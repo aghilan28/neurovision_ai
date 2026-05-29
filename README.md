@@ -8,10 +8,10 @@
 | | |
 |---|---|
 | **Current version** | **Version 1 — Offline EEG Platform** (in progress) |
-| **Current phase** | **V1-P1 (EEG Data Foundation) + V1-P2 (Signal-Processing Foundation)** — delivered |
+| **Current phase** | **V1-P1..P4** delivered — Data Foundation, Signal-Processing Foundation, Dataset Intelligence Layer, Evaluation Foundation |
 | **Built on** | **V0-P1 + V0-P2** (Constitution + Architecture) — complete |
-| **Outstanding** | **V0-P3 (`.gcc/` mechanization)** and remaining V1 phases (datasets curation surface, baseline ML, calibrated uncertainty, patient-disjoint evaluation). Full V1 exit is **not** yet certified (NR-12). |
-| **Status** | **Permanent EEG data + signal-processing foundations exist** (deterministic ingestion/validation/registry/versioning/lineage + deterministic preprocessing pipeline). **No ML models, training, APIs, or dashboards yet** — by design. |
+| **Outstanding** | **V0-P3 (`.gcc/` mechanization)** and remaining V1 phases (baseline ML, calibrated uncertainty, real patient-disjoint metrics). Full V1 exit is **not** yet certified (NR-12). |
+| **Status** | **Permanent data + DSP + dataset-intelligence + evaluation foundations exist** (deterministic ingestion/validation/registry/versioning/lineage; deterministic preprocessing; dataset profiling/leakage-risk; patient-disjoint splits + leakage gate + metrics + benchmarking + evaluation lineage). **No ML models, training, APIs, or dashboards yet** — by design. |
 | **Optimizing for** | Survivability · maintainability · architectural integrity (never speed/convenience) |
 
 ---

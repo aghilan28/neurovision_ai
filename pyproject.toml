@@ -13,8 +13,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "neurovision-ai"
-version = "1.0.0-alpha"           # V1 in progress (V1-P1 + V1-P2)
-description = "Production-oriented EEG-AI platform for critical-care neurology — V1 EEG data + signal-processing foundation."
+version = "1.0.0-alpha"           # V1 in progress (V1-P1..P4)
+description = "Production-oriented EEG-AI platform for critical-care neurology — V1 data, signal-processing, dataset-intelligence, and evaluation foundations."
 requires-python = ">=3.11,<3.12"
 license = { text = "Proprietary — license to be established as a governance decision (see README §9)." }
 dependencies = [
@@ -31,6 +31,7 @@ dev = ["pytest==8.3.5"]
 packages = [
     "preprocessing",
     "datasets",
+    "evaluation",
 ]
 
 [tool.pytest.ini_options]
@@ -42,6 +43,7 @@ pythonpath = ["."]
 testpaths = [
     "preprocessing/tests",
     "datasets/tests",
+    "evaluation",
     "tests",
 ]
 python_files = ["test_*.py"]
@@ -53,6 +55,7 @@ markers = [
     "reproducibility: asserts a result regenerates from pinned inputs/code (AP-6/NR-10).",
     "boundary: asserts module import boundaries are not violated (AP-7/NR-8).",
     "scientific: asserts scientific correctness of a DSP transform.",
+    "leakage: asserts patient-disjoint / no-leakage guarantees (AP-2/NR-3).",
 ]
 
 [tool.ruff]
@@ -68,11 +71,11 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["preprocessing", "datasets"]
+known-first-party = ["preprocessing", "datasets", "evaluation"]
 
 [tool.mypy]
 python_version = "3.11"
 warn_unused_ignores = true
 warn_redundant_casts = true
 ignore_missing_imports = true
-files = ["preprocessing", "datasets"]
+files = ["preprocessing", "datasets", "evaluation"]
