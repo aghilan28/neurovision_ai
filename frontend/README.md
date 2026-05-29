@@ -2,7 +2,8 @@
 
 > **Layer:** Presentation Layer
 > **Directory README type:** Repository Architecture Foundation (V0-P2)
-> **Status (V0):** Boundary contract defined; **no code yet** (correct for V0).
+> **Status (V0):** Boundary contract defined.
+> **Status (V1-P8):** **Offline implementation present** — `offline_research_app/` (presentation-only; imports no domain module). Clinical UI remains V2+.
 > **Governing docs:** AP-4 (faithful uncertainty), AP-7 (boundaries), NR-4, NR-8, [`../docs/architecture/IMPORT_RULES.md`](../docs/architecture/IMPORT_RULES.md)
 
 The clinician-facing layer. Its single hard constraint defines the platform's
@@ -56,3 +57,27 @@ supports review, triage, and trust — without ever touching domain code directl
 - Contains **no** DSP, modeling, evaluation, or data-curation logic — those live
   behind the backend.
 - The frontend↔backend boundary (API-only) is a **V2 exit criterion**.
+
+
+---
+
+## V1 Offline Implementation (V1-P8)
+
+> A **governed scope extension** (offline presentation layer in V1). Decision:
+> [`../.gcc/decisions/ADR-0002`](../.gcc/decisions/ADR-0002-v1-p7-p8-offline-inference-and-research-app.md).
+
+`frontend/offline_research_app/` is the **Offline Research Application** — a
+presentation-only workstation that reads the backend's **registered artifacts**
+(JSON) and renders them as view-models + a static, offline HTML report (CSS-only
+tabs, inline SVG, no JavaScript, no external assets).
+
+- **Strictest boundary upheld.** Imports **no** domain module (not even `backend`
+  as code) — standard library only. The offline frontend↔backend boundary is a
+  data/file boundary (read registered artifacts), stricter than the V2 API
+  boundary. Enforced by `tests/test_boundaries.py`.
+- **Faithful uncertainty (NR-4).** Calibration, conformal sets, coverage, and risk
+  are always shown alongside predictions; nothing is flattened to a bare label.
+- **Five workflows** (Upload, Dataset Intelligence, Inference, Benchmark, Audit) and
+  **eleven visualizations**, all sourced from registered artifacts.
+
+See [`offline_research_app/README.md`](./offline_research_app/README.md).
