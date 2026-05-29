@@ -8,8 +8,8 @@
 | | |
 |---|---|
 | **Current version** | **Version 0 — Repository Foundation** |
-| **Current phase** | **V0-P1…P4 complete** — Constitution + Architecture + **Governance Layer** + **AI Operating System** |
-| **Next phase** | **V0 exit gate**, then **V1 (Offline EEG Platform)**; near-term tooling: wire automated GCC checks |
+| **Current phase** | **V0-P1…P6 complete** — Constitution + Architecture + Governance + AI Operating System + **Quality Assurance Foundation** + **Context Preservation System** |
+| **Next phase** | **V0 exit gate**, then **V1 (Offline EEG Platform)**; near-term tooling: wire automated GCC/quality/context checks into CI |
 | **Status** | Foundation only. **No EEG processing, models, datasets, APIs, dashboards, or pipelines exist yet** — and that is by design. |
 | **Optimizing for** | Survivability · maintainability · architectural integrity (never speed/convenience) |
 
@@ -68,7 +68,9 @@ neurovision_ai/
 │   ├── NON_NEGOTIABLE_RULES.md
 │   ├── GLOSSARY.md
 │   ├── architecture/          dependency, boundary, import, layer & system-context docs
-│   └── governance/            governance framework — how the project may change (V0-P3)
+│   ├── governance/            governance framework — how the project may change (V0-P3)
+│   ├── quality/               quality framework — what "good" is; gates/validation (V0-P5)
+│   └── context/               context preservation — institutional memory (V0-P6)
 ├── frontend/                  Presentation Layer (clinician-facing UI)            [V2+]
 ├── backend/                   Application Layer (services, APIs, orchestration)   [V2+]
 ├── ml/                        ML Layer (models, inference, uncertainty)           [V1+]
@@ -112,8 +114,10 @@ Read in this order for a complete understanding of project direction.
 | 7 | [`docs/GLOSSARY.md`](docs/GLOSSARY.md) | Canonical terminology (IIC, LOSO, GCC, Lore Protocol, …). |
 | 8 | [`docs/architecture/`](docs/architecture/) | Dependency graph, module boundaries, import rules, layered architecture, system context. |
 | 9 | [`docs/governance/`](docs/governance/) | **Governance framework (V0-P3)** — architecture, AI, docs, testing, review, release, decision (ADR), risk, RFC, change management. |
-| 10 | [`.gcc/`](.gcc/) | **AI Operating System (V0-P4)** — master memory, live state, registries, Lore/recovery/onboarding protocols, templates, checklists. Start at [`.gcc/MAIN_CONTEXT.md`](.gcc/MAIN_CONTEXT.md). |
-| 11 | [`docs/README.md`](docs/README.md) | Documentation index / how to navigate the docs. |
+| 10 | [`docs/quality/`](docs/quality/) | **Quality Assurance Foundation (V0-P5)** — philosophy, gates (G1–G8), validation, test strategy, architecture/AI/doc validation, review checklists, release certification, metrics, failure handling. |
+| 11 | [`docs/context/`](docs/context/) | **Context Preservation System (V0-P6)** — decision/risk/assumption memory, knowledge capture, postmortems, lessons, context audits, retention, complete knowledge model. |
+| 12 | [`.gcc/`](.gcc/) | **AI Operating System (V0-P4)** — master memory, live state, registries, Lore/recovery/onboarding protocols, templates, checklists. Start at [`.gcc/MAIN_CONTEXT.md`](.gcc/MAIN_CONTEXT.md). |
+| 13 | [`docs/README.md`](docs/README.md) | Documentation index / how to navigate the docs. |
 
 > **Single source of truth.** Terminology is governed by
 > [`docs/GLOSSARY.md`](docs/GLOSSARY.md); architecture by
@@ -130,7 +134,9 @@ Read in this order for a complete understanding of project direction.
 | Repository Architecture Foundation (V0-P2) | ✅ Complete | V0 |
 | Governance Layer (`docs/governance/`, V0-P3) | ✅ Complete | V0 |
 | AI Operating System (`.gcc/`, V0-P4) | ✅ Complete | V0 |
-| GCC enforcement automation (CI checks for imports/boundaries/consistency) | ⏳ Specified; implementation is next tooling task | V0→V1 |
+| Quality Assurance Foundation (`docs/quality/`, V0-P5) | ✅ Complete | V0 |
+| Context Preservation System (`docs/context/`, V0-P6) | ✅ Complete | V0 |
+| GCC + quality + context enforcement automation (CI checks) | ⏳ Specified; implementation is next tooling task | V0→V1 |
 | Preprocessing / Datasets / ML / Evaluation | ⛔ Not started (correct for V0) | V1 |
 | Backend / Frontend (clinical workflow) | ⛔ Not started | V2 |
 | Near-real-time / Monitoring | ⛔ Not started | V3 |

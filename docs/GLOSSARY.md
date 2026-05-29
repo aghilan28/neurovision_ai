@@ -293,6 +293,57 @@ context and resume development across dormancy and turnover. Established in
 
 ---
 
+## 5A. Quality & Context Terms (V0-P5 / V0-P6)
+
+### Quality Gate
+A mandatory, **blocking** checkpoint a change or release must pass on **evidence**
+(not assertion). The eight gates (G1 Architecture, G2 Documentation, G3 AI Review,
+G4 Testing, G5 Validation, G6 Release, G7 Context Integrity, G8 Governance) are
+defined in [`quality/QUALITY_GATES.md`](./quality/QUALITY_GATES.md). Gates **wrap**
+the governance checkpoints.
+
+### Validation
+The act of **producing the evidence that a claim is true** (a result, a metric, a
+"done" status). Organized into a taxonomy (VC-ARCH…VC-CLIN) in
+[`quality/VALIDATION_FRAMEWORK.md`](./quality/VALIDATION_FRAMEWORK.md). Distinct
+from *verification* of code references (anti-hallucination); both are required.
+
+### Release Certification
+The recorded judgment that a release candidate is fit to tag/deploy, with one of
+four outcomes — **Approved / Approved with Risk / Deferred / Blocked** — defined in
+[`quality/RELEASE_CERTIFICATION.md`](./quality/RELEASE_CERTIFICATION.md).
+
+### Repository Quality Index (RQI)
+A 0–100 health gauge aggregating the quality metrics (M1–M12) across five pillars,
+defined in [`quality/QUALITY_METRICS.md`](./quality/QUALITY_METRICS.md). A trend
+signal only — it never overrides a hard-zero gate failure.
+
+### Postmortem
+A **blameless, durable** record of an incident/failure: what happened, root cause,
+recovery, lessons, and the **prevention** that makes recurrence impossible/loud.
+Defined in [`context/POSTMORTEM_FRAMEWORK.md`](./context/POSTMORTEM_FRAMEWORK.md);
+stored in `.gcc/postmortems/`.
+
+### Lesson (Learned)
+**Transferable** knowledge (from a success, failure, or surprise) captured to
+inform future work, in [`context/LESSONS_LEARNED_SYSTEM.md`](./context/LESSONS_LEARNED_SYSTEM.md)
+(stored in `.gcc/learnings/`). Distinct from a *postmortem* (incident-specific) and
+an *ADR* (a decision).
+
+### Knowledge / Context / Memory (distinction)
+**Knowledge** is raw understanding; **context** is knowledge organized around
+*why*; **memory** is context **persisted** in the repository (the `.gcc/`
+artifacts). The Context Preservation System ([`context/`](./context/)) turns
+knowledge into durable, recoverable memory.
+
+### Assumption Rot
+The decay by which an unverified **assumption** is silently treated as fact until
+no one remembers it was ever an assumption. Prevented by the assumption lifecycle
+in [`context/ASSUMPTION_MEMORY_SYSTEM.md`](./context/ASSUMPTION_MEMORY_SYSTEM.md)
+(mandatory verification plan; overdue verification is an audit finding).
+
+---
+
 ## 6. Project-Structure & Versioning Terms
 
 ### Version 0 (V0) — Repository Foundation
@@ -316,9 +367,11 @@ The **strategic destination**: a deployable, governable, auditable, reliable
 platform structurally ready for continuous hospital use. A maturity state, **not**
 a marketing or regulatory-clearance claim ([`PROJECT_VISION.md`](./PROJECT_VISION.md) §7).
 
-### Phase (e.g. V0-P1, V0-P2, V0-P3)
-A sub-stage within a version. V0 comprises **P1** (Project Constitution Layer),
-**P2** (Repository Architecture Foundation), and **P3** (Governance Layer).
+### Phase (e.g. V0-P1, V0-P2, …)
+A sub-stage within a version. **V0 comprises six phases:** **P1** Project
+Constitution Layer, **P2** Repository Architecture Foundation, **P3** Governance
+Layer, **P4** AI Operating System Foundation, **P5** Quality Assurance Foundation,
+and **P6** Context Preservation System.
 
 ### Exit Criteria
 The conditions a version must satisfy before the next version may claim its own
@@ -351,6 +404,7 @@ weakened in any later version
 | LRDA | Lateralized Rhythmic Delta Activity | §1 |
 | NCS/NCSE | Non-Convulsive Seizure / Status Epilepticus | §1 |
 | RFC | Request For Comments | §5 |
+| RQI | Repository Quality Index | §5A |
 | SZ | Seizure | §1 |
 | UQ | Uncertainty Quantification | §3 |
 | V0–V4 | Versions 0 through 4 | §6 |

@@ -94,6 +94,45 @@ The **governance framework** — *how the project is allowed to change* — live
 | [`governance/RFC_Process.md`](./governance/RFC_Process.md) | RFC lifecycle, template, quality standards. |
 | [`governance/Change_Management.md`](./governance/Change_Management.md) | Change classes and their approval/validation/rollback paths. |
 
+## Quality Assurance Foundation (V0-P5)
+
+The **quality framework** — *what "good" means and how it is validated, gated,
+measured, and recovered* — governing V1→V4, lives in [`quality/`](./quality/).
+Start at its index: [`quality/README.md`](./quality/README.md).
+
+| Document | Governs |
+|----------|---------|
+| [`quality/QUALITY_PHILOSOPHY.md`](./quality/QUALITY_PHILOSOPHY.md) | What quality is/isn't; preventive/detective/corrective/continuous; hierarchy. |
+| [`quality/QUALITY_GATES.md`](./quality/QUALITY_GATES.md) | The eight mandatory gates (G1–G8). |
+| [`quality/VALIDATION_FRAMEWORK.md`](./quality/VALIDATION_FRAMEWORK.md) | Validation taxonomy + evidence per category. |
+| [`quality/TEST_STRATEGY.md`](./quality/TEST_STRATEGY.md) | Testing strategy for V1–V4 (elaborates Testing Governance). |
+| [`quality/ARCHITECTURE_VALIDATION.md`](./quality/ARCHITECTURE_VALIDATION.md) | Architecture compliance + drift detection + audit. |
+| [`quality/AI_OUTPUT_VALIDATION.md`](./quality/AI_OUTPUT_VALIDATION.md) | Validating AI artifacts; AI trust/confidence/risk models. |
+| [`quality/DOCUMENTATION_VALIDATION.md`](./quality/DOCUMENTATION_VALIDATION.md) | Doc correctness/freshness/score/retirement. |
+| [`quality/CODE_REVIEW_CHECKLISTS.md`](./quality/CODE_REVIEW_CHECKLISTS.md) | Actionable per-domain review checklists. |
+| [`quality/RELEASE_CERTIFICATION.md`](./quality/RELEASE_CERTIFICATION.md) | Release certification outcomes + evidence. |
+| [`quality/QUALITY_METRICS.md`](./quality/QUALITY_METRICS.md) | Measurable indicators (M1–M12) + Repository Quality Index. |
+| [`quality/FAILURE_HANDLING.md`](./quality/FAILURE_HANDLING.md) | Repository-level failure framework. |
+
+## Context Preservation System (V0-P6)
+
+The **institutional-memory framework** — *how no critical knowledge is ever lost* —
+lives in [`context/`](./context/). Start at its index: [`context/README.md`](./context/README.md).
+It governs the **live memory artifacts** in [`../.gcc/`](../.gcc/).
+
+| Document | Preserves |
+|----------|-----------|
+| [`context/CONTEXT_PHILOSOPHY.md`](./context/CONTEXT_PHILOSOPHY.md) | What context is; why it's lost; preservation principles. |
+| [`context/DECISION_MEMORY_SYSTEM.md`](./context/DECISION_MEMORY_SYSTEM.md) | Decisions (ADR lifecycle + retirement). |
+| [`context/RISK_MEMORY_SYSTEM.md`](./context/RISK_MEMORY_SYSTEM.md) | Risks across their whole life (incl. unknown). |
+| [`context/ASSUMPTION_MEMORY_SYSTEM.md`](./context/ASSUMPTION_MEMORY_SYSTEM.md) | Assumptions + lifecycle (prevents rot). |
+| [`context/KNOWLEDGE_CAPTURE_FRAMEWORK.md`](./context/KNOWLEDGE_CAPTURE_FRAMEWORK.md) | How knowledge enters the repository. |
+| [`context/POSTMORTEM_FRAMEWORK.md`](./context/POSTMORTEM_FRAMEWORK.md) | Incident learning. |
+| [`context/LESSONS_LEARNED_SYSTEM.md`](./context/LESSONS_LEARNED_SYSTEM.md) | Reusable lessons. |
+| [`context/CONTEXT_AUDIT_SYSTEM.md`](./context/CONTEXT_AUDIT_SYSTEM.md) | Audits for missing/outdated/conflicting/orphaned context. |
+| [`context/MEMORY_RETENTION_POLICY.md`](./context/MEMORY_RETENTION_POLICY.md) | What is kept forever / archived / retired. |
+| [`context/REPOSITORY_KNOWLEDGE_MODEL.md`](./context/REPOSITORY_KNOWLEDGE_MODEL.md) | The complete knowledge graph + navigation. |
+
 ## AI Operating System (V0-P4)
 
 The **living state, registries, protocols, templates, and checklists** that let
@@ -106,4 +145,6 @@ and run [`../.gcc/CONTEXT_RECOVERY_PROTOCOL.md`](../.gcc/CONTEXT_RECOVERY_PROTOC
 Vision → Objectives → Scope → Version Model → Principles → Rules → Glossary →
 Architecture (Layered → System Context → Module Boundaries → Dependency Graph →
 Import Rules) → Governance ([`governance/README.md`](./governance/README.md)) →
+Quality ([`quality/README.md`](./quality/README.md)) →
+Context ([`context/README.md`](./context/README.md)) →
 Operating System ([`../.gcc/MAIN_CONTEXT.md`](../.gcc/MAIN_CONTEXT.md)).

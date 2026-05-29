@@ -4,7 +4,7 @@
 > **Status:** Living — updated at each phase/version gate.
 > **Owner:** Founder · **Kept current by:** the active contributor
 > **Update procedure:** Update completion %, readiness, and exit-criteria checkboxes at each gate; record gate decisions as ADRs ([`DECISION_REGISTRY.md`](./DECISION_REGISTRY.md)). Log changes ([`CHANGELOG_SYSTEM.md`](./CHANGELOG_SYSTEM.md)).
-> **Last updated:** V0-P4
+> **Last updated:** V0-P6
 > **Canonical version definitions:** [`../docs/VERSION_EVOLUTION_MODEL.md`](../docs/VERSION_EVOLUTION_MODEL.md)
 
 Tracks every version's status, completion, dependencies, readiness, risks, and
@@ -17,7 +17,7 @@ exit criteria. Completion % is a **rough maturity signal**, not a precise metric
 
 | Version | Status | Completion | Depends on | Readiness for next |
 |---------|--------|-----------:|------------|--------------------|
-| **V0** Repository Foundation | 🟢 In progress (P4) | ~95% | — | Pending V0 gate |
+| **V0** Repository Foundation | 🟢 In progress (P6) | ~99% | — | Pending V0 gate |
 | **V1** Offline EEG Platform | ⚪ Not started | 0% | V0 exit | — |
 | **V2** Clinical Workflow | ⚪ Not started | 0% | V1 exit | — |
 | **V3** Near Real-Time | ⚪ Not started | 0% | V2 exit | — |
@@ -28,7 +28,7 @@ Legend: 🟢 active · 🟡 at risk · ✅ complete · ⚪ not started.
 ---
 
 ## V0 — Repository Foundation
-- **Status:** In progress (P1–P3 ✅; P4 completing). **Completion:** ~95%.
+- **Status:** In progress (P1–P5 ✅; P6 completing). **Completion:** ~99%.
 - **Dependencies:** none (root).
 - **Risks:** RISK-0003 (arch drift pre-automation), RISK-0004 (doc entropy).
 - **Exit criteria** ([`../docs/VERSION_EVOLUTION_MODEL.md`](../docs/VERSION_EVOLUTION_MODEL.md) §1):
@@ -36,6 +36,8 @@ Legend: 🟢 active · 🟡 at risk · ✅ complete · ⚪ not started.
   - [x] Architecture foundation complete; graph acyclic; import rules explicit (P2).
   - [x] Governance framework established (P3).
   - [x] AI operating system established (P4).
+  - [x] Quality Assurance Foundation established (P5).
+  - [x] Context Preservation System established (P6).
   - [ ] No undefined terms / no architectural contradictions — **verify at gate**.
   - [ ] V0-completion ADR recorded.
 - **Readiness for V1:** **not yet** — pending the gate checks above.
