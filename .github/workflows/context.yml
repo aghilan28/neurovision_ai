@@ -1,0 +1,76 @@
+# ============================================================================
+# WORKFLOW: context  (Quality Gate G7 / Context Audit CA-1..CA-7)
+# ----------------------------------------------------------------------------
+# PURPOSE
+#   Mechanize the Context Integrity Gate: guarantee no knowledge is lost and the
+#   project memory stays recoverable. Implements the mechanizable parts of
+#   docs/context/CONTEXT_AUDIT_SYSTEM.md and the deterministic recovery surface.
+#
+# TRIGGERS
+#   - pull_request, push, workflow_dispatch
+#
+# VALIDATION LOGIC
+#   1. Live memory artifacts present (state files + registries + protocols).
+#   2. Tier-3 state/registers carry a "Last updated" marker (freshness signal, CA-2).
+#   3. Active assumptions each carry a "Verification Plan" (prevent assumption rot, CA-7).
+#   4. Recovery + onboarding protocols present and reference the read order (CA determinism).
+#
+# EXPECTED OUTPUTS
+#   - Pass: memory artifacts present + fresh markers + assumption plans -> green (G7).
+#   - Fail: names the missing/unmarked artifact (a context silo or staleness risk).
+#
+# FAILURE ACTIONS
+#   - Job fails -> PR blocked until the missing knowledge is captured into the repo
+#     (FAILURE_HANDLING class CTX). Systemic -> a CTX risk + strengthen the capture loop.
+# ============================================================================
+name: context
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  context-gate:
+    name: Context Integrity Gate (G7)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Live memory artifacts present
+        run: |
+          set -u
+          fail=0
+          for f in MAIN_CONTEXT CURRENT_STATE NEXT_STATE VERSION_STATUS ROADMAP_STATUS \
+                   ACTIVE_RISKS ACTIVE_ASSUMPTIONS DECISION_REGISTRY DEPENDENCY_REGISTRY \
+                   KNOWLEDGE_GRAPH LORE_PROTOCOL CONTEXT_RECOVERY_PROTOCOL AI_ONBOARDING_PROTOCOL; do
+            test -f ".gcc/$f.md" || { echo "MISSING: .gcc/$f.md"; fail=1; }
+          done
+          [ "$fail" -eq 0 ] && echo "OK: memory artifacts present" || { echo "FAIL"; exit 1; }
+
+      - name: State/register freshness markers (CA-2)
+        run: |
+          set -u
+          fail=0
+          for f in CURRENT_STATE NEXT_STATE VERSION_STATUS ACTIVE_RISKS ACTIVE_ASSUMPTIONS \
+                   DECISION_REGISTRY DEPENDENCY_REGISTRY; do
+            grep -qiE 'Last updated' ".gcc/$f.md" || { echo "NO 'Last updated' MARKER: .gcc/$f.md"; fail=1; }
+          done
+          [ "$fail" -eq 0 ] && echo "OK: state/registers carry freshness markers" || { echo "FAIL"; exit 1; }
+
+      - name: Assumptions carry verification plans (CA-7 / anti-rot)
+        run: |
+          set -u
+          if grep -qiE 'Verification Plan' .gcc/ACTIVE_ASSUMPTIONS.md ; then
+            echo "OK: assumptions reference verification plans"
+          else
+            echo "FAIL: ACTIVE_ASSUMPTIONS.md has no Verification Plan (assumption rot risk)"; exit 1
+          fi
+
+      - name: Recovery determinism present
+        run: |
+          set -u
+          grep -qiE 'read order|deterministic' .gcc/CONTEXT_RECOVERY_PROTOCOL.md \
+            && echo "OK: deterministic recovery sequence documented" \
+            || { echo "FAIL: recovery protocol missing deterministic read order"; exit 1; }

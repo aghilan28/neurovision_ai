@@ -6,7 +6,7 @@
 > **Framework:** [`../docs/governance/Risk_Governance.md`](../docs/governance/Risk_Governance.md) (categories, scoring, fields, cadence)
 > **Template:** [`TEMPLATES/RISK_TEMPLATE.md`](./TEMPLATES/RISK_TEMPLATE.md)
 > **Update procedure:** Add/score new risks on identification; re-review by cadence; close with rationale. Log changes ([`CHANGELOG_SYSTEM.md`](./CHANGELOG_SYSTEM.md)).
-> **Last updated:** V0-P4
+> **Last updated:** V0-P8
 
 **Scoring:** Exposure = Severity (Low/Medium/High/Critical) × Probability
 (Low/Medium/High); see Risk_Governance §3. Any risk to a **cross-version
@@ -52,7 +52,7 @@ invariant** or **clinical-safety property** is treated as **≥ High**.
 - **Mitigation:** Wire GCC import/acyclicity checks as the first tooling task
   ([`NEXT_STATE.md`](./NEXT_STATE.md) §1/§3); enforce reviews in the interim.
 - **Recovery:** Architecture_Governance §10.3 violation handling + rollback.
-- **Owner:** Founder · **Review:** every cycle until automation lands · **Status:** Open
+- **Owner:** Founder · **Review:** every cycle until automation lands · **Status:** Mitigating (CI automation added V0-P7; host-observation pending)
 - **Links:** AP-7, NR-8; Architecture_Governance.
 
 ### RISK-0004 · Documentation entropy as the doc set grows · **REPO**

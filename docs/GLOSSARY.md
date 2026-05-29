@@ -2,6 +2,8 @@
 
 > **Document type:** Project Constitution Layer (V0-P1)
 > **Status:** Authoritative / Canonical terminology source
+> **Owner:** Founder
+> **Update procedure:** Governance-class change (ADR); a new consequential term is added here in the same change (NR-14).
 > **Applies to:** Every document and (in later versions) every code artifact
 > **Related:** [`PROJECT_VISION.md`](./PROJECT_VISION.md), [`ARCHITECTURAL_PRINCIPLES.md`](./ARCHITECTURAL_PRINCIPLES.md), [`NON_NEGOTIABLE_RULES.md`](./NON_NEGOTIABLE_RULES.md)
 
@@ -344,6 +346,37 @@ in [`context/ASSUMPTION_MEMORY_SYSTEM.md`](./context/ASSUMPTION_MEMORY_SYSTEM.md
 
 ---
 
+## 5B. Environment & Certification Terms (V0-P7 / V0-P8)
+
+### Reproducible Environment
+An engineering environment that produces identical results from pinned inputs
+(toolchain + lockfiles + container), so builds/results regenerate on any machine
+(AP-3/AP-6). Defined in [`environment/ENVIRONMENT_PHILOSOPHY.md`](./environment/ENVIRONMENT_PHILOSOPHY.md).
+
+### CI Workflow
+A GitHub Actions workflow in `.github/workflows/` that **mechanizes** a quality gate
+(documentation→G2, architecture→G1, governance→G8, context→G7, quality→G4/G5,
+repository-health→aggregate). CI gates merges but never decides (humans approve, NR-7).
+See [`environment/CI_CD_ARCHITECTURE.md`](./environment/CI_CD_ARCHITECTURE.md).
+
+### Environment Validation Gate (EV-1…EV-6)
+The checks that prove the environment itself is correct (bootstrap, dependency,
+tool, CI, repository-health, recovery). Defined in
+[`environment/ENVIRONMENT_VALIDATION.md`](./environment/ENVIRONMENT_VALIDATION.md).
+
+### Certification (Version)
+The formal, evidence-backed verdict that a version is complete. V0's outcome model
+mirrors release certification: **CERTIFIED / CERTIFIED WITH CONDITIONS / DEFERRED /
+BLOCKED**. The V0 record is [`certification/V0_COMPLETION_REPORT.md`](./certification/V0_COMPLETION_REPORT.md)
+(ADR-0001). The Founder is the **Certification Authority**.
+
+### Readiness Gate
+The set of measurable conditions for entering the next version (e.g.
+[`certification/V1_READINESS_GATE.md`](./certification/V1_READINESS_GATE.md)),
+enforcing the no-version-skip rule (NR-12).
+
+---
+
 ## 6. Project-Structure & Versioning Terms
 
 ### Version 0 (V0) — Repository Foundation
@@ -368,10 +401,11 @@ platform structurally ready for continuous hospital use. A maturity state, **not
 a marketing or regulatory-clearance claim ([`PROJECT_VISION.md`](./PROJECT_VISION.md) §7).
 
 ### Phase (e.g. V0-P1, V0-P2, …)
-A sub-stage within a version. **V0 comprises six phases:** **P1** Project
+A sub-stage within a version. **V0 comprises eight phases:** **P1** Project
 Constitution Layer, **P2** Repository Architecture Foundation, **P3** Governance
 Layer, **P4** AI Operating System Foundation, **P5** Quality Assurance Foundation,
-and **P6** Context Preservation System.
+**P6** Context Preservation System, **P7** Development Environment Foundation, and
+**P8** Version 0 Certification.
 
 ### Exit Criteria
 The conditions a version must satisfy before the next version may claim its own

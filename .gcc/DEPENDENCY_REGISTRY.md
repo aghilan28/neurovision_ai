@@ -4,7 +4,7 @@
 > **Status:** Living — the authoritative record of what depends on what.
 > **Owner:** Founder · **Kept current by:** the active contributor
 > **Update procedure:** Any new/changed dependency is an **A2+ change** (RFC→ADR) and is recorded here in the same change set (NR-2/NR-5). Log changes ([`CHANGELOG_SYSTEM.md`](./CHANGELOG_SYSTEM.md)).
-> **Last updated:** V0-P4
+> **Last updated:** V0-P8 (CI workflows added; `.github/` infrastructure recorded)
 > **Canonical module graph:** [`../docs/architecture/DEPENDENCY_GRAPH.md`](../docs/architecture/DEPENDENCY_GRAPH.md) · **Rules:** [`../docs/architecture/IMPORT_RULES.md`](../docs/architecture/IMPORT_RULES.md)
 
 This registry tracks all dependency classes. **Silent dependency changes are a
@@ -73,9 +73,11 @@ reproducibility; an unpinned dependency is a defect (AP-6).
 | Tool class | Status | Purpose | Notes |
 |------------|--------|---------|-------|
 | Git + hosting | active | Version control, PRs, history-as-record | Branch workflow: [`BRANCH_WORKFLOW.md`](./BRANCH_WORKFLOW.md). |
-| CI runner | to add | Run GCC checks + tests on PRs | Required by AP-11 ([`NEXT_STATE.md`](./NEXT_STATE.md) §3). |
-| GCC check implementation | to build | Mechanize import/boundary/acyclicity + doc-consistency checks | First tooling task; lives under `.gcc/` + `tools/`. |
-| Markdown/doc linting | optional | Link/term consistency | Supports Documentation_Governance §8. |
+| **GitHub Actions CI** | **active (V0-P7)** | Run gate checks on PRs (G1–G8) | 6 workflows: [`../.github/workflows/`](../.github/workflows/); see [`../docs/environment/CI_CD_ARCHITECTURE.md`](../docs/environment/CI_CD_ARCHITECTURE.md). |
+| **GCC/quality/context checks** | **implemented (V0-P7)** | Mechanize import/boundary/doc/context/health checks | Inline in the workflows; real-import + test stages auto-activate at V1. |
+| `.github/` infrastructure | active | CI workflow definitions | **Tooling infra, outside the production graph; never imported by production** (NR-8), like `.gcc`/`tools`/`scripts`. |
+| Language toolchain (Python) + lockfile + container | to add (V1) | Reproducible code env | Pinned by **ADR at V1 start** ([`../docs/environment/TOOLCHAIN_STANDARD.md`](../docs/environment/TOOLCHAIN_STANDARD.md)). |
+| Markdown/doc linting | optional | Link/term consistency | Now run via `documentation.yml`. |
 
 ## 5. Future Dependencies (anticipated; not committed)
 - Site/domain-adaptation tooling (V4); federated/privacy-preserving training

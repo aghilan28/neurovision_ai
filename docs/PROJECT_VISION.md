@@ -2,6 +2,8 @@
 
 > **Document type:** Project Constitution Layer (V0-P1)
 > **Status:** Authoritative / Immutable intent
+> **Owner:** Founder
+> **Update procedure:** Governance-class change (ADR); constitution changes require a recorded, reviewed decision (NR-5).
 > **Applies to:** All versions (V0 → V4)
 > **Audience:** Human contributors, clinical stakeholders, and AI engineering agents
 > **Canonical terminology:** See [`GLOSSARY.md`](./GLOSSARY.md)

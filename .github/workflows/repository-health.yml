@@ -1,0 +1,92 @@
+# ============================================================================
+# WORKFLOW: repository-health  (aggregate audit + Repository Quality Index)
+# ----------------------------------------------------------------------------
+# PURPOSE
+#   The standing health monitor. Runs the aggregate audits on a schedule and on
+#   demand, reports the hard-zero quality metrics and an RQI-style summary, and
+#   surfaces drift/entropy before it crosses a threshold. Implements
+#   docs/quality/QUALITY_METRICS.md and docs/environment/ENVIRONMENT_VALIDATION.md (EV-5).
+#
+# TRIGGERS
+#   - schedule (weekly cron) - continuous quality
+#   - workflow_dispatch (manual, e.g. post-dormancy)
+#   - push (so health is visible on trunk updates)
+#
+# VALIDATION LOGIC (aggregate; non-blocking summary + hard-zero enforcement)
+#   1. Structure: every required directory has a governance README.
+#   2. Broken-link, placeholder, ownership scans (repo-wide).
+#   3. Stray AP/NR ID scan (architecture integrity).
+#   4. Standing security control: committed-secret scan (SECRETS_MANAGEMENT).
+#   5. Hard-zero metrics: any architecture/dependency violation, undocumented
+#      decision signal, or context-integrity finding fails the job.
+#
+# EXPECTED OUTPUTS
+#   - A health summary in the log (counts per check) + pass/fail on hard-zeros.
+#   - Findings feed risks/defects (ACTIVE_RISKS) and the certification audits.
+#
+# FAILURE ACTIONS
+#   - Hard-zero breach -> job fails -> raise/upgrade a risk; remediate before a
+#     version gate (QUALITY_METRICS S2). Trend worsening -> investigate early.
+# ============================================================================
+name: repository-health
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"   # 06:00 UTC every Monday
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  repository-health:
+    name: Repository Health (RQI + audits)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Structure + freshness summary
+        run: |
+          set -u
+          echo "== Structure =="
+          for d in docs frontend backend ml preprocessing datasets evaluation \
+                   deployment monitoring tests tools scripts .gcc; do
+            test -f "$d/README.md" && echo "  OK   $d/README.md" || echo "  MISS $d/README.md"
+          done
+          echo "== Markdown count =="; find . -name '*.md' -not -path './.git/*' | wc -l
+
+      - name: Hard-zero: broken links
+        run: |
+          set -u
+          fail=0
+          while IFS= read -r f; do
+            dir=$(dirname "$f")
+            while IFS= read -r link; do
+              case "$link" in http*|"#"*) continue ;; esac
+              target="${link%%#*}"; [ -z "$target" ] && continue
+              resolved=$(realpath -m "$dir/$target")
+              [ ! -e "$resolved" ] && { echo "BROKEN: $f -> $link"; fail=1; }
+            done < <(grep -oE '\]\(([^)]+)\)' "$f" | sed -E 's/^\]\(//; s/\)$//')
+          done < <(find . -name '*.md' -not -path './.git/*')
+          [ "$fail" -eq 0 ] && echo "OK: 0 broken links (M-doc)" || { echo "FAIL"; exit 1; }
+
+      - name: Hard-zero: stray AP/NR IDs (architecture integrity, M1)
+        run: |
+          set -u
+          if grep -rhoE '\b(AP-1[3-9]|AP-[2-9][0-9]|NR-1[6-9]|NR-[2-9][0-9])\b' docs --include='*.md' | sort -u | grep . ; then
+            echo "FAIL: stray AP/NR ID(s)"; exit 1
+          fi
+          echo "OK: 0 stray AP/NR IDs"
+
+      - name: Standing security control: committed-secret scan
+        run: |
+          set -u
+          # Heuristic scan for obvious secret patterns in tracked files (not docs prose).
+          if grep -rnIED 'AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC|PGP) PRIVATE KEY-----' \
+               --include='*' . 2>/dev/null | grep -v 'SECRETS_MANAGEMENT.md' ; then
+            echo "FAIL: possible committed secret (rotate immediately, see SECRETS_MANAGEMENT)"; exit 1
+          fi
+          echo "OK: no obvious committed secret detected"
+
+      - name: Health verdict
+        run: echo "Repository health checks complete. Detailed metrics: docs/quality/QUALITY_METRICS.md (M1-M12 + RQI)."

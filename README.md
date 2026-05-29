@@ -7,10 +7,10 @@
 
 | | |
 |---|---|
-| **Current version** | **Version 0 — Repository Foundation** |
-| **Current phase** | **V0-P1…P6 complete** — Constitution + Architecture + Governance + AI Operating System + **Quality Assurance Foundation** + **Context Preservation System** |
-| **Next phase** | **V0 exit gate**, then **V1 (Offline EEG Platform)**; near-term tooling: wire automated GCC/quality/context checks into CI |
-| **Status** | Foundation only. **No EEG processing, models, datasets, APIs, dashboards, or pipelines exist yet** — and that is by design. |
+| **Current version** | **Version 0 — Repository Foundation — ✅ COMPLETE (CERTIFIED WITH CONDITIONS)** |
+| **Current phase** | **V0-P1…P8 complete** — Constitution · Architecture · Governance · AI OS · Quality · Context · **Environment+CI** · **Certification** |
+| **Next phase** | **V1 (Offline EEG Platform)** — eligible to begin under [`docs/certification/V1_READINESS_GATE.md`](docs/certification/V1_READINESS_GATE.md) |
+| **Status** | Foundation complete and **certified** (ADR-0001). **No EEG processing, models, datasets, APIs, dashboards, or pipelines exist yet** — code begins in V1, by design. |
 | **Optimizing for** | Survivability · maintainability · architectural integrity (never speed/convenience) |
 
 ---
@@ -59,6 +59,7 @@ boundary rules.
 ```
 neurovision_ai/
 ├── README.md                  ← you are here (repository entry point)
+├── .github/workflows/         CI/CD — mechanizes the quality gates (V0-P7)
 ├── docs/                      Context Layer — constitution + architecture (the Lore Protocol)
 │   ├── PROJECT_VISION.md
 │   ├── PROJECT_OBJECTIVES.md
@@ -70,7 +71,9 @@ neurovision_ai/
 │   ├── architecture/          dependency, boundary, import, layer & system-context docs
 │   ├── governance/            governance framework — how the project may change (V0-P3)
 │   ├── quality/               quality framework — what "good" is; gates/validation (V0-P5)
-│   └── context/               context preservation — institutional memory (V0-P6)
+│   ├── context/               context preservation — institutional memory (V0-P6)
+│   ├── environment/           development environment foundation (V0-P7)
+│   └── certification/         Version 0 certification record (V0-P8)
 ├── frontend/                  Presentation Layer (clinician-facing UI)            [V2+]
 ├── backend/                   Application Layer (services, APIs, orchestration)   [V2+]
 ├── ml/                        ML Layer (models, inference, uncertainty)           [V1+]
@@ -116,8 +119,11 @@ Read in this order for a complete understanding of project direction.
 | 9 | [`docs/governance/`](docs/governance/) | **Governance framework (V0-P3)** — architecture, AI, docs, testing, review, release, decision (ADR), risk, RFC, change management. |
 | 10 | [`docs/quality/`](docs/quality/) | **Quality Assurance Foundation (V0-P5)** — philosophy, gates (G1–G8), validation, test strategy, architecture/AI/doc validation, review checklists, release certification, metrics, failure handling. |
 | 11 | [`docs/context/`](docs/context/) | **Context Preservation System (V0-P6)** — decision/risk/assumption memory, knowledge capture, postmortems, lessons, context audits, retention, complete knowledge model. |
-| 12 | [`.gcc/`](.gcc/) | **AI Operating System (V0-P4)** — master memory, live state, registries, Lore/recovery/onboarding protocols, templates, checklists. Start at [`.gcc/MAIN_CONTEXT.md`](.gcc/MAIN_CONTEXT.md). |
-| 13 | [`docs/README.md`](docs/README.md) | Documentation index / how to navigate the docs. |
+| 12 | [`docs/environment/`](docs/environment/) | **Development Environment Foundation (V0-P7)** — philosophy, standards, toolchain, local dev, git workflow, branch protection, dependency + secrets mgmt, CI/CD architecture, validation, bootstrap, onboarding. |
+| 13 | [`docs/certification/`](docs/certification/) | **Version 0 Certification (V0-P8)** — standard, audit framework, scored readiness, risk review, gap analysis, exit criteria, completion report, V1 gate. |
+| 14 | [`.github/workflows/`](.github/workflows/) | **CI workflows (V0-P7)** — documentation, architecture, governance, context, quality, repository-health (mechanize gates G1–G8). |
+| 15 | [`.gcc/`](.gcc/) | **AI Operating System (V0-P4)** — master memory, live state, registries, Lore/recovery/onboarding protocols, templates, checklists. Start at [`.gcc/MAIN_CONTEXT.md`](.gcc/MAIN_CONTEXT.md). |
+| 16 | [`docs/README.md`](docs/README.md) | Documentation index / how to navigate the docs. |
 
 > **Single source of truth.** Terminology is governed by
 > [`docs/GLOSSARY.md`](docs/GLOSSARY.md); architecture by
@@ -136,8 +142,9 @@ Read in this order for a complete understanding of project direction.
 | AI Operating System (`.gcc/`, V0-P4) | ✅ Complete | V0 |
 | Quality Assurance Foundation (`docs/quality/`, V0-P5) | ✅ Complete | V0 |
 | Context Preservation System (`docs/context/`, V0-P6) | ✅ Complete | V0 |
-| GCC + quality + context enforcement automation (CI checks) | ⏳ Specified; implementation is next tooling task | V0→V1 |
-| Preprocessing / Datasets / ML / Evaluation | ⛔ Not started (correct for V0) | V1 |
+| Development Environment + CI (`docs/environment/`, `.github/workflows/`, V0-P7) | ✅ Complete | V0 |
+| Version 0 Certification (`docs/certification/`, V0-P8) | ✅ Complete — **CERTIFIED WITH CONDITIONS** (ADR-0001) | V0 |
+| Preprocessing / Datasets / ML / Evaluation | ⛔ Not started — **eligible to begin (V1)** | V1 |
 | Backend / Frontend (clinical workflow) | ⛔ Not started | V2 |
 | Near-real-time / Monitoring | ⛔ Not started | V3 |
 | Hospital deployment / full audit | ⛔ Not started | V4 |

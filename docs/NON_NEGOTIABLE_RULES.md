@@ -2,6 +2,8 @@
 
 > **Document type:** Project Constitution Layer (V0-P1)
 > **Status:** Authoritative / Project law
+> **Owner:** Founder
+> **Update procedure:** Governance-class change (ADR); rule changes require a recorded, reviewed decision (NR-5).
 > **Enforces:** [`ARCHITECTURAL_PRINCIPLES.md`](./ARCHITECTURAL_PRINCIPLES.md), [`PROJECT_VISION.md`](./PROJECT_VISION.md), [`PROJECT_OBJECTIVES.md`](./PROJECT_OBJECTIVES.md), [`PROJECT_SCOPE.md`](./PROJECT_SCOPE.md)
 > **Mechanized by:** the Governance & Context Control layer (`.gcc/`, V0-P3)
 > **Canonical terminology:** [`GLOSSARY.md`](./GLOSSARY.md)

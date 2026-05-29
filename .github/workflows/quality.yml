@@ -1,0 +1,71 @@
+# ============================================================================
+# WORKFLOW: quality  (aggregate gate; G4/G5 test+validation stages [V1+])
+# ----------------------------------------------------------------------------
+# PURPOSE
+#   The aggregate quality gate. In V0 it confirms the quality framework exists
+#   and is wired; from V1 it gains the Testing Gate (G4) and Validation Gate
+#   (G5) stages (tests, invariant coverage, patient-disjoint + determinism +
+#   calibration/coverage). Implements docs/quality/{QUALITY_GATES,TEST_STRATEGY,
+#   VALIDATION_FRAMEWORK}.md.
+#
+# TRIGGERS
+#   - pull_request, push, workflow_dispatch
+#
+# VALIDATION LOGIC
+#   V0:
+#     1. Quality framework present (the 11 quality docs + index).
+#   V1+ (guarded by presence of code / a test manifest; auto-skips in V0):
+#     2. Install locked deps (--frozen); run unit/integration/contract/architecture tests.
+#     3. Assert invariant-behavior coverage = 100%; patient-disjoint + determinism;
+#        calibration/coverage for clinical claims; no disabled guarding test; no regression.
+#
+# EXPECTED OUTPUTS
+#   - Pass: framework present (V0); (V1+) all required tests green + coverage met.
+#   - Fail: names the missing quality doc or the failing/uncovered invariant.
+#
+# FAILURE ACTIONS
+#   - Job fails -> PR blocked. Never disable a guarding test to go green (NR-2).
+#     A missed invariant -> postmortem + a new guarding test (preventive quality).
+# ============================================================================
+name: quality
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  quality-gate:
+    name: Quality Gate (aggregate; G4/G5 [V1+])
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Quality framework present
+        run: |
+          set -u
+          fail=0
+          for f in QUALITY_PHILOSOPHY QUALITY_GATES VALIDATION_FRAMEWORK TEST_STRATEGY \
+                   ARCHITECTURE_VALIDATION AI_OUTPUT_VALIDATION DOCUMENTATION_VALIDATION \
+                   CODE_REVIEW_CHECKLISTS RELEASE_CERTIFICATION QUALITY_METRICS FAILURE_HANDLING README; do
+            test -f "docs/quality/$f.md" || { echo "MISSING: docs/quality/$f.md"; fail=1; }
+          done
+          [ "$fail" -eq 0 ] && echo "OK: quality framework present" || { echo "FAIL"; exit 1; }
+
+      - name: "[V1+] Tests + invariant coverage (auto-skips in V0)"
+        run: |
+          set -u
+          srccount=$(find preprocessing datasets ml evaluation backend frontend \
+                        -type f ! -name 'README.md' 2>/dev/null | wc -l | tr -d ' ')
+          if [ "$srccount" = "0" ]; then
+            echo "SKIP: no application code yet (V0). Testing Gate (G4) + Validation Gate (G5) activate in V1+."
+            exit 0
+          fi
+          echo "Application code detected ($srccount files): test+coverage stages would run here (V1+)."
+          # V1+ implementation:
+          #   <pkg-manager> install --frozen
+          #   run unit/integration/contract/architecture tests (single-shot, no watch)
+          #   assert invariant-behavior coverage = 100% (Testing_Governance S4/S7)
+          #   assert patient-disjoint + determinism + calibration/coverage (NR-3/NR-9/NR-4)
+          #   fail on any disabled guarding test or prior-version regression

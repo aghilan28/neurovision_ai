@@ -1,0 +1,68 @@
+# ============================================================================
+# WORKFLOW: governance  (Quality Gate G8)
+# ----------------------------------------------------------------------------
+# PURPOSE
+#   Mechanize the Governance Gate: ensure the governance framework is present
+#   and that changes carry the records governance requires (ADR/decision index,
+#   change classification). Implements docs/governance/Change_Management.md and
+#   docs/governance/Decision_Governance.md checks that are mechanizable.
+#
+# TRIGGERS
+#   - pull_request, push, workflow_dispatch
+#
+# VALIDATION LOGIC
+#   1. Governance doc set present (the 10 governance docs + index).
+#   2. Decision registry present and parseable (the ADR index exists).
+#   3. Glossary defines the governance/OS terms it must (ADR, RFC, GCC, Lore).
+#   Note: human-only rules (approver != producing agent, NR-7) are enforced by
+#   branch protection + review, not CI; CI checks the *records* exist.
+#
+# EXPECTED OUTPUTS
+#   - Pass: governance docs + registry + terms present -> green (G8 records exist).
+#   - Fail: names the missing governance artifact.
+#
+# FAILURE ACTIONS
+#   - Job fails -> PR blocked. A governance bypass that reached main is a
+#     governance failure (FAILURE_HANDLING S2.4): revert + incident + postmortem.
+# ============================================================================
+name: governance
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  governance-gate:
+    name: Governance Gate (G8)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Governance doc set present
+        run: |
+          set -u
+          fail=0
+          for f in Architecture_Governance AI_Governance Documentation_Governance \
+                   Testing_Governance Review_Governance Release_Governance \
+                   Decision_Governance Risk_Governance RFC_Process Change_Management README; do
+            test -f "docs/governance/$f.md" || { echo "MISSING: docs/governance/$f.md"; fail=1; }
+          done
+          [ "$fail" -eq 0 ] && echo "OK: governance framework present" || { echo "FAIL"; exit 1; }
+
+      - name: Decision registry present
+        run: |
+          set -u
+          test -f .gcc/DECISION_REGISTRY.md \
+            && echo "OK: decision registry present" \
+            || { echo "FAIL: .gcc/DECISION_REGISTRY.md missing"; exit 1; }
+
+      - name: Glossary defines governance/OS terms
+        run: |
+          set -u
+          fail=0
+          for term in "ADR" "RFC" "GCC" "Lore Protocol"; do
+            grep -qiF "$term" docs/GLOSSARY.md || { echo "TERM MISSING IN GLOSSARY: $term"; fail=1; }
+          done
+          [ "$fail" -eq 0 ] && echo "OK: governance terms defined" || { echo "FAIL"; exit 1; }
