@@ -76,7 +76,34 @@ direction from the repository alone.
 | [`architecture/LAYERED_ARCHITECTURE.md`](./architecture/LAYERED_ARCHITECTURE.md) | The seven layers; information & dependency flow. |
 | [`architecture/SYSTEM_CONTEXT.md`](./architecture/SYSTEM_CONTEXT.md) | High-level architecture, subsystem & version relationships. |
 
+## Governance documents (V0-P3)
+
+The **governance framework** — *how the project is allowed to change* — lives in
+[`governance/`](./governance/). Start at its index: [`governance/README.md`](./governance/README.md).
+
+| Document | Governs |
+|----------|---------|
+| [`governance/Architecture_Governance.md`](./governance/Architecture_Governance.md) | How architecture may change; drift detection; audit; rollback; risk tiers. |
+| [`governance/AI_Governance.md`](./governance/AI_Governance.md) | Approved AI systems/workflows; prompt standards; AI risk/failure modes; per-interaction requirements. |
+| [`governance/Documentation_Governance.md`](./governance/Documentation_Governance.md) | Doc hierarchy, canonical sources, lifecycle, entropy prevention. |
+| [`governance/Testing_Governance.md`](./governance/Testing_Governance.md) | Testing standards for V1–V4; validation; release gating. |
+| [`governance/Review_Governance.md`](./governance/Review_Governance.md) | Review workflow, risk-based depth, AI-code review, merge approval. |
+| [`governance/Release_Governance.md`](./governance/Release_Governance.md) | Release lifecycle, validation, versioning, observability, incidents, rollback. |
+| [`governance/Decision_Governance.md`](./governance/Decision_Governance.md) | The ADR framework (required fields, lifecycle, approval, indexing). |
+| [`governance/Risk_Governance.md`](./governance/Risk_Governance.md) | Risk categories, scoring, ownership, review cadence. |
+| [`governance/RFC_Process.md`](./governance/RFC_Process.md) | RFC lifecycle, template, quality standards. |
+| [`governance/Change_Management.md`](./governance/Change_Management.md) | Change classes and their approval/validation/rollback paths. |
+
+## AI Operating System (V0-P4)
+
+The **living state, registries, protocols, templates, and checklists** that let
+development survive across years and AI-agent turnover live in the Governance &
+Context Control layer: [`../.gcc/README.md`](../.gcc/README.md). A new contributor
+or AI agent should **start at** [`../.gcc/MAIN_CONTEXT.md`](../.gcc/MAIN_CONTEXT.md)
+and run [`../.gcc/CONTEXT_RECOVERY_PROTOCOL.md`](../.gcc/CONTEXT_RECOVERY_PROTOCOL.md).
+
 ## Recommended reading order
 Vision → Objectives → Scope → Version Model → Principles → Rules → Glossary →
 Architecture (Layered → System Context → Module Boundaries → Dependency Graph →
-Import Rules).
+Import Rules) → Governance ([`governance/README.md`](./governance/README.md)) →
+Operating System ([`../.gcc/MAIN_CONTEXT.md`](../.gcc/MAIN_CONTEXT.md)).

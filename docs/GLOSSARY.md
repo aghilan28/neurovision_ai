@@ -253,6 +253,44 @@ changes (Rule **NR-5**); stored under the governance layer.
 The end-to-end record that makes outputs and decisions reconstructable after the
 fact. Required for clinical outputs (Rule **NR-11**); a V2/V4 exit criterion.
 
+### ADR (Architecture / Any Decision Record)
+A recorded, versioned, dated statement of a consequential decision with its
+context, problem, options, tradeoffs, chosen solution, consequences, risk, future
+impact, and review date. The concrete form of a *Decision Record* (above); defined
+by [`governance/Decision_Governance.md`](./governance/Decision_Governance.md) and
+indexed in the Decision Registry. **Append-only** (superseded, never deleted).
+
+### RFC (Request For Comments)
+A structured proposal used to deliberate a non-trivial change **before** it becomes
+a decision; an RFC's approval produces an ADR. Defined by
+[`governance/RFC_Process.md`](./governance/RFC_Process.md).
+
+### Change Class
+The category that routes a change through its governance path: **Documentation,
+Minor, Major, Architecture, Governance, Emergency**. Defined by
+[`governance/Change_Management.md`](./governance/Change_Management.md).
+
+### Risk Tier (A0–A3, AE)
+The severity classification of a change that sets approval authority and review
+depth: **A0** editorial, **A1** minor, **A2** major, **A3** architecture-critical,
+**AE** emergency. Defined by
+[`governance/Architecture_Governance.md`](./governance/Architecture_Governance.md) §13.1
+and shared across the governance suite. (Distinct from a *risk's* Severity/
+Probability in [`governance/Risk_Governance.md`](./governance/Risk_Governance.md).)
+
+### AI-TRACE
+The mandatory traceability block an AI agent emits with any consequential change
+(agent, context read, scope, risk class, decisions, dependencies, assumptions,
+invariants, self-validation, required reviewer). Defined by
+[`governance/AI_Governance.md`](./governance/AI_Governance.md) §9; it is itself Lore.
+
+### AI Operating System (GCC OS)
+The set of **living** documents in `.gcc/` (master memory, state files, registries,
+knowledge graph, and the Lore / context-recovery / onboarding / branch / changelog
+protocols, plus templates and checklists) that let a human or AI agent recover
+context and resume development across dormancy and turnover. Established in
+**Phase V0-P4**; see [`../.gcc/README.md`](../.gcc/README.md).
+
 ---
 
 ## 6. Project-Structure & Versioning Terms
@@ -298,6 +336,8 @@ weakened in any later version
 | Acronym | Expansion | See section |
 |---------|-----------|-------------|
 | ACNS | American Clinical Neurophysiology Society | §1 |
+| ADR | Architecture / Any Decision Record | §5 |
+| AI-TRACE | AI traceability block | §5 |
 | BCI | Brain-Computer Interface (out of scope) | [`PROJECT_SCOPE.md`](./PROJECT_SCOPE.md) O2 |
 | cEEG | Continuous EEG | §1 |
 | EEG | Electroencephalography/-gram | §1 |
@@ -310,6 +350,7 @@ weakened in any later version
 | LPD | Lateralized Periodic Discharges | §1 |
 | LRDA | Lateralized Rhythmic Delta Activity | §1 |
 | NCS/NCSE | Non-Convulsive Seizure / Status Epilepticus | §1 |
+| RFC | Request For Comments | §5 |
 | SZ | Seizure | §1 |
 | UQ | Uncertainty Quantification | §3 |
 | V0–V4 | Versions 0 through 4 | §6 |
