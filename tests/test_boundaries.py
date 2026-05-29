@@ -32,6 +32,8 @@ ALLOWED = {
     "datasets": {"preprocessing"},
     "ml": {"preprocessing", "datasets"},
     "evaluation": {"ml", "datasets", "preprocessing"},
+    "backend": {"ml", "datasets", "preprocessing", "evaluation"},  # never frontend
+    "frontend": set(),                                       # imports NO domain module
 }
 
 
@@ -60,7 +62,7 @@ def _top_level_internal_imports(path: pathlib.Path) -> set[str]:
     return found
 
 
-@pytest.mark.parametrize("pkg", ["preprocessing", "datasets", "ml", "evaluation"])
+@pytest.mark.parametrize("pkg", ["preprocessing", "datasets", "ml", "evaluation", "backend", "frontend"])
 def test_module_respects_import_rules(pkg):
     allowed = ALLOWED[pkg] | {pkg}  # a package may import itself (absolute self-refs)
     violations = []
@@ -78,13 +80,29 @@ def test_ml_never_imports_evaluation():
         assert "evaluation" not in _top_level_internal_imports(path), f"{path} imports evaluation"
 
 
+def test_backend_never_imports_frontend():
+    """Application must never depend upward on Presentation (NR-8)."""
+    for path in _iter_py_files("backend"):
+        assert "frontend" not in _top_level_internal_imports(path), f"{path} imports frontend"
+
+
+def test_frontend_imports_no_domain_module():
+    """Presentation imports NO domain module (the strictest boundary, NR-8)."""
+    domain = {"ml", "evaluation", "datasets", "preprocessing", "backend",
+              "monitoring", "deployment"}
+    for path in _iter_py_files("frontend"):
+        imported = _top_level_internal_imports(path)
+        leaked = imported & domain
+        assert not leaked, f"{path} imports forbidden domain module(s): {sorted(leaked)}"
+
+
 def test_preprocessing_imports_nobody_internal():
     for path in _iter_py_files("preprocessing"):
         assert _top_level_internal_imports(path) - {"preprocessing"} == set()
 
 
 def test_no_module_imports_tests_or_scripts():
-    for pkg in ["preprocessing", "datasets", "ml", "evaluation"]:
+    for pkg in ["preprocessing", "datasets", "ml", "evaluation", "backend", "frontend"]:
         for path in _iter_py_files(pkg):
             imported = _top_level_internal_imports(path)
             assert "tests" not in imported and "scripts" not in imported and "tools" not in imported
@@ -107,3 +125,13 @@ def test_dependency_graph_is_acyclic():
         return False
 
     assert not any(has_cycle(n) for n in graph)
+
+
+def test_full_domain_chain_is_lower_triangular():
+    """The chain preprocessing→datasets→ml→evaluation→backend→frontend must stay
+    strictly one-way (each module only imports modules below it)."""
+    order = ["preprocessing", "datasets", "ml", "evaluation", "backend", "frontend"]
+    rank = {m: i for i, m in enumerate(order)}
+    for pkg in order:
+        for dep in ALLOWED[pkg]:
+            assert rank[dep] < rank[pkg], f"{pkg} imports {dep} not strictly below it"
