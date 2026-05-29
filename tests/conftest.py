@@ -97,3 +97,31 @@ def trained_for_uncertainty(prepared, dataset):
         "test_labels": prepared.y_test,
         "class_names": dataset.class_names,
     }
+
+
+
+# --- offline inference + research app fixtures (V1-P7 / V1-P8) ----------------
+from backend.offline_inference import InferenceOrchestrator, PipelineConfig, FakeClock
+
+
+def _small_pipeline_config() -> PipelineConfig:
+    return PipelineConfig(
+        synthetic=SyntheticConfig(n_patients=12, windows_per_patient=18),
+        training=TrainingConfig(steps=60),
+        model_name="tcn",
+        alpha=0.1,
+    )
+
+
+@pytest.fixture(scope="session")
+def offline_config() -> PipelineConfig:
+    return _small_pipeline_config()
+
+
+@pytest.fixture(scope="session")
+def offline_run(tmp_path_factory, offline_config):
+    """Run the orchestrator once per session; return (OrchestratorResult, output_dir)."""
+    out = tmp_path_factory.mktemp("offline_run")
+    orch = InferenceOrchestrator(offline_config, output_dir=str(out), clock=FakeClock())
+    result = orch.run()
+    return result, str(out)
