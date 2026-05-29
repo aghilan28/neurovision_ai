@@ -1,0 +1,78 @@
+# NeuroVision AI — project configuration (Version 1)
+#
+# This file configures the toolchain ONLY. It does not redefine architecture or
+# governance: the authoritative sources remain docs/ (constitution + architecture)
+# and .gcc/ (governance). See docs/README.md.
+#
+# Version ownership: introduced in V1 (the first version that contains code).
+# V0 intentionally contained no executable code (VERSION_EVOLUTION_MODEL.md §1).
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neurovision-ai"
+version = "1.0.0-alpha"           # V1 in progress (V1-P1 + V1-P2)
+description = "Production-oriented EEG-AI platform for critical-care neurology — V1 EEG data + signal-processing foundation."
+requires-python = ">=3.11,<3.12"
+license = { text = "Proprietary — license to be established as a governance decision (see README §9)." }
+dependencies = [
+    "numpy==2.2.6",
+    "scipy==1.15.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.3.5"]
+
+# Only the V1-owned modules are packaged. Higher layers (ml/backend/frontend/...)
+# remain intentionally empty until their owning version (VERSION_EVOLUTION_MODEL.md).
+[tool.setuptools]
+packages = [
+    "preprocessing",
+    "datasets",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+# The repository root is the import root. Absolute imports such as
+# `import preprocessing` / `import datasets` resolve from here. This keeps the
+# module boundaries in docs/architecture/IMPORT_RULES.md directly expressible.
+pythonpath = ["."]
+testpaths = [
+    "preprocessing/tests",
+    "datasets/tests",
+    "tests",
+]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-ra --strict-markers"
+markers = [
+    "determinism: asserts identical inputs + pinned version => identical outputs (AP-3/NR-9).",
+    "reproducibility: asserts a result regenerates from pinned inputs/code (AP-6/NR-10).",
+    "boundary: asserts module import boundaries are not violated (AP-7/NR-8).",
+    "scientific: asserts scientific correctness of a DSP transform.",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = [".venv", ".git", ".gcc"]
+
+[tool.ruff.lint]
+# Conservative, deterministic-friendly rule set.
+select = ["E", "F", "I", "W", "UP", "B", "C4", "SIM"]
+ignore = [
+    "E501",   # line length handled by formatter / line-length above
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["preprocessing", "datasets"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+warn_redundant_casts = true
+ignore_missing_imports = true
+files = ["preprocessing", "datasets"]
