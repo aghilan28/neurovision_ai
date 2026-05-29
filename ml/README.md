@@ -2,7 +2,8 @@
 
 > **Layer:** ML Layer
 > **Directory README type:** Repository Architecture Foundation (V0-P2)
-> **Status (V0):** Boundary contract defined; **no code yet** (correct for V0).
+> **Status (V0):** Boundary contract defined.
+> **Status (V1-P5 + V1-P6):** **Implemented** — baseline models + uncertainty layer (see "V1 Implementation" below).
 > **Governing docs:** AP-4 (uncertainty-aware), AP-2 (patient-disjoint), AP-5 (traceability), AP-10 (domain shift), NR-4, [`../docs/architecture/IMPORT_RULES.md`](../docs/architecture/IMPORT_RULES.md)
 
 Owns the **models and inference** that detect and characterize seizures and the
@@ -62,3 +63,58 @@ EEG.
   serve clients (`backend/`).
 - Generalization claims require shift-aware evaluation (AP-10, NR-15) performed in
   `evaluation/`.
+
+
+---
+
+## V1 Implementation (V1-P5 Baseline Models + V1-P6 Uncertainty)
+
+> Implemented within the V0-P2 boundary contract above — **extended, not rewritten**
+> (AP-1). Decision record: [`../.gcc/decisions/ADR-0001-v1-p5-p6-baseline-models-and-uncertainty.md`](../.gcc/decisions/ADR-0001-v1-p5-p6-baseline-models-and-uncertainty.md).
+
+### Subsystems
+
+```
+ml/
+├── schemas/        typed, versioned model I/O contracts
+├── models/         SimpleCNN · EEGNet · TCN (+ factory: the only model constructor)
+├── data/           ML dataset adapter (the directive's "ml/datasets"; see ADR-0001 D3)
+├── training/       deterministic training pipeline · config · manifest · report
+├── validation/     the 7 mandated training-validation checks
+├── registry/       model registry (no model exists outside it)
+├── artifacts/      deterministic, checksummed artifact store
+├── lineage/        version bundles + content-addressed lineage graph
+├── benchmarking/   benchmark records + registry; EvaluationPort (ml never imports evaluation)
+├── uncertainty/    V1-P6 — calibration · conformal · coverage · reliability · risk (+ registry/lineage/validation/reports)
+├── provenance.py   hashing / content-addressing / canonical-JSON IO
+└── version.py      all version constants
+```
+
+### What it guarantees
+- **Reproducible reference baselines** (EEGNet, TCN, SimpleCNN) — pure NumPy,
+  deterministic, framework-free. Future models are compared against these.
+- **Governed by construction:** every model is versioned, registered, lineage-
+  tracked, checksummed, and trained through one validated pipeline.
+- **Uncertainty-aware:** calibrated probabilities + conformal prediction sets with
+  a coverage guarantee + risk/abstain — a `Prediction` is *clinically complete*
+  only when calibrated uncertainty is attached (NR-4).
+- **Patient-disjoint or it didn't happen (NR-3):** benchmarking refuses any
+  non-patient-disjoint evaluation.
+
+### Where things are documented
+- Baseline models & training/registry/lineage/benchmarking design + model cards:
+  [`docs/V1_P5_BASELINE_MODELS.md`](./docs/V1_P5_BASELINE_MODELS.md)
+- Uncertainty methods: [`uncertainty/README.md`](./uncertainty/README.md) and
+  [`uncertainty/docs/V1_P6_UNCERTAINTY.md`](./uncertainty/docs/V1_P6_UNCERTAINTY.md)
+
+### Run the end-to-end pipeline
+```bash
+python -m scripts.run_pipeline            # Dataset→Preprocess→Split→Model→Eval→
+                                          # Calibration→Conformal→Coverage→Risk→Benchmark
+python -m pytest                          # full test suite (incl. boundary/determinism gates)
+```
+
+### Boundary reminder (unchanged from V0)
+`ml` imports **only** `preprocessing` and `datasets`. It **never** imports
+`evaluation` (evaluation imports ml — no cycle, NR-8). Cross-layer orchestration
+that needs both lives in `scripts/`. This is enforced by `tests/test_boundaries.py`.
