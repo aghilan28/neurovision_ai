@@ -350,3 +350,35 @@ unreadable/unsupported file is rejected with structured findings (no silent fail
 - **Run:** `python -m scripts.verify_productization_p1`.
 
 See [`eeg_foundation/README.md`](./eeg_foundation/README.md).
+
+
+---
+
+## Productization P2 — Signal Processing Foundation (`signal_processing/`)
+
+> Productization (built strictly on P1): turns a **raw EEG asset** into a **validated
+> clean EEG asset**. Decision:
+> [`../.gcc/decisions/ADR-0015`](../.gcc/decisions/ADR-0015-productization-p2-signal-processing.md).
+
+- **`signal_processing/`** (Productization P2) — reads the **immutable** raw EEG bytes
+  from the P1 store and produces a cleaned signal: it **assesses quality** (channel +
+  recording scores, grade, findings, recommendations), **detects artifacts** (eye-blink,
+  EMG, movement, powerline, channel dropout, flat/saturated channels → structured
+  records with severity/confidence/affected-channels/onset/duration), **filters**
+  (deterministic scipy bandpass/highpass/lowpass/notch/reference) and **removes
+  artifacts** (self-contained deterministic ICA, adaptive filtering, interpolation,
+  channel repair, noise suppression), then **stores** the clean signal in a *separate*
+  content-addressed store. No AI, model training, inference, classification, or clinical
+  decisions.
+
+The deliverable executes with complete traceability — a processed asset's chain
+verifies **Patient → Case → EEG → Processed**. The **raw EEG is never modified**; the
+processed asset is a separate, versioned, audited, lineage-tracked record, and
+`SignalIntegrityValidator` asserts raw immutability + raw → processed traceability.
+
+- **Boundary.** Imports `ml` + `backend.eeg_foundation` types + the shared
+  `backend.clinical_cases.audit` primitive; never imports `frontend`; performs signal
+  processing only.
+- **Run:** `python -m scripts.verify_productization_p2`.
+
+See [`signal_processing/README.md`](./signal_processing/README.md).
