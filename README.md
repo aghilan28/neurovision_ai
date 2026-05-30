@@ -131,6 +131,7 @@ Read in this order for a complete understanding of project direction.
 | Preprocessing / Datasets / Evaluation | 🚧 Minimal integration foundations implemented to execute V1 (extend, don't rewrite) — see ADR-0001/0002 | V1 |
 | V1 Certification | 🟡 CERTIFIED (QUALIFIED) — see [`docs/certification/v1/`](docs/certification/v1/V1_COMPLETION_REPORT.md); V2 gate NOT granted | V1 |
 | Clinical Case Foundation + Review Workflow (V2-P1 + V2-P2) | 🚧 Implemented on feature branch — see [`.gcc/decisions/ADR-0003`](.gcc/decisions/ADR-0003-v2-p1-p2-clinical-case-and-review.md) | V2 |
+| Findings & Interpretation + Clinical Knowledge (V2-P3 + V2-P4) | 🚧 Implemented on feature branch — see [`.gcc/decisions/ADR-0004`](.gcc/decisions/ADR-0004-v2-p3-p4-findings-and-knowledge.md) | V2 |
 | Backend / Frontend (clinical workflow, APIs) | 🚧 V2 clinical-workflow modeling implemented (offline, in-process); APIs/real-time remain later | V2 |
 | Near-real-time / Monitoring | ⛔ Not started | V3 |
 | Hospital deployment / full audit | ⛔ Not started | V4 |
