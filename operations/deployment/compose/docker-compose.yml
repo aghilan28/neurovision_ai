@@ -1,0 +1,54 @@
+# NeuroVision AI — Operations compose (Productization P8).
+#
+# Defines the deployable services from the P8 images. The runtime here is Podman/Buildah
+# without a docker-compose provider, so this file is validated structurally by
+# operations.deployment.validate_compose (and is a faithful, runnable compose v3 spec).
+#
+# Secrets are NEVER inline: real values are injected via an env_file mounted at deploy
+# time (see operations/environments/*.env.template). Shared configuration + a persistent
+# data volume are declared below.
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ../../..
+      dockerfile: operations/deployment/docker/Dockerfile.backend
+    image: neurovision-backend:local
+    environment:
+      NV_ENV: production
+      NV_WORKSPACE_DIR: /var/lib/neurovision/workspace
+      NV_BACKUP_DIR: /var/lib/neurovision/backups
+      NV_LOG_FORMAT: json
+    env_file:
+      - ../../environments/production.env.template
+    volumes:
+      - nv_data:/var/lib/neurovision
+    healthcheck:
+      test: ["CMD", "python", "-m", "operations.cli", "live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: "no"
+
+  frontend:
+    build:
+      context: ../../..
+      dockerfile: operations/deployment/docker/Dockerfile.frontend
+    image: neurovision-frontend:local
+    environment:
+      NV_ENV: production
+      NV_LOG_FORMAT: json
+    env_file:
+      - ../../environments/production.env.template
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "python", "-m", "operations.cli", "live"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: "no"
+
+volumes:
+  nv_data:
