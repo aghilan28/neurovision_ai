@@ -24,6 +24,7 @@ contributor and AI-agent turnover.
 | [ADR-0011](./ADR-0011-v4-p1-p2-goals-and-policies.md) | V4-P1 Goal Intelligence Foundation + V4-P2 Policy & Constraint Engine | V4-P1 / V4-P2 | Accepted |
 | [ADR-0012](./ADR-0012-v4-p3-p4-planning-and-tasks.md) | V4-P3 Planning Foundation + V4-P4 Task Intelligence Layer | V4-P3 / V4-P4 | Accepted |
 | [ADR-0013](./ADR-0013-v4-p5-p6-agents-and-execution.md) | V4-P5 Agent Coordination Framework + V4-P6 Execution Orchestration Layer | V4-P5 / V4-P6 | Accepted |
+| [ADR-0014](./ADR-0014-productization-p1-real-eeg-foundation.md) | Productization P1 — Real EEG Foundation Layer | Productization P1 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
