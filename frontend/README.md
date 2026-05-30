@@ -81,3 +81,45 @@ tabs, inline SVG, no JavaScript, no external assets).
   **eleven visualizations**, all sourced from registered artifacts.
 
 See [`offline_research_app/README.md`](./offline_research_app/README.md).
+
+
+
+---
+
+## V2 Clinical Workstation (V2-P7)
+
+> Decision: [`../.gcc/decisions/ADR-0006`](../.gcc/decisions/ADR-0006-v2-p7-p8-workstation-and-certification.md).
+
+`frontend/clinical_workstation/` is the first **unified workflow application** —
+the primary operational interface over every V2 subsystem (Patient → Case → Study →
+Review → Finding → Interpretation → Knowledge → Multi-Case Intelligence → Decision
+Support), plus unified Audit, Lineage, and Reporting. Presentation only: it reads a
+snapshot composed by `scripts.build_workstation_snapshot` and imports **no** domain
+module. See [`clinical_workstation/README.md`](./clinical_workstation/README.md).
+
+---
+
+## V3 Operational Intelligence Workstation (V3-P7)
+
+> Decision: [`../.gcc/decisions/ADR-0010`](../.gcc/decisions/ADR-0010-v3-p7-p8-workstation-and-certification.md).
+
+`frontend/operational_workstation/` is the first **unified operational
+environment** — the primary interface over every Version 3 subsystem (Events →
+Timelines → Workflows → Graph → Analytics → Recommendations), plus unified Audit,
+Lineage, Reports, and a System Health landing area, across **ten** navigation areas.
+
+- **Strictest boundary upheld.** Imports **no** domain module — stdlib `json` only.
+  The seam is `scripts.build_operational_workstation_snapshot` (composes the real V3
+  services over one shared lineage tracker and serializes every registered
+  artifact). Enforced by `tests/test_boundaries.py`.
+- **Exposes, does not create.** Not a source of truth and not a
+  workflow/analytics/recommendation engine; the only state it tracks is
+  deterministic navigation context.
+- **Ten visualization families** + **six** presentation-consistency checks
+  (registry/audit/lineage/visualization/report/state); deterministic static HTML
+  (inline CSS + inline SVG, no JavaScript).
+- **Traceability.** The lineage explorer renders Patient → … → Recommendations,
+  proven by a representative chain that `verify_chain`s to the patient.
+
+See [`operational_workstation/README.md`](./operational_workstation/README.md).
+Version 3 certification: [`../docs/certification/v3/`](../docs/certification/v3/).
