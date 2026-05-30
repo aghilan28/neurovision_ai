@@ -1,0 +1,13 @@
+# Keep build contexts small + reproducible (no local runtime/secret artifacts).
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+.nv_runtime
+.nv_backups
+*.env
+!*.env.template
+.python-version
+app_frontend_snapshot.json
