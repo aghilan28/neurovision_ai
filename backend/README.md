@@ -317,3 +317,36 @@ Task → **Agent → Execution → Governance**.
 
 See [`agent_coordination/README.md`](./agent_coordination/README.md) and
 [`execution_orchestration/README.md`](./execution_orchestration/README.md).
+
+
+---
+
+## Productization P1 — Real EEG Foundation (`eeg_foundation/`)
+
+> Productization (not a new version): the first step toward closing the inherited
+> Gap **G1** ("synthetic-only data"). Decision:
+> [`../.gcc/decisions/ADR-0014`](../.gcc/decisions/ADR-0014-productization-p1-real-eeg-foundation.md).
+
+- **`eeg_foundation/`** (Productization P1) — lets a **real EEG file** enter the
+  platform: it is loaded, validated, parsed, has its metadata extracted, becomes a
+  content-addressed **EEG asset**, is stored, and is tracked with shared audit +
+  lineage — and *nothing more* (no DSP, features, models, inference, analytics, APIs,
+  or deployment). Real files are read with **MNE-Python** (no mock/fake parsers)
+  across a **closed format vocabulary**: `EDF, EDF+, BDF, BDF+, FIF, SET`, detected
+  from file bytes. Validation returns **structured findings, never exceptions**
+  (corrupted/unreadable/unsupported/missing-channels/invalid-rate/invalid-duration/
+  metadata/annotation). Storage is **local + content-addressed** (checksum +
+  fingerprint + integrity verify; no cloud/S3/db). The registry admits **no orphan
+  assets**. Audit reuses the shared `ImmutableAuditLog`; lineage reuses the shared
+  `ml.lineage` tracker with the EEG node parented on the **case** node.
+
+The deliverable executes with complete traceability — a registered EEG asset's chain
+verifies **Patient → Case → EEG Asset**. A valid file is `REGISTERED`; a
+recognized-but-undecodable file is `QUARANTINED` (still tracked); an
+unreadable/unsupported file is rejected with structured findings (no silent failure).
+
+- **Boundary.** Imports `ml` + the shared `backend.clinical_cases.audit` primitive;
+  never imports `frontend`; performs no modelling/inference/DSP.
+- **Run:** `python -m scripts.verify_productization_p1`.
+
+See [`eeg_foundation/README.md`](./eeg_foundation/README.md).

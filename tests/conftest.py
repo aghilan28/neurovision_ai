@@ -125,3 +125,18 @@ def offline_run(tmp_path_factory, offline_config):
     orch = InferenceOrchestrator(offline_config, output_dir=str(out), clock=FakeClock())
     result = orch.run()
     return result, str(out)
+
+
+
+# --- EEG Foundation fixtures (Productization P1) -----------------------------
+@pytest.fixture(scope="session")
+def eeg_fixtures() -> dict:
+    """Ensure the committed EEG fixtures exist; return ``{name: path}``.
+
+    Files live in ``tests/fixtures/eeg/`` and are regenerated deterministically if
+    any are missing (e.g. on a fresh checkout). See ``tests/_eeg_fixtures.py``.
+    """
+    from _eeg_fixtures import generate_fixtures
+
+    dest = str(REPO_ROOT / "tests" / "fixtures" / "eeg")
+    return generate_fixtures(dest)
