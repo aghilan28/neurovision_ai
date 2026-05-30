@@ -225,3 +225,46 @@ Governance**.
 
 See [`goal_intelligence/README.md`](./goal_intelligence/README.md) and
 [`policy_engine/README.md`](./policy_engine/README.md).
+
+
+
+---
+
+## V4 Plans & Tasks (V4-P3 + V4-P4)
+
+> Version 4 continues by asking **"how can an approved goal be achieved?"** (Plans)
+> and breaking that into **governed units of future work** (Tasks) — **before** any
+> agent, assignment, or execution. Decision:
+> [`../.gcc/decisions/ADR-0012`](../.gcc/decisions/ADR-0012-v4-p3-p4-planning-and-tasks.md).
+
+The backend gains two more foundational V4 subsystems built on the goal + policy
+foundation:
+
+- **`planning_foundation/`** (V4-P3) — the **Plan** as the bridge between a Goal and
+  Tasks: *how a goal may be achieved*. An **intent structure**, never execution.
+  Hierarchical taxonomy (strategic apex), an eight-state governed lifecycle
+  (PROPOSED→…→READY→…→ARCHIVED), versioned dependencies (cycle-checked), governance,
+  registry, audit, shared lineage, 8-check validation, and reports. Every plan
+  **derives from an approved goal**; a plan cannot become READY without
+  policy-governed approval.
+- **`task_intelligence/`** (V4-P4) — the **Task** as the atomic unit of *future*
+  execution: it **describes work; it does not perform work**. Same governed shape
+  with a `BLOCKED` operational dependency state. Every task **derives from a ready
+  plan**; a task cannot become READY without policy-governed approval.
+
+Together they execute the V4 deliverable chain with complete traceability:
+Patient → Case → Review → Finding → Knowledge → Decision → Event → Timeline →
+Workflow → Graph → Analytics → Recommendations → Goal → Policy → Constraint →
+**Plan → Task → Governance**.
+
+- **Goal ↔ Plan ↔ Task integration.** `planning_foundation` and `task_intelligence`
+  stay policy-agnostic (each accepts an injected decider); `policy_engine.integration`
+  supplies `plan_policy_decider`/`task_policy_decider` backed by real ACTIVE policies
+  — so **every ready plan and task is policy governed**, deterministic, audited, and
+  lineage-tracked, with no coupling cycle.
+- **Boundary.** Both import `ml` + sibling `backend` subsystems; neither imports
+  `frontend`. No agents/execution/monitoring/simulation (those are later phases).
+- **Run:** `python -m scripts.verify_v4_p3_p4`.
+
+See [`planning_foundation/README.md`](./planning_foundation/README.md) and
+[`task_intelligence/README.md`](./task_intelligence/README.md).
