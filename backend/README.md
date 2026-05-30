@@ -382,3 +382,36 @@ processed asset is a separate, versioned, audited, lineage-tracked record, and
 - **Run:** `python -m scripts.verify_productization_p2`.
 
 See [`signal_processing/README.md`](./signal_processing/README.md).
+
+
+---
+
+## Productization P3 — Feature Engineering Platform (`feature_engineering/`)
+
+> Productization (built strictly on P1 + P2): turns a **processed EEG asset** into an
+> **immutable validated feature asset**. Decision:
+> [`../.gcc/decisions/ADR-0016`](../.gcc/decisions/ADR-0016-productization-p3-feature-engineering.md).
+
+- **`feature_engineering/`** (Productization P3) — reads the **immutable** processed
+  signal from the P2 store and generates five families of deterministic features:
+  **frequency** (band powers δ/θ/α/β/γ, relative power, band ratios, spectral entropy),
+  **temporal** (mean/variance/skew/kurtosis/RMS/ZCR/Hjorth/entropy, per-channel +
+  per-recording), **connectivity** (coherence/PLV/cross-correlation matrices +
+  synchronization), **spectral** (PSD/spectrogram/band-summary/frequency-histogram,
+  structured — no images), and **topography** (channel-layout/regional/spatial-summary/
+  topographic-stat, structured — no images). It assembles an **immutable** feature
+  asset, validates it (completeness/integrity/consistency/determinism +
+  registry/audit/lineage/version), and registers it. No model training, model registry,
+  inference, predictions, classification, or clinical decisions.
+
+The deliverable executes with complete traceability — a feature asset's chain verifies
+**Patient → Case → EEG → Processed → Feature**. The feature asset is immutable (frozen +
+content-fingerprinted); determinism is *validated* by re-extracting and comparing
+fingerprints.
+
+- **Boundary.** Imports `ml` + reads the P2 store + reuses the shared
+  `backend.clinical_cases.audit` primitive; never imports `frontend`; performs feature
+  generation only.
+- **Run:** `python -m scripts.verify_productization_p3`.
+
+See [`feature_engineering/README.md`](./feature_engineering/README.md).
