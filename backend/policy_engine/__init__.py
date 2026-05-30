@@ -54,7 +54,11 @@ from .registry import PolicyRegistry
 from .validation import PolicyValidator
 from .audit import make_policy_audit_log
 from .service import PolicyService
-from .integration import goal_policy_decider, install_default_goal_policies
+from .integration import (
+    goal_policy_decider, install_default_goal_policies,
+    plan_policy_decider, install_default_plan_policies,
+    task_policy_decider, install_default_task_policies,
+)
 
 __all__ = [
     "POLICY_ENGINE_VERSION", "POLICY_DOMAIN_VERSION", "POLICY_IDENTITY_VERSION",
@@ -74,4 +78,6 @@ __all__ = [
     "ConstraintEngine", "PolicyEvaluationEngine", "PolicyGovernanceGate", "PolicyGovernanceError",
     "PolicyRegistry", "PolicyValidator", "make_policy_audit_log", "PolicyService",
     "goal_policy_decider", "install_default_goal_policies",
+    "plan_policy_decider", "install_default_plan_policies",
+    "task_policy_decider", "install_default_task_policies",
 ]
