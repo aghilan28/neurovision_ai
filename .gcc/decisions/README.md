@@ -22,6 +22,7 @@ contributor and AI-agent turnover.
 | [ADR-0009](./ADR-0009-v3-p5-p6-analytics-and-recommendations.md) | V3-P5 Operational Analytics Layer + V3-P6 Operational Recommendation Layer | V3-P5 / V3-P6 | Accepted |
 | [ADR-0010](./ADR-0010-v3-p7-p8-workstation-and-certification.md) | V3-P7 Operational Intelligence Workstation + V3-P8 Version 3 Certification | V3-P7 / V3-P8 | Accepted |
 | [ADR-0011](./ADR-0011-v4-p1-p2-goals-and-policies.md) | V4-P1 Goal Intelligence Foundation + V4-P2 Policy & Constraint Engine | V4-P1 / V4-P2 | Accepted |
+| [ADR-0012](./ADR-0012-v4-p3-p4-planning-and-tasks.md) | V4-P3 Planning Foundation + V4-P4 Task Intelligence Layer | V4-P3 / V4-P4 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
