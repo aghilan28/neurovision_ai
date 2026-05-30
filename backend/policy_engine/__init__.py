@@ -58,6 +58,8 @@ from .integration import (
     goal_policy_decider, install_default_goal_policies,
     plan_policy_decider, install_default_plan_policies,
     task_policy_decider, install_default_task_policies,
+    agent_policy_decider, install_default_agent_policies,
+    execution_policy_decider, install_default_execution_policies,
 )
 
 __all__ = [
@@ -80,4 +82,6 @@ __all__ = [
     "goal_policy_decider", "install_default_goal_policies",
     "plan_policy_decider", "install_default_plan_policies",
     "task_policy_decider", "install_default_task_policies",
+    "agent_policy_decider", "install_default_agent_policies",
+    "execution_policy_decider", "install_default_execution_policies",
 ]
