@@ -415,3 +415,32 @@ fingerprints.
 - **Run:** `python -m scripts.verify_productization_p3`.
 
 See [`feature_engineering/README.md`](./feature_engineering/README.md).
+
+
+---
+
+## Productization P4 — Model Foundation Platform (`model_foundation/`)
+
+> Productization (built strictly on P1 + P2 + P3): turns **feature assets** into
+> **validated trained models**. Decision:
+> [`../.gcc/decisions/ADR-0017`](../.gcc/decisions/ADR-0017-productization-p4-model-foundation.md).
+
+- **`model_foundation/`** (Productization P4) — assembles a **patient-disjoint** dataset
+  from registered feature assets (plus an external-dataset integration framework for
+  **TUH EEG / CHB-MIT / Temple EEG** — manifest based, **no download, no internet**),
+  **trains** deterministic pure-NumPy baseline architectures (**EEGNet / DeepConvNet /
+  Temporal CNN / Transformer**), **evaluates** them (accuracy / precision / recall / F1 /
+  confusion / calibration / uncertainty), **tracks experiments**, **validates** (9
+  checks), and **registers** immutable models. No production inference, serving, APIs,
+  user predictions, or frontend.
+
+The deliverable executes with complete traceability — a model's chain verifies
+**Patient → Case → EEG → Processed → Feature → Dataset → Training Run → Model**. Training
+is seeded + reproducible (determinism is *validated*); models are immutable
+(content-addressed parameter fingerprint, not raw weights); splits are patient-disjoint.
+
+- **Boundary.** Imports `ml` + reuses the shared `backend.clinical_cases.audit`
+  primitive; never imports `frontend`; performs model creation only (no serving).
+- **Run:** `python -m scripts.verify_productization_p4`.
+
+See [`model_foundation/README.md`](./model_foundation/README.md).
