@@ -1,0 +1,41 @@
+# NeuroVision AI — Backend container (Productization P8).
+# Full application image: the P1-P7 platform + the operations layer. Builds the pinned
+# runtime deps for reproducibility. Build context = repository root:
+#   docker build -f operations/deployment/docker/Dockerfile.backend -t neurovision-backend .
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    NV_ENV=production \
+    NV_WORKSPACE_DIR=/var/lib/neurovision/workspace \
+    NV_BACKUP_DIR=/var/lib/neurovision/backups
+
+WORKDIR /app
+
+# Pinned runtime dependencies first (cache-friendly, reproducible build).
+COPY requirements.txt ./requirements.txt
+RUN python -m pip install --no-cache-dir --upgrade pip \
+    && python -m pip install --no-cache-dir -r requirements.txt
+
+# The platform + operations layers (no secrets are ever copied into the image).
+COPY ml/ ./ml/
+COPY preprocessing/ ./preprocessing/
+COPY datasets/ ./datasets/
+COPY evaluation/ ./evaluation/
+COPY backend/ ./backend/
+COPY frontend/ ./frontend/
+COPY scripts/ ./scripts/
+COPY operations/ ./operations/
+
+RUN mkdir -p "$NV_WORKSPACE_DIR" "$NV_BACKUP_DIR" \
+    && useradd --create-home --uid 10001 nvuser \
+    && chown -R nvuser:nvuser /app /var/lib/neurovision
+USER nvuser
+
+# Liveness probe (light: no model training).
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+    CMD ["python", "-m", "operations.cli", "live"]
+
+# Startup process: run the operational health check set and report (one-shot).
+CMD ["python", "-m", "operations.cli", "health", "--environment", "production"]

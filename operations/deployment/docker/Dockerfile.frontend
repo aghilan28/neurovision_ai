@@ -1,0 +1,29 @@
+# NeuroVision AI — Frontend container (Productization P8).
+# Presentation layer only: stdlib-only (NR-8), so this image carries NO heavy ML deps
+# and builds fast + deterministically. Build context = repository root:
+#   docker build -f operations/deployment/docker/Dockerfile.frontend -t neurovision-frontend .
+FROM python:3.11-slim
+
+# Reproducibility: no bytecode writes, unbuffered logs, fixed workdir.
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app \
+    NV_ENV=production
+
+WORKDIR /app
+
+# Presentation layer + the (lazy) operations layer. No requirements install needed —
+# the frontend imports only the standard library.
+COPY frontend/ ./frontend/
+COPY operations/ ./operations/
+
+# A non-root runtime user for safer operation.
+RUN useradd --create-home --uid 10001 nvuser && chown -R nvuser:nvuser /app
+USER nvuser
+
+# Liveness is a stdlib-only check (no backend import).
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD ["python", "-m", "operations.cli", "live"]
+
+# Startup process: render the login page and report status (one-shot smoke).
+CMD ["python", "operations/deployment/docker/frontend_smoke.py"]
