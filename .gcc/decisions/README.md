@@ -17,6 +17,7 @@ contributor and AI-agent turnover.
 | [ADR-0004](./ADR-0004-v2-p3-p4-findings-and-knowledge.md) | V2-P3 Findings & Interpretation Layer + V2-P4 Clinical Knowledge Layer | V2-P3 / V2-P4 | Accepted |
 | [ADR-0005](./ADR-0005-v2-p5-p6-intelligence-and-decision-support.md) | V2-P5 Multi-Case Intelligence Layer + V2-P6 Decision Support Layer | V2-P5 / V2-P6 | Accepted |
 | [ADR-0006](./ADR-0006-v2-p7-p8-workstation-and-certification.md) | V2-P7 Clinical Workstation + V2-P8 Version 2 Certification | V2-P7 / V2-P8 | Accepted |
+| [ADR-0007](./ADR-0007-v3-p1-p2-events-and-temporal.md) | V3-P1 Operational Event Foundation + V3-P2 Temporal Intelligence Layer | V3-P1 / V3-P2 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
