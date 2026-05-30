@@ -16,10 +16,14 @@ name = "neurovision-ai"
 version = "1.0.0"
 description = "NeuroVision AI — offline EEG platform (V1): baseline models + uncertainty/calibration."
 requires-python = ">=3.10"
-# Pinned for reproducibility. Pure-NumPy implementation guarantees deterministic,
-# framework-free, CPU-only reference baselines (AP-3 / AP-6 / NR-9 / NR-10).
+# Pinned for reproducibility. The V1 reference baselines are pure-NumPy
+# (deterministic, framework-free, CPU-only). Productization P1 adds MNE-Python +
+# scipy for real EEG file ingestion (EDF/EDF+/BDF/BDF+/FIF/SET); these are used
+# only by backend/eeg_foundation and never enter a reproducibility hash.
 dependencies = [
     "numpy==2.4.6",
+    "mne==1.12.1",
+    "scipy==1.17.1",
 ]
 
 [project.optional-dependencies]
@@ -42,4 +46,16 @@ packages = [
 pythonpath = ["."]
 testpaths = ["tests"]
 addopts = "-q"
-filterwarnings = ["error::DeprecationWarning"]
+# DeprecationWarnings remain hard errors for *our* code (the V0 quality gate).
+# Third-party readers (MNE-Python / scipy / their MAT/EEGLAB backends) may emit
+# their own DeprecationWarnings from inside library internals; those are out of
+# our control and are scoped-ignored so they cannot mask a regression in our code.
+# Later entries take precedence over earlier ones (pytest applies last match).
+filterwarnings = [
+    "error::DeprecationWarning",
+    "ignore::DeprecationWarning:mne",
+    "ignore::DeprecationWarning:scipy",
+    "ignore::DeprecationWarning:numpy",
+    "ignore::DeprecationWarning:dateutil",
+    "ignore::DeprecationWarning:pymatreader",
+]

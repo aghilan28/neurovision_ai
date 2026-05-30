@@ -1,8 +1,17 @@
-# NeuroVision AI — pinned runtime dependencies (V1).
-# Pinned exactly for reproducibility (AP-6 / NR-10). Pure NumPy only: the V1
-# reference baselines are framework-free and CPU-only so results are
+# NeuroVision AI — pinned runtime dependencies.
+# Pinned exactly for reproducibility (AP-6 / NR-10).
+#
+# V1 reference baselines are framework-free pure NumPy so results are
 # bit-for-bit reproducible and auditable.
 numpy==2.4.6
 
+# Productization P1 — Real EEG Foundation Layer.
+# MNE-Python is the industry-standard reader for clinical/research EEG formats
+# (EDF/EDF+/BDF/BDF+/FIF/SET). scipy is required to read EEGLAB ``.set`` files
+# (MATLAB v5 containers) and to deterministically generate the test fixtures.
+mne==1.12.1
+scipy==1.17.1
+
 # Development / verification only (not a runtime dependency of any module):
 pytest==9.0.3
+ruff==0.15.15
