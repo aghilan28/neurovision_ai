@@ -113,3 +113,32 @@ Audit Trail → Lineage Trail.
 
 See [`clinical_cases/README.md`](./clinical_cases/README.md) and
 [`clinical_review/README.md`](./clinical_review/README.md).
+
+
+---
+
+## V2 Findings & Knowledge (V2-P3 + V2-P4)
+
+> Adds clinical *meaning* on top of the case/review workflow. Decision:
+> [`../.gcc/decisions/ADR-0004`](../.gcc/decisions/ADR-0004-v2-p3-p4-findings-and-knowledge.md).
+
+- **`clinical_findings/`** (V2-P3) — the **Finding**: a structured clinical
+  observation **linked to evidence** (never a prediction/diagnosis/recommendation),
+  with a separate **Interpretation** entity, an 8-state lifecycle, mandatory
+  evidence, immutable audit, shared lineage, 7-check validation, and reports.
+- **`clinical_knowledge/`** (V2-P4) — structured **Knowledge**: terminology,
+  concepts, taxonomy, a practical ontology, and typed relationships (data, not
+  hidden code; not a diagnosis engine), with audit, lineage, registry, 7-check
+  validation, and reports.
+
+Together they complete the deliverable chain with full traceability:
+Patient → Case → Study → Review → Evidence → Finding → Interpretation → Knowledge
+Context → Audit Trail → Lineage Trail.
+
+- **Boundary.** Both import `ml` + the sibling clinical subsystems and integrate via
+  the shared lineage tracker; neither imports `frontend`.
+- **Run:** `python -m scripts.run_clinical_knowledge_workflow` ·
+  `python -m scripts.verify_v2_p3_p4`.
+
+See [`clinical_findings/README.md`](./clinical_findings/README.md) and
+[`clinical_knowledge/README.md`](./clinical_knowledge/README.md).
