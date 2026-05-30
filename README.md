@@ -130,7 +130,8 @@ Read in this order for a complete understanding of project direction.
 | Offline Inference Platform + Research App (V1-P7 + V1-P8) | 🚧 Implemented (offline-only) on feature branch — see [`.gcc/decisions/ADR-0002`](.gcc/decisions/ADR-0002-v1-p7-p8-offline-inference-and-research-app.md) | V1 |
 | Preprocessing / Datasets / Evaluation | 🚧 Minimal integration foundations implemented to execute V1 (extend, don't rewrite) — see ADR-0001/0002 | V1 |
 | V1 Certification | 🟡 CERTIFIED (QUALIFIED) — see [`docs/certification/v1/`](docs/certification/v1/V1_COMPLETION_REPORT.md); V2 gate NOT granted | V1 |
-| Backend / Frontend (clinical workflow, APIs) | ⛔ Not started (offline forms only in V1) | V2 |
+| Clinical Case Foundation + Review Workflow (V2-P1 + V2-P2) | 🚧 Implemented on feature branch — see [`.gcc/decisions/ADR-0003`](.gcc/decisions/ADR-0003-v2-p1-p2-clinical-case-and-review.md) | V2 |
+| Backend / Frontend (clinical workflow, APIs) | 🚧 V2 clinical-workflow modeling implemented (offline, in-process); APIs/real-time remain later | V2 |
 | Near-real-time / Monitoring | ⛔ Not started | V3 |
 | Hospital deployment / full audit | ⛔ Not started | V4 |
 
