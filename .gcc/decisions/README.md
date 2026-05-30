@@ -27,6 +27,7 @@ contributor and AI-agent turnover.
 | [ADR-0014](./ADR-0014-productization-p1-real-eeg-foundation.md) | Productization P1 — Real EEG Foundation Layer | Productization P1 | Accepted |
 | [ADR-0015](./ADR-0015-productization-p2-signal-processing.md) | Productization P2 — Signal Processing Foundation | Productization P2 | Accepted |
 | [ADR-0016](./ADR-0016-productization-p3-feature-engineering.md) | Productization P3 — Feature Engineering Platform | Productization P3 | Accepted |
+| [ADR-0017](./ADR-0017-productization-p4-model-foundation.md) | Productization P4 — Model Foundation Platform | Productization P4 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
