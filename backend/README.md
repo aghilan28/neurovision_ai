@@ -84,3 +84,32 @@ lineage, 7-check validation, six reports, and a recoverable job system.
   `python -m scripts.verify_v1`.
 
 See [`offline_inference/README.md`](./offline_inference/README.md).
+
+
+---
+
+## V2 Clinical Workflow (V2-P1 + V2-P2)
+
+> Version 2 models the **clinical workflow** (not deployment/FHIR/EMR/real-time).
+> Decision: [`../.gcc/decisions/ADR-0003`](../.gcc/decisions/ADR-0003-v2-p1-p2-clinical-case-and-review.md).
+
+The backend gains two clinical subsystems built on the certified V1 platform:
+
+- **`clinical_cases/`** (V2-P1) — the **Case** as the first-class object:
+  Patient → Case → Study, with content-addressed identities, an 8-state lifecycle,
+  an immutable tamper-evident audit log, a registry, shared lineage, 7-check
+  validation, and reports. Links a V1 inference run as a Study.
+- **`clinical_review/`** (V2-P2) — structured human **Review**: 8-state workflow,
+  sessions, assignment, tracking, registry, audit, lineage, 7-check validation, and
+  reports. Shares the case's lineage tracker.
+
+Together they execute the required deliverable with complete traceability:
+Patient → Case → Study → Inference Artifacts → Review Session → Review Lifecycle →
+Audit Trail → Lineage Trail.
+
+- **Boundary.** Both import `ml` + the sibling clinical subsystem and integrate with
+  `offline_inference`; neither imports `frontend`.
+- **Run:** `python -m scripts.run_clinical_workflow` · `python -m scripts.verify_v2`.
+
+See [`clinical_cases/README.md`](./clinical_cases/README.md) and
+[`clinical_review/README.md`](./clinical_review/README.md).
