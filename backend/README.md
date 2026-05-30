@@ -186,3 +186,42 @@ Recommendations**.
 
 See [`operational_analytics/README.md`](./operational_analytics/README.md) and
 [`operational_recommendations/README.md`](./operational_recommendations/README.md).
+
+
+---
+
+## V4 Goals & Policies (V4-P1 + V4-P2)
+
+> Version 4 begins by asking **"why does work exist?"** (Goals) and stating explicit
+> **boundaries** on what may happen (Policies/Constraints) — **before** any planning
+> or execution. Decision:
+> [`../.gcc/decisions/ADR-0011`](../.gcc/decisions/ADR-0011-v4-p1-p2-goals-and-policies.md).
+
+The backend gains two foundational V4 subsystems built on the certified V3 platform:
+
+- **`goal_intelligence/`** (V4-P1) — the **Goal** as a first-class entity: *intent*,
+  a desired outcome, **never execution**. Hierarchical taxonomy (strategic apex), an
+  eight-state governed lifecycle (PROPOSED→…→ACTIVE→…→ARCHIVED), versioned
+  relationships, governance, registry, audit, shared lineage, 8-check validation,
+  and reports. A goal cannot become ACTIVE without policy-governed approval.
+- **`policy_engine/`** (V4-P2) — the **safety system**: explicit, declarative,
+  **explainable** policies and constraints (ALLOWED/FORBIDDEN/REQUIRED/ESCALATED/
+  DEFERRED/CONDITIONAL) with a deterministic evaluation engine (PERMITTED/DENIED/
+  REQUIRES_REVIEW/ESCALATED/CONDITIONAL_APPROVAL), governance, registry, audit,
+  shared lineage, 8-check validation, and reports.
+
+Together they execute the V4 deliverable chain with complete traceability:
+Patient → Case → Review → Finding → Knowledge → Decision → Event → Timeline →
+Workflow → Graph → Analytics → Recommendations → **Goal → Policy → Constraint →
+Governance**.
+
+- **Goal ↔ Policy integration.** `goal_intelligence` stays policy-agnostic (it
+  accepts an injected decider); `policy_engine.integration` supplies a decider backed
+  by real ACTIVE policies — so **every active goal is policy governed**, deterministic,
+  audited, and lineage-tracked, without a coupling cycle.
+- **Boundary.** Both import `ml` + sibling `backend` subsystems; neither imports
+  `frontend`. No autonomous execution/agents/planning (those are later phases).
+- **Run:** `python -m scripts.verify_v4_p1_p2`.
+
+See [`goal_intelligence/README.md`](./goal_intelligence/README.md) and
+[`policy_engine/README.md`](./policy_engine/README.md).
