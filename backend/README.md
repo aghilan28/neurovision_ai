@@ -475,3 +475,41 @@ assets are immutable (content-addressed; no model weights / raw signal).
 - **Run:** `python -m scripts.verify_productization_p5`.
 
 See [`inference_foundation/README.md`](./inference_foundation/README.md).
+
+
+
+---
+
+## Productization P6 — Application Backend Platform (`application_backend/`)
+
+> Productization (built strictly on P1–P5): exposes the platform's capabilities through
+> governed **application backend services** — the objective is *backend access*, nothing
+> else. Decision:
+> [`../.gcc/decisions/ADR-0019`](../.gcc/decisions/ADR-0019-productization-p6-application-backend.md).
+
+- **`application_backend/`** (Productization P6) — composes the **reused** `CaseService`
+  + EEG / signal / feature / model / inference services over **one** shared
+  `ml.lineage.LineageTracker` and the shared `ImmutableAuditLog`, and adds local
+  **authentication** (PBKDF2 password hashing, session create/validate/revoke; no social
+  login/OAuth), **user management** (roles/status/metadata, audit history, lineage), an
+  **EEG workflow** that *orchestrates* P1–P5 (upload → validate → process → features →
+  predict → confidence → explanation, duplicating no business logic), a **versioned
+  (`v1`) in-process API** (upload, list/retrieve EEG, start analysis, retrieve
+  prediction/confidence/explanation, list history, list reports), **request + integrity
+  validation**, in-process **storage**, a single **registry** (no orphan records),
+  shared audit + lineage, and deterministic **reports**. No frontend, deployment,
+  monitoring, or cloud infrastructure.
+
+The deliverable executes through backend services only — a user authenticates, uploads a
+real EEG file, triggers analysis, and retrieves a prediction + confidence + explanation;
+the workflow's join lineage node yields one `verify_chain` proving
+**User → Upload → EEG → Processed → Feature → Model → Prediction** (the P1–P5 chain
+preserved intact). Everything except authentication secrets is content-addressed and
+deterministic; secrets come from a secure-default (injectable) entropy source and never
+enter a content hash, record, or report.
+
+- **Boundary.** Imports `ml` + sibling `backend` subsystems; never imports `frontend`.
+  In-process only (no HTTP/networking/serving).
+- **Run:** `python -m scripts.verify_productization_p6`.
+
+See [`application_backend/README.md`](./application_backend/README.md).
