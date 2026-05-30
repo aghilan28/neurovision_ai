@@ -30,6 +30,7 @@ contributor and AI-agent turnover.
 | [ADR-0017](./ADR-0017-productization-p4-model-foundation.md) | Productization P4 — Model Foundation Platform | Productization P4 | Accepted |
 | [ADR-0018](./ADR-0018-productization-p5-clinical-inference.md) | Productization P5 — Clinical Inference Foundation | Productization P5 | Accepted |
 | [ADR-0019](./ADR-0019-productization-p6-application-backend.md) | Productization P6 — Application Backend Platform | Productization P6 | Accepted |
+| [ADR-0020](./ADR-0020-productization-p7-application-frontend.md) | Productization P7 — Application Frontend Platform | Productization P7 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
