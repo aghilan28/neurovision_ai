@@ -444,3 +444,34 @@ is seeded + reproducible (determinism is *validated*); models are immutable
 - **Run:** `python -m scripts.verify_productization_p4`.
 
 See [`model_foundation/README.md`](./model_foundation/README.md).
+
+
+---
+
+## Productization P5 — Clinical Inference Foundation (`inference_foundation/`)
+
+> Productization (built strictly on P1–P4): turns **feature assets + trained models**
+> into **validated prediction assets**. Decision:
+> [`../.gcc/decisions/ADR-0018`](../.gcc/decisions/ADR-0018-productization-p5-clinical-inference.md).
+
+- **`inference_foundation/`** (Productization P5) — **loads + verifies** a trained model
+  (deterministic reconstruction via reproducibility; parameter-fingerprint + version
+  verification), runs **deterministic execution**, and generates a **prediction**
+  (class + probabilities + scores), a **confidence** assessment (score / interval /
+  stability / reliability / level), a **calibration** assessment (ECE + Brier +
+  reliability + quality), and a **structured explanation** (feature/band/channel
+  importance + decision factors — no images/UI). It assembles an **immutable** prediction
+  asset, validates it (9 checks), and registers it. No APIs, serving, deployment,
+  frontend, or user accounts.
+
+The deliverable executes with complete traceability — a prediction's chain verifies
+**Patient → Case → EEG → Processed → Feature → Dataset → Training Run → Model → Prediction**.
+Inference is deterministic (determinism is *validated* by re-inference); prediction
+assets are immutable (content-addressed; no model weights / raw signal).
+
+- **Boundary.** Imports `ml` + reuses P4 modules + the shared
+  `backend.clinical_cases.audit` primitive; never imports `frontend`; performs inference
+  only (no serving).
+- **Run:** `python -m scripts.verify_productization_p5`.
+
+See [`inference_foundation/README.md`](./inference_foundation/README.md).
