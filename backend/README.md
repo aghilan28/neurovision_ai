@@ -268,3 +268,52 @@ Workflow → Graph → Analytics → Recommendations → Goal → Policy → Con
 
 See [`planning_foundation/README.md`](./planning_foundation/README.md) and
 [`task_intelligence/README.md`](./task_intelligence/README.md).
+
+
+
+---
+
+## V4 Agents & Execution (V4-P5 + V4-P6)
+
+> Version 4 continues by answering **"who can perform work?"** (Agents) and modeling
+> the **governed progression of approved work** (Execution) — **without** autonomous
+> agents or autonomous action. Decision:
+> [`../.gcc/decisions/ADR-0013`](../.gcc/decisions/ADR-0013-v4-p5-p6-agents-and-execution.md).
+
+The backend gains two more foundational V4 subsystems built on the goal / policy /
+plan / task foundation:
+
+- **`agent_coordination/`** (V4-P5) — the **Agent** as a first-class governed
+  participant (human / system / service / future-AI), with declared **capabilities**
+  (mode + risk; high-risk requires approval) and **assignments**. Agents describe
+  capability and hold **no autonomous authority**. Hierarchical taxonomy (participant
+  apex), an eight-state governed lifecycle (PROPOSED→…→AVAILABLE→…→ARCHIVED),
+  governance, registry, audit, shared lineage, 9-check validation, and reports. An
+  agent cannot become AVAILABLE without policy-governed approval; every assignment
+  must satisfy the target's capability requirements and **never implies execution**.
+- **`execution_orchestration/`** (V4-P6) — **Execution** as the *governed
+  progression of approved work*. Coordinates already-approved goal/plan/task/agent/
+  assignment artifacts through a nine-state governed lifecycle (PROPOSED→QUEUED→
+  AUTHORIZED→ACTIVE→{PAUSED,BLOCKED,COMPLETED,TERMINATED}→ARCHIVED); **cannot become
+  ACTIVE without authorization**; references an approved agent assignment; **monitoring
+  observes but never modifies**. Governance, registry, audit, shared lineage, 9-check
+  validation, and reports.
+
+Together they complete the V4 deliverable chain with complete traceability:
+Patient → Case → Review → Finding → Knowledge → Decision → Event → Timeline →
+Workflow → Graph → Analytics → Recommendations → Goal → Policy → Constraint → Plan →
+Task → **Agent → Execution → Governance**.
+
+- **Task ↔ Agent ↔ Execution integration.** `agent_coordination` and
+  `execution_orchestration` stay policy-agnostic (each accepts an injected decider);
+  `policy_engine.integration` supplies `agent_policy_decider`/`execution_policy_decider`
+  backed by real ACTIVE policies — so **every available agent and active execution is
+  policy governed**, deterministic, audited, and lineage-tracked, with no coupling
+  cycle.
+- **Boundary.** Both import `ml` + sibling `backend` subsystems; neither imports
+  `frontend`. No autonomous/self-modifying agents, no autonomous action, no simulation
+  (those are out of scope).
+- **Run:** `python -m scripts.verify_v4_p5_p6`.
+
+See [`agent_coordination/README.md`](./agent_coordination/README.md) and
+[`execution_orchestration/README.md`](./execution_orchestration/README.md).
