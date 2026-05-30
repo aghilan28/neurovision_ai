@@ -126,3 +126,151 @@ def goal_policy_decider(policy_service: PolicyService, hook_to_policy: dict,
 def _policy_record_for(policy_service: PolicyService, policy_id: str):
     """Return the live ACTIVE PolicyRecord aggregate kept by the service."""
     return policy_service.policy_cache[policy_id]
+
+
+
+# ============================================================================
+# Plan <-> Policy integration (V4-P3)
+# ============================================================================
+
+# hook -> (policy category, governing fact, human title)
+_PLAN_HOOK_SPEC = {
+    "plan_approval": (PolicyCategory.GOVERNANCE, "review_complete",
+                      "Plan Approval Requires Completed Review"),
+    "plan_readiness": (PolicyCategory.OBLIGATION, "governance_approved",
+                       "Cannot Ready Unapproved Plans"),
+    "plan_suspension": (PolicyCategory.GOVERNANCE, "suspension_authorized",
+                        "Plan Suspension Requires Authorization"),
+    "plan_completion": (PolicyCategory.GOVERNANCE, "outcome_met",
+                        "Plan Completion Requires Outcome Met"),
+}
+
+
+def install_default_plan_policies(policy_service: PolicyService,
+                                  created_at: str = DETERMINISTIC_EPOCH) -> dict:
+    """Create + activate one ACTIVE policy per governed plan hook. Returns hook->policy_id."""
+    return _install_default_policies(policy_service, _PLAN_HOOK_SPEC, subject_kind="plan",
+                                     created_at=created_at)
+
+
+def _plan_context(hook: str, plan) -> dict:
+    """A deterministic evaluation context derived from the plan + hook."""
+    gov = plan.governance
+    satisfied_key = f"{hook}_requirement_satisfied"
+    requirement_met = {
+        "plan_approval": gov.approval_state in ("approved", "pending")
+        or plan.state.value in ("under_review", "approved"),
+        "plan_readiness": gov.approval_state == "approved" or _has_active_approval(plan),
+        "plan_suspension": True,
+        "plan_completion": bool(plan.metadata.expected_outcome),
+    }.get(hook, True)
+    return {
+        "hook": hook, "plan_id": plan.plan_id, "category": plan.category,
+        "priority": plan.priority, "state": plan.state.value,
+        "source_goal_id": plan.source_goal_id,
+        "governance_approved": gov.approval_state == "approved",
+        "review_complete": plan.state.value in ("under_review", "approved", "ready"),
+        "suspension_authorized": True, "outcome_met": bool(plan.metadata.expected_outcome),
+        satisfied_key: bool(requirement_met), "requirement_met": bool(requirement_met),
+    }
+
+
+def plan_policy_decider(policy_service: PolicyService, hook_to_policy: dict,
+                        authority: str = "governance") -> Callable:
+    """Return a decider ``(hook, plan) -> (approved, decision, policy_id, authority)``."""
+    return _make_decider(policy_service, hook_to_policy, _plan_context, "plan",
+                         lambda p: p.plan_id, lambda p: p.lineage_id, authority)
+
+
+# ============================================================================
+# Task <-> Policy integration (V4-P4)
+# ============================================================================
+
+_TASK_HOOK_SPEC = {
+    "task_approval": (PolicyCategory.GOVERNANCE, "review_complete",
+                      "Task Approval Requires Completed Review"),
+    "task_readiness": (PolicyCategory.OBLIGATION, "governance_approved",
+                       "Cannot Ready Unapproved Tasks"),
+    "task_completion": (PolicyCategory.GOVERNANCE, "work_defined",
+                        "Task Completion Requires Defined Work"),
+}
+
+
+def install_default_task_policies(policy_service: PolicyService,
+                                  created_at: str = DETERMINISTIC_EPOCH) -> dict:
+    """Create + activate one ACTIVE policy per governed task hook. Returns hook->policy_id."""
+    return _install_default_policies(policy_service, _TASK_HOOK_SPEC, subject_kind="task",
+                                     created_at=created_at)
+
+
+def _task_context(hook: str, task) -> dict:
+    """A deterministic evaluation context derived from the task + hook."""
+    gov = task.governance
+    satisfied_key = f"{hook}_requirement_satisfied"
+    requirement_met = {
+        "task_approval": gov.approval_state in ("approved", "pending")
+        or task.state.value in ("under_review", "approved"),
+        "task_readiness": gov.approval_state == "approved" or _has_active_approval(task),
+        "task_completion": bool(task.metadata.work_definition),
+    }.get(hook, True)
+    return {
+        "hook": hook, "task_id": task.task_id, "category": task.category,
+        "priority": task.priority, "state": task.state.value,
+        "source_plan_id": task.source_plan_id,
+        "governance_approved": gov.approval_state == "approved",
+        "review_complete": task.state.value in ("under_review", "approved", "ready"),
+        "work_defined": bool(task.metadata.work_definition),
+        satisfied_key: bool(requirement_met), "requirement_met": bool(requirement_met),
+    }
+
+
+def task_policy_decider(policy_service: PolicyService, hook_to_policy: dict,
+                        authority: str = "governance") -> Callable:
+    """Return a decider ``(hook, task) -> (approved, decision, policy_id, authority)``."""
+    return _make_decider(policy_service, hook_to_policy, _task_context, "task",
+                         lambda t: t.task_id, lambda t: t.lineage_id, authority)
+
+
+# ============================================================================
+# Shared helpers (used by goal/plan/task installers + deciders)
+# ============================================================================
+
+def _install_default_policies(policy_service: PolicyService, hook_spec: dict, *,
+                              subject_kind: str, created_at: str) -> dict:
+    """Create + activate one ACTIVE governance policy per hook (REQUIRED constraint)."""
+    hook_to_policy: dict = {}
+    for hook, (category, fact, title) in hook_spec.items():
+        constraint = policy_service.create_constraint(
+            constraint_type=ConstraintType.REQUIRED.value,
+            category=ConstraintCategory.GOVERNANCE, subject_kind=subject_kind,
+            constraint_key=f"{hook}_requirement",
+            rules=(PolicyRule(rule_id=f"{hook}_applies", fact="hook", operator="eq", value=hook,
+                              description=f"applies to the {hook} hook"),),
+            explanation=f"{title}: the {subject_kind} must satisfy '{fact}' for {hook}.",
+            created_at=created_at)
+        policy = policy_service.create_policy(
+            category=category, policy_key=hook, title=title,
+            description=f"Governs the {hook} transition of a {subject_kind} ({fact} required).",
+            subject_kind=subject_kind,
+            rules=(PolicyRule(rule_id=f"{hook}_match", fact="hook", operator="eq", value=hook,
+                              description=f"this policy governs the {hook} hook"),),
+            constraint_ids=(constraint.constraint_id,), created_at=created_at)
+        policy_service.activate(policy, authority="governance", created_at=created_at)
+        hook_to_policy[hook] = policy.policy_id
+    return hook_to_policy
+
+
+def _make_decider(policy_service: PolicyService, hook_to_policy: dict, context_fn,
+                  subject_kind: str, id_fn, lineage_fn, authority: str) -> Callable:
+    """Build a (hook, subject) decider that evaluates the bound ACTIVE policy."""
+    def _decide(hook: str, subject):
+        policy_id = hook_to_policy.get(hook)
+        if policy_id is None:
+            return False, "no_policy", None, authority
+        policy_record = _policy_record_for(policy_service, policy_id)
+        evaluation = policy_service.evaluate(
+            policy_record, subject_kind=subject_kind, subject_id=id_fn(subject), request=hook,
+            context=context_fn(hook, subject), subject_lineage_id=lineage_fn(subject))
+        approved = evaluation.outcome in _OUTCOME_APPROVES
+        return approved, evaluation.outcome, policy_id, authority
+    return _decide
