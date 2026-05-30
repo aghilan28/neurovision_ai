@@ -142,3 +142,47 @@ Context → Audit Trail → Lineage Trail.
 
 See [`clinical_findings/README.md`](./clinical_findings/README.md) and
 [`clinical_knowledge/README.md`](./clinical_knowledge/README.md).
+
+
+
+---
+
+## V3 Operational Intelligence (V3-P1 … V3-P6)
+
+> Version 3 makes the platform understand its own **operation**: events, time,
+> workflows, structure, intelligence, and recommendations. Every subsystem is
+> *derived* from the governed artifacts below it, shares the single
+> `ml.lineage.LineageTracker` and the shared `ImmutableAuditLog` (no parallel
+> lineage/audit), and is deterministic (logical clock, never wall-clock). Decisions:
+> [`../.gcc/decisions/ADR-0007`](../.gcc/decisions/ADR-0007-v3-p1-p2-events-and-temporal.md),
+> [`ADR-0008`](../.gcc/decisions/ADR-0008-v3-p3-p4-workflow-and-graph.md),
+> [`ADR-0009`](../.gcc/decisions/ADR-0009-v3-p5-p6-analytics-and-recommendations.md).
+
+- **`operational_events/`** (V3-P1) — **events** as first-class facts, observed from
+  the V2 audit logs (events observe; they do not own).
+- **`temporal_intelligence/`** (V3-P2) — timelines, histories, evolution, and
+  temporal analytics derived from events (durations in logical steps).
+- **`workflow_intelligence/`** (V3-P3) — the **workflow** as a first-class entity:
+  transitions, dependencies, bottlenecks, efficiency.
+- **`operational_graph/`** (V3-P4) — the platform-wide **operational graph** (a
+  structured model; no graph-only truth, no UI).
+- **`operational_analytics/`** (V3-P5) — **derived operational intelligence**:
+  metrics, health, performance, quality, trends, and risk **scores**. Analytics is
+  derived and never a source of truth. *Intelligence only — no recommendations.*
+- **`operational_recommendations/`** (V3-P6) — **explainable operational
+  recommendations**: guidance, prioritization, optimization suggestions, and
+  escalation candidates. Evidence-linked + analytics-linked; **suggestions only**
+  (never executed, never auto-escalated); operational, never clinical.
+
+Together they execute the V3 deliverable chain with complete traceability:
+Patient → Case → Review → Finding → Knowledge → Decision → Event → Timeline →
+Workflow → Graph → **Operational Analytics → Operational Risks → Operational
+Recommendations**.
+
+- **Boundary.** All import `ml` + sibling V3/V2 subsystems they derive from; none
+  imports `frontend` (enforced by `tests/test_boundaries.py`).
+- **Run:** `python -m scripts.verify_v3_p5_p6` (and `verify_v3_p1_p2`,
+  `verify_v3_p3_p4`).
+
+See [`operational_analytics/README.md`](./operational_analytics/README.md) and
+[`operational_recommendations/README.md`](./operational_recommendations/README.md).
