@@ -123,3 +123,38 @@ Lineage, Reports, and a System Health landing area, across **ten** navigation ar
 
 See [`operational_workstation/README.md`](./operational_workstation/README.md).
 Version 3 certification: [`../docs/certification/v3/`](../docs/certification/v3/).
+
+
+
+---
+
+## Productization P7 — Application Frontend Platform (`application_frontend/`)
+
+> Productization (built strictly on P1–P6): turns the application backend into a
+> **usable product** — the objective is *user interaction*, nothing else. Decision:
+> [`../.gcc/decisions/ADR-0020`](../.gcc/decisions/ADR-0020-productization-p7-application-frontend.md).
+
+`frontend/application_frontend/` is the user-facing application through which a person can
+**log in → upload an EEG → run an analysis → receive a prediction → view confidence →
+view explanation → access reports**. No deployment, monitoring, or cloud infrastructure.
+
+- **Strictest boundary upheld.** Imports **no** domain module — standard library only.
+  It consumes the backend exclusively through an abstract `BackendGateway` **port**
+  (plain dicts mirroring the real `v1` API). The concrete `LiveBackendGateway` that drives
+  the real `backend.application_backend.ApplicationAPI` lives at the `scripts/` seam
+  (`scripts.application_frontend_gateway`) — the only place that imports both layers.
+  Enforced by `tests/test_boundaries.py`.
+- **No business logic / no bypass.** Every action is a backend API call; controllers only
+  validate fields for UX, manage deterministic navigation state, and render deterministic
+  static HTML (inline CSS, **no JavaScript**). The analysis UI *reflects* the backend
+  workflow stages — it does not recreate the workflow engine.
+- **Faithful uncertainty (NR-4).** The prediction view always shows confidence +
+  calibration alongside the label. Secrets never enter frontend state (the raw token is
+  volatile and never rendered/serialized).
+- **Local authentication.** Login/registration/logout/session-expiration handling all
+  consume the backend auth API; there is no local auth logic.
+- **Run:** `python -m scripts.verify_productization_p7` ·
+  `python -m scripts.build_application_frontend_snapshot`.
+
+See [`application_frontend/README.md`](./application_frontend/README.md).
+Verified: all 15 P7 criteria pass; full suite **790 passed**.
