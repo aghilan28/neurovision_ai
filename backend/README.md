@@ -820,3 +820,28 @@ See [`operations_platform/README.md`](./operations_platform/README.md). Verified
 criteria pass against the **real** Track-3 product over the real CHB-MIT corpus — health
 HEALTHY (7/7), QUALIFIED (7/7), **READY_FOR_DEPLOYMENT** (score 1.0), traceable + audited;
 full suite **1027 passed**. No new dependencies.
+
+
+## DBE-1 — ASGI Entrypoint & Server Startup (`application_platform/server/`)
+
+> Deployment Blocker Elimination: closes the Final Hostile QA Audit's CRITICAL blocker
+> *NO RUNNABLE HTTP SERVER ENTRYPOINT*. Decision:
+> [`../.gcc/decisions/ADR-0034`](../.gcc/decisions/ADR-0034-dbe1-asgi-entrypoint.md).
+
+- **`application_platform/server/`** (DBE-1) — turns the Track-3 FastAPI *application* into a
+  runnable HTTP *service*: a single authoritative ASGI entrypoint
+  **`backend.application_platform.server.app:app`**, a typed/validated `NV_*` startup config,
+  an application factory using the **real** production `ApplicationPlatformService`, and an
+  application lifespan (startup validation + graceful shutdown) with `/livez` + `/readyz`
+  probes alongside the existing `/health`.
+- **Start it (exact commands):**
+  - `uvicorn backend.application_platform.server.app:app --host 0.0.0.0 --port 8000`
+  - `python -m backend.application_platform.server.app`
+- **Reuse, no new logic.** Builds the real service + the real Track-3 app via `create_app`;
+  changes no datasets/models/inference/persistence/security/operations/Track-1-4/Docker.
+- **Run:** `python -m scripts.verify_dbe1_asgi_entrypoint` (the 15 criteria).
+
+See [`application_platform/server/README.md`](./application_platform/server/README.md).
+Verified: all 15 DBE-1 criteria pass — a **real uvicorn process** served the live API and
+shut down gracefully on SIGTERM, the `python -m` path served live HTTP, health/readiness
+respond, security + operations initialize at startup; full suite **1042 passed**. No new deps.
