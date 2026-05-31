@@ -1,19 +1,26 @@
-# NeuroVision AI — Backend container (Productization P8).
-# Full application image: the P1-P7 platform + the operations layer. Builds the pinned
-# runtime deps for reproducibility. Build context = repository root:
+# NeuroVision AI — Backend API container (DBE-2).
+#
+# Serves the REAL NeuroVision HTTP API: the DBE-1 ASGI entrypoint
+# (backend.application_platform.server.app:app) run by uvicorn. The container stays alive
+# serving HTTP — it does NOT run a one-shot health command. Build context = repository root:
 #   docker build -f operations/deployment/docker/Dockerfile.backend -t neurovision-backend .
+#   docker run -p 8000:8000 neurovision-backend
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
     NV_ENV=production \
+    NV_HOST=0.0.0.0 \
+    NV_PORT=8000 \
+    NV_LOG_LEVEL=info \
     NV_WORKSPACE_DIR=/var/lib/neurovision/workspace \
     NV_BACKUP_DIR=/var/lib/neurovision/backups
 
 WORKDIR /app
 
-# Pinned runtime dependencies first (cache-friendly, reproducible build).
+# Pinned runtime dependencies first (cache-friendly, reproducible build). requirements.txt
+# already includes fastapi + uvicorn (the API stack), so the image can serve the API.
 COPY requirements.txt ./requirements.txt
 RUN python -m pip install --no-cache-dir --upgrade pip \
     && python -m pip install --no-cache-dir -r requirements.txt
@@ -33,9 +40,17 @@ RUN mkdir -p "$NV_WORKSPACE_DIR" "$NV_BACKUP_DIR" \
     && chown -R nvuser:nvuser /app /var/lib/neurovision
 USER nvuser
 
-# Liveness probe (light: no model training).
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-    CMD ["python", "-m", "operations.cli", "live"]
+# The API listens here (NV_PORT). Document + expose it for the orchestrator.
+EXPOSE 8000
 
-# Startup process: run the operational health check set and report (one-shot).
-CMD ["python", "-m", "operations.cli", "health", "--environment", "production"]
+# Liveness/readiness via a REAL HTTP probe against the running API (not a one-shot CLI).
+# Reports healthy only when the server is actually serving HTTP.
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
+    CMD ["python", "operations/deployment/docker/healthcheck.py", "/health"]
+
+# Startup process: serve the DBE-1 ASGI app with uvicorn. Reuses the single authoritative
+# entrypoint — no duplicated startup logic. uvicorn is PID 1's child and forwards signals,
+# so `docker stop` (SIGTERM) triggers a graceful shutdown via the application lifespan.
+# Exec form ensures signals reach the process directly.
+CMD ["python", "-m", "uvicorn", "backend.application_platform.server.app:app", \
+     "--host", "0.0.0.0", "--port", "8000"]
