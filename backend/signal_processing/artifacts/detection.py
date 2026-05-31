@@ -208,7 +208,7 @@ class ArtifactDetectionEngine:
         onset = float(times[0] / sfreq) if sfreq > 0 else 0.0
         duration = float((times[-1] - times[0] + 1) / sfreq) if sfreq > 0 else 0.0
         affected = tuple(labels[i] for i in range(n_ch) if masks[i, times].any())
-        conf = float(np.clip(times.size / max(1, n), 0.0, 1.0) + 0.5, 0.0, 1.0)
+        conf = float(np.clip(times.size / max(1, n) + 0.5, 0.0, 1.0))
         return [self._mk(ArtifactType.MOVEMENT, _severity_from_confidence(conf), conf,
                          affected, onset, duration, {"n_co_samples": int(times.size)})]
 

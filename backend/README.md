@@ -755,3 +755,37 @@ criteria pass against the **real, locally-acquired CHB-MIT corpus** (50 real win
 genuine 1-hour 256 Hz / 23-channel recordings; real seizure labels) — all five architectures
 trained → evaluated → benchmarked → compared → **READY_FOR_SERVING** (recommended: `hybrid_eeg`);
 full suite **989 passed**. Real EEG recordings — not synthetic fixtures.
+
+
+## Track 3 — Real Product Application (`application_platform/`)
+
+> Product Completion Program: closes the audit blocker *NO REAL PRODUCT APPLICATION* —
+> turns the model platform into a **usable product** with a real HTTP API. Decision:
+> [`../.gcc/decisions/ADR-0032`](../.gcc/decisions/ADR-0032-track3-real-product-application.md).
+
+- **`application_platform/`** (Track 3) — a real **FastAPI** HTTP API + governed user
+  workflows: upload a real EEG file → validate → metadata → features → select model →
+  inference → **prediction + confidence + calibration + model + evidence** → **report
+  (JSON/HTML/PDF)** → application readiness (NOT_READY / PARTIALLY_READY / **READY_FOR_USERS**).
+  It serves users; it retrains no models and modifies no datasets, Track 1, Track 2,
+  persistence, security, or deployment.
+- **Reuse, no duplicate logic.** Wraps `application_backend` (which already orchestrates the
+  reused P1-P5 upload → prediction workflow over the shared `ml.lineage` tracker + shared
+  `ImmutableAuditLog`); reuses the Track-1 recordings + Track-2 architectures. The HTTP API
+  is a thin typed/versioned (`/v1`) dispatcher with no business logic.
+- **Endpoints:** `GET /health`, `GET /v1/dataset/status`, `GET /v1/model/status`,
+  `POST /v1/auth/register`, `POST /v1/auth/login`, `POST /v1/uploads`,
+  `GET /v1/analyses/{id}/prediction`, `GET /v1/analyses/{id}/reports?type=&format=json|html|pdf`,
+  `GET /v1/readiness`. The OpenAPI schema documents the surface.
+- **Bounded analysis.** Real recordings are hours long; the product analyses a deterministic
+  leading segment (default 20 s) for interactivity — the full upload is preserved (ADR-0032).
+- **Traceability.** `verify_chain` proves **Dataset → Recording → Model → Prediction Request →
+  Prediction Result → Report**, reaching the recording + the model.
+- **Boundary.** Imports `ml` + sibling `backend` + the external FastAPI stack; never `frontend`.
+- **Run:** `python -m scripts.verify_track3_application` (the 15 criteria).
+
+See [`application_platform/README.md`](./application_platform/README.md). Verified: all 15
+Track 3 criteria pass against the **real, locally-acquired CHB-MIT corpus** through the real
+FastAPI API (register → login → upload a genuine 23-channel/256 Hz EDF → prediction → JSON/
+HTML/PDF report → **READY_FOR_USERS**, traceable + audited); full suite **1009 passed**. New
+deps: `fastapi`, `uvicorn`, `httpx` (used only by the Track-3 API + tests).
