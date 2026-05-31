@@ -537,3 +537,35 @@ See [`application_backend/README.md`](./application_backend/README.md).
 
 See [`dataset_integration/README.md`](./dataset_integration/README.md). Verified: all 15
 DRP-1 criteria pass; all five mandatory corpora **READY**; full suite **851 passed**.
+
+
+## DRP-2 — Production Model Program (`production_models/`)
+
+> Deployment Remediation (post-audit): closes the audit's *no validated models* gap by
+> turning reference-grade models into **production-candidate models** with objective
+> evaluation / benchmark / readiness evidence. Decision:
+> [`../.gcc/decisions/ADR-0025`](../.gcc/decisions/ADR-0025-drp2-production-models.md).
+
+- **`production_models/`** (DRP-2) — a governed program that, for each architecture,
+  **builds a dataset → trains (deterministic, reproducibility verified) → tracks the
+  experiment → evaluates → benchmarks → compares → scores readiness → validates → registers
+  → audits → traces**. Five architectures behind one contract: `eegnet`, `deepconvnet`,
+  `temporal_cnn`, `transformer_eeg` (wrappers that **reuse** the `model_foundation` reference
+  models, never removed) and a new deterministic `hybrid_eeg`. It develops + validates models;
+  it serves nothing and modifies no other subsystem.
+- **Reuse, no parallel systems.** Reuses `model_foundation.build_feature_dataset` + base
+  evaluator + reference models, the shared `DatasetRegistry` + `ModelRegistry`, the shared
+  `ml.lineage` tracker, the shared `ImmutableAuditLog`, and `ml.validation`. Only the new
+  production-candidate artifacts (models with benchmark + readiness, experiments, benchmarks,
+  evaluations, readiness assessments) live in `ProductionModelRegistry`.
+- **Determinism (NR-9/NR-10).** Deterministic metrics (accuracy/precision/recall/F1/ROC-AUC/
+  PR-AUC/ECE/Brier) enter every id + signature; performance measures (latency/memory/training/
+  inference time) are reported but **informational** (never hashed).
+- **Traceability.** `verify_chain` from a readiness assessment proves **Patient → Case → EEG →
+  Processed → Feature → Dataset → Training Run → Training Experiment → Model → Benchmark →
+  Readiness Assessment**.
+- **Boundary.** Imports `ml` + sibling `backend`; never imports `frontend`.
+- **Run:** `python -m scripts.verify_drp2_production_models`.
+
+See [`production_models/README.md`](./production_models/README.md). Verified: all 15 DRP-2
+criteria pass; all five architectures **READY**; full suite **872 passed**.
