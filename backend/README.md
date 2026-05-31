@@ -845,3 +845,25 @@ See [`application_platform/server/README.md`](./application_platform/server/READ
 Verified: all 15 DBE-1 criteria pass — a **real uvicorn process** served the live API and
 shut down gracefully on SIGTERM, the `python -m` path served live HTTP, health/readiness
 respond, security + operations initialize at startup; full suite **1042 passed**. No new deps.
+
+
+## DBE-3 — Duplicate Upload Reliability (`application_platform/uploads/duplicates.py`)
+
+> Deployment Blocker Elimination: closes the Final Hostile QA Audit's CRITICAL defect
+> *duplicate EEG uploads produce server errors (500)*. Decision:
+> [`../.gcc/decisions/ADR-0036`](../.gcc/decisions/ADR-0036-dbe3-duplicate-upload.md).
+
+- **Root cause:** a re-upload minted the same content-shape `upload_id` but re-registered it
+  with a registry signature embedding the advanced audit head → `RegistryError` → HTTP 500.
+- **Fix:** `uploads/duplicates.py` adds an authoritative `content_hash` (sha-256 via
+  `ml.provenance`) + a closed `DuplicateClass` vocabulary (`NEW_UPLOAD` / `EXACT_DUPLICATE` /
+  `CONTENT_DUPLICATE` / `CONFLICTING_UPLOAD` / `INVALID_UPLOAD`). The service classifies an
+  upload **before any registration** and returns the existing result for processed duplicates
+  (no re-analysis, no re-registration); `_register` is idempotent (defense-in-depth).
+- **API contract:** `POST /v1/uploads` → **201** new, **200** duplicate (reused result),
+  **409** conflicting, **422** invalid. **No duplicate path returns 500.**
+- **Integrity:** registry stays orphan-free, audit chain stays verifiable, lineage intact;
+  determinism preserved (same content → same classification + same `analysis_id`).
+- **Run:** `python -m scripts.verify_dbe3_duplicate_upload` (the 15 criteria).
+
+See [`application_platform/docs/DUPLICATE_UPLOADS.md`](./application_platform/docs/DUPLICATE_UPLOADS.md).
