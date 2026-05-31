@@ -627,3 +627,33 @@ criteria pass; all architectures served **READY**; full suite **891 passed**.
 
 See [`persistence_platform/README.md`](./persistence_platform/README.md). Verified: all 15
 DRP-4 criteria pass; persistence **READY**, recovery **recovered**; full suite **908 passed**.
+
+
+## DRP-5 — Security Hardening & Access Control Platform (`security_platform/`)
+
+> Deployment Remediation (post-audit): closes the audit's *insufficient security readiness*
+> blocker — authentication, authorization, access control, credential protection, security
+> auditing. Decision:
+> [`../.gcc/decisions/ADR-0028`](../.gcc/decisions/ADR-0028-drp5-security-platform.md).
+
+- **`security_platform/`** (DRP-5) — a governed platform that **authenticates users →
+  authorizes requests (RBAC, default-deny) → evaluates policies → controls access (least
+  privilege) → audits security events → traces security lineage → scores security readiness**.
+  It secures the platform; it changes no business logic.
+- **Credential protection.** Reuses the platform's PBKDF2 + injectable entropy
+  (`application_backend.auth`); stores a salted hash + salt (never plaintext) and only a session
+  token **fingerprint**. Invalid credentials / expired sessions are denied gracefully.
+- **RBAC + policies.** Declarative `(role, resource_type, action) -> effect`; **default-deny**;
+  a PERMITTED decision cites ≥ 1 matched policy. Least privilege over dataset / model / serving /
+  persistence / administrative resources.
+- **Reuse, no parallel systems.** Shares the single `ml.lineage` tracker + the shared
+  `ImmutableAuditLog`.
+- **Traceability.** `verify_chain` proves **User → Credential → Authentication → Authorization →
+  Access Decision → Resource Access** (and reaches the patient via the accessed resource).
+- **Boundary.** Imports `ml` + sibling `backend`; never imports `frontend`. No plaintext
+  credential storage; secrets never enter a hash/report/audit/lineage trail.
+- **Run:** `python -m scripts.verify_drp5_security_platform`.
+
+See [`security_platform/README.md`](./security_platform/README.md). Verified: all 15 DRP-5
+criteria pass; authentication/authorization/access-control all green, **READY**; full suite
+**927 passed**.
