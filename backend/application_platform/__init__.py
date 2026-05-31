@@ -37,6 +37,10 @@ from .uploads import (
     DuplicateDecision, DuplicateDetector, UploadValidation, content_hash,
     prepare_bounded_segment, validate_eeg_bytes,
 )
+from .persistence import (
+    ApplicationStateStore, RecoveryReport, default_persistence_root, reconstruct_outcome,
+    serialize_outcome,
+)
 from .readiness import ApplicationReadinessEngine
 from .validation import ApplicationIntegrityValidator
 from .registry import ApplicationRegistry, RegistryError
@@ -64,6 +68,8 @@ __all__ = [
     "WorkflowStage", "WorkflowStatus",
     "mint", "UploadValidation", "prepare_bounded_segment", "validate_eeg_bytes",
     "DuplicateDecision", "DuplicateDetector", "content_hash",
+    "ApplicationStateStore", "RecoveryReport", "default_persistence_root", "reconstruct_outcome",
+    "serialize_outcome",
     "ApplicationReadinessEngine", "ApplicationIntegrityValidator", "ApplicationRegistry",
     "RegistryError", "AuditError", "ImmutableAuditLog", "make_application_audit_log",
     "ENTITY_CONTRACTS", "validate_entity", "AnalysisOutcome", "ApplicationPlatformError",

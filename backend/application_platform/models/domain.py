@@ -168,6 +168,19 @@ class UploadRecord:
                 "created_at": self.created_at, "lineage_id": self.lineage_id,
                 "audit_head": self.audit_head, "upload_version": self.upload_version}
 
+    @classmethod
+    def from_dict(cls, d: dict) -> "UploadRecord":
+        return cls(
+            upload_id=d["upload_id"], user_id=d["user_id"], filename=d["filename"],
+            fmt=UploadFormat(d["format"]), content_fingerprint=d["content_fingerprint"],
+            size_bytes=int(d["size_bytes"]), analysis_seconds=float(d["analysis_seconds"]),
+            sampling_frequency=float(d["sampling_frequency"]), n_channels=int(d["n_channels"]),
+            duration_seconds=float(d["duration_seconds"]), status=UploadStatus(d["status"]),
+            findings=tuple(d.get("findings", ())), backend_upload_id=d.get("backend_upload_id"),
+            created_at=d.get("created_at", DETERMINISTIC_EPOCH), lineage_id=d.get("lineage_id"),
+            audit_head=d.get("audit_head"),
+            upload_version=d.get("upload_version", APP_UPLOAD_VERSION))
+
 
 @dataclass(frozen=True)
 class PredictionRequestRecord:
@@ -184,6 +197,13 @@ class PredictionRequestRecord:
                 "user_id": self.user_id, "model_id": self.model_id,
                 "architecture": self.architecture, "created_at": self.created_at,
                 "lineage_id": self.lineage_id}
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "PredictionRequestRecord":
+        return cls(prediction_request_id=d["prediction_request_id"], upload_id=d["upload_id"],
+                   user_id=d["user_id"], model_id=d["model_id"], architecture=d["architecture"],
+                   created_at=d.get("created_at", DETERMINISTIC_EPOCH),
+                   lineage_id=d.get("lineage_id"))
 
 
 @dataclass(frozen=True)
@@ -223,6 +243,19 @@ class PredictionResultRecord:
                 "created_at": self.created_at, "lineage_id": self.lineage_id,
                 "prediction_version": self.prediction_version, "signature": self.signature()}
 
+    @classmethod
+    def from_dict(cls, d: dict) -> "PredictionResultRecord":
+        return cls(
+            prediction_result_id=d["prediction_result_id"],
+            prediction_request_id=d["prediction_request_id"],
+            predicted_class=int(d["predicted_class"]), predicted_label=d["predicted_label"],
+            confidence_level=d["confidence_level"], confidence_score=float(d["confidence_score"]),
+            calibration_quality=d["calibration_quality"], model_id=d["model_id"],
+            model_architecture=d["model_architecture"], model_readiness=d["model_readiness"],
+            evidence=dict(d.get("evidence", {})), created_at=d.get("created_at", DETERMINISTIC_EPOCH),
+            lineage_id=d.get("lineage_id"),
+            prediction_version=d.get("prediction_version", APP_PREDICTION_VERSION))
+
 
 @dataclass(frozen=True)
 class AnalysisRecord:
@@ -245,6 +278,15 @@ class AnalysisRecord:
                 "prediction_result_id": self.prediction_result_id, "status": self.status.value,
                 "created_at": self.created_at, "lineage_id": self.lineage_id}
 
+    @classmethod
+    def from_dict(cls, d: dict) -> "AnalysisRecord":
+        return cls(
+            analysis_id=d["analysis_id"], upload_id=d["upload_id"], user_id=d["user_id"],
+            workflow_id=d["workflow_id"], backend_analysis_id=d["backend_analysis_id"],
+            prediction_request_id=d["prediction_request_id"],
+            prediction_result_id=d["prediction_result_id"], status=WorkflowStatus(d["status"]),
+            created_at=d.get("created_at", DETERMINISTIC_EPOCH), lineage_id=d.get("lineage_id"))
+
 
 @dataclass(frozen=True)
 class ReportRecord:
@@ -262,6 +304,15 @@ class ReportRecord:
                 "report_type": self.report_type, "available_formats": list(self.available_formats),
                 "content_fingerprint": self.content_fingerprint, "created_at": self.created_at,
                 "lineage_id": self.lineage_id, "report_version": self.report_version}
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "ReportRecord":
+        return cls(
+            report_id=d["report_id"], analysis_id=d["analysis_id"], report_type=d["report_type"],
+            available_formats=tuple(d.get("available_formats", ())),
+            content_fingerprint=d["content_fingerprint"],
+            created_at=d.get("created_at", DETERMINISTIC_EPOCH), lineage_id=d.get("lineage_id"),
+            report_version=d.get("report_version", APP_REPORT_VERSION))
 
 
 @dataclass(frozen=True)
@@ -290,6 +341,15 @@ class WorkflowRecord:
                 "audit_head": self.audit_head, "workflow_version": self.workflow_version,
                 "signature": self.signature()}
 
+    @classmethod
+    def from_dict(cls, d: dict) -> "WorkflowRecord":
+        return cls(
+            workflow_id=d["workflow_id"], upload_id=d["upload_id"], user_id=d["user_id"],
+            analysis_id=d["analysis_id"], stages=tuple(d.get("stages", ())),
+            status=WorkflowStatus(d["status"]), created_at=d.get("created_at", DETERMINISTIC_EPOCH),
+            lineage_id=d.get("lineage_id"), audit_head=d.get("audit_head"),
+            workflow_version=d.get("workflow_version", APP_WORKFLOW_VERSION))
+
 
 @dataclass(frozen=True)
 class ReadinessRecord:
@@ -310,6 +370,15 @@ class ReadinessRecord:
                 "created_at": self.created_at, "lineage_id": self.lineage_id,
                 "readiness_version": self.readiness_version}
 
+    @classmethod
+    def from_dict(cls, d: dict) -> "ReadinessRecord":
+        return cls(
+            readiness_id=d["readiness_id"], subject=d["subject"], score=float(d["score"]),
+            classification=ApplicationReadinessClass(d["classification"]),
+            dimensions=dict(d.get("dimensions", {})), findings=tuple(d.get("findings", ())),
+            created_at=d.get("created_at", DETERMINISTIC_EPOCH), lineage_id=d.get("lineage_id"),
+            readiness_version=d.get("readiness_version", APP_READINESS_VERSION))
+
 
 @dataclass(frozen=True)
 class ValidationRecord:
@@ -324,6 +393,12 @@ class ValidationRecord:
     def to_dict(self) -> dict:
         return {"validation_id": self.validation_id, "ok": self.ok, "n_checks": self.n_checks,
                 "checks": [{"name": n, "passed": bool(p), "detail": d} for n, p, d in self.checks]}
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "ValidationRecord":
+        checks = tuple((c["name"], bool(c["passed"]), c.get("detail", ""))
+                       for c in d.get("checks", []))
+        return cls(validation_id=d["validation_id"], ok=bool(d["ok"]), checks=checks)
 
 
 # =============================================================================

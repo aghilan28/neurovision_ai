@@ -179,6 +179,33 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
         outcome = svc.get_analysis(analysis_id)
         return outcome.readiness.to_dict()
 
+    # --- DBE4-F: retrieval workflows (served from persisted/recovered state) ---
+    @app.get(f"/{API_V1}/uploads/{{upload_id}}")
+    def get_upload(upload_id: str, svc: ApplicationPlatformService = Depends(hub)):
+        try:
+            return svc.get_upload(upload_id).to_dict()
+        except KeyError:
+            raise HTTPException(status_code=404, detail=f"upload {upload_id} not found")
+
+    @app.get(f"/{API_V1}/analyses")
+    def list_analyses(svc: ApplicationPlatformService = Depends(hub)):
+        return {"analyses": svc.list_analyses(), "uploads": svc.list_uploads()}
+
+    @app.get(f"/{API_V1}/analyses/{{analysis_id}}")
+    def get_analysis(analysis_id: str, svc: ApplicationPlatformService = Depends(hub)):
+        try:
+            outcome = svc.get_analysis(analysis_id)
+        except KeyError:
+            raise HTTPException(status_code=404, detail=f"analysis {analysis_id} not found")
+        return outcome.to_dict()
+
+    @app.get(f"/{API_V1}/persistence")
+    def persistence_status(svc: ApplicationPlatformService = Depends(hub)):
+        rep = svc.recovery_report
+        return {"persistence_enabled": svc.persistence_enabled,
+                "recovery": rep.to_dict() if rep else None,
+                "n_analyses": len(svc.list_analyses())}
+
     return app
 
 
