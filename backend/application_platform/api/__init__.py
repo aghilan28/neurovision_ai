@@ -105,8 +105,9 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
         return {"token": token, "token_type": "bearer"}
 
     # --- upload + analyze ----------------------------------------------------
-    @app.post(f"/{API_V1}/uploads", status_code=201)
-    def upload(body: UploadBody, authorization: Optional[str] = Header(default=None),
+    @app.post(f"/{API_V1}/uploads")
+    def upload(body: UploadBody, response: Response,
+               authorization: Optional[str] = Header(default=None),
                svc: ApplicationPlatformService = Depends(hub)):
         token = _bearer(authorization)
         if not token:
@@ -115,12 +116,21 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
             content = base64.b64decode(body.content_base64)
         except Exception as exc:  # noqa: BLE001
             raise HTTPException(status_code=400, detail=f"invalid base64: {exc}")
-        # validate + store the upload only (analysis is a separate call)
+        # DBE-3: duplicate uploads must NEVER 500. The service classifies + short-circuits;
+        # the endpoint maps the (deterministic) outcome to a deterministic status code.
         outcome = svc.upload_and_analyze(token=token, filename=body.filename, content=content)
         if not outcome.accepted:
-            return JSONResponse(status_code=422, content={
-                "accepted": False, "reason": outcome.reason, "upload": outcome.upload.to_dict()})
-        return {"accepted": True, "upload": outcome.upload.to_dict(),
+            # a CONFLICTING_UPLOAD (same identity, different content) -> 409; else 422.
+            code = 409 if outcome.duplicate_classification == "CONFLICTING_UPLOAD" else 422
+            return JSONResponse(status_code=code, content={
+                "accepted": False, "reason": outcome.reason or outcome.duplicate_classification,
+                "duplicate_classification": outcome.duplicate_classification,
+                "upload": outcome.upload.to_dict()})
+        # New upload -> 201 Created; duplicate (reused existing result) -> 200 OK. Deterministic.
+        response.status_code = 200 if outcome.is_duplicate else 201
+        return {"accepted": True, "duplicate": outcome.is_duplicate,
+                "duplicate_classification": outcome.duplicate_classification,
+                "upload": outcome.upload.to_dict(),
                 "analysis_id": outcome.analysis.analysis_id,
                 "prediction": outcome.prediction_result.to_dict(),
                 "readiness": outcome.readiness.to_dict()}
