@@ -29,9 +29,9 @@ and *how to obtain and run the product* — nothing more.
   need to check any of them out to run NeuroVision.
 - If the repository **default branch** still points at `v0/foundation-constitution-architecture`
   (the original constitution/architecture skeleton), it does **not** represent the product.
-  Set the default branch to `main` (a one-time maintainer action in the repository settings),
-  or merge the MP-4 consolidation pull request into the default branch. Either makes a plain
-  `git clone` land on the product.
+  Set the default branch to **`main`** (a one-time maintainer action in the repository
+  settings). After that, a plain `git clone` lands on the product. Until then, explicitly
+  `git checkout main` after cloning.
 
 **How to confirm you are on the source of truth:**
 ```bash
@@ -63,17 +63,22 @@ Top-level layout of the authoritative tree (all present and runnable):
 
 ## Repository Reality Report (MP4-A audit, from git)
 
-- Product tip: the head of `main` (the MP-3 commit) — contains **V0 → MP-3** in **44 linear
-  commits, 0 merge commits**.
-- The original default branch `v0/foundation-constitution-architecture` (`5461e0f`) is an
-  **ancestor** of the product tip — the product is **43 commits ahead** of it. Consolidation is
-  therefore a pure fast-forward (no conflicts possible).
-- Pull requests: **#15 merged** (V3-P1/P2); **#21–#51 open** and stacked cumulatively.
+- The authoritative branch **`main`** is a single **linear** spine rooted at the repository's
+  initial commit (`chore: initialize repository`), followed by the full cumulative product
+  **V0 → … → MP-4** — **46 commits, 0 merge commits**.
+- Before MP-4 the product lived only on the tip of a deep stacked-PR chain while the repository
+  default branch (`v0/foundation-constitution-architecture`) held just the V0 skeleton — so a
+  plain clone did not yield the product. MP-4 consolidates the entire spine onto `main` (a clean
+  fast-forward over the empty initial commit — no merge, no conflicts).
+- The legacy branch `v0/foundation-constitution-architecture` and the historical stacked pull
+  requests (**#15 merged**; **#21–#51 open**) are **pre-consolidation history**, preserved for
+  provenance. `main` supersedes them as the source of truth.
 - No tags; no conflict markers in the tree.
 
-### Branch / PR ancestry (the one spine)
+### Branch / PR ancestry (the one spine, now re-rooted on `main`)
 ```
-V0  Constitution + Architecture                      5461e0f
+(init) chore: initialize repository                  <- main's root (empty commit)
+V0  Constitution + Architecture
 V1  Baseline models / uncertainty / offline / app
 V2  Clinical case -> review -> findings -> knowledge -> intelligence -> decision support (cert)
 V3  Operational events -> temporal -> workflow -> graph -> analytics -> recommendations (cert)   #15 merged
@@ -86,7 +91,8 @@ Track-1..Track-4  real data -> real model training -> real product app -> operat
 DBE-1..DBE-5  ASGI entrypoint -> docker -> duplicate-upload -> persistence wiring -> auth        #44..#48
 MP-1  model provisioning foundation                                                             #49
 Track-2 data-module fix                                                                         #50
-MP-3  persistent model lifecycle & recovery                                                     #51  (product tip)
+MP-3  persistent model lifecycle & recovery                                                     #51
+MP-4  source of truth consolidation  ->  this is the tip of `main` (authoritative)
 ```
 
 ## Product Completeness Report (MP4-C)
@@ -105,9 +111,11 @@ existing in the authoritative tree:
 
 ## Merge Readiness Report (MP4-D)
 
-**Merge-ready.** Linear cumulative history, **0 merge commits**, default branch is an ancestor
-of the tip ⇒ fast-forward consolidation with **no conflicts, no dependency violations, and no
-duplicate implementations**.
+**Consolidated.** The authoritative `main` is a single linear cumulative spine with **0 merge
+commits** and **no conflict markers**; every phase is present exactly once (no duplicate
+implementations, no dependency violations). The pre-MP-4 spine fast-forwarded cleanly onto the
+empty repository-initial commit, so the consolidation required no merge and produced no
+conflicts.
 
 ---
 
