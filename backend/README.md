@@ -867,3 +867,29 @@ respond, security + operations initialize at startup; full suite **1042 passed**
 - **Run:** `python -m scripts.verify_dbe3_duplicate_upload` (the 15 criteria).
 
 See [`application_platform/docs/DUPLICATE_UPLOADS.md`](./application_platform/docs/DUPLICATE_UPLOADS.md).
+
+
+## DBE-4 — Persistence Wiring & State Durability (`application_platform/persistence.py`)
+
+> Deployment Blocker Elimination: closes the Final Hostile QA Audit's CRITICAL blocker
+> *application state does not survive restart*. Decision:
+> [`../.gcc/decisions/ADR-0037`](../.gcc/decisions/ADR-0037-dbe4-persistence-wiring.md).
+
+- **Root cause:** the Track-3 product held uploads/predictions/reports in in-memory dicts; the
+  DRP-4 persistence platform existed but was never wired in -> state lost on restart.
+- **Fix (wiring, not a new DB):** `persistence.py` reuses the **existing**
+  `backend.persistence_platform.StorageEngine` (durable, checksummed filesystem JSON). Each
+  accepted analysis (+ report payloads + duplicate index + model snapshot) is serialized
+  durably; on construction the service **recovers** state (reconstructs uploads/analyses/
+  reports via new domain `from_dict` methods, re-registers registry records, re-seeds the
+  duplicate index). Recovery never crashes on a corrupt record.
+- **Config:** `persistence_root` / `NV_PERSISTENCE_DIR`, else `<NV_WORKSPACE_DIR>/app_state`
+  (the DBE-2 container mounts `nv_data`, so it is durable). No workspace => ephemeral (historical).
+- **Retrieval (DBE4-F):** `get_upload` / `get_prediction` / `get_report` / `get_readiness` +
+  `GET /v1/uploads/{id}`, `/v1/analyses`, `/v1/analyses/{id}`, `/v1/persistence` — served from
+  recovered state.
+- **Integrity:** registry orphan-free, audit chain verifies, lineage references intact after
+  restart; determinism preserved (recovered ids identical).
+- **Run:** `python -m scripts.verify_dbe4_persistence` (the 15 criteria).
+
+See [`application_platform/docs/PERSISTENCE.md`](./application_platform/docs/PERSISTENCE.md).
