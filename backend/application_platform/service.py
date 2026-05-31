@@ -14,7 +14,7 @@ deployment. The five Track-2 architectures and the real recordings are reused as
 from __future__ import annotations
 
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Optional
 
 from ml.lineage import LineageTracker
@@ -32,13 +32,14 @@ from .lineage import (
     make_report_lineage, make_upload_lineage,
 )
 from .models.domain import (
-    AnalysisRecord, ApplicationRegistryRecord, EntityKind, ReportRecord, UploadRecord,
-    UploadStatus, WorkflowRecord, WorkflowStatus,
+    AnalysisRecord, ApplicationRegistryRecord, EntityKind, ReportRecord,
+    UploadRecord, UploadStatus, WorkflowRecord, WorkflowStatus,
 )
 from .predictions import build_prediction_request, build_prediction_result
 from .readiness import ApplicationReadinessEngine
 from .registry import ApplicationRegistry
 from .uploads import prepare_bounded_segment, validate_eeg_bytes
+from .uploads.duplicates import DuplicateDetector
 from .validation import ApplicationIntegrityValidator
 from .workflows import ANALYSIS_STAGES, run_backend_analysis
 from .version import (
@@ -67,6 +68,9 @@ class AnalysisOutcome:
     readiness: object = None
     validation: object = None
     reason: str = ""
+    # DBE-3: how this upload related to prior uploads, and whether it reused a prior result.
+    duplicate_classification: str = "NEW_UPLOAD"
+    is_duplicate: bool = False
 
     def to_dict(self) -> dict:
         return {"accepted": self.accepted, "upload": self.upload.to_dict(),
@@ -79,7 +83,9 @@ class AnalysisOutcome:
                 "report": self.report_record.to_dict() if self.report_record else None,
                 "readiness": self.readiness.to_dict() if self.readiness else None,
                 "validation": self.validation.to_dict() if self.validation else None,
-                "reason": self.reason}
+                "reason": self.reason,
+                "duplicate_classification": self.duplicate_classification,
+                "is_duplicate": self.is_duplicate}
 
 
 class ApplicationPlatformService:
@@ -100,6 +106,8 @@ class ApplicationPlatformService:
         self._uploads: dict[str, UploadRecord] = {}
         self._analyses: dict[str, AnalysisOutcome] = {}
         self._reports: dict[str, dict] = {}
+        # DBE-3: authoritative content/identity index for deterministic duplicate handling.
+        self._duplicates = DuplicateDetector()
 
     @property
     def version(self) -> str:
@@ -169,6 +177,20 @@ class ApplicationPlatformService:
                                         "fmt": v.fmt.value if v.fmt else "unknown",
                                         "sfreq": v.sampling_frequency, "nch": v.n_channels,
                                         "dur": round(v.duration_seconds, 3)})
+
+        # --- DBE-3: classify the upload BEFORE any registration (never crash on duplicates) ---
+        decision = self._duplicates.classify(content=content, upload_id=upload_id, valid=v.ok)
+        if decision.is_duplicate and decision.existing_analysis_id in self._analyses:
+            # EXACT or CONTENT duplicate of a fully-processed upload: return the existing
+            # result deterministically. No re-registration, no re-analysis, no 500.
+            prior = self._analyses[decision.existing_analysis_id]
+            self.audit.append("upload_duplicate", {
+                "upload_id": upload_id, "classification": decision.classification.value,
+                "existing_analysis_id": decision.existing_analysis_id,
+                "content_hash": decision.content_hash}, created_at=created_at)
+            return replace(prior, duplicate_classification=decision.classification.value,
+                           is_duplicate=True)
+
         up_node = self.lineage.record(make_upload_lineage(
             upload_id, content_fingerprint=content_fp, created_at=created_at))
         self.audit.append("upload_received", {"upload_id": upload_id, "filename": filename,
@@ -213,7 +235,6 @@ class ApplicationPlatformService:
         preq_node = self.lineage.record(make_prediction_request_lineage(
             preq.prediction_request_id, up_node.lineage_id, model_node.lineage_id,
             created_at=created_at))
-        from dataclasses import replace
         preq = replace(preq, lineage_id=preq_node.lineage_id)
 
         pres = build_prediction_result(prediction_request_id=preq.prediction_request_id,
@@ -293,9 +314,13 @@ class ApplicationPlatformService:
         outcome = AnalysisOutcome(
             accepted=True, upload=upload, workflow=workflow, analysis=analysis,
             prediction_request=preq, prediction_result=pres, report_record=report_record,
-            readiness=readiness, validation=validation)
+            readiness=readiness, validation=validation,
+            duplicate_classification=decision.classification.value, is_duplicate=False)
         self._analyses[analysis_id] = outcome
         self._reports[analysis_id] = report_payloads
+        # DBE-3: index this accepted upload so future identical uploads are detected + reused.
+        self._duplicates.record(content_hash_value=decision.content_hash,
+                                upload_id=upload_id, analysis_id=analysis_id)
         return outcome
 
     # =========================================================================
@@ -329,6 +354,12 @@ class ApplicationPlatformService:
         }
 
     def _register(self, kind, entity_id, version, lineage_id, created_at, *, deps=()) -> None:
+        # DBE-3: idempotent registration. The duplicate detector short-circuits before we get
+        # here for processed duplicates; this is defense-in-depth so a re-registration of an
+        # already-known entity id can never raise RegistryError (-> 500). A new id registers
+        # normally; an already-present id is a no-op (registry stays consistent, no orphans).
+        if self.registry.exists(entity_id):
+            return
         self.registry.register(ApplicationRegistryRecord(
             entity_kind=kind, entity_id=entity_id, status="active", version=str(version),
             owner="application-ops", creation_date=created_at, audit_state=self.audit.head,

@@ -47,6 +47,23 @@ class UploadStatus(str, Enum):
     REJECTED = "rejected"
 
 
+class DuplicateClass(str, Enum):
+    """Closed classification of an incoming upload vs. what the platform already holds (DBE-3).
+
+    * ``NEW_UPLOAD``        — never seen before (content + identity both new).
+    * ``EXACT_DUPLICATE``   — identical bytes already uploaded (same content hash + upload id).
+    * ``CONTENT_DUPLICATE`` — identical content under a different identity (e.g. renamed file).
+    * ``CONFLICTING_UPLOAD``— same upload identity but different content (a real conflict).
+    * ``INVALID_UPLOAD``    — the bytes failed validation (not a usable EEG).
+    """
+
+    NEW_UPLOAD = "NEW_UPLOAD"
+    EXACT_DUPLICATE = "EXACT_DUPLICATE"
+    CONTENT_DUPLICATE = "CONTENT_DUPLICATE"
+    CONFLICTING_UPLOAD = "CONFLICTING_UPLOAD"
+    INVALID_UPLOAD = "INVALID_UPLOAD"
+
+
 class WorkflowStage(str, Enum):
     UPLOAD = "upload"
     VALIDATE = "validate"

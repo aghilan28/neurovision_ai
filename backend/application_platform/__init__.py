@@ -26,13 +26,17 @@ from .version import (
     APPLICATION_PLATFORM_VERSION, DEFAULT_ANALYSIS_SECONDS, DETERMINISTIC_EPOCH,
 )
 from .models import (
-    AnalysisRecord, ApplicationReadinessClass, ApplicationRegistryRecord, EntityKind,
-    PredictionRequestRecord, PredictionResultRecord, ReadinessDimension, ReadinessRecord,
-    ReportFormat, ReportRecord, RequestStatus, UploadFormat, UploadRecord, UploadStatus,
-    UserRequestRecord, ValidationRecord, WorkflowRecord, WorkflowStage, WorkflowStatus,
+    AnalysisRecord, ApplicationReadinessClass, ApplicationRegistryRecord, DuplicateClass,
+    EntityKind, PredictionRequestRecord, PredictionResultRecord, ReadinessDimension,
+    ReadinessRecord, ReportFormat, ReportRecord, RequestStatus, UploadFormat, UploadRecord,
+    UploadStatus, UserRequestRecord, ValidationRecord, WorkflowRecord, WorkflowStage,
+    WorkflowStatus,
 )
 from .identity import mint
-from .uploads import UploadValidation, prepare_bounded_segment, validate_eeg_bytes
+from .uploads import (
+    DuplicateDecision, DuplicateDetector, UploadValidation, content_hash,
+    prepare_bounded_segment, validate_eeg_bytes,
+)
 from .readiness import ApplicationReadinessEngine
 from .validation import ApplicationIntegrityValidator
 from .registry import ApplicationRegistry, RegistryError
@@ -53,11 +57,13 @@ __all__ = [
     "APP_API_VERSION", "APP_WORKFLOW_VERSION", "APP_UPLOAD_VERSION", "APP_PREDICTION_VERSION",
     "APP_REPORT_VERSION", "APP_VALIDATION_VERSION", "APP_READINESS_VERSION", "APP_REGISTRY_VERSION",
     "APP_AUDIT_VERSION", "APP_LINEAGE_VERSION", "DEFAULT_ANALYSIS_SECONDS", "DETERMINISTIC_EPOCH",
-    "AnalysisRecord", "ApplicationReadinessClass", "ApplicationRegistryRecord", "EntityKind",
-    "PredictionRequestRecord", "PredictionResultRecord", "ReadinessDimension", "ReadinessRecord",
-    "ReportFormat", "ReportRecord", "RequestStatus", "UploadFormat", "UploadRecord", "UploadStatus",
-    "UserRequestRecord", "ValidationRecord", "WorkflowRecord", "WorkflowStage", "WorkflowStatus",
+    "AnalysisRecord", "ApplicationReadinessClass", "ApplicationRegistryRecord", "DuplicateClass",
+    "EntityKind", "PredictionRequestRecord", "PredictionResultRecord", "ReadinessDimension",
+    "ReadinessRecord", "ReportFormat", "ReportRecord", "RequestStatus", "UploadFormat",
+    "UploadRecord", "UploadStatus", "UserRequestRecord", "ValidationRecord", "WorkflowRecord",
+    "WorkflowStage", "WorkflowStatus",
     "mint", "UploadValidation", "prepare_bounded_segment", "validate_eeg_bytes",
+    "DuplicateDecision", "DuplicateDetector", "content_hash",
     "ApplicationReadinessEngine", "ApplicationIntegrityValidator", "ApplicationRegistry",
     "RegistryError", "AuditError", "ImmutableAuditLog", "make_application_audit_log",
     "ENTITY_CONTRACTS", "validate_entity", "AnalysisOutcome", "ApplicationPlatformError",
