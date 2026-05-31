@@ -151,6 +151,42 @@ class AuthService:
             raise AuthError("invalid or expired session")
         return session, self.users.get_user(session.user_id)
 
+    def classify_session_token(self, token: str) -> tuple[str, Optional[SessionRecord]]:
+        """Read-only classification of an opaque session ``token`` (DBE-5 hardening).
+
+        Returns ``(state, session)`` where ``state`` is one of:
+
+        * ``"active"``        — a live, ACTIVE session for an ACTIVE user;
+        * ``"revoked"``       — the token maps to a session that is no longer ACTIVE;
+        * ``"inactive_user"`` — the session is ACTIVE but its user is not ACTIVE;
+        * ``"unknown"``       — the token matches no issued session (or is empty/non-string).
+
+        Purely additive and side-effect-free: it issues nothing, mutates no state, and
+        **never raises** — it only reads the existing session/user stores so the HTTP
+        boundary can classify an invalid token into a controlled response instead of
+        crashing. Distinguishing ``revoked`` from ``unknown`` is why this is richer than
+        :meth:`validate_session` (which returns ``None`` for both).
+        """
+        if not isinstance(token, str) or token == "":
+            return "unknown", None
+        try:
+            tfp = token_fingerprint(token)
+        except Exception:  # noqa: BLE001 — never raise from classification
+            return "unknown", None
+        session_id = self._session_by_tfp.get(tfp)
+        if session_id is None:
+            return "unknown", None
+        session = self.sessions.find(session_id)
+        if session is None:
+            return "unknown", None
+        if session.status != SessionStatus.ACTIVE:
+            return "revoked", session
+        if not self.users.exists(session.user_id):
+            return "unknown", session
+        if self.users.get_user(session.user_id).status != UserStatus.ACTIVE:
+            return "inactive_user", session
+        return "active", session
+
     # --- revocation -----------------------------------------------------------
     def revoke_session(self, *, token: Optional[str] = None, session_id: Optional[str] = None,
                        created_at: str = DETERMINISTIC_EPOCH) -> SessionRecord:

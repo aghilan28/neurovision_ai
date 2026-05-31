@@ -173,6 +173,47 @@ class ApplicationPlatformService:
         return resp.body["token"]
 
     # =========================================================================
+    # DBE-5: hardened request authentication (the boundary guard)
+    # =========================================================================
+    def authenticate_request(self, authorization, *, operation,
+                             created_at: str = DETERMINISTIC_EPOCH):
+        """Classify an inbound bearer credential for ``operation`` — never raises, never 500.
+
+        Reuses the operative ``AuthService`` + the existing authorization policy via the
+        DBE-5 ``classify_request``. On any failure it emits a security audit event (carrying
+        only a token *fingerprint*, never the raw token) so invalid/expired/forbidden
+        attempts are auditable, and returns a deterministic ``TokenClassification`` the
+        endpoint maps to a controlled 401/403. A valid+authorized credential returns an
+        ``ok`` classification with the validated session + user.
+        """
+        from .security import classify_request
+
+        ctx = classify_request(auth_service=self.backend.auth, authorization=authorization,
+                               operation=operation)
+        if not ctx.ok:
+            self._audit_auth_failure(ctx, created_at=created_at)
+        return ctx
+
+    def _audit_auth_failure(self, ctx, *, created_at: str = DETERMINISTIC_EPOCH) -> None:
+        """Append a deterministic security event for a failed auth classification (DBE5-F).
+
+        Appends to the shared, hash-chained application audit log (no parallel audit system),
+        so the chain stays valid (verify() remains true). No raw token, no secret, no orphan
+        record (audit events need no registry/lineage node).
+        """
+        from .security import TokenFailureCode
+
+        code = ctx.code
+        kind = ("authorization_denied" if code == TokenFailureCode.FORBIDDEN
+                else "authentication_failed")
+        payload = {"code": code.value if code else "UNKNOWN_TOKEN_FAILURE",
+                   "operation": ctx.operation, "http_status": ctx.http_status}
+        fp = ctx.token_fingerprint
+        if fp is not None:
+            payload["token_fingerprint"] = fp  # a hash, never the raw token
+        self.audit.append(kind, payload, created_at=created_at)
+
+    # =========================================================================
     # T3-D/E/F/G: the full product workflow
     # =========================================================================
     def upload_and_analyze(self, *, token: str, filename: str, content: bytes,
