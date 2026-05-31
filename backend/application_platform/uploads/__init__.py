@@ -197,4 +197,7 @@ def _write_minimal_edf(path: str, data, sfreq: float, labels) -> None:
         fh.write(bytes(body))
 
 
-__all__ = ["UploadValidation", "validate_eeg_bytes", "prepare_bounded_segment"]
+from .duplicates import DuplicateDecision, DuplicateDetector, content_hash  # noqa: E402
+
+__all__ = ["UploadValidation", "validate_eeg_bytes", "prepare_bounded_segment",
+           "DuplicateDecision", "DuplicateDetector", "content_hash"]
