@@ -513,3 +513,27 @@ enter a content hash, record, or report.
 - **Run:** `python -m scripts.verify_productization_p6`.
 
 See [`application_backend/README.md`](./application_backend/README.md).
+
+
+
+---
+
+## DRP-1 — Real Dataset Integration (`dataset_integration/`)
+
+> Deployment Remediation (post-audit): closes the Independent Production Reality Audit's #1
+> blocker — *no real datasets integrated*. Decision:
+> [`../.gcc/decisions/ADR-0024`](../.gcc/decisions/ADR-0024-drp1-real-dataset-integration.md).
+
+- **`dataset_integration/`** (DRP-1) — a governed external-EEG-dataset lifecycle:
+  **inventory → registration → validation → governance metadata → readiness → lineage →
+  audit**, for the mandatory corpora (**TUH EEG, CHB-MIT, Temple/TUSZ, Siena Scalp, Bonn**)
+  and any future dataset, **from local manifests only (never downloaded)**. It manages
+  datasets; it trains no models and modifies no other subsystem. Reuses the model-foundation
+  connector framework (cross-references its `DatasetRecord` id for supported sources), the
+  shared `ml.lineage` tracker, the shared `ImmutableAuditLog`, and `ml.validation` (no
+  parallel systems). Lineage chain **Source → Dataset → Version**; deterministic and audited.
+- **Boundary.** Imports `ml` + sibling `backend`; never imports `frontend`.
+- **Run:** `python -m scripts.verify_drp1_dataset_integration`.
+
+See [`dataset_integration/README.md`](./dataset_integration/README.md). Verified: all 15
+DRP-1 criteria pass; all five mandatory corpora **READY**; full suite **851 passed**.
