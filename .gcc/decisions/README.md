@@ -36,6 +36,7 @@ contributor and AI-agent turnover.
 | [ADR-0023](./ADR-0023-productization-p10-deployment-certification.md) | Productization P10 — Deployment Readiness & Production Certification | Productization P10 | Accepted |
 | [ADR-0024](./ADR-0024-drp1-real-dataset-integration.md) | DRP-1 — Real Dataset Integration Program | Deployment Remediation DRP-1 | Accepted |
 | [ADR-0025](./ADR-0025-drp2-production-models.md) | DRP-2 — Production Model Program | Deployment Remediation DRP-2 | Accepted |
+| [ADR-0026](./ADR-0026-drp3-serving-platform.md) | DRP-3 — Production Serving Platform | Deployment Remediation DRP-3 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
