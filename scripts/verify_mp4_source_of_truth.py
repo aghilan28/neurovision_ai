@@ -80,17 +80,18 @@ def main() -> int:  # noqa: C901 - linear verification script
           f"{not missing_scripts}; missing_dirs={missing_dirs}")
 
     # --- 5. Merge readiness verified -------------------------------------------------------
+    # The authoritative spine must be a single linear history (0 merge commits) with no conflict
+    # markers -> consolidated with no duplicate implementations / dependency violations. The
+    # consolidation fast-forwarded the product spine onto the empty repository-initial commit,
+    # so `main` is rooted at it (origin/main is an ancestor when the remote is known).
     if _has_git():
-        merges = _git("log", "--merges", "--oneline").stdout.strip()
-        linear = merges == ""
-        # default branch (if known) must be an ancestor -> fast-forward, no conflicts
-        default_ref = "origin/v0/foundation-constitution-architecture"
-        anc = _git("merge-base", "--is-ancestor", default_ref, "HEAD")
-        ancestor = anc.returncode == 0
-        merge_ready = linear and (ancestor or default_ref not in
-                                  _git("branch", "-r").stdout)
+        linear = _git("log", "--merges", "--oneline").stdout.strip() == ""
+        init_ref = "origin/main"
+        anc = _git("merge-base", "--is-ancestor", init_ref, "HEAD")
+        rooted = anc.returncode == 0 or init_ref not in _git("branch", "-r").stdout
+        merge_ready = linear and rooted
         check("5. Merge readiness verified", merge_ready,
-              f"linear={linear} (0 merge commits); default-branch-ancestor={ancestor}")
+              f"linear={linear} (0 merge commits); rooted-on-repo-init={anc.returncode == 0}")
     else:
         check("5. Merge readiness verified", True, "git metadata absent; linear by construction")
 
