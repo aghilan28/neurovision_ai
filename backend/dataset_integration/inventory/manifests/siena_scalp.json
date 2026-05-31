@@ -1,0 +1,27 @@
+{
+  "name": "Siena Scalp EEG Database",
+  "source": "siena_scalp",
+  "version": "1.0.0",
+  "format": "edf",
+  "location": "<local mirror path — provided at deploy time; not downloaded>",
+  "n_recordings": 47,
+  "n_patients": 14,
+  "patients": ["PN00", "PN01", "PN03", "PN05", "PN06", "PN07", "PN09", "PN10",
+               "PN11", "PN12", "PN13", "PN14", "PN16", "PN17"],
+  "channels": ["FP1", "F3", "C3", "P3", "O1", "F7", "T3", "T5", "FC1", "FC5",
+               "CP1", "CP5", "FP2", "F4", "C4", "P4", "O2", "F8", "T4", "T6",
+               "FC2", "FC6", "CP2", "CP6", "FZ", "CZ", "PZ", "F9", "F10"],
+  "sampling_frequency": 512.0,
+  "size": {"recordings": 47, "hours": 128, "approx_bytes": 20000000000},
+  "metadata": {"montage": "10-20", "modality": "scalp_eeg", "annotations": true},
+  "governance": {
+    "license_name": "Open Data Commons Attribution License v1.0 (PhysioNet)",
+    "license_type": "open_access",
+    "usage_restrictions": ["cite source"],
+    "research_restrictions": [],
+    "attribution": "Detti, P., Vatti, G., & Zabalo Manrique de Lara, G. (2020). Siena Scalp EEG Database (v1.0.0). PhysioNet.",
+    "owner": "University of Siena (via PhysioNet)",
+    "source_url": "https://physionet.org/content/siena-scalp-eeg/1.0.0/",
+    "compliance_metadata": {"deidentified": "true", "open_access": "true"}
+  }
+}
