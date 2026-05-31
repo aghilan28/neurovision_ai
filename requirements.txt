@@ -15,3 +15,10 @@ scipy==1.17.1
 # Development / verification only (not a runtime dependency of any module):
 pytest==9.0.3
 ruff==0.15.15
+
+# Track 3 — Real Product Application: the HTTP API layer (FastAPI). Used only by
+# backend/application_platform/api and the Track-3 tests/verification; never enters a
+# reproducibility hash. httpx powers the FastAPI TestClient used in tests + verification.
+fastapi==0.121.2
+uvicorn==0.34.3
+httpx==0.28.1
