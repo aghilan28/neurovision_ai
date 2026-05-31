@@ -49,6 +49,7 @@ contributor and AI-agent turnover.
 | [ADR-0036](./ADR-0036-dbe3-duplicate-upload.md) | DBE-3 — Duplicate Upload Reliability Fix | Deployment Blocker Elimination DBE-3 | Accepted |
 | [ADR-0037](./ADR-0037-dbe4-persistence-wiring.md) | DBE-4 — Persistence Wiring & State Durability Fix | Deployment Blocker Elimination DBE-4 | Accepted |
 | [ADR-0038](./ADR-0038-mp3-model-lifecycle-recovery.md) | MP-3 — Persistent Model Lifecycle & Recovery Certification | Model Provisioning Program MP-3 | Accepted |
+| [ADR-0039](./ADR-0039-mp4-source-of-truth-consolidation.md) | MP-4 — Source of Truth Consolidation | Model Provisioning Program MP-4 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
