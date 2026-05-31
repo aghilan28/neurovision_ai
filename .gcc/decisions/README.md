@@ -38,6 +38,7 @@ contributor and AI-agent turnover.
 | [ADR-0025](./ADR-0025-drp2-production-models.md) | DRP-2 — Production Model Program | Deployment Remediation DRP-2 | Accepted |
 | [ADR-0026](./ADR-0026-drp3-serving-platform.md) | DRP-3 — Production Serving Platform | Deployment Remediation DRP-3 | Accepted |
 | [ADR-0027](./ADR-0027-drp4-persistence-platform.md) | DRP-4 — Persistence Platform | Deployment Remediation DRP-4 | Accepted |
+| [ADR-0028](./ADR-0028-drp5-security-platform.md) | DRP-5 — Security Hardening & Access Control Platform | Deployment Remediation DRP-5 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
