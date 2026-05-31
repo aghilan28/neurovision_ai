@@ -56,6 +56,14 @@ def create_app(service: "ApplicationPlatformService"):
     return _create_app(service)
 
 
+def provision_model(service, **kwargs):
+    """Ensure ``service`` has a usable model (MP-1). Imported lazily so numpy/mne stay optional
+    for lightweight tooling that only imports this package."""
+    from .provisioning import provision_model as _provision
+
+    return _provision(service, **kwargs)
+
+
 __all__ = [
     "APPLICATION_PLATFORM_VERSION", "API_V1", "APP_DOMAIN_VERSION", "APP_IDENTITY_VERSION",
     "APP_API_VERSION", "APP_WORKFLOW_VERSION", "APP_UPLOAD_VERSION", "APP_PREDICTION_VERSION",
@@ -73,5 +81,5 @@ __all__ = [
     "ApplicationReadinessEngine", "ApplicationIntegrityValidator", "ApplicationRegistry",
     "RegistryError", "AuditError", "ImmutableAuditLog", "make_application_audit_log",
     "ENTITY_CONTRACTS", "validate_entity", "AnalysisOutcome", "ApplicationPlatformError",
-    "ApplicationPlatformService", "create_app",
+    "ApplicationPlatformService", "create_app", "provision_model",
 ]

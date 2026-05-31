@@ -48,6 +48,8 @@ class ServerConfig:
     * ``NV_RELOAD``          — auto-reload (dev only; default off; forced off in production).
     * ``NV_WORKSPACE_DIR``   — workspace dir passed to the application service (optional).
     * ``NV_ANALYSIS_SECONDS``— bounded analysis window in seconds (default platform default).
+    * ``NV_PROVISION_MODEL`` — provision a model on startup (default ``on``; set ``0``/``false``
+      to disable, e.g. when an external model context is injected before serving).
     """
 
     host: str = "127.0.0.1"
@@ -57,6 +59,9 @@ class ServerConfig:
     reload: bool = False
     workspace_dir: Optional[str] = None
     analysis_seconds: Optional[float] = None
+    # MP-1: provision a model on startup so a fresh deploy reaches ready=true and uploads work.
+    # On by default (the whole point of MP-1); operators can disable via NV_PROVISION_MODEL=0.
+    provision_model: bool = True
 
     def __post_init__(self) -> None:
         if not isinstance(self.host, str) or not self.host:
@@ -73,7 +78,8 @@ class ServerConfig:
     def to_dict(self) -> dict:
         return {"host": self.host, "port": self.port, "environment": self.environment.value,
                 "log_level": self.log_level.value, "reload": self.reload,
-                "workspace_dir": self.workspace_dir, "analysis_seconds": self.analysis_seconds}
+                "workspace_dir": self.workspace_dir, "analysis_seconds": self.analysis_seconds,
+                "provision_model": self.provision_model}
 
 
 def _env(name: str, default: Optional[str] = None) -> Optional[str]:
@@ -134,13 +140,20 @@ def load_config(overrides: Optional[dict] = None) -> ServerConfig:
     analysis_raw = pick("analysis_seconds", "NV_ANALYSIS_SECONDS", float)
     analysis_seconds = float(analysis_raw) if analysis_raw is not None else None
 
+    if "provision_model" in overrides and overrides["provision_model"] is not None:
+        provision_model = bool(overrides["provision_model"])
+    else:
+        raw = _env("NV_PROVISION_MODEL")
+        # default ON; only an explicit falsey value disables provisioning.
+        provision_model = True if raw is None else (raw.lower() in _TRUE)
+
     # Production never auto-reloads (a single authoritative, stable process).
     if environment == ServerEnvironment.PRODUCTION:
         reload = False
 
     return ServerConfig(host=host, port=port, environment=environment, log_level=log_level,
                         reload=reload, workspace_dir=workspace_dir,
-                        analysis_seconds=analysis_seconds)
+                        analysis_seconds=analysis_seconds, provision_model=provision_model)
 
 
 __all__ = ["ServerEnvironment", "LogLevel", "ServerConfig", "StartupConfigError", "load_config"]
