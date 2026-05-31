@@ -789,3 +789,34 @@ Track 3 criteria pass against the **real, locally-acquired CHB-MIT corpus** thro
 FastAPI API (register → login → upload a genuine 23-channel/256 Hz EDF → prediction → JSON/
 HTML/PDF report → **READY_FOR_USERS**, traceable + audited); full suite **1009 passed**. New
 deps: `fastapi`, `uvicorn`, `httpx` (used only by the Track-3 API + tests).
+
+
+## Track 4 — Operational Readiness & Deployment Qualification (`operations_platform/`)
+
+> Product Completion Program: closes the audit blocker *NO DEPLOYMENT QUALIFICATION* —
+> turns the usable product into a **deployable product**. Decision:
+> [`../.gcc/decisions/ADR-0033`](../.gcc/decisions/ADR-0033-track4-operational-qualification.md).
+
+- **`operations_platform/`** (Track 4) — **qualifies operations** over the **real** Track-3
+  product (read-only): **health monitoring** (service/dataset/model/storage/API/workflow/
+  prediction → HEALTHY/DEGRADED/UNHEALTHY), **operational monitoring** (request/prediction/
+  upload volume + failures + validation errors; latency/resource informational),
+  **diagnostics** (workflow/prediction/upload/API/failure + closed root-cause vocabulary),
+  **deployment qualification** (dataset/model/API/workflow/report/persistence/security →
+  QUALIFIED/CONDITIONALLY_QUALIFIED/NOT_QUALIFIED), and **deployment readiness** (NOT_READY /
+  PARTIALLY_READY / **READY_FOR_DEPLOYMENT**). It qualifies operations; it alters no business
+  logic — no retraining, no dataset/Track-1/2/3/prediction/security changes.
+- **Reuse, observe-only.** Observes the Track-3 `ApplicationPlatformService` read-only; shares
+  its `ml.lineage` tracker + the shared `ImmutableAuditLog`. No parallel systems, no new AI.
+- **Traceability.** `verify_chain` proves **Dataset → Model → Prediction → Workflow → Health
+  Event → Qualification Event** (the operational chain attaches to the product's workflow
+  lineage and reaches the dataset + model).
+- **Determinism.** Content-addressed ids over observed deterministic state; wall-clock measures
+  informational + excluded from signatures and from the deterministic reports.
+- **Boundary.** Imports `ml` + sibling `backend`; never `frontend`.
+- **Run:** `python -m scripts.verify_track4_operations` (the 15 criteria).
+
+See [`operations_platform/README.md`](./operations_platform/README.md). Verified: all 15 Track 4
+criteria pass against the **real** Track-3 product over the real CHB-MIT corpus — health
+HEALTHY (7/7), QUALIFIED (7/7), **READY_FOR_DEPLOYMENT** (score 1.0), traceable + audited;
+full suite **1027 passed**. No new dependencies.
