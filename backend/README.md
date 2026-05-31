@@ -598,3 +598,32 @@ criteria pass; all five architectures **READY**; full suite **872 passed**.
 
 See [`serving_platform/README.md`](./serving_platform/README.md). Verified: all 15 DRP-3
 criteria pass; all architectures served **READY**; full suite **891 passed**.
+
+
+## DRP-4 — Persistence Platform (`persistence_platform/`)
+
+> Deployment Remediation (post-audit): closes the audit's *no persistence layer* blocker —
+> durable storage, persistent registries, and durable audit / lineage / execution history that
+> survives a cold restart. Decision:
+> [`../.gcc/decisions/ADR-0027`](../.gcc/decisions/ADR-0027-drp4-persistence-platform.md).
+
+- **`persistence_platform/`** (DRP-4) — a governed platform that **persists registries + audit
+  history + lineage history + execution history → recovers state on a cold restart →
+  validates the recovery → scores persistence readiness**. It persists + recovers state; it
+  modifies no business logic.
+- **Durable storage.** A deterministic, content-addressed, **tamper-evident** filesystem store
+  (canonical JSON + sha256 checksum + content fingerprint); files survive process restarts.
+  No cloud / database / deployment.
+- **Reuse, no parallel systems.** The shared `ImmutableAuditLog` is serialized + **replay-
+  recovered** (reproduces the head); the shared `ml.lineage` tracker is serialized + **rebuilt**
+  (`verify_chain` holds); the DRP-1/DRP-2/DRP-3 registries are persisted via `to_dict()`.
+- **Cold-restart recovery.** A fresh service at the same storage root reads a manifest,
+  checksum-verifies every object, rebuilds everything, re-verifies the chains, and records a
+  `recovery_event` lineage node.
+- **Traceability.** `verify_chain` from a recovery event proves **Dataset → Model → Inference →
+  Serving → Persistence Record → Recovery Event**.
+- **Boundary.** Imports `ml` + sibling `backend`; never imports `frontend`.
+- **Run:** `python -m scripts.verify_drp4_persistence_platform`.
+
+See [`persistence_platform/README.md`](./persistence_platform/README.md). Verified: all 15
+DRP-4 criteria pass; persistence **READY**, recovery **recovered**; full suite **908 passed**.
