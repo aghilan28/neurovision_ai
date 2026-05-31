@@ -44,6 +44,7 @@ contributor and AI-agent turnover.
 | [ADR-0031](./ADR-0031-track2-real-model-training.md) | Track 2 — Real Model Training & Benchmark Program | Product Completion Track 2 | Accepted |
 | [ADR-0032](./ADR-0032-track3-real-product-application.md) | Track 3 — Real Product Application Program | Product Completion Track 3 | Accepted |
 | [ADR-0033](./ADR-0033-track4-operational-qualification.md) | Track 4 — Operational Readiness & Deployment Qualification Program | Product Completion Track 4 | Accepted |
+| [ADR-0034](./ADR-0034-dbe1-asgi-entrypoint.md) | DBE-1 — ASGI Entrypoint & Server Startup Fix | Deployment Blocker Elimination DBE-1 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
