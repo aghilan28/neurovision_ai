@@ -35,6 +35,14 @@ from .models.domain import (
 )
 
 _ANALYSES_NS = "app.analyses"
+# MP-3: durable model identity (NOT weights) + a tiny health probe, on the SAME StorageEngine
+# (no new persistence system). The model itself is reconstructed deterministically by the MP-1
+# provisioning path; what survives restart here is the *identity* so recovery can verify
+# continuity (same model_id after a restart) rather than merely assume determinism held.
+_MODEL_NS = "app.model"
+_MODEL_KEY = "provisioned"
+_HEALTH_NS = "app.health"
+_HEALTH_KEY = "probe"
 
 
 @dataclass
@@ -97,6 +105,46 @@ class ApplicationStateStore:
 
     def load_all_payloads(self) -> list:
         return [self.engine.get(_ANALYSES_NS, aid) for aid in self.analysis_ids()]
+
+    # --- MP-3: durable model identity (survives restart; verified, never weights) ----------
+    def persist_model_identity(self, payload: dict) -> str:
+        """Durably store the provisioned model's identity payload; return the checksum.
+
+        Idempotent by content: provisioning is deterministic, so re-persisting the same
+        model identity writes byte-identical canonical JSON (same checksum).
+        """
+        record = self.engine.put(_MODEL_NS, _MODEL_KEY, payload)
+        return record.checksum
+
+    def has_model_identity(self) -> bool:
+        return self.engine.exists(_MODEL_NS, _MODEL_KEY)
+
+    def load_model_identity(self) -> Optional[dict]:
+        """Load the persisted model identity, or ``None`` if absent/corrupt.
+
+        Never raises: a missing or checksum-failing record is treated as "no durable identity"
+        (recovery then re-establishes it from the freshly-provisioned model).
+        """
+        try:
+            if not self.engine.exists(_MODEL_NS, _MODEL_KEY):
+                return None
+            obj = self.engine.get(_MODEL_NS, _MODEL_KEY)
+            return obj if isinstance(obj, dict) else None
+        except Exception:  # noqa: BLE001 — corrupt/unreadable durable identity -> treat as absent
+            return None
+
+    def health_ok(self) -> bool:
+        """True iff the durable store is writable+readable right now (a real round-trip probe).
+
+        Used by recovery-readiness so a configured-but-unavailable persistence layer (e.g. an
+        unwritable / corrupted storage root) makes readiness honest (``ready=false``) instead
+        of falsely reporting ready. Never raises.
+        """
+        try:
+            self.engine.put(_HEALTH_NS, _HEALTH_KEY, {"ok": True})
+            return self.engine.get(_HEALTH_NS, _HEALTH_KEY) == {"ok": True}
+        except Exception:  # noqa: BLE001 — any storage failure -> unhealthy
+            return False
 
 
 def reconstruct_outcome(outcome_dict: dict):

@@ -41,6 +41,10 @@ from .persistence import (
     ApplicationStateStore, RecoveryReport, default_persistence_root, reconstruct_outcome,
     serialize_outcome,
 )
+from .lifecycle import (
+    ModelRecoveryReport, assess_recovery_readiness, current_model_identity, model_available,
+    recover_model,
+)
 from .readiness import ApplicationReadinessEngine
 from .validation import ApplicationIntegrityValidator
 from .registry import ApplicationRegistry, RegistryError
@@ -78,6 +82,8 @@ __all__ = [
     "DuplicateDecision", "DuplicateDetector", "content_hash",
     "ApplicationStateStore", "RecoveryReport", "default_persistence_root", "reconstruct_outcome",
     "serialize_outcome",
+    "ModelRecoveryReport", "assess_recovery_readiness", "current_model_identity",
+    "model_available", "recover_model",
     "ApplicationReadinessEngine", "ApplicationIntegrityValidator", "ApplicationRegistry",
     "RegistryError", "AuditError", "ImmutableAuditLog", "make_application_audit_log",
     "ENTITY_CONTRACTS", "validate_entity", "AnalysisOutcome", "ApplicationPlatformError",

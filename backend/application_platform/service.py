@@ -120,6 +120,9 @@ class ApplicationPlatformService:
         self._state_store: Optional[ApplicationStateStore] = (
             ApplicationStateStore(root) if root else None)
         self._recovery: Optional[RecoveryReport] = None
+        # MP-3: the model-recovery report produced by the startup lifecycle (set by
+        # lifecycle.recover_model). None until recovery runs (e.g. direct service use).
+        self._model_recovery = None
         if self._state_store is not None:
             self._recovery = self._recover_state()
 
@@ -498,6 +501,11 @@ class ApplicationPlatformService:
     def recovery_report(self) -> Optional[RecoveryReport]:
         """The cold-restart recovery report (None if persistence is not configured)."""
         return self._recovery
+
+    @property
+    def model_recovery_report(self):
+        """The MP-3 model-recovery report from the startup lifecycle (None until recovery runs)."""
+        return self._model_recovery
 
     @property
     def persistence_enabled(self) -> bool:

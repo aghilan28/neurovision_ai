@@ -30,6 +30,8 @@ APP_READINESS_VERSION: str = "app-readiness@1.0.0"
 APP_REGISTRY_VERSION: str = "app-registry@1.0.0"
 APP_AUDIT_VERSION: str = "app-audit@1.0.0"
 APP_LINEAGE_VERSION: str = "app-lineage@1.0.0"
+# MP-3 — persistent model lifecycle & recovery (durable model identity + verified recovery).
+APP_MODEL_LIFECYCLE_VERSION: str = "app-model-lifecycle@1.0.0"
 
 # Bounded analysis window (seconds). Real EEG recordings can be hours long; the product
 # analyses a deterministic bounded leading segment so a user workflow returns promptly. The
