@@ -32,6 +32,8 @@ from pydantic import BaseModel, Field
 
 from ..service import ApplicationPlatformError, ApplicationPlatformService
 from ..version import API_V1, APPLICATION_PLATFORM_VERSION
+from backend.application_backend.models.domain import ApiOperation
+from ..security import AuthenticationFailure, register_security_exception_handlers
 
 
 # --- typed request contracts -------------------------------------------------
@@ -57,16 +59,14 @@ class AnalyzeBody(BaseModel):
     case_key: Optional[str] = None
 
 
-def _bearer(authorization: Optional[str]) -> Optional[str]:
-    if not authorization:
-        return None
-    return authorization[7:] if authorization.lower().startswith("bearer ") else authorization
-
-
 def create_app(service: ApplicationPlatformService) -> FastAPI:
     app = FastAPI(title="NeuroVision Application API",
                   version=APPLICATION_PLATFORM_VERSION,
                   description="Real EEG upload -> prediction -> report product API (Track 3).")
+
+    # DBE-5: install controlled authentication-failure handlers so an invalid token / an
+    # authorization denial renders a 401/403 (never a stack-trace-leaking HTTP 500).
+    register_security_exception_handlers(app)
 
     def hub() -> ApplicationPlatformService:
         return service
@@ -109,9 +109,15 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
     def upload(body: UploadBody, response: Response,
                authorization: Optional[str] = Header(default=None),
                svc: ApplicationPlatformService = Depends(hub)):
-        token = _bearer(authorization)
-        if not token:
-            raise HTTPException(status_code=401, detail="missing bearer token")
+        # DBE-5: classify + validate the bearer credential BEFORE any work. Every invalid
+        # token class (missing/empty/malformed/forged/expired/unknown) and every
+        # authorization denial returns a controlled 401/403 here — the deep workflow is
+        # only ever reached with a validated, authorized session, so an invalid token can
+        # never reach business logic and can never produce an HTTP 500.
+        auth_ctx = svc.authenticate_request(authorization, operation=ApiOperation.UPLOAD_EEG)
+        if not auth_ctx.ok:
+            raise AuthenticationFailure(auth_ctx)
+        token = auth_ctx.token
         try:
             content = base64.b64decode(body.content_base64)
         except Exception as exc:  # noqa: BLE001
