@@ -36,6 +36,10 @@ class StartupReport:
     security_ok: bool
     operations_ok: bool
     findings: tuple = ()
+    # MP-1: model provisioning outcome (recorded at startup; drives true readiness).
+    model_provisioned: bool = False
+    model_id: Optional[str] = None
+    provisioning_source: str = "not_attempted"
 
     @property
     def ok(self) -> bool:
@@ -47,6 +51,8 @@ class StartupReport:
                 "api_built": self.api_built, "health_ok": self.health_ok,
                 "readiness_ok": self.readiness_ok, "security_ok": self.security_ok,
                 "operations_ok": self.operations_ok, "ok": self.ok,
+                "model_provisioned": self.model_provisioned, "model_id": self.model_id,
+                "provisioning_source": self.provisioning_source,
                 "findings": list(self.findings)}
 
 
@@ -101,12 +107,36 @@ def _validate_startup(service: ApplicationPlatformService) -> StartupReport:
         operations_ok=operations_ok, findings=tuple(findings))
 
 
+def _provision_startup_model(service) -> StartupReport:
+    """Provision a model at startup (MP-1) then validate the service can serve.
+
+    Reuses the MP-1 ``provision_model`` (which reuses the existing ``prepare_model`` pipeline):
+    deterministic + idempotent, so a fresh deploy obtains a usable model and a restart simply
+    reconstructs the same model identity. The provisioning outcome is folded into the returned
+    :class:`StartupReport` so readiness can reflect *true* model availability.
+    """
+    from .. import provisioning  # local import: avoids constructing anything at module import
+
+    report = _validate_startup(service)
+    result = provisioning.provision_model(service)
+    findings = list(report.findings)
+    if not result.ok:
+        findings.extend(result.findings or ("model provisioning failed",))
+    return StartupReport(
+        started=report.started, service_constructed=report.service_constructed,
+        api_built=report.api_built, health_ok=report.health_ok,
+        readiness_ok=report.readiness_ok, security_ok=report.security_ok,
+        operations_ok=report.operations_ok, findings=tuple(findings),
+        model_provisioned=result.ok, model_id=result.model_id,
+        provisioning_source=result.source)
+
+
 def build_application(config: Optional[ServerConfig] = None):
     """Build ``(service, app)`` — the real service + the real FastAPI app with a lifespan.
 
     The returned ``app`` is the authoritative ASGI application. Its lifespan runs startup
-    validation (recorded at ``app.state.startup_report``) and a clean shutdown. The same
-    object is what ``uvicorn module:app`` and ``python -m ...`` both serve.
+    validation (recorded at ``app.state.startup_report``), MP-1 model provisioning, and a
+    clean shutdown. The same object is what ``uvicorn module:app`` and ``python -m ...`` serve.
     """
     config = config or load_config()
     service = build_service(config)
@@ -119,8 +149,11 @@ def build_application(config: Optional[ServerConfig] = None):
 
     @contextlib.asynccontextmanager
     async def lifespan(_app):
-        # --- startup (DBE1-F) ---
-        report = _validate_startup(service)
+        # --- startup (DBE1-F + MP1-D): validate, then provision a model so the deploy is usable ---
+        if getattr(config, "provision_model", True):
+            report = _provision_startup_model(service)
+        else:
+            report = _validate_startup(service)
         _app.state.startup_report = report
         if not report.ok:
             # Surface a clear, non-silent startup failure.
@@ -141,11 +174,15 @@ def build_application(config: Optional[ServerConfig] = None):
 
     @app.get("/readyz")
     def readyz():
+        # MP1-E: ready is TRUE only when the service is both validated AND has a usable model
+        # (the upload workflow needs a model). This eliminates the prior false positive where
+        # readiness was driven by the startup report alone while no model was prepared.
         rep = getattr(app.state, "startup_report", None)
-        ready = bool(rep and rep.ok)
+        model_prepared = bool(getattr(service, "_model_info", None))
+        ready = bool(rep and rep.ok and model_prepared)
         return {"status": "ready" if ready else "starting", "ready": ready,
                 "api_version": API_V1,
-                "model_prepared": bool(getattr(service, "_model_info", None))}
+                "model_prepared": model_prepared}
 
     return service, app
 
