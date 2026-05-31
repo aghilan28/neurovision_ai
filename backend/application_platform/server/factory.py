@@ -107,28 +107,34 @@ def _validate_startup(service: ApplicationPlatformService) -> StartupReport:
         operations_ok=operations_ok, findings=tuple(findings))
 
 
-def _provision_startup_model(service) -> StartupReport:
-    """Provision a model at startup (MP-1) then validate the service can serve.
+def _provision_startup_model(service, *, provision: bool = True):
+    """MP-3: validate the service, then run the **single authoritative model-recovery step**.
 
-    Reuses the MP-1 ``provision_model`` (which reuses the existing ``prepare_model`` pipeline):
-    deterministic + idempotent, so a fresh deploy obtains a usable model and a restart simply
-    reconstructs the same model identity. The provisioning outcome is folded into the returned
-    :class:`StartupReport` so readiness can reflect *true* model availability.
+    Reuses MP-1 provisioning (deterministic reconstruction of the same ``model_id``) + the
+    DBE-4 durable store via ``lifecycle.recover_model`` — no parallel recovery path. The
+    model-recovery outcome is folded into the :class:`StartupReport` (so ``model_provisioned``
+    / ``model_id`` / ``provisioning_source`` reflect the *authoritative* usable-model signal)
+    and the full :class:`~..lifecycle.ModelRecoveryReport` is returned so the lifespan can
+    record it and ``/readyz`` can derive honest readiness from it.
+
+    ``provision=False`` (operator disabled provisioning via ``NV_PROVISION_MODEL=0``) still
+    assesses recovery — it simply does not synthesize a model — so readiness honestly reports
+    ``false`` until a model context is injected.
     """
-    from .. import provisioning  # local import: avoids constructing anything at module import
+    from .. import lifecycle  # local import: keeps numpy/mne optional for lightweight tooling
 
-    report = _validate_startup(service)
-    result = provisioning.provision_model(service)
-    findings = list(report.findings)
-    if not result.ok:
-        findings.extend(result.findings or ("model provisioning failed",))
-    return StartupReport(
-        started=report.started, service_constructed=report.service_constructed,
-        api_built=report.api_built, health_ok=report.health_ok,
-        readiness_ok=report.readiness_ok, security_ok=report.security_ok,
-        operations_ok=report.operations_ok, findings=tuple(findings),
-        model_provisioned=result.ok, model_id=result.model_id,
-        provisioning_source=result.source)
+    base = _validate_startup(service)
+    recovery = lifecycle.recover_model(service, provision=provision)
+    findings = list(base.findings)
+    if not recovery.recovered:
+        findings.extend(recovery.findings or ("model recovery incomplete",))
+    report = StartupReport(
+        started=base.started, service_constructed=base.service_constructed,
+        api_built=base.api_built, health_ok=base.health_ok, readiness_ok=base.readiness_ok,
+        security_ok=base.security_ok, operations_ok=base.operations_ok, findings=tuple(findings),
+        model_provisioned=recovery.model_available, model_id=recovery.model_id,
+        provisioning_source=recovery.source)
+    return report, recovery
 
 
 def build_application(config: Optional[ServerConfig] = None):
@@ -146,17 +152,21 @@ def build_application(config: Optional[ServerConfig] = None):
     app.state.service = service
     app.state.config = config
     app.state.startup_report = None
+    app.state.model_recovery_report = None  # MP-3: set by the lifespan model-recovery step
 
     @contextlib.asynccontextmanager
     async def lifespan(_app):
-        # --- startup (DBE1-F + MP1-D): validate, then provision a model so the deploy is usable ---
-        if getattr(config, "provision_model", True):
-            report = _provision_startup_model(service)
-        else:
-            report = _validate_startup(service)
+        # --- startup (DBE1-F + MP1-D + MP3-D): validate, then run the single authoritative
+        # model-recovery step (reuses MP-1 provisioning + DBE-4 durable identity) so a fresh
+        # deploy is usable AND a restart recovers the model automatically. ---
+        provision = bool(getattr(config, "provision_model", True))
+        report, recovery = _provision_startup_model(service, provision=provision)
         _app.state.startup_report = report
+        _app.state.model_recovery_report = recovery
         if not report.ok:
-            # Surface a clear, non-silent startup failure.
+            # Surface a clear, non-silent startup *validation* failure (no partial start).
+            # A model-recovery shortfall is NOT fatal here — it is reported honestly via
+            # /readyz (ready=false) rather than crashing the process (MP3-G).
             raise RuntimeError(f"NeuroVision startup validation failed: {report.findings}")
         try:
             yield
@@ -174,15 +184,26 @@ def build_application(config: Optional[ServerConfig] = None):
 
     @app.get("/readyz")
     def readyz():
-        # MP1-E: ready is TRUE only when the service is both validated AND has a usable model
-        # (the upload workflow needs a model). This eliminates the prior false positive where
-        # readiness was driven by the startup report alone while no model was prepared.
+        # MP1-E + MP3-G: ready is TRUE only when startup validated AND a usable model is
+        # available AND (model identity is continuous across any restart) AND (persistence, if
+        # configured, is healthy). ``model_prepared`` is keyed on the AUTHORITATIVE usable-model
+        # signal (backend.model_context), not the lighter _model_info snapshot — closing the
+        # latent false positive where a restored snapshot could report ready with no usable model.
+        from .. import lifecycle
+
         rep = getattr(app.state, "startup_report", None)
-        model_prepared = bool(getattr(service, "_model_info", None))
-        ready = bool(rep and rep.ok and model_prepared)
+        recovery = getattr(app.state, "model_recovery_report", None)
+        startup_ok = bool(rep and rep.ok)
+        model_prepared = lifecycle.model_available(service)
+        if recovery is not None:
+            ready, _reasons = lifecycle.assess_recovery_readiness(
+                startup_ok=startup_ok, recovery=recovery)
+        else:
+            ready = bool(startup_ok and model_prepared)
         return {"status": "ready" if ready else "starting", "ready": ready,
-                "api_version": API_V1,
-                "model_prepared": model_prepared}
+                "api_version": API_V1, "model_prepared": model_prepared,
+                "model_recovered": bool(recovery and recovery.recovered),
+                "persistence_ok": (bool(recovery.persistence_ok) if recovery else None)}
 
     return service, app
 
