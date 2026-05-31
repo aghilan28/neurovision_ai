@@ -686,3 +686,35 @@ See [`clinical_validation/README.md`](./clinical_validation/README.md). Verified
 criteria pass; every model benchmarked, evidenced, **READY**; full suite **942 passed**. The
 metrics are evidence about untuned reference baselines on synthetic data (Gap G1), not a
 clinical-efficacy claim.
+
+
+## Track 1 — Real Data Acquisition & Integration (`dataset_acquisition/`)
+
+> Product Completion Program: closes the Production Reality Audit V2 blocker *NO REAL
+> DATASETS* — turns the DRP-1 dataset **framework** into a **Real Dataset Platform**. Decision:
+> [`../.gcc/decisions/ADR-0030`](../.gcc/decisions/ADR-0030-track1-real-data-acquisition.md).
+
+- **`dataset_acquisition/`** (Track 1) — **acquires** real public EEG corpora locally,
+  **validates** them from the **actual files** (not manifests), extracts **real metadata +
+  labels**, builds inventories, tracks lineage + audit, and scores **training readiness**
+  (NOT_READY / PARTIALLY_READY / **READY_FOR_TRAINING**). It acquires/validates/registers/
+  verifies/prepares datasets for training; it trains no models and modifies no other subsystem.
+- **Reuse, no parallel systems.** Reads real recordings via the `eeg_foundation` MNE reader
+  (and its content-addressed `recording+{hash16}` id); shares the single `ml.lineage` tracker +
+  the shared `ImmutableAuditLog` + `ml.validation` + `ml.provenance`.
+- **Acquisition policy.** Only OPEN, no-account corpora are auto-downloaded (CHB-MIT, PhysioNet).
+  TUH EEG + Temple/TUSZ require a signed data-use agreement → reported, never fetched. Real
+  recordings live in a **gitignored** data root (`data/real`, `$NV_DATASET_ROOT`); never committed.
+- **Traceability.** `verify_chain` proves **Dataset Source → Dataset → Patient → Recording →
+  Label → Registry**, reaching the source.
+- **Determinism.** Ids/fingerprints are content-addressed from real file checksums + labels;
+  download timings are never hashed — same files reproduce the same outcome bit-for-bit.
+- **Boundary.** Imports `ml` + sibling `backend`; never imports `frontend`.
+- **Run:** `python -m scripts.acquire_real_dataset` (acquire + report) and
+  `python -m scripts.verify_track1_real_data` (the 15 criteria).
+
+See [`dataset_acquisition/README.md`](./dataset_acquisition/README.md). Verified: all 15 Track 1
+criteria pass against a **real, locally-acquired CHB-MIT subset** (2 genuine 1-hour recordings,
+256 Hz, 23 channels; real seizure labels incl. the documented chb01_03 seizure at 2996–3036 s)
+scored **READY_FOR_TRAINING**; full suite **967 passed**. Real recordings — not synthetic
+fixtures — and **no synthetic labels** for that dataset.
