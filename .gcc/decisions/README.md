@@ -34,6 +34,7 @@ contributor and AI-agent turnover.
 | [ADR-0021](./ADR-0021-productization-p8-operations-foundation.md) | Productization P8 — Operations Foundation Platform | Productization P8 | Accepted |
 | [ADR-0022](./ADR-0022-productization-p9-validation-assurance.md) | Productization P9 — Validation & Performance Assurance Program | Productization P9 | Accepted |
 | [ADR-0023](./ADR-0023-productization-p10-deployment-certification.md) | Productization P10 — Deployment Readiness & Production Certification | Productization P10 | Accepted |
+| [ADR-0024](./ADR-0024-drp1-real-dataset-integration.md) | DRP-1 — Real Dataset Integration Program | Deployment Remediation DRP-1 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
