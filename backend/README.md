@@ -569,3 +569,32 @@ DRP-1 criteria pass; all five mandatory corpora **READY**; full suite **851 pass
 
 See [`production_models/README.md`](./production_models/README.md). Verified: all 15 DRP-2
 criteria pass; all five architectures **READY**; full suite **872 passed**.
+
+
+## DRP-3 — Production Serving Platform (`serving_platform/`)
+
+> Deployment Remediation (post-audit): closes the audit's *no serving layer* blocker with an
+> inference service boundary, a model serving lifecycle, and an in-process public execution
+> interface. Decision:
+> [`../.gcc/decisions/ADR-0026`](../.gcc/decisions/ADR-0026-drp3-serving-platform.md).
+
+- **`serving_platform/`** (DRP-3) — a governed serving platform that **receives a prediction
+  request → selects a model (resolve / version) → executes inference → generates + delivers a
+  response → tracks the lifecycle → scores readiness → traces lineage → audits the execution**.
+  It serves models; it never trains them and modifies no other subsystem.
+- **Reuse, no parallel systems.** Execution delegates to the reused `InferenceFoundationService`
+  (no duplicated prediction logic); the response carries its prediction + confidence +
+  calibration + explanation (NR-4). Serves `model_foundation` model records via the shared
+  `ModelRegistry`; shares the single `ml.lineage` tracker + the shared `ImmutableAuditLog`. The
+  new `ServingRegistry` stores only serving artifacts (requests/executions/responses/readiness).
+- **Lifecycle (DRP3-F).** `request_created → request_validated → model_selected →
+  inference_executed → response_generated → response_delivered → execution_completed`.
+- **Graceful failure.** Invalid requests / missing models → a structured `Error` contract,
+  audited, never a crash; the registry stays orphan-free.
+- **Traceability.** `verify_chain` from a served response proves **Dataset → Feature → Model →
+  Inference → Serving Request → Serving Execution → Serving Response**.
+- **Boundary.** Imports `ml` + sibling `backend`; never imports `frontend`. No HTTP/networking.
+- **Run:** `python -m scripts.verify_drp3_serving_platform`.
+
+See [`serving_platform/README.md`](./serving_platform/README.md). Verified: all 15 DRP-3
+criteria pass; all architectures served **READY**; full suite **891 passed**.
