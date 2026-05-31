@@ -718,3 +718,40 @@ criteria pass against a **real, locally-acquired CHB-MIT subset** (2 genuine 1-h
 256 Hz, 23 channels; real seizure labels incl. the documented chb01_03 seizure at 2996–3036 s)
 scored **READY_FOR_TRAINING**; full suite **967 passed**. Real recordings — not synthetic
 fixtures — and **no synthetic labels** for that dataset.
+
+
+## Track 2 — Real Model Training & Benchmark (`real_model_training/`)
+
+> Product Completion Program: closes the audit blocker *NO MEANINGFUL TRAINED MODELS* —
+> turns the **real datasets** from Track 1 into **real trained models**. Decision:
+> [`../.gcc/decisions/ADR-0031`](../.gcc/decisions/ADR-0031-track2-real-model-training.md).
+
+- **`real_model_training/`** (Track 2) — windows the **real** Track-1 recordings into labelled
+  samples, **trains the platform's five architectures** (EEGNet / DeepConvNet / Temporal CNN /
+  Transformer EEG / Hybrid EEG) on that real data, **evaluates** (accuracy / precision / recall /
+  F1 / ROC-AUC / PR-AUC / sensitivity / specificity / confusion / calibration / reliability),
+  **benchmarks**, **compares**, and scores **serving readiness** (NOT_READY / PARTIALLY_READY /
+  **READY_FOR_SERVING**). It trains/evaluates/benchmarks/compares/scores; it does not serve,
+  persist, secure, deploy, or modify Track 1.
+- **Reuse, no new architecture.** Drives the existing `production_models` + `model_foundation`
+  engines (`train_production` → `evaluate` → `benchmark_model` → `build_model_evaluation` →
+  `compare_models`) on a `DatasetBundle` assembled from real windows; reuses the Track-1
+  `RealDatasetService`, the single `ml.lineage` tracker, the shared `ImmutableAuditLog`,
+  `ml.validation`, and `ml.provenance`.
+- **Real data only.** Each window's label comes from the **real** seizure intervals; no
+  synthetic training. (The five reused architectures are feature-projection models, so each
+  window is reduced to a deterministic per-channel band-power + temporal feature vector before
+  training — the binding constraint of reusing the existing models, documented in ADR-0031.)
+- **Traceability.** `verify_chain` proves **Dataset → Recording → Feature Asset → Training Run →
+  Model → Evaluation → Benchmark → Readiness Assessment**, reaching the Track-1 dataset source.
+- **Determinism.** Content-addressed ids; reproducibility verified (train twice, compare
+  fingerprints); deterministic metrics hashed, wall-clock timings informational + excluded from
+  signatures and from the deterministic reports.
+- **Boundary.** Imports `ml` + sibling `backend`; never imports `frontend`.
+- **Run:** `python -m scripts.verify_track2_real_models` (the 15 criteria).
+
+See [`real_model_training/README.md`](./real_model_training/README.md). Verified: all 15 Track 2
+criteria pass against the **real, locally-acquired CHB-MIT corpus** (50 real windows from two
+genuine 1-hour 256 Hz / 23-channel recordings; real seizure labels) — all five architectures
+trained → evaluated → benchmarked → compared → **READY_FOR_SERVING** (recommended: `hybrid_eeg`);
+full suite **989 passed**. Real EEG recordings — not synthetic fixtures.
