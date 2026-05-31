@@ -32,6 +32,7 @@ contributor and AI-agent turnover.
 | [ADR-0019](./ADR-0019-productization-p6-application-backend.md) | Productization P6 — Application Backend Platform | Productization P6 | Accepted |
 | [ADR-0020](./ADR-0020-productization-p7-application-frontend.md) | Productization P7 — Application Frontend Platform | Productization P7 | Accepted |
 | [ADR-0021](./ADR-0021-productization-p8-operations-foundation.md) | Productization P8 — Operations Foundation Platform | Productization P8 | Accepted |
+| [ADR-0022](./ADR-0022-productization-p9-validation-assurance.md) | Productization P9 — Validation & Performance Assurance Program | Productization P9 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
