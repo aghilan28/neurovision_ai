@@ -86,7 +86,12 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
     def model_status(svc: ApplicationPlatformService = Depends(hub)):
         if not svc._model_info:
             return {"prepared": False}
-        return {"prepared": True, **svc._model_info}
+        # MP-3: surface the model-recovery report (durability/identity-continuity) when present.
+        rec = svc.model_recovery_report
+        body = {"prepared": True, **svc._model_info}
+        if rec is not None:
+            body["recovery"] = rec.to_dict()
+        return body
 
     # --- auth ----------------------------------------------------------------
     @app.post(f"/{API_V1}/auth/register", status_code=201)
@@ -208,8 +213,10 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
     @app.get(f"/{API_V1}/persistence")
     def persistence_status(svc: ApplicationPlatformService = Depends(hub)):
         rep = svc.recovery_report
+        mrec = svc.model_recovery_report
         return {"persistence_enabled": svc.persistence_enabled,
                 "recovery": rep.to_dict() if rep else None,
+                "model_recovery": mrec.to_dict() if mrec else None,
                 "n_analyses": len(svc.list_analyses())}
 
     return app
