@@ -47,6 +47,7 @@ contributor and AI-agent turnover.
 | [ADR-0034](./ADR-0034-dbe1-asgi-entrypoint.md) | DBE-1 — ASGI Entrypoint & Server Startup Fix | Deployment Blocker Elimination DBE-1 | Accepted |
 | [ADR-0035](./ADR-0035-dbe2-docker-deployment.md) | DBE-2 — Docker Deployment & Container Startup Fix | Deployment Blocker Elimination DBE-2 | Accepted |
 | [ADR-0036](./ADR-0036-dbe3-duplicate-upload.md) | DBE-3 — Duplicate Upload Reliability Fix | Deployment Blocker Elimination DBE-3 | Accepted |
+| [ADR-0037](./ADR-0037-dbe4-persistence-wiring.md) | DBE-4 — Persistence Wiring & State Durability Fix | Deployment Blocker Elimination DBE-4 | Accepted |
 
 A change to architecture, boundaries, or method requires a new (or amended) ADR
 before/with the change (NR-5).
