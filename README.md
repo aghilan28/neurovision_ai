@@ -1,5 +1,9 @@
 # NeuroVision AI
 
+> **Source of truth: branch [`main`](./REPOSITORY.md).** A fresh clone of `main` is the
+> complete, runnable product — see **[REPOSITORY.md](./REPOSITORY.md)** for the authoritative
+> structure, deployment, and onboarding guides. You do not need the historical PR stack.
+
 > **A production-oriented EEG-AI platform for critical-care neurology.**
 > NeuroVision AI assists clinicians in detecting and characterizing seizures and
 > the **Ictal-Interictal Continuum (IIC)** in the ICU from continuous EEG (cEEG),
@@ -7,10 +11,10 @@
 
 | | |
 |---|---|
-| **Current version** | **Version 0 — Repository Foundation** |
-| **Current phase** | **V0-P1 (Project Constitution Layer) + V0-P2 (Repository Architecture Foundation)** — complete |
-| **Next phase** | **V0-P3 (Governance Layer)** — implement `.gcc/` mechanisms |
-| **Status** | Foundation only. **No EEG processing, models, datasets, APIs, dashboards, or pipelines exist yet** — and that is by design. |
+| **Authoritative branch** | **`main`** (see [REPOSITORY.md](./REPOSITORY.md)) |
+| **Latest phase** | **MP-3 — Persistent Model Lifecycle & Recovery** (on top of V0→V4, Productization P1–P10, DRP-1–6, Track-1–4, DBE-1–5, MP-1) |
+| **Run it** | `git checkout main && pip install -r requirements.txt && uvicorn backend.application_platform.server.app:app` |
+| **Status** | Runnable product: real EEG ingest → signal/feature pipeline → model provisioning + inference → FastAPI app with auth, persistence, and restart recovery. Models are deterministic reference baselines (no clinical-accuracy claim). |
 | **Optimizing for** | Survivability · maintainability · architectural integrity (never speed/convenience) |
 
 ---
