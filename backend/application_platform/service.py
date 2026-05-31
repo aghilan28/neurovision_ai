@@ -40,6 +40,10 @@ from .readiness import ApplicationReadinessEngine
 from .registry import ApplicationRegistry
 from .uploads import prepare_bounded_segment, validate_eeg_bytes
 from .uploads.duplicates import DuplicateDetector
+from .persistence import (
+    ApplicationStateStore, RecoveryReport, default_persistence_root, reconstruct_outcome,
+    serialize_outcome,
+)
 from .validation import ApplicationIntegrityValidator
 from .workflows import ANALYSIS_STAGES, run_backend_analysis
 from .version import (
@@ -93,7 +97,8 @@ class ApplicationPlatformService:
 
     def __init__(self, *, workspace_dir: Optional[str] = None,
                  lineage_tracker: Optional[LineageTracker] = None,
-                 analysis_seconds: float = DEFAULT_ANALYSIS_SECONDS) -> None:
+                 analysis_seconds: float = DEFAULT_ANALYSIS_SECONDS,
+                 persistence_root: Optional[str] = None) -> None:
         self.lineage = lineage_tracker or LineageTracker()
         self.backend = ApplicationBackendService(workspace_dir=workspace_dir,
                                                  lineage_tracker=self.lineage)
@@ -108,6 +113,15 @@ class ApplicationPlatformService:
         self._reports: dict[str, dict] = {}
         # DBE-3: authoritative content/identity index for deterministic duplicate handling.
         self._duplicates = DuplicateDetector()
+        # DBE-4: durable application state (reuses the DRP-4 StorageEngine). When a persistence
+        # root is configured, state survives restart: persisted on each accepted analysis,
+        # recovered on construction. None -> ephemeral (the historical in-memory behaviour).
+        root = persistence_root or default_persistence_root(workspace_dir)
+        self._state_store: Optional[ApplicationStateStore] = (
+            ApplicationStateStore(root) if root else None)
+        self._recovery: Optional[RecoveryReport] = None
+        if self._state_store is not None:
+            self._recovery = self._recover_state()
 
     @property
     def version(self) -> str:
@@ -321,6 +335,11 @@ class ApplicationPlatformService:
         # DBE-3: index this accepted upload so future identical uploads are detected + reused.
         self._duplicates.record(content_hash_value=decision.content_hash,
                                 upload_id=upload_id, analysis_id=analysis_id)
+        # DBE-4: durably persist the accepted analysis so it survives a restart.
+        if self._state_store is not None:
+            self._state_store.persist_analysis(serialize_outcome(
+                outcome, report_payloads, content_hash=decision.content_hash,
+                upload_id=upload_id, model_info=self._model_info))
         return outcome
 
     # =========================================================================
@@ -353,6 +372,96 @@ class ApplicationPlatformService:
             "lineage_report": _reports.build_lineage_report(self.lineage, wf_lineage),
         }
 
+    # =========================================================================
+    # DBE-4: cold-restart recovery + durable-state internals
+    # =========================================================================
+    def _recover_state(self) -> RecoveryReport:
+        """Restore uploads / analyses / reports / duplicate index from durable storage.
+
+        Reconstructs the in-memory views from persisted records (DBE4-D), re-registers the
+        registry records (so the registry is consistent after restart), and re-seeds the
+        duplicate index. Never raises — a corrupt record is recorded as an error finding and
+        skipped (the rest of the state still recovers). Audit + lineage *references* are
+        carried inside the persisted records.
+        """
+        errors: list[str] = []
+        recovered_ids: list[str] = []
+        store = self._state_store
+        if store is None or not store.has_any():
+            return RecoveryReport(recovered=True, n_analyses=0, n_uploads=0, n_reports=0)
+        # Establish a live, non-genesis audit head BEFORE re-registering recovered records.
+        # The registry forbids orphan records (a record whose audit_state is empty/GENESIS), so
+        # re-registration must reference a valid audit head; the recovery event itself supplies
+        # one (and is audited). Without this the fresh audit log's GENESIS head would make every
+        # re-registered upload/analysis/report an orphan -> RegistryError during startup.
+        self.audit.append("state_recovery_started", {"namespace": "app.analyses"})
+        for payload in store.load_all_payloads():
+            try:
+                outcome = reconstruct_outcome(payload["outcome"])
+                analysis_id = payload["analysis_id"]
+                self._analyses[analysis_id] = outcome
+                self._reports[analysis_id] = payload.get("report_payloads", {})
+                if outcome.upload is not None:
+                    self._uploads[outcome.upload.upload_id] = outcome.upload
+                # restore the model snapshot used (for status/evidence after restart)
+                if payload.get("model_info") and not self._model_info:
+                    self._model_info = dict(payload["model_info"])
+                # re-seed the duplicate index so post-restart re-uploads are still detected
+                di = payload.get("duplicate_index") or {}
+                if di.get("content_hash") and di.get("upload_id"):
+                    self._duplicates.record(content_hash_value=di["content_hash"],
+                                            upload_id=di["upload_id"], analysis_id=analysis_id)
+                # re-register the registry records (consistent registry after restart)
+                self._reregister_outcome(outcome)
+                recovered_ids.append(analysis_id)
+            except Exception as exc:  # noqa: BLE001 — corrupt record skipped, never crash startup
+                errors.append(f"{payload.get('analysis_id', '?')}: {type(exc).__name__}: {exc}")
+        if recovered_ids:
+            self.audit.append("state_recovered", {"n_analyses": len(recovered_ids),
+                                                  "n_errors": len(errors)})
+        return RecoveryReport(
+            recovered=True, n_analyses=len(recovered_ids), n_uploads=len(self._uploads),
+            n_reports=len(self._reports), analysis_ids=tuple(sorted(recovered_ids)),
+            errors=tuple(errors))
+
+    def _reregister_outcome(self, outcome) -> None:
+        """Re-register the registry records for a recovered outcome (idempotent, no orphans)."""
+        u, a = outcome.upload, outcome.analysis
+        preq, pres = outcome.prediction_request, outcome.prediction_result
+        rep, wf, rd = outcome.report_record, outcome.workflow, outcome.readiness
+        if u is not None and u.lineage_id:
+            self._register(EntityKind.UPLOAD, u.upload_id, u.content_fingerprint, u.lineage_id,
+                           u.created_at)
+        if preq is not None and preq.lineage_id:
+            self._register(EntityKind.PREDICTION_REQUEST, preq.prediction_request_id,
+                           preq.prediction_request_id, preq.lineage_id, preq.created_at,
+                           deps=(preq.upload_id,))
+        if pres is not None and pres.lineage_id:
+            self._register(EntityKind.PREDICTION_RESULT, pres.prediction_result_id,
+                           pres.signature(), pres.lineage_id, pres.created_at,
+                           deps=(pres.prediction_request_id,))
+        if a is not None and a.lineage_id:
+            self._register(EntityKind.ANALYSIS, a.analysis_id, a.analysis_id, a.lineage_id,
+                           a.created_at, deps=(a.upload_id, a.prediction_result_id))
+        if wf is not None and wf.lineage_id:
+            self._register(EntityKind.WORKFLOW, wf.workflow_id, wf.signature(), wf.lineage_id,
+                           wf.created_at, deps=(wf.analysis_id,))
+        if rep is not None and rep.lineage_id:
+            self._register(EntityKind.REPORT, rep.report_id, rep.content_fingerprint,
+                           rep.lineage_id, rep.created_at, deps=(rep.analysis_id,))
+        if rd is not None and rd.lineage_id:
+            self._register(EntityKind.READINESS, rd.readiness_id, rd.readiness_id, rd.lineage_id,
+                           rd.created_at, deps=(rd.subject,))
+
+    @property
+    def recovery_report(self) -> Optional[RecoveryReport]:
+        """The cold-restart recovery report (None if persistence is not configured)."""
+        return self._recovery
+
+    @property
+    def persistence_enabled(self) -> bool:
+        return self._state_store is not None
+
     def _register(self, kind, entity_id, version, lineage_id, created_at, *, deps=()) -> None:
         # DBE-3: idempotent registration. The duplicate detector short-circuits before we get
         # here for processed duplicates; this is defense-in-depth so a re-registration of an
@@ -369,6 +478,32 @@ class ApplicationPlatformService:
         if analysis_id not in self._analyses:
             raise KeyError(f"analysis {analysis_id!r} not found")
         return self._analyses[analysis_id]
+
+    # =========================================================================
+    # DBE4-F: retrieval workflows (served from persisted/recovered state)
+    # =========================================================================
+    def get_upload(self, upload_id: str) -> UploadRecord:
+        if upload_id not in self._uploads:
+            raise KeyError(f"upload {upload_id!r} not found")
+        return self._uploads[upload_id]
+
+    def get_prediction(self, analysis_id: str):
+        return self.get_analysis(analysis_id).prediction_result
+
+    def get_report(self, analysis_id: str) -> ReportRecord:
+        rep = self.get_analysis(analysis_id).report_record
+        if rep is None:
+            raise KeyError(f"no report for analysis {analysis_id!r}")
+        return rep
+
+    def get_readiness(self, analysis_id: str):
+        return self.get_analysis(analysis_id).readiness
+
+    def list_analyses(self) -> list:
+        return sorted(self._analyses)
+
+    def list_uploads(self) -> list:
+        return sorted(self._uploads)
 
     def reports_for(self, analysis_id: str) -> dict:
         """The product report set + the readiness report for a completed analysis."""
