@@ -657,3 +657,32 @@ DRP-4 criteria pass; persistence **READY**, recovery **recovered**; full suite *
 See [`security_platform/README.md`](./security_platform/README.md). Verified: all 15 DRP-5
 criteria pass; authentication/authorization/access-control all green, **READY**; full suite
 **927 passed**.
+
+
+## DRP-6 — Clinical Validation & Evidence Platform (`clinical_validation/`)
+
+> Deployment Remediation (post-audit): closes the audit's *insufficient clinical validation
+> evidence* blocker — benchmark / performance / reliability / calibration evidence + objective
+> comparison + validation readiness. Decision:
+> [`../.gcc/decisions/ADR-0029`](../.gcc/decisions/ADR-0029-drp6-clinical-validation.md).
+
+- **`clinical_validation/`** (DRP-6) — a governed platform that, for every production model,
+  **benchmarks → evaluates performance → measures reliability → measures calibration →
+  generates evidence → compares models → traces validation lineage → scores validation
+  readiness**. It validates + generates evidence; it never retrains models or changes business
+  logic.
+- **Reuse, no replacement systems.** Develops/benchmarks/evaluates/compares via the reused
+  DRP-2 `ProductionModelService`; adds sensitivity/specificity (from the DRP-2 confusion matrix),
+  calibration curves, and reliability studies. Shares the single `ml.lineage` tracker + the
+  shared `ImmutableAuditLog`.
+- **Determinism.** Clinical metrics enter every id/signature; performance timings are reported
+  but never hashed.
+- **Traceability.** `verify_chain` proves **Dataset → Model → Benchmark → Evaluation → Evidence
+  → Readiness Assessment**, reaching the patient.
+- **Boundary.** Imports `ml` + sibling `backend`; never imports `frontend`.
+- **Run:** `python -m scripts.verify_drp6_clinical_validation`.
+
+See [`clinical_validation/README.md`](./clinical_validation/README.md). Verified: all 15 DRP-6
+criteria pass; every model benchmarked, evidenced, **READY**; full suite **942 passed**. The
+metrics are evidence about untuned reference baselines on synthetic data (Gap G1), not a
+clinical-efficacy claim.
