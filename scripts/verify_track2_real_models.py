@@ -15,6 +15,8 @@ Set NV_TRACK1_NO_DOWNLOAD=1 to forbid network (then the corpus must already be l
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import os
 import pathlib
 import subprocess

@@ -11,6 +11,8 @@ unchanged (validation is evaluation-only, one-way), and that product validation 
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import ast
 import pathlib
 import subprocess

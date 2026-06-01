@@ -12,6 +12,8 @@ governance/quality/lineage gates and the measurability of the V3 entry criteria.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import pathlib
 import re
 import subprocess

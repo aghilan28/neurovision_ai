@@ -1,0 +1,6 @@
+﻿{
+    "check":  "pytest_full_after_venv_cleanup",
+    "exit_code":  0,
+    "runtime_seconds":  210.378,
+    "evidence":  "fcbr_evidence_20260601_231951\\pytest_full_after_venv_cleanup.txt"
+}

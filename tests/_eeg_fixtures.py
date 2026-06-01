@@ -80,6 +80,11 @@ def _write_set(path: str) -> None:
             icawinv=[], icasphere=[], icaweights=[], chanlocs=chanlocs, event=events,
             ref="common", times=np.arange(n) / _SFREQ)
         savemat(path, {"EEG": eeg}, appendmat=False)
+        # scipy.io.savemat writes a wall-clock timestamp into the MATLAB v5 header.
+        # The fixture content is deterministic, so normalize that informational header.
+        fixed_header = b"MATLAB 5.0 MAT-file, NeuroVision deterministic EEGLAB fixture"
+        with open(path, "r+b") as fh:
+            fh.write(fixed_header.ljust(116, b" "))
 
 
 def _corrupt_ns_field(src_path: str, dest_path: str) -> None:

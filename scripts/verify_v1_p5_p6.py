@@ -6,6 +6,8 @@ Prints a PASS/FAIL line per criterion and exits non-zero if any fails.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import sys
 import tempfile
 

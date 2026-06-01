@@ -11,6 +11,8 @@ determinism + traceability preserved, the test suite green, and boundaries intac
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import pathlib
 import subprocess
 import sys

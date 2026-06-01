@@ -9,6 +9,8 @@ resource on one shared lineage tracker (no replacement systems).
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import pathlib
 import subprocess
 import sys

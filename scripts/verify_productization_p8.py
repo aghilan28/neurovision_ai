@@ -11,6 +11,8 @@ else exercises the real operational subsystems over the real P1-P7 systems.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import os
 import pathlib
 import shutil

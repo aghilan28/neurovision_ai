@@ -12,6 +12,8 @@ audit / lineage references intact.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import base64
 import os
 import pathlib

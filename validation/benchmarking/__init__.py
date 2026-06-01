@@ -14,7 +14,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Callable
 
-from ..util import fingerprint, population_stats
+from ..util import fingerprint, peak_memory_kb, population_stats
 from ..version import VALIDATION_BENCHMARK_VERSION
 
 
@@ -77,11 +77,7 @@ def run_benchmark(name: str, fn: Callable, *, runs: int = 3) -> BenchmarkResult:
         fps.append(fp)
         successes += 1 if ok else 0
         failures += 0 if ok else 1
-    try:
-        import resource
-        peak = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
-    except Exception:
-        peak = 0
+    peak = peak_memory_kb()
     return BenchmarkResult(name, runs, successes, failures, tuple(fps), lat, peak)
 
 

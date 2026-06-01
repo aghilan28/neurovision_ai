@@ -223,7 +223,7 @@ class ApplicationPlatformService:
                            patient_key: Optional[str] = None, case_key: Optional[str] = None,
                            created_at: str = DETERMINISTIC_EPOCH) -> AnalysisOutcome:
         """The end-to-end user workflow: upload -> validate -> analyze -> predict -> report."""
-        if not self._model_info:
+        if not self._model_info or getattr(self.backend, "model_context", None) is None:
             raise ApplicationPlatformError("no model prepared; call prepare_model() first")
 
         # --- T3-D: validate the real EEG bytes + prepare a bounded segment ---

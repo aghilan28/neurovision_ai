@@ -32,18 +32,14 @@ dev = [
 ]
 
 [tool.setuptools]
-# Explicit package list keeps module boundaries visible and intentional.
-packages = [
-    "preprocessing",
-    "datasets",
-    "ml",
-    "evaluation",
-]
+# Package discovery keeps fresh-clone installs aligned with the repository tree
+# as product subsystems are added under backend/.
+packages = { find = { include = ["preprocessing*", "datasets*", "ml*", "evaluation*", "backend*"] } }
 
 [tool.pytest.ini_options]
 # Repository root on sys.path so the top-level modules import as documented
 # (import preprocessing / datasets / ml / evaluation). Tests may import anything.
-pythonpath = ["."]
+pythonpath = [".", "tests"]
 testpaths = ["tests"]
 addopts = "-q"
 # DeprecationWarnings remain hard errors for *our* code (the V0 quality gate).

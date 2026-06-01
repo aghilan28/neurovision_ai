@@ -14,6 +14,8 @@ audit chain, and the model survives a restart with no manual step.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import base64
 import pathlib
 import subprocess

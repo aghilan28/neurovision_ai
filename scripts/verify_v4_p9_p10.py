@@ -9,6 +9,8 @@ Exits non-zero if any criterion fails or the version is not certifiable.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import pathlib
 import subprocess
 import sys

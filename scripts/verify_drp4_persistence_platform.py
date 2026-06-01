@@ -9,6 +9,8 @@ replacement systems), persisting + recovering the platform state.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import pathlib
 import subprocess
 import sys

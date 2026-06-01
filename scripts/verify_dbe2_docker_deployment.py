@@ -12,6 +12,8 @@ then stopped gracefully. This is the same honest, runtime-free strategy used by 
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import json
 import os
 import pathlib
