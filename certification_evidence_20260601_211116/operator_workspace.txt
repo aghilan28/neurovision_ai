@@ -1,0 +1,1 @@
+﻿operator_root=C:\Users\AKILA\AppData\Local\Temp\nv_final_cert_operator_20260601_211233

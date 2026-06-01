@@ -1,0 +1,6 @@
+﻿{
+    "fresh_venv":  "C:\\Users\\AKILA\\AppData\\Local\\Temp\\nv_fcbr_fresh_venv",
+    "command":  "C:\\Users\\AKILA\\AppData\\Local\\Temp\\nv_fcbr_fresh_venv\\Scripts\\python.exe -m pip check",
+    "exit_code":  0,
+    "evidence":  "fcbr_evidence_20260601_231951\\fresh_env_pip_check.txt"
+}

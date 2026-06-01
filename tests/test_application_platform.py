@@ -117,9 +117,10 @@ def test_missing_model_rejected():
     client = make_client(svc)
     tok = _auth(client)
     b64 = base64.b64encode(real_eeg_bytes()).decode()
-    with pytest.raises(Exception):
-        client.post("/v1/uploads", json={"filename": "x.edf", "content_base64": b64},
+    r = client.post("/v1/uploads", json={"filename": "x.edf", "content_base64": b64},
                     headers={"Authorization": f"Bearer {tok}"})
+    assert r.status_code == 503
+    assert "model prepared" in r.json()["detail"]
 
 
 # --- T3-G: reports (JSON / HTML / PDF) ---------------------------------------

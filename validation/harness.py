@@ -14,18 +14,17 @@ pipelines.
 
 from __future__ import annotations
 
-import resource
 import tempfile
 import time
 from dataclasses import dataclass
 from typing import Optional, Sequence
 
-from .util import fingerprint
+from .util import fingerprint, peak_memory_kb
 from .version import DETERMINISTIC_EPOCH
 
 
 def _peak_memory_kb() -> int:
-    return int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+    return peak_memory_kb()
 
 
 @dataclass

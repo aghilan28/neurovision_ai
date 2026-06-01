@@ -1,0 +1,51 @@
+﻿........................................................................ [  6%]
+........................................................................ [ 12%]
+........................................................................ [ 18%]
+........................................................................ [ 25%]
+........................................................................ [ 31%]
+........................................................................ [ 37%]
+........................................................................ [ 43%]
+........................................................................ [ 50%]
+...........................................................F............ [ 56%]
+........................................................................ [ 62%]
+........................................................................ [ 68%]
+........................................................................ [ 75%]
+........................................................................ [ 81%]
+........................................................................ [ 87%]
+........................................................................ [ 94%]
+....................................................................     [100%]
+================================== FAILURES ===================================
+_________________ test_no_conflict_markers_in_tracked_sources _________________
+
+    def test_no_conflict_markers_in_tracked_sources():
+        offenders = []
+        for ext in ("*.py", "*.md", "*.toml"):
+            for path in REPO.rglob(ext):
+                if ".venv" in path.parts or ".git" in path.parts:
+                    continue
+                try:
+                    for line in path.read_text(errors="ignore").splitlines():
+                        if line in ("<<<<<<<", "=======", ">>>>>>>") or \
+                           line.startswith(("<<<<<<< ", ">>>>>>> ")):
+                            offenders.append(str(path))
+                            break
+                except Exception:  # noqa: BLE001
+                    continue
+>       assert not offenders, f"conflict markers found in: {offenders}"
+E       AssertionError: conflict markers found in: ['C:\\\\Users\\\\AKILA\\\\OneDrive\\\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\\\neurovision\\\\neurovision_ai\\\\.fcbr_venv\\\\Lib\\\\site-packages\\\\_pytest\\\\_argcomplete.py', 'C:\\\\Users\\\\AKILA\\\\OneDrive\\\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\\\neurovision\\\\neurovision_ai\\\\.fcbr_venv\\\\Lib\\\\site-packages\\\\scipy\\\\ndimage\\\\__init__.py', 'C:\\\\Users\\\\AKILA\\\\OneDrive\\\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\\\neurovision\\\\neurovision_ai\\\\.fcbr_venv\\\\Lib\\\\site-packages\\\\scipy\\\\odr\\\\_odrpack.py']
+E       assert not ['C:\\\\Users\\\\AKILA\\\\OneDrive\\\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\\\neurovision\\\\neurovision_ai\\\\.fcbr_venv\\\\Lib\\\\site-packages\\\\_pytest\\\\_argcomple...\\Users\\\\AKILA\\\\OneDrive\\\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\\\neurovision\\\\neurovision_ai\\\\.fcbr_venv\\\\Lib\\\\site-packages\\\\scipy\\\\odr\\\\_odrpack.py']
+
+tests\test_mp4_source_of_truth.py:107: AssertionError
+============================== warnings summary ===============================
+tests/test_application_platform_e2e.py::test_real_corpus_user_workflow_when_available
+tests/test_application_platform_e2e.py::test_real_corpus_user_workflow_when_available
+tests/test_application_platform_e2e.py::test_real_corpus_user_workflow_when_available
+tests/test_operations_platform.py::test_real_corpus_qualification_when_available
+tests/test_operations_platform.py::test_real_corpus_qualification_when_available
+tests/test_operations_platform.py::test_real_corpus_qualification_when_available
+  C:\Users\AKILA\AppData\Local\Programs\Python\Python312\Lib\site-packages\scipy\signal\_spectral_py.py:2041: RuntimeWarning: invalid value encountered in divide
+    Cxy = np.abs(Pxy)**2 / Pxx / Pyy
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_mp4_source_of_truth.py::test_no_conflict_markers_in_tracked_sources

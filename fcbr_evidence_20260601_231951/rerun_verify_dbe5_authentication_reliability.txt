@@ -1,0 +1,23 @@
+﻿
+DBE-5 � AUTHENTICATION FAILURE & INVALID TOKEN RELIABILITY � FINAL VALIDATION
+============================================================================
+[PASS] 1. Bug reproduced   -- invalid token in the deep workflow raises WorkflowError (the uncaught 500 source)
+[PASS] 2. Root cause identified   -- root cause documented in AUTHENTICATION_RELIABILITY.md
+[PASS] 3. Missing token handled   -- 401 MISSING_TOKEN
+[PASS] 4. Empty token handled   -- 401 EMPTY_TOKEN
+[PASS] 5. Malformed token handled   -- 401 MALFORMED_TOKEN
+[PASS] 6. Invalid signature handled   -- sig=INVALID_SIGNATURE iss=INVALID_ISSUER aud=INVALID_AUDIENCE
+[PASS] 7. Expired token handled   -- 401 EXPIRED_TOKEN
+[PASS] 8. Authorization failures handled   -- 403 FORBIDDEN
+[PASS] 9. No 500 responses   -- statuses=[401, 403] (all 401/403)
+[PASS] 10. Security audit events generated   -- authentication_failed + authorization_denied recorded; chain verifies; no raw token
+[PASS] 11. Tests pass   -- ....................                                                     [100%]
+[PASS] 12. Repository boundaries preserved   -- .............                                                            [100%]
+[PASS] 13. Determinism preserved   -- identical classification across instances
+[PASS] 14. Security behavior documented   -- AUTHENTICATION_RELIABILITY.md documents all codes, statuses + the 4 guides
+[PASS] 15. DBE-5 completed   -- every invalid-token + authorization path returns a controlled, documented non-500 response
+[PASS] Security readiness READY   -- READY
+----------------------------------------------------------------------------
+UPLOAD STATUSES across all invalid-token classes: [401, 403]  (no 500)
+----------------------------------------------------------------------------
+RESULT: ALL CRITERIA PASS

@@ -9,6 +9,8 @@ whatever the evidence dictates — no assumptions, no optimism.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import ast
 import pathlib
 import subprocess

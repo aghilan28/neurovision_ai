@@ -12,6 +12,8 @@ with the test suite green and repository boundaries intact.
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import pathlib
 import subprocess
 import sys

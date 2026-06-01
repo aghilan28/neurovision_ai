@@ -1,0 +1,20 @@
+﻿available baseline models: ['eegnet', 'simple_cnn', 'tcn']
+[PASS]  1. eegnet works                                                acc=0.792
+[PASS]  2. tcn works                                                   acc=0.938
+[PASS]  3. simple_cnn works                                            acc=0.896
+[PASS]  4. training pipeline works                                     
+[PASS]  5. model registry works                                        
+[PASS]  6. lineage tracking works                                      
+[PASS]  7. benchmark registration works                                
+[PASS]  8. calibration framework works                                 
+[PASS]  9. reliability analysis works                                  
+[PASS] 10. conformal prediction works                                  
+[PASS] 11. coverage validation works                                   
+[PASS] 12. risk framework works                                        
+[PASS] 13. all reports generate correctly                              
+[PASS] 14. patient-disjoint + calibrated clinical outputs (NR-3/NR-4)  
+[PASS] 15. reproducible (run_id + summary checksum match)              
+[PASS] 16. artifacts integrity verified                                
+[PASS] 17. V0 quality gate: ml never imports evaluation (NR-8)         
+
+RESULT: ALL CRITERIA SATISFIED

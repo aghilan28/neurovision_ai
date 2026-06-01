@@ -1,0 +1,41 @@
+﻿EXACT COMMAND:
+C:\Users\AKILA\AppData\Local\Temp\nv_runtime2_dep_CcxEF8\.venv\Scripts\python.exe -m pytest -vv -s --tb=long tests/test_application_platform_e2e.py::test_real_corpus_user_workflow_when_available
+
+WORKDIR:
+C:\Users\AKILA\OneDrive\ドキュメント\neurovision\neurovision_ai
+
+=== OUTPUT BEGIN ===
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.0.3, pluggy-1.6.0 -- C:\Users\AKILA\AppData\Local\Temp\nv_runtime2_dep_CcxEF8\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\\Users\\AKILA\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\neurovision\\neurovision_ai
+configfile: pyproject.toml
+plugins: anyio-4.13.0
+collecting ... collected 1 item
+
+tests/test_application_platform_e2e.py::test_real_corpus_user_workflow_when_available FAILED
+
+================================== FAILURES ===================================
+________________ test_real_corpus_user_workflow_when_available ________________
+
+    def test_real_corpus_user_workflow_when_available():
+        root = real_chb_mit_root()
+        if root is None:
+            pytest.skip("real CHB-MIT corpus not acquired locally")
+        # prepare a model from bounded segments of the genuine PhysioNet recordings
+        svc = ApplicationPlatformService(analysis_seconds=20.0)
+        chb = os.path.join(root, "chb_mit", "chb01")
+        segs = []
+        cohort = []
+        for i, name in enumerate(("chb01_01.edf", "chb01_03.edf")):
+>           with open(os.path.join(chb, name), "rb") as fh:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\AKILA\\\\OneDrive\\\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\\\neurovision\\\\neurovision_ai\\\\data\\\\real\\\\chb_mit\\\\chb01\\\\chb01_03.edf'
+
+tests\test_application_platform_e2e.py:68: FileNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/test_application_platform_e2e.py::test_real_corpus_user_workflow_when_available
+============================== 1 failed in 7.79s ==============================
+=== OUTPUT END ===
+EXIT CODE: 1
+

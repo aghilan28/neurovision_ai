@@ -13,6 +13,8 @@ the MP-4 change set is governance-only (no product source touched).
 
 from __future__ import annotations
 
+import _repo_bootstrap  # noqa: F401
+
 import pathlib
 import subprocess
 import sys
@@ -109,7 +111,7 @@ def main() -> int:  # noqa: C901 - linear verification script
     clone_ok = False
     if _has_git():
         clone_dir = tempfile.mkdtemp(prefix="nv_mp4_clone_")
-        cl = _git("clone", "--quiet", str(REPO), clone_dir, cwd=REPO.parent)
+        cl = _git("clone", "--quiet", "--no-hardlinks", str(REPO), clone_dir, cwd=REPO.parent)
         clone_ok = (cl.returncode == 0
                     and (pathlib.Path(clone_dir) / "requirements.txt").exists()
                     and (pathlib.Path(clone_dir) / "backend" / "application_platform").is_dir()

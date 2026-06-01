@@ -129,7 +129,10 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
             raise HTTPException(status_code=400, detail=f"invalid base64: {exc}")
         # DBE-3: duplicate uploads must NEVER 500. The service classifies + short-circuits;
         # the endpoint maps the (deterministic) outcome to a deterministic status code.
-        outcome = svc.upload_and_analyze(token=token, filename=body.filename, content=content)
+        try:
+            outcome = svc.upload_and_analyze(token=token, filename=body.filename, content=content)
+        except ApplicationPlatformError as exc:
+            raise HTTPException(status_code=503, detail=str(exc))
         if not outcome.accepted:
             # a CONFLICTING_UPLOAD (same identity, different content) -> 409; else 422.
             code = 409 if outcome.duplicate_classification == "CONFLICTING_UPLOAD" else 422
