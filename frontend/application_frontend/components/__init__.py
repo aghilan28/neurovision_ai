@@ -49,6 +49,12 @@ def table(heading: str, columns, rows) -> dict:
             "rows": [["" if c is None else str(c) for c in row] for row in rows]}
 
 
+def timeline(heading: str, events) -> dict:
+    """Build a timeline section (item, subtext, status)."""
+    return {"type": "timeline_records", "heading": heading,
+            "items": [{"label": str(e[0]), "text": str(e[1]), "status": str(e[2])} for e in events]}
+
+
 def form_section(heading: str, form: dict, field_errors=()) -> dict:
     return {"type": "form", "heading": heading, "form": form,
             "field_errors": [{"field": f, "message": m} for f, m in (field_errors or ())]}
@@ -67,8 +73,8 @@ def report_section(heading: str, name: str, content: dict, pretty_json: str) -> 
     return {"type": "report", "heading": heading, "name": name, "json": pretty_json}
 
 
-def prose(heading: str, text: str) -> dict:
-    return {"type": "prose", "heading": heading, "text": text}
+def prose(heading: str, text: str, intelligence: bool = False) -> dict:
+    return {"type": "prose", "heading": heading, "text": text, "intelligence": intelligence}
 
 
 __all__ = [

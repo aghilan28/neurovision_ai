@@ -1,85 +1,141 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Clinical Prediction Review Workspace</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prediction Review Workspace</title><style>
 :root{
-  --bg:#080d12;--surface:#0d141b;--panel:#111b24;--panel-2:#16222d;
-  --line:#263440;--line-strong:#385061;--text:#e6edf3;--muted:#9aa8b4;
-  --subtle:#6f7f8e;--accent:#67b7dc;--accent-2:#77d0a5;
-  --warning:#e2b15f;--danger:#ef6f6c;--ok:#73d29c;--info:#8fb7ff;
+  --bg:#12101B;--surface:#181523;--panel:#211D30;--panel-2:#2A2440;
+  --line:rgba(168, 154, 232, 0.1);--line-strong:rgba(168, 154, 232, 0.2);--text:#E6EBF8;--muted:#8A8895;
+  --subtle:#5D5B6A;--accent:#A89AE8;--accent-2:#4EE4B8;
+  --warning:#FFB84D;--danger:#FF5577;--ok:#4EE4B8;--info:#A89AE8;
+  --sidebar-w:280px;--topbar-h:72px;
 }
 *{box-sizing:border-box}
-html{background:var(--bg);color:var(--text)}
-body{margin:0;background:
-  radial-gradient(circle at 20% 0%, rgba(103,183,220,.10), transparent 30%),
-  linear-gradient(180deg,#0a1016 0%,#080d12 58%,#070b10 100%);
-  color:var(--text);font:13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:0}
-a{color:inherit;text-decoration:none}
-.nv-shell{min-height:100vh;display:grid;grid-template-columns:minmax(210px,248px) 1fr}
-.nv-sidebar{border-right:1px solid var(--line);background:rgba(13,20,27,.92);padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
-.nv-brand{display:grid;gap:3px;padding:0 8px 18px;border-bottom:1px solid var(--line)}
-.nv-brand-title{font-size:16px;font-weight:700;color:var(--text)}
-.nv-brand-sub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.nv-nav{display:grid;gap:5px;margin-top:16px}
-.nv-nav a,.nv-tab-label{display:flex;align-items:center;gap:8px;min-height:34px;padding:8px 10px;border:1px solid transparent;border-radius:6px;color:var(--muted);transition:background 120ms ease,border-color 120ms ease,color 120ms ease}
-.nv-nav a.active,.nv-tab:checked + .nv-tab-label{background:rgba(103,183,220,.10);border-color:rgba(103,183,220,.34);color:var(--text)}
-.nv-nav a:hover,.nv-tab-label:hover{background:rgba(255,255,255,.035);color:var(--text)}
-.nv-main{min-width:0;padding:20px 22px 28px}
-.nv-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px}
-.nv-page-title{margin:0;font-size:23px;line-height:1.16;font-weight:700;color:var(--text)}
-.nv-subtitle{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:760px}
-.nv-meta{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:11px}
-.nv-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
-.nv-panel{grid-column:span 12;background:linear-gradient(180deg,rgba(22,34,45,.98),rgba(13,20,27,.98));border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 34px rgba(0,0,0,.22);overflow:hidden}
-.nv-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:42px;padding:11px 13px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}
-.nv-panel-title{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#c8d4df;font-weight:700}
-.nv-panel-body{padding:13px;overflow:auto}
-.nv-kv{display:grid;grid-template-columns:minmax(150px,260px) minmax(0,1fr);gap:7px 14px}
-.nv-k{color:var(--muted)}
-.nv-v{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;word-break:break-word;color:#e9f2f8}
-.nv-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:6px}
-table{width:100%;border-collapse:collapse;min-width:520px}
-th,td{padding:8px 9px;border-bottom:1px solid rgba(38,52,64,.78);text-align:left;vertical-align:top}
-th{color:#b9c8d4;font-size:11px;text-transform:uppercase;letter-spacing:.07em;background:rgba(255,255,255,.026);font-weight:700}
-td{color:#d8e3eb}
-tr:last-child td{border-bottom:0}
-.nv-badges{display:flex;flex-wrap:wrap;gap:6px}
-.nv-badge{display:inline-flex;align-items:center;gap:6px;min-height:24px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--muted);font-size:11px;font-weight:650}
-.nv-badge.ok,.nv-badge.pass,.nv-badge.success{border-color:rgba(115,210,156,.52);color:var(--ok);background:rgba(115,210,156,.10)}
-.nv-badge.fail,.nv-badge.error,.nv-badge.danger{border-color:rgba(239,111,108,.52);color:var(--danger);background:rgba(239,111,108,.10)}
-.nv-badge.warning{border-color:rgba(226,177,95,.58);color:var(--warning);background:rgba(226,177,95,.10)}
-.nv-badge.info{border-color:rgba(143,183,255,.48);color:var(--info);background:rgba(143,183,255,.10)}
-.nv-alert{margin-bottom:12px;padding:11px 13px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--text)}
-.nv-alert.success{border-color:rgba(115,210,156,.52);background:rgba(115,210,156,.10)}
-.nv-alert.warning{border-color:rgba(226,177,95,.58);background:rgba(226,177,95,.10)}
-.nv-alert.error{border-color:rgba(239,111,108,.52);background:rgba(239,111,108,.10)}
-.nv-form{display:grid;gap:12px;max-width:560px}
-.nv-field{display:grid;gap:6px;color:#c9d6df;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-input,select{width:100%;min-height:38px;padding:8px 10px;border-radius:6px;border:1px solid var(--line-strong);background:#091018;color:var(--text);font:13px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
-input:focus,select:focus,button:focus-visible,a:focus-visible,label:focus-visible{outline:0;box-shadow:0 0 0 3px rgba(103,183,220,.26)}
-button,.nv-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:max-content;min-height:36px;padding:8px 12px;border-radius:6px;border:1px solid rgba(103,183,220,.42);background:linear-gradient(180deg,#1d5f7c,#16485f);color:white;font-weight:700;cursor:pointer}
-.nv-error-text{color:var(--danger);font-size:12px;text-transform:none;letter-spacing:0;font-weight:500}
-.nv-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:8px;list-style:none;margin:0;padding:0}
-.nv-step{border:1px solid var(--line);border-radius:6px;padding:9px 10px;background:rgba(255,255,255,.025);color:var(--muted)}
-.nv-step.done{border-color:rgba(115,210,156,.55);background:rgba(115,210,156,.10);color:var(--ok)}
-.nv-items{margin:0;padding-left:18px;color:#dbe6ee}
-pre{margin:0;max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:6px;background:#070c11;color:#dbe6ee;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace}
-.nv-viz svg{max-width:100%;height:auto;background:#070c11;border:1px solid var(--line);border-radius:6px}
-.nv-tabs{display:grid;grid-template-columns:248px 1fr;gap:0;min-height:100vh}
-.nv-tab-rail{border-right:1px solid var(--line);background:rgba(13,20,27,.92);padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
-.nv-tab,.tab{position:absolute;left:-9999px}
-.nv-panels{padding:20px 22px}
-.nv-area{display:none}
-.nv-pagebar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
-.nv-page-chip{display:inline-flex;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px;background:rgba(255,255,255,.025)}
-.nv-controls{display:grid;gap:8px;margin-top:10px}
-.nv-control{border:1px solid rgba(226,177,95,.42);border-radius:6px;padding:9px 10px;background:rgba(226,177,95,.08)}
-.nv-control.disabled{opacity:.55}
-.nv-footer{color:var(--subtle);font-size:11px;text-align:right;margin-top:20px}
-@media (max-width:860px){
-  .nv-shell,.nv-tabs{grid-template-columns:1fr}
-  .nv-sidebar,.nv-tab-rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}
-  .nv-main,.nv-panels{padding:16px}
-  .nv-kv{grid-template-columns:1fr}
-  .nv-top{display:grid}
-  .nv-meta{justify-content:flex-start}
+html{background:var(--bg);color:var(--text);height:100%;overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 'Inter', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:-0.01em;height:100%}
+a{color:inherit;text-decoration:none;transition:all 200ms ease}
+
+.nv-shell{display:grid;grid-template-columns:var(--sidebar-w) 1fr;height:100vh}
+
+/* LEFT SIDEBAR */
+.nv-sidebar{
+  background:var(--surface);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;padding:32px 24px;
+  height:100vh;overflow-y:auto;z-index:100;
+}
+.nv-brand{margin-bottom:48px;padding:0 8px}
+.nv-brand-title{font-size:18px;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px}
+.nv-brand-sub{font-size:11px;color:var(--subtle);text-transform:uppercase;letter-spacing:0.1em}
+
+.nv-nav{display:grid;gap:8px}
+.nv-nav a,.nv-tab-label{
+  display:flex;align-items:center;gap:12px;min-height:44px;padding:0 16px;
+  border-radius:var(--radius-md, 8px);color:var(--muted);font-weight:500;
+}
+.nv-nav a:hover,.nv-tab-label:hover{background:rgba(168, 154, 232, 0.05);color:var(--accent);box-shadow:inset 0 0 0 1px var(--line)}
+.nv-nav a.active,.nv-tab:checked + .nv-tab-label{
+  background:var(--panel);color:var(--accent);box-shadow:inset 4px 0 0 -1px var(--accent);
 }
 
-</style></head><body><div class="nv-shell"><aside class="nv-sidebar"><div class="nv-brand"><div class="nv-brand-title">NeuroVision</div><div class="nv-brand-sub">Clinical Intelligence Operating Environment</div></div><nav><div class="nv-nav"><a class="active" href="#dashboard">Command Center</a><a class="" href="#upload">EEG Intake</a><a class="" href="#analysis">Analysis Execution</a><a class="" href="#prediction">Prediction Review</a><a class="" href="#reports">Evidence Center</a><a class="" href="#logout">Log out</a></div></nav></aside><main class="nv-main"><div class="nv-top"><div><h1 class="nv-page-title">Clinical Prediction Review Workspace</h1><p class="nv-subtitle">Analysis analysis+preview</p></div><div class="nv-meta"><span class="nv-badge v1">backend: v1</span><span class="nv-badge application-frontend@1.0.0">version: application-frontend@1.0.0</span></div></div><div class="nv-grid"><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Prediction</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Label</div><div class="nv-v">abnormal-pattern-review</div><div class="nv-k">Class</div><div class="nv-v">1</div><div class="nv-k">Model</div><div class="nv-v">model+preview</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Uncertainty (always shown)</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Confidence level</div><div class="nv-v">high</div><div class="nv-k">Confidence score</div><div class="nv-v">0.82</div><div class="nv-k">Calibration</div><div class="nv-v">well-calibrated</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Class probabilities</div></div><div class="nv-panel-body"><div class="nv-table-wrap"><table><thead><tr><th>Class</th><th>Label</th><th>Probability</th></tr></thead><tbody><tr><td>0</td><td>baseline</td><td>0.18</td></tr><tr><td>1</td><td>abnormal-pattern-review</td><td>0.82</td></tr></tbody></table></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Explanation summary</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Method</div><div class="nv-v">feature attribution</div><div class="nv-k">Top factors</div><div class="nv-v">2</div></div></div></section></div><div class="nv-footer">presentation layer only; platform truth remains in backend and registered artifacts</div></main></div></body></html>
+/* MAIN AREA */
+.nv-main{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+/* TOP INTELLIGENCE BAR */
+.nv-top-bar{
+  height:var(--topbar-h);min-height:var(--topbar-h);
+  border-bottom:1px solid var(--line);background:rgba(24, 21, 35, 0.8);
+  backdrop-filter:blur(12px);padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  z-index:90;
+}
+.nv-breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.nv-breadcrumb span{color:var(--text);font-weight:600}
+
+/* WORKSPACE AREA */
+.nv-workspace{flex:1;overflow-y:auto;padding:40px 48px;background:radial-gradient(circle at 50% 0%, rgba(168, 154, 232, 0.03), transparent 70%)}
+
+.nv-page-header{margin-bottom:40px}
+.nv-page-title{font-size:32px;font-weight:700;letter-spacing:-0.03em;margin:0 0 12px;color:var(--text)}
+.nv-subtitle{font-size:16px;color:var(--muted);max-width:800px;line-height:1.6}
+
+.nv-grid{display:grid;grid-template-columns:repeat(12, 1fr);gap:24px}
+
+/* CARDS / PANELS */
+.nv-panel{
+  grid-column:span 12;background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;transition:transform 250ms ease, box-shadow 250ms ease;
+}
+.nv-panel:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+.nv-panel-head{
+  padding:20px 24px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nv-panel-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted)}
+.nv-panel-body{padding:24px}
+
+/* DATA DISPLAY */
+.nv-kv{display:grid;grid-template-columns:200px 1fr;gap:12px 24px}
+.nv-k{color:var(--muted);font-size:13px}
+.nv-v{color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:13px}
+
+.nv-table-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:14px 20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--subtle);background:var(--panel)}
+td{padding:14px 20px;border-top:1px solid var(--line);font-size:13px;color:var(--text)}
+tr:hover td{background:rgba(168, 154, 232, 0.02)}
+
+/* BADGES */
+.nv-badge{
+  display:inline-flex;align-items:center;padding:4px 12px;border-radius:99px;
+  font-size:11px;font-weight:700;letter-spacing:0.02em;border:1px solid transparent;
+}
+.nv-badge.info{background:rgba(168, 154, 232, 0.1);color:var(--accent);border-color:rgba(168, 154, 232, 0.2)}
+.nv-badge.ok{background:rgba(78, 228, 184, 0.1);color:var(--ok);border-color:rgba(78, 228, 184, 0.2)}
+.nv-badge.warning{background:rgba(255, 184, 77, 0.1);color:var(--warning);border-color:rgba(255, 184, 77, 0.2)}
+.nv-badge.fail{background:rgba(255, 85, 119, 0.1);color:var(--danger);border-color:rgba(255, 85, 119, 0.2)}
+
+/* FORMS */
+.nv-form{display:grid;gap:20px;max-width:480px}
+.nv-field{display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+input,select{
+  background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+  padding:12px 16px;color:var(--text);font-family:'Inter', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;font-size:14px;
+  transition:border-color 200ms ease, box-shadow 200ms ease;
+}
+input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(168, 154, 232, 0.1)}
+
+button,.nv-button{
+  background:var(--accent);color:var(--bg);border:none;border-radius:8px;
+  padding:12px 24px;font-weight:700;font-size:14px;cursor:pointer;
+  transition:transform 200ms ease, opacity 200ms ease;
+}
+button:hover{transform:translateY(-1px);opacity:0.9}
+button:active{transform:translateY(0)}
+
+/* ALERTS */
+.nv-alert{
+  padding:16px 24px;border-radius:12px;border:1px solid var(--line);
+  margin-bottom:24px;font-size:14px;display:flex;align-items:center;gap:12px;
+}
+.nv-alert.warning{background:rgba(255, 184, 77, 0.05);border-color:rgba(255, 184, 77, 0.2);color:var(--warning)}
+
+/* STEPS / TIMELINE */
+.nv-steps{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none;position:relative}
+.nv-step{
+  padding:0 0 32px 32px;border-left:2px solid var(--line);position:relative;
+  color:var(--muted);transition:color 250ms ease;
+}
+.nv-step::before{
+  content:'';position:absolute;left:-7px;top:4px;width:12px;height:12px;
+  border-radius:50%;background:var(--surface);border:2px solid var(--line);
+  transition:all 250ms ease;
+}
+.nv-step.done{color:var(--text)}
+.nv-step.done::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px rgba(168, 154, 232, 0.2)}
+.nv-step:last-child{border-left-color:transparent}
+
+/* FOOTER */
+.nv-footer{margin-top:auto;padding-top:40px;color:var(--subtle);font-size:12px;text-align:center}
+
+@media (max-width:1024px){
+  .nv-shell{grid-template-columns:1fr}
+  .nv-sidebar{display:none}
+}
+
+</style></head><body><div class="nv-shell"><aside class="nv-sidebar"><div class="nv-brand"><div class="nv-brand-title">NeuroVision</div><div class="nv-brand-sub">Intelligence Operating Environment</div></div><nav><div class="nv-nav"><a class="" href="#dashboard">Command Center</a><a class="" href="#upload">EEG Intake</a><a class="" href="#analysis">Analysis</a><a class="active" href="#prediction">Predictions</a><a class="" href="#reports">Evidence Center</a><a class="" href="#clinical">Clinical Workspace</a><a class="" href="#operations">Operations Workspace</a><a class="" href="#autonomous">Autonomous Workspace</a><a class="" href="#research">Research Workspace</a><a class="" href="#logout">Log out</a></div></nav></aside><main class="nv-main"><header class="nv-top-bar"><div class="nv-breadcrumb">Workspace / <span>Prediction Review Workspace</span></div><div class="nv-meta"><span class="nv-badge v1">backend: v1</span><span class="nv-badge application-frontend@1.0.0">version: application-frontend@1.0.0</span></div></header><div class="nv-workspace"><div class="nv-page-header"><h1 class="nv-page-title">Prediction Review Workspace</h1><p class="nv-subtitle">Deterministic Decision Support for Analysis analysis+9217c22af65f6c29</p></div><div class="nv-grid"><div class="nv-alert success">Analysis complete — prediction is ready.</div><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Prediction</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Label</div><div class="nv-v">0</div><div class="nv-k">Class</div><div class="nv-v">0</div><div class="nv-k">Model</div><div class="nv-v"></div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Intelligence Outcome</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Predicted Label</div><div class="nv-v">0</div><div class="nv-k">Outcome Confidence</div><div class="nv-v">high</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Uncertainty (always shown)</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Confidence level</div><div class="nv-v">high</div><div class="nv-k">Confidence score</div><div class="nv-v"></div><div class="nv-k">Calibration</div><div class="nv-v">moderately_calibrated</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Calibration &amp; Evidence</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Calibration Quality</div><div class="nv-v">moderately_calibrated</div><div class="nv-k">Model Confidence</div><div class="nv-v"></div><div class="nv-k">Model ID</div><div class="nv-v"></div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Class probabilities</div></div><div class="nv-panel-body"><div class="nv-table-wrap"><table><thead><tr><th>Class</th><th>Label</th><th>Probability</th></tr></thead><tbody><tr><td>0</td><td></td><td>0.984770328</td></tr><tr><td>1</td><td></td><td>0.015229672</td></tr></tbody></table></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Probability Distribution</div></div><div class="nv-panel-body"><div class="nv-table-wrap"><table><thead><tr><th>Class</th><th>Label</th><th>Probability</th></tr></thead><tbody><tr><td>0</td><td></td><td>0.984770328</td></tr><tr><td>1</td><td></td><td>0.015229672</td></tr></tbody></table></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Explanation summary</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Method</div><div class="nv-v">occlusion</div><div class="nv-k">Top factors</div><div class="nv-v">5</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Clinical Context &amp; Risk</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Explanation Method</div><div class="nv-v">occlusion</div><div class="nv-k">Risk Indicators</div><div class="nv-v">Standard Clinical Review Path</div><div class="nv-k">Interpretation</div><div class="nv-v">Outcome derived from feature extraction and inference calibration.</div></div></div></section></div><div class="nv-footer">Intelligence Operating Environment &bull; Lore Protocol Compliant</div></div></main></div></body></html>
