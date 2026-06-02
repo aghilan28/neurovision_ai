@@ -1,0 +1,27 @@
+﻿timestamp=2026-06-01T21:11:16.6223825+05:30
+cwd=C:\Users\AKILA\OneDrive\ドキュメント\neurovision\neurovision_ai
+branch=main
+head=923443b9f58acf7247b1bac14249f4611d76e51f
+origin_main=923443b9f58acf7247b1bac14249f4611d76e51f
+origin_head=refs/remotes/origin/main
+remote_v=origin	https://github.com/aghilan28/neurovision_ai (fetch) origin	https://github.com/aghilan28/neurovision_ai (push)
+status_short:
+ M validation/benchmarking/__init__.py
+ M validation/harness.py
+ M validation/util.py
+?? REAL_CORPUS_FAILURE_REPORT.md
+?? REAL_CORPUS_REMEDIATION_REPORT.md
+?? REAL_CORPUS_ROOT_CAUSE_REPORT.md
+?? runtime_evidence_real_corpus/
+?? valid_edf_base64.txt
+status_porcelain_v2:
+1 .M N... 100644 100644 100644 e8205a830a62e287bb9297145a58befab64e2f1a e8205a830a62e287bb9297145a58befab64e2f1a validation/benchmarking/__init__.py
+1 .M N... 100644 100644 100644 044fb394ce9c327042dfa3ad3ad9cbb3f1603fb1 044fb394ce9c327042dfa3ad3ad9cbb3f1603fb1 validation/harness.py
+1 .M N... 100644 100644 100644 7fa87fc680372cff72cf7ec6d2f70db0ba2d213e 7fa87fc680372cff72cf7ec6d2f70db0ba2d213e validation/util.py
+? REAL_CORPUS_FAILURE_REPORT.md
+? REAL_CORPUS_REMEDIATION_REPORT.md
+? REAL_CORPUS_ROOT_CAUSE_REPORT.md
+? runtime_evidence_real_corpus/
+? valid_edf_base64.txt
+source_truth_head_matches_origin_main=True
+repository_clean=False

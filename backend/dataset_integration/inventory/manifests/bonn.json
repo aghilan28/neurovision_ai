@@ -1,0 +1,26 @@
+{
+  "name": "Bonn University EEG Database (Andrzejak 2001)",
+  "source": "bonn",
+  "version": "2001",
+  "format": "ascii",
+  "location": "<local mirror path — provided at deploy time; not downloaded>",
+  "n_recordings": 500,
+  "n_patients": 5,
+  "patients": ["setA_Z", "setB_O", "setC_N", "setD_F", "setE_S"],
+  "patients_note": "five segment sets (Z,O,N,F,S); each = 100 single-channel 23.6s segments",
+  "channels": ["single_channel"],
+  "sampling_frequency": 173.61,
+  "size": {"recordings": 500, "hours": 3.3, "approx_bytes": 70000000},
+  "metadata": {"montage": "single channel (intracranial + scalp subsets)", "modality": "eeg",
+               "segment_samples": 4097, "segment_seconds": 23.6, "annotations": false},
+  "governance": {
+    "license_name": "Bonn University — freely available for research",
+    "license_type": "research_only",
+    "usage_restrictions": ["cite source"],
+    "research_restrictions": ["research use"],
+    "attribution": "Andrzejak, R. G. et al. (2001). Indications of nonlinear deterministic and finite-dimensional structures in time series of brain electrical activity. Phys. Rev. E, 64:061907.",
+    "owner": "University of Bonn, Department of Epileptology",
+    "source_url": "https://www.ukbonn.de/epileptologie/ag-lehnertz-downloads/",
+    "compliance_metadata": {"deidentified": "true", "single_channel": "true"}
+  }
+}

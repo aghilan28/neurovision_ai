@@ -1,0 +1,68 @@
+# NeuroVision AI — Deployment compose (DBE-2).
+#
+# `docker compose up` launches the REAL NeuroVision HTTP API: the backend service runs the
+# DBE-1 ASGI entrypoint (backend.application_platform.server.app:app) via uvicorn, exposes a
+# port, and is health-checked over real HTTP. It stays alive serving requests — it does not
+# run a one-shot health command.
+#
+# Start:   docker compose -f operations/deployment/compose/docker-compose.yml up --build
+# Verify:  curl http://127.0.0.1:8000/health   (also /readyz, /v1/readiness, /openapi.json)
+# Stop:    docker compose ... down              (graceful SIGTERM -> application shutdown)
+#
+# Secrets are NEVER inline: real values are injected via an env_file mounted at deploy time
+# (see operations/environments/*.env.template). A persistent data volume is declared below.
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ../../..
+      dockerfile: operations/deployment/docker/Dockerfile.backend
+    image: neurovision-backend:local
+    # Serve the real API (same DBE-1 entrypoint as `uvicorn ... server.app:app`).
+    command: ["python", "-m", "uvicorn", "backend.application_platform.server.app:app",
+              "--host", "0.0.0.0", "--port", "8000"]
+    environment:
+      NV_ENV: production
+      NV_HOST: 0.0.0.0
+      NV_PORT: "8000"
+      NV_LOG_LEVEL: info
+      NV_WORKSPACE_DIR: /var/lib/neurovision/workspace
+      NV_BACKUP_DIR: /var/lib/neurovision/backups
+      NV_LOG_FORMAT: json
+    env_file:
+      - ../../environments/production.env.template
+    ports:
+      - "8000:8000"
+    volumes:
+      - nv_data:/var/lib/neurovision
+    healthcheck:
+      test: ["CMD", "python", "operations/deployment/docker/healthcheck.py", "/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ../../..
+      dockerfile: operations/deployment/docker/Dockerfile.frontend
+    image: neurovision-frontend:local
+    environment:
+      NV_ENV: production
+      NV_LOG_FORMAT: json
+    env_file:
+      - ../../environments/production.env.template
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-m", "operations.cli", "live"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  nv_data:
