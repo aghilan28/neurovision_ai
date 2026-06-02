@@ -1,0 +1,60 @@
+................................................................F.F..... [  6%]
+...............s........................................................ [ 12%]
+........................................................................ [ 18%]
+.....................................................s.................. [ 25%]
+........................................................................ [ 31%]
+........................................................................ [ 37%]
+........................................................................ [ 43%]
+........................................................................ [ 50%]
+........................................................................ [ 56%]
+........................................................................ [ 62%]
+.....................................................................s.. [ 68%]
+........................................................................ [ 75%]
+...................................s.................................... [ 81%]
+........................................................................ [ 87%]
+........................................................................ [ 94%]
+....................................................................     [100%]
+=================================== FAILURES ===================================
+________________________ test_full_frontend_deliverable ________________________
+
+eeg_fixtures = {'corrupted.bdf': '/app/tests/fixtures/eeg/corrupted.bdf', 'corrupted.edf': '/app/tests/fixtures/eeg/corrupted.edf', 'unsupported.eeg': '/app/tests/fixtures/eeg/unsupported.eeg', 'valid.bdf': '/app/tests/fixtures/eeg/valid.bdf', ...}
+tmp_path = PosixPath('/tmp/pytest-of-jules/pytest-3/test_full_frontend_deliverable0')
+
+    def test_full_frontend_deliverable(eeg_fixtures, tmp_path):
+        svc, gateway, app, analysis_id = _run_journey(eeg_fixtures, tmp_path / "ws")
+
+        # the user receives a prediction with confidence + explanation (NR-4)
+        prediction_html = app.render_prediction(analysis_id)
+>       assert "Prediction" in prediction_html and "Uncertainty (always shown)" in prediction_html
+E       assert ('Prediction' in '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-...s="nv-footer">Intelligence Operating Environment &bull; Lore Protocol Compliant</div></div></main></div></body></html>' and 'Uncertainty (always shown)' in '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-...s="nv-footer">Intelligence Operating Environment &bull; Lore Protocol Compliant</div></div></main></div></body></html>')
+
+tests/test_application_frontend_e2e.py:45: AssertionError
+____________________ test_rendered_product_is_deterministic ____________________
+
+eeg_fixtures = {'corrupted.bdf': '/app/tests/fixtures/eeg/corrupted.bdf', 'corrupted.edf': '/app/tests/fixtures/eeg/corrupted.edf', 'unsupported.eeg': '/app/tests/fixtures/eeg/unsupported.eeg', 'valid.bdf': '/app/tests/fixtures/eeg/valid.bdf', ...}
+tmp_path = PosixPath('/tmp/pytest-of-jules/pytest-3/test_rendered_product_is_deter0')
+
+    def test_rendered_product_is_deterministic(eeg_fixtures, tmp_path):
+        """Two independent runs render byte-identical pages (determinism preserved)."""
+        _, _, app_a, aid_a = _run_journey(eeg_fixtures, tmp_path / "a", seed_label="det")
+        _, _, app_b, aid_b = _run_journey(eeg_fixtures, tmp_path / "b", seed_label="det")
+        assert aid_a == aid_b
+>       assert app_a.render_prediction(aid_a) == app_b.render_prediction(aid_b)
+E       AssertionError: assert '<!doctype ht.../body></html>' == '<!doctype ht.../body></html>'
+E
+E         Skipping 9509 identical leading characters in diff, use -v to show
+E         - nts='38.0,239.5 72.4,171.9 106.8,146.6 141.2,78.5 175.6,108.3 210.0,75.0 244.4,164.8 278.8,174.9 313.2,172.4 347.6,198.7 382.0,70.9'/><circle cx='38.0' cy='239.5' r='3.2' fill='#A89AE8'/><circle cx='72.4' cy='171.9' r='3.2' fill='#A89AE8'/><circle cx='106.8' cy='146.6' r='3.2' fill='#A89AE8'/><circle cx='141.2' cy='78.5' r='3.2' fill='#A89AE8'/><circle cx='175.6' cy='108.3' r='3.2' fill='#A89AE8'/><circle cx='210.0' cy='75.0' r='3.2' fill='#A89AE8'/><circle cx='244.4' cy='164.8' r='3.2' fill='#A89AE8'/>...
+E
+E         ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_application_frontend_e2e.py:80: AssertionError
+=============================== warnings summary ===============================
+../home/jules/.pyenv/versions/3.12.13/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /home/jules/.pyenv/versions/3.12.13/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_application_frontend_e2e.py::test_full_frontend_deliverable
+FAILED tests/test_application_frontend_e2e.py::test_rendered_product_is_deterministic
+2 failed, 1142 passed, 4 skipped, 1 warning in 291.39s (0:04:51)
