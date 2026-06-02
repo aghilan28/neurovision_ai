@@ -275,16 +275,33 @@ def render_section(section: dict) -> str:
         return panel(title, f"<pre>{esc(section.get('json', ''))}</pre>")
     if kind == "prose":
         cls = "nv-intelligence" if section.get("intelligence") else ""
-        return panel(title, f"<p class='{cls}'>{esc(data.get('text', section.get('text', '')))}</p>")
+        text = (data or {}).get("text") if isinstance(data, dict) else None
+        if text is None:
+            text = section.get("text", "")
+        return panel(title, f"<p class='{cls}'>{esc(text)}</p>")
     if kind == "timeline_records":
         items = section.get("items", [])
         intelligence = section.get("intelligence")
-        body = "".join(
-            f'<li class="nv-step done"><div style="font-weight:700;color:var(--text)">{esc(it.get("label"))}</div>'
-            f'<div style="font-size:12px;color:var(--muted)">{esc(it.get("text"))}</div>'
-            f'{badge("Status", it.get("status"), "intelligence" if intelligence else "ok")}</li>'
-            for it in items
-        )
+        rows = []
+        for it in items:
+            if isinstance(it, dict):
+                label = it.get("label", "")
+                text = it.get("text", "")
+                status = it.get("status", "ok")
+            elif isinstance(it, (list, tuple)):
+                label = str(it[0]) if len(it) > 0 else ""
+                text = " • ".join(str(x) for x in it[1:]) if len(it) > 1 else ""
+                status = it[-1] if len(it) > 0 else "ok"
+            else:
+                label = str(it)
+                text = ""
+                status = "ok"
+            rows.append(
+                f'<li class="nv-step done"><div style="font-weight:700;color:var(--text)">{esc(label)}</div>'
+                f'<div style="font-size:12px;color:var(--muted)">{esc(text)}</div>'
+                f'{badge("Status", status, "intelligence" if intelligence else "ok")}</li>'
+            )
+        body = "".join(rows)
         return panel(title, f'<ol class="nv-steps" style="margin-left:8px">{body}</ol>')
     return panel(title, "<p>No renderable content is available for this section.</p>")
 
