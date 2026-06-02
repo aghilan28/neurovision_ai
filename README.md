@@ -127,10 +127,17 @@ Read in this order for a complete understanding of project direction.
 | Project Constitution Layer (V0-P1) | ✅ Complete | V0 |
 | Repository Architecture Foundation (V0-P2) | ✅ Complete | V0 |
 | Governance & Context Control (`.gcc/`, V0-P3) | ⏳ Contract defined; mechanisms pending | V0 |
-| Preprocessing / Datasets / ML / Evaluation | ⛔ Not started (correct for V0) | V1 |
+| ML baseline models + Uncertainty (V1-P5 + V1-P6) | 🚧 Implemented on feature branch — pending review (NR-7) & version gate (NR-12); see [`.gcc/decisions/ADR-0001`](.gcc/decisions/ADR-0001-v1-p5-p6-baseline-models-and-uncertainty.md) | V1 |
+| Preprocessing / Datasets / Evaluation | 🚧 Minimal integration foundations implemented to execute V1-P5/P6 (extend, don't rewrite) — see ADR-0001 | V1 |
 | Backend / Frontend (clinical workflow) | ⛔ Not started | V2 |
 | Near-real-time / Monitoring | ⛔ Not started | V3 |
 | Hospital deployment / full audit | ⛔ Not started | V4 |
+
+> **Note (V1-P5/P6 branch).** The ML baseline + uncertainty layers are implemented
+> with deterministic, reproducible, patient-disjoint, uncertainty-aware, fully
+> lineage-tracked pipelines (`python -m scripts.run_pipeline`; `python -m pytest`).
+> Formal V1 *exit criteria* still require V0-P3 and the full V1-P1…P4 deliverables
+> per the version gate (NR-12); this branch does not claim them.
 
 There is **intentionally no executable code** in V0. The foundation is documents
 and governed structure. See

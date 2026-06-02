@@ -1,3 +1,11 @@
+# NeuroVision AI — Python project configuration (introduced in V1).
+#
+# Scope note: V0 is documentation/structure only. Executable code is introduced
+# in V1 (see docs/VERSION_EVOLUTION_MODEL.md). This file pins the toolchain so
+# that every reported result is reproducible (AP-6 / NR-10).
+#
+# This configuration does NOT redefine architecture; the import DAG in
+# docs/architecture/ remains authoritative and is enforced by tests.
 # NeuroVision AI — project configuration (Version 1)
 #
 # This file configures the toolchain ONLY. It does not redefine architecture or
@@ -13,6 +21,36 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "neurovision-ai"
+version = "1.0.0"
+description = "NeuroVision AI — offline EEG platform (V1): baseline models + uncertainty/calibration."
+requires-python = ">=3.10"
+# Pinned for reproducibility. Pure-NumPy implementation guarantees deterministic,
+# framework-free, CPU-only reference baselines (AP-3 / AP-6 / NR-9 / NR-10).
+dependencies = [
+    "numpy==2.4.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.0.3",
+]
+
+[tool.setuptools]
+# Explicit package list keeps module boundaries visible and intentional.
+packages = [
+    "preprocessing",
+    "datasets",
+    "ml",
+    "evaluation",
+]
+
+[tool.pytest.ini_options]
+# Repository root on sys.path so the top-level modules import as documented
+# (import preprocessing / datasets / ml / evaluation). Tests may import anything.
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+filterwarnings = ["error::DeprecationWarning"]
 version = "1.0.0-alpha"           # V1 in progress (V1-P1 + V1-P2)
 description = "Production-oriented EEG-AI platform for critical-care neurology — V1 EEG data + signal-processing foundation."
 requires-python = ">=3.11,<3.12"

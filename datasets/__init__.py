@@ -1,3 +1,10 @@
+"""``datasets/`` — Data Access & Curation.
+
+Owns patient-level, leakage-safe access to EEG data and the patient-disjoint
+splitting that the rest of the platform depends on (AP-2 / NR-3). Imports only
+``preprocessing/`` (NR-8).
+
+See ``datasets/README.md`` for the boundary contract.
 """``datasets/`` — Data Access & Curation layer (Version 1).
 
 This package owns **patient-level, leakage-safe access** to EEG data and the
@@ -27,6 +34,27 @@ documented as extension points; none are implemented (Rule NR-13, stay in scope)
 
 from __future__ import annotations
 
+from .version import DATASET_SCHEMA_VERSION, CLASS_NAMES
+from .catalog import EEGDataset
+from .synthetic import SyntheticConfig, generate_dataset
+from .splits import (
+    SplitConfig,
+    PatientDisjointSplit,
+    patient_disjoint_split,
+    loso_folds,
+)
+
+__all__ = [
+    "DATASET_SCHEMA_VERSION",
+    "CLASS_NAMES",
+    "EEGDataset",
+    "SyntheticConfig",
+    "generate_dataset",
+    "SplitConfig",
+    "PatientDisjointSplit",
+    "patient_disjoint_split",
+    "loso_folds",
+]
 #: Version of the data-foundation subsystem. Bumped via a recorded governance
 #: decision (NR-5). Recorded on every artifact this subsystem emits for
 #: reproducibility/traceability (AP-5/AP-6, NR-10/NR-11).
