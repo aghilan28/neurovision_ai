@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NeuroVision Research Environment</title><style>
+:root{
+  --bg:#080d12;--surface:#0d141b;--panel:#111b24;--panel-2:#16222d;
+  --line:#263440;--line-strong:#385061;--text:#e6edf3;--muted:#9aa8b4;
+  --subtle:#6f7f8e;--accent:#67b7dc;--accent-2:#77d0a5;
+  --warning:#e2b15f;--danger:#ef6f6c;--ok:#73d29c;--info:#8fb7ff;
+}
+*{box-sizing:border-box}
+html{background:var(--bg);color:var(--text)}
+body{margin:0;background:
+  radial-gradient(circle at 20% 0%, rgba(103,183,220,.10), transparent 30%),
+  linear-gradient(180deg,#0a1016 0%,#080d12 58%,#070b10 100%);
+  color:var(--text);font:13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:0}
+a{color:inherit;text-decoration:none}
+.nv-shell{min-height:100vh;display:grid;grid-template-columns:minmax(210px,248px) 1fr}
+.nv-sidebar{border-right:1px solid var(--line);background:rgba(13,20,27,.92);padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.nv-brand{display:grid;gap:3px;padding:0 8px 18px;border-bottom:1px solid var(--line)}
+.nv-brand-title{font-size:16px;font-weight:700;color:var(--text)}
+.nv-brand-sub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.nv-nav{display:grid;gap:5px;margin-top:16px}
+.nv-nav a,.nv-tab-label{display:flex;align-items:center;gap:8px;min-height:34px;padding:8px 10px;border:1px solid transparent;border-radius:6px;color:var(--muted);transition:background 120ms ease,border-color 120ms ease,color 120ms ease}
+.nv-nav a.active,.nv-tab:checked + .nv-tab-label{background:rgba(103,183,220,.10);border-color:rgba(103,183,220,.34);color:var(--text)}
+.nv-nav a:hover,.nv-tab-label:hover{background:rgba(255,255,255,.035);color:var(--text)}
+.nv-main{min-width:0;padding:20px 22px 28px}
+.nv-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px}
+.nv-page-title{margin:0;font-size:23px;line-height:1.16;font-weight:700;color:var(--text)}
+.nv-subtitle{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:760px}
+.nv-meta{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:11px}
+.nv-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.nv-panel{grid-column:span 12;background:linear-gradient(180deg,rgba(22,34,45,.98),rgba(13,20,27,.98));border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 34px rgba(0,0,0,.22);overflow:hidden}
+.nv-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:42px;padding:11px 13px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}
+.nv-panel-title{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#c8d4df;font-weight:700}
+.nv-panel-body{padding:13px;overflow:auto}
+.nv-kv{display:grid;grid-template-columns:minmax(150px,260px) minmax(0,1fr);gap:7px 14px}
+.nv-k{color:var(--muted)}
+.nv-v{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;word-break:break-word;color:#e9f2f8}
+.nv-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:6px}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th,td{padding:8px 9px;border-bottom:1px solid rgba(38,52,64,.78);text-align:left;vertical-align:top}
+th{color:#b9c8d4;font-size:11px;text-transform:uppercase;letter-spacing:.07em;background:rgba(255,255,255,.026);font-weight:700}
+td{color:#d8e3eb}
+tr:last-child td{border-bottom:0}
+.nv-badges{display:flex;flex-wrap:wrap;gap:6px}
+.nv-badge{display:inline-flex;align-items:center;gap:6px;min-height:24px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--muted);font-size:11px;font-weight:650}
+.nv-badge.ok,.nv-badge.pass,.nv-badge.success{border-color:rgba(115,210,156,.52);color:var(--ok);background:rgba(115,210,156,.10)}
+.nv-badge.fail,.nv-badge.error,.nv-badge.danger{border-color:rgba(239,111,108,.52);color:var(--danger);background:rgba(239,111,108,.10)}
+.nv-badge.warning{border-color:rgba(226,177,95,.58);color:var(--warning);background:rgba(226,177,95,.10)}
+.nv-badge.info{border-color:rgba(143,183,255,.48);color:var(--info);background:rgba(143,183,255,.10)}
+.nv-alert{margin-bottom:12px;padding:11px 13px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--text)}
+.nv-alert.success{border-color:rgba(115,210,156,.52);background:rgba(115,210,156,.10)}
+.nv-alert.warning{border-color:rgba(226,177,95,.58);background:rgba(226,177,95,.10)}
+.nv-alert.error{border-color:rgba(239,111,108,.52);background:rgba(239,111,108,.10)}
+.nv-form{display:grid;gap:12px;max-width:560px}
+.nv-field{display:grid;gap:6px;color:#c9d6df;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+input,select{width:100%;min-height:38px;padding:8px 10px;border-radius:6px;border:1px solid var(--line-strong);background:#091018;color:var(--text);font:13px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
+input:focus,select:focus,button:focus-visible,a:focus-visible,label:focus-visible{outline:0;box-shadow:0 0 0 3px rgba(103,183,220,.26)}
+button,.nv-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:max-content;min-height:36px;padding:8px 12px;border-radius:6px;border:1px solid rgba(103,183,220,.42);background:linear-gradient(180deg,#1d5f7c,#16485f);color:white;font-weight:700;cursor:pointer}
+.nv-error-text{color:var(--danger);font-size:12px;text-transform:none;letter-spacing:0;font-weight:500}
+.nv-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:8px;list-style:none;margin:0;padding:0}
+.nv-step{border:1px solid var(--line);border-radius:6px;padding:9px 10px;background:rgba(255,255,255,.025);color:var(--muted)}
+.nv-step.done{border-color:rgba(115,210,156,.55);background:rgba(115,210,156,.10);color:var(--ok)}
+.nv-items{margin:0;padding-left:18px;color:#dbe6ee}
+pre{margin:0;max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:6px;background:#070c11;color:#dbe6ee;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace}
+.nv-viz svg{max-width:100%;height:auto;background:#070c11;border:1px solid var(--line);border-radius:6px}
+.nv-tabs{display:grid;grid-template-columns:248px 1fr;gap:0;min-height:100vh}
+.nv-tab-rail{border-right:1px solid var(--line);background:rgba(13,20,27,.92);padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+.nv-tab,.tab{position:absolute;left:-9999px}
+.nv-panels{padding:20px 22px}
+.nv-area{display:none}
+.nv-pagebar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.nv-page-chip{display:inline-flex;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px;background:rgba(255,255,255,.025)}
+.nv-controls{display:grid;gap:8px;margin-top:10px}
+.nv-control{border:1px solid rgba(226,177,95,.42);border-radius:6px;padding:9px 10px;background:rgba(226,177,95,.08)}
+.nv-control.disabled{opacity:.55}
+.nv-footer{color:var(--subtle);font-size:11px;text-align:right;margin-top:20px}
+@media (max-width:860px){
+  .nv-shell,.nv-tabs{grid-template-columns:1fr}
+  .nv-sidebar,.nv-tab-rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+  .nv-main,.nv-panels{padding:16px}
+  .nv-kv{grid-template-columns:1fr}
+  .nv-top{display:grid}
+  .nv-meta{justify-content:flex-start}
+}
+#tab-research-upload:checked ~ .nv-panels #area-research-upload{display:block}#tab-research-upload:checked ~ .nv-tab-rail label[for='tab-research-upload']{background:rgba(103,183,220,.10);border-color:rgba(103,183,220,.34);color:var(--text)}#tab-research-inference:checked ~ .nv-panels #area-research-inference{display:block}#tab-research-inference:checked ~ .nv-tab-rail label[for='tab-research-inference']{background:rgba(103,183,220,.10);border-color:rgba(103,183,220,.34);color:var(--text)}#tab-research-audit:checked ~ .nv-panels #area-research-audit{display:block}#tab-research-audit:checked ~ .nv-tab-rail label[for='tab-research-audit']{background:rgba(103,183,220,.10);border-color:rgba(103,183,220,.34);color:var(--text)}
+</style></head><body><div class="nv-tabs"><input class='tab' type='radio' name='tabs' id='tab-research-upload' checked><input class='tab' type='radio' name='tabs' id='tab-research-inference'><input class='tab' type='radio' name='tabs' id='tab-research-audit'><aside class="nv-tab-rail"><div class="nv-brand"><div class="nv-brand-title">NeuroVision</div><div class="nv-brand-sub">Scientific intelligence workspace</div></div><nav class="nv-nav"><label class="nv-tab-label" for="tab-research-upload">Upload</label><label class="nv-tab-label" for="tab-research-inference">Inference</label><label class="nv-tab-label" for="tab-research-audit">Audit</label></nav></aside><main class="nv-panels"><div class="nv-top"><div><h1 class="nv-page-title">NeuroVision Research Environment</h1><p class="nv-subtitle">Scientific intelligence workspace. Registered artifacts are presented as a research workspace, not recomputed.</p></div><div class="nv-meta"><span class="nv-badge ok">validation: ok</span><span class="nv-badge offline-research-app@1.0.0">version: offline-research-app@1.0.0</span><span class="nv-badge inference+preview">inference_id: inference+preview</span><span class="nv-badge lineage+preview">lineage_id: lineage+preview</span></div></div><section class="nv-area" id="area-research-upload"><h2 class="nv-page-title">Upload</h2><div class="nv-grid" style="margin-top:12px"><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Run Intake</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">recording</div><div class="nv-v">patient_alpha.edf</div><div class="nv-k">artifact_status</div><div class="nv-v">registered</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Channel Layout</div></div><div class="nv-panel-body"><div class="nv-viz"><svg width='420' height='300' viewBox='0 0 420 300'><circle cx='105.0' cy='105.0' r='9' fill='#67b7dc'/><text x='105.0' y='92.0' fill='#e6edf3' font-size='10' text-anchor='middle'>Fp1</text><circle cx='315.0' cy='105.0' r='9' fill='#77d0a5'/><text x='315.0' y='92.0' fill='#e6edf3' font-size='10' text-anchor='middle'>Fp2</text></svg></div></div></section></div></section><section class="nv-area" id="area-research-inference"><h2 class="nv-page-title">Inference</h2><div class="nv-grid" style="margin-top:12px"><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Prediction Evidence</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">prediction</div><div class="nv-v">abnormal-pattern-review</div><div class="nv-k">confidence</div><div class="nv-v">0.82</div><div class="nv-k">calibration</div><div class="nv-v">well-calibrated</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Class Probabilities</div></div><div class="nv-panel-body"><div class="nv-viz"><svg width='720' height='250' viewBox='0 0 720 250'><line x1='34' y1='216' x2='686' y2='216' stroke='#263440'/><rect x='34.0' y='183.2' width='202.0' height='32.8' rx='3' fill='#67b7dc'/><text x='135.0' y='238' fill='#9aa8b4' font-size='9' text-anchor='middle'>baseline</text><text x='135.0' y='178.2' fill='#e6edf3' font-size='9' text-anchor='middle'>0.18</text><rect x='360.0' y='66.8' width='202.0' height='149.2' rx='3' fill='#67b7dc'/><text x='461.0' y='238' fill='#9aa8b4' font-size='9' text-anchor='middle'>review</text><text x='461.0' y='61.8' fill='#e6edf3' font-size='9' text-anchor='middle'>0.82</text></svg></div></div></section></div></section><section class="nv-area" id="area-research-audit"><h2 class="nv-page-title">Audit</h2><div class="nv-grid" style="margin-top:12px"><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Integrity</div></div><div class="nv-panel-body"><div class="nv-badges"><span class="nv-badge ok">lineage: pass</span><span class="nv-badge ok">audit: pass</span></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Audit Timeline</div></div><div class="nv-panel-body"><div class="nv-viz"><svg width='760' height='108' viewBox='0 0 760 108'><line x1='34' y1='54.0' x2='726' y2='54.0' stroke='#263440'/><circle cx='34.0' cy='54.0' r='4.2' fill='#77d0a5'/><text x='34.0' y='44.0' fill='#9aa8b4' font-size='8' text-anchor='middle'>1</text><circle cx='380.0' cy='54.0' r='4.2' fill='#77d0a5'/><circle cx='726.0' cy='54.0' r='4.2' fill='#77d0a5'/></svg></div></div></section></div></section><div class="nv-footer">offline deterministic research environment</div></main></div></body></html>
