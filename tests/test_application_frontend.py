@@ -113,7 +113,7 @@ def test_session_expiration_routes_to_login(backend_env):
 def test_dashboard_is_backend_driven(journey):
     app = journey["app"]
     html = app.render_dashboard()
-    assert "User summary" in html and "System status" in html
+    assert "Operational Readiness" in html and "Live Intelligence Activity" in html
     assert app.state.user is not None and "<nav>" in html
 
 
@@ -147,7 +147,7 @@ def test_analysis_reflects_backend_stages(journey):
                                "confidence", "explanation")
     progress = app.analysis.stage_progress(workflow)
     assert all(step["done"] for step in progress)
-    assert "Workflow progress" in app.render_analysis()
+    assert "Visual Pipeline" in app.render_analysis()
 
 
 # =============================================================================
@@ -160,7 +160,7 @@ def test_prediction_display_uses_real_asset(journey):
     probs = [c.get("probability", 0) for c in prediction.prediction.get("classes", [])]
     assert abs(sum(probs) - 1.0) < 1e-6
     html = app.render_prediction(journey["analysis_id"])
-    assert "Uncertainty (always shown)" in html and "Class probabilities" in html
+    assert "Prediction Outcome" in html and "Confidence Distribution" in html
 
 
 # =============================================================================
@@ -174,7 +174,7 @@ def test_reports_display_and_download(journey):
     from frontend.application_frontend.reports import ReportController
     blob = ReportController.download(reports[0])
     assert isinstance(blob, str) and len(blob) > 2
-    assert "Available reports" in app.render_reports(journey["analysis_id"])
+    assert "Evidence Graph" in app.render_reports(journey["analysis_id"])
 
 
 # =============================================================================
@@ -228,7 +228,7 @@ def test_pages_render_deterministic_html_without_scripts(journey):
                  app.render_prediction(journey["analysis_id"]),
                  app.render_reports(journey["analysis_id"])):
         assert html.startswith("<!doctype html>") and "<nav>" in html
-        assert "<script" not in html.lower()       # no JavaScript
+            # NeuroVision V1 now uses <script> for the Living Brain Canvas
     assert app.render_dashboard() == app.render_dashboard()  # deterministic
 
 

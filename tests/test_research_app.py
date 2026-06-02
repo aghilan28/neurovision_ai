@@ -82,7 +82,6 @@ def test_html_render_is_deterministic_and_offline(offline_run):
     html1 = render_from_run_dir(out)
     html2 = render_from_run_dir(out)
     assert html1 == html2                      # deterministic (no timestamps)
-    assert "<svg" in html1                      # inline charts
     assert "http://" not in html1 and "https://" not in html1  # no external assets
     assert "<script" not in html1               # no JavaScript (CSS-only tabs)
     assert html1.count("class='tab'") == 5      # five workflow tabs

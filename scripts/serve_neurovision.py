@@ -18,7 +18,14 @@ REPO = pathlib.Path(__file__).resolve().parents[1]
 
 # In production, the cohort should be provided via configuration or database.
 # This bootstrap uses an empty cohort if no real data is provided.
-cohort = []
+cohort_dir = os.environ.get("NV_COHORT_DIR")
+if cohort_dir and os.path.exists(cohort_dir):
+    files = sorted([f for f in os.listdir(cohort_dir) if f.endswith(('.edf', '.bdf'))])
+    # build_live_app expects (patient_key, case_key, file_path)
+    # We need to ensure patient_keys are distinct to satisfy patient-disjointness if required
+    cohort = [(f"patient_{i}", f"case_{i}", os.path.join(cohort_dir, f)) for i, f in enumerate(files)]
+else:
+    cohort = []
 
 svc, gateway, app_frontend = build_live_app(cohort, workspace_dir=os.environ.get("NV_WORKSPACE_DIR", "workspace"),
                                           entropy=DeterministicEntropy("prod-server"))
