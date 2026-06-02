@@ -11,6 +11,12 @@ This document is the **map of how everything connects**: objectives ↔ architec
 an agent see the *shape of the whole* before diving into any part, and trace any
 concept to the documents that own it.
 
+> **Operational vs. complete:** this is the **operational quick-reference** read
+> during recovery. The **complete** model — adding the **Quality** (V0-P5) and
+> **Context** (V0-P6) layers, full traceability maps, and deterministic navigation
+> paths — is [`../docs/context/REPOSITORY_KNOWLEDGE_MODEL.md`](../docs/context/REPOSITORY_KNOWLEDGE_MODEL.md)
+> (canonical for the full model; the two are kept consistent).
+
 ---
 
 ## 1. Top-Level Graph

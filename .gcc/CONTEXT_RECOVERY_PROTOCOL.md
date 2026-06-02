@@ -35,12 +35,12 @@ order in [`MAIN_CONTEXT.md`](./MAIN_CONTEXT.md) §15.)
 | 7 | [`../docs/ARCHITECTURAL_PRINCIPLES.md`](../docs/ARCHITECTURAL_PRINCIPLES.md) + [`../docs/NON_NEGOTIABLE_RULES.md`](../docs/NON_NEGOTIABLE_RULES.md) | The principles (AP) and laws (NR) you must obey. |
 | 8 | [`../docs/GLOSSARY.md`](../docs/GLOSSARY.md) | Canonical terminology (resolve every unfamiliar term here). |
 | 9 | [`../docs/architecture/`](../docs/architecture/) (layered → system context → boundaries → dependency graph → import rules) | The structure and the hard import constraints. |
-| 10 | [`../docs/governance/README.md`](../docs/governance/README.md) (+ the domain doc relevant to your task) | How changes are governed. |
+| 10 | [`../docs/governance/README.md`](../docs/governance/README.md) (+ the domain doc relevant to your task) **and the quality framework [`../docs/quality/README.md`](../docs/quality/README.md)** | How changes are governed and what "good" means (gates/validation). |
 | 11 | [`DECISION_REGISTRY.md`](./DECISION_REGISTRY.md) | Why things are the way they are (decisions). |
 | 12 | [`ACTIVE_RISKS.md`](./ACTIVE_RISKS.md) + [`ACTIVE_ASSUMPTIONS.md`](./ACTIVE_ASSUMPTIONS.md) | What's risky and what's unverified. |
 | 13 | [`DEPENDENCY_REGISTRY.md`](./DEPENDENCY_REGISTRY.md) | What depends on what (don't add unrecorded edges). |
 | 14 | [`KNOWLEDGE_GRAPH.md`](./KNOWLEDGE_GRAPH.md) | How all of the above connects. |
-| 15 | [`LORE_PROTOCOL.md`](./LORE_PROTOCOL.md) + [`CHANGELOG_SYSTEM.md`](./CHANGELOG_SYSTEM.md) | How to leave a correct trace when you act. |
+| 15 | [`LORE_PROTOCOL.md`](./LORE_PROTOCOL.md) + [`CHANGELOG_SYSTEM.md`](./CHANGELOG_SYSTEM.md) **+ the context/memory systems [`../docs/context/README.md`](../docs/context/README.md)** | How to leave a correct trace, and how project memory is preserved/recovered. |
 | 16 | **Task-local context:** the README of the module you will touch + any ADR/RFC it links. | The exact boundary and prior decisions for your specific work. |
 
 ## 2. How Context Is Reconstructed (what to extract at each layer)
