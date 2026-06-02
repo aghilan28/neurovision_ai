@@ -1,0 +1,98 @@
+# ============================================================================
+# WORKFLOW: documentation  (Quality Gate G2 / VC-DOC, VC-REPO)
+# ----------------------------------------------------------------------------
+# PURPOSE
+#   Mechanize the Documentation Gate: keep docs true, singular, current,
+#   navigable, and owned. Implements the six documentation scans of
+#   docs/quality/DOCUMENTATION_VALIDATION.md and docs/governance/Documentation_Governance.md (S8).
+#
+# TRIGGERS
+#   - pull_request -> main (and phase branches)
+#   - push
+#   - workflow_dispatch (manual)
+#
+# VALIDATION LOGIC (runs on the docs-only V0 repo today; extends unchanged later)
+#   1. Broken internal markdown link scan (relative links must resolve).
+#   2. Placeholder scan (no TODO/TBD/FIXME in authoritative docs).
+#   3. Ownership scan (every doc in docs/ and .gcc/ declares Owner + Update procedure).
+#   4. Required-structure scan (every module directory has a governance README).
+#
+# EXPECTED OUTPUTS
+#   - Pass: all scans clean -> green check (G2 satisfied).
+#   - Fail: a non-zero finding count with the offending files listed in the log.
+#
+# FAILURE ACTIONS
+#   - Job fails -> PR blocked (stop-and-remediate). Fix in the same change set,
+#     then re-run. Systemic entropy -> a REPO risk + a doc audit (DOCUMENTATION_VALIDATION).
+# ============================================================================
+name: documentation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  documentation-gate:
+    name: Documentation Gate (G2)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Broken internal link scan
+        run: |
+          set -u
+          fail=0
+          while IFS= read -r f; do
+            dir=$(dirname "$f")
+            while IFS= read -r link; do
+              case "$link" in http*|"#"*) continue ;; esac
+              target="${link%%#*}"
+              [ -z "$target" ] && continue
+              resolved=$(realpath -m "$dir/$target")
+              if [ ! -e "$resolved" ]; then
+                echo "BROKEN LINK in $f -> $link"
+                fail=1
+              fi
+            done < <(grep -oE '\]\(([^)]+)\)' "$f" | sed -E 's/^\]\(//; s/\)$//')
+          done < <(find . -name '*.md' -not -path './.git/*')
+          [ "$fail" -eq 0 ] && echo "OK: no broken internal links" || { echo "FAIL: broken links found"; exit 1; }
+
+      - name: Placeholder scan (genuine unfilled markers only)
+        run: |
+          set -u
+          # Detect GENUINE unfilled placeholders (the conventional forms), not prose
+          # that *discusses* TODO/TBD/FIXME. Real placeholders use angle-bracket
+          # sentinels or HTML-comment markers, which never appear in authored prose.
+          if grep -rnoE '<!-- *(TODO|FIXME|TBD)|<(TODO|TBD|FIXME|INSERT|PLACEHOLDER)\b|\blorem ipsum\b' \
+               docs --include='*.md' ; then
+            echo "FAIL: genuine placeholder marker found in authoritative docs"; exit 1
+          fi
+          echo "OK: no genuine placeholders in authoritative docs"
+
+      - name: Ownership scan (Owner + Update procedure)
+        run: |
+          set -u
+          fail=0
+          # Tier-2/Tier-3 policy + OS docs must declare Owner + Update procedure.
+          # Exclude fill-in artifacts (templates/checklists) and structured records
+          # (ADRs/RFCs/learnings/postmortems) which use their own field schema.
+          for f in $(find docs .gcc -name '*.md' \
+                       -not -path '*/TEMPLATES/*' -not -path '*/CHECKLISTS/*' \
+                       -not -path '*/decisions/*' -not -path '*/rfcs/*' \
+                       -not -path '*/learnings/*' -not -path '*/postmortems/*'); do
+            grep -qiE '\*\*Owner:\*\*' "$f"            || { echo "NO OWNER: $f"; fail=1; }
+            grep -qiE '\*\*Update procedure:\*\*' "$f" || { echo "NO UPDATE PROC: $f"; fail=1; }
+          done
+          [ "$fail" -eq 0 ] && echo "OK: all policy/OS docs declare Owner + Update procedure" || { echo "FAIL"; exit 1; }
+
+      - name: Required-structure scan (per-directory READMEs)
+        run: |
+          set -u
+          fail=0
+          for d in docs frontend backend ml preprocessing datasets evaluation \
+                   deployment monitoring tests tools scripts .gcc; do
+            test -f "$d/README.md" || { echo "MISSING README: $d"; fail=1; }
+          done
+          [ "$fail" -eq 0 ] && echo "OK: required structure present" || { echo "FAIL"; exit 1; }

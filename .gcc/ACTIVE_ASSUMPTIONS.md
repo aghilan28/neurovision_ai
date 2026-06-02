@@ -5,7 +5,7 @@
 > **Owner:** Founder · **Kept current by:** the active contributor
 > **Template:** [`TEMPLATES/ASSUMPTION_TEMPLATE.md`](./TEMPLATES/ASSUMPTION_TEMPLATE.md)
 > **Update procedure:** Record an assumption whenever a decision rests on something unverified; verify or retire it on its plan; log changes ([`CHANGELOG_SYSTEM.md`](./CHANGELOG_SYSTEM.md)).
-> **Last updated:** V0-P4
+> **Last updated:** V0-P8
 
 An **assumption** is something we are currently treating as true **without
 verification**. Unrecorded assumptions are a top cause of context drift: they
@@ -73,7 +73,7 @@ Plan · Status (Open/Verified/Refuted/Retired) · Owner · Links`.
 - **Confidence:** High.
 - **Verification Plan:** Implement the GCC checks task ([`NEXT_STATE.md`](./NEXT_STATE.md) §3)
   and confirm they run on PRs.
-- **Status:** Open · **Owner:** Founder · **Links:** AP-11; DEPENDENCY_REGISTRY.
+- **Status:** Open — **CI workflows implemented (V0-P7)**; host-observation pending (confirm green on first V1 PR) · **Owner:** Founder · **Links:** AP-11; DEPENDENCY_REGISTRY.
 
 ---
 

@@ -2,6 +2,8 @@
 
 > **Document type:** Project Constitution Layer (V0-P1)
 > **Status:** Authoritative
+> **Owner:** Founder
+> **Update procedure:** Governance-class change (ADR); scope changes require a recorded, reviewed decision (NR-5/NR-13).
 > **Derived from:** [`PROJECT_VISION.md`](./PROJECT_VISION.md), [`PROJECT_OBJECTIVES.md`](./PROJECT_OBJECTIVES.md)
 > **Canonical terminology:** [`GLOSSARY.md`](./GLOSSARY.md)
 

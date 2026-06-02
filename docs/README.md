@@ -2,6 +2,8 @@
 
 > **Layer:** Context Layer (operates under the **Lore Protocol**)
 > **Directory README type:** Repository Architecture Foundation (V0-P2)
+> **Owner:** Founder (Documentation Owner role)
+> **Update procedure:** Index updated (Documentation change) when a doc is added/renamed; policy changes are governance-class (ADR).
 > **Parent entry point:** [`../README.md`](../README.md)
 
 This directory is the **Context Layer** of NeuroVision AI. It holds the project
@@ -141,10 +143,31 @@ Context Control layer: [`../.gcc/README.md`](../.gcc/README.md). A new contribut
 or AI agent should **start at** [`../.gcc/MAIN_CONTEXT.md`](../.gcc/MAIN_CONTEXT.md)
 and run [`../.gcc/CONTEXT_RECOVERY_PROTOCOL.md`](../.gcc/CONTEXT_RECOVERY_PROTOCOL.md).
 
+## Development Environment Foundation (V0-P7)
+
+The **permanent engineering environment** (reproducible, deterministic, AI-assisted,
+forward-compatible) lives in [`environment/`](./environment/); the **CI workflows**
+that mechanize the quality gates live in [`../.github/workflows/`](../.github/workflows/).
+Start at [`environment/README.md`](./environment/README.md). Key docs: philosophy,
+development standards, toolchain, local development, git workflow, branch protection,
+dependency + secrets management, CI/CD architecture, environment validation,
+repository bootstrap, onboarding workflow.
+
+## Version 0 Certification (V0-P8)
+
+The formal, evidence-backed proof that V0 is complete lives in
+[`certification/`](./certification/) (start at [`certification/README.md`](./certification/README.md)).
+**Outcome: CERTIFIED WITH CONDITIONS** (ADR-0001) — see
+[`certification/V0_COMPLETION_REPORT.md`](./certification/V0_COMPLETION_REPORT.md).
+Includes the certification standard, audit framework, scored readiness assessment,
+risk review, gap analysis, exit criteria, completion report, and the V1 readiness gate.
+
 ## Recommended reading order
 Vision → Objectives → Scope → Version Model → Principles → Rules → Glossary →
 Architecture (Layered → System Context → Module Boundaries → Dependency Graph →
 Import Rules) → Governance ([`governance/README.md`](./governance/README.md)) →
 Quality ([`quality/README.md`](./quality/README.md)) →
 Context ([`context/README.md`](./context/README.md)) →
+Environment ([`environment/README.md`](./environment/README.md)) →
+Certification ([`certification/README.md`](./certification/README.md)) →
 Operating System ([`../.gcc/MAIN_CONTEXT.md`](../.gcc/MAIN_CONTEXT.md)).

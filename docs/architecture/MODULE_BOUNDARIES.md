@@ -2,6 +2,8 @@
 
 > **Document type:** Repository Architecture Foundation (V0-P2)
 > **Status:** Authoritative
+> **Owner:** Founder (Architecture Owner role)
+> **Update procedure:** Governance-class change (ADR — [`../governance/Architecture_Governance.md`](../governance/Architecture_Governance.md)); architecture changes require an ADR (NR-5/NR-8).
 > **Enforces:** Principle **AP-7**; Rule **NR-8**
 > **Companion docs:** [`LAYERED_ARCHITECTURE.md`](./LAYERED_ARCHITECTURE.md), [`DEPENDENCY_GRAPH.md`](./DEPENDENCY_GRAPH.md), [`IMPORT_RULES.md`](./IMPORT_RULES.md)
 > **Per-directory detail:** each module's own `README.md`

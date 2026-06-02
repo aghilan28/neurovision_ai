@@ -4,7 +4,7 @@
 > **Status:** Living — the single fastest path to understanding the whole project.
 > **Owner:** Founder · **Kept current by:** the active contributor (human or AI)
 > **Update procedure:** Update whenever project identity, architecture, version position, priorities, or top risks change. Every update is logged ([`CHANGELOG_SYSTEM.md`](./CHANGELOG_SYSTEM.md)).
-> **Last updated:** V0-P6 (Quality + Context layers established)
+> **Last updated:** V0-P8 (V0 CERTIFIED WITH CONDITIONS — ADR-0001)
 
 **Purpose:** allow a *completely new AI agent* (or the founder after months away)
 to understand the entire project **in minutes** and act safely. If you read only
@@ -66,11 +66,12 @@ graph, module boundaries, import rules, system context).
 Canonical: [`../docs/VERSION_EVOLUTION_MODEL.md`](../docs/VERSION_EVOLUTION_MODEL.md).
 
 ## 6. Current Position
-- **Version:** V0 (Repository Foundation).
-- **Phases complete:** V0-P1 (Constitution), V0-P2 (Architecture), V0-P3
-  (Governance framework), V0-P4 (AI Operating System), V0-P5 (Quality Assurance
-  Foundation), **V0-P6 (Context Preservation System — current).**
-- **Code:** none yet (correct for V0).
+- **Version:** V0 (Repository Foundation) — **✅ COMPLETE, CERTIFIED WITH CONDITIONS** (ADR-0001).
+- **Phases complete:** V0-P1…P8 (Constitution, Architecture, Governance, AI OS,
+  Quality, Context, Environment+CI, Certification).
+- **Next:** **V1 (Offline EEG Platform) — eligible to begin** (gated by
+  [`../docs/certification/V1_READINESS_GATE.md`](../docs/certification/V1_READINESS_GATE.md)).
+- **Code:** none yet (application code is V1).
 - Live detail: [`CURRENT_STATE.md`](./CURRENT_STATE.md).
 
 ## 7. Target Position
@@ -98,9 +99,11 @@ Patient-disjoint validation · deterministic preprocessing · calibrated uncerta
 scope. (See [`../docs/VERSION_EVOLUTION_MODEL.md`](../docs/VERSION_EVOLUTION_MODEL.md) §6.)
 
 ## 10. Current Priorities
-1. Finalize V0 (governance + OS) and verify **V0 exit criteria**.
+1. **V0 complete & certified** (ADR-0001). Close the 3 V1-entry conditions before the
+   first V1 code merges (observe CI green; cold-onboarding test; host branch protection).
 2. Keep the OS state files current (this directory).
-3. Prepare V1 entry: preprocessing determinism + patient-disjoint evaluation design.
+3. Begin V1 entry: V1 toolchain ADR; preprocessing determinism + patient-disjoint
+   evaluation design (RFC→ADR).
 (Live: [`NEXT_STATE.md`](./NEXT_STATE.md), [`ROADMAP_STATUS.md`](./ROADMAP_STATUS.md).)
 
 ## 11. Future Priorities
@@ -139,8 +142,8 @@ each gated by the prior version's exit criteria (NR-12).
 5. Architecture: `docs/architecture/` (layered → system context → boundaries →
    dependency graph → import rules)
 6. Governance: `docs/governance/` (start at its `README.md`)
-7. Quality: `docs/quality/` (start at its `README.md`) · Context: `docs/context/`
-   (start at its `README.md`)
+7. Quality: `docs/quality/` · Context: `docs/context/` · Environment:
+   `docs/environment/` · Certification: `docs/certification/` (start at each `README.md`)
 8. Registers: `.gcc/DECISION_REGISTRY.md`, `ACTIVE_RISKS.md`,
    `ACTIVE_ASSUMPTIONS.md`, `DEPENDENCY_REGISTRY.md`
 9. `.gcc/KNOWLEDGE_GRAPH.md` (operational map) →

@@ -2,6 +2,8 @@
 
 > **Document type:** Project Constitution Layer (V0-P1)
 > **Status:** Authoritative / Immutable principles
+> **Owner:** Founder (Architecture Owner role)
+> **Update procedure:** Governance-class change (ADR); principle changes require a recorded, reviewed decision (NR-5).
 > **Derived from:** [`PROJECT_VISION.md`](./PROJECT_VISION.md), [`PROJECT_OBJECTIVES.md`](./PROJECT_OBJECTIVES.md)
 > **Enforced by:** [`NON_NEGOTIABLE_RULES.md`](./NON_NEGOTIABLE_RULES.md), the Governance & Context Control layer (`.gcc/`), and the architecture docs in [`architecture/`](./architecture/)
 > **Canonical terminology:** [`GLOSSARY.md`](./GLOSSARY.md)
