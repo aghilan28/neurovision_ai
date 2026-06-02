@@ -6,3 +6,18 @@ numpy==2.4.6
 
 # Development / verification only (not a runtime dependency of any module):
 pytest==9.0.3
+# NeuroVision AI — direct runtime/dev dependencies (Version 1)
+#
+# Pinned for reproducibility (Principle AP-6, Rule NR-10).
+# These are the ONLY third-party libraries the V1 data + DSP foundation uses.
+# preprocessing/ may use the numeric/DSP libraries below (NumPy, SciPy) as
+# "pinned third-party numeric/DSP libs" (see docs/architecture/IMPORT_RULES.md);
+# it imports NO internal module.
+#
+# The fully-resolved transitive lock is recorded in requirements-lock.txt.
+#
+# Target interpreter: CPython 3.11.x (see pyproject.toml / .python-version).
+
+numpy==2.2.6        # deterministic array math (DSP + content hashing)
+scipy==1.15.3       # deterministic signal processing (filters, polyphase resampling)
+pytest==8.3.5       # test runner (test-only; never a production dependency)

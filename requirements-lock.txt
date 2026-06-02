@@ -1,0 +1,16 @@
+# NeuroVision AI — fully-resolved dependency lock (Version 1)
+#
+# Generated from a clean CPython 3.11.15 virtual environment via `pip freeze`.
+# This file pins the COMPLETE transitive dependency set so that any reported
+# result can be regenerated from a known-good environment (AP-6 / NR-10).
+#
+# Regenerate with:
+#   python -m venv .venv && . .venv/bin/activate
+#   pip install -r requirements.txt && pip freeze > requirements-lock.txt
+
+iniconfig==2.3.0
+numpy==2.2.6
+packaging==26.2
+pluggy==1.6.0
+pytest==8.3.5
+scipy==1.15.3
