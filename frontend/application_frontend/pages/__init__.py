@@ -29,14 +29,14 @@ def login_page(snapshot: dict, *, field_errors=()) -> dict:
         sections.append(C.alert("warning", "Your session has expired. Please log in again."))
     sections.append(C.form_section("Log in", LOGIN_FORM.to_dict(), field_errors))
     sections.append(C.prose("New here?", "Create an account from the Register page."))
-    return _page("login", "NeuroVision — Log in", snapshot, sections,
-                 subtitle="Sign in to upload EEG and run analyses.")
+    return _page("login", "NeuroVision - Secure Access", snapshot, sections,
+                 subtitle="Enter the clinical intelligence operating environment.")
 
 
 def register_page(snapshot: dict, *, field_errors=()) -> dict:
-    return _page("register", "NeuroVision — Create account", snapshot,
+    return _page("register", "NeuroVision - Provision Account", snapshot,
                  [C.form_section("Create account", REGISTRATION_FORM.to_dict(), field_errors)],
-                 subtitle="Local account — clinician, researcher, or viewer.")
+                 subtitle="Create a governed local identity for clinical, research, or review access.")
 
 
 # --- dashboard (P7-D) --------------------------------------------------------
@@ -64,8 +64,8 @@ def dashboard_page(snapshot: dict) -> dict:
                 [[a, p.get("predicted_label"), p.get("confidence_level")]
                  for a, p in list(snapshot.get("predictions", {}).items())[-5:]] or [["—", "—", "—"]]),
     ]
-    return _page("dashboard", "Dashboard", snapshot, sections,
-                 subtitle="Your recent activity, sourced from the backend.")
+    return _page("dashboard", "NeuroVision Command Center", snapshot, sections,
+                 subtitle="Operational status, traceable activity, and intelligence readiness.")
 
 
 # --- upload (P7-E) -----------------------------------------------------------
@@ -80,8 +80,8 @@ def upload_page(snapshot: dict, *, field_errors=()) -> dict:
                 [[u["upload_id"], u["filename"], u["content_fingerprint"][:12],
                   u["size_bytes"], u["status"]] for u in uploads] or [["—", "—", "—", "—", "—"]]),
     ]
-    return _page("upload", "Upload EEG", snapshot, sections,
-                 subtitle="Send a real recording to the platform.")
+    return _page("upload", "EEG Intake Workspace", snapshot, sections,
+                 subtitle="Acquire recordings through the governed backend intake contract.")
 
 
 # --- analysis (P7-F) ---------------------------------------------------------
@@ -97,14 +97,14 @@ def analysis_page(snapshot: dict, *, stage_view=None) -> dict:
     if not workflows:
         sections.insert(0, C.prose("No analyses yet",
                                    "Upload an EEG, then start an analysis to generate a prediction."))
-    return _page("analysis", "Analysis", snapshot, sections,
-                 subtitle="Start an analysis and follow the backend workflow.")
+    return _page("analysis", "Analysis Execution Workspace", snapshot, sections,
+                 subtitle="Follow the backend workflow from intake through prediction and evidence.")
 
 
 # --- prediction (P7-G) -------------------------------------------------------
 def prediction_page(snapshot: dict, view: Optional[dict]) -> dict:
     if not view:
-        return _page("prediction", "Prediction", snapshot,
+        return _page("prediction", "Clinical Prediction Review Workspace", snapshot,
                      [C.prose("No prediction selected", "Run an analysis to view a prediction.")])
     probs = view.get("class_probabilities", [])
     sections = [
@@ -125,14 +125,14 @@ def prediction_page(snapshot: dict, view: Optional[dict]) -> dict:
             ("Top factors", len(view.get("top_factors", []))),
         ]),
     ]
-    return _page("prediction", "Prediction", snapshot, sections,
+    return _page("prediction", "Clinical Prediction Review Workspace", snapshot, sections,
                  subtitle=f"Analysis {view.get('analysis_id', '')}")
 
 
 # --- reports (P7-H) ----------------------------------------------------------
 def reports_page(snapshot: dict, view: Optional[dict], reports: Optional[list] = None) -> dict:
     if not view:
-        return _page("reports", "Reports", snapshot,
+        return _page("reports", "Evidence & Reporting Center", snapshot,
                      [C.prose("No reports", "Run an analysis to generate reports.")])
     sections = [
         C.items_list("Available reports", view.get("report_names", [])),
@@ -149,7 +149,7 @@ def reports_page(snapshot: dict, view: Optional[dict], reports: Optional[list] =
         sections.append(C.report_section(
             f"Report: {r.name}", r.name, r.content,
             json.dumps(r.content, indent=2, sort_keys=True, default=str)))
-    return _page("reports", "Reports", snapshot, sections,
+    return _page("reports", "Evidence & Reporting Center", snapshot, sections,
                  subtitle="View and download analysis reports.")
 
 

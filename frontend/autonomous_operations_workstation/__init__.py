@@ -44,6 +44,9 @@ from .navigation import build_areas, area_ids, PRIMARY_AREAS
 from .controls import build_controls, controls_summary
 from .validation import validate_state
 from .application import build_workstation_view, build_from_snapshot, build_from_path
+from .reports.html_report import (
+    render_workstation_html, render_from_snapshot_path, write_workstation_html,
+)
 
 __all__ = [
     "AOW_WORKSTATION_VERSION", "AOW_VIEWMODEL_VERSION", "AOW_CONTROL_VERSION", "AOW_STATE_VERSION",
@@ -51,4 +54,5 @@ __all__ = [
     "WorkstationView", "WorkstationState", "CONTEXT_KEYS", "ENTITY_BLOCKS",
     "build_areas", "area_ids", "PRIMARY_AREAS", "build_controls", "controls_summary",
     "validate_state", "build_workstation_view", "build_from_snapshot", "build_from_path",
+    "render_workstation_html", "render_from_snapshot_path", "write_workstation_html",
 ]

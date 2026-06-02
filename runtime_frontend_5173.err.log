@@ -1,0 +1,31 @@
+127.0.0.1 - - [02/Jun/2026 20:55:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jun/2026 20:56:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jun/2026 20:56:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jun/2026 20:56:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jun/2026 20:56:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jun/2026 20:56:50] code 404, message File not found
+127.0.0.1 - - [02/Jun/2026 20:56:50] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [02/Jun/2026 20:59:02] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jun/2026 20:59:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Jun/2026 20:59:11] "GET / HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 8137)
+Traceback (most recent call last):
+  File "C:\msys64\mingw64\lib\python3.12\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\msys64\mingw64\lib\python3.12\http\server.py", line 1311, in finish_request
+    self.RequestHandlerClass(request, client_address, self,
+  File "C:\msys64\mingw64\lib\python3.12\http\server.py", line 672, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\msys64\mingw64\lib\python3.12\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\msys64\mingw64\lib\python3.12\http\server.py", line 436, in handle
+    self.handle_one_request()
+  File "C:\msys64\mingw64\lib\python3.12\http\server.py", line 404, in handle_one_request
+    self.raw_requestline = self.rfile.readline(65537)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\msys64\mingw64\lib\python3.12\socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+----------------------------------------

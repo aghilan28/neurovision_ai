@@ -8,11 +8,15 @@ from __future__ import annotations
 
 # The primary navigation areas (id, label, requires authentication).
 NAV_AREAS = (
-    ("dashboard", "Dashboard", True),
-    ("upload", "Upload EEG", True),
+    ("dashboard", "Command Center", True),
+    ("upload", "EEG Intake", True),
     ("analysis", "Analysis", True),
     ("prediction", "Predictions", True),
-    ("reports", "Reports", True),
+    ("reports", "Evidence Center", True),
+    ("clinical", "Clinical Workspace", True),
+    ("operations", "Operations Workspace", True),
+    ("autonomous", "Autonomous Workspace", True),
+    ("research", "Research Workspace", True),
 )
 
 
