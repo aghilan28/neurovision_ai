@@ -1,9 +1,5 @@
 # NeuroVision AI
 
-> **Source of truth: branch [`main`](./REPOSITORY.md).** A fresh clone of `main` is the
-> complete, runnable product — see **[REPOSITORY.md](./REPOSITORY.md)** for the authoritative
-> structure, deployment, and onboarding guides. You do not need the historical PR stack.
-
 > **A production-oriented EEG-AI platform for critical-care neurology.**
 > NeuroVision AI assists clinicians in detecting and characterizing seizures and
 > the **Ictal-Interictal Continuum (IIC)** in the ICU from continuous EEG (cEEG),
@@ -11,10 +7,10 @@
 
 | | |
 |---|---|
-| **Authoritative branch** | **`main`** (see [REPOSITORY.md](./REPOSITORY.md)) |
-| **Latest phase** | **MP-3 — Persistent Model Lifecycle & Recovery** (on top of V0→V4, Productization P1–P10, DRP-1–6, Track-1–4, DBE-1–5, MP-1) |
-| **Run it** | `git checkout main && pip install -r requirements.txt && uvicorn backend.application_platform.server.app:app` |
-| **Status** | Runnable product: real EEG ingest → signal/feature pipeline → model provisioning + inference → FastAPI app with auth, persistence, and restart recovery. Models are deterministic reference baselines (no clinical-accuracy claim). |
+| **Current version** | **Version 0 — Repository Foundation** |
+| **Current phase** | **V0-P1 (Project Constitution Layer) + V0-P2 (Repository Architecture Foundation)** — complete |
+| **Next phase** | **V0-P3 (Governance Layer)** — implement `.gcc/` mechanisms |
+| **Status** | Foundation only. **No EEG processing, models, datasets, APIs, dashboards, or pipelines exist yet** — and that is by design. |
 | **Optimizing for** | Survivability · maintainability · architectural integrity (never speed/convenience) |
 
 ---
@@ -130,23 +126,10 @@ Read in this order for a complete understanding of project direction.
 | Project Constitution Layer (V0-P1) | ✅ Complete | V0 |
 | Repository Architecture Foundation (V0-P2) | ✅ Complete | V0 |
 | Governance & Context Control (`.gcc/`, V0-P3) | ⏳ Contract defined; mechanisms pending | V0 |
-| ML baseline models + Uncertainty (V1-P5 + V1-P6) | 🚧 Implemented on feature branch — pending review (NR-7) & version gate (NR-12); see [`.gcc/decisions/ADR-0001`](.gcc/decisions/ADR-0001-v1-p5-p6-baseline-models-and-uncertainty.md) | V1 |
-| Offline Inference Platform + Research App (V1-P7 + V1-P8) | 🚧 Implemented (offline-only) on feature branch — see [`.gcc/decisions/ADR-0002`](.gcc/decisions/ADR-0002-v1-p7-p8-offline-inference-and-research-app.md) | V1 |
-| Preprocessing / Datasets / Evaluation | 🚧 Minimal integration foundations implemented to execute V1 (extend, don't rewrite) — see ADR-0001/0002 | V1 |
-| V1 Certification | 🟡 CERTIFIED (QUALIFIED) — see [`docs/certification/v1/`](docs/certification/v1/V1_COMPLETION_REPORT.md); V2 gate NOT granted | V1 |
-| Clinical Case Foundation + Review Workflow (V2-P1 + V2-P2) | 🚧 Implemented on feature branch — see [`.gcc/decisions/ADR-0003`](.gcc/decisions/ADR-0003-v2-p1-p2-clinical-case-and-review.md) | V2 |
-| Findings & Interpretation + Clinical Knowledge (V2-P3 + V2-P4) | 🚧 Implemented on feature branch — see [`.gcc/decisions/ADR-0004`](.gcc/decisions/ADR-0004-v2-p3-p4-findings-and-knowledge.md) | V2 |
-| Backend / Frontend (clinical workflow, APIs) | 🚧 V2 clinical-workflow modeling implemented (offline, in-process); APIs/real-time remain later | V2 |
+| Preprocessing / Datasets / ML / Evaluation | ⛔ Not started (correct for V0) | V1 |
+| Backend / Frontend (clinical workflow) | ⛔ Not started | V2 |
 | Near-real-time / Monitoring | ⛔ Not started | V3 |
 | Hospital deployment / full audit | ⛔ Not started | V4 |
-
-> **Note (V1 branch).** The full offline pipeline runs end to end with complete
-> traceability (`python -m scripts.run_offline_inference --render-app`;
-> `python -m scripts.verify_v1`; `python -m pytest`). V1 is **CERTIFIED
-> (QUALIFIED)**: every delivered-scope exit criterion passes, but real-EEG
-> validation, the authoritative V1-P1…P4 foundations, and mechanized V0-P3
-> governance remain open and are **V2 blockers** (see the certification docs). V2
-> is **not** auto-started (NR-12).
 
 There is **intentionally no executable code** in V0. The foundation is documents
 and governed structure. See

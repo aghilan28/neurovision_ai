@@ -1,106 +1,54 @@
-# NeuroVision AI — Deployment Guide (DBE-2)
+# `deployment/` — Infrastructure Layer (Packaging & Deployment)
 
-This guide is for an **independent operator**. Following it yields a **running NeuroVision
-HTTP API** — no source-code changes required. The container serves the real DBE-1 ASGI
-entrypoint (`backend.application_platform.server.app:app`) via uvicorn and stays alive.
+> **Layer:** Infrastructure Layer
+> **Directory README type:** Repository Architecture Foundation (V0-P2)
+> **Status (V0):** Boundary contract defined; **no code yet** (correct for V0).
+> **Governing docs:** AP-6 (reproducibility), AP-8 (auditability), AP-12 (survivability), NR-8, [`../docs/architecture/LAYERED_ARCHITECTURE.md`](../docs/architecture/LAYERED_ARCHITECTURE.md)
 
-Deployment assets live in [`operations/deployment/`](../operations/deployment):
-- `docker/Dockerfile.backend` — the API image (uvicorn serving the ASGI app).
-- `docker/healthcheck.py` — stdlib HTTP healthcheck (probes `/health`).
-- `compose/docker-compose.yml` — backend (API) + frontend services.
-
----
-
-## Compose Startup Guide (recommended)
-
-```bash
-# from the repository root
-docker compose -f operations/deployment/compose/docker-compose.yml up --build
-```
-
-This builds the image, starts the API on port **8000**, and keeps it running
-(`restart: unless-stopped`). The compose `healthcheck` probes `/health` over real HTTP.
-
-Validate (in another shell):
-
-```bash
-curl http://127.0.0.1:8000/health          # {"status":"ok",...}
-curl http://127.0.0.1:8000/livez           # {"status":"alive",...}
-curl http://127.0.0.1:8000/readyz          # {"status":"ready","ready":true,...}
-curl http://127.0.0.1:8000/v1/readiness    # application readiness
-curl http://127.0.0.1:8000/openapi.json    # full API contract
-```
-
-Stop (graceful SIGTERM → application lifespan shutdown):
-
-```bash
-docker compose -f operations/deployment/compose/docker-compose.yml down
-```
+Packages and deploys the platform. It **wraps** the other modules into runnable,
+reproducible artifacts and environments; it does **not** import domain code into
+itself.
 
 ---
 
-## Docker Startup Guide (single container)
+## Purpose
+Provide reproducible packaging, environment definitions, and deployment
+configuration so the platform can run reliably — ultimately inside a hospital (V4).
 
-```bash
-docker build -f operations/deployment/docker/Dockerfile.backend -t neurovision-backend .
-docker run --rm -p 8000:8000 neurovision-backend
-curl http://127.0.0.1:8000/health
-docker stop <container>          # graceful shutdown
-```
+## Responsibilities
+- Define **pinned, reproducible environments** (the substrate of AP-6).
+- Package the application/services for deployment (V3/V4).
+- Encode deployment topology/configuration consistent with hospital IT/security
+  constraints (V4).
+- Keep deployment **declarative and auditable** (AP-8).
 
-The image `EXPOSE`s 8000, runs as a non-root user, and its `HEALTHCHECK` calls
-`operations/deployment/docker/healthcheck.py /health` (reports healthy only when the API is
-actually serving HTTP).
+## Allowed dependencies
+- ✅ Build/packaging/orchestration tooling and configuration.
+- ✅ References (by artifact, not code import) to the modules being deployed.
 
----
+## Forbidden dependencies
+- ❌ Importing domain modules (`preprocessing`, `datasets`, `ml`, `evaluation`,
+  `backend`, `frontend`) **into** deployment code (NR-8). Deployment orchestrates
+  artifacts; it is not part of the dependency graph of the application.
+- ❌ Baking in **vendor/hardware lock-in** as an architectural assumption
+  ([`../docs/PROJECT_SCOPE.md`](../docs/PROJECT_SCOPE.md) R7).
 
-## Operator Deployment Guide (exact, end to end)
+## Future responsibilities
+- **V3:** deployment supporting near-real-time ingestion/inference.
+- **V4:** hospital-ready deployment (security model, reliability, operations runbooks).
 
-```bash
-git clone <repo> && cd neurovision_ai
-docker compose -f operations/deployment/compose/docker-compose.yml up --build -d
-# wait for healthy, then:
-curl -fsS http://127.0.0.1:8000/health   && echo OK
-curl -fsS http://127.0.0.1:8000/readyz   && echo READY
-curl -fsS http://127.0.0.1:8000/openapi.json | head -c 80
-docker compose -f operations/deployment/compose/docker-compose.yml down
-```
+## Version ownership
+- **Introduced/owned from V3, matured in V4.** Contract defined in **V0-P2** (this README).
 
-No code edits are needed at any step.
+## Examples
+- A pinned environment specification guaranteeing reproducible builds.
+- A deployment configuration describing how services are packaged and run.
+- An operations runbook (authored with `docs/`) for a hospital deployment (V4).
 
----
-
-## Deployment configuration (env vars; documented defaults)
-
-The server reads `NV_*` env vars (typed + validated; see
-`backend/application_platform/server/config.py`). The Dockerfile/compose set production
-defaults:
-
-| Variable | Compose/Image default | Meaning |
-|---|---|---|
-| `NV_HOST` | `0.0.0.0` | bind host (in-container) |
-| `NV_PORT` | `8000` | bind port (published `8000:8000`) |
-| `NV_ENV` | `production` | environment (forces reload off) |
-| `NV_LOG_LEVEL` | `info` | uvicorn log level |
-| `NV_WORKSPACE_DIR` | `/var/lib/neurovision/workspace` | service workspace (persistent volume) |
-
-Secrets are never baked into the image; inject real values via the mounted `env_file`
-(`operations/environments/*.env.template`).
-
----
-
-## Container Validation Guide
-
-```bash
-# runtime-free verification of the deployment assets + the exact container start command:
-python -m scripts.verify_dbe2_docker_deployment
-
-# asset + container-start tests:
-python -m pytest tests/test_docker_deployment.py
-```
-
-> Note: this sandbox has no container runtime (Podman/Buildah, no `docker compose`
-> provider — see P8). The container *definitions* are validated structurally and the exact
-> container start command (`uvicorn backend.application_platform.server.app:app`) is proven
-> to serve live HTTP by launching it directly. On a host with Docker, the `docker`/`docker
-> compose` commands above run the identical command inside the container.
+## Boundary rules
+- Sits in the **Infrastructure Layer**; it deploys other layers but is **not
+  imported by** them (one-way; see
+  [`../docs/architecture/DEPENDENCY_GRAPH.md`](../docs/architecture/DEPENDENCY_GRAPH.md)).
+- Must preserve reproducibility (AP-6) and remain auditable/declarative (AP-8).
+- Does not implement domain logic, evaluation, or monitoring (that is
+  `monitoring/`).
