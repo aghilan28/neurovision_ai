@@ -8,8 +8,8 @@
 | | |
 |---|---|
 | **Current version** | **Version 0 — Repository Foundation** |
-| **Current phase** | **V0-P1 (Project Constitution Layer) + V0-P2 (Repository Architecture Foundation)** — complete |
-| **Next phase** | **V0-P3 (Governance Layer)** — implement `.gcc/` mechanisms |
+| **Current phase** | **V0-P1…P4 complete** — Constitution + Architecture + **Governance Layer** + **AI Operating System** |
+| **Next phase** | **V0 exit gate**, then **V1 (Offline EEG Platform)**; near-term tooling: wire automated GCC checks |
 | **Status** | Foundation only. **No EEG processing, models, datasets, APIs, dashboards, or pipelines exist yet** — and that is by design. |
 | **Optimizing for** | Survivability · maintainability · architectural integrity (never speed/convenience) |
 
@@ -67,7 +67,8 @@ neurovision_ai/
 │   ├── ARCHITECTURAL_PRINCIPLES.md
 │   ├── NON_NEGOTIABLE_RULES.md
 │   ├── GLOSSARY.md
-│   └── architecture/          dependency, boundary, import, layer & system-context docs
+│   ├── architecture/          dependency, boundary, import, layer & system-context docs
+│   └── governance/            governance framework — how the project may change (V0-P3)
 ├── frontend/                  Presentation Layer (clinician-facing UI)            [V2+]
 ├── backend/                   Application Layer (services, APIs, orchestration)   [V2+]
 ├── ml/                        ML Layer (models, inference, uncertainty)           [V1+]
@@ -79,7 +80,7 @@ neurovision_ai/
 ├── tests/                     Cross-cutting tests (may import any module)         [V0+]
 ├── tools/                     Developer/maintainer tooling (not imported by prod) [V0+]
 ├── scripts/                   Operational scripts (not imported by prod)          [V0+]
-└── .gcc/                      Governance & Context Control layer                  [V0-P3]
+└── .gcc/                      Governance & Context Control + AI Operating System  [V0-P3/P4]
 ```
 
 **Dependency direction is one-way and acyclic** (top layers depend on lower
@@ -110,7 +111,9 @@ Read in this order for a complete understanding of project direction.
 | 6 | [`docs/NON_NEGOTIABLE_RULES.md`](docs/NON_NEGOTIABLE_RULES.md) | The 15 project laws (NR-1…NR-15). |
 | 7 | [`docs/GLOSSARY.md`](docs/GLOSSARY.md) | Canonical terminology (IIC, LOSO, GCC, Lore Protocol, …). |
 | 8 | [`docs/architecture/`](docs/architecture/) | Dependency graph, module boundaries, import rules, layered architecture, system context. |
-| 9 | [`docs/README.md`](docs/README.md) | Documentation index / how to navigate the docs. |
+| 9 | [`docs/governance/`](docs/governance/) | **Governance framework (V0-P3)** — architecture, AI, docs, testing, review, release, decision (ADR), risk, RFC, change management. |
+| 10 | [`.gcc/`](.gcc/) | **AI Operating System (V0-P4)** — master memory, live state, registries, Lore/recovery/onboarding protocols, templates, checklists. Start at [`.gcc/MAIN_CONTEXT.md`](.gcc/MAIN_CONTEXT.md). |
+| 11 | [`docs/README.md`](docs/README.md) | Documentation index / how to navigate the docs. |
 
 > **Single source of truth.** Terminology is governed by
 > [`docs/GLOSSARY.md`](docs/GLOSSARY.md); architecture by
@@ -125,7 +128,9 @@ Read in this order for a complete understanding of project direction.
 |------|--------|----------------|
 | Project Constitution Layer (V0-P1) | ✅ Complete | V0 |
 | Repository Architecture Foundation (V0-P2) | ✅ Complete | V0 |
-| Governance & Context Control (`.gcc/`, V0-P3) | ⏳ Contract defined; mechanisms pending | V0 |
+| Governance Layer (`docs/governance/`, V0-P3) | ✅ Complete | V0 |
+| AI Operating System (`.gcc/`, V0-P4) | ✅ Complete | V0 |
+| GCC enforcement automation (CI checks for imports/boundaries/consistency) | ⏳ Specified; implementation is next tooling task | V0→V1 |
 | Preprocessing / Datasets / ML / Evaluation | ⛔ Not started (correct for V0) | V1 |
 | Backend / Frontend (clinical workflow) | ⛔ Not started | V2 |
 | Near-real-time / Monitoring | ⛔ Not started | V3 |
@@ -170,16 +175,19 @@ criteria are satisfied** (Rule **NR-12**, "Never skip a version").
 
 ### For AI engineering agents
 This repository is built to be **self-explanatory without the original research
-corpus** (the Lore Protocol). Before acting:
+corpus** (the Lore Protocol). **Start at [`.gcc/MAIN_CONTEXT.md`](.gcc/MAIN_CONTEXT.md)
+and run [`.gcc/CONTEXT_RECOVERY_PROTOCOL.md`](.gcc/CONTEXT_RECOVERY_PROTOCOL.md) +
+[`.gcc/AI_ONBOARDING_PROTOCOL.md`](.gcc/AI_ONBOARDING_PROTOCOL.md).** Then, before acting:
 1. Load the **constitution**: vision → objectives → scope → version model →
    principles → rules → glossary.
 2. Load the **architecture**: [`docs/architecture/`](docs/architecture/) — treat
    the dependency graph and import rules as **hard constraints**.
-3. Confirm the **current version/phase** (§ top of this file) and do not
-   implement capability owned by a later version (Rule **NR-12**, **NR-13**).
-4. Never introduce a forbidden import or weaken a cross-version invariant
-   (Rules **NR-8**, **NR-3**, **NR-4**, **NR-9**).
-5. All generated code is subject to human review (Rule **NR-7**).
+3. Obey the **governance framework** [`docs/governance/AI_Governance.md`](docs/governance/AI_Governance.md)
+   (context recovery, scope/version checks, self-validation, traceability).
+4. Confirm the **current version/phase** and do not implement capability owned by a
+   later version (Rules **NR-12**, **NR-13**).
+5. Never introduce a forbidden import or weaken a cross-version invariant
+   (Rules **NR-8**, **NR-3**, **NR-4**, **NR-9**); **never self-approve** (NR-7).
 
 ### Golden rules (the short version)
 - **Patient-disjoint or it didn't happen.** (NR-3)
@@ -192,10 +200,13 @@ corpus** (the Lore Protocol). Before acting:
 
 ## 8. Governance & Contributions
 
-NeuroVision AI is governed **by construction**. The Governance & Context Control
-layer ([`.gcc/`](.gcc/), formalized in V0-P3) mechanizes the boundaries and
-decision records described throughout the docs. Changes to constitution or
-architecture documents are **governance events** requiring a recorded, reviewed
+NeuroVision AI is governed **by construction**. The **governance framework**
+([`docs/governance/`](docs/governance/), V0-P3) defines how every change is
+proposed (RFC), decided (ADR), reviewed, tested, and released; the **AI Operating
+System** ([`.gcc/`](.gcc/), V0-P4) holds the living state, registries, and the
+context-recovery / onboarding / Lore protocols that let a solo founder and AI
+agents develop safely for years. Changes to constitution, architecture, or
+governance documents are **governance events** requiring a recorded, reviewed
 decision (Rule **NR-5**).
 
 ---
