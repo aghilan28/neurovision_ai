@@ -128,16 +128,20 @@ Read in this order for a complete understanding of project direction.
 | Repository Architecture Foundation (V0-P2) | ✅ Complete | V0 |
 | Governance & Context Control (`.gcc/`, V0-P3) | ⏳ Contract defined; mechanisms pending | V0 |
 | ML baseline models + Uncertainty (V1-P5 + V1-P6) | 🚧 Implemented on feature branch — pending review (NR-7) & version gate (NR-12); see [`.gcc/decisions/ADR-0001`](.gcc/decisions/ADR-0001-v1-p5-p6-baseline-models-and-uncertainty.md) | V1 |
-| Preprocessing / Datasets / Evaluation | 🚧 Minimal integration foundations implemented to execute V1-P5/P6 (extend, don't rewrite) — see ADR-0001 | V1 |
-| Backend / Frontend (clinical workflow) | ⛔ Not started | V2 |
+| Offline Inference Platform + Research App (V1-P7 + V1-P8) | 🚧 Implemented (offline-only) on feature branch — see [`.gcc/decisions/ADR-0002`](.gcc/decisions/ADR-0002-v1-p7-p8-offline-inference-and-research-app.md) | V1 |
+| Preprocessing / Datasets / Evaluation | 🚧 Minimal integration foundations implemented to execute V1 (extend, don't rewrite) — see ADR-0001/0002 | V1 |
+| V1 Certification | 🟡 CERTIFIED (QUALIFIED) — see [`docs/certification/v1/`](docs/certification/v1/V1_COMPLETION_REPORT.md); V2 gate NOT granted | V1 |
+| Backend / Frontend (clinical workflow, APIs) | ⛔ Not started (offline forms only in V1) | V2 |
 | Near-real-time / Monitoring | ⛔ Not started | V3 |
 | Hospital deployment / full audit | ⛔ Not started | V4 |
 
-> **Note (V1-P5/P6 branch).** The ML baseline + uncertainty layers are implemented
-> with deterministic, reproducible, patient-disjoint, uncertainty-aware, fully
-> lineage-tracked pipelines (`python -m scripts.run_pipeline`; `python -m pytest`).
-> Formal V1 *exit criteria* still require V0-P3 and the full V1-P1…P4 deliverables
-> per the version gate (NR-12); this branch does not claim them.
+> **Note (V1 branch).** The full offline pipeline runs end to end with complete
+> traceability (`python -m scripts.run_offline_inference --render-app`;
+> `python -m scripts.verify_v1`; `python -m pytest`). V1 is **CERTIFIED
+> (QUALIFIED)**: every delivered-scope exit criterion passes, but real-EEG
+> validation, the authoritative V1-P1…P4 foundations, and mechanized V0-P3
+> governance remain open and are **V2 blockers** (see the certification docs). V2
+> is **not** auto-started (NR-12).
 
 There is **intentionally no executable code** in V0. The foundation is documents
 and governed structure. See

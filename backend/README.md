@@ -2,7 +2,8 @@
 
 > **Layer:** Application Layer
 > **Directory README type:** Repository Architecture Foundation (V0-P2)
-> **Status (V0):** Boundary contract defined; **no code yet** (correct for V0).
+> **Status (V0):** Boundary contract defined.
+> **Status (V1-P7):** **Offline implementation present** — `offline_inference/` (see "V1 Offline Implementation" below). Clinical/API/deployment remain V2+.
 > **Governing docs:** AP-4 (preserve uncertainty), AP-5/AP-8 (traceability/auditability), AP-7 (boundaries), NR-4, NR-11, [`../docs/architecture/IMPORT_RULES.md`](../docs/architecture/IMPORT_RULES.md)
 
 The **orchestration and service** layer. It composes the domain modules
@@ -60,3 +61,26 @@ Provide application services and APIs that orchestrate domain logic and deliver
   set to a bare label.
 - Does not implement DSP (`preprocessing/`), modeling (`ml/`), or metric
   computation (`evaluation/`) itself — it orchestrates them.
+
+
+---
+
+## V1 Offline Implementation (V1-P7)
+
+> A **governed scope extension**: the directive introduces an *offline* application
+> layer in V1. The architecture is **populated, not re-layered** (AP-1). Decision:
+> [`../.gcc/decisions/ADR-0002`](../.gcc/decisions/ADR-0002-v1-p7-p8-offline-inference-and-research-app.md).
+
+`backend/offline_inference/` is the **Offline Inference Platform** — a deterministic
+15-stage orchestration of every V1 subsystem (raw EEG → registered intelligence
+output), with an inference registry, checksummed artifacts, content-addressed
+lineage, 7-check validation, six reports, and a recoverable job system.
+
+- **Offline only.** No APIs, networking, real-time, multi-user, or clinical
+  deployment (V2+).
+- **Boundary.** Imports `ml`/`evaluation`/`datasets`/`preprocessing` and composes
+  them; **never** imports `frontend` (enforced by `tests/test_boundaries.py`).
+- **Run:** `python -m scripts.run_offline_inference --render-app` ·
+  `python -m scripts.verify_v1`.
+
+See [`offline_inference/README.md`](./offline_inference/README.md).
