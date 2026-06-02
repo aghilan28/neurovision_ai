@@ -18,11 +18,11 @@ THEME_TOKENS = {
         "surface": "#181523",
         "panel": "#211D30",
         "panel_2": "#2A2440",
-        "line": "rgba(168, 154, 232, 0.1)",
+        "line": "rgba(168, 154, 232, 0.12)",
         "line_strong": "rgba(168, 154, 232, 0.2)",
-        "text": "#E6EBF8",
-        "muted": "#8A8895",
-        "subtle": "#5D5B6A",
+        "text": "#F5F5FA",
+        "muted": "#9C97B5",
+        "subtle": "#6D6786",
         "accent": "#A89AE8",
         "accent_2": "#4EE4B8",
         "warning": "#FFB84D",
@@ -36,7 +36,7 @@ THEME_TOKENS = {
         "mono": "ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace",
     },
     "spacing": {"1": "4px", "2": "8px", "3": "12px", "4": "16px", "5": "20px", "6": "24px"},
-    "radius": {"sm": "4px", "md": "8px", "lg": "12px"},
+    "radius": {"sm": "4px", "md": "8px", "lg": "24px"},
     "elevation": {"panel": "0 8px 32px rgba(0,0,0,.32)"},
     "animation": {"fast": "150ms ease", "standard": "250ms cubic-bezier(0.4, 0, 0.2, 1)"},
     "interaction": {"focus": "0 0 0 3px rgba(168, 154, 232, 0.2)"},
@@ -103,8 +103,8 @@ a{{color:inherit;text-decoration:none;transition:all 200ms ease}}
 /* TOP INTELLIGENCE BAR */
 .nv-top-bar{{
   height:var(--topbar-h);min-height:var(--topbar-h);
-  border-bottom:1px solid var(--line);background:rgba(24, 21, 35, 0.8);
-  backdrop-filter:blur(12px);padding:0 32px;
+  border-bottom:1px solid var(--line);background:rgba(18, 16, 27, 0.8);
+  backdrop-filter:blur(24px);padding:0 32px;
   display:flex;align-items:center;justify-content:space-between;
   z-index:90;
 }}
@@ -113,6 +113,16 @@ a{{color:inherit;text-decoration:none;transition:all 200ms ease}}
 
 /* WORKSPACE AREA */
 .nv-workspace{{flex:1;overflow-y:auto;padding:40px 48px;background:radial-gradient(circle at 50% 0%, rgba(168, 154, 232, 0.03), transparent 70%)}}
+
+/* WORKSTATION LAYOUT */
+.nv-workstation-layout{{
+  display:grid;grid-template-columns:1fr 320px;grid-template-rows:1fr auto;gap:24px;height:100%;
+}}
+.nv-ws-center{{grid-column:1;grid-row:1}}
+.nv-ws-right{{grid-column:2;grid-row:1 / span 2;display:flex;flex-direction:column;gap:24px}}
+.nv-ws-bottom{{grid-column:1;grid-row:2;padding-top:24px;border-top:1px solid var(--line)}}
+
+.nv-area{{display:none;height:100%}}
 
 .nv-page-header{{margin-bottom:40px}}
 .nv-page-title{{font-size:32px;font-weight:700;letter-spacing:-0.03em;margin:0 0 12px;color:var(--text)}}
@@ -123,7 +133,7 @@ a{{color:inherit;text-decoration:none;transition:all 200ms ease}}
 /* CARDS / PANELS */
 .nv-panel{{
   grid-column:span 12;background:var(--surface);border:1px solid var(--line);
-  border-radius:12px;overflow:hidden;transition:transform 250ms ease, box-shadow 250ms ease;
+  border-radius:24px;overflow:hidden;transition:transform 250ms ease, box-shadow 250ms ease;
 }}
 .nv-panel:hover{{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.4)}}
 .nv-panel-head{{
@@ -232,6 +242,12 @@ def render_section(section: dict) -> str:
     kind = section.get("kind") or section.get("type")
     title = section.get("title") or section.get("heading") or "Section"
     data = section.get("data", {})
+    if kind == "visualization":
+        return render_visualization({
+            "type": section.get("visualization_type"),
+            "title": title,
+            "spec": section.get("spec", {})
+        })
     if kind == "alert":
         return f'<div class="nv-alert {esc(section.get("level", "info"))}">{esc(section.get("message"))}</div>'
     if kind == "kv":
@@ -410,47 +426,153 @@ def _layout_svg(spec: dict) -> str:
     return f"<svg width='{width}' height='{height}' viewBox='0 0 {width} {height}'>{''.join(parts)}</svg>"
 
 
-def _brain_simulation_svg() -> str:
-    """A high-fidelity, CSS-animated SVG brain simulation."""
-    # Simplified anatomical paths for two hemispheres
-    l_hemi = "M150,100 C100,100 80,150 80,200 C80,280 150,320 150,320 C150,320 150,100 150,100"
-    r_hemi = "M150,100 C200,100 220,150 220,200 C220,280 150,320 150,320 C150,320 150,100 150,100"
+def _brain_simulation_html() -> str:
+    """A high-fidelity, animated Canvas-based living brain simulation."""
+    return """
+<div id="brain-container" style="width:100%; height:600px; position:relative; overflow:hidden; background: radial-gradient(circle at 50% 50%, rgba(168, 154, 232, 0.05) 0%, transparent 70%); border-radius: 24px;">
+    <canvas id="brain-canvas" style="width:100%; height:100%;"></canvas>
+    <div id="brain-overlay" style="position:absolute; top:24px; left:24px; pointer-events:none;">
+        <div class="nv-brand-sub" style="color:var(--accent-2); margin-bottom:8px;">Live Neural Flow</div>
+        <div id="active-region" style="font-size:24px; font-weight:700; color:var(--text); letter-spacing:-0.02em;">Frontal Lobe</div>
+    </div>
+    <div style="position:absolute; bottom:24px; right:24px; text-align:right;">
+        <div class="nv-badge intelligence">Confidence: 99.2%</div>
+        <div style="margin-top:8px; font-size:10px; color:var(--subtle); text-transform:uppercase; letter-spacing:0.1em;">Real-time Telemetry</div>
+    </div>
+</div>
+<script>
+(function() {
+    const canvas = document.getElementById('brain-canvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('brain-container');
+    let width, height, dpr;
 
-    # Internal neural network (nodes and synapses)
-    nodes = [
-        (120, 150, 0), (180, 150, 0.5), (105, 200, 0.2), (195, 200, 0.7),
-        (130, 250, 0.4), (170, 250, 0.9), (150, 180, 0.1), (150, 280, 0.6)
-    ]
-    edges = [
-        (120, 150, 105, 200), (180, 150, 195, 200), (105, 200, 130, 250),
-        (195, 200, 170, 250), (130, 250, 150, 280), (170, 250, 150, 280),
-        (150, 180, 120, 150), (150, 180, 180, 150)
-    ]
+    function resize() {
+        dpr = window.devicePixelRatio || 1;
+        width = container.clientWidth;
+        height = container.clientHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
-    svg_parts = [
-        '<style>',
-        '@keyframes brain-pulse { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }',
-        '@keyframes synapse-flow { 0% { stroke-dashoffset: 20; } 100% { stroke-dashoffset: 0; } }',
-        '@keyframes brain-glow { 0%, 100% { filter: drop-shadow(0 0 5px rgba(168, 154, 232, 0.2)); } 50% { filter: drop-shadow(0 0 15px rgba(168, 154, 232, 0.5)); } }',
-        '.hemi { fill: rgba(168, 154, 232, 0.03); stroke: rgba(168, 154, 232, 0.1); stroke-width: 1; }',
-        '.node { fill: var(--accent); animation: brain-pulse 3s infinite ease-in-out; }',
-        '.edge { fill: none; stroke: rgba(78, 228, 184, 0.2); stroke-width: 1; stroke-dasharray: 4 4; animation: synapse-flow 1s infinite linear; }',
-        '#brain-sim { animation: brain-glow 4s infinite ease-in-out; }',
-        '</style>',
-        '<g id="brain-sim">',
-        f'<path class="hemi" d="{l_hemi}"/>',
-        f'<path class="hemi" d="{r_hemi}"/>'
-    ]
+    const nodes = [];
+    const edges = [];
+    const particles = [];
+    const nodeCount = 220;
+    const edgeCount = 450;
 
-    for x1, y1, x2, y2 in edges:
-        svg_parts.append(f'<path class="edge" d="M{x1},{y1} L{x2},{y2}"/>')
+    // Generate nodes in a brain-like shape
+    for (let i = 0; i < nodeCount; i++) {
+        let x, y;
+        const side = Math.random() > 0.5 ? 1 : -1;
+        // Two lobes approximation
+        const centerX = width / 2 + (side * width * 0.12);
+        const centerY = height / 2;
+        const angle = Math.random() * Math.PI * 2;
+        const radiusX = (0.2 + Math.random() * 0.15) * width;
+        const radiusY = (0.25 + Math.random() * 0.2) * height;
 
-    for x, y, delay in nodes:
-        svg_parts.append(f'<circle class="node" cx="{x}" cy="{y}" r="3" style="animation-delay: {delay}s"/>')
+        x = centerX + Math.cos(angle) * radiusX * Math.random();
+        y = centerY + Math.sin(angle) * radiusY * Math.random();
 
-    svg_parts.append('</g>')
+        nodes.push({
+            x, y,
+            baseX: x, baseY: y,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: (Math.random() - 0.5) * 0.2,
+            size: 1 + Math.random() * 2,
+            pulse: Math.random() * Math.PI * 2,
+            region: getRegionName(x, y, width, height)
+        });
+    }
 
-    return f'<svg width="300" height="400" viewBox="0 50 300 300" style="margin: 0 auto; display: block;">{"".join(svg_parts)}</svg>'
+    function getRegionName(x, y, w, h) {
+        const cx = w/2, cy = h/2;
+        if (y < cy - h*0.1) return 'Frontal';
+        if (y > cy + h*0.15) return 'Occipital';
+        if (x < cx - w*0.1) return 'Temporal (L)';
+        if (x > cx + w*0.1) return 'Temporal (R)';
+        return 'Parietal';
+    }
+
+    // Connect nodes
+    for (let i = 0; i < edgeCount; i++) {
+        const a = nodes[Math.floor(Math.random() * nodes.length)];
+        let b = nodes[Math.floor(Math.random() * nodes.length)];
+        const distSq = (a.x - b.x)**2 + (a.y - b.y)**2;
+        if (distSq < (width * 0.15)**2 && a !== b) {
+            edges.push({a, b, strength: 0.1 + Math.random() * 0.4});
+        } else {
+            i--; // try again
+        }
+    }
+
+    function animate(time) {
+        ctx.clearRect(0, 0, width, height);
+        const breathing = 1 + Math.sin(time / 1500) * 0.02;
+
+        // Update nodes
+        nodes.forEach(n => {
+            n.x = width/2 + (n.baseX - width/2) * breathing + Math.sin(time/1000 + n.pulse) * 2;
+            n.y = height/2 + (n.baseY - height/2) * breathing + Math.cos(time/1000 + n.pulse) * 2;
+        });
+
+        // Draw edges
+        ctx.lineWidth = 0.5;
+        edges.forEach(e => {
+            const alpha = 0.05 + Math.sin(time/500 + e.a.pulse) * 0.05;
+            ctx.strokeStyle = `rgba(168, 154, 232, ${alpha})`;
+            ctx.beginPath();
+            ctx.moveTo(e.a.x, e.a.y);
+            ctx.lineTo(e.b.x, e.b.y);
+            ctx.stroke();
+        });
+
+        // Neural Flow Particles
+        if (Math.random() < 0.1) {
+            const edge = edges[Math.floor(Math.random() * edges.length)];
+            particles.push({edge, progress: 0, speed: 0.005 + Math.random() * 0.01});
+        }
+
+        particles.forEach((p, i) => {
+            p.progress += p.speed;
+            if (p.progress >= 1) {
+                particles.splice(i, 1);
+                return;
+            }
+            const x = p.edge.a.x + (p.edge.b.x - p.edge.a.x) * p.progress;
+            const y = p.edge.a.y + (p.edge.b.y - p.edge.a.y) * p.progress;
+            ctx.fillStyle = '#4EE4B8';
+            ctx.beginPath();
+            ctx.arc(x, y, 1.5, 0, Math.PI*2);
+            ctx.fill();
+            // Glow
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = '#4EE4B8';
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        });
+
+        // Draw nodes
+        nodes.forEach(n => {
+            const active = Math.sin(time/1000 + n.pulse) > 0.8;
+            ctx.fillStyle = active ? '#4EE4B8' : '#A89AE8';
+            ctx.globalAlpha = active ? 0.8 : 0.3;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, active ? n.size * 1.5 : n.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        ctx.globalAlpha = 1.0;
+
+        requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+})();
+</script>
+"""
 
 
 def render_visualization(viz: dict) -> str:
@@ -508,7 +630,7 @@ def render_application_page(page: dict, *, version: str) -> str:
     # Brain simulation in the Command Center (Screen 1)
     brain = ""
     if page.get("id") == "dashboard":
-        brain = f'<div style="grid-column: span 12; margin-bottom: 40px; background: var(--surface); border-radius: 24px; padding: 48px; border: 1px solid var(--line); box-shadow: inset 0 0 80px rgba(168, 154, 232, 0.05);">{_brain_simulation_svg()}</div>'
+        brain = f'<div style="grid-column: span 12; margin-bottom: 40px; background: var(--surface); border-radius: 24px; padding: 48px; border: 1px solid var(--line); box-shadow: inset 0 0 80px rgba(168, 154, 232, 0.05);">{_brain_simulation_html()}</div>'
     nav_html = "".join(
         f'<a class="{"active" if item.get("active") else ""}" href="#{esc(item.get("id"))}">{esc(item.get("label"))}</a>'
         for item in nav
@@ -556,7 +678,7 @@ def render_workstation_view(view: Any, *, title: str, subtitle: str, version: st
     validation = data.get("validation", {})
     meta = data.get("meta", {})
     reveal = "".join(
-        f"#tab-{esc(area.get('id'))}:checked ~ .nv-main #area-{esc(area.get('id'))}{{display:block}}"
+        f"#tab-{esc(area.get('id'))}:checked ~ .nv-main #area-{esc(area.get('id'))}{{display:grid}}"
         f"#tab-{esc(area.get('id'))}:checked ~ .nv-sidebar label[for='tab-{esc(area.get('id'))}']"
         "{background:var(--panel);color:var(--accent);box-shadow:inset 4px 0 0 -1px var(--accent)}"
         for area in areas
@@ -569,9 +691,30 @@ def render_workstation_view(view: Any, *, title: str, subtitle: str, version: st
         aid = esc(area.get("id"))
         radios.append(f"<input class='tab' type='radio' name='tabs' id='tab-{aid}'{checked}>")
         labels.append(f'<label class="nv-tab-label" for="tab-{aid}">{esc(area.get("title"))}</label>')
-        pagebar = "".join(f'<span class="nv-badge info" style="margin-right:8px">{esc(page.get("title"))}</span>' for page in area.get("pages", []))
-        pages = "".join(_page_html(page) for page in area.get("pages", []))
-        panels.append(f'<section class="nv-area" id="area-{aid}"><div style="margin-bottom:24px">{pagebar}</div>{pages}</section>')
+
+        # Workstation 3-Part Layout: Center, Right, Bottom
+        pages_list = area.get("pages", [])
+        center_pages = [p for p in pages_list if "overview" in p.get("id", "").lower() or "graph" in p.get("id", "").lower() or "workspace" in p.get("title", "").lower()]
+        right_pages = [p for p in pages_list if "insight" in p.get("title", "").lower() or "alert" in p.get("title", "").lower() or "governance" in p.get("title", "").lower()]
+        bottom_pages = [p for p in pages_list if "finding" in p.get("title", "").lower() or "telemetry" in p.get("title", "").lower() or "timeline" in p.get("title", "").lower()]
+
+        # Fallback
+        if not center_pages and pages_list: center_pages = [pages_list[0]]
+        if not right_pages and len(pages_list) > 1: right_pages = [pages_list[1]]
+        if not bottom_pages and len(pages_list) > 2: bottom_pages = [pages_list[2]]
+
+        center_html = "".join(_page_html(p) for p in center_pages)
+        right_html = "".join(_page_html(p) for p in right_pages)
+        bottom_html = "".join(_page_html(p) for p in bottom_pages)
+
+        area_layout = f"""
+        <div class="nv-workstation-layout">
+            <div class="nv-ws-center">{center_html}</div>
+            <div class="nv-ws-right">{right_html}</div>
+            <div class="nv-ws-bottom">{bottom_html}</div>
+        </div>
+        """
+        panels.append(f'<section class="nv-area" id="area-{aid}">{area_layout}</section>')
     meta_badges = [
         badge("validation", "ok" if validation.get("ok") else "failed"),
         badge("version", version),
@@ -608,9 +751,9 @@ def render_research_view(view: Any, *, title: str, subtitle: str, version: str) 
     validation = data.get("validation", {})
     meta = data.get("meta", {})
     reveal = "".join(
-        f"#tab-{esc(page.get('id'))}:checked ~ .nv-main #area-{esc(page.get('id'))}{{display:block}}"
+        f"#tab-{esc(page.get('id'))}:checked ~ .nv-main #area-{esc(page.get('id'))}{{display:grid}}"
         f"#tab-{esc(page.get('id'))}:checked ~ .nv-sidebar label[for='tab-{esc(page.get('id'))}']"
-        "{background:var(--panel);color:var(--accent);box-shadow:inset 0 4px 0 -1px var(--accent)}"
+        "{background:var(--panel);color:var(--accent);box-shadow:inset 4px 0 0 -1px var(--accent)}"
         for page in pages
     )
     radios = []
@@ -621,7 +764,29 @@ def render_research_view(view: Any, *, title: str, subtitle: str, version: str) 
         pid = esc(page.get("id"))
         radios.append(f"<input class='tab' type='radio' name='tabs' id='tab-{pid}'{checked}>")
         labels.append(f'<label class="nv-tab-label" for="tab-{pid}">{esc(page.get("title"))}</label>')
-        panels.append(f'<section class="nv-area" id="area-{pid}">{_page_html(page)}</section>')
+
+        # Research layout: Center (Object), Right (Hypotheses/Notes), Bottom (Metrics)
+        sections = page.get("sections", [])
+        center_secs = [s for s in sections if s.get("type") in ("graph", "visualization", "layout", "report")]
+        right_secs = [s for s in sections if "hypotheses" in s.get("title", "").lower() or "notes" in s.get("title", "").lower() or "insights" in s.get("title", "").lower() or "lineage" in s.get("title", "").lower()]
+        bottom_secs = [s for s in sections if "metrics" in s.get("title", "").lower() or "benchmarks" in s.get("title", "").lower() or "experiments" in s.get("title", "").lower() or "audit" in s.get("title", "").lower()]
+
+        # Fallback
+        if not center_secs and sections: center_secs = [sections[0]]
+        if not right_secs and len(sections) > 1: right_secs = [sections[1]]
+        if not bottom_secs and len(sections) > 2: bottom_secs = [sections[2]]
+
+        def _render_secs(secs):
+            return "".join(render_section(s) for s in secs)
+
+        area_layout = f"""
+        <div class="nv-workstation-layout">
+            <div class="nv-ws-center">{_render_secs(center_secs)}</div>
+            <div class="nv-ws-right">{_render_secs(right_secs)}</div>
+            <div class="nv-ws-bottom">{_render_secs(bottom_secs)}</div>
+        </div>
+        """
+        panels.append(f'<section class="nv-area" id="area-{pid}">{area_layout}</section>')
     meta_badges = [badge("validation", "ok" if validation.get("ok") else "failed"), badge("version", version)]
     for key in ("inference_id", "lineage_id"):
         if key in meta:

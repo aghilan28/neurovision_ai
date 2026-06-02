@@ -42,14 +42,14 @@ def test_full_frontend_deliverable(eeg_fixtures, tmp_path):
 
     # the user receives a prediction with confidence + explanation (NR-4)
     prediction_html = app.render_prediction(analysis_id)
-    assert "Prediction" in prediction_html and "Uncertainty (always shown)" in prediction_html
+    assert "Prediction Outcome" in prediction_html and "Confidence Distribution" in prediction_html
     prediction = app.state.predictions[analysis_id]
     assert prediction.confidence_level and prediction.calibration_quality
     assert len(prediction.explanation.get("feature_contributions", [])) == 29
 
     # the user can access reports
     reports_html = app.render_reports(analysis_id)
-    assert "Available reports" in reports_html
+    assert "Evidence Graph" in reports_html
     assert {"prediction_report", "lineage_report"} <= {r.name for r in app.state.reports[analysis_id]}
 
     # the whole journey is frontend-validated and exercised the core API surface

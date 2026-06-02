@@ -77,7 +77,11 @@ def prose(heading: str, text: str, intelligence: bool = False) -> dict:
     return {"type": "prose", "heading": heading, "text": text, "intelligence": intelligence}
 
 
+def visualization(title: str, typ: str, spec: dict) -> dict:
+    return {"type": "visualization", "title": title, "visualization_type": typ, "spec": spec}
+
+
 __all__ = [
     "NAV_AREAS", "nav", "alert", "kv", "table", "form_section", "stages", "items_list",
-    "report_section", "prose",
+    "report_section", "prose", "visualization",
 ]
