@@ -53,3 +53,71 @@ splitting is always **patient-disjoint** and data handling is reproducible.
 - **Patient disjointness is a hard invariant** owned here; violating it is NR-3.
 - Does not train/run models (that is `ml/`) or compute metrics (that is `evaluation/`).
 - Provides data + provenance; never serves clients directly (that is `backend/`).
+
+
+---
+
+## Version 1 (V1-P1) — Implemented EEG Data Foundation
+
+> The boundary contract above (V0-P2) is **unchanged and still authoritative**.
+> This section documents the V1-P1 implementation that *populates* this module
+> within those boundaries (Principle **AP-1**: extend, never rewrite).
+
+### What V1-P1 delivers
+A deterministic, validated, traceable lifecycle for every EEG file entering the
+repository:
+
+```
+ingest → validate → extract metadata → register → version → trace lineage
+```
+
+**Supported inputs: EDF and EDF+ only** (V1 directive; NR-13). Other formats are
+detected and reported as `UNSUPPORTED`, never mis-parsed. Future formats are
+documented as extension points (see [`docs/EXTENSION_POINTS.md`](./docs/EXTENSION_POINTS.md)).
+
+### Subsystem layout
+| Path | Responsibility |
+|------|----------------|
+| [`contracts/`](./contracts) | The 8 formal data contracts (purpose, fields, validation/quality/version/lineage/traceability rules). |
+| [`schemas/`](./schemas) | Frozen dataclasses realizing the contracts (deterministic `to_dict`/`from_dict`). |
+| [`ingestion/`](./ingestion) | Pure-Python EDF/EDF+ reader, signature detection, integrity verification, discovery, and the ingestion pipeline. |
+| [`validation/`](./validation) | Composable, deterministic checks → `ValidationReport`. |
+| [`metadata/`](./metadata) | EDF→canonical `MetadataRecord` / `PatientRecord` / `RecordingSession`. |
+| [`registry/`](./registry) | Discoverable, JSON-backed record + dataset registries. |
+| [`versioning/`](./versioning) | Checksums, content-addressed manifests, append-only version chain, change tracking, audits. |
+| [`lineage/`](./lineage) | The provenance DAG (`LineageTracker`). |
+| [`docs/`](./docs) | Lifecycle, ingestion, traceability, and extension-point documentation. |
+| [`tests/`](./tests) | Deterministic test suite incl. a self-contained EDF fixture writer. |
+
+### Minimal usage
+```python
+from datasets.ingestion import ingest_edf_file
+from datasets.lineage import LineageTracker
+from datasets.registry import RecordRegistry, DatasetRegistry
+from datasets.versioning import build_manifest, VersionedDataset, audit_manifest
+
+tracker = LineageTracker()
+registry = RecordRegistry()
+
+record = ingest_edf_file("recording.edf", tracker=tracker)   # deterministic
+registry.register_record(record)                              # discoverable
+
+manifest = build_manifest("ds-icu", "v1", registry.records())
+chain = VersionedDataset("ds-icu")
+version, diff = chain.commit(manifest, change_summary="initial cohort")
+
+known = {r.file_id: r.content_sha256 for r in registry.records()}
+assert audit_manifest(manifest, known, version=version).ok    # reproducible
+```
+
+### Reproducibility & determinism (AP-3/AP-6, NR-9/NR-10)
+- All identifiers and fingerprints are **content-derived** (SHA-256).
+- Manifest fingerprints are **order-independent** and exclude volatile fields.
+- No wall-clock is read implicitly; timestamps are caller-supplied provenance.
+- The EDF reader and fixture writer use only the standard library + NumPy, so
+  parsing behaviour is fully owned and auditable (no third-party EDF dependency).
+
+### Dependencies used (pinned)
+`numpy` (array math + content hashing). No `ml`/`evaluation`/`backend`/`frontend`
+imports (NR-8). `preprocessing/` is *available* to this module but **not** imported
+in V1-P1 (the data foundation needs no DSP).
