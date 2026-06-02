@@ -274,3 +274,116 @@ def _make_decider(policy_service: PolicyService, hook_to_policy: dict, context_f
         approved = evaluation.outcome in _OUTCOME_APPROVES
         return approved, evaluation.outcome, policy_id, authority
     return _decide
+
+
+
+# ============================================================================
+# Agent <-> Policy integration (V4-P5)
+# ============================================================================
+
+# hook -> (policy category, governing fact, human title)
+_AGENT_HOOK_SPEC = {
+    "agent_approval": (PolicyCategory.GOVERNANCE, "review_complete",
+                       "Agent Approval Requires Completed Review"),
+    "agent_availability": (PolicyCategory.OBLIGATION, "capabilities_approved",
+                           "Cannot Make Agent Available Without Capability Approval"),
+    "agent_suspension": (PolicyCategory.GOVERNANCE, "suspension_authorized",
+                         "Agent Suspension Requires Authorization"),
+    "agent_retirement": (PolicyCategory.GOVERNANCE, "retirement_authorized",
+                         "Agent Retirement Requires Authorization"),
+}
+
+
+def install_default_agent_policies(policy_service: PolicyService,
+                                   created_at: str = DETERMINISTIC_EPOCH) -> dict:
+    """Create + activate one ACTIVE policy per governed agent hook. Returns hook->policy_id."""
+    return _install_default_policies(policy_service, _AGENT_HOOK_SPEC, subject_kind="agent",
+                                     created_at=created_at)
+
+
+def _agent_context(hook: str, agent) -> dict:
+    """A deterministic evaluation context derived from the agent + hook."""
+    gov = agent.governance
+    satisfied_key = f"{hook}_requirement_satisfied"
+    requirement_met = {
+        "agent_approval": gov.approval_state in ("approved", "pending")
+        or agent.state.value in ("under_review", "approved"),
+        "agent_availability": gov.approval_state == "approved" or _has_active_approval(agent),
+        "agent_suspension": True,
+        "agent_retirement": True,
+    }.get(hook, True)
+    return {
+        "hook": hook, "agent_id": agent.agent_id, "category": agent.category,
+        "priority": agent.priority, "state": agent.state.value,
+        "governance_approved": gov.approval_state == "approved",
+        "review_complete": agent.state.value in ("under_review", "approved", "available"),
+        "capabilities_approved": gov.capability_approved or not _has_high_risk(agent),
+        "suspension_authorized": True, "retirement_authorized": True,
+        satisfied_key: bool(requirement_met), "requirement_met": bool(requirement_met),
+    }
+
+
+def _has_high_risk(agent) -> bool:
+    """True if the agent declares any high/critical-risk capability (needs cap approval)."""
+    return any(getattr(c, "risk", "") in ("high", "critical") for c in agent.capabilities)
+
+
+def agent_policy_decider(policy_service: PolicyService, hook_to_policy: dict,
+                         authority: str = "governance") -> Callable:
+    """Return a decider ``(hook, agent) -> (approved, decision, policy_id, authority)``."""
+    return _make_decider(policy_service, hook_to_policy, _agent_context, "agent",
+                         lambda a: a.agent_id, lambda a: a.lineage_id, authority)
+
+
+# ============================================================================
+# Execution <-> Policy integration (V4-P6)
+# ============================================================================
+
+_EXECUTION_HOOK_SPEC = {
+    "execution_authorization": (PolicyCategory.GOVERNANCE, "assignment_referenced",
+                                "Execution Authorization Requires an Approved Assignment"),
+    "execution_activation": (PolicyCategory.OBLIGATION, "authorized",
+                             "Cannot Activate Unauthorized Executions"),
+    "execution_completion": (PolicyCategory.GOVERNANCE, "objective_defined",
+                             "Execution Completion Requires a Defined Objective"),
+    "execution_termination": (PolicyCategory.GOVERNANCE, "termination_authorized",
+                              "Execution Termination Requires Authorization"),
+}
+
+
+def install_default_execution_policies(policy_service: PolicyService,
+                                       created_at: str = DETERMINISTIC_EPOCH) -> dict:
+    """Create + activate one ACTIVE policy per governed execution hook. Returns hook->policy_id."""
+    return _install_default_policies(policy_service, _EXECUTION_HOOK_SPEC,
+                                     subject_kind="execution", created_at=created_at)
+
+
+def _execution_context(hook: str, execution) -> dict:
+    """A deterministic evaluation context derived from the execution + hook."""
+    gov = execution.governance
+    ctx = execution.context
+    satisfied_key = f"{hook}_requirement_satisfied"
+    authorized = gov.authorization_state == "authorized" or any(
+        e.get("decision") in ("permitted", "conditional_approval", "approved")
+        for e in gov.authorization_history)
+    requirement_met = {
+        "execution_authorization": bool(ctx.assignment_id and ctx.agent_id and ctx.task_id),
+        "execution_activation": authorized,
+        "execution_completion": bool(execution.metadata.objective),
+        "execution_termination": True,
+    }.get(hook, True)
+    return {
+        "hook": hook, "execution_id": execution.execution_id, "state": execution.state.value,
+        "task_id": ctx.task_id, "agent_id": ctx.agent_id, "assignment_id": ctx.assignment_id,
+        "assignment_referenced": bool(ctx.assignment_id and ctx.agent_id and ctx.task_id),
+        "authorized": authorized, "objective_defined": bool(execution.metadata.objective),
+        "termination_authorized": True,
+        satisfied_key: bool(requirement_met), "requirement_met": bool(requirement_met),
+    }
+
+
+def execution_policy_decider(policy_service: PolicyService, hook_to_policy: dict,
+                             authority: str = "governance") -> Callable:
+    """Return a decider ``(hook, execution) -> (approved, decision, policy_id, authority)``."""
+    return _make_decider(policy_service, hook_to_policy, _execution_context, "execution",
+                         lambda e: e.execution_id, lambda e: e.lineage_id, authority)
