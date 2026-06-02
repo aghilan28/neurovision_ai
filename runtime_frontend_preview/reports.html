@@ -1,93 +1,2162 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Evidence &amp; Reporting Center</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Evidence Center</title><style>
 :root{
-  --bg:#080d12;--surface:#0d141b;--panel:#111b24;--panel-2:#16222d;
-  --line:#263440;--line-strong:#385061;--text:#e6edf3;--muted:#9aa8b4;
-  --subtle:#6f7f8e;--accent:#67b7dc;--accent-2:#77d0a5;
-  --warning:#e2b15f;--danger:#ef6f6c;--ok:#73d29c;--info:#8fb7ff;
+  --bg:#12101B;--surface:#181523;--panel:#211D30;--panel-2:#2A2440;
+  --line:rgba(168, 154, 232, 0.1);--line-strong:rgba(168, 154, 232, 0.2);--text:#E6EBF8;--muted:#8A8895;
+  --subtle:#5D5B6A;--accent:#A89AE8;--accent-2:#4EE4B8;
+  --warning:#FFB84D;--danger:#FF5577;--ok:#4EE4B8;--info:#A89AE8;
+  --sidebar-w:280px;--topbar-h:72px;
 }
 *{box-sizing:border-box}
-html{background:var(--bg);color:var(--text)}
-body{margin:0;background:
-  radial-gradient(circle at 20% 0%, rgba(103,183,220,.10), transparent 30%),
-  linear-gradient(180deg,#0a1016 0%,#080d12 58%,#070b10 100%);
-  color:var(--text);font:13px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:0}
-a{color:inherit;text-decoration:none}
-.nv-shell{min-height:100vh;display:grid;grid-template-columns:minmax(210px,248px) 1fr}
-.nv-sidebar{border-right:1px solid var(--line);background:rgba(13,20,27,.92);padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
-.nv-brand{display:grid;gap:3px;padding:0 8px 18px;border-bottom:1px solid var(--line)}
-.nv-brand-title{font-size:16px;font-weight:700;color:var(--text)}
-.nv-brand-sub{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.nv-nav{display:grid;gap:5px;margin-top:16px}
-.nv-nav a,.nv-tab-label{display:flex;align-items:center;gap:8px;min-height:34px;padding:8px 10px;border:1px solid transparent;border-radius:6px;color:var(--muted);transition:background 120ms ease,border-color 120ms ease,color 120ms ease}
-.nv-nav a.active,.nv-tab:checked + .nv-tab-label{background:rgba(103,183,220,.10);border-color:rgba(103,183,220,.34);color:var(--text)}
-.nv-nav a:hover,.nv-tab-label:hover{background:rgba(255,255,255,.035);color:var(--text)}
-.nv-main{min-width:0;padding:20px 22px 28px}
-.nv-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px}
-.nv-page-title{margin:0;font-size:23px;line-height:1.16;font-weight:700;color:var(--text)}
-.nv-subtitle{margin:6px 0 0;color:var(--muted);font-size:13px;max-width:760px}
-.nv-meta{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:11px}
-.nv-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
-.nv-panel{grid-column:span 12;background:linear-gradient(180deg,rgba(22,34,45,.98),rgba(13,20,27,.98));border:1px solid var(--line);border-radius:8px;box-shadow:0 12px 34px rgba(0,0,0,.22);overflow:hidden}
-.nv-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:42px;padding:11px 13px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}
-.nv-panel-title{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:#c8d4df;font-weight:700}
-.nv-panel-body{padding:13px;overflow:auto}
-.nv-kv{display:grid;grid-template-columns:minmax(150px,260px) minmax(0,1fr);gap:7px 14px}
-.nv-k{color:var(--muted)}
-.nv-v{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;word-break:break-word;color:#e9f2f8}
-.nv-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:6px}
-table{width:100%;border-collapse:collapse;min-width:520px}
-th,td{padding:8px 9px;border-bottom:1px solid rgba(38,52,64,.78);text-align:left;vertical-align:top}
-th{color:#b9c8d4;font-size:11px;text-transform:uppercase;letter-spacing:.07em;background:rgba(255,255,255,.026);font-weight:700}
-td{color:#d8e3eb}
-tr:last-child td{border-bottom:0}
-.nv-badges{display:flex;flex-wrap:wrap;gap:6px}
-.nv-badge{display:inline-flex;align-items:center;gap:6px;min-height:24px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--muted);font-size:11px;font-weight:650}
-.nv-badge.ok,.nv-badge.pass,.nv-badge.success{border-color:rgba(115,210,156,.52);color:var(--ok);background:rgba(115,210,156,.10)}
-.nv-badge.fail,.nv-badge.error,.nv-badge.danger{border-color:rgba(239,111,108,.52);color:var(--danger);background:rgba(239,111,108,.10)}
-.nv-badge.warning{border-color:rgba(226,177,95,.58);color:var(--warning);background:rgba(226,177,95,.10)}
-.nv-badge.info{border-color:rgba(143,183,255,.48);color:var(--info);background:rgba(143,183,255,.10)}
-.nv-alert{margin-bottom:12px;padding:11px 13px;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--text)}
-.nv-alert.success{border-color:rgba(115,210,156,.52);background:rgba(115,210,156,.10)}
-.nv-alert.warning{border-color:rgba(226,177,95,.58);background:rgba(226,177,95,.10)}
-.nv-alert.error{border-color:rgba(239,111,108,.52);background:rgba(239,111,108,.10)}
-.nv-form{display:grid;gap:12px;max-width:560px}
-.nv-field{display:grid;gap:6px;color:#c9d6df;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-input,select{width:100%;min-height:38px;padding:8px 10px;border-radius:6px;border:1px solid var(--line-strong);background:#091018;color:var(--text);font:13px -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
-input:focus,select:focus,button:focus-visible,a:focus-visible,label:focus-visible{outline:0;box-shadow:0 0 0 3px rgba(103,183,220,.26)}
-button,.nv-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:max-content;min-height:36px;padding:8px 12px;border-radius:6px;border:1px solid rgba(103,183,220,.42);background:linear-gradient(180deg,#1d5f7c,#16485f);color:white;font-weight:700;cursor:pointer}
-.nv-error-text{color:var(--danger);font-size:12px;text-transform:none;letter-spacing:0;font-weight:500}
-.nv-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:8px;list-style:none;margin:0;padding:0}
-.nv-step{border:1px solid var(--line);border-radius:6px;padding:9px 10px;background:rgba(255,255,255,.025);color:var(--muted)}
-.nv-step.done{border-color:rgba(115,210,156,.55);background:rgba(115,210,156,.10);color:var(--ok)}
-.nv-items{margin:0;padding-left:18px;color:#dbe6ee}
-pre{margin:0;max-height:420px;overflow:auto;border:1px solid var(--line);border-radius:6px;background:#070c11;color:#dbe6ee;padding:12px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace}
-.nv-viz svg{max-width:100%;height:auto;background:#070c11;border:1px solid var(--line);border-radius:6px}
-.nv-tabs{display:grid;grid-template-columns:248px 1fr;gap:0;min-height:100vh}
-.nv-tab-rail{border-right:1px solid var(--line);background:rgba(13,20,27,.92);padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto}
-.nv-tab,.tab{position:absolute;left:-9999px}
-.nv-panels{padding:20px 22px}
-.nv-area{display:none}
-.nv-pagebar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
-.nv-page-chip{display:inline-flex;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px;background:rgba(255,255,255,.025)}
-.nv-controls{display:grid;gap:8px;margin-top:10px}
-.nv-control{border:1px solid rgba(226,177,95,.42);border-radius:6px;padding:9px 10px;background:rgba(226,177,95,.08)}
-.nv-control.disabled{opacity:.55}
-.nv-footer{color:var(--subtle);font-size:11px;text-align:right;margin-top:20px}
-@media (max-width:860px){
-  .nv-shell,.nv-tabs{grid-template-columns:1fr}
-  .nv-sidebar,.nv-tab-rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}
-  .nv-main,.nv-panels{padding:16px}
-  .nv-kv{grid-template-columns:1fr}
-  .nv-top{display:grid}
-  .nv-meta{justify-content:flex-start}
+html{background:var(--bg);color:var(--text);height:100%;overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 'Inter', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:-0.01em;height:100%}
+a{color:inherit;text-decoration:none;transition:all 200ms ease}
+
+.nv-shell{display:grid;grid-template-columns:var(--sidebar-w) 1fr;height:100vh}
+
+/* LEFT SIDEBAR */
+.nv-sidebar{
+  background:var(--surface);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;padding:32px 24px;
+  height:100vh;overflow-y:auto;z-index:100;
+}
+.nv-brand{margin-bottom:48px;padding:0 8px}
+.nv-brand-title{font-size:18px;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px}
+.nv-brand-sub{font-size:11px;color:var(--subtle);text-transform:uppercase;letter-spacing:0.1em}
+
+.nv-nav{display:grid;gap:8px}
+.nv-nav a,.nv-tab-label{
+  display:flex;align-items:center;gap:12px;min-height:44px;padding:0 16px;
+  border-radius:var(--radius-md, 8px);color:var(--muted);font-weight:500;
+}
+.nv-nav a:hover,.nv-tab-label:hover{background:rgba(168, 154, 232, 0.05);color:var(--accent);box-shadow:inset 0 0 0 1px var(--line)}
+.nv-nav a.active,.nv-tab:checked + .nv-tab-label{
+  background:var(--panel);color:var(--accent);box-shadow:inset 4px 0 0 -1px var(--accent);
 }
 
-</style></head><body><div class="nv-shell"><aside class="nv-sidebar"><div class="nv-brand"><div class="nv-brand-title">NeuroVision</div><div class="nv-brand-sub">Clinical Intelligence Operating Environment</div></div><nav><div class="nv-nav"><a class="active" href="#dashboard">Command Center</a><a class="" href="#upload">EEG Intake</a><a class="" href="#analysis">Analysis Execution</a><a class="" href="#prediction">Prediction Review</a><a class="" href="#reports">Evidence Center</a><a class="" href="#logout">Log out</a></div></nav></aside><main class="nv-main"><div class="nv-top"><div><h1 class="nv-page-title">Evidence &amp; Reporting Center</h1><p class="nv-subtitle">View and download analysis reports.</p></div><div class="nv-meta"><span class="nv-badge v1">backend: v1</span><span class="nv-badge application-frontend@1.0.0">version: application-frontend@1.0.0</span></div></div><div class="nv-grid"><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Available reports</div></div><div class="nv-panel-body"><ul class="nv-items"><li>prediction_report</li><li>workflow_report</li><li>lineage_report</li></ul></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Validation summary</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Workflow audit verified</div><div class="nv-v">True</div><div class="nv-k">Lineage chain verified</div><div class="nv-v">True</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Audit summary</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Audit events</div><div class="nv-v">7</div><div class="nv-k">Audit head</div><div class="nv-v"></div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Report: prediction_report</div></div><div class="nv-panel-body"><pre>{
-  &quot;confidence&quot;: 0.82,
-  &quot;prediction&quot;: &quot;abnormal-pattern-review&quot;
-}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Report: workflow_report</div></div><div class="nv-panel-body"><pre>{
+/* MAIN AREA */
+.nv-main{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+/* TOP INTELLIGENCE BAR */
+.nv-top-bar{
+  height:var(--topbar-h);min-height:var(--topbar-h);
+  border-bottom:1px solid var(--line);background:rgba(24, 21, 35, 0.8);
+  backdrop-filter:blur(12px);padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  z-index:90;
+}
+.nv-breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.nv-breadcrumb span{color:var(--text);font-weight:600}
+
+/* WORKSPACE AREA */
+.nv-workspace{flex:1;overflow-y:auto;padding:40px 48px;background:radial-gradient(circle at 50% 0%, rgba(168, 154, 232, 0.03), transparent 70%)}
+
+.nv-page-header{margin-bottom:40px}
+.nv-page-title{font-size:32px;font-weight:700;letter-spacing:-0.03em;margin:0 0 12px;color:var(--text)}
+.nv-subtitle{font-size:16px;color:var(--muted);max-width:800px;line-height:1.6}
+
+.nv-grid{display:grid;grid-template-columns:repeat(12, 1fr);gap:24px}
+
+/* CARDS / PANELS */
+.nv-panel{
+  grid-column:span 12;background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;transition:transform 250ms ease, box-shadow 250ms ease;
+}
+.nv-panel:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+.nv-panel-head{
+  padding:20px 24px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nv-panel-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted)}
+.nv-panel-body{padding:24px}
+
+/* DATA DISPLAY */
+.nv-kv{display:grid;grid-template-columns:200px 1fr;gap:12px 24px}
+.nv-k{color:var(--muted);font-size:13px}
+.nv-v{color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:13px}
+
+.nv-table-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:14px 20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--subtle);background:var(--panel)}
+td{padding:14px 20px;border-top:1px solid var(--line);font-size:13px;color:var(--text)}
+tr:hover td{background:rgba(168, 154, 232, 0.02)}
+
+/* BADGES */
+.nv-badge{
+  display:inline-flex;align-items:center;padding:4px 12px;border-radius:99px;
+  font-size:11px;font-weight:700;letter-spacing:0.02em;border:1px solid transparent;
+}
+.nv-badge.info{background:rgba(168, 154, 232, 0.1);color:var(--accent);border-color:rgba(168, 154, 232, 0.2)}
+.nv-badge.ok{background:rgba(78, 228, 184, 0.1);color:var(--ok);border-color:rgba(78, 228, 184, 0.2)}
+.nv-badge.warning{background:rgba(255, 184, 77, 0.1);color:var(--warning);border-color:rgba(255, 184, 77, 0.2)}
+.nv-badge.fail{background:rgba(255, 85, 119, 0.1);color:var(--danger);border-color:rgba(255, 85, 119, 0.2)}
+
+/* FORMS */
+.nv-form{display:grid;gap:20px;max-width:480px}
+.nv-field{display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+input,select{
+  background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
+  padding:12px 16px;color:var(--text);font-family:'Inter', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;font-size:14px;
+  transition:border-color 200ms ease, box-shadow 200ms ease;
+}
+input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(168, 154, 232, 0.1)}
+
+button,.nv-button{
+  background:var(--accent);color:var(--bg);border:none;border-radius:8px;
+  padding:12px 24px;font-weight:700;font-size:14px;cursor:pointer;
+  transition:transform 200ms ease, opacity 200ms ease;
+}
+button:hover{transform:translateY(-1px);opacity:0.9}
+button:active{transform:translateY(0)}
+
+/* ALERTS */
+.nv-alert{
+  padding:16px 24px;border-radius:12px;border:1px solid var(--line);
+  margin-bottom:24px;font-size:14px;display:flex;align-items:center;gap:12px;
+}
+.nv-alert.warning{background:rgba(255, 184, 77, 0.05);border-color:rgba(255, 184, 77, 0.2);color:var(--warning)}
+
+/* STEPS / TIMELINE */
+.nv-steps{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none;position:relative}
+.nv-step{
+  padding:0 0 32px 32px;border-left:2px solid var(--line);position:relative;
+  color:var(--muted);transition:color 250ms ease;
+}
+.nv-step::before{
+  content:'';position:absolute;left:-7px;top:4px;width:12px;height:12px;
+  border-radius:50%;background:var(--surface);border:2px solid var(--line);
+  transition:all 250ms ease;
+}
+.nv-step.done{color:var(--text)}
+.nv-step.done::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px rgba(168, 154, 232, 0.2)}
+.nv-step:last-child{border-left-color:transparent}
+
+/* FOOTER */
+.nv-footer{margin-top:auto;padding-top:40px;color:var(--subtle);font-size:12px;text-align:center}
+
+@media (max-width:1024px){
+  .nv-shell{grid-template-columns:1fr}
+  .nv-sidebar{display:none}
+}
+
+</style></head><body><div class="nv-shell"><aside class="nv-sidebar"><div class="nv-brand"><div class="nv-brand-title">NeuroVision</div><div class="nv-brand-sub">Intelligence Operating Environment</div></div><nav><div class="nv-nav"><a class="" href="#dashboard">Command Center</a><a class="" href="#upload">EEG Intake</a><a class="" href="#analysis">Analysis</a><a class="active" href="#prediction">Predictions</a><a class="" href="#reports">Evidence Center</a><a class="" href="#clinical">Clinical Workspace</a><a class="" href="#operations">Operations Workspace</a><a class="" href="#autonomous">Autonomous Workspace</a><a class="" href="#research">Research Workspace</a><a class="" href="#logout">Log out</a></div></nav></aside><main class="nv-main"><header class="nv-top-bar"><div class="nv-breadcrumb">Workspace / <span>Evidence Center</span></div><div class="nv-meta"><span class="nv-badge v1">backend: v1</span><span class="nv-badge application-frontend@1.0.0">version: application-frontend@1.0.0</span></div></header><div class="nv-workspace"><div class="nv-page-header"><h1 class="nv-page-title">Evidence Center</h1><p class="nv-subtitle">Trust, transparency, and auditability for all intelligence outcomes.</p></div><div class="nv-grid"><div class="nv-alert success">Analysis complete — prediction is ready.</div><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Available reports</div></div><div class="nv-panel-body"><ul class="nv-items"><li>analysis_report</li><li>calibration_report</li><li>confidence_report</li><li>explainability_report</li><li>inference_report</li><li>lineage_report</li><li>prediction_report</li><li>workflow_report</li></ul></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Audit &amp; Evidence Sources</div></div><div class="nv-panel-body"><ul class="nv-items"><li>analysis_report</li><li>calibration_report</li><li>confidence_report</li><li>explainability_report</li><li>inference_report</li><li>lineage_report</li><li>prediction_report</li><li>workflow_report</li></ul></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Audit &amp; Lineage Trail</div></div><div class="nv-panel-body"><div class="nv-kv"><div class="nv-k">Audit Verification</div><div class="nv-v">True</div><div class="nv-k">Lineage Integrity</div><div class="nv-v">True</div><div class="nv-k">Event Count</div><div class="nv-v">10</div><div class="nv-k">Chain Head</div><div class="nv-v">d538b75e40728532</div></div></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Fidelity Report: analysis_report</div></div><div class="nv-panel-body"><pre>{
+  &quot;analysis&quot;: {
+    &quot;analysis_id&quot;: &quot;analysis+9217c22af65f6c29&quot;,
+    &quot;calibration_quality&quot;: &quot;moderately_calibrated&quot;,
+    &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+    &quot;confidence_level&quot;: &quot;high&quot;,
+    &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+    &quot;domain_version&quot;: &quot;application-domain@1.0.0&quot;,
+    &quot;lineage_id&quot;: &quot;lineage+8a18f8f4b8bc5781&quot;,
+    &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+    &quot;predicted_class&quot;: 0,
+    &quot;predicted_label&quot;: &quot;0&quot;,
+    &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+    &quot;status&quot;: &quot;generated&quot;,
+    &quot;user_id&quot;: &quot;user+b6c6b3d9a884ca59&quot;,
+    &quot;workflow_id&quot;: &quot;workflow+d8bbb07222b9665a&quot;
+  },
+  &quot;analysis_id&quot;: &quot;analysis+9217c22af65f6c29&quot;,
+  &quot;application_backend_version&quot;: &quot;application-backend@1.0.0&quot;,
+  &quot;application_report_version&quot;: &quot;application-report@1.0.0&quot;,
+  &quot;calibration_quality&quot;: &quot;moderately_calibrated&quot;,
+  &quot;calibration_report&quot;: {
+    &quot;calibration&quot;: {
+      &quot;brier_score&quot;: 0.327124495,
+      &quot;calibration_quality&quot;: &quot;moderately_calibrated&quot;,
+      &quot;calibration_signature&quot;: &quot;a0d8f72de9c49bcc&quot;,
+      &quot;calibration_version&quot;: &quot;inference-calibration@1.0.0&quot;,
+      &quot;confidence_consistency&quot;: 0.848563006,
+      &quot;expected_calibration_error&quot;: 0.14928054,
+      &quot;reference_n_samples&quot;: 6,
+      &quot;reliability_assessment&quot;: 0.85071946
+    },
+    &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+    &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+    &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+    &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+    &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+    &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+    &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+    &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+    &quot;report_type&quot;: &quot;calibration&quot;
+  },
+  &quot;confidence_level&quot;: &quot;high&quot;,
+  &quot;confidence_report&quot;: {
+    &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+    &quot;confidence&quot;: {
+      &quot;confidence_interval&quot;: [
+        0.984770328,
+        0.984770328
+      ],
+      &quot;confidence_level&quot;: &quot;high&quot;,
+      &quot;confidence_score&quot;: 0.984770328,
+      &quot;confidence_signature&quot;: &quot;3faa1ffd77a8afca&quot;,
+      &quot;confidence_version&quot;: &quot;inference-confidence@1.0.0&quot;,
+      &quot;prediction_reliability&quot;: 0.986293295,
+      &quot;prediction_stability&quot;: 1.0,
+      &quot;uncertainty_summary&quot;: {
+        &quot;margin&quot;: 0.969540655,
+        &quot;normalized_entropy&quot;: 0.1137447,
+        &quot;second_probability&quot;: 0.015229672,
+        &quot;top2_gap&quot;: 0.969540655
+      }
+    },
+    &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+    &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+    &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+    &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+    &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+    &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+    &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+    &quot;report_type&quot;: &quot;confidence&quot;
+  },
+  &quot;explainability_report&quot;: {
+    &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+    &quot;explanation&quot;: {
+      &quot;band_importance&quot;: {
+        &quot;alpha&quot;: 0.0,
+        &quot;beta&quot;: 0.0,
+        &quot;delta&quot;: 0.006022369,
+        &quot;gamma&quot;: 0.0,
+        &quot;theta&quot;: 0.0
+      },
+      &quot;channel_importance&quot;: {
+        &quot;Cz&quot;: 0.333333333,
+        &quot;Fp1&quot;: 0.333333333,
+        &quot;Fp2&quot;: 0.333333333
+      },
+      &quot;decision_factors&quot;: [
+        {
+          &quot;contribution&quot;: 0.013640068,
+          &quot;direction&quot;: &quot;supports&quot;,
+          &quot;name&quot;: &quot;synchronization.mean_coherence&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.013367097,
+          &quot;direction&quot;: &quot;supports&quot;,
+          &quot;name&quot;: &quot;recording_temporal_summary.mean&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.010469914,
+          &quot;direction&quot;: &quot;supports&quot;,
+          &quot;name&quot;: &quot;recording_temporal_summary.hjorth_mobility&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.007611661,
+          &quot;direction&quot;: &quot;supports&quot;,
+          &quot;name&quot;: &quot;recording_temporal_summary.skewness&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.007414837,
+          &quot;direction&quot;: &quot;supports&quot;,
+          &quot;name&quot;: &quot;topographic_stat.global_field_power&quot;
+        }
+      ],
+      &quot;explanation_signature&quot;: &quot;ccd2c3da5569ab28&quot;,
+      &quot;explanation_version&quot;: &quot;inference-explainability@1.0.0&quot;,
+      &quot;feature_contributions&quot;: [
+        {
+          &quot;contribution&quot;: 0.013367097,
+          &quot;name&quot;: &quot;recording_temporal_summary.mean&quot;
+        },
+        {
+          &quot;contribution&quot;: -0.000942899,
+          &quot;name&quot;: &quot;recording_temporal_summary.variance&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.007611661,
+          &quot;name&quot;: &quot;recording_temporal_summary.skewness&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.002216387,
+          &quot;name&quot;: &quot;recording_temporal_summary.kurtosis&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.000359225,
+          &quot;name&quot;: &quot;recording_temporal_summary.rms&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.001779868,
+          &quot;name&quot;: &quot;recording_temporal_summary.zero_crossing_rate&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.002692769,
+          &quot;name&quot;: &quot;recording_temporal_summary.hjorth_activity&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.010469914,
+          &quot;name&quot;: &quot;recording_temporal_summary.hjorth_mobility&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;recording_temporal_summary.hjorth_complexity&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.001255052,
+          &quot;name&quot;: &quot;recording_temporal_summary.signal_entropy&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.013640068,
+          &quot;name&quot;: &quot;synchronization.mean_coherence&quot;
+        },
+        {
+          &quot;contribution&quot;: -0.001560113,
+          &quot;name&quot;: &quot;synchronization.mean_plv&quot;
+        },
+        {
+          &quot;contribution&quot;: -0.003996467,
+          &quot;name&quot;: &quot;synchronization.mean_cross_correlation&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.004804027,
+          &quot;name&quot;: &quot;spatial_summary.spatial_mean_rms&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.004759256,
+          &quot;name&quot;: &quot;spatial_summary.spatial_std_rms&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;spatial_summary.n_active_channels&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.007414837,
+          &quot;name&quot;: &quot;topographic_stat.global_field_power&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.005303776,
+          &quot;name&quot;: &quot;topographic_stat.spatial_dispersion&quot;
+        },
+        {
+          &quot;contribution&quot;: -0.006022369,
+          &quot;name&quot;: &quot;band_summary.delta&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;band_summary.theta&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;band_summary.alpha&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;band_summary.beta&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;band_summary.gamma&quot;
+        },
+        {
+          &quot;contribution&quot;: -0.001944292,
+          &quot;name&quot;: &quot;regional_rms.frontal&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.006561314,
+          &quot;name&quot;: &quot;regional_rms.central&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;regional_rms.temporal&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;regional_rms.parietal&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;regional_rms.occipital&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;regional_rms.other&quot;
+        }
+      ],
+      &quot;feature_importance&quot;: [
+        {
+          &quot;contribution&quot;: 0.14105348,
+          &quot;name&quot;: &quot;synchronization.mean_coherence&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.138230653,
+          &quot;name&quot;: &quot;recording_temporal_summary.mean&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.108270559,
+          &quot;name&quot;: &quot;recording_temporal_summary.hjorth_mobility&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.078713046,
+          &quot;name&quot;: &quot;recording_temporal_summary.skewness&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.076677668,
+          &quot;name&quot;: &quot;topographic_stat.global_field_power&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.067851292,
+          &quot;name&quot;: &quot;regional_rms.central&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.062278001,
+          &quot;name&quot;: &quot;band_summary.delta&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.054846948,
+          &quot;name&quot;: &quot;topographic_stat.spatial_dispersion&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.049678986,
+          &quot;name&quot;: &quot;spatial_summary.spatial_mean_rms&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.049216006,
+          &quot;name&quot;: &quot;spatial_summary.spatial_std_rms&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.041327918,
+          &quot;name&quot;: &quot;synchronization.mean_cross_correlation&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.027846224,
+          &quot;name&quot;: &quot;recording_temporal_summary.hjorth_activity&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.022919911,
+          &quot;name&quot;: &quot;recording_temporal_summary.kurtosis&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.020106147,
+          &quot;name&quot;: &quot;regional_rms.frontal&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.018405816,
+          &quot;name&quot;: &quot;recording_temporal_summary.zero_crossing_rate&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.016133303,
+          &quot;name&quot;: &quot;synchronization.mean_plv&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.012978639,
+          &quot;name&quot;: &quot;recording_temporal_summary.signal_entropy&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.00975062,
+          &quot;name&quot;: &quot;recording_temporal_summary.variance&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.003714783,
+          &quot;name&quot;: &quot;recording_temporal_summary.rms&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;recording_temporal_summary.hjorth_complexity&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;spatial_summary.n_active_channels&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;band_summary.theta&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;band_summary.alpha&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;band_summary.beta&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;band_summary.gamma&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;regional_rms.temporal&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;regional_rms.parietal&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;regional_rms.occipital&quot;
+        },
+        {
+          &quot;contribution&quot;: 0.0,
+          &quot;name&quot;: &quot;regional_rms.other&quot;
+        }
+      ],
+      &quot;method&quot;: &quot;occlusion&quot;,
+      &quot;model_attribution_summary&quot;: {
+        &quot;architecture&quot;: &quot;eegnet&quot;,
+        &quot;method&quot;: &quot;occlusion&quot;,
+        &quot;n_negative&quot;: 5,
+        &quot;n_positive&quot;: 14,
+        &quot;predicted_class&quot;: 0,
+        &quot;sum_abs_contribution&quot;: 0.096701393,
+        &quot;top_contribution&quot;: 0.013640068,
+        &quot;top_feature&quot;: &quot;synchronization.mean_coherence&quot;
+      }
+    },
+    &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+    &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+    &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+    &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+    &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+    &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+    &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+    &quot;report_type&quot;: &quot;explainability&quot;
+  },
+  &quot;predicted_class&quot;: 0,
+  &quot;predicted_label&quot;: &quot;0&quot;,
+  &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+  &quot;prediction_report&quot;: {
+    &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+    &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+    &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+    &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+    &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+    &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+    &quot;prediction&quot;: {
+      &quot;classes&quot;: [
+        {
+          &quot;class_index&quot;: 0,
+          &quot;class_label&quot;: &quot;0&quot;,
+          &quot;probability&quot;: 0.984770328
+        },
+        {
+          &quot;class_index&quot;: 1,
+          &quot;class_label&quot;: &quot;1&quot;,
+          &quot;probability&quot;: 0.015229672
+        }
+      ],
+      &quot;decision_metadata&quot;: {
+        &quot;argmax_index&quot;: 0,
+        &quot;decision_rule&quot;: &quot;argmax&quot;,
+        &quot;n_classes&quot;: 2,
+        &quot;tie&quot;: false
+      },
+      &quot;predicted_class&quot;: 0,
+      &quot;predicted_label&quot;: &quot;0&quot;,
+      &quot;prediction_signature&quot;: &quot;1f3374559fe422c9&quot;,
+      &quot;prediction_version&quot;: &quot;inference-prediction@1.0.0&quot;,
+      &quot;scores&quot;: [
+        {
+          &quot;name&quot;: &quot;max_probability&quot;,
+          &quot;value&quot;: 0.984770328
+        },
+        {
+          &quot;name&quot;: &quot;margin&quot;,
+          &quot;value&quot;: 0.969540655
+        },
+        {
+          &quot;name&quot;: &quot;normalized_entropy&quot;,
+          &quot;value&quot;: 0.1137447
+        }
+      ]
+    },
+    &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+    &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+    &quot;report_type&quot;: &quot;prediction&quot;
+  },
+  &quot;report_type&quot;: &quot;analysis&quot;,
+  &quot;status&quot;: &quot;generated&quot;,
+  &quot;workflow_id&quot;: &quot;workflow+d8bbb07222b9665a&quot;
+}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Fidelity Report: calibration_report</div></div><div class="nv-panel-body"><pre>{
+  &quot;calibration&quot;: {
+    &quot;brier_score&quot;: 0.327124495,
+    &quot;calibration_quality&quot;: &quot;moderately_calibrated&quot;,
+    &quot;calibration_signature&quot;: &quot;a0d8f72de9c49bcc&quot;,
+    &quot;calibration_version&quot;: &quot;inference-calibration@1.0.0&quot;,
+    &quot;confidence_consistency&quot;: 0.848563006,
+    &quot;expected_calibration_error&quot;: 0.14928054,
+    &quot;reference_n_samples&quot;: 6,
+    &quot;reliability_assessment&quot;: 0.85071946
+  },
+  &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+  &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+  &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+  &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+  &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+  &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+  &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+  &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+  &quot;report_type&quot;: &quot;calibration&quot;
+}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Fidelity Report: confidence_report</div></div><div class="nv-panel-body"><pre>{
+  &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+  &quot;confidence&quot;: {
+    &quot;confidence_interval&quot;: [
+      0.984770328,
+      0.984770328
+    ],
+    &quot;confidence_level&quot;: &quot;high&quot;,
+    &quot;confidence_score&quot;: 0.984770328,
+    &quot;confidence_signature&quot;: &quot;3faa1ffd77a8afca&quot;,
+    &quot;confidence_version&quot;: &quot;inference-confidence@1.0.0&quot;,
+    &quot;prediction_reliability&quot;: 0.986293295,
+    &quot;prediction_stability&quot;: 1.0,
+    &quot;uncertainty_summary&quot;: {
+      &quot;margin&quot;: 0.969540655,
+      &quot;normalized_entropy&quot;: 0.1137447,
+      &quot;second_probability&quot;: 0.015229672,
+      &quot;top2_gap&quot;: 0.969540655
+    }
+  },
+  &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+  &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+  &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+  &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+  &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+  &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+  &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+  &quot;report_type&quot;: &quot;confidence&quot;
+}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Fidelity Report: explainability_report</div></div><div class="nv-panel-body"><pre>{
+  &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+  &quot;explanation&quot;: {
+    &quot;band_importance&quot;: {
+      &quot;alpha&quot;: 0.0,
+      &quot;beta&quot;: 0.0,
+      &quot;delta&quot;: 0.006022369,
+      &quot;gamma&quot;: 0.0,
+      &quot;theta&quot;: 0.0
+    },
+    &quot;channel_importance&quot;: {
+      &quot;Cz&quot;: 0.333333333,
+      &quot;Fp1&quot;: 0.333333333,
+      &quot;Fp2&quot;: 0.333333333
+    },
+    &quot;decision_factors&quot;: [
+      {
+        &quot;contribution&quot;: 0.013640068,
+        &quot;direction&quot;: &quot;supports&quot;,
+        &quot;name&quot;: &quot;synchronization.mean_coherence&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.013367097,
+        &quot;direction&quot;: &quot;supports&quot;,
+        &quot;name&quot;: &quot;recording_temporal_summary.mean&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.010469914,
+        &quot;direction&quot;: &quot;supports&quot;,
+        &quot;name&quot;: &quot;recording_temporal_summary.hjorth_mobility&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.007611661,
+        &quot;direction&quot;: &quot;supports&quot;,
+        &quot;name&quot;: &quot;recording_temporal_summary.skewness&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.007414837,
+        &quot;direction&quot;: &quot;supports&quot;,
+        &quot;name&quot;: &quot;topographic_stat.global_field_power&quot;
+      }
+    ],
+    &quot;explanation_signature&quot;: &quot;ccd2c3da5569ab28&quot;,
+    &quot;explanation_version&quot;: &quot;inference-explainability@1.0.0&quot;,
+    &quot;feature_contributions&quot;: [
+      {
+        &quot;contribution&quot;: 0.013367097,
+        &quot;name&quot;: &quot;recording_temporal_summary.mean&quot;
+      },
+      {
+        &quot;contribution&quot;: -0.000942899,
+        &quot;name&quot;: &quot;recording_temporal_summary.variance&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.007611661,
+        &quot;name&quot;: &quot;recording_temporal_summary.skewness&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.002216387,
+        &quot;name&quot;: &quot;recording_temporal_summary.kurtosis&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.000359225,
+        &quot;name&quot;: &quot;recording_temporal_summary.rms&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.001779868,
+        &quot;name&quot;: &quot;recording_temporal_summary.zero_crossing_rate&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.002692769,
+        &quot;name&quot;: &quot;recording_temporal_summary.hjorth_activity&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.010469914,
+        &quot;name&quot;: &quot;recording_temporal_summary.hjorth_mobility&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;recording_temporal_summary.hjorth_complexity&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.001255052,
+        &quot;name&quot;: &quot;recording_temporal_summary.signal_entropy&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.013640068,
+        &quot;name&quot;: &quot;synchronization.mean_coherence&quot;
+      },
+      {
+        &quot;contribution&quot;: -0.001560113,
+        &quot;name&quot;: &quot;synchronization.mean_plv&quot;
+      },
+      {
+        &quot;contribution&quot;: -0.003996467,
+        &quot;name&quot;: &quot;synchronization.mean_cross_correlation&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.004804027,
+        &quot;name&quot;: &quot;spatial_summary.spatial_mean_rms&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.004759256,
+        &quot;name&quot;: &quot;spatial_summary.spatial_std_rms&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;spatial_summary.n_active_channels&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.007414837,
+        &quot;name&quot;: &quot;topographic_stat.global_field_power&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.005303776,
+        &quot;name&quot;: &quot;topographic_stat.spatial_dispersion&quot;
+      },
+      {
+        &quot;contribution&quot;: -0.006022369,
+        &quot;name&quot;: &quot;band_summary.delta&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;band_summary.theta&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;band_summary.alpha&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;band_summary.beta&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;band_summary.gamma&quot;
+      },
+      {
+        &quot;contribution&quot;: -0.001944292,
+        &quot;name&quot;: &quot;regional_rms.frontal&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.006561314,
+        &quot;name&quot;: &quot;regional_rms.central&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;regional_rms.temporal&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;regional_rms.parietal&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;regional_rms.occipital&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;regional_rms.other&quot;
+      }
+    ],
+    &quot;feature_importance&quot;: [
+      {
+        &quot;contribution&quot;: 0.14105348,
+        &quot;name&quot;: &quot;synchronization.mean_coherence&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.138230653,
+        &quot;name&quot;: &quot;recording_temporal_summary.mean&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.108270559,
+        &quot;name&quot;: &quot;recording_temporal_summary.hjorth_mobility&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.078713046,
+        &quot;name&quot;: &quot;recording_temporal_summary.skewness&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.076677668,
+        &quot;name&quot;: &quot;topographic_stat.global_field_power&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.067851292,
+        &quot;name&quot;: &quot;regional_rms.central&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.062278001,
+        &quot;name&quot;: &quot;band_summary.delta&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.054846948,
+        &quot;name&quot;: &quot;topographic_stat.spatial_dispersion&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.049678986,
+        &quot;name&quot;: &quot;spatial_summary.spatial_mean_rms&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.049216006,
+        &quot;name&quot;: &quot;spatial_summary.spatial_std_rms&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.041327918,
+        &quot;name&quot;: &quot;synchronization.mean_cross_correlation&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.027846224,
+        &quot;name&quot;: &quot;recording_temporal_summary.hjorth_activity&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.022919911,
+        &quot;name&quot;: &quot;recording_temporal_summary.kurtosis&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.020106147,
+        &quot;name&quot;: &quot;regional_rms.frontal&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.018405816,
+        &quot;name&quot;: &quot;recording_temporal_summary.zero_crossing_rate&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.016133303,
+        &quot;name&quot;: &quot;synchronization.mean_plv&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.012978639,
+        &quot;name&quot;: &quot;recording_temporal_summary.signal_entropy&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.00975062,
+        &quot;name&quot;: &quot;recording_temporal_summary.variance&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.003714783,
+        &quot;name&quot;: &quot;recording_temporal_summary.rms&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;recording_temporal_summary.hjorth_complexity&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;spatial_summary.n_active_channels&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;band_summary.theta&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;band_summary.alpha&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;band_summary.beta&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;band_summary.gamma&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;regional_rms.temporal&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;regional_rms.parietal&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;regional_rms.occipital&quot;
+      },
+      {
+        &quot;contribution&quot;: 0.0,
+        &quot;name&quot;: &quot;regional_rms.other&quot;
+      }
+    ],
+    &quot;method&quot;: &quot;occlusion&quot;,
+    &quot;model_attribution_summary&quot;: {
+      &quot;architecture&quot;: &quot;eegnet&quot;,
+      &quot;method&quot;: &quot;occlusion&quot;,
+      &quot;n_negative&quot;: 5,
+      &quot;n_positive&quot;: 14,
+      &quot;predicted_class&quot;: 0,
+      &quot;sum_abs_contribution&quot;: 0.096701393,
+      &quot;top_contribution&quot;: 0.013640068,
+      &quot;top_feature&quot;: &quot;synchronization.mean_coherence&quot;
+    }
+  },
+  &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+  &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+  &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+  &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+  &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+  &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+  &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+  &quot;report_type&quot;: &quot;explainability&quot;
+}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Fidelity Report: inference_report</div></div><div class="nv-panel-body"><pre>{
+  &quot;calibration&quot;: {
+    &quot;brier_score&quot;: 0.327124495,
+    &quot;calibration_quality&quot;: &quot;moderately_calibrated&quot;,
+    &quot;calibration_signature&quot;: &quot;a0d8f72de9c49bcc&quot;,
+    &quot;calibration_version&quot;: &quot;inference-calibration@1.0.0&quot;,
+    &quot;confidence_consistency&quot;: 0.848563006,
+    &quot;expected_calibration_error&quot;: 0.14928054,
+    &quot;reference_n_samples&quot;: 6,
+    &quot;reliability_assessment&quot;: 0.85071946
+  },
+  &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+  &quot;confidence&quot;: {
+    &quot;confidence_interval&quot;: [
+      0.984770328,
+      0.984770328
+    ],
+    &quot;confidence_level&quot;: &quot;high&quot;,
+    &quot;confidence_score&quot;: 0.984770328,
+    &quot;confidence_signature&quot;: &quot;3faa1ffd77a8afca&quot;,
+    &quot;confidence_version&quot;: &quot;inference-confidence@1.0.0&quot;,
+    &quot;prediction_reliability&quot;: 0.986293295,
+    &quot;prediction_stability&quot;: 1.0,
+    &quot;uncertainty_summary&quot;: {
+      &quot;margin&quot;: 0.969540655,
+      &quot;normalized_entropy&quot;: 0.1137447,
+      &quot;second_probability&quot;: 0.015229672,
+      &quot;top2_gap&quot;: 0.969540655
+    }
+  },
+  &quot;execution_metadata&quot;: {
+    &quot;architecture&quot;: &quot;eegnet&quot;,
+    &quot;execution_version&quot;: &quot;inference-execution@1.0.0&quot;,
+    &quot;input_fingerprint&quot;: &quot;8a12b387828967fe&quot;,
+    &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+    &quot;n_classes&quot;: 2,
+    &quot;n_features&quot;: 29,
+    &quot;n_params&quot;: 498,
+    &quot;params_fingerprint_verified&quot;: true,
+    &quot;reconstructed&quot;: true,
+    &quot;version_verified&quot;: true
+  },
+  &quot;explanation_summary&quot;: {
+    &quot;architecture&quot;: &quot;eegnet&quot;,
+    &quot;method&quot;: &quot;occlusion&quot;,
+    &quot;n_negative&quot;: 5,
+    &quot;n_positive&quot;: 14,
+    &quot;predicted_class&quot;: 0,
+    &quot;sum_abs_contribution&quot;: 0.096701393,
+    &quot;top_contribution&quot;: 0.013640068,
+    &quot;top_feature&quot;: &quot;synchronization.mean_coherence&quot;
+  },
+  &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+  &quot;feature_metadata&quot;: {
+    &quot;eeg_asset_id&quot;: &quot;eeg+34bec4053beee5da&quot;,
+    &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+    &quot;n_channels&quot;: 3,
+    &quot;n_features_model&quot;: 29,
+    &quot;processed_id&quot;: &quot;signal+ef3e79920c9fd0cb&quot;,
+    &quot;sampling_frequency&quot;: 256.0
+  },
+  &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+  &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+  &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+  &quot;model_metadata&quot;: {
+    &quot;architecture&quot;: &quot;eegnet&quot;,
+    &quot;dataset_id&quot;: &quot;dataset+62c5ee7c197a5206&quot;,
+    &quot;eval_accuracy&quot;: 0.0,
+    &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+    &quot;n_classes&quot;: 2,
+    &quot;n_params&quot;: 498,
+    &quot;train_accuracy&quot;: 1.0,
+    &quot;training_run_id&quot;: &quot;training_run+2060d80680ee465d&quot;
+  },
+  &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+  &quot;prediction&quot;: {
+    &quot;classes&quot;: [
+      {
+        &quot;class_index&quot;: 0,
+        &quot;class_label&quot;: &quot;0&quot;,
+        &quot;probability&quot;: 0.984770328
+      },
+      {
+        &quot;class_index&quot;: 1,
+        &quot;class_label&quot;: &quot;1&quot;,
+        &quot;probability&quot;: 0.015229672
+      }
+    ],
+    &quot;decision_metadata&quot;: {
+      &quot;argmax_index&quot;: 0,
+      &quot;decision_rule&quot;: &quot;argmax&quot;,
+      &quot;n_classes&quot;: 2,
+      &quot;tie&quot;: false
+    },
+    &quot;predicted_class&quot;: 0,
+    &quot;predicted_label&quot;: &quot;0&quot;,
+    &quot;prediction_signature&quot;: &quot;1f3374559fe422c9&quot;,
+    &quot;prediction_version&quot;: &quot;inference-prediction@1.0.0&quot;,
+    &quot;scores&quot;: [
+      {
+        &quot;name&quot;: &quot;max_probability&quot;,
+        &quot;value&quot;: 0.984770328
+      },
+      {
+        &quot;name&quot;: &quot;margin&quot;,
+        &quot;value&quot;: 0.969540655
+      },
+      {
+        &quot;name&quot;: &quot;normalized_entropy&quot;,
+        &quot;value&quot;: 0.1137447
+      }
+    ]
+  },
+  &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+  &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+  &quot;report_type&quot;: &quot;inference&quot;,
+  &quot;status&quot;: &quot;generated&quot;
+}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Fidelity Report: lineage_report</div></div><div class="nv-panel-body"><pre>{
+  &quot;application_backend_version&quot;: &quot;application-backend@1.0.0&quot;,
+  &quot;application_report_version&quot;: &quot;application-report@1.0.0&quot;,
+  &quot;chain&quot;: [
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+        &quot;upload_id&quot;: &quot;upload+086e66cd90aa1ebe&quot;
+      },
+      &quot;kind&quot;: &quot;workflow&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+8a18f8f4b8bc5781&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;workflow_id&quot;: &quot;workflow+d8bbb07222b9665a&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+ee02fce83592f461&quot;,
+        &quot;lineage+70decaf8ea36478b&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;application_backend_version&quot;: &quot;application-backend@1.0.0&quot;,
+        &quot;application_domain_version&quot;: &quot;application-domain@1.0.0&quot;,
+        &quot;application_identity_version&quot;: &quot;application-identity@1.0.0&quot;,
+        &quot;application_lineage_version&quot;: &quot;application-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+        &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;
+      },
+      &quot;kind&quot;: &quot;prediction&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+70decaf8ea36478b&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;prediction_fingerprint&quot;: &quot;1f3374559fe422c9&quot;,
+        &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+e77f4876ce594800&quot;,
+        &quot;lineage+15f86aa2339bf88d&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;inference_domain_version&quot;: &quot;inference-domain@1.0.0&quot;,
+        &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+        &quot;inference_identity_version&quot;: &quot;inference-identity@1.0.0&quot;,
+        &quot;inference_lineage_version&quot;: &quot;inference-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+        &quot;processed_id&quot;: &quot;signal+ef3e79920c9fd0cb&quot;
+      },
+      &quot;kind&quot;: &quot;feature&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+15f86aa2339bf88d&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;families&quot;: [
+          &quot;connectivity&quot;,
+          &quot;frequency&quot;,
+          &quot;spectral&quot;,
+          &quot;temporal&quot;,
+          &quot;topography&quot;
+        ],
+        &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+        &quot;feature_fingerprint&quot;: &quot;8ec6b2823766f546&quot;,
+        &quot;n_vectors&quot;: 39
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+855d1eef397bf52e&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;feature_domain_version&quot;: &quot;feature-domain@1.0.0&quot;,
+        &quot;feature_engineering_version&quot;: &quot;feature-engineering@1.0.0&quot;,
+        &quot;feature_identity_version&quot;: &quot;feature-identity@1.0.0&quot;,
+        &quot;feature_lineage_version&quot;: &quot;feature-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;eeg_asset_id&quot;: &quot;eeg+34bec4053beee5da&quot;,
+        &quot;processing_id&quot;: &quot;processing+200a9fe59886d015&quot;,
+        &quot;quality_id&quot;: &quot;squality+d22f808b275cbd8b&quot;
+      },
+      &quot;kind&quot;: &quot;processed_eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+855d1eef397bf52e&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;processed_fingerprint&quot;: &quot;5c06db5f44bc8a5b&quot;,
+        &quot;processed_id&quot;: &quot;signal+ef3e79920c9fd0cb&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+543e02a84839566c&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;signal_domain_version&quot;: &quot;signal-domain@1.0.0&quot;,
+        &quot;signal_identity_version&quot;: &quot;signal-identity@1.0.0&quot;,
+        &quot;signal_lineage_version&quot;: &quot;signal-lineage@1.0.0&quot;,
+        &quot;signal_processing_version&quot;: &quot;signal-processing@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+34bec4053beee5da&quot;,
+        &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+        &quot;recording_id&quot;: &quot;recording+73906ba3b8c0e78d&quot;
+      },
+      &quot;kind&quot;: &quot;eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+543e02a84839566c&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+34bec4053beee5da&quot;,
+        &quot;checksum_sha256&quot;: &quot;d3e5ab4361cfe73d4f5aa83c9f430ef240a09015939f8a7dba32c30662fd8722&quot;,
+        &quot;eeg_format&quot;: &quot;EDF&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+0bebe5c14ddc8ccc&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;eeg_domain_version&quot;: &quot;eeg-domain@1.0.0&quot;,
+        &quot;eeg_foundation_version&quot;: &quot;eeg-foundation@1.0.0&quot;,
+        &quot;eeg_identity_version&quot;: &quot;eeg-identity@1.0.0&quot;,
+        &quot;eeg_lineage_version&quot;: &quot;eeg-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+        &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;
+      },
+      &quot;kind&quot;: &quot;case&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+0bebe5c14ddc8ccc&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+3197176340f3be8d&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;
+      },
+      &quot;kind&quot;: &quot;patient&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+3197176340f3be8d&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;
+      },
+      &quot;parents&quot;: [],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;architecture&quot;: &quot;eegnet&quot;,
+        &quot;training_run_id&quot;: &quot;lineage+ec9d15f266b80724&quot;
+      },
+      &quot;kind&quot;: &quot;model&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+e77f4876ce594800&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+        &quot;params_fingerprint&quot;: &quot;436c36dc911a0345&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+ec9d15f266b80724&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;model_domain_version&quot;: &quot;model-domain@1.0.0&quot;,
+        &quot;model_foundation_version&quot;: &quot;model-foundation@1.0.0&quot;,
+        &quot;model_identity_version&quot;: &quot;model-identity@1.0.0&quot;,
+        &quot;model_lineage_version&quot;: &quot;model-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;architecture&quot;: &quot;eegnet&quot;,
+        &quot;dataset_id&quot;: &quot;lineage+ac521fc3de194501&quot;
+      },
+      &quot;kind&quot;: &quot;training_run&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+ec9d15f266b80724&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;params_fingerprint&quot;: &quot;436c36dc911a0345&quot;,
+        &quot;training_run_id&quot;: &quot;training_run+2060d80680ee465d&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+ac521fc3de194501&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;model_domain_version&quot;: &quot;model-domain@1.0.0&quot;,
+        &quot;model_foundation_version&quot;: &quot;model-foundation@1.0.0&quot;,
+        &quot;model_identity_version&quot;: &quot;model-identity@1.0.0&quot;,
+        &quot;model_lineage_version&quot;: &quot;model-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_lineage_ids&quot;: [
+          &quot;lineage+3b414d7ee73365be&quot;,
+          &quot;lineage+c98b2aa693a10887&quot;,
+          &quot;lineage+0b0584d39f4e1b98&quot;,
+          &quot;lineage+0d4d6d2364f658ff&quot;,
+          &quot;lineage+94425d1c127f4051&quot;,
+          &quot;lineage+41eb4cc062ce719a&quot;
+        ],
+        &quot;source&quot;: &quot;feature_assets&quot;
+      },
+      &quot;kind&quot;: &quot;dataset&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+ac521fc3de194501&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;data_fingerprint&quot;: &quot;93a3aa67699986d7&quot;,
+        &quot;dataset_id&quot;: &quot;dataset+62c5ee7c197a5206&quot;,
+        &quot;n_samples&quot;: 6
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+3b414d7ee73365be&quot;,
+        &quot;lineage+c98b2aa693a10887&quot;,
+        &quot;lineage+0b0584d39f4e1b98&quot;,
+        &quot;lineage+0d4d6d2364f658ff&quot;,
+        &quot;lineage+94425d1c127f4051&quot;,
+        &quot;lineage+41eb4cc062ce719a&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;model_domain_version&quot;: &quot;model-domain@1.0.0&quot;,
+        &quot;model_foundation_version&quot;: &quot;model-foundation@1.0.0&quot;,
+        &quot;model_identity_version&quot;: &quot;model-identity@1.0.0&quot;,
+        &quot;model_lineage_version&quot;: &quot;model-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_asset_id&quot;: &quot;feature+e3286bad36236731&quot;,
+        &quot;processed_id&quot;: &quot;signal+e3c27a47a0e6c661&quot;
+      },
+      &quot;kind&quot;: &quot;feature&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+41eb4cc062ce719a&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;families&quot;: [
+          &quot;connectivity&quot;,
+          &quot;frequency&quot;,
+          &quot;spectral&quot;,
+          &quot;temporal&quot;,
+          &quot;topography&quot;
+        ],
+        &quot;feature_asset_id&quot;: &quot;feature+e3286bad36236731&quot;,
+        &quot;feature_fingerprint&quot;: &quot;b7088b6d2a715b65&quot;,
+        &quot;n_vectors&quot;: 39
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+5ada43aff617ffc2&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;feature_domain_version&quot;: &quot;feature-domain@1.0.0&quot;,
+        &quot;feature_engineering_version&quot;: &quot;feature-engineering@1.0.0&quot;,
+        &quot;feature_identity_version&quot;: &quot;feature-identity@1.0.0&quot;,
+        &quot;feature_lineage_version&quot;: &quot;feature-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;eeg_asset_id&quot;: &quot;eeg+699e79026c7203e6&quot;,
+        &quot;processing_id&quot;: &quot;processing+bd3b26ce0d21ac40&quot;,
+        &quot;quality_id&quot;: &quot;squality+0d726a7bbbea1369&quot;
+      },
+      &quot;kind&quot;: &quot;processed_eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+5ada43aff617ffc2&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;processed_fingerprint&quot;: &quot;5b055668a3f28b6b&quot;,
+        &quot;processed_id&quot;: &quot;signal+e3c27a47a0e6c661&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+93babaa7e2484491&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;signal_domain_version&quot;: &quot;signal-domain@1.0.0&quot;,
+        &quot;signal_identity_version&quot;: &quot;signal-identity@1.0.0&quot;,
+        &quot;signal_lineage_version&quot;: &quot;signal-lineage@1.0.0&quot;,
+        &quot;signal_processing_version&quot;: &quot;signal-processing@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+699e79026c7203e6&quot;,
+        &quot;case_id&quot;: &quot;case+9801a9c4c72bbb88&quot;,
+        &quot;recording_id&quot;: &quot;recording+79bb71352c38ff06&quot;
+      },
+      &quot;kind&quot;: &quot;eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+93babaa7e2484491&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+699e79026c7203e6&quot;,
+        &quot;checksum_sha256&quot;: &quot;cca9364b591042cc7e01844afb87308d69fdf41fa1416ec35cb5e529c6b0bf6a&quot;,
+        &quot;eeg_format&quot;: &quot;SET&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+a30d022231c43361&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;eeg_domain_version&quot;: &quot;eeg-domain@1.0.0&quot;,
+        &quot;eeg_foundation_version&quot;: &quot;eeg-foundation@1.0.0&quot;,
+        &quot;eeg_identity_version&quot;: &quot;eeg-identity@1.0.0&quot;,
+        &quot;eeg_lineage_version&quot;: &quot;eeg-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;case_id&quot;: &quot;case+9801a9c4c72bbb88&quot;,
+        &quot;patient_id&quot;: &quot;patient+92c44d54223fd396&quot;
+      },
+      &quot;kind&quot;: &quot;case&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+a30d022231c43361&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;case_id&quot;: &quot;case+9801a9c4c72bbb88&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+72fd952675bfd825&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+92c44d54223fd396&quot;
+      },
+      &quot;kind&quot;: &quot;patient&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+72fd952675bfd825&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+92c44d54223fd396&quot;
+      },
+      &quot;parents&quot;: [],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_asset_id&quot;: &quot;feature+c2be7bd95295e8df&quot;,
+        &quot;processed_id&quot;: &quot;signal+cd2989bd18aaf1ec&quot;
+      },
+      &quot;kind&quot;: &quot;feature&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+94425d1c127f4051&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;families&quot;: [
+          &quot;connectivity&quot;,
+          &quot;frequency&quot;,
+          &quot;spectral&quot;,
+          &quot;temporal&quot;,
+          &quot;topography&quot;
+        ],
+        &quot;feature_asset_id&quot;: &quot;feature+c2be7bd95295e8df&quot;,
+        &quot;feature_fingerprint&quot;: &quot;b7088b6d2a715b65&quot;,
+        &quot;n_vectors&quot;: 39
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+b6e0e4a8cac7c148&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;feature_domain_version&quot;: &quot;feature-domain@1.0.0&quot;,
+        &quot;feature_engineering_version&quot;: &quot;feature-engineering@1.0.0&quot;,
+        &quot;feature_identity_version&quot;: &quot;feature-identity@1.0.0&quot;,
+        &quot;feature_lineage_version&quot;: &quot;feature-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;eeg_asset_id&quot;: &quot;eeg+5f211d3755173662&quot;,
+        &quot;processing_id&quot;: &quot;processing+84f5744d81302695&quot;,
+        &quot;quality_id&quot;: &quot;squality+606dde3b54a4d9be&quot;
+      },
+      &quot;kind&quot;: &quot;processed_eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+b6e0e4a8cac7c148&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;processed_fingerprint&quot;: &quot;5b055668a3f28b6b&quot;,
+        &quot;processed_id&quot;: &quot;signal+cd2989bd18aaf1ec&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+36e54e654c9f8cf4&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;signal_domain_version&quot;: &quot;signal-domain@1.0.0&quot;,
+        &quot;signal_identity_version&quot;: &quot;signal-identity@1.0.0&quot;,
+        &quot;signal_lineage_version&quot;: &quot;signal-lineage@1.0.0&quot;,
+        &quot;signal_processing_version&quot;: &quot;signal-processing@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+5f211d3755173662&quot;,
+        &quot;case_id&quot;: &quot;case+c0bd40405d423427&quot;,
+        &quot;recording_id&quot;: &quot;recording+659813a226defbb8&quot;
+      },
+      &quot;kind&quot;: &quot;eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+36e54e654c9f8cf4&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+5f211d3755173662&quot;,
+        &quot;checksum_sha256&quot;: &quot;b71218cd6da67d25110e5a09391a8dbf12a1fcc5a0393e48e9171ad44fa6b02b&quot;,
+        &quot;eeg_format&quot;: &quot;FIF&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+4b82f9af7ab890cd&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;eeg_domain_version&quot;: &quot;eeg-domain@1.0.0&quot;,
+        &quot;eeg_foundation_version&quot;: &quot;eeg-foundation@1.0.0&quot;,
+        &quot;eeg_identity_version&quot;: &quot;eeg-identity@1.0.0&quot;,
+        &quot;eeg_lineage_version&quot;: &quot;eeg-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;case_id&quot;: &quot;case+c0bd40405d423427&quot;,
+        &quot;patient_id&quot;: &quot;patient+eee84bae7925eb3e&quot;
+      },
+      &quot;kind&quot;: &quot;case&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+4b82f9af7ab890cd&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;case_id&quot;: &quot;case+c0bd40405d423427&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+3424635d76994f8e&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+eee84bae7925eb3e&quot;
+      },
+      &quot;kind&quot;: &quot;patient&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+3424635d76994f8e&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+eee84bae7925eb3e&quot;
+      },
+      &quot;parents&quot;: [],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_asset_id&quot;: &quot;feature+0051bd21856c1a32&quot;,
+        &quot;processed_id&quot;: &quot;signal+7bbe4e91800e7551&quot;
+      },
+      &quot;kind&quot;: &quot;feature&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+0d4d6d2364f658ff&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;families&quot;: [
+          &quot;connectivity&quot;,
+          &quot;frequency&quot;,
+          &quot;spectral&quot;,
+          &quot;temporal&quot;,
+          &quot;topography&quot;
+        ],
+        &quot;feature_asset_id&quot;: &quot;feature+0051bd21856c1a32&quot;,
+        &quot;feature_fingerprint&quot;: &quot;7d40864449d35588&quot;,
+        &quot;n_vectors&quot;: 39
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+32434df6869575b9&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;feature_domain_version&quot;: &quot;feature-domain@1.0.0&quot;,
+        &quot;feature_engineering_version&quot;: &quot;feature-engineering@1.0.0&quot;,
+        &quot;feature_identity_version&quot;: &quot;feature-identity@1.0.0&quot;,
+        &quot;feature_lineage_version&quot;: &quot;feature-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;eeg_asset_id&quot;: &quot;eeg+b649d3b4c214ecfc&quot;,
+        &quot;processing_id&quot;: &quot;processing+946573b5e6646b18&quot;,
+        &quot;quality_id&quot;: &quot;squality+dd5c9028fa2b53c5&quot;
+      },
+      &quot;kind&quot;: &quot;processed_eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+32434df6869575b9&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;processed_fingerprint&quot;: &quot;606a5f9e9f1eabb1&quot;,
+        &quot;processed_id&quot;: &quot;signal+7bbe4e91800e7551&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+309883a6d868337d&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;signal_domain_version&quot;: &quot;signal-domain@1.0.0&quot;,
+        &quot;signal_identity_version&quot;: &quot;signal-identity@1.0.0&quot;,
+        &quot;signal_lineage_version&quot;: &quot;signal-lineage@1.0.0&quot;,
+        &quot;signal_processing_version&quot;: &quot;signal-processing@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+b649d3b4c214ecfc&quot;,
+        &quot;case_id&quot;: &quot;case+a537cb0d4b736534&quot;,
+        &quot;recording_id&quot;: &quot;recording+750cb061fb2df006&quot;
+      },
+      &quot;kind&quot;: &quot;eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+309883a6d868337d&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+b649d3b4c214ecfc&quot;,
+        &quot;checksum_sha256&quot;: &quot;b8b951568bc759f4b177863381b0ae7c877e5617e3b7473e31077246b3e2c03a&quot;,
+        &quot;eeg_format&quot;: &quot;BDF+&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+29bd337b02a881c5&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;eeg_domain_version&quot;: &quot;eeg-domain@1.0.0&quot;,
+        &quot;eeg_foundation_version&quot;: &quot;eeg-foundation@1.0.0&quot;,
+        &quot;eeg_identity_version&quot;: &quot;eeg-identity@1.0.0&quot;,
+        &quot;eeg_lineage_version&quot;: &quot;eeg-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;case_id&quot;: &quot;case+a537cb0d4b736534&quot;,
+        &quot;patient_id&quot;: &quot;patient+7596e8b724627a65&quot;
+      },
+      &quot;kind&quot;: &quot;case&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+29bd337b02a881c5&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;case_id&quot;: &quot;case+a537cb0d4b736534&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+fbd26d0ab9cef5bd&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+7596e8b724627a65&quot;
+      },
+      &quot;kind&quot;: &quot;patient&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+fbd26d0ab9cef5bd&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+7596e8b724627a65&quot;
+      },
+      &quot;parents&quot;: [],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_asset_id&quot;: &quot;feature+adebe901d676d1f8&quot;,
+        &quot;processed_id&quot;: &quot;signal+3caeda3f84eefc1c&quot;
+      },
+      &quot;kind&quot;: &quot;feature&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+0b0584d39f4e1b98&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;families&quot;: [
+          &quot;connectivity&quot;,
+          &quot;frequency&quot;,
+          &quot;spectral&quot;,
+          &quot;temporal&quot;,
+          &quot;topography&quot;
+        ],
+        &quot;feature_asset_id&quot;: &quot;feature+adebe901d676d1f8&quot;,
+        &quot;feature_fingerprint&quot;: &quot;7d40864449d35588&quot;,
+        &quot;n_vectors&quot;: 39
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+47b808d8c2183428&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;feature_domain_version&quot;: &quot;feature-domain@1.0.0&quot;,
+        &quot;feature_engineering_version&quot;: &quot;feature-engineering@1.0.0&quot;,
+        &quot;feature_identity_version&quot;: &quot;feature-identity@1.0.0&quot;,
+        &quot;feature_lineage_version&quot;: &quot;feature-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;eeg_asset_id&quot;: &quot;eeg+8236d5dd4089f942&quot;,
+        &quot;processing_id&quot;: &quot;processing+be7ba174e252adbd&quot;,
+        &quot;quality_id&quot;: &quot;squality+d20c0ec5306e07f6&quot;
+      },
+      &quot;kind&quot;: &quot;processed_eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+47b808d8c2183428&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;processed_fingerprint&quot;: &quot;606a5f9e9f1eabb1&quot;,
+        &quot;processed_id&quot;: &quot;signal+3caeda3f84eefc1c&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+ed251475409ab1c4&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;signal_domain_version&quot;: &quot;signal-domain@1.0.0&quot;,
+        &quot;signal_identity_version&quot;: &quot;signal-identity@1.0.0&quot;,
+        &quot;signal_lineage_version&quot;: &quot;signal-lineage@1.0.0&quot;,
+        &quot;signal_processing_version&quot;: &quot;signal-processing@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+8236d5dd4089f942&quot;,
+        &quot;case_id&quot;: &quot;case+e6427384d07b3d64&quot;,
+        &quot;recording_id&quot;: &quot;recording+d19cc28881ce4d3d&quot;
+      },
+      &quot;kind&quot;: &quot;eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+ed251475409ab1c4&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+8236d5dd4089f942&quot;,
+        &quot;checksum_sha256&quot;: &quot;10dee10347d88e170305a8daf190f3c2cba0e5b86535c3f35d018812da6aae4c&quot;,
+        &quot;eeg_format&quot;: &quot;BDF&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+854a4277f9ffc3b2&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;eeg_domain_version&quot;: &quot;eeg-domain@1.0.0&quot;,
+        &quot;eeg_foundation_version&quot;: &quot;eeg-foundation@1.0.0&quot;,
+        &quot;eeg_identity_version&quot;: &quot;eeg-identity@1.0.0&quot;,
+        &quot;eeg_lineage_version&quot;: &quot;eeg-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;case_id&quot;: &quot;case+e6427384d07b3d64&quot;,
+        &quot;patient_id&quot;: &quot;patient+4999dba26ff097f6&quot;
+      },
+      &quot;kind&quot;: &quot;case&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+854a4277f9ffc3b2&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;case_id&quot;: &quot;case+e6427384d07b3d64&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+9f6365c1cc2a98ef&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+4999dba26ff097f6&quot;
+      },
+      &quot;kind&quot;: &quot;patient&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+9f6365c1cc2a98ef&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+4999dba26ff097f6&quot;
+      },
+      &quot;parents&quot;: [],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_asset_id&quot;: &quot;feature+56d740683e74deb1&quot;,
+        &quot;processed_id&quot;: &quot;signal+5bb30721e08a2d68&quot;
+      },
+      &quot;kind&quot;: &quot;feature&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+c98b2aa693a10887&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;families&quot;: [
+          &quot;connectivity&quot;,
+          &quot;frequency&quot;,
+          &quot;spectral&quot;,
+          &quot;temporal&quot;,
+          &quot;topography&quot;
+        ],
+        &quot;feature_asset_id&quot;: &quot;feature+56d740683e74deb1&quot;,
+        &quot;feature_fingerprint&quot;: &quot;8ec6b2823766f546&quot;,
+        &quot;n_vectors&quot;: 39
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+bea420d53b54137e&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;feature_domain_version&quot;: &quot;feature-domain@1.0.0&quot;,
+        &quot;feature_engineering_version&quot;: &quot;feature-engineering@1.0.0&quot;,
+        &quot;feature_identity_version&quot;: &quot;feature-identity@1.0.0&quot;,
+        &quot;feature_lineage_version&quot;: &quot;feature-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;eeg_asset_id&quot;: &quot;eeg+a8f27e2dfaeb0cbd&quot;,
+        &quot;processing_id&quot;: &quot;processing+9f1c16916b5a3f3c&quot;,
+        &quot;quality_id&quot;: &quot;squality+13dc1bcab43d0a2a&quot;
+      },
+      &quot;kind&quot;: &quot;processed_eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+bea420d53b54137e&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;processed_fingerprint&quot;: &quot;5c06db5f44bc8a5b&quot;,
+        &quot;processed_id&quot;: &quot;signal+5bb30721e08a2d68&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+47b7264077e652d8&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;signal_domain_version&quot;: &quot;signal-domain@1.0.0&quot;,
+        &quot;signal_identity_version&quot;: &quot;signal-identity@1.0.0&quot;,
+        &quot;signal_lineage_version&quot;: &quot;signal-lineage@1.0.0&quot;,
+        &quot;signal_processing_version&quot;: &quot;signal-processing@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+a8f27e2dfaeb0cbd&quot;,
+        &quot;case_id&quot;: &quot;case+9a2a4c9648ba6113&quot;,
+        &quot;recording_id&quot;: &quot;recording+056f01bc1282a67e&quot;
+      },
+      &quot;kind&quot;: &quot;eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+47b7264077e652d8&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+a8f27e2dfaeb0cbd&quot;,
+        &quot;checksum_sha256&quot;: &quot;e1e43937d7875e1e48f3a65865876c648232804add9f49ef6d41a172a0fa03cd&quot;,
+        &quot;eeg_format&quot;: &quot;EDF+&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+89852fb1ac722777&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;eeg_domain_version&quot;: &quot;eeg-domain@1.0.0&quot;,
+        &quot;eeg_foundation_version&quot;: &quot;eeg-foundation@1.0.0&quot;,
+        &quot;eeg_identity_version&quot;: &quot;eeg-identity@1.0.0&quot;,
+        &quot;eeg_lineage_version&quot;: &quot;eeg-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;case_id&quot;: &quot;case+9a2a4c9648ba6113&quot;,
+        &quot;patient_id&quot;: &quot;patient+8e14406ab66cc449&quot;
+      },
+      &quot;kind&quot;: &quot;case&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+89852fb1ac722777&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;case_id&quot;: &quot;case+9a2a4c9648ba6113&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+823423a98fe5b6a9&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+8e14406ab66cc449&quot;
+      },
+      &quot;kind&quot;: &quot;patient&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+823423a98fe5b6a9&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+8e14406ab66cc449&quot;
+      },
+      &quot;parents&quot;: [],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;feature_asset_id&quot;: &quot;feature+f1e77e95d345cf46&quot;,
+        &quot;processed_id&quot;: &quot;signal+3dff53d65a745a7f&quot;
+      },
+      &quot;kind&quot;: &quot;feature&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+3b414d7ee73365be&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;families&quot;: [
+          &quot;connectivity&quot;,
+          &quot;frequency&quot;,
+          &quot;spectral&quot;,
+          &quot;temporal&quot;,
+          &quot;topography&quot;
+        ],
+        &quot;feature_asset_id&quot;: &quot;feature+f1e77e95d345cf46&quot;,
+        &quot;feature_fingerprint&quot;: &quot;8ec6b2823766f546&quot;,
+        &quot;n_vectors&quot;: 39
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+cde79d3f9b3f292e&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;feature_domain_version&quot;: &quot;feature-domain@1.0.0&quot;,
+        &quot;feature_engineering_version&quot;: &quot;feature-engineering@1.0.0&quot;,
+        &quot;feature_identity_version&quot;: &quot;feature-identity@1.0.0&quot;,
+        &quot;feature_lineage_version&quot;: &quot;feature-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;eeg_asset_id&quot;: &quot;eeg+b178cc11ae6ccfb6&quot;,
+        &quot;processing_id&quot;: &quot;processing+5254cd348ce22a75&quot;,
+        &quot;quality_id&quot;: &quot;squality+2069f1ee71143ea7&quot;
+      },
+      &quot;kind&quot;: &quot;processed_eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+cde79d3f9b3f292e&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;processed_fingerprint&quot;: &quot;5c06db5f44bc8a5b&quot;,
+        &quot;processed_id&quot;: &quot;signal+3dff53d65a745a7f&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+f1ac6dd4d613418a&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;signal_domain_version&quot;: &quot;signal-domain@1.0.0&quot;,
+        &quot;signal_identity_version&quot;: &quot;signal-identity@1.0.0&quot;,
+        &quot;signal_lineage_version&quot;: &quot;signal-lineage@1.0.0&quot;,
+        &quot;signal_processing_version&quot;: &quot;signal-processing@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+b178cc11ae6ccfb6&quot;,
+        &quot;case_id&quot;: &quot;case+8f33cf1b57ccd8b1&quot;,
+        &quot;recording_id&quot;: &quot;recording+73906ba3b8c0e78d&quot;
+      },
+      &quot;kind&quot;: &quot;eeg&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+f1ac6dd4d613418a&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;asset_id&quot;: &quot;eeg+b178cc11ae6ccfb6&quot;,
+        &quot;checksum_sha256&quot;: &quot;d3e5ab4361cfe73d4f5aa83c9f430ef240a09015939f8a7dba32c30662fd8722&quot;,
+        &quot;eeg_format&quot;: &quot;EDF&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+26e1052b19746ff7&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;eeg_domain_version&quot;: &quot;eeg-domain@1.0.0&quot;,
+        &quot;eeg_foundation_version&quot;: &quot;eeg-foundation@1.0.0&quot;,
+        &quot;eeg_identity_version&quot;: &quot;eeg-identity@1.0.0&quot;,
+        &quot;eeg_lineage_version&quot;: &quot;eeg-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;case_id&quot;: &quot;case+8f33cf1b57ccd8b1&quot;,
+        &quot;patient_id&quot;: &quot;patient+1f8ee9e867f75341&quot;
+      },
+      &quot;kind&quot;: &quot;case&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+26e1052b19746ff7&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;case_id&quot;: &quot;case+8f33cf1b57ccd8b1&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+bd2ebb7c3b0fb848&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+1f8ee9e867f75341&quot;
+      },
+      &quot;kind&quot;: &quot;patient&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+bd2ebb7c3b0fb848&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;patient_id&quot;: &quot;patient+1f8ee9e867f75341&quot;
+      },
+      &quot;parents&quot;: [],
+      &quot;versions&quot;: {
+        &quot;case_domain_version&quot;: &quot;case-domain@1.0.0&quot;,
+        &quot;case_identity_version&quot;: &quot;case-identity@1.0.0&quot;,
+        &quot;case_lineage_version&quot;: &quot;case-lineage@1.0.0&quot;,
+        &quot;clinical_cases_version&quot;: &quot;clinical-cases@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;content_fingerprint&quot;: &quot;d3e5ab4361cfe73d4f5aa83c9f430ef240a09015939f8a7dba32c30662fd8722&quot;,
+        &quot;user_id&quot;: &quot;user+b6c6b3d9a884ca59&quot;
+      },
+      &quot;kind&quot;: &quot;upload&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+ee02fce83592f461&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;upload_id&quot;: &quot;upload+086e66cd90aa1ebe&quot;
+      },
+      &quot;parents&quot;: [
+        &quot;lineage+085af9a7bc7e689b&quot;
+      ],
+      &quot;versions&quot;: {
+        &quot;application_backend_version&quot;: &quot;application-backend@1.0.0&quot;,
+        &quot;application_domain_version&quot;: &quot;application-domain@1.0.0&quot;,
+        &quot;application_identity_version&quot;: &quot;application-identity@1.0.0&quot;,
+        &quot;application_lineage_version&quot;: &quot;application-lineage@1.0.0&quot;
+      }
+    },
+    {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;inputs&quot;: {
+        &quot;username&quot;: &quot;dr.demo&quot;
+      },
+      &quot;kind&quot;: &quot;user&quot;,
+      &quot;lineage_id&quot;: &quot;lineage+085af9a7bc7e689b&quot;,
+      &quot;lineage_version&quot;: &quot;lineage@1.0.0&quot;,
+      &quot;outputs&quot;: {
+        &quot;user_id&quot;: &quot;user+b6c6b3d9a884ca59&quot;
+      },
+      &quot;parents&quot;: [],
+      &quot;versions&quot;: {
+        &quot;application_backend_version&quot;: &quot;application-backend@1.0.0&quot;,
+        &quot;application_domain_version&quot;: &quot;application-domain@1.0.0&quot;,
+        &quot;application_identity_version&quot;: &quot;application-identity@1.0.0&quot;,
+        &quot;application_lineage_version&quot;: &quot;application-lineage@1.0.0&quot;
+      }
+    }
+  ],
+  &quot;chain_kinds&quot;: [
+    &quot;workflow&quot;,
+    &quot;prediction&quot;,
+    &quot;feature&quot;,
+    &quot;processed_eeg&quot;,
+    &quot;eeg&quot;,
+    &quot;case&quot;,
+    &quot;patient&quot;,
+    &quot;model&quot;,
+    &quot;training_run&quot;,
+    &quot;dataset&quot;,
+    &quot;feature&quot;,
+    &quot;processed_eeg&quot;,
+    &quot;eeg&quot;,
+    &quot;case&quot;,
+    &quot;patient&quot;,
+    &quot;feature&quot;,
+    &quot;processed_eeg&quot;,
+    &quot;eeg&quot;,
+    &quot;case&quot;,
+    &quot;patient&quot;,
+    &quot;feature&quot;,
+    &quot;processed_eeg&quot;,
+    &quot;eeg&quot;,
+    &quot;case&quot;,
+    &quot;patient&quot;,
+    &quot;feature&quot;,
+    &quot;processed_eeg&quot;,
+    &quot;eeg&quot;,
+    &quot;case&quot;,
+    &quot;patient&quot;,
+    &quot;feature&quot;,
+    &quot;processed_eeg&quot;,
+    &quot;eeg&quot;,
+    &quot;case&quot;,
+    &quot;patient&quot;,
+    &quot;feature&quot;,
+    &quot;processed_eeg&quot;,
+    &quot;eeg&quot;,
+    &quot;case&quot;,
+    &quot;patient&quot;,
+    &quot;upload&quot;,
+    &quot;user&quot;
+  ],
+  &quot;chain_length&quot;: 42,
+  &quot;chain_verified&quot;: true,
+  &quot;lineage_id&quot;: &quot;lineage+8a18f8f4b8bc5781&quot;,
+  &quot;report_type&quot;: &quot;lineage&quot;
+}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Fidelity Report: prediction_report</div></div><div class="nv-panel-body"><pre>{
+  &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+  &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+  &quot;inference_foundation_version&quot;: &quot;inference-foundation@1.0.0&quot;,
+  &quot;inference_report_version&quot;: &quot;inference-report@1.0.0&quot;,
+  &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+  &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+  &quot;prediction&quot;: {
+    &quot;classes&quot;: [
+      {
+        &quot;class_index&quot;: 0,
+        &quot;class_label&quot;: &quot;0&quot;,
+        &quot;probability&quot;: 0.984770328
+      },
+      {
+        &quot;class_index&quot;: 1,
+        &quot;class_label&quot;: &quot;1&quot;,
+        &quot;probability&quot;: 0.015229672
+      }
+    ],
+    &quot;decision_metadata&quot;: {
+      &quot;argmax_index&quot;: 0,
+      &quot;decision_rule&quot;: &quot;argmax&quot;,
+      &quot;n_classes&quot;: 2,
+      &quot;tie&quot;: false
+    },
+    &quot;predicted_class&quot;: 0,
+    &quot;predicted_label&quot;: &quot;0&quot;,
+    &quot;prediction_signature&quot;: &quot;1f3374559fe422c9&quot;,
+    &quot;prediction_version&quot;: &quot;inference-prediction@1.0.0&quot;,
+    &quot;scores&quot;: [
+      {
+        &quot;name&quot;: &quot;max_probability&quot;,
+        &quot;value&quot;: 0.984770328
+      },
+      {
+        &quot;name&quot;: &quot;margin&quot;,
+        &quot;value&quot;: 0.969540655
+      },
+      {
+        &quot;name&quot;: &quot;normalized_entropy&quot;,
+        &quot;value&quot;: 0.1137447
+      }
+    ]
+  },
+  &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+  &quot;prediction_version&quot;: &quot;9757d2bb91ab4546&quot;,
+  &quot;report_type&quot;: &quot;prediction&quot;
+}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Fidelity Report: workflow_report</div></div><div class="nv-panel-body"><pre>{
+  &quot;application_backend_version&quot;: &quot;application-backend@1.0.0&quot;,
+  &quot;application_report_version&quot;: &quot;application-report@1.0.0&quot;,
+  &quot;audit_head&quot;: &quot;d538b75e40728532&quot;,
   &quot;audit_verified&quot;: true,
-  &quot;n_audit_events&quot;: 7,
+  &quot;lineage_id&quot;: &quot;lineage+8a18f8f4b8bc5781&quot;,
+  &quot;n_audit_events&quot;: 10,
+  &quot;report_type&quot;: &quot;workflow&quot;,
   &quot;stages&quot;: [
     &quot;upload&quot;,
     &quot;validate&quot;,
@@ -96,8 +2165,52 @@ pre{margin:0;max-height:420px;overflow:auto;border:1px solid var(--line);border-
     &quot;predict&quot;,
     &quot;confidence&quot;,
     &quot;explanation&quot;
-  ]
-}</pre></div></section><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Report: lineage_report</div></div><div class="nv-panel-body"><pre>{
-  &quot;chain_verified&quot;: true,
-  &quot;n_nodes&quot;: 12
-}</pre></div></section></div><div class="nv-footer">presentation layer only; platform truth remains in backend and registered artifacts</div></main></div></body></html>
+  ],
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;upload_id&quot;: &quot;upload+086e66cd90aa1ebe&quot;,
+  &quot;user_id&quot;: &quot;user+b6c6b3d9a884ca59&quot;,
+  &quot;version&quot;: &quot;e5263033c2706d94&quot;,
+  &quot;workflow&quot;: {
+    &quot;audit_head&quot;: &quot;d538b75e40728532&quot;,
+    &quot;case_id&quot;: &quot;case+8753d96e0e52c666&quot;,
+    &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+    &quot;dependencies&quot;: [
+      &quot;upload+086e66cd90aa1ebe&quot;,
+      &quot;eeg+34bec4053beee5da&quot;,
+      &quot;signal+ef3e79920c9fd0cb&quot;,
+      &quot;feature+58e850eedd709ef9&quot;,
+      &quot;model+3239b6416c66a604&quot;,
+      &quot;prediction+739f8f363603791d&quot;
+    ],
+    &quot;eeg_asset_id&quot;: &quot;eeg+34bec4053beee5da&quot;,
+    &quot;feature_asset_id&quot;: &quot;feature+58e850eedd709ef9&quot;,
+    &quot;lineage_id&quot;: &quot;lineage+8a18f8f4b8bc5781&quot;,
+    &quot;model_id&quot;: &quot;model+3239b6416c66a604&quot;,
+    &quot;owner&quot;: &quot;user+b6c6b3d9a884ca59&quot;,
+    &quot;patient_id&quot;: &quot;patient+b266be29bd8a136c&quot;,
+    &quot;prediction_id&quot;: &quot;prediction+739f8f363603791d&quot;,
+    &quot;processed_id&quot;: &quot;signal+ef3e79920c9fd0cb&quot;,
+    &quot;stages&quot;: [
+      &quot;upload&quot;,
+      &quot;validate&quot;,
+      &quot;process&quot;,
+      &quot;features&quot;,
+      &quot;predict&quot;,
+      &quot;confidence&quot;,
+      &quot;explanation&quot;
+    ],
+    &quot;state_signature&quot;: &quot;7f48a87e5a7e4e40&quot;,
+    &quot;status&quot;: &quot;completed&quot;,
+    &quot;upload_id&quot;: &quot;upload+086e66cd90aa1ebe&quot;,
+    &quot;user_id&quot;: &quot;user+b6c6b3d9a884ca59&quot;,
+    &quot;version&quot;: {
+      &quot;created_at&quot;: &quot;1970-01-01T00:00:00Z&quot;,
+      &quot;previous&quot;: null,
+      &quot;reason&quot;: &quot;completed&quot;,
+      &quot;version&quot;: &quot;e5263033c2706d94&quot;
+    },
+    &quot;workflow_id&quot;: &quot;workflow+d8bbb07222b9665a&quot;,
+    &quot;workflow_version&quot;: &quot;application-workflow@1.0.0&quot;
+  },
+  &quot;workflow_id&quot;: &quot;workflow+d8bbb07222b9665a&quot;
+}</pre></div></section></div><div class="nv-footer">Intelligence Operating Environment &bull; Lore Protocol Compliant</div></div></main></div></body></html>
