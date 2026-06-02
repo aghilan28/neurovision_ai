@@ -29,3 +29,12 @@ Rules/Principles invoked**, plus a status and the phase that introduced it.
 | [0005](./0005-conservative-unknown-patient-identity.md) | Unknown patient identity ⇒ distinct patient (conservative) | V1-P1 |
 | [0006](./0006-default-dsp-parameters.md) | Default DSP parameters (resample/filter/montage/normalize/window) | V1-P2 |
 | [0007](./0007-quality-and-normalization-scope.md) | Quality assessed pre-normalization; per-window norm deferral | V1-P2 |
+
+## Index (V1-P3 + V1-P4)
+| # | Decision | Phase |
+|---|----------|-------|
+| [0008](./0008-per-layer-canonical-helpers.md) | Per-layer canonical/findings helpers (controlled duplication) | V1-P3/P4 |
+| [0009](./0009-annotation-to-class-mapping.md) | Annotation-text → class mapping for distribution *analysis* | V1-P3 |
+| [0010](./0010-patient-disjoint-splits-by-construction.md) | Patient-disjoint splits by construction + deterministic seeding | V1-P4 |
+| [0011](./0011-pure-numpy-metrics-calibration-placeholders.md) | Pure-NumPy metrics; calibration/clinical metrics are placeholders | V1-P4 |
+| [0012](./0012-no-benchmark-without-provenance.md) | No benchmark/eval result without provenance; leakage gate blocks runs | V1-P4 |
