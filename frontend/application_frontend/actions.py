@@ -26,13 +26,18 @@ class ActionResult:
 
 def from_api_error(response: dict, *, page: str) -> ActionResult:
     """Map an unsuccessful API response dict to a friendly ActionResult."""
-    body = response.get("body") or {}
+    raw_body = response.get("body") or {}
     status = response.get("status", "error")
-    message = body.get("error") or body.get("reason") or f"Request failed ({status})."
-    if isinstance(body.get("errors"), list) and body["errors"]:
-        parts = [str(e.get("check") or e.get("detail") or "") if isinstance(e, dict) else str(e)
-                 for e in body["errors"]]
-        message = "; ".join(p for p in parts if p) or message
+    # body may be a plain string (e.g. from gateway exception handler) or a dict
+    if isinstance(raw_body, str):
+        message = raw_body or f"Request failed ({status})."
+    else:
+        body = raw_body
+        message = body.get("error") or body.get("reason") or f"Request failed ({status})."
+        if isinstance(body.get("errors"), list) and body["errors"]:
+            parts = [str(e.get("check") or e.get("detail") or "") if isinstance(e, dict) else str(e)
+                     for e in body["errors"]]
+            message = "; ".join(p for p in parts if p) or message
     return ActionResult(ok=False, page=page, level="error", message=message,
                         data={"status": status, "error_code": response.get("error_code")})
 
