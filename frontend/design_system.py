@@ -484,19 +484,36 @@ def _brain_simulation_html() -> str:
             vx: (Math.random() - 0.5) * 0.2,
             vy: (Math.random() - 0.5) * 0.2,
             size: 1 + Math.random() * 2,
-            pulse: Math.random() * Math.PI * 2,
-            region: getRegionName(x, y, width, height)
+            pulse: Math.random() * Math.PI * 2
         });
     }
 
     function getRegionName(x, y, w, h) {
         const cx = w/2, cy = h/2;
-        if (y < cy - h*0.1) return 'Frontal';
-        if (y > cy + h*0.15) return 'Occipital';
-        if (x < cx - w*0.1) return 'Temporal (L)';
-        if (x > cx + w*0.1) return 'Temporal (R)';
+        const dx = (x - cx) / w;
+        const dy = (y - cy) / h;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+
+        if (dist < 0.05) return 'Hippocampus';
+        if (dy < -0.15) return 'Frontal';
+        if (dy > 0.15) return 'Occipital';
+        if (Math.abs(dy) < 0.05) return 'Motor Cortex';
+        if (Math.abs(dx) > 0.15) return 'Temporal';
         return 'Parietal';
     }
+
+    let hoveredRegion = 'Frontal';
+    const regionDisplay = document.getElementById('active-region');
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const region = getRegionName(mx, my, width, height);
+        if (region !== hoveredRegion) {
+            hoveredRegion = region;
+            regionDisplay.innerText = region;
+        }
+    });
 
     // Connect nodes
     for (let i = 0; i < edgeCount; i++) {
@@ -575,6 +592,44 @@ def _brain_simulation_html() -> str:
 """
 
 
+def _radar_chart_svg(spec: dict) -> str:
+    """Animated radial visualization for confidence levels."""
+    labels = spec.get("labels", ["Confidence", "Calibration", "Risk", "Evidence", "Lineage"])
+    values = spec.get("values", [0.99, 0.95, 0.1, 0.88, 0.92])
+    width, height = 400, 400
+    cx, cy, r = width / 2, height / 2, 140
+
+    parts = []
+    # Grid circles
+    for i in range(1, 6):
+        parts.append(f"<circle cx='{cx}' cy='{cy}' r='{r * i / 5}' fill='none' stroke='var(--line)' stroke-width='1'/>")
+
+    # Axis lines
+    n = len(labels)
+    for i in range(n):
+        angle = i * (2 * 3.14159 / n) - (3.14159 / 2)
+        x2, y2 = cx + Math.cos(angle) * r, cy + Math.sin(angle) * r
+        parts.append(f"<line x1='{cx}' y1='{cy}' x2='{x2}' y2='{y2}' stroke='var(--line)'/>")
+        # Labels
+        lx, ly = cx + Math.cos(angle) * (r + 30), cy + Math.sin(angle) * (r + 20)
+        parts.append(f"<text x='{lx}' y='{ly}' fill='var(--muted)' font-size='10' text-anchor='middle'>{esc(labels[i])}</text>")
+
+    # Data polygon
+    poly_points = []
+    for i, v in enumerate(values):
+        angle = i * (2 * 3.14159 / n) - (3.14159 / 2)
+        dist = r * float(v)
+        px, py = cx + Math.cos(angle) * dist, cy + Math.sin(angle) * dist
+        poly_points.append(f"{px},{py}")
+
+    parts.append(f"<polygon points='{' '.join(poly_points)}' fill='rgba(78, 228, 184, 0.2)' stroke='var(--intelligence)' stroke-width='2'/>")
+
+    # Animated particles on the polygon edges
+    return f"<svg width='{width}' height='{height}' viewBox='0 0 {width} {height}'>{''.join(parts)}</svg>"
+
+
+import math as Math
+
 def render_visualization(viz: dict) -> str:
     typ = viz.get("type")
     spec = viz.get("spec", {})
@@ -582,6 +637,8 @@ def render_visualization(viz: dict) -> str:
         body = _bar_svg(spec)
     elif typ == "line":
         body = _line_svg(spec)
+    elif typ == "radar":
+        body = _radar_chart_svg(spec)
     elif typ == "graph":
         body = _graph_svg(spec)
     elif typ == "timeline":

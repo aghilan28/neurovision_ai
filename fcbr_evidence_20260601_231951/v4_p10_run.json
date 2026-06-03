@@ -1,6 +1,0 @@
-﻿{
-    "command":  "py -3.12 -m scripts.verify_v4_p9_p10",
-    "exit_code":  0,
-    "runtime_seconds":  272.507,
-    "evidence":  "fcbr_evidence_20260601_231951\\after_verify_v4_p9_p10.txt"
-}

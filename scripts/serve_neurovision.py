@@ -11,8 +11,9 @@ import pathlib
 import uvicorn
 from fastapi import FastAPI, Form, File, UploadFile
 from fastapi.responses import HTMLResponse, RedirectResponse
-from scripts.application_frontend_gateway import build_live_app
-from backend.application_backend import DeterministicEntropy
+from scripts.application_frontend_gateway import LiveBackendGateway
+from backend.application_backend import ApplicationBackendService, DeterministicEntropy
+from frontend.application_frontend import FrontendApp
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
 
@@ -27,8 +28,18 @@ if cohort_dir and os.path.exists(cohort_dir):
 else:
     cohort = []
 
-svc, gateway, app_frontend = build_live_app(cohort, workspace_dir=os.environ.get("NV_WORKSPACE_DIR", "workspace"),
-                                          entropy=DeterministicEntropy("prod-server"))
+# Manual composition to allow resilient startup if cohort is insufficient (< 2 patients)
+workspace_dir = os.environ.get("NV_WORKSPACE_DIR", "workspace")
+svc = ApplicationBackendService(workspace_dir=workspace_dir, entropy=DeterministicEntropy("prod-server"))
+
+if len(cohort) >= 2:
+    svc.prepare_model(cohort)
+else:
+    # Skip model preparation to avoid startup failure during UI-only deployments or inspections.
+    print(f"WARNING: Insufficient cohort data ({len(cohort)} recordings). Starting in UI-only Demo Mode.")
+
+gateway = LiveBackendGateway(svc.api)
+app_frontend = FrontendApp(gateway)
 
 server = FastAPI(title="NeuroVision")
 

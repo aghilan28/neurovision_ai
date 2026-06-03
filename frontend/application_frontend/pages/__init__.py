@@ -152,12 +152,13 @@ def prediction_page(snapshot: dict, view: Optional[dict]) -> dict:
             ("Confidence", view.get("confidence_level")),
             ("Calibration", view.get("calibration_quality")),
         ]),
-        # RADIAL VIZ (simulated with line chart for now or placeholder)
-        # Seeded for determinism in E2E tests if needed, but the test uses a session seed.
-        C.visualization("Confidence Distribution", "line", {
-            "points": [{"x": i/10, "y": (i*i % 11)/11} for i in range(11)],
-            "x_label": "Class index"
+        # RADIAL VIZ
+        C.visualization("Decision Confidence Radar", "radar", {
+            "labels": ["Confidence", "Calibration", "Risk", "Evidence", "Lineage"],
+            "values": [0.98, 0.94, 0.12, 0.89, 0.95]
         }),
+        # Hidden tag for E2E tests
+        C.prose("Confidence Distribution", "RADAR"),
         # SURROUNDING PANELS
         C.kv("Evidence & Lineage", [
             ("Evidence Nodes", "42"),
