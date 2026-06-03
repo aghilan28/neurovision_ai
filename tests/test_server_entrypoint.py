@@ -63,6 +63,18 @@ def test_config_from_overrides():
     assert cfg.environment == ServerEnvironment.DEVELOPMENT and cfg.reload is True
 
 
+def test_render_env_aliases_are_honored(monkeypatch):
+    monkeypatch.setenv("HOST", "0.0.0.0")
+    monkeypatch.setenv("PORT", "4321")
+    monkeypatch.delenv("NV_HOST", raising=False)
+    monkeypatch.delenv("NV_PORT", raising=False)
+
+    cfg = load_config({})
+
+    assert cfg.host == "0.0.0.0"
+    assert cfg.port == 4321
+
+
 def test_production_forces_no_reload():
     cfg = load_config({"environment": "production", "reload": True})
     assert cfg.reload is False

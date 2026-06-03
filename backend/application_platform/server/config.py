@@ -101,8 +101,11 @@ def load_config(overrides: Optional[dict] = None) -> ServerConfig:
         raw = _env(env_name)
         return transform(raw) if raw is not None else None
 
-    host = pick("host", "NV_HOST") or "127.0.0.1"
+    host = pick("host", "NV_HOST") or _env("HOST") or "127.0.0.1"
     port_val = pick("port", "NV_PORT", int)
+    if port_val is None:
+        raw_port = _env("PORT")
+        port_val = int(raw_port) if raw_port is not None else None
     port = int(port_val) if port_val is not None else 8000
 
     env_raw = pick("environment", "NV_ENV")
