@@ -324,7 +324,7 @@ def render_form_section(section: dict) -> str:
             control = f'<input type="{typ}" name="{esc(name)}"{ph}>'
         fields.append(f'<label class="nv-field">{esc(label)}{control}{err}</label>')
     body = (
-        f'<form class="nv-form" method="{esc(form.get("method"))}" data-action="{esc(form.get("action"))}">'
+        f'<form class="nv-form" method="{esc(form.get("method"))}" action="/action/{esc(form.get("action"))}" enctype="{"multipart/form-data" if any(f.get("kind") == "file" for f in form.get("fields", [])) else "application/x-www-form-urlencoded"}">'
         f'{"".join(fields)}<button type="submit">{esc(form.get("submit_label", "Submit"))}</button></form>'
     )
     return panel(section.get("heading", "Form"), body)
@@ -632,7 +632,7 @@ def render_application_page(page: dict, *, version: str) -> str:
     if page.get("id") == "dashboard":
         brain = f'<div style="grid-column: span 12; margin-bottom: 40px; background: var(--surface); border-radius: 24px; padding: 48px; border: 1px solid var(--line); box-shadow: inset 0 0 80px rgba(168, 154, 232, 0.05);">{_brain_simulation_html()}</div>'
     nav_html = "".join(
-        f'<a class="{"active" if item.get("active") else ""}" href="#{esc(item.get("id"))}">{esc(item.get("label"))}</a>'
+        f'<a class="{"active" if item.get("active") else ""}" href="/{esc(item.get("id"))}">{esc(item.get("label"))}</a>'
         for item in nav
     )
     return (
