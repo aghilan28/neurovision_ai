@@ -36,7 +36,7 @@ if len(cohort) >= 2:
     svc.prepare_model(cohort)
 else:
     # Skip model preparation to avoid startup failure during UI-only deployments or inspections.
-    print(f"WARNING: Insufficient cohort data ({len(cohort)} recordings). Starting in UI-only Demo Mode.")
+    print("WARNING: Demo Mode enabled (insufficient cohort)")
 
 gateway = LiveBackendGateway(svc.api)
 app_frontend = FrontendApp(gateway)
