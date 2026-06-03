@@ -207,11 +207,18 @@ def build_application(config: Optional[ServerConfig] = None):
 
     # Attach UI routes at the END to avoid shadowing system routes like /health or /readyz.
     # Uses dynamic import to satisfy the strict architectural boundary check (NR-8).
+    # CRITICAL: Route attachment failure is a FATAL deployment error — never swallow silently.
+    import logging as _logging
+    _log = _logging.getLogger(__name__)
     try:
         ui = __import__("scripts.application_frontend_gateway", fromlist=["attach_ui_routes"])
         ui.attach_ui_routes(app, service)
-    except Exception:
-        pass
+        _log.info("NeuroVision frontend routes attached successfully.")
+    except Exception as _exc:
+        _log.critical("FATAL: Frontend UI route attachment failed: %s", _exc, exc_info=True)
+        raise RuntimeError(
+            f"NeuroVision deployment aborted: frontend route attachment failed — {_exc}"
+        ) from _exc
 
     return service, app
 
