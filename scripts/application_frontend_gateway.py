@@ -79,6 +79,16 @@ class PlatformBackendGateway(BackendGateway):
                 content = params.get("content")
                 if isinstance(content, str):
                     content = base64.b64decode(content)
+                # Lazy provisioning: if startup provisioning failed (e.g. OOM at boot),
+                # retry now. Idempotent — skipped if model is already present.
+                if not getattr(self.service, "_model_info", None) or                         getattr(self.service.backend, "model_context", None) is None:
+                    from backend.application_platform.provisioning import provision_model
+                    prov = provision_model(self.service)
+                    if not prov.ok:
+                        findings = "; ".join(prov.findings) if prov.findings else "unknown error"
+                        return {"ok": False, "status": "error",
+                                "body": {"error": f"Model not ready: {findings}"},
+                                "error_code": "MODEL_NOT_READY"}
                 outcome = self.service.upload_and_analyze(
                     token=token,
                     filename=params.get("filename"),
@@ -126,7 +136,8 @@ class PlatformBackendGateway(BackendGateway):
 
             return {"ok": False, "status": "error", "body": f"Unhandled operation: {operation}"}
         except Exception as exc:
-            return {"ok": False, "status": "error", "body": str(exc), "error_code": "GATEWAY_ERROR"}
+            return {"ok": False, "status": "error",
+                    "body": {"error": str(exc)}, "error_code": "GATEWAY_ERROR"}
 
 
 import hmac
