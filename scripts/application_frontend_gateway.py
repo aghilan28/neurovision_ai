@@ -58,14 +58,30 @@ class PlatformBackendGateway(BackendGateway):
 
             if operation == "login":
                 try:
-                    token = self.service.login(
+                    login_result = self.service.login(
                         username=params.get("username"),
                         password=params.get("password")
                     )
+                    # login() may return a raw token string OR a LoginResult dataclass
+                    # depending on which service layer is wired. Normalise both to a
+                    # plain str token so the cookie always carries the raw hex token
+                    # that AuthService.validate_session() can look up.
+                    if hasattr(login_result, "token"):
+                        raw_token = login_result.token
+                        user_id = (login_result.session.user_id
+                                   if hasattr(login_result, "session") and login_result.session
+                                   else "u-1")
+                        session_id = (login_result.session.session_id
+                                      if hasattr(login_result, "session") and login_result.session
+                                      else "s-1")
+                    else:
+                        raw_token = login_result
+                        user_id = "u-1"
+                        session_id = "s-1"
                     return {"ok": True, "status": "ok", "body": {
-                        "token": token,
-                        "user_id": "u-1",
-                        "session_id": "s-1",
+                        "token": raw_token,
+                        "user_id": user_id,
+                        "session_id": session_id,
                         "username": params.get("username"),
                         "roles": ["clinician"]
                     }, "error_code": None}
@@ -76,12 +92,26 @@ class PlatformBackendGateway(BackendGateway):
                 return {"ok": True, "status": "ok", "body": {}}
 
             if operation == "upload_eeg":
+                # `token` here is the method argument — the raw hex session token
+                # restored from the signed cookie by _get_frontend(). Guard against
+                # it being absent so the error is explicit rather than a silent None
+                # reaching AuthService.validate_session().
+                if not token:
+                    return {"ok": False, "status": "unauthorized",
+                            "body": {"errors": [
+                                {"check": "authentication",
+                                 "detail": {"public": False, "session": None,
+                                            "reason": "no_token_in_gateway"}},
+                                {"check": "authorization",
+                                 "detail": {"reason": "no_user"}}]},
+                            "error_code": "authentication"}
                 content = params.get("content")
                 if isinstance(content, str):
                     content = base64.b64decode(content)
                 # Lazy provisioning: if startup provisioning failed (e.g. OOM at boot),
                 # retry now. Idempotent — skipped if model is already present.
-                if not getattr(self.service, "_model_info", None) or                         getattr(self.service.backend, "model_context", None) is None:
+                if not getattr(self.service, "_model_info", None) or \
+                        getattr(self.service.backend, "model_context", None) is None:
                     from backend.application_platform.provisioning import provision_model
                     prov = provision_model(self.service)
                     if not prov.ok:
