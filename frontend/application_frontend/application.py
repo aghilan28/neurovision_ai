@@ -176,6 +176,18 @@ class FrontendApp:
         view = build_reports_view(reports) if reports else None
         return render_html(pages.reports_page(self.state.snapshot(), view, reports))
 
+    def render_clinical(self) -> str:
+        return render_html(pages.clinical_page(self.state.snapshot()))
+
+    def render_operations(self) -> str:
+        return render_html(pages.operations_page(self.state.snapshot()))
+
+    def render_autonomous(self) -> str:
+        return render_html(pages.autonomous_page(self.state.snapshot()))
+
+    def render_research(self) -> str:
+        return render_html(pages.research_page(self.state.snapshot()))
+
     def render_current(self) -> str:
         page = self.state.current_page
         return {
@@ -183,6 +195,10 @@ class FrontendApp:
             "dashboard": self.render_dashboard, "upload": self.render_upload,
             "analysis": self.render_analysis, "prediction": self.render_prediction,
             "reports": self.render_reports,
+            "clinical": self.render_clinical,
+            "operations": self.render_operations,
+            "autonomous": self.render_autonomous,
+            "research": self.render_research,
         }.get(page, self.render_login)()
 
 

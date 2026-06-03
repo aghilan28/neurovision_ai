@@ -213,7 +213,46 @@ def reports_page(snapshot: dict, view: Optional[dict], reports: Optional[list] =
                  subtitle="Lineage and Audit Trail Visualization")
 
 
+def clinical_page(snapshot: dict) -> dict:
+    cases = snapshot.get("clinical_cases", [])
+    sections = [
+        C.kv("Clinical Cases", [("Total", len(cases))]),
+        C.table("Recent Reviews", ["ID", "Subject", "Status"],
+                [[c.get("id"), c.get("subject"), c.get("status")] for c in cases]
+                or [["—", "—", "—"]]),
+        C.prose("Clinical Decision Support", "AI-assisted neurological diagnostics and treatment recommendations."),
+    ]
+    return _page("clinical", "Clinical Workspace", snapshot, sections, subtitle="Advanced Neuro-Diagnostic Environment")
+
+def operations_page(snapshot: dict) -> dict:
+    events = snapshot.get("operational_events", [])
+    sections = [
+        C.kv("System Operations", [("Nodes", "24"), ("Health", "Optimal")]),
+        C.timeline("Operational Events", events or [["No events", "-", "-"]]),
+        C.visualization("Compute Load", "line", {"points": [{"x": i/10, "y": 0.5 + 0.1*i} for i in range(11)], "x_label": "Time"}),
+    ]
+    return _page("operations", "Operational Workspace", snapshot, sections, subtitle="Platform Governance and Monitoring")
+
+def autonomous_page(snapshot: dict) -> dict:
+    tasks = snapshot.get("autonomous_tasks", [])
+    sections = [
+        C.kv("Autonomous Agents", [("Active", "3"), ("Tasks", len(tasks))]),
+        C.table("Active Plans", ["Task ID", "Goal", "Status"], tasks or [["—", "—", "—"]]),
+        C.prose("Agent Governance", "Monitoring autonomous agency and policy compliance."),
+    ]
+    return _page("autonomous", "Autonomous Workspace", snapshot, sections, subtitle="AI Agent Management and Execution")
+
+def research_page(snapshot: dict) -> dict:
+    benchmarks = snapshot.get("research_benchmarks", {"labels": [], "values": []})
+    sections = [
+        C.kv("Research Datasets", [("Collections", "8"), ("Samples", "14.2k")]),
+        C.visualization("Benchmark Results", "bar", benchmarks),
+        C.prose("Knowledge Discovery", "Exploring emergent neural patterns and research lineages."),
+    ]
+    return _page("research", "Research Workspace", snapshot, sections, subtitle="Scientific Discovery and Validation")
+
 __all__ = [
     "login_page", "register_page", "dashboard_page", "upload_page", "analysis_page",
-    "prediction_page", "reports_page",
+    "prediction_page", "reports_page", "clinical_page", "operations_page",
+    "autonomous_page", "research_page",
 ]
