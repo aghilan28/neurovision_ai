@@ -272,7 +272,7 @@ def attach_ui_routes(app, service):
         frontend = _get_frontend(request, service)
         form_data = await request.form()
         params = dict(form_data)
-        if operation == "upload" and "file" in params:
+        if operation in ("upload", "upload_eeg") and "file" in params:
             file = params["file"]
             if hasattr(file, "read"):
                 content = await file.read()
@@ -281,12 +281,12 @@ def attach_ui_routes(app, service):
         result = None
         if operation == "login":
             result = frontend.login(params.get("username"), params.get("password"))
-        elif operation == "register":
+        elif operation in ("register", "register_user"):
             result = frontend.register(params.get("username"), params.get("password"),
                                      params.get("password_confirm"), params.get("role"))
         elif operation == "logout":
             result = frontend.logout()
-        elif operation == "upload":
+        elif operation in ("upload", "upload_eeg"):
             result = frontend.upload(params.get("filename"), params.get("content"))
         elif operation == "start_analysis":
             result = frontend.start_analysis(params.get("upload_id"))
