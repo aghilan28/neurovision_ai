@@ -18,6 +18,10 @@ import contextlib
 from dataclasses import dataclass
 from typing import Optional
 
+from fastapi.responses import HTMLResponse
+
+from frontend.application_frontend import FrontendApp
+from frontend.application_frontend.gateway import BackendGateway
 from .. import create_app
 from ..service import ApplicationPlatformService
 from ..version import APPLICATION_PLATFORM_VERSION, API_V1
@@ -137,6 +141,15 @@ def _provision_startup_model(service, *, provision: bool = True):
     return report, recovery
 
 
+class _FrontendGatewayAdapter(BackendGateway):
+    """Minimal UI gateway for the HTML surface that renders against the live service."""
+
+    def handle(self, operation: str, params: Optional[dict] = None,
+               token: Optional[str] = None) -> dict:
+        return {"ok": True, "status": "ok", "body": {}, "error_code": None,
+                "api_version": "v1", "operation": operation}
+
+
 def build_application(config: Optional[ServerConfig] = None):
     """Build ``(service, app)`` — the real service + the real FastAPI app with a lifespan.
 
@@ -177,6 +190,8 @@ def build_application(config: Optional[ServerConfig] = None):
     # Install the lifespan on the existing app without rebuilding routes.
     app.router.lifespan_context = lifespan
 
+    frontend = FrontendApp(_FrontendGatewayAdapter())
+
     # --- operational probes (kube-style); reuse the existing /health semantics ---
     @app.get("/livez")
     def livez():
@@ -204,6 +219,27 @@ def build_application(config: Optional[ServerConfig] = None):
                 "api_version": API_V1, "model_prepared": model_prepared,
                 "model_recovered": bool(recovery and recovery.recovered),
                 "persistence_ok": (bool(recovery.persistence_ok) if recovery else None)}
+
+    @app.get("/", response_class=HTMLResponse)
+    def root():
+        return HTMLResponse(frontend.render_login())
+
+    @app.get("/{page}", response_class=HTMLResponse)
+    def ui_page(page: str):
+        renderer = {
+            "login": frontend.render_login,
+            "register": frontend.render_register,
+            "dashboard": frontend.render_dashboard,
+            "upload": frontend.render_upload,
+            "analysis": frontend.render_analysis,
+            "prediction": frontend.render_prediction,
+            "reports": frontend.render_reports,
+        }.get(page)
+        if renderer is None:
+            from fastapi import HTTPException
+            raise HTTPException(status_code=404, detail="Not Found")
+        frontend.state.navigate(page)
+        return HTMLResponse(renderer())
 
     return service, app
 

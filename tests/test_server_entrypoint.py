@@ -176,6 +176,18 @@ def test_real_uvicorn_launch_and_graceful_shutdown():
     assert proc.returncode is not None
 
 
+def test_deployment_app_exposes_frontend_routes():
+    _, app = build_application(load_config({"port": 8801}))
+    with TestClient(app) as c:
+        assert c.get("/").status_code == 200
+        assert c.get("/login").status_code == 200
+        assert c.get("/dashboard").status_code == 200
+        assert c.get("/upload").status_code == 200
+        assert c.get("/analysis").status_code == 200
+        assert c.get("/prediction").status_code == 200
+        assert c.get("/reports").status_code == 200
+
+
 def test_module_run_helper_exists():
     # `python -m backend.application_platform.server.app` path is wired via run()
     from backend.application_platform.server import app as appmod
