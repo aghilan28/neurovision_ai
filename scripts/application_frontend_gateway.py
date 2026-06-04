@@ -183,7 +183,13 @@ def _get_frontend(request: Request, service) -> FrontendApp:
             encoded, sig = raw_value.rsplit(".", 1)
             if not hmac.compare_digest(_sign(encoded), sig):
                 return frontend
-            data = json.loads(base64.b64decode(encoded).decode("utf-8"))
+            # Handle both urlsafe (no padding) and standard base64 cookies.
+            padded = encoded + "=" * (-len(encoded) % 4)
+            try:
+                raw_bytes = base64.urlsafe_b64decode(padded)
+            except Exception:
+                raw_bytes = base64.b64decode(padded)
+            data = json.loads(raw_bytes.decode("utf-8"))
             if data.get("user"):
                 frontend.state.user = FrontendUser(**data["user"])
             if data.get("session"):
@@ -210,7 +216,7 @@ def _set_session_cookie(response, frontend: FrontendApp):
     for key in ("clinical_cases", "operational_events", "autonomous_tasks", "research_benchmarks"):
         val = getattr(state, key, None)
         if val is not None: data[key] = val
-    encoded = base64.b64encode(json.dumps(data).encode("utf-8")).decode("utf-8")
+    encoded = base64.urlsafe_b64encode(json.dumps(data).encode("utf-8")).decode("utf-8").rstrip("=")
     value = f"{encoded}.{_sign(encoded)}"
     response.set_cookie(
         key="nv_session",
