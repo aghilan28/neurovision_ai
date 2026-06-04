@@ -249,6 +249,39 @@ def build_live_app(cohort_files: Sequence[tuple], *, workspace_dir: Optional[str
 def attach_ui_routes(app, service):
     """Attach the NeuroVision HTML frontend routes to the FastAPI app."""
 
+    @app.get("/debug/cookie")
+    def debug_cookie(request: Request):
+        """Diagnostic endpoint — shows cookie state as seen by the server."""
+        raw = request.cookies.get("nv_session")
+        result = {
+            "cookie_present": raw is not None,
+            "cookie_length": len(raw) if raw else 0,
+            "cookie_starts_with_quote": raw[0] == '"' if raw else None,
+            "cookie_first_20": raw[:20] if raw else None,
+            "has_dot": "." in raw if raw else None,
+            "all_cookie_keys": list(request.cookies.keys()),
+            "headers_cookie": request.headers.get("cookie", "")[:100],
+        }
+        if raw and "." in raw:
+            encoded, sig = raw.rsplit(".", 1)
+            import hmac as _h
+            sig_ok = _h.compare_digest(_sign(encoded), sig)
+            result["signature_valid"] = sig_ok
+            if sig_ok:
+                try:
+                    padded = encoded + "=" * (-len(encoded) % 4)
+                    try:
+                        raw_bytes = base64.urlsafe_b64decode(padded)
+                    except Exception:
+                        raw_bytes = base64.b64decode(padded)
+                    data = json.loads(raw_bytes.decode("utf-8"))
+                    result["token_present"] = data.get("token") is not None
+                    result["user_present"] = data.get("user") is not None
+                    result["current_page"] = data.get("current_page")
+                except Exception as exc:
+                    result["decode_error"] = str(exc)
+        return result
+
     @app.get("/", response_class=HTMLResponse)
     def root(request: Request):
         frontend = _get_frontend(request, service)

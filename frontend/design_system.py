@@ -324,7 +324,8 @@ def render_form_section(section: dict) -> str:
             control = f'<input type="{typ}" name="{esc(name)}"{ph}>'
         fields.append(f'<label class="nv-field">{esc(label)}{control}{err}</label>')
     body = (
-        f'<form class="nv-form" method="{esc(form.get("method"))}" action="/action/{esc(form.get("action"))}" enctype="{"multipart/form-data" if any(f.get("kind") == "file" for f in form.get("fields", [])) else "application/x-www-form-urlencoded"}">'
+        f'<form class="nv-form" method="{esc(form.get("method"))}" action="/action/{esc(form.get("action"))}" enctype="{"multipart/form-data" if any(f.get("kind") == "file" for f in form.get("fields", [])) else "application/x-www-form-urlencoded"}"'
+        f' onsubmit="this.querySelector(\'button[type=submit]\').disabled=true;this.querySelector(\'button[type=submit]\').textContent=\'Processing… please wait\';">'
         f'{"".join(fields)}<button type="submit">{esc(form.get("submit_label", "Submit"))}</button></form>'
     )
     return panel(section.get("heading", "Form"), body)
