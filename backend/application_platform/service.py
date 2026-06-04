@@ -428,6 +428,9 @@ class ApplicationPlatformService:
         skipped (the rest of the state still recovers). Audit + lineage *references* are
         carried inside the persisted records.
         """
+        if hasattr(self.backend.auth, 'rehydrate_tfp_index'):
+            self.backend.auth.rehydrate_tfp_index()
+
         errors: list[str] = []
         recovered_ids: list[str] = []
         store = self._state_store

@@ -62,6 +62,11 @@ class AuthService:
         self.credentials = CredentialStore()
         self.sessions = make_session_store()
         self._session_by_tfp: dict[str, str] = {}
+
+    def rehydrate_tfp_index(self):
+        """Rehydrate the transient _session_by_tfp index from persistent store."""
+        for sess in self.sessions.values():
+            self._session_by_tfp[sess.token_fingerprint] = sess.session_id
         self._session_audit_logs: dict[str, ImmutableAuditLog] = {}
 
     # --- accessors ------------------------------------------------------------
@@ -143,7 +148,14 @@ class AuthService:
             tfp[:8], session_id, list(self._session_by_tfp.keys())[:3], id(self)
         )
         if session_id is None:
-            _tv.warning("[TRACE L8-VALIDATE] FAIL: fingerprint not in _session_by_tfp")
+            _tv.warning("[TRACE L8-VALIDATE] FALLBACK: searching sessions store directly")
+            for sess in self.sessions.values():
+                if sess.token_fingerprint == tfp:
+                    session_id = sess.session_id
+                    self._session_by_tfp[tfp] = session_id
+                    break
+        if session_id is None:
+            _tv.warning("[TRACE L8-VALIDATE] FAIL: fingerprint not in _session_by_tfp or sessions store")
             return None
         session = self.sessions.find(session_id)
         if session is None or session.status != SessionStatus.ACTIVE:
@@ -189,6 +201,12 @@ class AuthService:
             return "unknown", None
         session_id = self._session_by_tfp.get(tfp)
         if session_id is None:
+            for sess in self.sessions.values():
+                if sess.token_fingerprint == tfp:
+                    session_id = sess.session_id
+                    self._session_by_tfp[tfp] = session_id
+                    break
+        if session_id is None:
             return "unknown", None
         session = self.sessions.find(session_id)
         if session is None:
@@ -206,7 +224,14 @@ class AuthService:
                        created_at: str = DETERMINISTIC_EPOCH) -> SessionRecord:
         """Revoke a session (by raw token or by session id)."""
         if session_id is None and token is not None:
-            session_id = self._session_by_tfp.get(token_fingerprint(token))
+            tfp = token_fingerprint(token)
+            session_id = self._session_by_tfp.get(tfp)
+            if session_id is None:
+                for sess in self.sessions.values():
+                    if sess.token_fingerprint == tfp:
+                        session_id = sess.session_id
+                        self._session_by_tfp[tfp] = session_id
+                        break
         if session_id is None or not self.sessions.exists(session_id):
             raise AuthError("unknown session")
         current = self.sessions.get(session_id)
