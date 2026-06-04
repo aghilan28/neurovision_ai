@@ -1,3 +1,11 @@
+---
+title: NeuroVision AI
+emoji: 🧠
+colorFrom: purple
+colorTo: blue
+sdk: docker
+---
+
 # NeuroVision AI
 
 > **A production-oriented EEG-AI platform for critical-care neurology.**
