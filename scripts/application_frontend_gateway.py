@@ -249,6 +249,22 @@ def build_live_app(cohort_files: Sequence[tuple], *, workspace_dir: Optional[str
 def attach_ui_routes(app, service):
     """Attach the NeuroVision HTML frontend routes to the FastAPI app."""
 
+    @app.post("/debug/upload")
+    async def debug_upload(request: Request):
+        """Diagnostic: show exactly what the server receives from a file upload."""
+        form = await request.form()
+        result = {}
+        for key in form:
+            val = form[key]
+            if hasattr(val, "read"):
+                content = await val.read()
+                result[key] = {"type": "UploadFile", "filename": getattr(val, "filename", None),
+                               "size": len(content)}
+            else:
+                result[key] = {"type": "str", "value": str(val)[:50]}
+        from fastapi.responses import JSONResponse
+        return JSONResponse(result)
+
     @app.get("/debug/cookie")
     def debug_cookie(request: Request):
         """Diagnostic endpoint — shows cookie state as seen by the server."""
@@ -358,11 +374,15 @@ def attach_ui_routes(app, service):
         frontend = _get_frontend(request, service)
         form_data = await request.form()
         params = dict(form_data)
-        if operation in ("upload", "upload_eeg") and "file" in params:
-            file = params["file"]
-            if hasattr(file, "read"):
+        if operation in ("upload", "upload_eeg"):
+            # Read the uploaded file from the multipart form.
+            # The form has: "filename" (text input) and "file" (file input).
+            file = form_data.get("file")
+            if file is not None and hasattr(file, "read"):
                 content = await file.read()
-                params["content"], params["filename"] = content, getattr(file, "filename", "upload.edf")
+                filename = getattr(file, "filename", None) or params.get("filename") or "upload.edf"
+                params["content"] = content
+                params["filename"] = filename
 
         result = None
         if operation == "login":
