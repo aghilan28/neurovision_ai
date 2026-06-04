@@ -70,11 +70,35 @@ class ApplicationAPI:
             "operation": request.operation.value,
             "request_key": _req_key(request, self._seq)}).id
 
+        import logging as _lg
+        _ta = _lg.getLogger("nv.auth_trace")
+
         session = user = None
         if not is_public(request.operation) and request.token:
+            _ta.warning(
+                "[TRACE L7-API] op=%s token type=%s is_none=%s len=%s auth_id=%s session_count=%s",
+                request.operation.value,
+                type(request.token).__name__,
+                request.token is None,
+                len(request.token) if isinstance(request.token, str) else "N/A",
+                id(self.service.auth),
+                len(self.service.auth._session_by_tfp)
+            )
             session = self.service.auth.validate_session(request.token)
+            _ta.warning(
+                "[TRACE L7-API] validate_session returned: session type=%s is_none=%s",
+                type(session).__name__,
+                session is None
+            )
             if session is not None:
                 user = self.service.users.get_user(session.user_id)
+        else:
+            _ta.warning(
+                "[TRACE L7-API] op=%s SKIPPED validate_session: is_public=%s token_truthy=%s",
+                request.operation.value,
+                is_public(request.operation),
+                bool(request.token)
+            )
 
         checks = self.validator.checks(operation=request.operation, params=request.params,
                                        session=session, user=user)

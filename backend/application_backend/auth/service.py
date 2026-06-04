@@ -130,18 +130,32 @@ class AuthService:
     # --- validation -----------------------------------------------------------
     def validate_session(self, token: str) -> Optional[SessionRecord]:
         """Return the active session for ``token`` or ``None`` (no exception)."""
+        import logging as _lg
+        _tv = _lg.getLogger("nv.auth_trace")
         if not isinstance(token, str) or token == "":
+            _tv.warning("[TRACE L8-VALIDATE] FAIL: token not str or empty — type=%s", type(token).__name__)
             return None
-        session_id = self._session_by_tfp.get(token_fingerprint(token))
+        from .tokens import token_fingerprint as _tfp
+        tfp = _tfp(token)
+        session_id = self._session_by_tfp.get(tfp)
+        _tv.warning(
+            "[TRACE L8-VALIDATE] tfp=%s session_id=%s known_tfps=%s auth_id=%s",
+            tfp[:8], session_id, list(self._session_by_tfp.keys())[:3], id(self)
+        )
         if session_id is None:
+            _tv.warning("[TRACE L8-VALIDATE] FAIL: fingerprint not in _session_by_tfp")
             return None
         session = self.sessions.find(session_id)
         if session is None or session.status != SessionStatus.ACTIVE:
+            _tv.warning("[TRACE L8-VALIDATE] FAIL: session None or not ACTIVE — session=%s", session)
             return None
         if not self.users.exists(session.user_id):
+            _tv.warning("[TRACE L8-VALIDATE] FAIL: user %s does not exist", session.user_id)
             return None
         if self.users.get_user(session.user_id).status != UserStatus.ACTIVE:
+            _tv.warning("[TRACE L8-VALIDATE] FAIL: user %s not ACTIVE", session.user_id)
             return None
+        _tv.warning("[TRACE L8-VALIDATE] SUCCESS: session_id=%s user_id=%s", session_id, session.user_id)
         return session
 
     def authenticate(self, token: str) -> tuple[SessionRecord, UserRecord]:
