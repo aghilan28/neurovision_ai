@@ -373,20 +373,21 @@ def attach_ui_routes(app, service):
     async def ui_action(operation: str, request: Request):
         frontend = _get_frontend(request, service)
         form_data = await request.form()
+        params = {}
 
-        # Read file upload BEFORE dict conversion (which consumes the stream).
-        file_content = None
-        file_name = None
-        if operation in ("upload", "upload_eeg"):
-            file_obj = form_data.get("file")
-            if file_obj is not None and hasattr(file_obj, "read"):
-                file_content = await file_obj.read()
-                file_name = getattr(file_obj, "filename", None)
-
-        params = dict(form_data)
-        if file_content is not None:
-            params["content"] = file_content
-            params["filename"] = file_name or params.get("filename") or "upload.edf"
+        # Extract all form fields, handling file uploads specially.
+        for key in form_data:
+            val = form_data.multi_items()  # not used, just to avoid consuming
+            break
+        for key, val in form_data.multi_items():
+            if hasattr(val, "read"):
+                # This is an UploadFile — read its content bytes.
+                await val.seek(0)
+                file_bytes = await val.read()
+                params["content"] = file_bytes
+                params["filename"] = getattr(val, "filename", None) or "upload.edf"
+            else:
+                params[key] = val
 
         result = None
         if operation == "login":

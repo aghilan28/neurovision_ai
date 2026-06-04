@@ -29,7 +29,10 @@ class UploadController:
                                    self.state.token)
         if not is_success(resp):
             return from_api_error(resp, page="upload")
-        upload = FrontendUpload.from_body(resp["body"])
+        body = resp["body"]
+        # The upload data may be nested under "upload" key (from AnalysisOutcome.to_dict).
+        upload_body = body.get("upload", body) if isinstance(body, dict) else body
+        upload = FrontendUpload.from_body(upload_body)
         self.state.add_upload(upload)
         return ActionResult(True, "upload", "success",
                             f"Uploaded {upload.filename} ({upload.size_bytes} bytes).",
