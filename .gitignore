@@ -19,3 +19,4 @@ artifacts/_runs/
 # Real recordings are NEVER committed (size + redistribution); they are acquired
 # on demand into this gitignored tree (default NV_DATASET_ROOT=data/real).
 data/
+"runtime_verification_media/" 
