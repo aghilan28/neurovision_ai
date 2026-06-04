@@ -286,7 +286,10 @@ def attach_ui_routes(app, service):
     def root(request: Request):
         frontend = _get_frontend(request, service)
         if frontend.is_authenticated:
-            return RedirectResponse(url="/dashboard", status_code=303)
+            frontend.dashboard()
+            response = HTMLResponse(frontend.render_dashboard())
+            _set_session_cookie(response, frontend)
+            return response
         return HTMLResponse(frontend.render_login())
 
     @app.get("/{page}", response_class=HTMLResponse)
@@ -310,7 +313,7 @@ def attach_ui_routes(app, service):
 
         if page == "logout":
             frontend.logout()
-            response = RedirectResponse(url="/login", status_code=303)
+            response = HTMLResponse(frontend.render_login())
             _set_session_cookie(response, frontend)
             return response
 
@@ -319,7 +322,7 @@ def attach_ui_routes(app, service):
             raise HTTPException(status_code=404)
 
         if page not in ("login", "register") and not frontend.is_authenticated:
-            return RedirectResponse(url="/login", status_code=303)
+            return HTMLResponse(frontend.render_login())
 
         renderer = renderers.get(page)
 
@@ -375,7 +378,26 @@ def attach_ui_routes(app, service):
             result = frontend.start_analysis(params.get("upload_id"))
 
         if result and result.ok:
-            response = RedirectResponse(url=f"/{result.page}", status_code=303)
+            # Render the target page directly instead of a 303 redirect.
+            # HF Spaces proxy follows redirects server-side and loses Set-Cookie
+            # headers, so the browser never receives the session cookie.
+            frontend.state.navigate(result.page)
+            if result.page == "dashboard":
+                frontend.dashboard()
+                content = frontend.render_dashboard()
+            elif result.page == "upload":
+                content = frontend.render_upload()
+            elif result.page == "analysis":
+                content = frontend.render_analysis()
+            elif result.page == "prediction":
+                content = frontend.render_prediction()
+            elif result.page == "reports":
+                content = frontend.render_reports()
+            elif result.page == "login":
+                content = frontend.render_login()
+            else:
+                content = frontend.render_current()
+            response = HTMLResponse(content)
         else:
             response = HTMLResponse(frontend.render_current())
         _set_session_cookie(response, frontend)
