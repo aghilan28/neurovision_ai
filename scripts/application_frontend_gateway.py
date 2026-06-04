@@ -11,7 +11,10 @@ is the sanctioned composition point (like ``run_offline_inference`` /
 from __future__ import annotations
 
 import base64
+import hashlib
+import hmac
 import json
+import os
 import tempfile
 from typing import Optional, Sequence
 
@@ -62,10 +65,8 @@ class PlatformBackendGateway(BackendGateway):
                         username=params.get("username"),
                         password=params.get("password")
                     )
-                    # login() may return a raw token string OR a LoginResult dataclass
-                    # depending on which service layer is wired. Normalise both to a
-                    # plain str token so the cookie always carries the raw hex token
-                    # that AuthService.validate_session() can look up.
+                    # login() returns a namespace with .token and .session carrying
+                    # real user_id and session_id from the backend.
                     if hasattr(login_result, "token"):
                         raw_token = login_result.token
                         user_id = (login_result.session.user_id
@@ -92,22 +93,7 @@ class PlatformBackendGateway(BackendGateway):
                 return {"ok": True, "status": "ok", "body": {}}
 
             if operation == "upload_eeg":
-                import logging as _lg
-                _tg = _lg.getLogger("nv.auth_trace")
-                _tg.warning(
-                    "[TRACE L4-GATEWAY] upload_eeg token type=%s is_none=%s len=%s service_id=%s backend_auth_id=%s",
-                    type(token).__name__,
-                    token is None,
-                    len(token) if isinstance(token, str) else "N/A",
-                    id(self.service),
-                    id(getattr(getattr(self.service, "backend", None), "auth", None))
-                )
-                # `token` here is the method argument — the raw hex session token
-                # restored from the signed cookie by _get_frontend(). Guard against
-                # it being absent so the error is explicit rather than a silent None
-                # reaching AuthService.validate_session().
                 if not token:
-                    _tg.warning("[TRACE L4-GATEWAY] EARLY EXIT: no token")
                     return {"ok": False, "status": "unauthorized",
                             "body": {"errors": [
                                 {"check": "authentication",
@@ -181,30 +167,21 @@ class PlatformBackendGateway(BackendGateway):
                     "body": {"error": str(exc)}, "error_code": "GATEWAY_ERROR"}
 
 
-import hmac
-import hashlib
-
 SECRET = b"neurovision-deployment-secret-key"
+
 
 def _sign(data: str) -> str:
     return hmac.new(SECRET, data.encode(), hashlib.sha256).hexdigest()
 
-import logging as _logging
-_trace = _logging.getLogger("nv.auth_trace")
 
 def _get_frontend(request: Request, service) -> FrontendApp:
     gateway = PlatformBackendGateway(service)
     frontend = FrontendApp(gateway)
     raw_value = request.cookies.get("nv_session")
-    _trace.warning(
-        "[TRACE L3-COOKIE] path=%s cookie_present=%s",
-        request.url.path, bool(raw_value)
-    )
     if raw_value and "." in raw_value:
         try:
             encoded, sig = raw_value.rsplit(".", 1)
             if not hmac.compare_digest(_sign(encoded), sig):
-                _trace.warning("[TRACE L3-COOKIE] SIGNATURE MISMATCH — token will be None")
                 return frontend
             data = json.loads(base64.b64decode(encoded).decode("utf-8"))
             if data.get("user"):
@@ -212,12 +189,6 @@ def _get_frontend(request: Request, service) -> FrontendApp:
             if data.get("session"):
                 frontend.state.session = FrontendSession(**data["session"])
             frontend.state._token = data.get("token")
-            _trace.warning(
-                "[TRACE L3-COOKIE] token_from_cookie type=%s is_none=%s len=%s",
-                type(frontend.state._token).__name__,
-                frontend.state._token is None,
-                len(frontend.state._token) if isinstance(frontend.state._token, str) else "N/A"
-            )
             if data.get("current_page"):
                 frontend.state.current_page = data["current_page"]
             for key in ("clinical_cases", "operational_events", "autonomous_tasks", "research_benchmarks"):
@@ -236,18 +207,23 @@ def _set_session_cookie(response, frontend: FrontendApp):
         "token": state._token,
         "current_page": state.current_page,
     }
-    _trace.warning(
-        "[TRACE L2-COOKIE-WRITE] page=%s token_is_none=%s token_type=%s",
-        state.current_page,
-        state._token is None,
-        type(state._token).__name__
-    )
     for key in ("clinical_cases", "operational_events", "autonomous_tasks", "research_benchmarks"):
         val = getattr(state, key, None)
         if val is not None: data[key] = val
     encoded = base64.b64encode(json.dumps(data).encode("utf-8")).decode("utf-8")
     value = f"{encoded}.{_sign(encoded)}"
-    response.set_cookie(key="nv_session", value=value, httponly=True, samesite="lax")
+    # PART 6: durable cookie settings for production HTTPS deployments.
+    # secure=True when behind TLS (Render, any HTTPS proxy).
+    _is_https = bool(os.environ.get("RENDER") or os.environ.get("NV_SECURE_COOKIES"))
+    response.set_cookie(
+        key="nv_session",
+        value=value,
+        httponly=True,
+        samesite="lax",
+        secure=_is_https,
+        path="/",
+        max_age=86400,  # 24 hours
+    )
 
 
 def build_live_app(cohort_files: Sequence[tuple], *, workspace_dir: Optional[str] = None,

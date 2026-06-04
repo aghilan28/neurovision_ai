@@ -104,9 +104,11 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
     @app.post(f"/{API_V1}/auth/login")
     def login(body: LoginBody, svc: ApplicationPlatformService = Depends(hub)):
         try:
-            token = svc.login(username=body.username, password=body.password)
+            result = svc.login(username=body.username, password=body.password)
         except ApplicationPlatformError as exc:
             raise HTTPException(status_code=401, detail=str(exc))
+        # login() returns a namespace with .token and .session (or a raw str for compat).
+        token = result.token if hasattr(result, "token") else result
         return {"token": token, "token_type": "bearer"}
 
     # --- upload + analyze ----------------------------------------------------

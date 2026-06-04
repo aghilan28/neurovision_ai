@@ -61,16 +61,51 @@ class AuthService:
         self.iterations = iterations
         self.credentials = CredentialStore()
         self.sessions = make_session_store()
+        # PART 1 + PART 2: Both indexes are initialized unconditionally at construction
+        # so they exist regardless of whether persistence or recovery runs.
         self._session_by_tfp: dict[str, str] = {}
+        self._session_audit_logs: dict[str, ImmutableAuditLog] = {}
 
-    def rehydrate_tfp_index(self):
-        """Rehydrate the transient _session_by_tfp index from persistent store."""
+    # --- PART 2: session index rehydration ------------------------------------
+    def rehydrate_session_index(self) -> None:
+        """Rebuild the token-fingerprint -> session-id index from the session store.
+
+        Scans every session record in the persistent session store and rebuilds the
+        in-memory ``_session_by_tfp`` lookup so that ``validate_session()`` can resolve
+        tokens issued before a restart/deployment/recovery.
+
+        Also rebuilds ``_session_audit_logs`` entries for sessions that have no
+        corresponding audit log (creates a fresh audit log so ``revoke_session`` and
+        ``audit_log_for`` do not crash on recovered sessions).
+
+        This method is idempotent: calling it multiple times produces the same index.
+        """
         for sess in self.sessions.values():
             self._session_by_tfp[sess.token_fingerprint] = sess.session_id
-        self._session_audit_logs: dict[str, ImmutableAuditLog] = {}
+            if sess.session_id not in self._session_audit_logs:
+                log = make_backend_audit_log()
+                log.append("session_recovered", {
+                    "session_id": sess.session_id,
+                    "user_id": sess.user_id,
+                    "token_fingerprint": sess.token_fingerprint,
+                    "status": sess.status.value,
+                }, created_at=sess.created_at)
+                self._session_audit_logs[sess.session_id] = log
+
+    # Backward-compatible alias used by existing callers.
+    def rehydrate_tfp_index(self) -> None:
+        """Alias for :meth:`rehydrate_session_index` (backward compatibility)."""
+        self.rehydrate_session_index()
 
     # --- accessors ------------------------------------------------------------
     def audit_log_for(self, session_id: str) -> ImmutableAuditLog:
+        if session_id not in self._session_audit_logs:
+            # Defensive: if a session exists but its audit log was lost (e.g. recovery),
+            # create a minimal audit log rather than crashing.
+            log = make_backend_audit_log()
+            log.append("audit_log_reconstructed", {"session_id": session_id},
+                       created_at=DETERMINISTIC_EPOCH)
+            self._session_audit_logs[session_id] = log
         return self._session_audit_logs[session_id]
 
     def get_session(self, session_id: str) -> SessionRecord:
@@ -132,42 +167,41 @@ class AuthService:
         self._session_by_tfp[tfp] = session_id
         return LoginResult(session=session, token=token)
 
-    # --- validation -----------------------------------------------------------
+    # --- PART 3: hardened session validation -----------------------------------
     def validate_session(self, token: str) -> Optional[SessionRecord]:
-        """Return the active session for ``token`` or ``None`` (no exception)."""
-        import logging as _lg
-        _tv = _lg.getLogger("nv.auth_trace")
+        """Return the active session for ``token`` or ``None`` (no exception).
+
+        PART 3 hardening: if the in-memory ``_session_by_tfp`` index does not contain
+        the fingerprint, fall back to a linear scan of the session store. If a match
+        is found, the index is repaired on the fly so subsequent lookups are O(1).
+        This ensures validation survives index loss from restart/deployment/recovery.
+        """
         if not isinstance(token, str) or token == "":
-            _tv.warning("[TRACE L8-VALIDATE] FAIL: token not str or empty — type=%s", type(token).__name__)
             return None
         from .tokens import token_fingerprint as _tfp
         tfp = _tfp(token)
+
+        # Primary lookup: O(1) index.
         session_id = self._session_by_tfp.get(tfp)
-        _tv.warning(
-            "[TRACE L8-VALIDATE] tfp=%s session_id=%s known_tfps=%s auth_id=%s",
-            tfp[:8], session_id, list(self._session_by_tfp.keys())[:3], id(self)
-        )
+
+        # PART 3: fallback — scan the authoritative session store and repair the index.
         if session_id is None:
-            _tv.warning("[TRACE L8-VALIDATE] FALLBACK: searching sessions store directly")
             for sess in self.sessions.values():
                 if sess.token_fingerprint == tfp:
                     session_id = sess.session_id
+                    # Repair the index so future lookups are O(1).
                     self._session_by_tfp[tfp] = session_id
                     break
+
         if session_id is None:
-            _tv.warning("[TRACE L8-VALIDATE] FAIL: fingerprint not in _session_by_tfp or sessions store")
             return None
         session = self.sessions.find(session_id)
         if session is None or session.status != SessionStatus.ACTIVE:
-            _tv.warning("[TRACE L8-VALIDATE] FAIL: session None or not ACTIVE — session=%s", session)
             return None
         if not self.users.exists(session.user_id):
-            _tv.warning("[TRACE L8-VALIDATE] FAIL: user %s does not exist", session.user_id)
             return None
         if self.users.get_user(session.user_id).status != UserStatus.ACTIVE:
-            _tv.warning("[TRACE L8-VALIDATE] FAIL: user %s not ACTIVE", session.user_id)
             return None
-        _tv.warning("[TRACE L8-VALIDATE] SUCCESS: session_id=%s user_id=%s", session_id, session.user_id)
         return session
 
     def authenticate(self, token: str) -> tuple[SessionRecord, UserRecord]:
@@ -237,7 +271,7 @@ class AuthService:
         current = self.sessions.get(session_id)
         if current.status == SessionStatus.REVOKED:
             return current
-        log = self._session_audit_logs[session_id]
+        log = self.audit_log_for(session_id)
         log.append("session_revoked", {"session_id": session_id, "user_id": current.user_id},
                    created_at=created_at)
         session = self._assemble_session(

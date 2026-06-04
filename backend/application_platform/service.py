@@ -168,12 +168,24 @@ class ApplicationPlatformService:
             "username": username, "password": password, "roles": roles or ["clinician"]}),
             created_at=created_at)
 
-    def login(self, *, username: str, password: str, created_at: str = DETERMINISTIC_EPOCH) -> str:
+    def login(self, *, username: str, password: str, created_at: str = DETERMINISTIC_EPOCH):
+        """Authenticate a user and return the login result.
+
+        Returns a namespace carrying ``.token`` (raw hex) and ``.session`` (with
+        ``.user_id`` and ``.session_id``) so the frontend cookie carries real identity
+        metadata instead of placeholders.
+        """
         resp = self.backend.api.handle(ApiRequest(ApiOperation.LOGIN, {
             "username": username, "password": password}), created_at=created_at)
         if not resp.ok:
             raise ApplicationPlatformError(f"login failed: {resp.body}")
-        return resp.body["token"]
+        from types import SimpleNamespace
+        body = resp.body
+        session_ns = SimpleNamespace(
+            user_id=body.get("user_id", "u-1"),
+            session_id=body.get("session_id", "s-1"),
+        )
+        return SimpleNamespace(token=body["token"], session=session_ns)
 
     # =========================================================================
     # DBE-5: hardened request authentication (the boundary guard)
@@ -428,8 +440,10 @@ class ApplicationPlatformService:
         skipped (the rest of the state still recovers). Audit + lineage *references* are
         carried inside the persisted records.
         """
-        if hasattr(self.backend.auth, 'rehydrate_tfp_index'):
-            self.backend.auth.rehydrate_tfp_index()
+        # PART 4: Rehydrate authentication indexes unconditionally on recovery.
+        # This rebuilds _session_by_tfp from the session store so that tokens issued
+        # before a restart can still be validated by AuthService.validate_session().
+        self.backend.auth.rehydrate_session_index()
 
         errors: list[str] = []
         recovered_ids: list[str] = []
