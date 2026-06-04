@@ -212,15 +212,11 @@ def _set_session_cookie(response, frontend: FrontendApp):
         if val is not None: data[key] = val
     encoded = base64.b64encode(json.dumps(data).encode("utf-8")).decode("utf-8")
     value = f"{encoded}.{_sign(encoded)}"
-    # PART 6: durable cookie settings for production HTTPS deployments.
-    # secure=True when behind TLS (Render, any HTTPS proxy).
-    _is_https = bool(os.environ.get("RENDER") or os.environ.get("NV_SECURE_COOKIES"))
     response.set_cookie(
         key="nv_session",
         value=value,
         httponly=True,
         samesite="lax",
-        secure=_is_https,
         path="/",
         max_age=86400,  # 24 hours
     )
