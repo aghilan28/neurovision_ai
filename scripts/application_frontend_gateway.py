@@ -432,19 +432,28 @@ def attach_ui_routes(app, service):
             # Render the target page directly instead of a 303 redirect.
             # HF Spaces proxy follows redirects server-side and loses Set-Cookie
             # headers, so the browser never receives the session cookie.
-            frontend.state.navigate(result.page)
-            if result.page == "dashboard":
+            target_page = result.page
+
+            # After a successful upload that includes analysis results,
+            # navigate to the prediction page to show the results immediately.
+            if operation in ("upload", "upload_eeg") and result.ok:
+                summary = result.data.get("summary", {}) if result.data else {}
+                if summary.get("analysis_id"):
+                    target_page = "prediction"
+
+            frontend.state.navigate(target_page)
+            if target_page == "dashboard":
                 frontend.dashboard()
                 content = frontend.render_dashboard()
-            elif result.page == "upload":
+            elif target_page == "upload":
                 content = frontend.render_upload()
-            elif result.page == "analysis":
+            elif target_page == "analysis":
                 content = frontend.render_analysis()
-            elif result.page == "prediction":
+            elif target_page == "prediction":
                 content = frontend.render_prediction()
-            elif result.page == "reports":
+            elif target_page == "reports":
                 content = frontend.render_reports()
-            elif result.page == "login":
+            elif target_page == "login":
                 content = frontend.render_login()
             else:
                 content = frontend.render_current()
