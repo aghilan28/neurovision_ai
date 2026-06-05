@@ -135,7 +135,7 @@ class ApplicationBackendService:
             labels=labels, label_fn=label_fn,
             created_at=created_at).model
         self._model_context = ModelContext(model_record=model, train_feature_records=tuple(feats),
-                                            dataset_key=dataset_key)
+                                            dataset_key=dataset_key, label_fn=label_fn)
         return self._model_context
 
     def set_model_context(self, context: ModelContext) -> None:

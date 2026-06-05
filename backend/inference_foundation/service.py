@@ -90,6 +90,7 @@ class InferenceFoundationService:
     # --- the single use case --------------------------------------------------
     def predict(self, model_record, input_feature_record, *, train_feature_records: Sequence,
                 val_fraction: float = 0.2, test_fraction: float = 0.2, dataset_key: str = "default",
+                label_fn=None,
                 owner: str = "inference-ops", created_at: str = DETERMINISTIC_EPOCH) -> InferenceOutcome:
         """Generate a validated prediction asset for ``input_feature_record`` using ``model_record``."""
         model_id = model_record.model_id
@@ -105,7 +106,8 @@ class InferenceFoundationService:
         # --- load + verify the model (deterministic reconstruction) -----------
         model, exec_meta, bundle = self.execution_engine.load_model(
             model_record, train_feature_records, val_fraction=val_fraction,
-            test_fraction=test_fraction, dataset_key=dataset_key)
+            test_fraction=test_fraction, dataset_key=dataset_key,
+            label_fn=label_fn)
         n_classes = model_record.metadata.n_classes
         feature_names = bundle.record.feature_names
 

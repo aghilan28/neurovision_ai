@@ -48,6 +48,7 @@ class ModelContext:
     model_record: object
     train_feature_records: tuple
     dataset_key: str
+    label_fn: object = None
 
     @property
     def model_id(self) -> str:
@@ -138,7 +139,9 @@ class EegWorkflowService:
         inference = self.inference_service.predict(
             model_context.model_record, feature_asset,
             train_feature_records=list(model_context.train_feature_records),
-            dataset_key=model_context.dataset_key, owner=owner, created_at=created_at)
+            dataset_key=model_context.dataset_key,
+            label_fn=model_context.label_fn,
+            owner=owner, created_at=created_at)
         if not inference.accepted or inference.asset is None:
             return WorkflowOutcome(accepted=False, reason=f"prediction_failed:{inference.reason}")
         asset = inference.asset

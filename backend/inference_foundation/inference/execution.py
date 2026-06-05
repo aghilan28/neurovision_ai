@@ -29,16 +29,20 @@ class ModelExecutionEngine:
     version = INFERENCE_EXECUTION_VERSION
 
     def load_model(self, model_record, train_feature_records, *, val_fraction: float = 0.2,
-                   test_fraction: float = 0.2, dataset_key: str = "default"):
+                   test_fraction: float = 0.2, dataset_key: str = "default",
+                   label_fn=None):
         """Reconstruct + verify the model. Returns (fitted_model, exec_metadata, bundle)."""
         from backend.model_foundation.datasets import build_feature_dataset
         from backend.model_foundation.training import train
 
         meta = model_record.metadata
+        build_kwargs = {}
+        if label_fn is not None:
+            build_kwargs["label_fn"] = label_fn
         bundle = build_feature_dataset(
             train_feature_records, name=f"feature_dataset[{dataset_key}]", dataset_key=dataset_key,
             n_classes=meta.n_classes, val_fraction=val_fraction, test_fraction=test_fraction,
-            seed=meta.seed)
+            seed=meta.seed, **build_kwargs)
         run, model = train(model_record.architecture, bundle, n_classes=meta.n_classes,
                            seed=meta.seed, hyperparameters=dict(meta.hyperparameters))
 

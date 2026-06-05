@@ -176,26 +176,29 @@ def provision_model(service, *, architecture: ModelArchitecture = ModelArchitect
     try:
         cohort_dir = tempfile.mkdtemp(prefix="nv_bootstrap_cohort_")
         cohort = build_bootstrap_cohort(cohort_dir, analysis_seconds=analysis_seconds)
-        # Build patient_key → class_label mapping from the bootstrap definition.
-        _patient_labels = {pk: cl for pk, _ck, _seed, cl in _BOOTSTRAP_PATIENTS}
 
-        # label_fn that maps feature records to clinical labels based on patient key.
-        # The patient_id in the feature record is content-addressed (a hash), so we
-        # must match by position: the cohort order is deterministic, so the i-th
-        # feature record corresponds to the i-th bootstrap patient.
+        # The cohort is ordered: first 3 are interictal (class 0), last 3 are ictal (class 1).
+        # We need to assign labels AFTER prepare_model creates feature records.
+        # Step 1: prepare without custom labels (uses default hash-based labels).
+        # Step 2: capture the feature_asset_ids in creation order.
+        # Step 3: build a labels dict mapping each feature_asset_id to the correct clinical label.
+        # Step 4: re-train with the correct labels.
+        #
+        # Actually simpler: use a deterministic label_fn that assigns based on
+        # the feature_asset_id's content hash — we just need it to be CONSISTENT
+        # across calls (same input → same output). We assign by patient_id:
+        # the first 3 unique patient_ids get class 0, the rest get class 1.
         _ordered_labels = [cl for _pk, _ck, _seed, cl in _BOOTSTRAP_PATIENTS]
-        _label_counter = iter(range(len(_ordered_labels)))
-
-        # Build labels dict after prepare_model creates the feature records, using
-        # a label_fn that assigns by order of creation.
-        _creation_order = []
+        _patient_id_to_label = {}
+        _patient_order = []
 
         def _clinical_label_fn(feature_record, n_classes=2):
-            idx = len(_creation_order)
-            _creation_order.append(feature_record.feature_asset_id)
-            if idx < len(_ordered_labels):
-                return _ordered_labels[idx]
-            return 0
+            pid = feature_record.patient_id
+            if pid not in _patient_id_to_label:
+                idx = len(_patient_order)
+                _patient_order.append(pid)
+                _patient_id_to_label[pid] = _ordered_labels[idx] if idx < len(_ordered_labels) else 0
+            return _patient_id_to_label[pid]
 
         service.prepare_model(cohort, architecture=architecture,
                               dataset_key=_BOOTSTRAP_DATASET_KEY, seed=_BOOTSTRAP_SEED,
