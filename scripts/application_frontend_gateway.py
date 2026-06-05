@@ -121,8 +121,37 @@ class PlatformBackendGateway(BackendGateway):
                     filename=params.get("filename"),
                     content=content
                 )
+                body = outcome.to_dict()
+
+                # Run CHB-MIT clinical model inference on the uploaded EEG
+                # for a second clinical opinion from real seizure data
+                try:
+                    from backend.application_platform.chbmit_inference import (
+                        chbmit_available, predict_seizure)
+                    if chbmit_available() and isinstance(content, (bytes, bytearray)):
+                        import mne
+                        import tempfile
+                        mne.set_log_level("ERROR")
+                        suffix = ".edf" if params.get("filename", "").lower().endswith(".edf") else ".fif"
+                        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
+                            tmp.write(content)
+                            tmp_path = tmp.name
+                        try:
+                            raw = mne.io.read_raw(tmp_path, preload=True, verbose="ERROR")
+                            chbmit_result = predict_seizure(raw.get_data(), raw.info["sfreq"])
+                            if chbmit_result:
+                                body["chbmit_inference"] = chbmit_result
+                        except Exception:
+                            pass
+                        finally:
+                            import os
+                            if os.path.exists(tmp_path):
+                                os.remove(tmp_path)
+                except Exception:
+                    pass
+
                 return {"ok": outcome.accepted, "status": "ok" if outcome.accepted else "error",
-                        "body": outcome.to_dict()}
+                        "body": body}
 
             if operation == "list_analysis_history":
                 analyses = self.service.list_analyses()

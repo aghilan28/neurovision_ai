@@ -77,6 +77,11 @@ class UploadController:
             summary["predicted_label"] = pred_body.get("predicted_label")
             summary["confidence_level"] = pred_body.get("confidence_level")
 
+        # Include CHB-MIT clinical model results if available
+        chbmit = body.get("chbmit_inference") if isinstance(body, dict) else None
+        if chbmit:
+            summary["chbmit_inference"] = chbmit
+
         return ActionResult(True, "upload", "success",
                             f"Uploaded {upload.filename} ({upload.size_bytes} bytes).",
                             data={"upload": upload.to_dict(), "summary": summary})

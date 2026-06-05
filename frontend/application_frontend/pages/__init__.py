@@ -273,6 +273,29 @@ def prediction_page(snapshot: dict, view: Optional[dict]) -> dict:
         ))
     sections.append(C.kv("Evidence Intelligence", ev_items))
 
+    # ▌ CHB-MIT CLINICAL MODEL (if available)
+    chbmit = view.get("chbmit_inference")
+    if not chbmit:
+        # Try to get it from prediction data
+        chbmit = prediction_data.get("chbmit_inference") if isinstance(prediction_data, dict) else None
+    if isinstance(chbmit, dict) and "seizure_probability" in chbmit:
+        chb_prob = chbmit["seizure_probability"]
+        chb_items = [
+            ("Seizure Probability", f"{round(chb_prob * 100, 1)}%"),
+            ("Non-Seizure Probability", f"{round(chbmit.get('non_seizure_probability', 1-chb_prob) * 100, 1)}%"),
+            ("Model Source", str(chbmit.get("model_source", "CHB-MIT"))),
+            ("Model Version", str(chbmit.get("model_version", ""))),
+            ("Training Accuracy", f"{round(chbmit.get('model_accuracy', 0) * 100, 1)}%"),
+            ("Sensitivity", f"{round(chbmit.get('model_sensitivity', 0) * 100, 1)}%"),
+            ("Specificity", f"{round(chbmit.get('model_specificity', 0) * 100, 1)}%"),
+        ]
+        # Add feature contributions
+        for fc in chbmit.get("feature_contributions", [])[:3]:
+            feature_name = fc.get("feature", "").replace("_", " ").title()
+            direction = fc.get("direction", "").replace("_", " ")
+            chb_items.append((f"  {feature_name}", f"{direction} ({fc.get('contribution', 0)})"))
+        sections.append(C.kv("CHB-MIT Clinical Model (Real Patient Data)", chb_items))
+
     # ▌ DISCLAIMER
     sections.append(C.prose("Disclaimer", na["disclaimer"]))
 
