@@ -223,3 +223,5 @@ decision (Rule **NR-5**).
 [`docs/`](docs/) govern. Where this file and a `docs/` document disagree, the
 `docs/` document is authoritative and the discrepancy is a consistency defect to
 fix.*
+#   r e b u i l d  
+ 
