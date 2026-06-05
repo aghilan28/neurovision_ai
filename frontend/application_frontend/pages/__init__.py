@@ -142,69 +142,143 @@ def analysis_page(snapshot: dict, *, stage_view=None) -> dict:
 # --- Screen 4: Prediction Review Workspace -----------------------------------
 def prediction_page(snapshot: dict, view: Optional[dict]) -> dict:
     if not view:
-        return _page("prediction", "Prediction Workspace", snapshot,
-                     [C.prose("No prediction selected", "Execute an analysis to generate an outcome.")])
+        return _page("prediction", "NeuroVision Intelligence Report", snapshot,
+                     [C.prose("No Analysis Available",
+                              "Upload an EEG recording and run analysis to generate "
+                              "a comprehensive neurological intelligence report.")])
 
-    # Extract real data from the prediction view
-    class_probs = view.get("class_probabilities", [])
-    confidence_score = view.get("confidence_score")
-    top_factors = view.get("top_factors", [])
-    model_id = view.get("model_id", "")
+    # ── Build Intelligence Report from prediction view data ──
+    from ..intelligence import build_intelligence_report
 
-    # Confidence Distribution: real class probabilities
-    if class_probs:
-        conf_points = [{"x": i, "y": cp.get("probability", 0)} for i, cp in enumerate(class_probs)]
-    elif confidence_score is not None:
-        # Fallback: show binary distribution from confidence score
-        score = float(confidence_score) if confidence_score else 0.5
-        conf_points = [{"x": 0, "y": round(1 - score, 4)}, {"x": 1, "y": round(score, 4)}]
-    else:
-        conf_points = [{"x": 0, "y": 0.5}, {"x": 1, "y": 0.5}]
+    # Reconstruct the data structures needed by the intelligence engine
+    prediction_data = view.get("prediction_data", {
+        "predicted_class": view.get("predicted_class"),
+        "predicted_label": view.get("predicted_label"),
+        "calibration_quality": view.get("calibration_quality", ""),
+    })
+    confidence_data = view.get("confidence_data", {
+        "confidence_level": view.get("confidence_level", ""),
+        "confidence_score": view.get("confidence_score", 0.5),
+        "score": view.get("confidence_score", 0.5),
+    })
+    explanation_data = view.get("explanation_data", {
+        "method": view.get("explanation_method", ""),
+        "decision_factors": view.get("top_factors", []),
+    })
+    upload_data = view.get("upload_data", {
+        "n_channels": view.get("n_channels", 0),
+        "sampling_frequency": view.get("sampling_frequency", 0),
+        "duration_seconds": view.get("duration_seconds", 0),
+        "filename": view.get("filename", ""),
+        "format": view.get("format", ""),
+        "size_bytes": view.get("size_bytes", 0),
+    })
+    evidence_data = view.get("evidence_data", {
+        "model": {"architecture": view.get("model_architecture", ""),
+                  "model_id": view.get("model_id", "")},
+    })
 
-    # Evidence & Lineage: derived from real prediction data
-    evidence_nodes = len(top_factors) + (3 if model_id else 1)
-    predicted_class = view.get("predicted_class")
-    n_alternatives = max(0, len(class_probs) - 1) if class_probs else 1
+    report = build_intelligence_report(
+        prediction=prediction_data, confidence=confidence_data,
+        explanation=explanation_data, upload=upload_data,
+        evidence=evidence_data)
 
-    # Risk level: derived from confidence and calibration
-    conf_level = view.get("confidence_level", "")
-    calib_quality = view.get("calibration_quality", "")
-    if conf_level == "high" and "well" in str(calib_quality):
-        risk_level = "Low (Well-Calibrated)"
-    elif conf_level == "high":
-        risk_level = "Low (High Confidence)"
-    elif conf_level == "moderate":
-        risk_level = "Moderate (Review Recommended)"
-    else:
-        risk_level = "Elevated (Low Confidence)"
+    sq = report["signal_quality"]
+    ba = report["brain_activity"]
+    ab = report["abnormality"]
+    si = report["seizure_intelligence"]
+    ev = report["evidence"]
+    na = report["narrative"]
+    su = report["summary"]
 
-    sections = [
-        C.kv("Prediction Outcome", [
-            ("Primary Label", view.get("predicted_label")),
-            ("Predicted Class", str(predicted_class) if predicted_class is not None else "—"),
-            ("Confidence", f"{conf_level} ({round(float(confidence_score), 4) if confidence_score else '—'})"),
-            ("Calibration", calib_quality or "—"),
-            ("Model", str(model_id)[:20] if model_id else "—"),
-        ]),
-        C.visualization("Confidence Distribution", "line", {
-            "points": conf_points,
-            "x_label": "Class index"
-        }),
-        C.kv("Evidence & Lineage", [
-            ("Evidence Nodes", str(evidence_nodes)),
-            ("Feature Contributions", str(len(top_factors))),
-            ("Audit Chain", "Verified" if model_id else "Pending"),
-            ("Lineage", "Grounded" if model_id else "Untracked"),
-        ]),
-        C.kv("Explanation & Risk", [
-            ("Method", view.get("explanation_method") or "feature_attribution"),
-            ("Risk Level", risk_level),
-            ("Alternative Outcomes", f"{n_alternatives} identified"),
-            ("Top Factor", top_factors[0].get("feature", top_factors[0]) if top_factors else "—"),
-        ]),
+    # ── Build the Intelligence Report Page ──
+    sections = []
+
+    # ▌ OVERALL SUMMARY — the single takeaway (top of page)
+    sections.append(C.kv("Intelligence Summary", [
+        ("Assessment", su["conclusion"]),
+        ("Recommended Action", su["recommended_action"]),
+        ("Signal Quality", su["signal_quality_grade"]),
+        ("Abnormality Level", su["abnormality_level"]),
+    ]))
+
+    # ▌ CLINICAL NARRATIVE — the centerpiece
+    narrative_text = "\n\n".join(na["paragraphs"])
+    sections.append(C.prose("Clinical Interpretation", narrative_text))
+
+    # ▌ SEIZURE INTELLIGENCE — rich probability output
+    sections.append(C.kv("Seizure Intelligence", [
+        ("Seizure Probability", f"{si['seizure_probability']}%"),
+        ("Non-Seizure Probability", f"{si['non_seizure_probability']}%"),
+        ("Risk Level", si["risk_level"]),
+        ("Risk Assessment", si["risk_description"]),
+        ("Confidence", f"{si['confidence_level']} ({si['confidence_score']}%)"),
+        ("Calibration", si["calibration"]),
+        ("Prediction Stability", si["prediction_stability"]),
+    ]))
+
+    # ▌ SEIZURE PROBABILITY VISUALIZATION
+    sections.append(C.visualization("Seizure Probability Distribution", "bar", {
+        "labels": ["Non-Seizure", "Seizure"],
+        "values": [si["non_seizure_probability"], si["seizure_probability"]],
+        "max": 100,
+        "target_line": 50,
+    }))
+
+    # ▌ SIGNAL QUALITY INTELLIGENCE
+    sq_items = [
+        ("Quality Score", f"{sq['score']}/100"),
+        ("Quality Grade", sq["grade"]),
+        ("Recording Trust", sq["trust_statement"]),
+        ("Channels", str(sq["channels"])),
+        ("Sampling Rate", f"{sq['sampling_rate']} Hz"),
+        ("Duration", f"{sq['duration']}s"),
+        ("Format", sq["format"].upper() if sq["format"] else "—"),
     ]
-    return _page("prediction", "Decision Intelligence Environment", snapshot, sections,
-                 subtitle=f"Scientific Decision Support: {view.get('analysis_id', '')[:12]}")
+    if sq["issues"]:
+        for i, issue in enumerate(sq["issues"][:3]):
+            sq_items.append((f"Issue {i+1}", issue))
+    sections.append(C.kv("Signal Quality Intelligence", sq_items))
+
+    # ▌ BRAIN ACTIVITY CHARACTERIZATION
+    ba_items = [
+        ("Brain State", ba["state"]),
+        ("Dominant Rhythm", ba["dominant_rhythm"]),
+        ("Channel Coverage", ba["channel_coverage"]),
+        ("Contributing Features", str(ba["n_contributing_features"])),
+    ]
+    for i, pattern in enumerate(ba["patterns"][:4]):
+        ba_items.append((f"Observation {i+1}", pattern))
+    sections.append(C.kv("Brain Activity Characterization", ba_items))
+
+    # ▌ ABNORMALITY ASSESSMENT
+    sections.append(C.kv("Abnormality Assessment", [
+        ("Level", ab["level"]),
+        ("Score", f"{ab['score']}%"),
+        ("Assessment", ab["description"]),
+    ] + [(f"Finding {i+1}", obs) for i, obs in enumerate(ab["observations"][:3])]))
+
+    # ▌ EVIDENCE INTELLIGENCE
+    ev_items = [
+        ("Analysis Method", ev["method"]),
+        ("Supporting Factors", str(ev["n_supporting"])),
+        ("Opposing Factors", str(ev["n_opposing"])),
+        ("Model Architecture", ev["model_architecture"].upper()),
+        ("Model ID", ev["model_id"] or "—"),
+    ]
+    for item in ev["evidence_items"][:5]:
+        ev_items.append((
+            f"{item['icon']} {item['feature']}",
+            f"{item['impact']} ({item['contribution']})"
+        ))
+    sections.append(C.kv("Evidence Intelligence", ev_items))
+
+    # ▌ DISCLAIMER
+    sections.append(C.prose("Disclaimer", na["disclaimer"]))
+
+    analysis_id = view.get("analysis_id", "")[:12]
+    return _page("prediction", "NeuroVision Intelligence Report", snapshot, sections,
+                 subtitle=f"EEG Analysis: {analysis_id}")
 
 
 # --- Screen 5: Evidence Center -----------------------------------------------

@@ -166,7 +166,12 @@ class FrontendApp:
         if analysis_id is None and self.state.predictions:
             analysis_id = next(reversed(self.state.predictions))
         prediction = self.state.predictions.get(analysis_id) if analysis_id else None
-        view = build_prediction_view(prediction) if prediction else None
+        # Pass upload metadata to the intelligence report
+        upload_data = {}
+        if self.state.uploads:
+            latest = self.state.uploads[-1]
+            upload_data = latest.to_dict() if hasattr(latest, "to_dict") else {}
+        view = build_prediction_view(prediction, upload_data=upload_data) if prediction else None
         return render_html(pages.prediction_page(self.state.snapshot(), view))
 
     def render_reports(self, analysis_id: Optional[str] = None) -> str:

@@ -51,11 +51,21 @@ class PredictionController:
                             data={"prediction": prediction.to_dict()})
 
 
-def build_prediction_view(prediction: FrontendPrediction) -> dict:
-    """A deterministic, presentation-ready view of a prediction asset."""
+def build_prediction_view(prediction: FrontendPrediction, upload_data: dict = None) -> dict:
+    """A deterministic, presentation-ready view of a prediction asset.
+
+    Provides all data needed by the Intelligence Report renderer, including
+    the raw prediction/confidence/explanation dicts for the intelligence engine.
+    """
     classes = prediction.prediction.get("classes", [])
     top_factors = (prediction.explanation.get("decision_factors")
-                   or prediction.explanation.get("feature_contributions") or [])[:5]
+                   or prediction.explanation.get("feature_contributions") or [])[:8]
+
+    evidence = prediction.prediction.get("evidence",
+               prediction.prediction.get("model", {}))
+    if not isinstance(evidence, dict):
+        evidence = {}
+
     return {
         "analysis_id": prediction.analysis_id,
         "predicted_label": prediction.predicted_label,
@@ -65,10 +75,24 @@ def build_prediction_view(prediction: FrontendPrediction) -> dict:
         "class_probabilities": [
             {"class": c.get("class_index", c.get("class")), "label": c.get("label"),
              "probability": c.get("probability")} for c in classes],
-        "confidence_score": prediction.confidence.get("score"),
+        "confidence_score": prediction.confidence.get("score",
+                            prediction.confidence.get("confidence_score")),
         "explanation_method": prediction.explanation.get("method"),
         "top_factors": top_factors,
         "model_id": prediction.prediction.get("model_id"),
+        "model_architecture": prediction.prediction.get("model_architecture", ""),
+        # Raw data dicts for the intelligence engine
+        "prediction_data": prediction.prediction,
+        "confidence_data": prediction.confidence,
+        "explanation_data": prediction.explanation,
+        "evidence_data": evidence if evidence else {
+            "model": {
+                "architecture": prediction.prediction.get("model_architecture", ""),
+                "model_id": prediction.prediction.get("model_id", ""),
+            }
+        },
+        # Upload metadata (passed through from the upload state)
+        "upload_data": upload_data or {},
     }
 
 
