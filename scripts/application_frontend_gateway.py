@@ -346,6 +346,32 @@ def attach_ui_routes(app, service):
         if page == "dashboard":
             frontend.dashboard()
             content = frontend.render_dashboard()
+        elif page == "analysis":
+            # Load analysis/workflow history from backend
+            frontend.analysis.refresh_history()
+            frontend.uploads.refresh_history()
+            content = frontend.render_analysis()
+        elif page == "prediction":
+            # Load latest prediction from backend
+            frontend.analysis.refresh_history()
+            if frontend.state.workflows:
+                latest = frontend.state.workflows[-1]
+                if latest.analysis_id:
+                    frontend.predictions.load(latest.analysis_id)
+                    frontend.reports.load(latest.analysis_id)
+            content = frontend.render_prediction()
+        elif page == "reports":
+            # Load latest reports from backend
+            frontend.analysis.refresh_history()
+            if frontend.state.workflows:
+                latest = frontend.state.workflows[-1]
+                if latest.analysis_id:
+                    frontend.reports.load(latest.analysis_id)
+            content = frontend.render_reports()
+        elif page == "upload":
+            # Refresh upload history
+            frontend.uploads.refresh_history()
+            content = frontend.render_upload()
         elif page == "clinical":
             resp = frontend.gateway.handle("list_clinical_cases", {}, frontend.state.token)
             if resp.get("ok"): frontend.state.clinical_cases = resp["body"].get("cases", [])

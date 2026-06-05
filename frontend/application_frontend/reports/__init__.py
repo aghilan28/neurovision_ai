@@ -25,9 +25,15 @@ class ReportController:
         resp = self.gateway.handle(OP_LIST_REPORTS, {"analysis_id": analysis_id}, self.state.token)
         if not is_success(resp):
             return from_api_error(resp, page="reports")
-        reports_map = resp["body"].get("reports", {})
-        names = resp["body"].get("report_names", sorted(reports_map))
-        reports = [FrontendReport(name=n, content=reports_map.get(n, {})) for n in names]
+        raw = resp["body"].get("reports", {})
+        # Handle both list-of-dicts and dict-of-dicts formats.
+        if isinstance(raw, list):
+            reports = [FrontendReport(name=r.get("name", ""), content=r.get("content", {}))
+                       for r in raw if isinstance(r, dict)]
+            names = [r.name for r in reports]
+        else:
+            names = resp["body"].get("report_names", sorted(raw))
+            reports = [FrontendReport(name=n, content=raw.get(n, {})) for n in names]
         self.state.cache_reports(analysis_id, reports)
         return ActionResult(True, "reports", "info", f"{len(reports)} report(s) available.",
                             data={"report_names": names})
