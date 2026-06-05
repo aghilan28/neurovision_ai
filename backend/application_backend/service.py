@@ -109,6 +109,7 @@ class ApplicationBackendService:
     def prepare_model(self, cohort_files: Sequence[tuple], *,
                       architecture: ModelArchitecture = ModelArchitecture.EEGNET,
                       dataset_key: str = "cohort", seed: int = 7,
+                      labels: Optional[dict] = None, label_fn=None,
                       created_at: str = DETERMINISTIC_EPOCH) -> ModelContext:
         """Build a patient-disjoint cohort by running P1-P3 over real EEG files, then
         train + register a model (P4). ``cohort_files`` is a sequence of
@@ -131,6 +132,7 @@ class ApplicationBackendService:
             feats.append(self.feature_service.generate_features(processed, created_at=created_at).asset)
         model = self.model_service.train_model(
             feats, architecture=architecture, dataset_key=dataset_key, seed=seed,
+            labels=labels, label_fn=label_fn,
             created_at=created_at).model
         self._model_context = ModelContext(model_record=model, train_feature_records=tuple(feats),
                                             dataset_key=dataset_key)

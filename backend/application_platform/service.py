@@ -135,9 +135,12 @@ class ApplicationPlatformService:
     # =========================================================================
     def prepare_model(self, cohort_files, *, architecture=ModelArchitecture.EEGNET,
                       dataset_key: str = "cohort", seed: int = 7,
+                      labels=None, label_fn=None,
                       created_at: str = DETERMINISTIC_EPOCH):
         ctx = self.backend.prepare_model(cohort_files, architecture=architecture,
-                                         dataset_key=dataset_key, seed=seed, created_at=created_at)
+                                         dataset_key=dataset_key, seed=seed,
+                                         labels=labels, label_fn=label_fn,
+                                         created_at=created_at)
         self._model_info = {"model_id": ctx.model_record.model_id,
                             "architecture": architecture.value,
                             "readiness": getattr(ctx.model_record, "status", "candidate")
