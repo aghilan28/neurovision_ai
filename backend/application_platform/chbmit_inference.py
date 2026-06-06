@@ -1,187 +1,88 @@
-"""CHB-MIT pre-trained model inference.
+"""``backend/application_platform/chbmit_inference.py`` — Inference engine for serialized CHB-MIT models.
 
-Loads the pre-built CHB-MIT model (trained on real PhysioNet seizure data)
-and runs inference on uploaded EEG files. The model was trained on 10-second
-windows from CHB-MIT chb01 with 28 spectral features.
-
-This module provides a standalone inference function that can be called
-alongside the existing provisioning model to provide a second opinion
-from a clinically-trained model.
+Loads the serialized model config and weights from `data/chbmit_model.json` and reconstructs
+the trained architecture (HybridModel or ReferenceArchitectureWrapper) to perform fast,
+deterministic inference on windowed EEG features or raw segments.
 """
 
 from __future__ import annotations
 
-import json
 import os
-from typing import Optional
-
+import json
 import numpy as np
 
-_MODEL_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "data", "chbmit_model.json")
-_MODEL_CACHE: Optional[dict] = None
+from backend.production_models.architectures.models import HybridModel, ReferenceArchitectureWrapper
+from backend.production_models.models.domain import ProductionArchitecture
+from backend.real_model_training.data import _window_features
 
 
-def _load_model() -> dict:
-    """Load the pre-trained CHB-MIT model from disk (cached)."""
-    global _MODEL_CACHE
-    if _MODEL_CACHE is not None:
-        return _MODEL_CACHE
+class CHBMitInferenceEngine:
+    """Inference engine loaded from a serialized chbmit_model.json artifact."""
 
-    # Try multiple paths
-    paths = [
-        _MODEL_PATH,
-        os.path.join(os.path.dirname(__file__), "..", "..", "data", "chbmit_model.json"),
-        "/app/data/chbmit_model.json",
-        "data/chbmit_model.json",
-    ]
+    def __init__(self, model_json_path: str):
+        self.model_json_path = os.path.abspath(model_json_path)
+        if not os.path.exists(self.model_json_path):
+            raise FileNotFoundError(f"Model artifact not found at: {self.model_json_path}")
+            
+        with open(self.model_json_path, "r", encoding="utf-8") as fh:
+            self.model_data = json.load(fh)
+            
+        self.architecture_summary = self.model_data["architecture_summary"]
+        self.metrics = self.model_data["metrics"]
+        self.payload = self.model_data["model_payload"]
+        
+        self.model = self._reconstruct_model(self.payload)
 
-    for path in paths:
-        abs_path = os.path.abspath(path)
-        if os.path.exists(abs_path):
-            with open(abs_path) as f:
-                _MODEL_CACHE = json.load(f)
-            return _MODEL_CACHE
-
-    return None
-
-
-def chbmit_available() -> bool:
-    """Check if the CHB-MIT model is available."""
-    return _load_model() is not None
-
-
-def compute_eeg_features(data: np.ndarray, sfreq: float) -> Optional[dict]:
-    """Compute the 28 spectral features from an EEG segment.
-
-    ``data`` is (n_channels, n_samples). Returns a feature dict matching
-    the CHB-MIT model's feature names, or None if computation fails.
-    """
-    from scipy.signal import welch
-
-    n_channels, n_samples = data.shape
-    if n_samples < int(sfreq * 2):
-        return None
-
-    bands = {
-        "delta": (0.5, 4), "theta": (4, 8), "alpha": (8, 13),
-        "beta": (13, 30), "gamma": (30, 45),
-    }
-
-    ch_band_powers = {b: [] for b in bands}
-    ch_entropy, ch_rms, ch_line_length = [], [], []
-
-    for ch in range(min(n_channels, 23)):
-        x = data[ch]
-        if np.std(x) < 1e-10:
-            continue
-
-        nperseg = min(len(x), int(sfreq * 2))
-        try:
-            freqs, psd = welch(x, fs=sfreq, nperseg=nperseg)
-        except Exception:
-            continue
-
-        for band_name, (lo, hi) in bands.items():
-            mask = (freqs >= lo) & (freqs < hi)
-            bp = float(np.trapz(psd[mask], freqs[mask])) if mask.any() else 0.0
-            ch_band_powers[band_name].append(bp)
-
-        psd_pos = psd[psd > 0]
-        if len(psd_pos) > 1:
-            pn = psd_pos / psd_pos.sum()
-            entropy = float(-np.sum(pn * np.log(pn + 1e-12)) / np.log(len(pn)))
+    def _reconstruct_model(self, payload: dict):
+        """Reconstruct the model object from its serialized JSON parameters."""
+        arch = ProductionArchitecture(payload["architecture"])
+        seed = payload["seed"]
+        n_classes = payload["n_classes"]
+        hp = payload["hyperparameters"]
+        
+        if payload["type"] == "reference_wrapper":
+            model = ReferenceArchitectureWrapper(arch, n_classes, seed=seed, hyperparameters=hp)
+            # Load weights
+            weights_np = {k: np.array(v) for k, v in payload["weights"].items()}
+            model._inner.load_weights(weights_np)
+            return model
         else:
-            entropy = 0.0
-        ch_entropy.append(entropy)
-        ch_rms.append(float(np.sqrt(np.mean(x ** 2))))
-        ch_line_length.append(float(np.sum(np.abs(np.diff(x))) / len(x)))
+            model = HybridModel(n_classes, seed=seed, hyperparameters=hp)
+            # Load weights
+            model._mean = np.array(payload["weights"]["mean"])
+            model._std = np.array(payload["weights"]["std"])
+            model._proj_a = np.array(payload["weights"]["proj_a"])
+            model._proj_b = np.array(payload["weights"]["proj_b"])
+            model._W = np.array(payload["weights"]["W"])
+            model._b = np.array(payload["weights"]["b"])
+            return model
 
-    if not ch_entropy:
-        return None
+    def predict_proba(self, X: np.ndarray) -> np.ndarray:
+        """Run probability prediction on precomputed feature matrices (N, n_features)."""
+        return self.model.predict_proba(X)
 
-    features = {}
-    for band_name in bands:
-        vals = ch_band_powers[band_name]
-        features[f"{band_name}_mean"] = float(np.mean(vals)) if vals else 0.0
-        features[f"{band_name}_std"] = float(np.std(vals)) if vals else 0.0
-        features[f"{band_name}_max"] = float(np.max(vals)) if vals else 0.0
+    def predict(self, X: np.ndarray) -> np.ndarray:
+        """Run class prediction on precomputed feature matrices (N, n_features)."""
+        return self.model.predict(X)
 
-    features["entropy_mean"] = float(np.mean(ch_entropy))
-    features["entropy_std"] = float(np.std(ch_entropy))
-    features["rms_mean"] = float(np.mean(ch_rms))
-    features["rms_std"] = float(np.std(ch_rms))
-    features["line_length_mean"] = float(np.mean(ch_line_length))
-    features["line_length_std"] = float(np.std(ch_line_length))
+    def predict_raw_window(self, window: np.ndarray, sfreq: float) -> tuple[int, np.ndarray]:
+        """Convert a raw window segment [channels, samples] to features and run inference.
 
-    total = sum(features[f"{b}_mean"] for b in bands)
-    for b in bands:
-        features[f"{b}_ratio"] = features[f"{b}_mean"] / (total + 1e-12)
-
-    features["delta_alpha_ratio"] = features["delta_mean"] / (features["alpha_mean"] + 1e-12)
-    features["theta_beta_ratio"] = features["theta_mean"] / (features["beta_mean"] + 1e-12)
-
-    return features
-
-
-def predict_seizure(data: np.ndarray, sfreq: float) -> Optional[dict]:
-    """Run CHB-MIT model inference on EEG data.
-
-    ``data`` is (n_channels, n_samples). Returns a dict with seizure probability,
-    risk level, and feature contributions, or None if inference fails.
-    """
-    model = _load_model()
-    if model is None:
-        return None
-
-    features = compute_eeg_features(data, sfreq)
-    if features is None:
-        return None
-
-    # Build feature vector in the correct order
-    feature_names = model["feature_names"]
-    row = np.array([features.get(fn, 0.0) for fn in feature_names], dtype=np.float64)
-
-    # Normalize
-    mean = np.array(model["mean"], dtype=np.float64)
-    std = np.array(model["std"], dtype=np.float64)
-    row_norm = np.nan_to_num((row - mean) / std, nan=0.0, posinf=0.0, neginf=0.0)
-
-    # Predict
-    W = np.array(model["W"], dtype=np.float64)
-    b = np.array(model["b"], dtype=np.float64)
-
-    z = row_norm @ W + b
-    z = z - z.max()
-    probs = np.exp(z) / (np.exp(z).sum() + 1e-12)
-
-    seizure_prob = float(probs[1])
-    non_seizure_prob = float(probs[0])
-
-    # Feature contributions (simple weight-based)
-    contributions = []
-    weighted = row_norm * W[:, 1]  # contribution to seizure class
-    top_indices = np.argsort(np.abs(weighted))[::-1][:5]
-    for idx in top_indices:
-        contrib = float(weighted[idx])
-        contributions.append({
-            "feature": feature_names[idx],
-            "contribution": round(abs(contrib), 4),
-            "direction": "supports_seizure" if contrib > 0 else "supports_normal",
-            "raw_value": round(float(row[idx]), 6),
-        })
-
-    return {
-        "seizure_probability": round(seizure_prob, 4),
-        "non_seizure_probability": round(non_seizure_prob, 4),
-        "model_source": model.get("source", "CHB-MIT"),
-        "model_version": model.get("version", "unknown"),
-        "model_accuracy": model.get("accuracy", 0),
-        "model_sensitivity": model.get("sensitivity", 0),
-        "model_specificity": model.get("specificity", 0),
-        "n_training_windows": model.get("n_train", 0),
-        "feature_contributions": contributions,
-        "features_computed": len(feature_names),
-    }
+        Returns `(predicted_class, class_probabilities)`.
+        """
+        # Ensure correct shape and float64 type
+        window = np.asarray(window, dtype=np.float64)
+        if window.ndim != 2:
+            raise ValueError(f"Expected 2D array [channels, samples], got shape: {window.shape}")
+            
+        # Extract features
+        features = _window_features(window, sfreq)
+        features_batch = np.array([features])  # model expects a batch (1, n_features)
+        
+        # Predict
+        proba = self.predict_proba(features_batch)[0]
+        pred_class = int(np.argmax(proba))
+        return pred_class, proba
 
 
-__all__ = ["chbmit_available", "predict_seizure", "compute_eeg_features"]
+__all__ = ["CHBMitInferenceEngine"]
