@@ -31,7 +31,7 @@ SOURCE_SPECS: dict[DatasetSource, AcquisitionSourceSpec] = {
         expected_labels="Per-recording seizure annotations (start/end seconds) in chbNN-summary.txt.",
         expected_metadata="EDF: 256 Hz, 23 bipolar scalp channels, ~1 h recordings, pediatric.",
         base_url=f"{_PHYSIONET}/chbmit/1.0.0",
-        sample_files=("chb01/chb01-summary.txt", "chb01/chb01_01.edf", "chb01/chb01_03.edf"),
+        sample_files=( "chb01/chb01-summary.txt", "chb01/chb01_01.edf", "chb01/chb01_03.edf", "chb03/chb03-summary.txt", "chb03/chb03_01.edf", "chb03/chb03_02.edf", "chb05/chb05-summary.txt", "chb05/chb05_01.edf", "chb05/chb05_06.edf", "chb06/chb06-summary.txt", "chb06/chb06_01.edf", "chb06/chb06_04.edf", "chb08/chb08-summary.txt", "chb08/chb08_02.edf", "chb08/chb08_05.edf", "chb10/chb10-summary.txt", "chb10/chb10_01.edf", "chb10/chb10_27.edf", "chb12/chb12-summary.txt", "chb12/chb12_01.edf", "chb12/chb12_06.edf", "chb14/chb14-summary.txt", "chb14/chb14_01.edf", "chb14/chb14_04.edf", "chb15/chb15-summary.txt", "chb15/chb15_01.edf", "chb15/chb15_06.edf", "chb18/chb18-summary.txt", "chb18/chb18_01.edf", "chb18/chb18_29.edf", ),
         auto_downloadable=True,
         attribution=("Shoeb A. (2009) MIT PhD thesis; Goldberger et al. (2000) PhysioNet, "
                      "Circulation 101(23):e215-e220."),
