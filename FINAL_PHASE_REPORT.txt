@@ -1,0 +1,71 @@
+==================================================
+PATIENTS PROCESSED
+==================================================
+- chb01
+- chb03
+- chb05
+- chb06
+- chb08
+- chb10
+- chb12
+==================================================
+EDF INVENTORY
+==================================================
+chb01: 8 EDFs
+chb03: 8 EDFs
+chb05: 6 EDFs
+chb06: 8 EDFs
+chb08: 6 EDFs
+chb10: 8 EDFs
+chb12: 14 EDFs
+==================================================
+WINDOW STATISTICS
+==================================================
+Per-patient seizure windows: N/A (Global balancing applied)
+Per-patient background windows: N/A (Global balancing applied)
+Global totals:
+- Seizure windows: 2322
+- Background windows: 4644
+- Total windows: 6966
+==================================================
+DATASET SUMMARY
+==================================================
+Patient count: 7
+EDF count: 58
+Feature count: 11
+Window count: 6966
+==================================================
+TRAINING SUMMARY
+==================================================
+Train patients: chb01, chb05, chb08, chb10, chb12
+Validation patients: chb06
+Test patients: chb03
+==================================================
+METRICS
+==================================================
+Accuracy: 0.4771
+Sensitivity: 0.8714
+Specificity: 0.2813
+Precision: 0.3758
+Recall: N/A
+F1: 0.5251
+==================================================
+MODEL ARTIFACT
+==================================================
+Artifact path: chbmit_model.json
+Artifact size: 27148 bytes
+Timestamp: 2026-06-06T20:47:14.548538
+==================================================
+COMPARISON AGAINST PREVIOUS BASELINE
+==================================================
+Previous patients: 3
+New patients: 7
+Previous windows: 780
+New windows: 6966
+Previous sensitivity: 0.1475
+New sensitivity: 0.8714
+Delta: +0.7239
+==================================================
+FINAL STATUS
+==================================================
+SUCCESS

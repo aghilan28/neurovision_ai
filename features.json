@@ -42,16 +42,20 @@
       45.0
     ]
   ],
-  "n_windows_total": 780,
-  "n_seizure_windows": 260,
-  "n_background_windows": 520,
-  "n_edf_files": 11,
-  "n_patients": 3,
+  "n_windows_total": 6966,
+  "n_seizure_windows": 2322,
+  "n_background_windows": 4644,
+  "n_edf_files": 58,
+  "n_patients": 7,
   "train_patients": [
-    "chb05"
+    "chb01",
+    "chb05",
+    "chb08",
+    "chb10",
+    "chb12"
   ],
   "val_patients": [
-    "chb01"
+    "chb06"
   ],
   "test_patients": [
     "chb03"
@@ -59,6 +63,10 @@
   "patient_ids": [
     "chb01",
     "chb03",
-    "chb05"
+    "chb05",
+    "chb06",
+    "chb08",
+    "chb10",
+    "chb12"
   ]
 }

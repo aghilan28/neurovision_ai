@@ -86,12 +86,21 @@ class PhysioNetDownloader:
         self.failed: list[str] = []
 
     def _urlretrieve(self, url: str, dest: Path, timeout: int = 120) -> bool:
-        """Download a file with progress reporting."""
+        """Download a file with progress reporting using aws s3."""
         try:
             dest.parent.mkdir(parents=True, exist_ok=True)
-            print(f"  DOWNLOAD: {url}")
-            urllib.request.urlretrieve(url, dest)
-            return True
+            print(f"  DOWNLOAD: {url} -> {dest}")
+            # Map url to s3 url
+            s3_url = url.replace("https://physionet.org/files/", "s3://physionet-open/")
+            # Execute aws s3 cp
+            import subprocess
+            result = subprocess.run(["aws", "s3", "cp", "--no-sign-request", s3_url, str(dest)], 
+                                    capture_output=True, timeout=timeout)
+            if result.returncode == 0:
+                return True
+            else:
+                print(f"  FAILED: {url} -- {result.stderr.decode()}")
+                return False
         except Exception as exc:
             print(f"  FAILED: {url} -- {exc}")
             return False
@@ -177,13 +186,19 @@ def read_edf(abspath: str) -> Optional[tuple]:
         return None
     try:
         import mne
+        import gc
         mne.set_log_level("ERROR")
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             raw = mne.io.read_raw_edf(abspath, preload=True, verbose="ERROR")
-        data, sfreq = raw.get_data(), raw.info["sfreq"]
+        data = raw.get_data()
+        sfreq = raw.info["sfreq"]
+        del raw
         # Convert to microvolts
-        data_uV = data.astype(np.float64) * 1e6
+        data_uV = data.astype(np.float64)
+        data_uV *= 1e6
+        del data
+        gc.collect()
         return data_uV, sfreq
     except Exception:
         return None
@@ -256,8 +271,10 @@ def extract_windows(rec: Recording, *, storage_root: Path,
                     stride_seconds: float = STRIDE_SECONDS) -> list[Window]:
     """Extract windows from one EDF recording."""
     abspath = storage_root / rec.relative_path
+    print(f"  EXTRACTING: {rec.relative_path}", flush=True)
     result = read_edf(str(abspath))
     if result is None:
+        print(f"  FAILED read_edf: {rec.relative_path}", flush=True)
         return []
 
     data, sfreq = result
@@ -286,6 +303,11 @@ def extract_windows(rec: Recording, *, storage_root: Path,
         start += stride
         widx += 1
 
+    print(f"  DONE: {rec.relative_path} ({len(windows)} windows)", flush=True)
+    import gc
+    del data
+    del result
+    gc.collect()
     return windows
 
 
@@ -598,10 +620,23 @@ def run_training(*,
         downloader = PhysioNetDownloader(str(chb_root))
         for patient_id in patients:
             sum_file = f"{patient_id}-summary.txt"
-            # List expected EDF files by reading the summary or guessing
-            # Use just the filename (e.g., "chb01_01.edf") - the downloader adds patient dir
-            possible_edfs = [f"{patient_id}_{i:02d}.edf"
-                             for i in list(range(1, 37)) + list(range(38, 47))]
+            patient_dir = chb_root / patient_id
+            sum_path = patient_dir / sum_file
+            if not sum_path.exists():
+                sum_url = f"{PHYSIONET_BASE}/{patient_id}/{sum_file}"
+                downloader._urlretrieve(sum_url, sum_path, timeout=60)
+            
+            with open(sum_path, encoding="utf-8", errors="replace") as fh:
+                summary = parse_summary(fh.read())
+            
+            # Only download files with seizures to save time/space
+            possible_edfs = [fname for fname, (n_sz, _) in summary.items() if n_sz > 0]
+            
+            # Also keep 1 background file if available
+            bg_files = [fname for fname, (n_sz, _) in summary.items() if n_sz == 0]
+            if bg_files:
+                possible_edfs.append(bg_files[0])
+                
             results = downloader.download_patient(patient_id, possible_edfs, sum_file)
             n_downloaded += sum(1 for v in results.values() if v == "downloaded")
 
