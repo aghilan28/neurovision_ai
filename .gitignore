@@ -20,3 +20,4 @@ artifacts/_runs/
 # on demand into this gitignored tree (default NV_DATASET_ROOT=data/real).
 data/
 "runtime_verification_media/" 
+chb_test/
