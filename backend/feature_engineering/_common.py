@@ -1,7 +1,7 @@
 """Shared deterministic helpers for the feature engines (internal).
 
 Spectral estimation (Welch PSD), band-power integration, channel-region mapping,
-and a ``FeatureVector`` builder. Pure NumPy/SciPy; no randomness, no learned state —
+and a ``FeatureVector`` builder. Pure NumPy/SciPy; no randomness, no learned state --
 the same input always produces the same numbers.
 """
 

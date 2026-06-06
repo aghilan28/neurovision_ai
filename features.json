@@ -1,0 +1,64 @@
+{
+  "feature_names": [
+    "rel_delta",
+    "rel_theta",
+    "rel_alpha",
+    "rel_beta",
+    "rel_gamma",
+    "total_power_log",
+    "std",
+    "rms",
+    "mean_abs",
+    "zero_crossing_rate",
+    "line_length"
+  ],
+  "n_features": 11,
+  "window_seconds": 4.0,
+  "stride_seconds": 2.0,
+  "band_definitions": [
+    [
+      "delta",
+      0.5,
+      4.0
+    ],
+    [
+      "theta",
+      4.0,
+      8.0
+    ],
+    [
+      "alpha",
+      8.0,
+      13.0
+    ],
+    [
+      "beta",
+      13.0,
+      30.0
+    ],
+    [
+      "gamma",
+      30.0,
+      45.0
+    ]
+  ],
+  "n_windows_total": 780,
+  "n_seizure_windows": 260,
+  "n_background_windows": 520,
+  "n_edf_files": 11,
+  "n_patients": 3,
+  "train_patients": [
+    "chb05"
+  ],
+  "val_patients": [
+    "chb01"
+  ],
+  "test_patients": [
+    "chb03"
+  ],
+  "patient_ids": [
+    "chb01",
+    "chb03",
+    "chb05"
+  ]
+}
