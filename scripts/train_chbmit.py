@@ -200,7 +200,8 @@ def read_edf(abspath: str) -> Optional[tuple]:
         del data
         gc.collect()
         return data_uV, sfreq
-    except Exception:
+    except Exception as e:
+        print(f"Exception in read_edf: {e}")
         return None
 
 
@@ -456,6 +457,11 @@ class SeizureMLP:
         n = len(y)
         history = {"loss": [], "train_acc": []}
         rng = random.Random(self.seed + 1)
+        
+        # Normalize features
+        self.mean = np.mean(X, axis=0)
+        self.std = np.std(X, axis=0) + 1e-8
+        X_norm = (X - self.mean) / self.std
 
         # Compute balanced class weights (moderate, not extreme)
         n_pos = int(np.sum(y == 1))
@@ -475,7 +481,7 @@ class SeizureMLP:
             epoch_loss = 0.0
             for start in range(0, n, batch_size):
                 batch_idx = indices[start:start + batch_size]
-                Xb = X[batch_idx]
+                Xb = X_norm[batch_idx]
                 yb = np.array([y[i] for i in batch_idx], dtype=np.float64)
 
                 z1, a1, z2, a2 = self._forward(Xb)
@@ -488,15 +494,15 @@ class SeizureMLP:
                 # Backprop with class weighting
                 delta2 = (a2 - yb)[:, None] * weights[:, None]       # [B, 1] weighted
                 grad_W2 = delta2.T @ a1                              # [1, H]
-                grad_b2 = (delta2.squeeze() * weights).sum() / len(batch_idx)
+                grad_b2 = delta2.sum(axis=0) / len(batch_idx)        # [1,]
                 delta1 = (delta2 @ self.W2) * self._relu_grad(z1)    # [B, H]
                 grad_W1 = delta1.T @ Xb                              # [H, D]
-                grad_b1 = (delta1 * weights[:, None]).sum(axis=0) / len(batch_idx)
+                grad_b1 = delta1.sum(axis=0) / len(batch_idx)        # [H,]
 
-                self.W2 -= lr * (grad_W2 / len(batch_idx) + 0.0001 * self.W2)
-                self.b2 -= lr * grad_b2
-                self.W1 -= lr * (grad_W1 / len(batch_idx) + 0.0001 * self.W1)
-                self.b1 -= lr * grad_b1
+                self.W2 -= lr * (grad_W2 / len(batch_idx) + 0.01 * self.W2)
+                self.b2 -= lr * (grad_b2 + 0.01 * self.b2)
+                self.W1 -= lr * (grad_W1 / len(batch_idx) + 0.01 * self.W1)
+                self.b1 -= lr * (grad_b1 + 0.01 * self.b1)
 
             avg_loss = epoch_loss / n
             preds = (self.predict_proba(X) > 0.5).astype(int)
@@ -510,7 +516,11 @@ class SeizureMLP:
         return history
 
     def predict_proba(self, X: np.ndarray) -> np.ndarray:
-        _, _, _, a2 = self._forward(X)
+        if hasattr(self, 'mean'):
+            X_norm = (X - self.mean) / self.std
+            _, _, _, a2 = self._forward(X_norm)
+        else:
+            _, _, _, a2 = self._forward(X)
         return a2
 
     def predict(self, X: np.ndarray) -> np.ndarray:
@@ -579,7 +589,8 @@ def run_training(*,
                  patients: Optional[list[str]] = None,
                  storage_root: str | Path = "data/real",
                  no_download: bool = False,
-                 verbose: bool = True) -> dict:
+                 verbose: bool = True,
+                 seed: int = RANDOM_SEED) -> dict:
     """Run the complete CHB-MIT training pipeline."""
 
     t0 = time.time()
@@ -680,10 +691,20 @@ def run_training(*,
         raise RuntimeError("No EDF recordings found. Check --no-download or network access.")
 
     # ---- 4. Extract windows ----
-    all_windows: list[Window] = []
-    for rec in recordings:
-        wins = extract_windows(rec, storage_root=chb_root)
-        all_windows.extend(wins)
+    import pickle
+    cache_file = chb_root / f"windows_cache_{content_id(*patients)}.pkl"
+    if cache_file.exists():
+        if verbose:
+            print(f"LOADING from cache: {cache_file}")
+        with open(cache_file, "rb") as f:
+            all_windows = pickle.load(f)
+    else:
+        all_windows: list[Window] = []
+        for rec in recordings:
+            wins = extract_windows(rec, storage_root=chb_root)
+            all_windows.extend(wins)
+        with open(cache_file, "wb") as f:
+            pickle.dump(all_windows, f)
 
     if verbose:
         n_sz = sum(1 for w in all_windows if w.label == 1)
@@ -714,7 +735,7 @@ def run_training(*,
 
     # ---- 7. Patient-disjoint split ----
     train_w, val_w, test_w, train_p, val_p, test_p = patient_disjoint_split(
-        all_windows, val_frac=VAL_FRACTION, test_frac=TEST_FRACTION, seed=RANDOM_SEED)
+        all_windows, val_frac=VAL_FRACTION, test_frac=TEST_FRACTION, seed=seed)
 
     # Verify: if test has 0 seizures, fall back to stratified split
     test_seizures = sum(1 for w in test_w if w.label == 1)
@@ -761,7 +782,7 @@ def run_training(*,
     if verbose:
         print(f"\nTRAINING: Training SeizureMLP on {len(X_train)} windows...")
 
-    model = SeizureMLP(input_dim=N_FEATURES, hidden_dim=64, seed=RANDOM_SEED)
+    model = SeizureMLP(input_dim=N_FEATURES, hidden_dim=64, seed=seed)
     history = model.fit(X_train, y_train, epochs=100, lr=0.01, batch_size=32, verbose=verbose)
 
     if verbose:
@@ -882,6 +903,8 @@ def main():
                         help="Output directory for model/features (default: current dir)")
     parser.add_argument("--epochs", type=int, default=100,
                         help="Training epochs (default: 100)")
+    parser.add_argument("--seed", type=int, default=42,
+                        help="Random seed (default: 42)")
     parser.add_argument("--quiet", action="store_true", help="Suppress verbose output")
 
     args = parser.parse_args()
@@ -896,6 +919,7 @@ def main():
         storage_root=args.storage_root,
         no_download=args.no_download,
         verbose=not args.quiet,
+        seed=args.seed,
     )
 
     return 0

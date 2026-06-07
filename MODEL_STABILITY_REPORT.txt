@@ -1,0 +1,17 @@
+=== MODEL STABILITY REPORT ===
+RUN 1:
+Validation Sensitivity: 0.638
+Test Sensitivity: 0.638
+TP > 0: YES
+
+RUN 2:
+Validation Sensitivity: 0.7165
+Test Sensitivity: 0.7165
+TP > 0: YES
+
+RUN 3:
+Validation Sensitivity: 0.6055
+Test Sensitivity: 0.6055
+TP > 0: YES
+
+COLLAPSE DETECTED: NO

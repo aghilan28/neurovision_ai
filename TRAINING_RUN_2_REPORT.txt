@@ -1,0 +1,28 @@
+METRICS (Validation):
+  Accuracy    : 0.6213
+  Sensitivity : 0.6532
+  Specificity : 0.6115
+  Precision   : 0.3401
+  F1          : 0.4473
+
+METRICS (Test):
+  Accuracy    : 0.7367
+  Sensitivity : 0.7165
+  Specificity : 0.7413
+
+SAVED: features.json
+SAVED: chbmit_model.json
+
+TOTAL_TIME: 3.7s
+============================================================
+SUMMARY:
+  EDF files processed : 110
+  Seizure windows     : 4733
+  Background windows  : 9466
+  Patients            : 15
+  Accuracy (test)     : 0.7367
+  Sensitivity (test)  : 0.7165
+  Specificity (test)  : 0.7413
+  Model path          : chbmit_model.json
+  Features path       : features.json
+============================================================

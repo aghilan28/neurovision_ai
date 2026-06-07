@@ -1,21 +1,25 @@
 Folder PATH listing for volume OS
-Volume serial number is 00000065 368E:D4C2
+Volume serial number is 0000002B 368E:D4C2
 C:.
 |   .gitignore
 |   capture_runtime.py
 |   CERTIFICATION_GATE_REPORT.md
 |   CERTIFICATION_STATE_REPORT.md
+|   chbmit_model.json
 |   DEPLOYED_ROUTE_INVENTORY.md
 |   DEPLOYMENT_ENTRYPOINT_AUDIT.md
 |   Dockerfile
 |   EXECUTIVE_CERTIFICATION_SUMMARY.md
+|   features.json
 |   FINAL_CERTIFICATION_DECISION.md
 |   FINAL_CERTIFICATION_REPORT.md
+|   FINAL_PHASE_REPORT.txt
 |   FINAL_VERIFIER_EXECUTION_REPORT.md
 |   FRONTEND_ROUTE_MAP.md
 |   FRONTEND_RUNTIME_VERIFICATION.md
 |   FRONTEND_SURFACE_MAP.md
 |   LOCAL_DEPLOYMENT_VERIFICATION.md
+|   old_train_chbmit.py
 |   pyproject.toml
 |   pytest_output.log
 |   README.md
@@ -37,6 +41,7 @@ C:.
 |   struct.txt
 |   structure1.txt
 |   UI_REPLACEMENT_MAP.md
+|   v21.json
 |   valid_edf_base64.txt
 |   VERIFIER_STATUS_REPORT.md
 |   _repo_bootstrap.py
@@ -2822,6 +2827,11 @@ C:.
 |       phase13_baseline_runtime_ids.json
 |       phase13_release_baseline_inputs.txt
 |       
++---chb_test
+|   \---chb01
+|           chb01-summary.txt
+|           chb01_01.edf
+|           
 +---data
 |   |   chbmit_model.json
 |   |   
@@ -2837,9 +2847,14 @@ C:.
 |           |       chb03_01.edf
 |           |       chb03_02.edf
 |           |       
-|           \---chb05
-|                   chb05-summary.txt
-|                   chb05_01.edf.part
+|           +---chb05
+|           |       chb05-summary.txt
+|           |       chb05_01.edf.part
+|           |       
+|           \---chb08
+|                   chb08-summary.txt
+|                   chb08_02.edf
+|                   chb08_03.edf
 |                   
 +---datasets
 |       catalog.py
@@ -3544,67 +3559,72 @@ C:.
 |               summary_report.json
 |               
 +---scripts
-|       acquire_real_dataset.py
-|       application_frontend_gateway.py
-|       build_application_frontend_snapshot.py
-|       build_autonomous_operations_workstation_snapshot.py
-|       build_chbmit_features.sh
-|       build_operational_workstation_snapshot.py
-|       build_workstation_snapshot.py
-|       README.md
-|       resume_chbmit_training.py
-|       run_clinical_knowledge_workflow.py
-|       run_clinical_workflow.py
-|       run_offline_inference.py
-|       run_pipeline.py
-|       serve_neurovision.py
-|       train_chbmit.py
-|       verify_dbe1_asgi_entrypoint.py
-|       verify_dbe2_docker_deployment.py
-|       verify_dbe3_duplicate_upload.py
-|       verify_dbe4_persistence.py
-|       verify_dbe5_authentication_reliability.py
-|       verify_drp1_dataset_integration.py
-|       verify_drp2_production_models.py
-|       verify_drp3_serving_platform.py
-|       verify_drp4_persistence_platform.py
-|       verify_drp5_security_platform.py
-|       verify_drp6_clinical_validation.py
-|       verify_mp1_model_provisioning.py
-|       verify_mp3_model_lifecycle.py
-|       verify_mp4_source_of_truth.py
-|       verify_productization_p1.py
-|       verify_productization_p10.py
-|       verify_productization_p2.py
-|       verify_productization_p3.py
-|       verify_productization_p4.py
-|       verify_productization_p5.py
-|       verify_productization_p6.py
-|       verify_productization_p7.py
-|       verify_productization_p8.py
-|       verify_productization_p9.py
-|       verify_track1_real_data.py
-|       verify_track2_real_models.py
-|       verify_track3_application.py
-|       verify_track4_operations.py
-|       verify_v1.py
-|       verify_v1_p5_p6.py
-|       verify_v2.py
-|       verify_v2_p3_p4.py
-|       verify_v2_p5_p6.py
-|       verify_v2_p7_p8.py
-|       verify_v3_p1_p2.py
-|       verify_v3_p3_p4.py
-|       verify_v3_p5_p6.py
-|       verify_v3_p7_p8.py
-|       verify_v4_p1_p2.py
-|       verify_v4_p3_p4.py
-|       verify_v4_p5_p6.py
-|       verify_v4_p7_p8.py
-|       verify_v4_p9_p10.py
-|       _repo_bootstrap.py
-|       __init__.py
-|       
+|   |   acquire_real_dataset.py
+|   |   application_frontend_gateway.py
+|   |   build_application_frontend_snapshot.py
+|   |   build_autonomous_operations_workstation_snapshot.py
+|   |   build_chbmit_features.sh
+|   |   build_operational_workstation_snapshot.py
+|   |   build_workstation_snapshot.py
+|   |   README.md
+|   |   resume_chbmit_training.py
+|   |   run_clinical_knowledge_workflow.py
+|   |   run_clinical_workflow.py
+|   |   run_offline_inference.py
+|   |   run_pipeline.py
+|   |   serve_neurovision.py
+|   |   train_chbmit.py
+|   |   verify_dbe1_asgi_entrypoint.py
+|   |   verify_dbe2_docker_deployment.py
+|   |   verify_dbe3_duplicate_upload.py
+|   |   verify_dbe4_persistence.py
+|   |   verify_dbe5_authentication_reliability.py
+|   |   verify_drp1_dataset_integration.py
+|   |   verify_drp2_production_models.py
+|   |   verify_drp3_serving_platform.py
+|   |   verify_drp4_persistence_platform.py
+|   |   verify_drp5_security_platform.py
+|   |   verify_drp6_clinical_validation.py
+|   |   verify_mp1_model_provisioning.py
+|   |   verify_mp3_model_lifecycle.py
+|   |   verify_mp4_source_of_truth.py
+|   |   verify_productization_p1.py
+|   |   verify_productization_p10.py
+|   |   verify_productization_p2.py
+|   |   verify_productization_p3.py
+|   |   verify_productization_p4.py
+|   |   verify_productization_p5.py
+|   |   verify_productization_p6.py
+|   |   verify_productization_p7.py
+|   |   verify_productization_p8.py
+|   |   verify_productization_p9.py
+|   |   verify_track1_real_data.py
+|   |   verify_track2_real_models.py
+|   |   verify_track3_application.py
+|   |   verify_track4_operations.py
+|   |   verify_v1.py
+|   |   verify_v1_p5_p6.py
+|   |   verify_v2.py
+|   |   verify_v2_p3_p4.py
+|   |   verify_v2_p5_p6.py
+|   |   verify_v2_p7_p8.py
+|   |   verify_v3_p1_p2.py
+|   |   verify_v3_p3_p4.py
+|   |   verify_v3_p5_p6.py
+|   |   verify_v3_p7_p8.py
+|   |   verify_v4_p1_p2.py
+|   |   verify_v4_p3_p4.py
+|   |   verify_v4_p5_p6.py
+|   |   verify_v4_p7_p8.py
+|   |   verify_v4_p9_p10.py
+|   |   _repo_bootstrap.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           resume_chbmit_training.cpython-312.pyc
+|           train_chbmit.cpython-312.pyc
+|           __init__.cpython-312.pyc
+|           
 +---tests
 |   |   conftest.py
 |   |   README.md
@@ -3619,6 +3639,7 @@ C:.
 |   |   test_autonomous_operations_workstation.py
 |   |   test_boundaries.py
 |   |   test_certification.py
+|   |   test_chbmit_inference.py
 |   |   test_clinical_cases.py
 |   |   test_clinical_findings.py
 |   |   test_clinical_knowledge.py

@@ -1,0 +1,17 @@
+=== FEATURE_FORENSICS_REPORT.txt ===
+Validating 298381 windows across 15 patients
+NaN count: 0
+Infinity count: 0
+Constant features: 0
+Global Distributions:
+rel_delta: Mean=0.5134, Std=0.1795, Var=0.0322, Min=0.0000, Max=0.9290
+rel_theta: Mean=0.1541, Std=0.0782, Var=0.0061, Min=0.0000, Max=0.6019
+rel_alpha: Mean=0.0619, Std=0.0485, Var=0.0024, Min=0.0000, Max=0.4750
+rel_beta: Mean=0.0781, Std=0.0638, Var=0.0041, Min=0.0000, Max=0.5290
+rel_gamma: Mean=0.0416, Std=0.0535, Var=0.0029, Min=0.0000, Max=0.3592
+total_power_log: Mean=7.2113, Std=1.4687, Var=2.1572, Min=0.0375, Max=13.0024
+std: Mean=56.3343, Std=44.9003, Var=2016.0330, Min=0.0000, Max=895.7444
+rms: Mean=56.6265, Std=44.9458, Var=2020.1248, Min=0.1954, Max=896.0265
+mean_abs: Mean=42.7756, Std=34.5249, Var=1191.9720, Min=0.1954, Max=759.8741
+zero_crossing_rate: Mean=0.1000, Std=0.0745, Var=0.0056, Min=0.0000, Max=0.5155
+line_length: Mean=15.8736, Std=35.4144, Var=1254.1775, Min=0.0000, Max=927.9716

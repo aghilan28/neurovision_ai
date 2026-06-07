@@ -1,0 +1,55 @@
+=== PRE_EXPANSION_AUDIT.txt ===
+Current patients:
+chb01
+chb02
+chb03
+chb04
+chb05
+chb06
+chb07
+chb08
+chb09
+chb10
+chb12
+Current EDF count:
+74
+Current windows:
+  "n_windows_total": 8757,
+  "n_seizure_windows": 2919,
+  "n_background_windows": 5838,
+Current model metrics:
+  "test_metrics": {
+    "accuracy": 0.6213,
+    "sensitivity": 0.0921,
+    "specificity": 1.0,
+    "precision": 1.0,
+    "f1": 0.1687,
+    "confusion_matrix": {
+      "tp": 61,
+      "tn": 925,
+Current artifact hashes:
+f185fe7b2e0130eae067a4c48eb64f86  features.json
+b83cc38242422a2fc475c72ce72b1fa5  chbmit_model.json
+75853bde724566533441e25168008012  scripts/train_chbmit.py
+Current assignments:
+  "train_patients": [
+    "chb01",
+    "chb02",
+    "chb05",
+    "chb06",
+    "chb07",
+    "chb10",
+    "chb12"
+  ],
+  "val_patients": [
+    "chb03",
+    "chb09"
+  ],
+  "test_patients": [
+    "chb04",
+    "chb08"
+  ],
+  "patient_ids": [
+    "chb01",
+    "chb02",
+    "chb03",

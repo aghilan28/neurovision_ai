@@ -1,0 +1,48 @@
+Patient ID: chb01
+EDF count: 8
+Total raw extracted windows: 13754
+Failures: None
+Warnings: None
+----------------------------------------
+Patient ID: chb02
+EDF count: 4
+Total raw extracted windows: 5875
+Failures: None
+Warnings: None
+----------------------------------------
+Patient ID: chb03
+EDF count: 8
+Total raw extracted windows: 14392
+Failures: None
+Warnings: None
+----------------------------------------
+Patient ID: chb04
+EDF count: 4
+Total raw extracted windows: 26374
+Failures: None
+Warnings: None
+----------------------------------------
+Patient ID: chb05
+EDF count: 6
+Total raw extracted windows: 10799
+Failures: None
+Warnings: None
+----------------------------------------
+Patient ID: chb06
+EDF count: 8
+Total raw extracted windows: 53799
+Failures: None
+Warnings: None
+----------------------------------------
+Patient ID: chb07
+EDF count: 4
+Total raw extracted windows: 23469
+Failures: None
+Warnings: None
+----------------------------------------
+Patient ID: chb08
+EDF count: 4
+Total raw extracted windows: 7196
+Failures: None
+Warnings: None
+----------------------------------------

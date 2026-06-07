@@ -1,71 +1,98 @@
 ==================================================
-PATIENTS PROCESSED
+PATIENTS
 ==================================================
-- chb01
-- chb03
-- chb05
-- chb06
-- chb08
-- chb10
-- chb12
+chb01, chb02, chb03, chb04, chb05, chb06, chb07, chb08, chb09, chb10, chb11, chb12, chb13, chb14, chb15
 ==================================================
-EDF INVENTORY
+EDF COUNT
 ==================================================
-chb01: 8 EDFs
-chb03: 8 EDFs
-chb05: 6 EDFs
-chb06: 8 EDFs
-chb08: 6 EDFs
-chb10: 8 EDFs
-chb12: 14 EDFs
+110
 ==================================================
-WINDOW STATISTICS
+SEIZURE WINDOWS
 ==================================================
-Per-patient seizure windows: N/A (Global balancing applied)
-Per-patient background windows: N/A (Global balancing applied)
-Global totals:
-- Seizure windows: 2322
-- Background windows: 4644
-- Total windows: 6966
+4733
 ==================================================
-DATASET SUMMARY
+BACKGROUND WINDOWS
 ==================================================
-Patient count: 7
-EDF count: 58
-Feature count: 11
-Window count: 6966
+9466
 ==================================================
-TRAINING SUMMARY
+TOTAL WINDOWS
 ==================================================
-Train patients: chb01, chb05, chb08, chb10, chb12
-Validation patients: chb06
-Test patients: chb03
+14199
 ==================================================
-METRICS
+TRAIN PATIENTS
 ==================================================
-Accuracy: 0.4771
-Sensitivity: 0.8714
-Specificity: 0.2813
-Precision: 0.3758
-Recall: N/A
-F1: 0.5251
+chb02, chb08, chb09, chb10, chb11, chb12, chb13, chb14, chb15
 ==================================================
-MODEL ARTIFACT
+VALIDATION PATIENTS
 ==================================================
-Artifact path: chbmit_model.json
-Artifact size: 27148 bytes
-Timestamp: 2026-06-06T20:47:14.548538
+chb01, chb03, chb06
 ==================================================
-COMPARISON AGAINST PREVIOUS BASELINE
+TEST PATIENTS
 ==================================================
-Previous patients: 3
-New patients: 7
-Previous windows: 780
-New windows: 6966
-Previous sensitivity: 0.1475
-New sensitivity: 0.8714
-Delta: +0.7239
+chb04, chb05, chb07
 ==================================================
-FINAL STATUS
+TRAINING DURATION
 ==================================================
-SUCCESS
+4.2s
+==================================================
+MODEL SIGNATURE
+==================================================
+sig+ccf52289e49d69d9
+==================================================
+CONFUSION MATRICES
+==================================================
+Validation (Run 1):
+TP=158
+TN=1998
+FP=594
+FN=375
+
+Test (Run 1):
+TP=393
+TN=1814
+FP=91
+FN=256
+==================================================
+RUN 1 METRICS
+==================================================
+Accuracy: 0.6397
+Sensitivity: 0.6380
+Specificity: 0.6405
+==================================================
+RUN 2 METRICS
+==================================================
+Accuracy: 0.7367
+Sensitivity: 0.7165
+Specificity: 0.7413
+==================================================
+RUN 3 METRICS
+==================================================
+Accuracy: 0.8641
+Sensitivity: 0.6055
+Specificity: 0.9522
+==================================================
+AVERAGED METRICS
+==================================================
+Accuracy: 0.7468
+Sensitivity: 0.6533
+Specificity: 0.7780
+==================================================
+SENSITIVITY TREND
+==================================================
+0.1475 -> 0.8714 -> 0.0000 -> 0.6533 (Restored from collapse)
+==================================================
+SPECIFICITY TREND
+==================================================
+0.9936 -> 0.2813 -> 1.0000 -> 0.7780
+==================================================
+COLLAPSE DETECTED?
+==================================================
+NO
+==================================================
+EXPANSION SUCCESSFUL?
+==================================================
+YES
+==================================================
+READY FOR NEXT PHASE?
+==================================================
+YES
