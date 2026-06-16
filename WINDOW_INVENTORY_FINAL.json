@@ -1,0 +1,20 @@
+{
+  "patients": 24,
+  "edf_files": 686,
+  "recording_hours": 982.94,
+  "seizure_events": 158,
+  "window_counts": {
+    "4s": {
+      "sz": 4926,
+      "bg": 1763653
+    },
+    "8s": {
+      "sz": 2624,
+      "bg": 881299
+    },
+    "16s": {
+      "sz": 1472,
+      "bg": 440123
+    }
+  }
+}

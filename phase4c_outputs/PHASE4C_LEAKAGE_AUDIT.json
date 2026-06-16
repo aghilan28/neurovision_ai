@@ -1,0 +1,34 @@
+{
+  "patient_overlap": [],
+  "edf_overlap": [],
+  "window_overlap": false,
+  "train_patients": [
+    "chb02",
+    "chb03",
+    "chb04",
+    "chb05",
+    "chb06",
+    "chb07",
+    "chb08",
+    "chb10",
+    "chb11",
+    "chb13",
+    "chb14",
+    "chb15",
+    "chb16",
+    "chb18",
+    "chb20",
+    "chb21",
+    "chb22",
+    "chb23",
+    "chb24"
+  ],
+  "test_patients": [
+    "chb01",
+    "chb09",
+    "chb12",
+    "chb17",
+    "chb19"
+  ],
+  "leakage_detected": false
+}

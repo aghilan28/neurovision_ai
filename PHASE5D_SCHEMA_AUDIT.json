@@ -1,0 +1,157 @@
+{
+  "file_existence": {
+    "feature_signature": {
+      "path": "PHASE5B_FEATURE_SIGNATURE.json",
+      "exists": true
+    },
+    "patient_split": {
+      "path": "PHASE5B_PATIENT_SPLIT.json",
+      "exists": true
+    },
+    "metrics_5b": {
+      "path": "PHASE5B_METRICS.json",
+      "exists": true
+    },
+    "threshold_sweep_5b": {
+      "path": "PHASE5B_THRESHOLD_SWEEP.csv",
+      "exists": true
+    },
+    "feature_importance_5b": {
+      "path": "PHASE5B_FEATURE_IMPORTANCE.csv",
+      "exists": true
+    },
+    "model": {
+      "path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+      "exists": true
+    },
+    "dataset": {
+      "path": "PHASE5B_ENGINEERED_DATASET.parquet",
+      "exists": true
+    },
+    "event_predictions_5c": {
+      "path": "PHASE5C_EVENT_PREDICTIONS.csv",
+      "exists": true
+    },
+    "event_metrics_5c": {
+      "path": "PHASE5C_EVENT_METRICS.csv",
+      "exists": true
+    },
+    "configuration_search_5c": {
+      "path": "PHASE5C_CONFIGURATION_SEARCH.csv",
+      "exists": true
+    },
+    "best_configuration_5c": {
+      "path": "PHASE5C_BEST_CONFIGURATION.json",
+      "exists": true
+    },
+    "patient_event_summary_5c": {
+      "path": "PHASE5C_PATIENT_EVENT_SUMMARY.csv",
+      "exists": true
+    },
+    "schema_audit_5c": {
+      "path": "PHASE5C_SCHEMA_AUDIT.json",
+      "exists": true
+    },
+    "runtime_audit_5c": {
+      "path": "PHASE5C_RUNTIME_AUDIT.json",
+      "exists": true
+    },
+    "execution_report_5c": {
+      "path": "PHASE5C_EXECUTION_REPORT.txt",
+      "exists": true
+    }
+  },
+  "feature_signature": {
+    "path": "PHASE5B_FEATURE_SIGNATURE.json",
+    "exists": true,
+    "feature_count": 484,
+    "feature_names_length": 484,
+    "passed": true
+  },
+  "patient_split": {
+    "path": "PHASE5B_PATIENT_SPLIT.json",
+    "exists": true,
+    "test_patients": [
+      "chb02",
+      "chb05",
+      "chb09",
+      "chb14",
+      "chb22"
+    ],
+    "test_patient_count": 5,
+    "train_patient_count": 16,
+    "calibration_patients_provided": true,
+    "calibration_patient_count": 3,
+    "passed": true
+  },
+  "dataset_columns": {
+    "path": "PHASE5B_ENGINEERED_DATASET.parquet",
+    "total_columns_in_dataset": 493,
+    "total_rows_in_dataset": 1765872,
+    "feature_count_matches": true,
+    "feature_columns_present": true,
+    "passed": true
+  },
+  "model": {
+    "path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+    "type": "<class 'xgboost.sklearn.XGBClassifier'>",
+    "has_predict_proba": true,
+    "n_features_in": 484,
+    "feature_order_matches_signature": true,
+    "passed": true
+  },
+  "event_predictions_schema": {
+    "path": "PHASE5C_EVENT_PREDICTIONS.csv",
+    "columns": [
+      "patient",
+      "edf",
+      "event_start_window",
+      "event_end_window",
+      "duration_windows",
+      "peak_probability",
+      "mean_probability",
+      "positive_window_count",
+      "is_true_event"
+    ],
+    "passed": true
+  },
+  "configuration_search_schema": {
+    "path": "PHASE5C_CONFIGURATION_SEARCH.csv",
+    "columns": [
+      "smoothing_window",
+      "threshold",
+      "min_duration",
+      "min_peak_probability",
+      "true_positive_events",
+      "false_positive_events",
+      "false_negative_events",
+      "total_gt_events",
+      "total_predicted_events",
+      "precision",
+      "recall",
+      "f1",
+      "balanced_accuracy",
+      "mcc",
+      "cohen_kappa",
+      "alarm_rate",
+      "suppression_rate",
+      "total_events_before_suppression",
+      "suppressed_events",
+      "retained_events"
+    ],
+    "passed": true
+  },
+  "metadata_column_resolution": {
+    "label": "label",
+    "patient": "patient",
+    "edf": "edf",
+    "window_index": "window_index",
+    "window_uid": "window_uid",
+    "window_start_sec": "window_start_sec",
+    "window_end_sec": "window_end_sec",
+    "window_duration_sec": "window_duration_sec",
+    "stride_sec": "stride_sec"
+  },
+  "overall_passed": true,
+  "errors": []
+}

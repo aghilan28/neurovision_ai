@@ -1,0 +1,9 @@
+{
+  "gate_4_patient_isolation": true,
+  "gate_5_edf_isolation": true,
+  "gate_6_no_future_leakage": true,
+  "gate_7_temporal_ordering": true,
+  "gate_8_no_label_leakage": true,
+  "patient_overlap": [],
+  "edf_overlap": []
+}

@@ -1,0 +1,117 @@
+{
+  "BEST_F1": {
+    "config": {
+      "min_peak_probability": 0.95,
+      "smoothing_window": 21.0,
+      "threshold": 0.01,
+      "min_duration": 1.0,
+      "tp": 9.0,
+      "fp": 1.0,
+      "fn": 14.0,
+      "total_gt_events": 23.0,
+      "total_predicted_events": 10.0,
+      "precision": 0.9,
+      "recall": 0.391304,
+      "f1": 0.545455,
+      "patient_recall": 0.4,
+      "suppression_rate": 0.583333,
+      "false_alarm_rate": 10.0,
+      "ground_truth_coverage": 0.391304
+    },
+    "justification": "Maximizes F1=0.5455 across the peak sweep. TP=9.0, FP=1.0, FN=14.0.",
+    "benefits": "Optimal balance between seizure detection and false alarm rate.",
+    "risk_analysis": "Recall=0.3913; FN=14.0 seizures still missed."
+  },
+  "BEST_RECALL": {
+    "config": {
+      "min_peak_probability": 0.5,
+      "smoothing_window": 21.0,
+      "threshold": 0.01,
+      "min_duration": 1.0,
+      "tp": 12.0,
+      "fp": 46.0,
+      "fn": 11.0,
+      "total_gt_events": 23.0,
+      "total_predicted_events": 58.0,
+      "precision": 0.206897,
+      "recall": 0.521739,
+      "f1": 0.296296,
+      "patient_recall": 0.6,
+      "suppression_rate": 0.15942,
+      "false_alarm_rate": 58.0,
+      "ground_truth_coverage": 0.521739
+    },
+    "justification": "Maximizes seizure recall=0.5217. TP=12.0, FP=46.0.",
+    "benefits": "Detects the most seizures; suitable for safety-critical contexts.",
+    "risk_analysis": "Precision=0.2069; FP=46.0 false alarms."
+  },
+  "BEST_PRECISION": {
+    "config": {
+      "min_peak_probability": 0.95,
+      "smoothing_window": 21.0,
+      "threshold": 0.01,
+      "min_duration": 1.0,
+      "tp": 9.0,
+      "fp": 1.0,
+      "fn": 14.0,
+      "total_gt_events": 23.0,
+      "total_predicted_events": 10.0,
+      "precision": 0.9,
+      "recall": 0.391304,
+      "f1": 0.545455,
+      "patient_recall": 0.4,
+      "suppression_rate": 0.583333,
+      "false_alarm_rate": 10.0,
+      "ground_truth_coverage": 0.391304
+    },
+    "justification": "Maximizes precision=0.9000. TP=9.0, FP=1.0.",
+    "benefits": "Minimizes false alarms; suitable when alert fatigue is a concern.",
+    "risk_analysis": "Recall=0.3913; FN=14.0 missed seizures."
+  },
+  "BEST_PATIENT_RECALL": {
+    "config": {
+      "min_peak_probability": 0.5,
+      "smoothing_window": 21.0,
+      "threshold": 0.01,
+      "min_duration": 1.0,
+      "tp": 12.0,
+      "fp": 46.0,
+      "fn": 11.0,
+      "total_gt_events": 23.0,
+      "total_predicted_events": 58.0,
+      "precision": 0.206897,
+      "recall": 0.521739,
+      "f1": 0.296296,
+      "patient_recall": 0.6,
+      "suppression_rate": 0.15942,
+      "false_alarm_rate": 58.0,
+      "ground_truth_coverage": 0.521739
+    },
+    "justification": "Maximizes mean per-patient recall=0.6000.",
+    "benefits": "Ensures the most patients have at least some seizures detected.",
+    "risk_analysis": "Overall recall=0.5217; FP=46.0."
+  },
+  "BEST_BALANCED_TRADEOFF": {
+    "config": {
+      "min_peak_probability": 0.55,
+      "smoothing_window": 21.0,
+      "threshold": 0.01,
+      "min_duration": 1.0,
+      "tp": 12.0,
+      "fp": 37.0,
+      "fn": 11.0,
+      "total_gt_events": 23.0,
+      "total_predicted_events": 49.0,
+      "precision": 0.244898,
+      "recall": 0.521739,
+      "f1": 0.333333,
+      "patient_recall": 0.6,
+      "suppression_rate": 0.183333,
+      "false_alarm_rate": 49.0,
+      "ground_truth_coverage": 0.521739
+    },
+    "justification": "Best F1 among configurations achieving recall >= 0.50. F1=0.3333, Recall=0.5217, Precision=0.2449.",
+    "benefits": "Balanced: catches >=50% of seizures while maintaining reasonable precision.",
+    "risk_analysis": "FP=37.0, FN=11.0."
+  }
+}

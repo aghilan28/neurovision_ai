@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-06-12T12:58:55.125879",
+  "model_parameters": {
+    "n_estimators": 300,
+    "max_depth": 6,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "min_child_weight": 3,
+    "gamma": 0.1,
+    "reg_alpha": 0.1,
+    "reg_lambda": 1.0,
+    "scale_pos_weight": 5.0,
+    "random_state": 42,
+    "n_jobs": -1,
+    "eval_metric": "auc"
+  },
+  "cross_validation": {
+    "cv_scores": [
+      0.9754276021601327,
+      0.9752345982028663,
+      0.975820455473571,
+      0.9757059849008778,
+      0.9790670841003158
+    ],
+    "cv_mean": 0.9762511449675527,
+    "cv_std": 0.0014229403514130663
+  },
+  "test_metrics": {
+    "accuracy": 0.9975366671757366,
+    "balanced_accuracy": 0.7265075736909354,
+    "f1": 0.5673124689518132,
+    "precision": 0.7572944297082228,
+    "recall": 0.45353455123113584,
+    "specificity": 0.9994805961507349,
+    "auc": 0.9750168015468642,
+    "optimal_threshold": 0.019609881564974785,
+    "threshold_accuracy": 0.928798085897066,
+    "threshold_f1": 0.08337581009247798,
+    "threshold_precision": 0.04369061701072233,
+    "threshold_recall": 0.90945194598888,
+    "threshold_specificity": 0.9288672171022941,
+    "confusion_matrix": [
+      [
+        352144,
+        183
+      ],
+      [
+        688,
+        571
+      ]
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.9980500634863051,
+        "recall": 0.9994805961507349,
+        "f1-score": 0.9987648175801486,
+        "support": 352327.0
+      },
+      "1": {
+        "precision": 0.7572944297082228,
+        "recall": 0.45353455123113584,
+        "f1-score": 0.5673124689518132,
+        "support": 1259.0
+      },
+      "accuracy": 0.9975366671757366,
+      "macro avg": {
+        "precision": 0.877672246597264,
+        "recall": 0.7265075736909354,
+        "f1-score": 0.7830386432659808,
+        "support": 353586.0
+      },
+      "weighted avg": {
+        "precision": 0.997192814209109,
+        "recall": 0.9975366671757366,
+        "f1-score": 0.9972285618830252,
+        "support": 353586.0
+      }
+    },
+    "test_set_size": 353586,
+    "seizure_count": 1259,
+    "background_count": 352327
+  },
+  "dataset_info": {
+    "dataset_path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_clean.parquet"
+  }
+}

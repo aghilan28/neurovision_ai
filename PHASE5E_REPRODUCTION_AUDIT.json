@@ -1,0 +1,29 @@
+{
+  "reference": {
+    "tp": 9,
+    "fp": 1,
+    "fn": 14,
+    "f1": 0.545455,
+    "recall": 0.391304,
+    "precision": 0.9,
+    "source": "best_configuration.json BEST_F1 block"
+  },
+  "reproduced": {
+    "tp": 9,
+    "fp": 1,
+    "fn": 14,
+    "total_gt_events": 23,
+    "total_predicted_events": 10,
+    "precision": 0.9,
+    "recall": 0.391304,
+    "f1": 0.545455,
+    "patient_recall": 0.4,
+    "suppression_rate": 0.583333,
+    "false_alarm_rate": 10,
+    "ground_truth_coverage": 0.391304
+  },
+  "metric_reproduction_ok": true,
+  "count_reproduction_ok": true,
+  "tolerance": 0.01,
+  "note": "Metric reproduction passed."
+}

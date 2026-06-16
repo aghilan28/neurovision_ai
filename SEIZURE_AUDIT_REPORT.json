@@ -1,0 +1,155 @@
+{
+  "totals": {
+    "patients": 24,
+    "summary_files": 24,
+    "seizure_events": 198,
+    "seizure_edfs": 141,
+    "non_seizure_edfs": 545
+  },
+  "patients": {
+    "chb01": {
+      "edf_count": 42,
+      "seizure_events": 7,
+      "seizure_edfs": 7,
+      "non_seizure_edfs": 35
+    },
+    "chb02": {
+      "edf_count": 36,
+      "seizure_events": 3,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 33
+    },
+    "chb03": {
+      "edf_count": 38,
+      "seizure_events": 7,
+      "seizure_edfs": 7,
+      "non_seizure_edfs": 31
+    },
+    "chb04": {
+      "edf_count": 42,
+      "seizure_events": 4,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 39
+    },
+    "chb05": {
+      "edf_count": 39,
+      "seizure_events": 5,
+      "seizure_edfs": 5,
+      "non_seizure_edfs": 34
+    },
+    "chb06": {
+      "edf_count": 18,
+      "seizure_events": 10,
+      "seizure_edfs": 7,
+      "non_seizure_edfs": 11
+    },
+    "chb07": {
+      "edf_count": 19,
+      "seizure_events": 3,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 16
+    },
+    "chb08": {
+      "edf_count": 20,
+      "seizure_events": 5,
+      "seizure_edfs": 5,
+      "non_seizure_edfs": 15
+    },
+    "chb09": {
+      "edf_count": 19,
+      "seizure_events": 4,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 16
+    },
+    "chb10": {
+      "edf_count": 25,
+      "seizure_events": 7,
+      "seizure_edfs": 7,
+      "non_seizure_edfs": 18
+    },
+    "chb11": {
+      "edf_count": 35,
+      "seizure_events": 3,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 32
+    },
+    "chb12": {
+      "edf_count": 24,
+      "seizure_events": 40,
+      "seizure_edfs": 13,
+      "non_seizure_edfs": 11
+    },
+    "chb13": {
+      "edf_count": 33,
+      "seizure_events": 12,
+      "seizure_edfs": 8,
+      "non_seizure_edfs": 25
+    },
+    "chb14": {
+      "edf_count": 26,
+      "seizure_events": 8,
+      "seizure_edfs": 7,
+      "non_seizure_edfs": 19
+    },
+    "chb15": {
+      "edf_count": 40,
+      "seizure_events": 20,
+      "seizure_edfs": 14,
+      "non_seizure_edfs": 26
+    },
+    "chb16": {
+      "edf_count": 19,
+      "seizure_events": 10,
+      "seizure_edfs": 6,
+      "non_seizure_edfs": 13
+    },
+    "chb17": {
+      "edf_count": 21,
+      "seizure_events": 3,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 18
+    },
+    "chb18": {
+      "edf_count": 36,
+      "seizure_events": 6,
+      "seizure_edfs": 6,
+      "non_seizure_edfs": 30
+    },
+    "chb19": {
+      "edf_count": 30,
+      "seizure_events": 3,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 27
+    },
+    "chb20": {
+      "edf_count": 29,
+      "seizure_events": 8,
+      "seizure_edfs": 6,
+      "non_seizure_edfs": 23
+    },
+    "chb21": {
+      "edf_count": 33,
+      "seizure_events": 4,
+      "seizure_edfs": 4,
+      "non_seizure_edfs": 29
+    },
+    "chb22": {
+      "edf_count": 31,
+      "seizure_events": 3,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 28
+    },
+    "chb23": {
+      "edf_count": 9,
+      "seizure_events": 7,
+      "seizure_edfs": 3,
+      "non_seizure_edfs": 6
+    },
+    "chb24": {
+      "edf_count": 22,
+      "seizure_events": 16,
+      "seizure_edfs": 12,
+      "non_seizure_edfs": 10
+    }
+  }
+}

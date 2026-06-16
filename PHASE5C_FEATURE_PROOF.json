@@ -1,0 +1,10 @@
+{
+  "model_feature_count": 484,
+  "dataset_feature_count": 484,
+  "feature_names_match": true,
+  "feature_count_match": true,
+  "missing_features_count": 0,
+  "missing_features_first_20": [],
+  "extra_features_count": 0,
+  "extra_features_first_20": []
+}

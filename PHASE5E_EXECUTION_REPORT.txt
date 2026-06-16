@@ -1,0 +1,185 @@
+======================================================================
+PHASE5E EVENT DECISION OPTIMIZATION - EXECUTION REPORT
+======================================================================
+Generated : 2026-06-14T11:32:23.289435Z
+Python    : 3.13.7
+Platform  : Windows-11-10.0.26200-SP0
+
+======================================================================
+SCHEMA DISCOVERY
+======================================================================
+Parquet columns : 493
+Parquet rows    : 1,765,872
+Feature count   : 484
+Test patients   : ['chb02', 'chb05', 'chb09', 'chb14', 'chb22']
+Calib patients  : ['chb03', 'chb15', 'chb23']
+
+======================================================================
+ARTIFACT VALIDATION
+======================================================================
+Status: PASSED
+  [PASS] EXISTS:parquet: E:\Project\neurovision_ai\PHASE5B_ENGINEERED_DATASET.parquet
+  [PASS] NON_EMPTY:parquet: 3,634,462,487 bytes
+  [PASS] EXISTS:model: E:\Project\neurovision_ai\PHASE5B_TEMPORAL_XGBOOST.joblib
+  [PASS] NON_EMPTY:model: 1,613,008 bytes
+  [PASS] EXISTS:feature_signature: E:\Project\neurovision_ai\PHASE5B_FEATURE_SIGNATURE.json
+  [PASS] NON_EMPTY:feature_signature: 15,249 bytes
+  [PASS] EXISTS:patient_split: E:\Project\neurovision_ai\PHASE5B_PATIENT_SPLIT.json
+  [PASS] NON_EMPTY:patient_split: 501 bytes
+  [PASS] EXISTS:event_metrics: E:\Project\neurovision_ai\PHASE5C_EVENT_METRICS.csv
+  [PASS] NON_EMPTY:event_metrics: 504 bytes
+  [PASS] EXISTS:event_predictions: E:\Project\neurovision_ai\PHASE5C_EVENT_PREDICTIONS.csv
+  [PASS] NON_EMPTY:event_predictions: 803 bytes
+  [PASS] EXISTS:configuration_search: E:\Project\neurovision_ai\PHASE5C_CONFIGURATION_SEARCH.csv
+  [PASS] NON_EMPTY:configuration_search: 3,098,858 bytes
+  [PASS] EXISTS:best_configuration: E:\Project\neurovision_ai\PHASE5C_BEST_CONFIGURATION.json
+  [PASS] NON_EMPTY:best_configuration: 922 bytes
+  [PASS] EXISTS:fn_events: E:\Project\neurovision_ai\PHASE5D_FALSE_NEGATIVE_EVENTS.csv
+  [PASS] NON_EMPTY:fn_events: 7,217 bytes
+  [PASS] EXISTS:root_cause_analysis: E:\Project\neurovision_ai\PHASE5D_ROOT_CAUSE_ANALYSIS.csv
+  [PASS] NON_EMPTY:root_cause_analysis: 5,356 bytes
+  [PASS] EXISTS:execution_report: E:\Project\neurovision_ai\PHASE5D_EXECUTION_REPORT.txt
+  [PASS] NON_EMPTY:execution_report: 18,734 bytes
+  [PASS] FEATURE_SIGNATURE_COUNT_MATCH: 484 names vs count=484
+  [PASS] PARQUET_FEATURES_PRESENT: all present
+  [PASS] MODEL_LOADS: n_features_in=484
+  [PASS] MODEL_FEATURE_COUNT_MATCHES_SIGNATURE: model=484 vs signature=484
+  [PASS] SPLIT_CALIBRATION_PATIENTS_NON_EMPTY: 3 patients
+  [PASS] SPLIT_TEST_PATIENTS_NON_EMPTY: 5 patients
+  [PASS] SPLIT_TRAIN_PATIENTS_NON_EMPTY: 16 patients
+
+======================================================================
+REPRODUCTION AUDIT
+======================================================================
+Reference source: best_configuration.json BEST_F1 block
+Reference: TP=9, FP=1, FN=14, F1=0.5455, Recall=0.3913, Precision=0.9000
+Reproduced: TP=9, FP=1, FN=14, F1=0.5455, Recall=0.3913, Precision=0.9000
+Metric reproduction OK: True
+Count reproduction OK:  True
+Note: Metric reproduction passed.
+
+======================================================================
+PEAK SWEEP RESULTS SUMMARY
+======================================================================
+   MPP    TP    FP    FN    Recall   Precision        F1   PatRecall
+  0.50    12    46    11    0.5217      0.2069    0.2963      0.6000
+  0.55    12    37    11    0.5217      0.2449    0.3333      0.6000
+  0.60    11    30    12    0.4783      0.2683    0.3438      0.5333
+  0.65    11    21    12    0.4783      0.3438    0.4000      0.5333
+  0.70    11    14    12    0.4783      0.4400    0.4583      0.5333
+  0.75    11    11    12    0.4783      0.5000    0.4889      0.5333
+  0.80    11     9    12    0.4783      0.5500    0.5116      0.5333
+  0.85     9     6    14    0.3913      0.6000    0.4737      0.4000
+  0.90     9     2    14    0.3913      0.8182    0.5294      0.4000
+  0.95     9     1    14    0.3913      0.9000    0.5455      0.4000
+
+======================================================================
+FALSE NEGATIVE RECOVERY ANALYSIS
+======================================================================
+Total FN events : 14
+Recoverable     : 4
+  chb02::chb02_16+.edf::1484-1526: smoothed_peak=0.747378, first_recovery_mpp=0.5, best_mpp=0.7, confidence=0.50
+  chb02::chb02_16.edf::63-106: smoothed_peak=0.805537, first_recovery_mpp=0.5, best_mpp=0.8, confidence=0.70
+  chb02::chb02_19.edf::1683-1689: smoothed_peak=0.611972, first_recovery_mpp=0.5, best_mpp=0.6, confidence=0.30
+  chb14::chb14_03.edf::991-1000: smoothed_peak=0.074649, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb14::chb14_04.edf::684-696: smoothed_peak=0.04017, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb14::chb14_04.edf::1407-1419: smoothed_peak=0.098286, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb14::chb14_06.edf::954-962: smoothed_peak=0.198091, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb14::chb14_11.edf::917-939: smoothed_peak=0.098262, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb14::chb14_17.edf::1618-1629: smoothed_peak=0.05761, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb14::chb14_18.edf::518-530: smoothed_peak=0.020489, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb14::chb14_27.edf::1415-1424: smoothed_peak=0.115527, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb22::chb22_20.edf::1682-1712: smoothed_peak=0.468071, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+  chb22::chb22_25.edf::1568-1606: smoothed_peak=0.593732, first_recovery_mpp=0.5, best_mpp=0.55, confidence=0.20
+  chb22::chb22_38.edf::630-667: smoothed_peak=0.402521, first_recovery_mpp=nan, best_mpp=nan, confidence=0.00
+
+======================================================================
+OPTIMAL CONFIGURATIONS
+======================================================================
+--------------------------------------------------
+BEST_F1
+--------------------------------------------------
+  mpp=0.95, F1=0.5455, Recall=0.3913, Precision=0.9000
+  Justification: Maximizes F1=0.5455 across the peak sweep. TP=9.0, FP=1.0, FN=14.0.
+  Benefits:      Optimal balance between seizure detection and false alarm rate.
+  Risks:         Recall=0.3913; FN=14.0 seizures still missed.
+--------------------------------------------------
+BEST_RECALL
+--------------------------------------------------
+  mpp=0.5, F1=0.2963, Recall=0.5217, Precision=0.2069
+  Justification: Maximizes seizure recall=0.5217. TP=12.0, FP=46.0.
+  Benefits:      Detects the most seizures; suitable for safety-critical contexts.
+  Risks:         Precision=0.2069; FP=46.0 false alarms.
+--------------------------------------------------
+BEST_PRECISION
+--------------------------------------------------
+  mpp=0.95, F1=0.5455, Recall=0.3913, Precision=0.9000
+  Justification: Maximizes precision=0.9000. TP=9.0, FP=1.0.
+  Benefits:      Minimizes false alarms; suitable when alert fatigue is a concern.
+  Risks:         Recall=0.3913; FN=14.0 missed seizures.
+--------------------------------------------------
+BEST_PATIENT_RECALL
+--------------------------------------------------
+  mpp=0.5, F1=0.2963, Recall=0.5217, Precision=0.2069
+  Justification: Maximizes mean per-patient recall=0.6000.
+  Benefits:      Ensures the most patients have at least some seizures detected.
+  Risks:         Overall recall=0.5217; FP=46.0.
+--------------------------------------------------
+BEST_BALANCED_TRADEOFF
+--------------------------------------------------
+  mpp=0.55, F1=0.3333, Recall=0.5217, Precision=0.2449
+  Justification: Best F1 among configurations achieving recall >= 0.50. F1=0.3333, Recall=0.5217, Precision=0.2449.
+  Benefits:      Balanced: catches >=50% of seizures while maintaining reasonable precision.
+  Risks:         FP=37.0, FN=11.0.
+
+======================================================================
+PRODUCTION RECOMMENDATION
+======================================================================
+Current  mpp : 0.95
+Current  metrics: TP=9, FP=1, FN=14, Recall=0.3913, Precision=0.9000, F1=0.5455
+Recommended mpp: 0.95
+Recommended metrics: TP=9, FP=1, FN=14, Recall=0.3913, Precision=0.9000, F1=0.5455
+Rationale: At mpp=0.95, the pipeline achieves F1=0.5455, Recall=0.3913, Precision=0.9000. This represents the best F1 while maintaining precision>=0.50. The current production setting (mpp=0.95) yields Recall=0.3913; lowering to 0.95 recovers 0 additional TP event(s).
+Notes:     Phase5D confirmed all 14 FNs are PEAK_FILTER_FAILURE. Patients chb14 and chb22 have very low peak probabilities — patient-level adaptation may be needed beyond global peak tuning. Any production change should be validated on an independent held-out set.
+
+======================================================================
+RUNTIME SUMMARY
+======================================================================
+Total runtime (s) : 22.287
+Peak memory (MB)  : 7288.16
+CPU % at end      : 1.2
+
+======================================================================
+SELF AUDIT
+======================================================================
+All outputs OK: False
+  [PASS] PHASE5E_SCHEMA_DISCOVERY.json
+  [PASS] PHASE5E_ARTIFACT_AUDIT.json
+  [PASS] PHASE5E_REPRODUCTION_AUDIT.json
+  [PASS] PHASE5E_PEAK_SWEEP_RESULTS.csv
+  [PASS] PHASE5E_FN_RECOVERY.csv
+  [PASS] PHASE5E_PATIENT_FORENSICS.csv
+  [PASS] PHASE5E_OPTIMAL_CONFIGURATIONS.json
+  [PASS] PHASE5E_PRODUCTION_RECOMMENDATION.json
+  [PASS] PHASE5E_HISTORICAL_COMPARISON.csv
+  [PASS] PHASE5E_RUNTIME_AUDIT.json
+  [FAIL] PHASE5E_EXECUTION_REPORT.txt
+
+======================================================================
+OUTPUT ARTIFACTS
+======================================================================
+  [PASS] PHASE5E_SCHEMA_DISCOVERY.json
+  [PASS] PHASE5E_ARTIFACT_AUDIT.json
+  [PASS] PHASE5E_REPRODUCTION_AUDIT.json
+  [PASS] PHASE5E_PEAK_SWEEP_RESULTS.csv
+  [PASS] PHASE5E_FN_RECOVERY.csv
+  [PASS] PHASE5E_PATIENT_FORENSICS.csv
+  [PASS] PHASE5E_OPTIMAL_CONFIGURATIONS.json
+  [PASS] PHASE5E_PRODUCTION_RECOMMENDATION.json
+  [PASS] PHASE5E_HISTORICAL_COMPARISON.csv
+  [PASS] PHASE5E_RUNTIME_AUDIT.json
+  [FAIL] PHASE5E_EXECUTION_REPORT.txt
+
+======================================================================
+END OF EXECUTION REPORT
+======================================================================

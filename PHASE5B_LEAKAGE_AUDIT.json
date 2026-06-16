@@ -1,0 +1,22 @@
+{
+  "patient_isolation": {
+    "passed": true,
+    "train_val_overlap": [],
+    "train_test_overlap": [],
+    "val_test_overlap": []
+  },
+  "edf_isolation": {
+    "passed": true,
+    "train_val_overlap": [],
+    "train_test_overlap": [],
+    "val_test_overlap": []
+  },
+  "monotonic_window_ordering": {
+    "passed": true
+  },
+  "no_label_derived_features": {
+    "passed": true,
+    "found": []
+  },
+  "overall_passed": true
+}

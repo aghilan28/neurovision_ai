@@ -1,0 +1,124 @@
+{
+  "recommended_min_peak_probability": 0.95,
+  "rationale": "At mpp=0.95, the pipeline achieves F1=0.5455, Recall=0.3913, Precision=0.9000. This represents the best F1 while maintaining precision>=0.50. The current production setting (mpp=0.95) yields Recall=0.3913; lowering to 0.95 recovers 0 additional TP event(s).",
+  "current_production_mpp": 0.95,
+  "current_metrics": {
+    "tp": 9,
+    "fp": 1,
+    "fn": 14,
+    "recall": 0.3913,
+    "precision": 0.9,
+    "f1": 0.5455
+  },
+  "recommended_metrics": {
+    "tp": 9,
+    "fp": 1,
+    "fn": 14,
+    "recall": 0.3913,
+    "precision": 0.9,
+    "f1": 0.5455
+  },
+  "evidence_table": [
+    {
+      "min_peak_probability": 0.5,
+      "tp": 12,
+      "fp": 46,
+      "fn": 11,
+      "recall": 0.5217,
+      "precision": 0.2069,
+      "f1": 0.2963,
+      "patient_recall": 0.6
+    },
+    {
+      "min_peak_probability": 0.55,
+      "tp": 12,
+      "fp": 37,
+      "fn": 11,
+      "recall": 0.5217,
+      "precision": 0.2449,
+      "f1": 0.3333,
+      "patient_recall": 0.6
+    },
+    {
+      "min_peak_probability": 0.6,
+      "tp": 11,
+      "fp": 30,
+      "fn": 12,
+      "recall": 0.4783,
+      "precision": 0.2683,
+      "f1": 0.3438,
+      "patient_recall": 0.5333
+    },
+    {
+      "min_peak_probability": 0.65,
+      "tp": 11,
+      "fp": 21,
+      "fn": 12,
+      "recall": 0.4783,
+      "precision": 0.3438,
+      "f1": 0.4,
+      "patient_recall": 0.5333
+    },
+    {
+      "min_peak_probability": 0.7,
+      "tp": 11,
+      "fp": 14,
+      "fn": 12,
+      "recall": 0.4783,
+      "precision": 0.44,
+      "f1": 0.4583,
+      "patient_recall": 0.5333
+    },
+    {
+      "min_peak_probability": 0.75,
+      "tp": 11,
+      "fp": 11,
+      "fn": 12,
+      "recall": 0.4783,
+      "precision": 0.5,
+      "f1": 0.4889,
+      "patient_recall": 0.5333
+    },
+    {
+      "min_peak_probability": 0.8,
+      "tp": 11,
+      "fp": 9,
+      "fn": 12,
+      "recall": 0.4783,
+      "precision": 0.55,
+      "f1": 0.5116,
+      "patient_recall": 0.5333
+    },
+    {
+      "min_peak_probability": 0.85,
+      "tp": 9,
+      "fp": 6,
+      "fn": 14,
+      "recall": 0.3913,
+      "precision": 0.6,
+      "f1": 0.4737,
+      "patient_recall": 0.4
+    },
+    {
+      "min_peak_probability": 0.9,
+      "tp": 9,
+      "fp": 2,
+      "fn": 14,
+      "recall": 0.3913,
+      "precision": 0.8182,
+      "f1": 0.5294,
+      "patient_recall": 0.4
+    },
+    {
+      "min_peak_probability": 0.95,
+      "tp": 9,
+      "fp": 1,
+      "fn": 14,
+      "recall": 0.3913,
+      "precision": 0.9,
+      "f1": 0.5455,
+      "patient_recall": 0.4
+    }
+  ],
+  "additional_notes": "Phase5D confirmed all 14 FNs are PEAK_FILTER_FAILURE. Patients chb14 and chb22 have very low peak probabilities \u2014 patient-level adaptation may be needed beyond global peak tuning. Any production change should be validated on an independent held-out set."
+}

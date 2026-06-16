@@ -1,0 +1,53 @@
+{
+  "file_existence": {
+    "dataset": {
+      "path": "PHASE5B_ENGINEERED_DATASET.parquet",
+      "exists": true
+    },
+    "model": {
+      "path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+      "exists": true
+    },
+    "feature_signature": {
+      "path": "PHASE5B_FEATURE_SIGNATURE.json",
+      "exists": true
+    },
+    "patient_split": {
+      "path": "PHASE5B_PATIENT_SPLIT.json",
+      "exists": true
+    }
+  },
+  "feature_signature": {
+    "feature_count": 484,
+    "source": "PHASE5B_FEATURE_SIGNATURE.json",
+    "passed": true
+  },
+  "patient_split": {
+    "test_patients": [
+      "chb02",
+      "chb05",
+      "chb09",
+      "chb14",
+      "chb22"
+    ],
+    "test_patient_count": 5,
+    "train_patient_count": 16,
+    "calibration_patients_provided": true,
+    "calibration_patient_count": 3,
+    "passed": true
+  },
+  "dataset_columns": {
+    "total_columns_in_dataset": 493,
+    "required_metadata_present": true,
+    "feature_columns_present": true,
+    "feature_count_matches": true,
+    "feature_order_matches": true,
+    "passed": true
+  },
+  "model": {
+    "path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+    "has_predict_proba": true,
+    "passed": true
+  },
+  "overall_passed": true
+}

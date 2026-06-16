@@ -1,0 +1,35 @@
+{
+  "train_patients": [
+    "chb01",
+    "chb04",
+    "chb06",
+    "chb07",
+    "chb08",
+    "chb10",
+    "chb11",
+    "chb12",
+    "chb13",
+    "chb16",
+    "chb17",
+    "chb18",
+    "chb19",
+    "chb20",
+    "chb21",
+    "chb24"
+  ],
+  "calibration_patients": [
+    "chb03",
+    "chb15",
+    "chb23"
+  ],
+  "test_patients": [
+    "chb02",
+    "chb05",
+    "chb09",
+    "chb14",
+    "chb22"
+  ],
+  "train_rows": 1220370,
+  "val_rows": 187793,
+  "test_rows": 357709
+}

@@ -1,0 +1,12 @@
+{
+  "tracked_components": {
+    "dataset": 4.625623054802418,
+    "features": 0.6136179566383362,
+    "labels": 0.0003169514238834381
+  },
+  "total_estimated_gb": 5.239557962864637,
+  "peak_estimated_gb": 5.239557962864637,
+  "budget_gb": 10.0,
+  "within_budget": "True",
+  "timestamp": "2026-06-13T00:59:26.413161"
+}

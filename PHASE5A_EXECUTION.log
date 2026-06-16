@@ -1,0 +1,703 @@
+NEUROVISION PHASE 5A LOG
+Started: 2026-06-12T20:35:08.392365
+================================================================================
+
+[INFO] 2026-06-12 20:35:08.397 - ================================================================================
+[INFO] 2026-06-12 20:35:08.397 - NEUROVISION OMEGA - PHASE 5A INITIATED
+[INFO] 2026-06-12 20:35:08.398 - ================================================================================
+[INFO] 2026-06-12 20:35:08.398 - Loading input dataset: real_feature_dataset_v4_clean.parquet
+[INFO] 2026-06-12 20:35:09.188 - Loaded 1,767,930 rows, 99 columns
+[INFO] 2026-06-12 20:35:09.188 - GATE 1: Schema verification
+[SUCCESS] 2026-06-12 20:35:09.753 - GATE 1 passed
+[INFO] 2026-06-12 20:35:09.949 - Starting temporal reconstruction
+[INFO] 2026-06-12 20:35:10.074 - Processing EDF group 1/686: chb01|chb01_01.edf
+[INFO] 2026-06-12 20:35:10.099 - Processing EDF group 11/686: chb01|chb01_11.edf
+[INFO] 2026-06-12 20:35:10.123 - Processing EDF group 21/686: chb01|chb01_21.edf
+[INFO] 2026-06-12 20:35:10.147 - Processing EDF group 31/686: chb01|chb01_32.edf
+[INFO] 2026-06-12 20:35:10.171 - Processing EDF group 41/686: chb01|chb01_43.edf
+[INFO] 2026-06-12 20:35:10.196 - Checkpoint saved: stage=temporal_reconstruction, rows=87295
+[INFO] 2026-06-12 20:35:10.196 - Processing EDF group 51/686: chb02|chb02_09.edf
+[INFO] 2026-06-12 20:35:10.221 - Processing EDF group 61/686: chb02|chb02_18.edf
+[INFO] 2026-06-12 20:35:10.248 - Processing EDF group 71/686: chb02|chb02_28.edf
+[INFO] 2026-06-12 20:35:10.272 - Processing EDF group 81/686: chb03|chb03_03.edf
+[INFO] 2026-06-12 20:35:10.297 - Processing EDF group 91/686: chb03|chb03_13.edf
+[INFO] 2026-06-12 20:35:10.321 - Checkpoint saved: stage=temporal_reconstruction, rows=175878
+[INFO] 2026-06-12 20:35:10.321 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.335 - Processing EDF group 101/686: chb03|chb03_23.edf
+[INFO] 2026-06-12 20:35:10.338 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.353 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.368 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.386 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.401 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.415 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.432 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.445 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.458 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.473 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.485 - Processing EDF group 111/686: chb03|chb03_33.edf
+[INFO] 2026-06-12 20:35:10.488 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.503 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.518 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.533 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.547 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.561 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.579 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.597 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.615 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.632 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.646 - Processing EDF group 121/686: chb04|chb04_05.edf
+[INFO] 2026-06-12 20:35:10.650 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.670 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.687 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.706 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.725 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.743 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.758 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.777 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.797 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.815 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.830 - Processing EDF group 131/686: chb04|chb04_15.edf
+[INFO] 2026-06-12 20:35:10.835 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.854 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.874 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.894 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.914 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.933 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.953 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.971 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:10.989 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.008 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.027 - Processing EDF group 141/686: chb04|chb04_26.edf
+[INFO] 2026-06-12 20:35:11.033 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.058 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.087 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.113 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.138 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.157 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.174 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.192 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.212 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.230 - Checkpoint saved: stage=temporal_reconstruction, rows=436579
+[INFO] 2026-06-12 20:35:11.230 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.243 - Processing EDF group 151/686: chb04|chb04_36.edf
+[INFO] 2026-06-12 20:35:11.249 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.265 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.283 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.301 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.321 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.339 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.355 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.373 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.389 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.404 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.418 - Processing EDF group 161/686: chb05|chb05_03.edf
+[INFO] 2026-06-12 20:35:11.421 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.437 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.453 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.469 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.484 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.500 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.514 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.529 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.543 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.559 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.572 - Processing EDF group 171/686: chb05|chb05_13.edf
+[INFO] 2026-06-12 20:35:11.575 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.590 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.605 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.621 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.636 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.650 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.664 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.677 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.694 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.709 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.722 - Processing EDF group 181/686: chb05|chb05_23.edf
+[INFO] 2026-06-12 20:35:11.725 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.739 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.754 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.771 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.787 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.803 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.820 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.835 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.849 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.863 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.875 - Processing EDF group 191/686: chb05|chb05_33.edf
+[INFO] 2026-06-12 20:35:11.878 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.895 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.910 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.926 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.942 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.956 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.972 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:11.990 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.008 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.025 - Checkpoint saved: stage=temporal_reconstruction, rows=577217
+[INFO] 2026-06-12 20:35:12.025 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.038 - Processing EDF group 201/686: chb06|chb06_04.edf
+[INFO] 2026-06-12 20:35:12.043 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.061 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.080 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.098 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.119 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.138 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.156 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.174 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.192 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.209 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.223 - Processing EDF group 211/686: chb06|chb06_15.edf
+[INFO] 2026-06-12 20:35:12.229 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.244 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.261 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.278 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.295 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.313 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.330 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.348 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.365 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.383 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.396 - Processing EDF group 221/686: chb07|chb07_06.edf
+[INFO] 2026-06-12 20:35:12.399 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.413 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.431 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.449 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.468 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.486 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.504 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.519 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.544 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.570 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.588 - Processing EDF group 231/686: chb07|chb07_16.edf
+[INFO] 2026-06-12 20:35:12.594 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.616 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.635 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.653 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.669 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.685 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.702 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.718 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.733 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.747 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.760 - Processing EDF group 241/686: chb08|chb08_12.edf
+[INFO] 2026-06-12 20:35:12.763 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.778 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.794 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.811 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.835 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.849 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.864 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.878 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.895 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.937 - Checkpoint saved: stage=temporal_reconstruction, rows=825122
+[INFO] 2026-06-12 20:35:12.937 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:12.976 - Processing EDF group 251/686: chb08|chb08_22.edf
+[INFO] 2026-06-12 20:35:12.984 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.032 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.055 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.076 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.095 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.114 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.132 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.150 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.169 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.188 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.202 - Processing EDF group 261/686: chb09|chb09_07.edf
+[INFO] 2026-06-12 20:35:13.207 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.226 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.243 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.263 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.281 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.301 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.320 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.339 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.357 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.378 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.391 - Processing EDF group 271/686: chb09|chb09_17.edf
+[INFO] 2026-06-12 20:35:13.393 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.411 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.428 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.445 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.462 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.478 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.495 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.512 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.529 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.545 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.559 - Processing EDF group 281/686: chb10|chb10_08.edf
+[INFO] 2026-06-12 20:35:13.563 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.579 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.595 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.612 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.629 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.646 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.664 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.681 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.699 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.718 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.733 - Processing EDF group 291/686: chb10|chb10_21.edf
+[INFO] 2026-06-12 20:35:13.736 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.753 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.771 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.790 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.809 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.827 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.845 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.862 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.879 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.897 - Checkpoint saved: stage=temporal_reconstruction, rows=1048049
+[INFO] 2026-06-12 20:35:13.897 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.915 - Processing EDF group 301/686: chb11|chb11_03.edf
+[INFO] 2026-06-12 20:35:13.918 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.937 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.954 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.969 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:13.986 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.003 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.019 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.035 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.051 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.066 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.078 - Processing EDF group 311/686: chb11|chb11_13.edf
+[INFO] 2026-06-12 20:35:14.082 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.098 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.116 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.132 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.148 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.164 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.179 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.196 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.211 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.228 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.241 - Processing EDF group 321/686: chb11|chb11_27.edf
+[INFO] 2026-06-12 20:35:14.244 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.260 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.277 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.293 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.310 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.325 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.342 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.357 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.374 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.390 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.403 - Processing EDF group 331/686: chb11|chb11_82.edf
+[INFO] 2026-06-12 20:35:14.406 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.423 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.439 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.455 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.471 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.488 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.503 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.520 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.536 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.552 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.565 - Processing EDF group 341/686: chb12|chb12_21.edf
+[INFO] 2026-06-12 20:35:14.568 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.584 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.601 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.616 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.632 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.647 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.667 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.685 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.703 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.721 - Checkpoint saved: stage=temporal_reconstruction, rows=1137022
+[INFO] 2026-06-12 20:35:14.722 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.735 - Processing EDF group 351/686: chb12|chb12_36.edf
+[INFO] 2026-06-12 20:35:14.738 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.755 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.772 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.790 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.808 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.826 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.842 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.859 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.876 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.894 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.908 - Processing EDF group 361/686: chb13|chb13_05.edf
+[INFO] 2026-06-12 20:35:14.911 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.931 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.949 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.967 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:14.983 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.001 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.020 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.037 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.055 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.071 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.086 - Processing EDF group 371/686: chb13|chb13_15.edf
+[INFO] 2026-06-12 20:35:15.090 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.107 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.124 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.142 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.159 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.177 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.194 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.210 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.227 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.244 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.258 - Processing EDF group 381/686: chb13|chb13_38.edf
+[INFO] 2026-06-12 20:35:15.261 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.278 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.294 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.311 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.327 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.344 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.361 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.377 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.394 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.411 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.425 - Processing EDF group 391/686: chb14|chb14_01.edf
+[INFO] 2026-06-12 20:35:15.428 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.446 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.463 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.482 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.499 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.516 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.533 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.551 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.568 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.586 - Checkpoint saved: stage=temporal_reconstruction, rows=1226930
+[INFO] 2026-06-12 20:35:15.586 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.602 - Processing EDF group 401/686: chb14|chb14_16.edf
+[INFO] 2026-06-12 20:35:15.605 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.622 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.639 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.655 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.674 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.692 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.711 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.728 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.745 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.761 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.776 - Processing EDF group 411/686: chb14|chb14_29.edf
+[INFO] 2026-06-12 20:35:15.779 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.797 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.815 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.833 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.850 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.866 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.887 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.906 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.926 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.945 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.960 - Processing EDF group 421/686: chb15|chb15_05.edf
+[INFO] 2026-06-12 20:35:15.963 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.981 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:15.998 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.016 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.037 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.055 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.073 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.090 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.108 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.135 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.162 - Processing EDF group 431/686: chb15|chb15_15.edf
+[INFO] 2026-06-12 20:35:16.165 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.194 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.213 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.231 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.248 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.265 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.284 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.303 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.321 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.339 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.354 - Processing EDF group 441/686: chb15|chb15_31.edf
+[INFO] 2026-06-12 20:35:16.357 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.375 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.392 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.410 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.428 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.446 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.464 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.481 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.499 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.516 - Checkpoint saved: stage=temporal_reconstruction, rows=1316844
+[INFO] 2026-06-12 20:35:16.517 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.533 - Processing EDF group 451/686: chb15|chb15_51.edf
+[INFO] 2026-06-12 20:35:16.536 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.555 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.573 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.590 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.609 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.626 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.645 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.662 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.685 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.705 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.722 - Processing EDF group 461/686: chb16|chb16_05.edf
+[INFO] 2026-06-12 20:35:16.725 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.744 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.762 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.780 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.799 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.820 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.840 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.859 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.879 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.898 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.915 - Processing EDF group 471/686: chb16|chb16_15.edf
+[INFO] 2026-06-12 20:35:16.919 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.940 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.961 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.979 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:16.997 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.014 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.034 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.053 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.072 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.090 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.108 - Processing EDF group 481/686: chb17|chb17b_57.edf
+[INFO] 2026-06-12 20:35:17.112 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.132 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.150 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.168 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.189 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.208 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.226 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.244 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.262 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.280 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.296 - Processing EDF group 491/686: chb17|chb17c_04.edf
+[INFO] 2026-06-12 20:35:17.299 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.318 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.337 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.355 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.374 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.392 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.410 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.428 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.447 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.465 - Checkpoint saved: stage=temporal_reconstruction, rows=1406767
+[INFO] 2026-06-12 20:35:17.465 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.481 - Processing EDF group 501/686: chb18|chb18_05.edf
+[INFO] 2026-06-12 20:35:17.484 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.501 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.521 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.539 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.557 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.575 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.593 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.616 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.643 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.671 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.695 - Processing EDF group 511/686: chb18|chb18_15.edf
+[INFO] 2026-06-12 20:35:17.698 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.719 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.738 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.757 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.776 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.796 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.815 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.836 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.855 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.875 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.892 - Processing EDF group 521/686: chb18|chb18_25.edf
+[INFO] 2026-06-12 20:35:17.896 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.918 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.941 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.960 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.980 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:17.998 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.017 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.035 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.057 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.075 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.091 - Processing EDF group 531/686: chb18|chb18_35.edf
+[INFO] 2026-06-12 20:35:18.095 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.113 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.133 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.152 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.170 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.189 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.207 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.226 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.244 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.262 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.278 - Processing EDF group 541/686: chb19|chb19_09.edf
+[INFO] 2026-06-12 20:35:18.281 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.299 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.318 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.336 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.356 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.374 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.393 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.411 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.430 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.449 - Checkpoint saved: stage=temporal_reconstruction, rows=1496004
+[INFO] 2026-06-12 20:35:18.449 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.466 - Processing EDF group 551/686: chb19|chb19_19.edf
+[INFO] 2026-06-12 20:35:18.470 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.490 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.510 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.529 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.547 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.566 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.585 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.605 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.624 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.643 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.660 - Processing EDF group 561/686: chb19|chb19_29.edf
+[INFO] 2026-06-12 20:35:18.664 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.684 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.705 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.727 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.748 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.767 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.789 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.810 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.831 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.849 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.866 - Processing EDF group 571/686: chb20|chb20_11.edf
+[INFO] 2026-06-12 20:35:18.870 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.894 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.914 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.936 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.956 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.976 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:18.996 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.016 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.034 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.053 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.073 - Processing EDF group 581/686: chb20|chb20_25.edf
+[INFO] 2026-06-12 20:35:19.076 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.094 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.114 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.133 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.161 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.188 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.213 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.239 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.266 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.294 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.316 - Processing EDF group 591/686: chb20|chb20_68.edf
+[INFO] 2026-06-12 20:35:19.320 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.345 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.365 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.385 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.407 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.430 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.451 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.472 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.497 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.522 - Checkpoint saved: stage=temporal_reconstruction, rows=1583261
+[INFO] 2026-06-12 20:35:19.523 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.542 - Processing EDF group 601/686: chb21|chb21_10.edf
+[INFO] 2026-06-12 20:35:19.545 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.565 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.584 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.606 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.627 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.646 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.666 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.686 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.709 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.730 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.747 - Processing EDF group 611/686: chb21|chb21_20.edf
+[INFO] 2026-06-12 20:35:19.750 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.772 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.794 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.816 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.836 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.857 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.879 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.900 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.923 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.945 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.963 - Processing EDF group 621/686: chb21|chb21_30.edf
+[INFO] 2026-06-12 20:35:19.967 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:19.987 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.008 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.029 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.048 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.068 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.090 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.111 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.132 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.154 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.172 - Processing EDF group 631/686: chb22|chb22_07.edf
+[INFO] 2026-06-12 20:35:20.175 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.196 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.216 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.235 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.255 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.276 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.296 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.315 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.337 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.357 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.374 - Processing EDF group 641/686: chb22|chb22_20.edf
+[INFO] 2026-06-12 20:35:20.378 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.398 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.418 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.439 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.460 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.479 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.499 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.519 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.541 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.561 - Checkpoint saved: stage=temporal_reconstruction, rows=1672862
+[INFO] 2026-06-12 20:35:20.561 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.579 - Processing EDF group 651/686: chb22|chb22_30.edf
+[INFO] 2026-06-12 20:35:20.582 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.602 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.622 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.642 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.663 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.685 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.709 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.732 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.755 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.781 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.801 - Processing EDF group 661/686: chb23|chb23_16.edf
+[INFO] 2026-06-12 20:35:20.807 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.834 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.858 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.882 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.904 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.928 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.950 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.970 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:20.993 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.016 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.033 - Processing EDF group 671/686: chb24|chb24_07.edf
+[INFO] 2026-06-12 20:35:21.037 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.060 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.082 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.104 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.126 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.149 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.170 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.192 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.224 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.256 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.280 - Processing EDF group 681/686: chb24|chb24_17.edf
+[INFO] 2026-06-12 20:35:21.283 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.304 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.326 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.346 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.367 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.386 - Forcing garbage collection
+[INFO] 2026-06-12 20:35:21.405 - Concatenating reconstructed chunks
+[INFO] 2026-06-12 20:35:21.643 - GATE 2: Feature preservation verification
+[SUCCESS] 2026-06-12 20:35:23.340 - GATE 2 passed
+[INFO] 2026-06-12 20:35:23.341 - GATE 3: Label preservation verification
+[SUCCESS] 2026-06-12 20:35:23.349 - GATE 3 passed
+[INFO] 2026-06-12 20:35:23.353 - GATE 4: Patient integrity verification
+[SUCCESS] 2026-06-12 20:35:23.389 - GATE 4 passed
+[INFO] 2026-06-12 20:35:23.389 - GATE 5: EDF integrity verification
+[SUCCESS] 2026-06-12 20:35:26.801 - GATE 5 passed
+[INFO] 2026-06-12 20:35:26.808 - GATE 6: Temporal integrity audit
+[SUCCESS] 2026-06-12 20:35:27.759 - GATE 6 passed
+[INFO] 2026-06-12 20:35:27.759 - Saving output dataset: real_feature_dataset_v5_temporal.parquet
+[INFO] 2026-06-12 20:35:33.690 - Generating audit artifacts
+[INFO] 2026-06-12 20:35:33.704 - Schema audit saved: PHASE5A_SCHEMA_AUDIT.json
+[INFO] 2026-06-12 20:35:34.283 - Dataset audit saved: PHASE5A_DATASET_AUDIT.json
+[INFO] 2026-06-12 20:35:34.890 - Temporal audit saved: PHASE5A_TEMPORAL_AUDIT.json
+[INFO] 2026-06-12 20:35:36.047 - Patient audit saved: PHASE5A_PATIENT_AUDIT.csv
+[INFO] 2026-06-12 20:35:36.244 - EDF audit saved: PHASE5A_EDF_AUDIT.csv
+[INFO] 2026-06-12 20:35:36.255 - Window audit saved: PHASE5A_WINDOW_AUDIT.csv
+[INFO] 2026-06-12 20:35:36.256 - Execution report saved: PHASE5A_EXECUTION_REPORT.json
+[INFO] 2026-06-12 20:35:36.257 - Checkpoint cleared
+[SUCCESS] 2026-06-12 20:35:36.257 - PHASE 5A COMPLETED SUCCESSFULLY

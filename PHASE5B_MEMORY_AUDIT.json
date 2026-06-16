@@ -1,0 +1,29 @@
+{
+  "matrices": [
+    {
+      "name": "X_train",
+      "rows": 1220370,
+      "columns": 484,
+      "dtype": "float32",
+      "estimated_bytes": 2362636320,
+      "estimated_gb": 2.200377
+    },
+    {
+      "name": "X_val",
+      "rows": 187793,
+      "columns": 484,
+      "dtype": "float32",
+      "estimated_bytes": 363567248,
+      "estimated_gb": 0.338598
+    },
+    {
+      "name": "X_test",
+      "rows": 357709,
+      "columns": 484,
+      "dtype": "float32",
+      "estimated_bytes": 692524624,
+      "estimated_gb": 0.644964
+    }
+  ],
+  "total_gb": 3.183939
+}

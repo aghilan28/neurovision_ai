@@ -1,0 +1,35 @@
+{
+  "train_patients": [
+    "chb01",
+    "chb02",
+    "chb03",
+    "chb04",
+    "chb05",
+    "chb06",
+    "chb09",
+    "chb10",
+    "chb12",
+    "chb13",
+    "chb14",
+    "chb16",
+    "chb17",
+    "chb18",
+    "chb19",
+    "chb21",
+    "chb22",
+    "chb23",
+    "chb24"
+  ],
+  "test_patients": [
+    "chb07",
+    "chb08",
+    "chb11",
+    "chb15",
+    "chb20"
+  ],
+  "split_timestamp": "2026-06-12T13:22:41.260590",
+  "random_state": 42,
+  "dataset_rows": 1767930,
+  "dataset_patients": 24,
+  "split_ratio": "80/20 patient-disjoint"
+}

@@ -1,0 +1,15 @@
+patient,edf,gt_event_id,gt_start_window,gt_end_window,gt_duration_windows,max_probability_in_range,mean_probability_in_range,smoothed_peak_in_range,first_recovering_peak_mpp,last_recovering_peak_mpp,best_peak_mpp,recovering_mpp_values,recovery_confidence,is_recoverable,root_cause
+chb02,chb02_16+.edf,chb02::chb02_16+.edf::1484-1526,1484,1526,43,1.0,0.525157,0.747378,0.5,0.7,0.7,"[0.5, 0.55, 0.6, 0.65, 0.7]",0.5,True,PEAK_FILTER_FAILURE
+chb02,chb02_16.edf,chb02::chb02_16.edf::63-106,63,106,44,1.0,0.505714,0.805537,0.5,0.8,0.8,"[0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8]",0.7,True,PEAK_FILTER_FAILURE
+chb02,chb02_19.edf,chb02::chb02_19.edf::1683-1689,1683,1689,7,0.8,0.530612,0.611972,0.5,0.6,0.6,"[0.5, 0.55, 0.6]",0.3,True,PEAK_FILTER_FAILURE
+chb14,chb14_03.edf,chb14::chb14_03.edf::991-1000,991,1000,10,0.151515,0.061497,0.074649,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb14,chb14_04.edf,chb14::chb14_04.edf::684-696,684,696,13,0.122172,0.025539,0.04017,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb14,chb14_04.edf,chb14::chb14_04.edf::1407-1419,1407,1419,13,0.154362,0.053411,0.098286,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb14,chb14_06.edf,chb14::chb14_06.edf::954-962,954,962,9,0.265306,0.078971,0.198091,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb14,chb14_11.edf,chb14::chb14_11.edf::917-939,917,939,23,0.154362,0.042026,0.098262,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb14,chb14_17.edf,chb14::chb14_17.edf::1618-1629,1618,1629,12,0.117241,0.036446,0.05761,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb14,chb14_18.edf,chb14::chb14_18.edf::518-530,518,530,13,0.055118,0.020285,0.020489,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb14,chb14_27.edf,chb14::chb14_27.edf::1415-1424,1415,1424,10,0.40884,0.115527,0.115527,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb22,chb22_20.edf,chb22::chb22_20.edf::1682-1712,1682,1712,31,0.8,0.365786,0.468071,,,,[],0.0,False,PEAK_FILTER_FAILURE
+chb22,chb22_25.edf,chb22::chb22_25.edf::1568-1606,1568,1606,39,1.0,0.457778,0.593732,0.5,0.55,0.55,"[0.5, 0.55]",0.2,True,PEAK_FILTER_FAILURE
+chb22,chb22_38.edf,chb22::chb22_38.edf::630-667,630,667,38,0.454545,0.269714,0.402521,,,,[],0.0,False,PEAK_FILTER_FAILURE

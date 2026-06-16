@@ -1,0 +1,6 @@
+patient,total_windows,positive_windows,total_edfs,predicted_events,ground_truth_events,true_positive_events,false_positive_events,false_negative_events
+chb02,63300,94,36,0,3,0,0,3
+chb05,70010,291,39,5,5,5,0,0
+chb09,122078,147,19,5,4,4,1,0
+chb14,46670,103,26,0,8,0,0,8
+chb22,55651,108,31,0,3,0,0,3

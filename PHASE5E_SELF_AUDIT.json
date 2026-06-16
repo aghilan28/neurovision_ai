@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-06-14T11:32:23.288766Z",
+  "all_passed": false,
+  "checks": [
+    {
+      "file": "PHASE5E_SCHEMA_DISCOVERY.json",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_ARTIFACT_AUDIT.json",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_REPRODUCTION_AUDIT.json",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_PEAK_SWEEP_RESULTS.csv",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_FN_RECOVERY.csv",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_PATIENT_FORENSICS.csv",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_OPTIMAL_CONFIGURATIONS.json",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_PRODUCTION_RECOMMENDATION.json",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_HISTORICAL_COMPARISON.csv",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_RUNTIME_AUDIT.json",
+      "status": "PASS",
+      "exists": true,
+      "non_empty": true,
+      "readable": true,
+      "parseable": true
+    },
+    {
+      "file": "PHASE5E_EXECUTION_REPORT.txt",
+      "status": "FAIL",
+      "exists": true,
+      "non_empty": false,
+      "readable": true,
+      "parseable": false
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "leakage_detected": false,
+  "issues": [
+    "Patient split missing"
+  ],
+  "audits_passed": {
+    "label_leakage": true,
+    "column_leakage": true,
+    "patient_leakage": false,
+    "temporal_leakage": true
+  },
+  "timestamp": "2026-06-13T00:59:26.644391"
+}

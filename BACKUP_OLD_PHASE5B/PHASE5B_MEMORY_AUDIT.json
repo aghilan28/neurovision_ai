@@ -1,0 +1,16 @@
+{
+  "train_rows": 1264431,
+  "train_columns": 484,
+  "train_estimated_mb": 2334.54,
+  "val_rows": 161117,
+  "val_columns": 484,
+  "val_estimated_mb": 297.47,
+  "test_rows": 340324,
+  "test_columns": 484,
+  "test_estimated_mb": 628.34,
+  "total_estimated_mb": 3260.35,
+  "total_estimated_gb": 3.18,
+  "ram_budget_gb": 10.0,
+  "within_budget": true,
+  "current_usage_mb": 1031.49
+}

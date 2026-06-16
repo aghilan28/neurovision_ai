@@ -1,0 +1,270 @@
+======================================================================
+PHASE5D FAILURE ANALYSIS - EXECUTION REPORT
+======================================================================
+
+Generated            : 2026-06-14T10:29:07.130120+00:00
+Python version       : 3.13.7
+Platform             : Windows-11-10.0.26200-SP0
+numpy version        : 2.4.6
+pandas version       : 3.0.3
+scikit-learn version : 1.9.0
+xgboost version      : 3.2.0
+joblib version       : 1.5.3
+Total runtime (sec)  : 24.7992
+Peak memory (MB)     : 5360.21
+
+INPUT FILES AND HASHES (SHA-256)
+----------------------------------------------------------------------
+  PHASE5B_FEATURE_SIGNATURE.json: 1e38033cc8e486ed351c55b10bb60d690bad82cbde218bb6f08235668a28ed19
+  PHASE5B_PATIENT_SPLIT.json: e90e59a88e078decbe42cb4d5afaeea726894144266006c6573998d50a709fbd
+  PHASE5B_METRICS.json: 71723d48a72f25be35e67561905bc7118a34a22f197a492a13206621ae7fc2b6
+  PHASE5B_THRESHOLD_SWEEP.csv: 7ed76828acb32ce331809bf7d95e91aa46d4bf4d13f8d1b56a9ea830c8302465
+  PHASE5B_FEATURE_IMPORTANCE.csv: 9ee7184ca0ee89069739437caa990fb76771b317b2a8ecb9f4765dd98819d72d
+  PHASE5B_TEMPORAL_XGBOOST.joblib: 608337510b4228eb814a340bff0150a85d85da00b32f805702acc56c4f09ce76
+  PHASE5B_ENGINEERED_DATASET.parquet: 937312c8199f80cad9b44d22ee6bfdeb2981ab2245021abe632cb930344c1543
+  PHASE5C_EVENT_PREDICTIONS.csv: afd7453b7e5e8066e38833144ad175037b645666d693a913c84dede552e6ecf7
+  PHASE5C_EVENT_METRICS.csv: 4fb40d034817c9874af9908be4ccab062dd4841f38de4b541baba5e0590ec505
+  PHASE5C_CONFIGURATION_SEARCH.csv: c1e8fc045ea65a1235f1856e22c606d71d9e5343e984e3471816123bbb41d60f
+  PHASE5C_BEST_CONFIGURATION.json: 71bcce6f586eeee386f295d33f69dddf78d2bab9dfbf7c0c9a8280b21bbdb782
+  PHASE5C_PATIENT_EVENT_SUMMARY.csv: ce57e604204062fe86689caec800860ff1607611a5a5a48c6eca133190a22d8e
+  PHASE5C_SCHEMA_AUDIT.json: 7b7ebc4d3569f704683a649f53a5d7e2863d654a93dd5a6599b2003c4db010f1
+  PHASE5C_RUNTIME_AUDIT.json: 6bd3a729998ff9fc388a9fb734829472d0e94402cf6fc6fa2611b9cdbf490ccf
+  PHASE5C_EXECUTION_REPORT.txt: 7f81c4f98c3f1d405db883f9dd81cbf6d22eebeb51d903190d6bafb215a4f999
+
+ANALYSIS CONFIGURATION
+----------------------------------------------------------------------
+  Forensic configuration based on : PHASE5C_BEST_CONFIGURATION.json -> BEST_F1
+  smoothing_window      : 21
+  threshold             : 0.01
+  min_duration          : 1
+  min_peak_probability  : 0.95
+  calibration_applied   : True
+  calibration_source    : explicit_split_file
+  calibration_patients  : ['chb03', 'chb15', 'chb23']
+  calibration_ece_before: 0.2788756428665694
+  calibration_ece_after : 1.2289890212448328e-07
+  test_patients         : ['chb02', 'chb05', 'chb09', 'chb14', 'chb22']
+  metadata column map   : {'label': 'label', 'patient': 'patient', 'edf': 'edf', 'window_index': 'window_index', 'window_uid': 'window_uid', 'window_start_sec': 'window_start_sec', 'window_end_sec': 'window_end_sec', 'window_duration_sec': 'window_duration_sec', 'stride_sec': 'stride_sec'}
+  feature_count         : 484
+  threshold sweep       : [0.99, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0.01]
+  smoothing forensics windows : [0, 3, 5, 7, 11, 15, 21, 31, 41]
+  min_duration sweep    : [1, 2, 3, 5, 7, 10, 15, 20, 25, 30]
+  peak filter sweep     : [0.5, 0.6, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 0.99]
+
+GROUND TRUTH RECONSTRUCTION (from contiguous label==1 windows)
+----------------------------------------------------------------------
+  Total reconstructed GT events (test patients): 23
+  Matched (TP) under best config               : 9
+  False negative events                        : 14
+
+ROOT CAUSE DISTRIBUTION (across all FN events)
+----------------------------------------------------------------------
+  PEAK_FILTER_FAILURE: 14
+
+======================================================================
+MANDATED FORENSIC QUESTIONS
+======================================================================
+
+PATIENT chb02
+----------------------------------------------------------------------
+  Ground-truth events       : 3
+  True positive events       : 0
+  False negative events       : 3
+  Event recall                : 0.0
+  Mean raw probability        : 0.010680
+  Max raw probability          : 1.000000
+  Probability variance         : 0.001073
+
+  Q: Can the model see chb02's seizures?
+  A: PARTIALLY. At least one FN event reaches max_probability_in_range=1.000000 (>= 0.30), indicating the model assigns real signal to some of chb02's seizures, but the signal does not survive the production pipeline.
+
+  Event chb02::chb02_16+.edf::1484-1526:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.802517 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.802517). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10, 15, 20, 25, 30]
+    min_peak_probability values event survives: [0.5, 0.6, 0.7, 0.75, 0.8]
+
+  Event chb02::chb02_16.edf::63-106:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.805537 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.805537). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10, 15, 20, 25, 30]
+    min_peak_probability values event survives: [0.5, 0.6, 0.7, 0.75, 0.8]
+
+  Event chb02::chb02_19.edf::1683-1689:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.194536 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.194536). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.15, 0.1, 0.05, 0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7]
+    min_peak_probability values event survives: []
+
+  Patient-shift comparison vs chb05/chb09 (successful patients):
+    mean_probability: chb02=0.010680 vs successful=0.112942
+    max_probability: chb02=1.000000 vs successful=1.000000
+    probability_variance: chb02=0.001073 vs successful=0.030262
+    distribution L1 distance (percentile-based): 0.233897
+    Is patient shift contributing? YES (L1 distance exceeds 0.05 threshold)
+
+PATIENT chb14
+----------------------------------------------------------------------
+  Ground-truth events       : 8
+  True positive events       : 0
+  False negative events       : 8
+  Event recall                : 0.0
+  Mean raw probability        : 0.022744
+  Max raw probability          : 0.659091
+  Probability variance         : 0.003586
+
+  Q: Can the model see chb14's seizures?
+  A: PARTIALLY. At least one FN event reaches max_probability_in_range=0.408840 (>= 0.30), indicating the model assigns real signal to some of chb14's seizures, but the signal does not survive the production pipeline.
+
+  Event chb14::chb14_03.edf::991-1000:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.047344 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.047344). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10]
+    min_peak_probability values event survives: []
+
+  Event chb14::chb14_04.edf::684-696:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.024428 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.024428). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10]
+    min_peak_probability values event survives: []
+
+  Event chb14::chb14_04.edf::1407-1419:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.039519 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.039519). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10]
+    min_peak_probability values event survives: []
+
+  Event chb14::chb14_06.edf::954-962:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.090969 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.090969). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.05, 0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7]
+    min_peak_probability values event survives: []
+
+  Event chb14::chb14_11.edf::917-939:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.046771 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.046771). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10, 15, 20]
+    min_peak_probability values event survives: []
+
+  Event chb14::chb14_17.edf::1618-1629:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.026122 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.026122). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10]
+    min_peak_probability values event survives: []
+
+  Event chb14::chb14_18.edf::518-530:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.023911 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.023911). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10]
+    min_peak_probability values event survives: []
+
+  Event chb14::chb14_27.edf::1415-1424:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.066751 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.066751). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.05, 0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10]
+    min_peak_probability values event survives: []
+
+  Patient-shift comparison vs chb05/chb09 (successful patients):
+    mean_probability: chb14=0.022744 vs successful=0.112942
+    max_probability: chb14=0.659091 vs successful=1.000000
+    probability_variance: chb14=0.003586 vs successful=0.030262
+    distribution L1 distance (percentile-based): 0.176746
+    Is patient shift contributing? YES (L1 distance exceeds 0.05 threshold)
+
+PATIENT chb22
+----------------------------------------------------------------------
+  Ground-truth events       : 3
+  True positive events       : 0
+  False negative events       : 3
+  Event recall                : 0.0
+  Mean raw probability        : 0.007980
+  Max raw probability          : 1.000000
+  Probability variance         : 0.000867
+
+  Q: Can the model see chb22's seizures?
+  A: PARTIALLY. At least one FN event reaches max_probability_in_range=1.000000 (>= 0.30), indicating the model assigns real signal to some of chb22's seizures, but the signal does not survive the production pipeline.
+
+  Event chb22::chb22_20.edf::1682-1712:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.484804 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.484804). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10, 15, 20, 25, 30]
+    min_peak_probability values event survives: []
+
+  Event chb22::chb22_25.edf::1568-1606:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.594365 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.594365). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.55, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10, 15, 20, 25, 30]
+    min_peak_probability values event survives: [0.5]
+
+  Event chb22::chb22_38.edf::630-667:
+    Root cause classification: PEAK_FILTER_FAILURE
+    Evidence: event_peak_probability=0.402521 < min_peak_probability filter (0.95) used in the best configuration, while threshold=0.01 alone WOULD detect this event (peak_in_range=0.402521). The peak-probability filter is the binding constraint.
+    Lower thresholds that WOULD recover this event: [0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0.01]
+    Smoothing windows under which event is recovered (at threshold=0.01): [0, 3, 5, 7, 11, 15, 21, 31, 41]
+    min_duration values event survives (at threshold=0.01, smoothing=21): [1, 2, 3, 5, 7, 10, 15, 20, 25, 30]
+    min_peak_probability values event survives: []
+
+  Patient-shift comparison vs chb05/chb09 (successful patients):
+    mean_probability: chb22=0.007980 vs successful=0.112942
+    max_probability: chb22=1.000000 vs successful=1.000000
+    probability_variance: chb22=0.000867 vs successful=0.030262
+    distribution L1 distance (percentile-based): 0.247230
+    Is patient shift contributing? YES (L1 distance exceeds 0.05 threshold)
+
+======================================================================
+CROSS-CUTTING QUESTIONS (across chb02, chb14, chb22)
+======================================================================
+
+  Would lower thresholds recover them?     NO FN event classified as pure THRESHOLD_FAILURE (see PHASE5D_THRESHOLD_FORENSICS.csv for per-event sweep).
+  Would smoothing removal recover them?    NO FN event classified as SMOOTHING_FAILURE (see PHASE5D_SMOOTHING_FORENSICS.csv).
+  Would peak filter removal recover them?  YES, at least one FN event is PEAK_FILTER_FAILURE (see PHASE5D_PEAK_FORENSICS.csv).
+  Would duration filter removal recover them? NO FN event classified as MIN_DURATION_FAILURE (see PHASE5D_DURATION_FORENSICS.csv).
+  Is calibration contributing?             NO FN event classified as CALIBRATION_FAILURE (calibration ECE before=0.2788756428665694, after=1.2289890212448328e-07).
+  Is patient shift contributing?           NO FN event classified as PATIENT_SHIFT (see PHASE5D_PATIENT_SHIFT_ANALYSIS.csv).
+  Is event aggregation / fragmentation contributing? NO FN event classified as EVENT_AGGREGATION_FAILURE.
+  Is the model fundamentally blind to any events? NO FN event classified as MODEL_BLIND.
+
+======================================================================
+OUTPUT ARTIFACTS
+======================================================================
+  [OK] PHASE5D_FALSE_NEGATIVE_EVENTS.csv
+  [OK] PHASE5D_THRESHOLD_FORENSICS.csv
+  [OK] PHASE5D_SMOOTHING_FORENSICS.csv
+  [OK] PHASE5D_DURATION_FORENSICS.csv
+  [OK] PHASE5D_PEAK_FORENSICS.csv
+  [OK] PHASE5D_PATIENT_FAILURE_SUMMARY.csv
+  [OK] PHASE5D_ROOT_CAUSE_ANALYSIS.csv
+  [OK] PHASE5D_PATIENT_SHIFT_ANALYSIS.csv
+  [OK] PHASE5D_SCHEMA_AUDIT.json
+  [OK] PHASE5D_RUNTIME_AUDIT.json
+  [OK] PHASE5D_EXECUTION_REPORT.txt
+
+======================================================================
+END OF EXECUTION REPORT
+======================================================================

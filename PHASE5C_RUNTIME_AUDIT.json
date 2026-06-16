@@ -1,0 +1,10 @@
+{
+  "rows_processed": 357709,
+  "patients_processed": 5,
+  "edfs_processed": 151,
+  "events_generated": 1571,
+  "events_suppressed": 1561,
+  "runtime_seconds": 536.83,
+  "peak_memory_mb": 3916.75,
+  "timestamp": "2026-06-14T09:41:39.066038"
+}

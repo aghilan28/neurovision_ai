@@ -1,0 +1,11 @@
+Validation Report - 2026-06-10 23:03:52.977294
+============================================================
+Total rows: 225,367
+Total columns: 99
+Feature columns: 96
+Background windows: 224,604
+Seizure windows: 763
+Ratio (seizure/background): 0.0034
+NaN columns (filled): 0
+Inf columns (filled): 0
+Duplicates: 225257

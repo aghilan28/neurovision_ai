@@ -1,0 +1,151 @@
+{
+  "generated_at": "2026-06-14T11:32:14.945986Z",
+  "checks": [
+    {
+      "name": "EXISTS:parquet",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5B_ENGINEERED_DATASET.parquet"
+    },
+    {
+      "name": "NON_EMPTY:parquet",
+      "status": "PASS",
+      "detail": "3,634,462,487 bytes"
+    },
+    {
+      "name": "EXISTS:model",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5B_TEMPORAL_XGBOOST.joblib"
+    },
+    {
+      "name": "NON_EMPTY:model",
+      "status": "PASS",
+      "detail": "1,613,008 bytes"
+    },
+    {
+      "name": "EXISTS:feature_signature",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5B_FEATURE_SIGNATURE.json"
+    },
+    {
+      "name": "NON_EMPTY:feature_signature",
+      "status": "PASS",
+      "detail": "15,249 bytes"
+    },
+    {
+      "name": "EXISTS:patient_split",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5B_PATIENT_SPLIT.json"
+    },
+    {
+      "name": "NON_EMPTY:patient_split",
+      "status": "PASS",
+      "detail": "501 bytes"
+    },
+    {
+      "name": "EXISTS:event_metrics",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5C_EVENT_METRICS.csv"
+    },
+    {
+      "name": "NON_EMPTY:event_metrics",
+      "status": "PASS",
+      "detail": "504 bytes"
+    },
+    {
+      "name": "EXISTS:event_predictions",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5C_EVENT_PREDICTIONS.csv"
+    },
+    {
+      "name": "NON_EMPTY:event_predictions",
+      "status": "PASS",
+      "detail": "803 bytes"
+    },
+    {
+      "name": "EXISTS:configuration_search",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5C_CONFIGURATION_SEARCH.csv"
+    },
+    {
+      "name": "NON_EMPTY:configuration_search",
+      "status": "PASS",
+      "detail": "3,098,858 bytes"
+    },
+    {
+      "name": "EXISTS:best_configuration",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5C_BEST_CONFIGURATION.json"
+    },
+    {
+      "name": "NON_EMPTY:best_configuration",
+      "status": "PASS",
+      "detail": "922 bytes"
+    },
+    {
+      "name": "EXISTS:fn_events",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5D_FALSE_NEGATIVE_EVENTS.csv"
+    },
+    {
+      "name": "NON_EMPTY:fn_events",
+      "status": "PASS",
+      "detail": "7,217 bytes"
+    },
+    {
+      "name": "EXISTS:root_cause_analysis",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5D_ROOT_CAUSE_ANALYSIS.csv"
+    },
+    {
+      "name": "NON_EMPTY:root_cause_analysis",
+      "status": "PASS",
+      "detail": "5,356 bytes"
+    },
+    {
+      "name": "EXISTS:execution_report",
+      "status": "PASS",
+      "detail": "E:\\Project\\neurovision_ai\\PHASE5D_EXECUTION_REPORT.txt"
+    },
+    {
+      "name": "NON_EMPTY:execution_report",
+      "status": "PASS",
+      "detail": "18,734 bytes"
+    },
+    {
+      "name": "FEATURE_SIGNATURE_COUNT_MATCH",
+      "status": "PASS",
+      "detail": "484 names vs count=484"
+    },
+    {
+      "name": "PARQUET_FEATURES_PRESENT",
+      "status": "PASS",
+      "detail": "all present"
+    },
+    {
+      "name": "MODEL_LOADS",
+      "status": "PASS",
+      "detail": "n_features_in=484"
+    },
+    {
+      "name": "MODEL_FEATURE_COUNT_MATCHES_SIGNATURE",
+      "status": "PASS",
+      "detail": "model=484 vs signature=484"
+    },
+    {
+      "name": "SPLIT_CALIBRATION_PATIENTS_NON_EMPTY",
+      "status": "PASS",
+      "detail": "3 patients"
+    },
+    {
+      "name": "SPLIT_TEST_PATIENTS_NON_EMPTY",
+      "status": "PASS",
+      "detail": "5 patients"
+    },
+    {
+      "name": "SPLIT_TRAIN_PATIENTS_NON_EMPTY",
+      "status": "PASS",
+      "detail": "16 patients"
+    }
+  ],
+  "passed": true
+}

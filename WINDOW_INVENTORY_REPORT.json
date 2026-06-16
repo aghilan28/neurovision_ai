@@ -1,0 +1,140 @@
+{
+  "corpus": {
+    "patients": 24,
+    "edf_files": 686,
+    "seizure_events": 40
+  },
+  "window_configs": {
+    "4s_2s": {
+      "estimated_seizure_windows": 1116
+    },
+    "8s_4s": {
+      "estimated_seizure_windows": 553
+    },
+    "16s_8s": {
+      "estimated_seizure_windows": 272
+    }
+  },
+  "patients": {
+    "chb01": {
+      "edf_count": 42,
+      "seizure_events": 7,
+      "seizure_duration_seconds": 442
+    },
+    "chb02": {
+      "edf_count": 36,
+      "seizure_events": 3,
+      "seizure_duration_seconds": 172
+    },
+    "chb03": {
+      "edf_count": 38,
+      "seizure_events": 7,
+      "seizure_duration_seconds": 402
+    },
+    "chb04": {
+      "edf_count": 42,
+      "seizure_events": 2,
+      "seizure_duration_seconds": 160
+    },
+    "chb05": {
+      "edf_count": 39,
+      "seizure_events": 5,
+      "seizure_duration_seconds": 558
+    },
+    "chb06": {
+      "edf_count": 18,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb07": {
+      "edf_count": 19,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb08": {
+      "edf_count": 20,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb09": {
+      "edf_count": 19,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb10": {
+      "edf_count": 25,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb11": {
+      "edf_count": 35,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb12": {
+      "edf_count": 24,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb13": {
+      "edf_count": 33,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb14": {
+      "edf_count": 26,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb15": {
+      "edf_count": 40,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb16": {
+      "edf_count": 19,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb17": {
+      "edf_count": 21,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb18": {
+      "edf_count": 36,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb19": {
+      "edf_count": 30,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb20": {
+      "edf_count": 29,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb21": {
+      "edf_count": 33,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb22": {
+      "edf_count": 31,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb23": {
+      "edf_count": 9,
+      "seizure_events": 0,
+      "seizure_duration_seconds": 0
+    },
+    "chb24": {
+      "edf_count": 22,
+      "seizure_events": 16,
+      "seizure_duration_seconds": 511
+    }
+  }
+}

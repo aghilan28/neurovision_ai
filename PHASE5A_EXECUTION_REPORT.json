@@ -1,0 +1,19 @@
+{
+  "start_time": "2026-06-12T20:35:08.397574",
+  "input_rows": 1767930,
+  "output_rows": 1767930,
+  "input_seizure_windows": 6297,
+  "output_seizure_windows": 6297,
+  "input_background_windows": 1761633,
+  "output_background_windows": 1761633,
+  "patients": 24,
+  "edf_files": 686,
+  "feature_columns": 96,
+  "temporal_columns_added": 6,
+  "temporal_integrity_status": "PASSED",
+  "dataset_integrity_status": "PASSED",
+  "execution_time_seconds": 27.858237266540527,
+  "output_dataset_path": "real_feature_dataset_v5_temporal.parquet",
+  "audit_report_path": "PHASE5A_EXECUTION_REPORT.json",
+  "end_time": "2026-06-12T20:35:36.255822"
+}

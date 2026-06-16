@@ -1,0 +1,5021 @@
+{
+  "timestamp": "2026-06-12T12:36:18.575620",
+  "summary": {
+    "total_rows": 1767930,
+    "total_columns": 99,
+    "expected_columns": 99,
+    "feature_count": 96,
+    "expected_feature_count": 96,
+    "memory_usage_mb": 1364.04,
+    "shard_count": 686,
+    "expected_shard_count": 686
+  },
+  "patient_analysis": {
+    "patients_found": [
+      "chb01",
+      "chb02",
+      "chb03",
+      "chb04",
+      "chb05",
+      "chb06",
+      "chb07",
+      "chb08",
+      "chb09",
+      "chb10",
+      "chb11",
+      "chb12",
+      "chb13",
+      "chb14",
+      "chb15",
+      "chb16",
+      "chb17",
+      "chb18",
+      "chb19",
+      "chb20",
+      "chb21",
+      "chb22",
+      "chb23",
+      "chb24"
+    ],
+    "patient_count": 24,
+    "expected_patient_count": 24,
+    "missing_patients": [],
+    "rows_per_patient": {
+      "chb04": 280836,
+      "chb09": 122135,
+      "chb07": 120657,
+      "chb06": 120088,
+      "chb10": 89993,
+      "chb01": 72911,
+      "chb15": 71939,
+      "chb05": 70127,
+      "chb03": 68327,
+      "chb18": 64071,
+      "chb02": 63408,
+      "chb11": 62559,
+      "chb13": 59334,
+      "chb21": 59029,
+      "chb22": 55744,
+      "chb19": 53813,
+      "chb20": 49626,
+      "chb23": 47788,
+      "chb14": 46748,
+      "chb12": 42603,
+      "chb24": 38290,
+      "chb17": 37770,
+      "chb08": 35972,
+      "chb16": 34162
+    }
+  },
+  "edf_analysis": {
+    "unique_edf_files": 686,
+    "expected_edf_count": 686,
+    "rows_per_edf_sample": {
+      "chb04_27.edf": 7212,
+      "chb06_01.edf": 7212,
+      "chb04_18.edf": 7211,
+      "chb23_09.edf": 7211,
+      "chb04_28.edf": 7210,
+      "chb09_15.edf": 7209,
+      "chb04_12.edf": 7208,
+      "chb04_14.edf": 7207,
+      "chb09_04.edf": 7206,
+      "chb07_01.edf": 7204,
+      "chb07_19.edf": 7204,
+      "chb09_14.edf": 7204,
+      "chb04_24.edf": 7201,
+      "chb09_13.edf": 7201,
+      "chb04_29.edf": 7200,
+      "chb04_02.edf": 7198,
+      "chb04_03.edf": 7198,
+      "chb04_04.edf": 7198,
+      "chb04_06.edf": 7198,
+      "chb04_08.edf": 7198
+    }
+  },
+  "label_analysis": {
+    "background_windows": 1761633,
+    "seizure_windows": 6297,
+    "seizure_ratio": 0.003575,
+    "label_distribution": {
+      "0": 1761633,
+      "1": 6297
+    }
+  },
+  "data_quality": {
+    "null_columns": {},
+    "inf_columns": {},
+    "has_nulls": false,
+    "has_infs": false
+  },
+  "schema_validation": {
+    "missing_feature_columns": [],
+    "extra_columns": [],
+    "columns_match": true
+  },
+  "dtypes": {
+    "mean_mean": "float64",
+    "mean_std": "float64",
+    "mean_max": "float64",
+    "std_mean": "float64",
+    "std_std": "float64",
+    "std_max": "float64",
+    "variance_mean": "float64",
+    "variance_std": "float64",
+    "variance_max": "float64",
+    "rms_mean": "float64",
+    "rms_std": "float64",
+    "rms_max": "float64",
+    "max_mean": "float64",
+    "max_std": "float64",
+    "max_max": "float64",
+    "min_mean": "float64",
+    "min_std": "float64",
+    "min_max": "float64",
+    "ptp_mean": "float64",
+    "ptp_std": "float64",
+    "ptp_max": "float64",
+    "line_length_mean": "float64",
+    "line_length_std": "float64",
+    "line_length_max": "float64",
+    "zero_crossings_mean": "float64",
+    "zero_crossings_std": "float64",
+    "zero_crossings_max": "float64",
+    "iqr_mean": "float64",
+    "iqr_std": "float64",
+    "iqr_max": "float64",
+    "mad_mean": "float64",
+    "mad_std": "float64",
+    "mad_max": "float64",
+    "sample_entropy_mean": "float64",
+    "sample_entropy_std": "float64",
+    "sample_entropy_max": "float64",
+    "perm_entropy_mean": "float64",
+    "perm_entropy_std": "float64",
+    "perm_entropy_max": "float64",
+    "spectral_entropy_mean": "float64",
+    "spectral_entropy_std": "float64",
+    "spectral_entropy_max": "float64",
+    "higuchi_fd_mean": "float64",
+    "higuchi_fd_std": "float64",
+    "higuchi_fd_max": "float64",
+    "petrosian_fd_mean": "float64",
+    "petrosian_fd_std": "float64",
+    "petrosian_fd_max": "float64",
+    "wavelet_energy_0_mean": "float64",
+    "wavelet_energy_0_std": "float64",
+    "wavelet_energy_0_max": "float64",
+    "wavelet_energy_1_mean": "float64",
+    "wavelet_energy_1_std": "float64",
+    "wavelet_energy_1_max": "float64",
+    "wavelet_energy_2_mean": "float64",
+    "wavelet_energy_2_std": "float64",
+    "wavelet_energy_2_max": "float64",
+    "wavelet_energy_3_mean": "float64",
+    "wavelet_energy_3_std": "float64",
+    "wavelet_energy_3_max": "float64",
+    "wavelet_energy_4_mean": "float64",
+    "wavelet_energy_4_std": "float64",
+    "wavelet_energy_4_max": "float64",
+    "wavelet_energy_5_mean": "float64",
+    "wavelet_energy_5_std": "float64",
+    "wavelet_energy_5_max": "float64",
+    "delta_power_mean": "float64",
+    "delta_power_std": "float64",
+    "delta_power_max": "float64",
+    "theta_power_mean": "float64",
+    "theta_power_std": "float64",
+    "theta_power_max": "float64",
+    "alpha_power_mean": "float64",
+    "alpha_power_std": "float64",
+    "alpha_power_max": "float64",
+    "beta_power_mean": "float64",
+    "beta_power_std": "float64",
+    "beta_power_max": "float64",
+    "gamma_power_mean": "float64",
+    "gamma_power_std": "float64",
+    "gamma_power_max": "float64",
+    "delta_relative_mean": "float64",
+    "delta_relative_std": "float64",
+    "delta_relative_max": "float64",
+    "theta_relative_mean": "float64",
+    "theta_relative_std": "float64",
+    "theta_relative_max": "float64",
+    "alpha_relative_mean": "float64",
+    "alpha_relative_std": "float64",
+    "alpha_relative_max": "float64",
+    "beta_relative_mean": "float64",
+    "beta_relative_std": "float64",
+    "beta_relative_max": "float64",
+    "gamma_relative_mean": "float64",
+    "gamma_relative_std": "float64",
+    "gamma_relative_max": "float64",
+    "label": "int64",
+    "patient": "str",
+    "edf": "str"
+  },
+  "shard_details": {
+    "chb01_chb01_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_01.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.480569839477539
+    },
+    "chb01_chb01_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_02.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4779510498046875
+    },
+    "chb01_chb01_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_03.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4772615432739258
+    },
+    "chb01_chb01_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_04.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4755992889404297
+    },
+    "chb01_chb01_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_05.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4826440811157227
+    },
+    "chb01_chb01_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_06.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4818668365478516
+    },
+    "chb01_chb01_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_07.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4815988540649414
+    },
+    "chb01_chb01_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_08.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.479207992553711
+    },
+    "chb01_chb01_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_09.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.484602928161621
+    },
+    "chb01_chb01_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_10.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4821758270263672
+    },
+    "chb01_chb01_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_11.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4739179611206055
+    },
+    "chb01_chb01_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_12.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4814605712890625
+    },
+    "chb01_chb01_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_13.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4774150848388672
+    },
+    "chb01_chb01_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_14.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4810009002685547
+    },
+    "chb01_chb01_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_15.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4781627655029297
+    },
+    "chb01_chb01_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_16.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.479391098022461
+    },
+    "chb01_chb01_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_17.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4776687622070312
+    },
+    "chb01_chb01_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_18.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.471055030822754
+    },
+    "chb01_chb01_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_19.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4712505340576172
+    },
+    "chb01_chb01_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_20.parquet",
+      "patient": "chb01",
+      "rows": 1330,
+      "columns": 99,
+      "size_mb": 1.1094160079956055
+    },
+    "chb01_chb01_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_21.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4805974960327148
+    },
+    "chb01_chb01_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_22.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4834575653076172
+    },
+    "chb01_chb01_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_23.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485447883605957
+    },
+    "chb01_chb01_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_24.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4787979125976562
+    },
+    "chb01_chb01_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_25.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4850358963012695
+    },
+    "chb01_chb01_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_26.parquet",
+      "patient": "chb01",
+      "rows": 1161,
+      "columns": 99,
+      "size_mb": 0.9822139739990234
+    },
+    "chb01_chb01_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_27.parquet",
+      "patient": "chb01",
+      "rows": 298,
+      "columns": 99,
+      "size_mb": 0.29367923736572266
+    },
+    "chb01_chb01_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_29.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4853267669677734
+    },
+    "chb01_chb01_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_30.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4781818389892578
+    },
+    "chb01_chb01_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_31.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4806337356567383
+    },
+    "chb01_chb01_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_32.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4880094528198242
+    },
+    "chb01_chb01_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_33.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4787006378173828
+    },
+    "chb01_chb01_34.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_34.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.482600212097168
+    },
+    "chb01_chb01_36.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_36.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4796838760375977
+    },
+    "chb01_chb01_37.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_37.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.476710319519043
+    },
+    "chb01_chb01_38.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_38.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4783897399902344
+    },
+    "chb01_chb01_39.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_39.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4651823043823242
+    },
+    "chb01_chb01_40.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_40.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4679136276245117
+    },
+    "chb01_chb01_41.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_41.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4672088623046875
+    },
+    "chb01_chb01_42.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_42.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4838981628417969
+    },
+    "chb01_chb01_43.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_43.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4741792678833008
+    },
+    "chb01_chb01_46.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb01_chb01_46.parquet",
+      "patient": "chb01",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4780120849609375
+    },
+    "chb02_chb02_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_01.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4831228256225586
+    },
+    "chb02_chb02_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_02.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4692964553833008
+    },
+    "chb02_chb02_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_03.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4879255294799805
+    },
+    "chb02_chb02_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_04.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.479456901550293
+    },
+    "chb02_chb02_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_05.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4825000762939453
+    },
+    "chb02_chb02_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_06.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4847164154052734
+    },
+    "chb02_chb02_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_07.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4837017059326172
+    },
+    "chb02_chb02_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_08.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4873085021972656
+    },
+    "chb02_chb02_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_09.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.476205825805664
+    },
+    "chb02_chb02_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_10.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.471522331237793
+    },
+    "chb02_chb02_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_11.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.468806266784668
+    },
+    "chb02_chb02_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_12.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4577398300170898
+    },
+    "chb02_chb02_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_13.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4729728698730469
+    },
+    "chb02_chb02_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_14.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4654407501220703
+    },
+    "chb02_chb02_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_15.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4903812408447266
+    },
+    "chb02_chb02_16+.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_16+.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4801607131958008
+    },
+    "chb02_chb02_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_16.parquet",
+      "patient": "chb02",
+      "rows": 478,
+      "columns": 99,
+      "size_mb": 0.4355049133300781
+    },
+    "chb02_chb02_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_17.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4910898208618164
+    },
+    "chb02_chb02_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_18.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4830045700073242
+    },
+    "chb02_chb02_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_19.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4881296157836914
+    },
+    "chb02_chb02_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_20.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4910888671875
+    },
+    "chb02_chb02_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_21.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4872589111328125
+    },
+    "chb02_chb02_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_22.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4917936325073242
+    },
+    "chb02_chb02_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_23.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4867000579833984
+    },
+    "chb02_chb02_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_24.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4842634201049805
+    },
+    "chb02_chb02_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_25.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.479628562927246
+    },
+    "chb02_chb02_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_26.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4880189895629883
+    },
+    "chb02_chb02_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_27.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4796857833862305
+    },
+    "chb02_chb02_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_28.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.467698097229004
+    },
+    "chb02_chb02_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_29.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4727983474731445
+    },
+    "chb02_chb02_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_30.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4631967544555664
+    },
+    "chb02_chb02_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_31.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4678564071655273
+    },
+    "chb02_chb02_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_32.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4704580307006836
+    },
+    "chb02_chb02_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_33.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4650287628173828
+    },
+    "chb02_chb02_34.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_34.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.469461441040039
+    },
+    "chb02_chb02_35.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb02_chb02_35.parquet",
+      "patient": "chb02",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485377311706543
+    },
+    "chb03_chb03_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_01.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4474477767944336
+    },
+    "chb03_chb03_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_02.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4473743438720703
+    },
+    "chb03_chb03_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_03.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4825544357299805
+    },
+    "chb03_chb03_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_04.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4571218490600586
+    },
+    "chb03_chb03_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_05.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.424753189086914
+    },
+    "chb03_chb03_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_06.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.454132080078125
+    },
+    "chb03_chb03_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_07.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3671808242797852
+    },
+    "chb03_chb03_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_08.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4098196029663086
+    },
+    "chb03_chb03_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_09.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3424644470214844
+    },
+    "chb03_chb03_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_10.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.426931381225586
+    },
+    "chb03_chb03_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_11.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.359471321105957
+    },
+    "chb03_chb03_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_12.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.2766828536987305
+    },
+    "chb03_chb03_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_13.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3339414596557617
+    },
+    "chb03_chb03_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_14.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.2842016220092773
+    },
+    "chb03_chb03_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_15.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3202667236328125
+    },
+    "chb03_chb03_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_16.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4184598922729492
+    },
+    "chb03_chb03_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_17.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4825382232666016
+    },
+    "chb03_chb03_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_18.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3872356414794922
+    },
+    "chb03_chb03_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_19.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4578590393066406
+    },
+    "chb03_chb03_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_20.parquet",
+      "patient": "chb03",
+      "rows": 1801,
+      "columns": 99,
+      "size_mb": 1.489396095275879
+    },
+    "chb03_chb03_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_21.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.480088233947754
+    },
+    "chb03_chb03_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_22.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.472773551940918
+    },
+    "chb03_chb03_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_23.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.490987777709961
+    },
+    "chb03_chb03_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_24.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4864044189453125
+    },
+    "chb03_chb03_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_25.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4808263778686523
+    },
+    "chb03_chb03_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_26.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4866724014282227
+    },
+    "chb03_chb03_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_27.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4914655685424805
+    },
+    "chb03_chb03_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_28.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4914798736572266
+    },
+    "chb03_chb03_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_29.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4783334732055664
+    },
+    "chb03_chb03_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_30.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.476327896118164
+    },
+    "chb03_chb03_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_31.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.435225486755371
+    },
+    "chb03_chb03_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_32.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.465836524963379
+    },
+    "chb03_chb03_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_33.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4763479232788086
+    },
+    "chb03_chb03_34.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_34.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4475288391113281
+    },
+    "chb03_chb03_35.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_35.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4641084671020508
+    },
+    "chb03_chb03_36.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_36.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4748783111572266
+    },
+    "chb03_chb03_37.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_37.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4787712097167969
+    },
+    "chb03_chb03_38.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb03_chb03_38.parquet",
+      "patient": "chb03",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.487360954284668
+    },
+    "chb04_chb04_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_01.parquet",
+      "patient": "chb04",
+      "rows": 7197,
+      "columns": 99,
+      "size_mb": 5.809286117553711
+    },
+    "chb04_chb04_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_02.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.5801897048950195
+    },
+    "chb04_chb04_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_03.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.454075813293457
+    },
+    "chb04_chb04_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_04.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.603071212768555
+    },
+    "chb04_chb04_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_05.parquet",
+      "patient": "chb04",
+      "rows": 4766,
+      "columns": 99,
+      "size_mb": 3.8683996200561523
+    },
+    "chb04_chb04_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_06.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.727972984313965
+    },
+    "chb04_chb04_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_07.parquet",
+      "patient": "chb04",
+      "rows": 3746,
+      "columns": 99,
+      "size_mb": 3.0494422912597656
+    },
+    "chb04_chb04_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_08.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.857060432434082
+    },
+    "chb04_chb04_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_09.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8432416915893555
+    },
+    "chb04_chb04_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_10.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.824599266052246
+    },
+    "chb04_chb04_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_11.parquet",
+      "patient": "chb04",
+      "rows": 2414,
+      "columns": 99,
+      "size_mb": 1.9850902557373047
+    },
+    "chb04_chb04_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_12.parquet",
+      "patient": "chb04",
+      "rows": 7208,
+      "columns": 99,
+      "size_mb": 5.877433776855469
+    },
+    "chb04_chb04_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_13.parquet",
+      "patient": "chb04",
+      "rows": 7197,
+      "columns": 99,
+      "size_mb": 5.863633155822754
+    },
+    "chb04_chb04_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_14.parquet",
+      "patient": "chb04",
+      "rows": 7207,
+      "columns": 99,
+      "size_mb": 5.886440277099609
+    },
+    "chb04_chb04_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_15.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.879535675048828
+    },
+    "chb04_chb04_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_16.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.883756637573242
+    },
+    "chb04_chb04_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_17.parquet",
+      "patient": "chb04",
+      "rows": 6864,
+      "columns": 99,
+      "size_mb": 5.591217041015625
+    },
+    "chb04_chb04_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_18.parquet",
+      "patient": "chb04",
+      "rows": 7211,
+      "columns": 99,
+      "size_mb": 5.858844757080078
+    },
+    "chb04_chb04_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_19.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.855351448059082
+    },
+    "chb04_chb04_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_21.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.825722694396973
+    },
+    "chb04_chb04_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_22.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.823757171630859
+    },
+    "chb04_chb04_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_23.parquet",
+      "patient": "chb04",
+      "rows": 5340,
+      "columns": 99,
+      "size_mb": 4.355486869812012
+    },
+    "chb04_chb04_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_24.parquet",
+      "patient": "chb04",
+      "rows": 7201,
+      "columns": 99,
+      "size_mb": 5.853062629699707
+    },
+    "chb04_chb04_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_25.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.847718238830566
+    },
+    "chb04_chb04_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_26.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.805665016174316
+    },
+    "chb04_chb04_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_27.parquet",
+      "patient": "chb04",
+      "rows": 7212,
+      "columns": 99,
+      "size_mb": 5.885047912597656
+    },
+    "chb04_chb04_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_28.parquet",
+      "patient": "chb04",
+      "rows": 7210,
+      "columns": 99,
+      "size_mb": 5.873831748962402
+    },
+    "chb04_chb04_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_29.parquet",
+      "patient": "chb04",
+      "rows": 7200,
+      "columns": 99,
+      "size_mb": 5.8566789627075195
+    },
+    "chb04_chb04_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_30.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8944501876831055
+    },
+    "chb04_chb04_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_31.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.890183448791504
+    },
+    "chb04_chb04_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_32.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.890228271484375
+    },
+    "chb04_chb04_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_33.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.905494689941406
+    },
+    "chb04_chb04_34.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_34.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.904697418212891
+    },
+    "chb04_chb04_35.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_35.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.856461524963379
+    },
+    "chb04_chb04_36.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_36.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.885075569152832
+    },
+    "chb04_chb04_37.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_37.parquet",
+      "patient": "chb04",
+      "rows": 2805,
+      "columns": 99,
+      "size_mb": 2.324568748474121
+    },
+    "chb04_chb04_38.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_38.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.836822509765625
+    },
+    "chb04_chb04_39.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_39.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8184099197387695
+    },
+    "chb04_chb04_40.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_40.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.809109687805176
+    },
+    "chb04_chb04_41.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_41.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.765616416931152
+    },
+    "chb04_chb04_42.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_42.parquet",
+      "patient": "chb04",
+      "rows": 2910,
+      "columns": 99,
+      "size_mb": 2.3504743576049805
+    },
+    "chb04_chb04_43.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb04_chb04_43.parquet",
+      "patient": "chb04",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.842745780944824
+    },
+    "chb05_chb05_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_01.parquet",
+      "patient": "chb05",
+      "rows": 1803,
+      "columns": 99,
+      "size_mb": 1.4888935089111328
+    },
+    "chb05_chb05_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_02.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4848527908325195
+    },
+    "chb05_chb05_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_03.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4854469299316406
+    },
+    "chb05_chb05_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_04.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485403060913086
+    },
+    "chb05_chb05_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_05.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4864444732666016
+    },
+    "chb05_chb05_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_06.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4820280075073242
+    },
+    "chb05_chb05_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_07.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4753742218017578
+    },
+    "chb05_chb05_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_08.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.477004051208496
+    },
+    "chb05_chb05_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_09.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4791431427001953
+    },
+    "chb05_chb05_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_10.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4736499786376953
+    },
+    "chb05_chb05_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_11.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4742412567138672
+    },
+    "chb05_chb05_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_12.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.472905158996582
+    },
+    "chb05_chb05_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_13.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.48394775390625
+    },
+    "chb05_chb05_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_14.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4850788116455078
+    },
+    "chb05_chb05_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_15.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.474888801574707
+    },
+    "chb05_chb05_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_16.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4846887588500977
+    },
+    "chb05_chb05_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_17.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4848203659057617
+    },
+    "chb05_chb05_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_18.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4841337203979492
+    },
+    "chb05_chb05_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_19.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4839801788330078
+    },
+    "chb05_chb05_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_20.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485795021057129
+    },
+    "chb05_chb05_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_21.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4873266220092773
+    },
+    "chb05_chb05_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_22.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.489741325378418
+    },
+    "chb05_chb05_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_23.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4734992980957031
+    },
+    "chb05_chb05_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_24.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4816627502441406
+    },
+    "chb05_chb05_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_25.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.479776382446289
+    },
+    "chb05_chb05_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_26.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.491128921508789
+    },
+    "chb05_chb05_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_27.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4905328750610352
+    },
+    "chb05_chb05_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_28.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.487166404724121
+    },
+    "chb05_chb05_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_29.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4866008758544922
+    },
+    "chb05_chb05_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_30.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4848403930664062
+    },
+    "chb05_chb05_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_31.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4776115417480469
+    },
+    "chb05_chb05_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_32.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4819440841674805
+    },
+    "chb05_chb05_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_33.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4811649322509766
+    },
+    "chb05_chb05_34.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_34.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4840717315673828
+    },
+    "chb05_chb05_35.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_35.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4848909378051758
+    },
+    "chb05_chb05_36.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_36.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4878082275390625
+    },
+    "chb05_chb05_37.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_37.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4776287078857422
+    },
+    "chb05_chb05_38.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_38.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4844932556152344
+    },
+    "chb05_chb05_39.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb05_chb05_39.parquet",
+      "patient": "chb05",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.488180160522461
+    },
+    "chb06_chb06_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_01.parquet",
+      "patient": "chb06",
+      "rows": 7212,
+      "columns": 99,
+      "size_mb": 5.868529319763184
+    },
+    "chb06_chb06_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_02.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.853126525878906
+    },
+    "chb06_chb06_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_03.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8349714279174805
+    },
+    "chb06_chb06_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_04.parquet",
+      "patient": "chb06",
+      "rows": 6629,
+      "columns": 99,
+      "size_mb": 5.439700126647949
+    },
+    "chb06_chb06_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_05.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.891057014465332
+    },
+    "chb06_chb06_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_06.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.859623908996582
+    },
+    "chb06_chb06_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_07.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.859602928161621
+    },
+    "chb06_chb06_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_08.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8517866134643555
+    },
+    "chb06_chb06_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_09.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.850801467895508
+    },
+    "chb06_chb06_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_10.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.850537300109863
+    },
+    "chb06_chb06_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_12.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.855547904968262
+    },
+    "chb06_chb06_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_13.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8527679443359375
+    },
+    "chb06_chb06_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_14.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.86252498626709
+    },
+    "chb06_chb06_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_15.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.832261085510254
+    },
+    "chb06_chb06_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_16.parquet",
+      "patient": "chb06",
+      "rows": 1513,
+      "columns": 99,
+      "size_mb": 1.2585334777832031
+    },
+    "chb06_chb06_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_17.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.866267204284668
+    },
+    "chb06_chb06_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_18.parquet",
+      "patient": "chb06",
+      "rows": 3962,
+      "columns": 99,
+      "size_mb": 3.234121322631836
+    },
+    "chb06_chb06_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb06_chb06_24.parquet",
+      "patient": "chb06",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.879968643188477
+    },
+    "chb07_chb07_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_01.parquet",
+      "patient": "chb07",
+      "rows": 7204,
+      "columns": 99,
+      "size_mb": 5.85446834564209
+    },
+    "chb07_chb07_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_02.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.816326141357422
+    },
+    "chb07_chb07_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_03.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.784058570861816
+    },
+    "chb07_chb07_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_04.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.76057243347168
+    },
+    "chb07_chb07_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_05.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.830055236816406
+    },
+    "chb07_chb07_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_06.parquet",
+      "patient": "chb07",
+      "rows": 2458,
+      "columns": 99,
+      "size_mb": 2.024472236633301
+    },
+    "chb07_chb07_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_07.parquet",
+      "patient": "chb07",
+      "rows": 2328,
+      "columns": 99,
+      "size_mb": 1.9081201553344727
+    },
+    "chb07_chb07_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_08.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.846382141113281
+    },
+    "chb07_chb07_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_09.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.846135139465332
+    },
+    "chb07_chb07_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_10.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.839417457580566
+    },
+    "chb07_chb07_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_11.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.788153648376465
+    },
+    "chb07_chb07_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_12.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.863002777099609
+    },
+    "chb07_chb07_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_13.parquet",
+      "patient": "chb07",
+      "rows": 1861,
+      "columns": 99,
+      "size_mb": 1.5374202728271484
+    },
+    "chb07_chb07_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_14.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8890380859375
+    },
+    "chb07_chb07_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_15.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8550214767456055
+    },
+    "chb07_chb07_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_16.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.847072601318359
+    },
+    "chb07_chb07_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_17.parquet",
+      "patient": "chb07",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.807452201843262
+    },
+    "chb07_chb07_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_18.parquet",
+      "patient": "chb07",
+      "rows": 6028,
+      "columns": 99,
+      "size_mb": 4.84736442565918
+    },
+    "chb07_chb07_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb07_chb07_19.parquet",
+      "patient": "chb07",
+      "rows": 7204,
+      "columns": 99,
+      "size_mb": 5.8560686111450195
+    },
+    "chb08_chb08_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_02.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4900217056274414
+    },
+    "chb08_chb08_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_03.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4783658981323242
+    },
+    "chb08_chb08_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_04.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4787464141845703
+    },
+    "chb08_chb08_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_05.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4923648834228516
+    },
+    "chb08_chb08_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_10.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4838676452636719
+    },
+    "chb08_chb08_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_11.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4883947372436523
+    },
+    "chb08_chb08_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_12.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4845504760742188
+    },
+    "chb08_chb08_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_13.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4852066040039062
+    },
+    "chb08_chb08_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_14.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4851083755493164
+    },
+    "chb08_chb08_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_15.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4846467971801758
+    },
+    "chb08_chb08_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_16.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4792137145996094
+    },
+    "chb08_chb08_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_17.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4815893173217773
+    },
+    "chb08_chb08_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_18.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4786548614501953
+    },
+    "chb08_chb08_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_19.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4756383895874023
+    },
+    "chb08_chb08_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_20.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.48748779296875
+    },
+    "chb08_chb08_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_21.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4881772994995117
+    },
+    "chb08_chb08_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_22.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4821672439575195
+    },
+    "chb08_chb08_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_23.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.48272705078125
+    },
+    "chb08_chb08_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_24.parquet",
+      "patient": "chb08",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4870529174804688
+    },
+    "chb08_chb08_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb08_chb08_29.parquet",
+      "patient": "chb08",
+      "rows": 1810,
+      "columns": 99,
+      "size_mb": 1.4940929412841797
+    },
+    "chb09_chb09_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_01.parquet",
+      "patient": "chb09",
+      "rows": 4010,
+      "columns": 99,
+      "size_mb": 3.239187240600586
+    },
+    "chb09_chb09_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_02.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.822800636291504
+    },
+    "chb09_chb09_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_03.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.816804885864258
+    },
+    "chb09_chb09_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_04.parquet",
+      "patient": "chb09",
+      "rows": 7206,
+      "columns": 99,
+      "size_mb": 5.7905683517456055
+    },
+    "chb09_chb09_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_05.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.798893928527832
+    },
+    "chb09_chb09_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_06.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.85439395904541
+    },
+    "chb09_chb09_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_07.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.817883491516113
+    },
+    "chb09_chb09_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_08.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.83367919921875
+    },
+    "chb09_chb09_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_09.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.807103157043457
+    },
+    "chb09_chb09_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_10.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8135480880737305
+    },
+    "chb09_chb09_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_11.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.801648139953613
+    },
+    "chb09_chb09_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_12.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.8269243240356445
+    },
+    "chb09_chb09_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_13.parquet",
+      "patient": "chb09",
+      "rows": 7201,
+      "columns": 99,
+      "size_mb": 5.822668075561523
+    },
+    "chb09_chb09_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_14.parquet",
+      "patient": "chb09",
+      "rows": 7204,
+      "columns": 99,
+      "size_mb": 5.837579727172852
+    },
+    "chb09_chb09_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_15.parquet",
+      "patient": "chb09",
+      "rows": 7209,
+      "columns": 99,
+      "size_mb": 5.828855514526367
+    },
+    "chb09_chb09_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_16.parquet",
+      "patient": "chb09",
+      "rows": 6794,
+      "columns": 99,
+      "size_mb": 5.4955596923828125
+    },
+    "chb09_chb09_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_17.parquet",
+      "patient": "chb09",
+      "rows": 485,
+      "columns": 99,
+      "size_mb": 0.43636035919189453
+    },
+    "chb09_chb09_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_18.parquet",
+      "patient": "chb09",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.842150688171387
+    },
+    "chb09_chb09_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb09_chb09_19.parquet",
+      "patient": "chb09",
+      "rows": 2848,
+      "columns": 99,
+      "size_mb": 2.3367738723754883
+    },
+    "chb10_chb10_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_01.parquet",
+      "patient": "chb10",
+      "rows": 3608,
+      "columns": 99,
+      "size_mb": 2.9211320877075195
+    },
+    "chb10_chb10_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_02.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.91544246673584
+    },
+    "chb10_chb10_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_03.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9156694412231445
+    },
+    "chb10_chb10_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_04.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9123096466064453
+    },
+    "chb10_chb10_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_05.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9339208602905273
+    },
+    "chb10_chb10_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_06.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9197006225585938
+    },
+    "chb10_chb10_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_07.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.929266929626465
+    },
+    "chb10_chb10_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_08.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.920520782470703
+    },
+    "chb10_chb10_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_12.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9267148971557617
+    },
+    "chb10_chb10_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_13.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9256696701049805
+    },
+    "chb10_chb10_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_14.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.920076370239258
+    },
+    "chb10_chb10_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_15.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9130630493164062
+    },
+    "chb10_chb10_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_16.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.906853675842285
+    },
+    "chb10_chb10_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_17.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.917300224304199
+    },
+    "chb10_chb10_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_18.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.912708282470703
+    },
+    "chb10_chb10_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_19.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.919013023376465
+    },
+    "chb10_chb10_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_20.parquet",
+      "patient": "chb10",
+      "rows": 3604,
+      "columns": 99,
+      "size_mb": 2.9585514068603516
+    },
+    "chb10_chb10_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_21.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.935328483581543
+    },
+    "chb10_chb10_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_22.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9164676666259766
+    },
+    "chb10_chb10_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_27.parquet",
+      "patient": "chb10",
+      "rows": 3607,
+      "columns": 99,
+      "size_mb": 2.9252729415893555
+    },
+    "chb10_chb10_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_28.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9056625366210938
+    },
+    "chb10_chb10_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_30.parquet",
+      "patient": "chb10",
+      "rows": 3605,
+      "columns": 99,
+      "size_mb": 2.91770076751709
+    },
+    "chb10_chb10_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_31.parquet",
+      "patient": "chb10",
+      "rows": 3609,
+      "columns": 99,
+      "size_mb": 2.9520950317382812
+    },
+    "chb10_chb10_38.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_38.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.9237289428710938
+    },
+    "chb10_chb10_89.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb10_chb10_89.parquet",
+      "patient": "chb10",
+      "rows": 3598,
+      "columns": 99,
+      "size_mb": 2.917649269104004
+    },
+    "chb11_chb11_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_01.parquet",
+      "patient": "chb11",
+      "rows": 1797,
+      "columns": 99,
+      "size_mb": 1.481358528137207
+    },
+    "chb11_chb11_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_02.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4775075912475586
+    },
+    "chb11_chb11_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_03.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.482621192932129
+    },
+    "chb11_chb11_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_04.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4808855056762695
+    },
+    "chb11_chb11_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_05.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4873285293579102
+    },
+    "chb11_chb11_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_06.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4877691268920898
+    },
+    "chb11_chb11_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_07.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4889640808105469
+    },
+    "chb11_chb11_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_08.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4923067092895508
+    },
+    "chb11_chb11_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_09.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.490163803100586
+    },
+    "chb11_chb11_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_10.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485879898071289
+    },
+    "chb11_chb11_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_11.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.486577033996582
+    },
+    "chb11_chb11_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_12.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4781017303466797
+    },
+    "chb11_chb11_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_13.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4800891876220703
+    },
+    "chb11_chb11_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_14.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4866447448730469
+    },
+    "chb11_chb11_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_15.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4886722564697266
+    },
+    "chb11_chb11_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_16.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4833803176879883
+    },
+    "chb11_chb11_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_17.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4728174209594727
+    },
+    "chb11_chb11_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_18.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4736661911010742
+    },
+    "chb11_chb11_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_19.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4753179550170898
+    },
+    "chb11_chb11_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_24.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4779376983642578
+    },
+    "chb11_chb11_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_25.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4811525344848633
+    },
+    "chb11_chb11_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_26.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4889945983886719
+    },
+    "chb11_chb11_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_27.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4912128448486328
+    },
+    "chb11_chb11_53.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_53.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4783258438110352
+    },
+    "chb11_chb11_54.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_54.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.467569351196289
+    },
+    "chb11_chb11_55.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_55.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4788017272949219
+    },
+    "chb11_chb11_56.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_56.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4777965545654297
+    },
+    "chb11_chb11_58.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_58.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4713153839111328
+    },
+    "chb11_chb11_60.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_60.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4715251922607422
+    },
+    "chb11_chb11_61.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_61.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4652366638183594
+    },
+    "chb11_chb11_62.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_62.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4585447311401367
+    },
+    "chb11_chb11_63.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_63.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.471212387084961
+    },
+    "chb11_chb11_82.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_82.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4752998352050781
+    },
+    "chb11_chb11_92.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_92.parquet",
+      "patient": "chb11",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.488037109375
+    },
+    "chb11_chb11_99.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb11_chb11_99.parquet",
+      "patient": "chb11",
+      "rows": 1428,
+      "columns": 99,
+      "size_mb": 1.2011604309082031
+    },
+    "chb12_chb12_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_06.parquet",
+      "patient": "chb12",
+      "rows": 1801,
+      "columns": 99,
+      "size_mb": 1.4811382293701172
+    },
+    "chb12_chb12_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_08.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4699440002441406
+    },
+    "chb12_chb12_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_09.parquet",
+      "patient": "chb12",
+      "rows": 1804,
+      "columns": 99,
+      "size_mb": 1.475132942199707
+    },
+    "chb12_chb12_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_10.parquet",
+      "patient": "chb12",
+      "rows": 1804,
+      "columns": 99,
+      "size_mb": 1.4779138565063477
+    },
+    "chb12_chb12_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_11.parquet",
+      "patient": "chb12",
+      "rows": 1214,
+      "columns": 99,
+      "size_mb": 1.0206289291381836
+    },
+    "chb12_chb12_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_19.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4821453094482422
+    },
+    "chb12_chb12_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_20.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4762887954711914
+    },
+    "chb12_chb12_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_21.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4816503524780273
+    },
+    "chb12_chb12_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_23.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485396385192871
+    },
+    "chb12_chb12_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_24.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.482680320739746
+    },
+    "chb12_chb12_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_27.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4969234466552734
+    },
+    "chb12_chb12_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_28.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4857749938964844
+    },
+    "chb12_chb12_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_29.parquet",
+      "patient": "chb12",
+      "rows": 1810,
+      "columns": 99,
+      "size_mb": 1.501230239868164
+    },
+    "chb12_chb12_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_32.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4769458770751953
+    },
+    "chb12_chb12_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_33.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4706640243530273
+    },
+    "chb12_chb12_34.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_34.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4658393859863281
+    },
+    "chb12_chb12_35.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_35.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4661893844604492
+    },
+    "chb12_chb12_36.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_36.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4752082824707031
+    },
+    "chb12_chb12_37.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_37.parquet",
+      "patient": "chb12",
+      "rows": 1806,
+      "columns": 99,
+      "size_mb": 1.476790428161621
+    },
+    "chb12_chb12_38.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_38.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4721746444702148
+    },
+    "chb12_chb12_39.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_39.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.482706069946289
+    },
+    "chb12_chb12_40.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_40.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4707765579223633
+    },
+    "chb12_chb12_41.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_41.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4641399383544922
+    },
+    "chb12_chb12_42.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb12_chb12_42.parquet",
+      "patient": "chb12",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4755048751831055
+    },
+    "chb13_chb13_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_02.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4850196838378906
+    },
+    "chb13_chb13_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_03.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.490311622619629
+    },
+    "chb13_chb13_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_04.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4827241897583008
+    },
+    "chb13_chb13_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_05.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4860620498657227
+    },
+    "chb13_chb13_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_06.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4847278594970703
+    },
+    "chb13_chb13_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_07.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4862985610961914
+    },
+    "chb13_chb13_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_08.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4742012023925781
+    },
+    "chb13_chb13_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_09.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4716100692749023
+    },
+    "chb13_chb13_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_10.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4619827270507812
+    },
+    "chb13_chb13_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_11.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.467686653137207
+    },
+    "chb13_chb13_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_12.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4667034149169922
+    },
+    "chb13_chb13_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_13.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4680652618408203
+    },
+    "chb13_chb13_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_14.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4670429229736328
+    },
+    "chb13_chb13_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_15.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4738855361938477
+    },
+    "chb13_chb13_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_16.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4810028076171875
+    },
+    "chb13_chb13_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_18.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4834117889404297
+    },
+    "chb13_chb13_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_19.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4893074035644531
+    },
+    "chb13_chb13_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_21.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.492049217224121
+    },
+    "chb13_chb13_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_22.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4930305480957031
+    },
+    "chb13_chb13_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_24.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4825801849365234
+    },
+    "chb13_chb13_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_30.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485330581665039
+    },
+    "chb13_chb13_36.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_36.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4701852798461914
+    },
+    "chb13_chb13_37.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_37.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4721794128417969
+    },
+    "chb13_chb13_38.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_38.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4715986251831055
+    },
+    "chb13_chb13_39.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_39.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4705514907836914
+    },
+    "chb13_chb13_40.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_40.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4775466918945312
+    },
+    "chb13_chb13_47.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_47.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4892578125
+    },
+    "chb13_chb13_55.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_55.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4981298446655273
+    },
+    "chb13_chb13_56.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_56.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4803838729858398
+    },
+    "chb13_chb13_58.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_58.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4780082702636719
+    },
+    "chb13_chb13_59.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_59.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.484919548034668
+    },
+    "chb13_chb13_60.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_60.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4727869033813477
+    },
+    "chb13_chb13_62.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb13_chb13_62.parquet",
+      "patient": "chb13",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4776992797851562
+    },
+    "chb14_chb14_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_01.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.483407974243164
+    },
+    "chb14_chb14_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_02.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.482365608215332
+    },
+    "chb14_chb14_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_03.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4827690124511719
+    },
+    "chb14_chb14_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_04.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4814834594726562
+    },
+    "chb14_chb14_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_06.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4833459854125977
+    },
+    "chb14_chb14_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_07.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4770545959472656
+    },
+    "chb14_chb14_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_11.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.481241226196289
+    },
+    "chb14_chb14_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_12.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4776811599731445
+    },
+    "chb14_chb14_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_13.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4729843139648438
+    },
+    "chb14_chb14_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_14.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.480229377746582
+    },
+    "chb14_chb14_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_16.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4753761291503906
+    },
+    "chb14_chb14_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_17.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4831218719482422
+    },
+    "chb14_chb14_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_18.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4802265167236328
+    },
+    "chb14_chb14_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_19.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4792289733886719
+    },
+    "chb14_chb14_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_20.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.480637550354004
+    },
+    "chb14_chb14_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_22.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4733915328979492
+    },
+    "chb14_chb14_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_24.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4783124923706055
+    },
+    "chb14_chb14_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_25.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.481572151184082
+    },
+    "chb14_chb14_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_26.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4791545867919922
+    },
+    "chb14_chb14_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_27.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4828996658325195
+    },
+    "chb14_chb14_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_29.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4830389022827148
+    },
+    "chb14_chb14_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_30.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4809904098510742
+    },
+    "chb14_chb14_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_32.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4853410720825195
+    },
+    "chb14_chb14_37.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_37.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.475503921508789
+    },
+    "chb14_chb14_39.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_39.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.474675178527832
+    },
+    "chb14_chb14_42.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb14_chb14_42.parquet",
+      "patient": "chb14",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.482748031616211
+    },
+    "chb15_chb15_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_01.parquet",
+      "patient": "chb15",
+      "rows": 1799,
+      "columns": 99,
+      "size_mb": 1.4361867904663086
+    },
+    "chb15_chb15_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_02.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4486846923828125
+    },
+    "chb15_chb15_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_03.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.437744140625
+    },
+    "chb15_chb15_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_04.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4277477264404297
+    },
+    "chb15_chb15_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_05.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.430227279663086
+    },
+    "chb15_chb15_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_06.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4275407791137695
+    },
+    "chb15_chb15_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_07.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3943061828613281
+    },
+    "chb15_chb15_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_08.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4184789657592773
+    },
+    "chb15_chb15_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_09.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.39630126953125
+    },
+    "chb15_chb15_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_10.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4158544540405273
+    },
+    "chb15_chb15_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_11.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4143152236938477
+    },
+    "chb15_chb15_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_12.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4216651916503906
+    },
+    "chb15_chb15_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_13.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.445180892944336
+    },
+    "chb15_chb15_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_14.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4364299774169922
+    },
+    "chb15_chb15_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_15.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4577217102050781
+    },
+    "chb15_chb15_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_16.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4389724731445312
+    },
+    "chb15_chb15_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_17.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4066457748413086
+    },
+    "chb15_chb15_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_19.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4502754211425781
+    },
+    "chb15_chb15_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_20.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4494819641113281
+    },
+    "chb15_chb15_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_22.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4513435363769531
+    },
+    "chb15_chb15_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_26.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4555301666259766
+    },
+    "chb15_chb15_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_28.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4338703155517578
+    },
+    "chb15_chb15_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_29.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.432938575744629
+    },
+    "chb15_chb15_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_30.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.437413215637207
+    },
+    "chb15_chb15_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_31.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.411726951599121
+    },
+    "chb15_chb15_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_32.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4161157608032227
+    },
+    "chb15_chb15_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_33.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.435114860534668
+    },
+    "chb15_chb15_35.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_35.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4207229614257812
+    },
+    "chb15_chb15_37.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_37.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3950271606445312
+    },
+    "chb15_chb15_40.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_40.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4525947570800781
+    },
+    "chb15_chb15_45.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_45.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.455348014831543
+    },
+    "chb15_chb15_46.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_46.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4610881805419922
+    },
+    "chb15_chb15_49.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_49.parquet",
+      "patient": "chb15",
+      "rows": 1811,
+      "columns": 99,
+      "size_mb": 1.4731903076171875
+    },
+    "chb15_chb15_50.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_50.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4468812942504883
+    },
+    "chb15_chb15_51.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_51.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4318275451660156
+    },
+    "chb15_chb15_52.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_52.parquet",
+      "patient": "chb15",
+      "rows": 1803,
+      "columns": 99,
+      "size_mb": 1.4515552520751953
+    },
+    "chb15_chb15_54.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_54.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.431778907775879
+    },
+    "chb15_chb15_61.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_61.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.437727928161621
+    },
+    "chb15_chb15_62.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_62.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4384737014770508
+    },
+    "chb15_chb15_63.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb15_chb15_63.parquet",
+      "patient": "chb15",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4296760559082031
+    },
+    "chb16_chb16_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_01.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4988574981689453
+    },
+    "chb16_chb16_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_02.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.488236427307129
+    },
+    "chb16_chb16_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_03.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4888811111450195
+    },
+    "chb16_chb16_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_04.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4882097244262695
+    },
+    "chb16_chb16_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_05.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4799365997314453
+    },
+    "chb16_chb16_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_06.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4812393188476562
+    },
+    "chb16_chb16_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_07.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4637069702148438
+    },
+    "chb16_chb16_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_08.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4333810806274414
+    },
+    "chb16_chb16_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_09.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4460535049438477
+    },
+    "chb16_chb16_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_10.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4896507263183594
+    },
+    "chb16_chb16_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_11.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4892292022705078
+    },
+    "chb16_chb16_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_12.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.450556755065918
+    },
+    "chb16_chb16_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_13.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4574041366577148
+    },
+    "chb16_chb16_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_14.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4593133926391602
+    },
+    "chb16_chb16_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_15.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4673242568969727
+    },
+    "chb16_chb16_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_16.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4919414520263672
+    },
+    "chb16_chb16_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_17.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4939422607421875
+    },
+    "chb16_chb16_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_18.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4846763610839844
+    },
+    "chb16_chb16_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb16_chb16_19.parquet",
+      "patient": "chb16",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485504150390625
+    },
+    "chb17_chb17a_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17a_03.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4821043014526367
+    },
+    "chb17_chb17a_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17a_04.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4771137237548828
+    },
+    "chb17_chb17a_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17a_05.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4844951629638672
+    },
+    "chb17_chb17a_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17a_06.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.478764533996582
+    },
+    "chb17_chb17a_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17a_08.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.486734390258789
+    },
+    "chb17_chb17b_57.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17b_57.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.486659049987793
+    },
+    "chb17_chb17b_58.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17b_58.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4856748580932617
+    },
+    "chb17_chb17b_59.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17b_59.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.490701675415039
+    },
+    "chb17_chb17b_60.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17b_60.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4911651611328125
+    },
+    "chb17_chb17b_63.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17b_63.parquet",
+      "patient": "chb17",
+      "rows": 1810,
+      "columns": 99,
+      "size_mb": 1.4947166442871094
+    },
+    "chb17_chb17b_67.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17b_67.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4531688690185547
+    },
+    "chb17_chb17b_68.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17b_68.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4827699661254883
+    },
+    "chb17_chb17b_69.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17b_69.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 0.6391639709472656
+    },
+    "chb17_chb17c_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17c_02.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4711542129516602
+    },
+    "chb17_chb17c_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17c_03.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4412336349487305
+    },
+    "chb17_chb17c_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17c_04.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.455902099609375
+    },
+    "chb17_chb17c_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17c_05.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4265079498291016
+    },
+    "chb17_chb17c_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17c_06.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4285974502563477
+    },
+    "chb17_chb17c_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17c_07.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4262828826904297
+    },
+    "chb17_chb17c_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17c_08.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4564504623413086
+    },
+    "chb17_chb17c_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb17_chb17c_13.parquet",
+      "patient": "chb17",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4858369827270508
+    },
+    "chb18_chb18_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_01.parquet",
+      "patient": "chb18",
+      "rows": 1804,
+      "columns": 99,
+      "size_mb": 1.4477033615112305
+    },
+    "chb18_chb18_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_02.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4445829391479492
+    },
+    "chb18_chb18_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_03.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4428119659423828
+    },
+    "chb18_chb18_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_04.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4571466445922852
+    },
+    "chb18_chb18_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_05.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.449671745300293
+    },
+    "chb18_chb18_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_06.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4223518371582031
+    },
+    "chb18_chb18_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_07.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4233684539794922
+    },
+    "chb18_chb18_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_08.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4211511611938477
+    },
+    "chb18_chb18_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_09.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4352293014526367
+    },
+    "chb18_chb18_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_10.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3326921463012695
+    },
+    "chb18_chb18_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_11.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3896236419677734
+    },
+    "chb18_chb18_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_12.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4088258743286133
+    },
+    "chb18_chb18_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_13.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3349103927612305
+    },
+    "chb18_chb18_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_14.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3484230041503906
+    },
+    "chb18_chb18_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_15.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3874740600585938
+    },
+    "chb18_chb18_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_16.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4209728240966797
+    },
+    "chb18_chb18_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_17.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4477901458740234
+    },
+    "chb18_chb18_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_18.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.445307731628418
+    },
+    "chb18_chb18_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_19.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4556713104248047
+    },
+    "chb18_chb18_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_20.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4542236328125
+    },
+    "chb18_chb18_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_21.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.486074447631836
+    },
+    "chb18_chb18_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_22.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.462590217590332
+    },
+    "chb18_chb18_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_23.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.446761131286621
+    },
+    "chb18_chb18_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_24.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4324579238891602
+    },
+    "chb18_chb18_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_25.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3961286544799805
+    },
+    "chb18_chb18_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_26.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.456648826599121
+    },
+    "chb18_chb18_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_27.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3528566360473633
+    },
+    "chb18_chb18_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_28.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3804645538330078
+    },
+    "chb18_chb18_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_29.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3571252822875977
+    },
+    "chb18_chb18_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_30.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4012184143066406
+    },
+    "chb18_chb18_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_31.parquet",
+      "patient": "chb18",
+      "rows": 1135,
+      "columns": 99,
+      "size_mb": 0.9411859512329102
+    },
+    "chb18_chb18_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_32.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4792289733886719
+    },
+    "chb18_chb18_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_33.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3457040786743164
+    },
+    "chb18_chb18_34.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_34.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4254627227783203
+    },
+    "chb18_chb18_35.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_35.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4597244262695312
+    },
+    "chb18_chb18_36.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb18_chb18_36.parquet",
+      "patient": "chb18",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4750280380249023
+    },
+    "chb19_chb19_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_01.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4672069549560547
+    },
+    "chb19_chb19_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_02.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4782562255859375
+    },
+    "chb19_chb19_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_03.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4751605987548828
+    },
+    "chb19_chb19_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_04.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4565019607543945
+    },
+    "chb19_chb19_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_05.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.472982406616211
+    },
+    "chb19_chb19_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_06.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4374513626098633
+    },
+    "chb19_chb19_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_07.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.448455810546875
+    },
+    "chb19_chb19_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_08.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3798980712890625
+    },
+    "chb19_chb19_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_09.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.438211441040039
+    },
+    "chb19_chb19_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_10.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.369955062866211
+    },
+    "chb19_chb19_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_11.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3452119827270508
+    },
+    "chb19_chb19_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_12.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3373823165893555
+    },
+    "chb19_chb19_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_13.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.358994483947754
+    },
+    "chb19_chb19_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_14.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.350438117980957
+    },
+    "chb19_chb19_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_15.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4178504943847656
+    },
+    "chb19_chb19_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_16.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4077234268188477
+    },
+    "chb19_chb19_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_17.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4642038345336914
+    },
+    "chb19_chb19_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_18.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4760961532592773
+    },
+    "chb19_chb19_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_19.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4713506698608398
+    },
+    "chb19_chb19_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_20.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4648752212524414
+    },
+    "chb19_chb19_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_21.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4454126358032227
+    },
+    "chb19_chb19_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_22.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4500446319580078
+    },
+    "chb19_chb19_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_23.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.3957443237304688
+    },
+    "chb19_chb19_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_24.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4377069473266602
+    },
+    "chb19_chb19_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_25.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.362351417541504
+    },
+    "chb19_chb19_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_26.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4101905822753906
+    },
+    "chb19_chb19_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_27.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4710969924926758
+    },
+    "chb19_chb19_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_28.parquet",
+      "patient": "chb19",
+      "rows": 1804,
+      "columns": 99,
+      "size_mb": 1.4864530563354492
+    },
+    "chb19_chb19_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_29.parquet",
+      "patient": "chb19",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4724292755126953
+    },
+    "chb19_chb19_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb19_chb19_30.parquet",
+      "patient": "chb19",
+      "rows": 1665,
+      "columns": 99,
+      "size_mb": 1.3755836486816406
+    },
+    "chb20_chb20_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_01.parquet",
+      "patient": "chb20",
+      "rows": 1801,
+      "columns": 99,
+      "size_mb": 1.4791803359985352
+    },
+    "chb20_chb20_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_02.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.469273567199707
+    },
+    "chb20_chb20_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_03.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.480879783630371
+    },
+    "chb20_chb20_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_04.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.474726676940918
+    },
+    "chb20_chb20_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_05.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.471883773803711
+    },
+    "chb20_chb20_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_06.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4699230194091797
+    },
+    "chb20_chb20_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_07.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4648475646972656
+    },
+    "chb20_chb20_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_08.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4760217666625977
+    },
+    "chb20_chb20_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_11.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4750480651855469
+    },
+    "chb20_chb20_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_12.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4693279266357422
+    },
+    "chb20_chb20_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_13.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.468064308166504
+    },
+    "chb20_chb20_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_14.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4705228805541992
+    },
+    "chb20_chb20_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_15.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4679460525512695
+    },
+    "chb20_chb20_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_16.parquet",
+      "patient": "chb20",
+      "rows": 1733,
+      "columns": 99,
+      "size_mb": 1.4185075759887695
+    },
+    "chb20_chb20_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_17.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4737892150878906
+    },
+    "chb20_chb20_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_21.parquet",
+      "patient": "chb20",
+      "rows": 1807,
+      "columns": 99,
+      "size_mb": 1.4940576553344727
+    },
+    "chb20_chb20_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_22.parquet",
+      "patient": "chb20",
+      "rows": 369,
+      "columns": 99,
+      "size_mb": 0.3477592468261719
+    },
+    "chb20_chb20_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_23.parquet",
+      "patient": "chb20",
+      "rows": 1480,
+      "columns": 99,
+      "size_mb": 1.2284746170043945
+    },
+    "chb20_chb20_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_25.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4794120788574219
+    },
+    "chb20_chb20_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_26.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4764776229858398
+    },
+    "chb20_chb20_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_27.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4783401489257812
+    },
+    "chb20_chb20_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_28.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.481928825378418
+    },
+    "chb20_chb20_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_29.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4802923202514648
+    },
+    "chb20_chb20_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_30.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4706268310546875
+    },
+    "chb20_chb20_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_31.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4730033874511719
+    },
+    "chb20_chb20_34.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_34.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4791145324707031
+    },
+    "chb20_chb20_59.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_59.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4781265258789062
+    },
+    "chb20_chb20_60.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_60.parquet",
+      "patient": "chb20",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4746475219726562
+    },
+    "chb20_chb20_68.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb20_chb20_68.parquet",
+      "patient": "chb20",
+      "rows": 1082,
+      "columns": 99,
+      "size_mb": 0.9122085571289062
+    },
+    "chb21_chb21_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_01.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4824819564819336
+    },
+    "chb21_chb21_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_02.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4792098999023438
+    },
+    "chb21_chb21_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_03.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4797735214233398
+    },
+    "chb21_chb21_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_04.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.480142593383789
+    },
+    "chb21_chb21_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_05.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4834728240966797
+    },
+    "chb21_chb21_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_06.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4830074310302734
+    },
+    "chb21_chb21_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_07.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.476980209350586
+    },
+    "chb21_chb21_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_08.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4798240661621094
+    },
+    "chb21_chb21_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_09.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.477309226989746
+    },
+    "chb21_chb21_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_10.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4783687591552734
+    },
+    "chb21_chb21_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_11.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4786100387573242
+    },
+    "chb21_chb21_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_12.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4753551483154297
+    },
+    "chb21_chb21_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_13.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4767866134643555
+    },
+    "chb21_chb21_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_14.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4743108749389648
+    },
+    "chb21_chb21_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_15.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4784297943115234
+    },
+    "chb21_chb21_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_16.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4864435195922852
+    },
+    "chb21_chb21_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_17.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4843177795410156
+    },
+    "chb21_chb21_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_18.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.480360984802246
+    },
+    "chb21_chb21_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_19.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.488372802734375
+    },
+    "chb21_chb21_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_20.parquet",
+      "patient": "chb21",
+      "rows": 1493,
+      "columns": 99,
+      "size_mb": 1.245966911315918
+    },
+    "chb21_chb21_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_21.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4858074188232422
+    },
+    "chb21_chb21_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_22.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4879541397094727
+    },
+    "chb21_chb21_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_23.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4796218872070312
+    },
+    "chb21_chb21_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_24.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485630989074707
+    },
+    "chb21_chb21_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_25.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.489858627319336
+    },
+    "chb21_chb21_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_26.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.475621223449707
+    },
+    "chb21_chb21_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_27.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4806089401245117
+    },
+    "chb21_chb21_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_28.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.479264259338379
+    },
+    "chb21_chb21_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_29.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4888629913330078
+    },
+    "chb21_chb21_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_30.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485219955444336
+    },
+    "chb21_chb21_31.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_31.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4910106658935547
+    },
+    "chb21_chb21_32.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_32.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4794950485229492
+    },
+    "chb21_chb21_33.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb21_chb21_33.parquet",
+      "patient": "chb21",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.481429100036621
+    },
+    "chb22_chb22_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_01.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4862337112426758
+    },
+    "chb22_chb22_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_02.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.484187126159668
+    },
+    "chb22_chb22_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_03.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4777708053588867
+    },
+    "chb22_chb22_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_04.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4755592346191406
+    },
+    "chb22_chb22_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_05.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4686698913574219
+    },
+    "chb22_chb22_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_06.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4703407287597656
+    },
+    "chb22_chb22_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_07.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.481572151184082
+    },
+    "chb22_chb22_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_08.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4851970672607422
+    },
+    "chb22_chb22_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_09.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.485940933227539
+    },
+    "chb22_chb22_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_10.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4866046905517578
+    },
+    "chb22_chb22_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_11.parquet",
+      "patient": "chb22",
+      "rows": 1804,
+      "columns": 99,
+      "size_mb": 1.4941463470458984
+    },
+    "chb22_chb22_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_15.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4911537170410156
+    },
+    "chb22_chb22_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_16.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4901390075683594
+    },
+    "chb22_chb22_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_17.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4874629974365234
+    },
+    "chb22_chb22_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_18.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4869146347045898
+    },
+    "chb22_chb22_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_19.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.488602638244629
+    },
+    "chb22_chb22_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_20.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.488539695739746
+    },
+    "chb22_chb22_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_21.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4938335418701172
+    },
+    "chb22_chb22_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_22.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4797039031982422
+    },
+    "chb22_chb22_23.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_23.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.48876953125
+    },
+    "chb22_chb22_24.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_24.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4897880554199219
+    },
+    "chb22_chb22_25.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_25.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4905672073364258
+    },
+    "chb22_chb22_26.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_26.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4747705459594727
+    },
+    "chb22_chb22_27.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_27.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4758005142211914
+    },
+    "chb22_chb22_28.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_28.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.464071273803711
+    },
+    "chb22_chb22_29.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_29.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4778289794921875
+    },
+    "chb22_chb22_30.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_30.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4675579071044922
+    },
+    "chb22_chb22_38.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_38.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.489058494567871
+    },
+    "chb22_chb22_51.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_51.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4917049407958984
+    },
+    "chb22_chb22_54.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_54.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4820890426635742
+    },
+    "chb22_chb22_77.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb22_chb22_77.parquet",
+      "patient": "chb22",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4815759658813477
+    },
+    "chb23_chb23_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_06.parquet",
+      "patient": "chb23",
+      "rows": 3741,
+      "columns": 99,
+      "size_mb": 3.0434446334838867
+    },
+    "chb23_chb23_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_07.parquet",
+      "patient": "chb23",
+      "rows": 1278,
+      "columns": 99,
+      "size_mb": 1.0752315521240234
+    },
+    "chb23_chb23_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_08.parquet",
+      "patient": "chb23",
+      "rows": 5169,
+      "columns": 99,
+      "size_mb": 4.2380876541137695
+    },
+    "chb23_chb23_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_09.parquet",
+      "patient": "chb23",
+      "rows": 7211,
+      "columns": 99,
+      "size_mb": 5.872389793395996
+    },
+    "chb23_chb23_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_10.parquet",
+      "patient": "chb23",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.862059593200684
+    },
+    "chb23_chb23_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_16.parquet",
+      "patient": "chb23",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.858803749084473
+    },
+    "chb23_chb23_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_17.parquet",
+      "patient": "chb23",
+      "rows": 6292,
+      "columns": 99,
+      "size_mb": 5.1312713623046875
+    },
+    "chb23_chb23_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_19.parquet",
+      "patient": "chb23",
+      "rows": 7198,
+      "columns": 99,
+      "size_mb": 5.80635929107666
+    },
+    "chb23_chb23_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb23_chb23_20.parquet",
+      "patient": "chb23",
+      "rows": 2503,
+      "columns": 99,
+      "size_mb": 2.0472021102905273
+    },
+    "chb24_chb24_01.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_01.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.482076644897461
+    },
+    "chb24_chb24_02.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_02.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4945611953735352
+    },
+    "chb24_chb24_03.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_03.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.490525245666504
+    },
+    "chb24_chb24_04.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_04.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4890403747558594
+    },
+    "chb24_chb24_05.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_05.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4828109741210938
+    },
+    "chb24_chb24_06.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_06.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4844818115234375
+    },
+    "chb24_chb24_07.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_07.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4817686080932617
+    },
+    "chb24_chb24_08.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_08.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4810676574707031
+    },
+    "chb24_chb24_09.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_09.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4762725830078125
+    },
+    "chb24_chb24_10.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_10.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4812469482421875
+    },
+    "chb24_chb24_11.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_11.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.468099594116211
+    },
+    "chb24_chb24_12.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_12.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4762506484985352
+    },
+    "chb24_chb24_13.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_13.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4693670272827148
+    },
+    "chb24_chb24_14.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_14.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4722919464111328
+    },
+    "chb24_chb24_15.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_15.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.469705581665039
+    },
+    "chb24_chb24_16.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_16.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.484750747680664
+    },
+    "chb24_chb24_17.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_17.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.488326072692871
+    },
+    "chb24_chb24_18.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_18.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4882659912109375
+    },
+    "chb24_chb24_19.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_19.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4899282455444336
+    },
+    "chb24_chb24_20.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_20.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4867839813232422
+    },
+    "chb24_chb24_21.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_21.parquet",
+      "patient": "chb24",
+      "rows": 1798,
+      "columns": 99,
+      "size_mb": 1.4959383010864258
+    },
+    "chb24_chb24_22.parquet": {
+      "path": "E:\\Project\\neurovision_ai\\real_feature_dataset_v4_shards\\chb24_chb24_22.parquet",
+      "patient": "chb24",
+      "rows": 532,
+      "columns": 99,
+      "size_mb": 0.48337459564208984
+    }
+  }
+}

@@ -1,0 +1,102 @@
+======================================================================
+PHASE5C TEMPORAL EVENT DETECTION — EXECUTION REPORT
+======================================================================
+
+Generated: 2026-06-14T09:41:39.066680
+Runtime: 536.83 seconds
+
+SCHEMA VALIDATION
+  Overall Passed: True
+  Feature Count Source: PHASE5B_FEATURE_SIGNATURE.json (FIX-1: no hardcoded constant)
+  Feature Order Check: explicit element-wise comparison (FIX-9)
+
+TEST PATIENTS
+  Count: 5
+  Patients: chb02, chb05, chb09, chb14, chb22
+
+PROBABILITY CALIBRATION (FIX-10 / FIX-11)
+  Applied                 : True
+  Calibration Patient Src : explicit_split_file
+  Calibration Patients    : ['chb03', 'chb15', 'chb23']
+  Calibration-set ECE Before : 0.278876
+  Calibration-set ECE After  : 0.0
+
+RUNTIME STATISTICS
+  Rows Processed       : 357709
+  Patients Processed   : 5
+  EDFs Processed       : 151
+  Events Generated     : 1571
+  Events Suppressed    : 1561
+  Peak Memory (MB)     : 3916.75 (psutil, FIX-4)
+
+GROUND TRUTH
+  Total GT Events      : 23
+
+CONFIGURATION SEARCH
+  Total Combinations   : 38115
+  Note (FIX-2)         : Aggregation cached per (col, threshold) — only 495 aggregation calls executed.
+  Note (FIX-14)        : Matcher still runs once per combination (38115 calls) — expect minutes, not seconds.
+
+METRICS NOTE (FIX-6/7/8)
+  balanced_accuracy, mcc, cohen_kappa: NOT REPORTED.
+  Reason: TN (true negative events) is undefined at event level
+  without enumerating all seizure-free EDF segments.
+
+EVENT MATCHING NOTE (FIX-5/FIX-13)
+  Matching strategy configured : auto
+  Group size limit for optimal : 40 (max(preds, gts) per (patient, edf) group)
+  'auto' uses maximum-cardinality bipartite matching (Hopcroft-Karp
+  style augmenting paths) for small groups, and falls back to the
+  original earliest-start-first greedy assignment for larger groups.
+  One GT event can be matched by at most one predicted event in all modes.
+
+BEST CONFIGURATIONS
+  BEST_F1:
+    smoothing_window: 21
+    threshold: 0.01
+    min_duration: 1
+    min_peak_probability: 0.95
+    f1: 0.545455
+    true_positive_events: 9
+    false_positive_events: 1
+    false_negative_events: 14
+    precision: 0.9
+    recall: 0.391304
+
+  BEST_RECALL:
+    smoothing_window: 3
+    threshold: 0.01
+    min_duration: 1
+    min_peak_probability: 0.5
+    recall: 0.608696
+    true_positive_events: 14
+    false_positive_events: 202
+    false_negative_events: 9
+    precision: 0.064815
+    f1: 0.117155
+
+  BEST_PRECISION:
+    smoothing_window: 21
+    threshold: 0.01
+    min_duration: 1
+    min_peak_probability: 0.95
+    precision: 0.9
+    true_positive_events: 9
+    false_positive_events: 1
+    false_negative_events: 14
+    recall: 0.391304
+    f1: 0.545455
+
+OUTPUT ARTIFACTS
+  [OK] PHASE5C_EVENT_PREDICTIONS.csv
+  [OK] PHASE5C_EVENT_METRICS.csv
+  [OK] PHASE5C_CONFIGURATION_SEARCH.csv
+  [OK] PHASE5C_BEST_CONFIGURATION.json
+  [OK] PHASE5C_PATIENT_EVENT_SUMMARY.csv
+  [OK] PHASE5C_EXECUTION_REPORT.txt
+  [OK] PHASE5C_SCHEMA_AUDIT.json
+  [OK] PHASE5C_RUNTIME_AUDIT.json
+
+======================================================================
+END OF EXECUTION REPORT
+======================================================================

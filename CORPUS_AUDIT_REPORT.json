@@ -1,0 +1,216 @@
+{
+  "patients": {
+    "chb01": {
+      "edf_count": 42,
+      "readable": 42,
+      "failed": 0,
+      "duration_hours": 40.55222222222223,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb02": {
+      "edf_count": 36,
+      "readable": 36,
+      "failed": 0,
+      "duration_hours": 35.26638888888889,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb03": {
+      "edf_count": 38,
+      "readable": 38,
+      "failed": 0,
+      "duration_hours": 38.001666666666665,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb04": {
+      "edf_count": 42,
+      "readable": 42,
+      "failed": 0,
+      "duration_hours": 156.06500000000003,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb05": {
+      "edf_count": 39,
+      "readable": 39,
+      "failed": 0,
+      "duration_hours": 39.00277777777778,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb06": {
+      "edf_count": 18,
+      "readable": 18,
+      "failed": 0,
+      "duration_hours": 66.73500000000001,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb07": {
+      "edf_count": 19,
+      "readable": 19,
+      "failed": 0,
+      "duration_hours": 67.05222222222221,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb08": {
+      "edf_count": 20,
+      "readable": 20,
+      "failed": 0,
+      "duration_hours": 20.00638888888889,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb09": {
+      "edf_count": 19,
+      "readable": 19,
+      "failed": 0,
+      "duration_hours": 67.87166666666666,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb10": {
+      "edf_count": 25,
+      "readable": 25,
+      "failed": 0,
+      "duration_hours": 50.02333333333334,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb11": {
+      "edf_count": 35,
+      "readable": 35,
+      "failed": 0,
+      "duration_hours": 34.79361111111111,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb12": {
+      "edf_count": 24,
+      "readable": 24,
+      "failed": 0,
+      "duration_hours": 23.694444444444443,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb13": {
+      "edf_count": 33,
+      "readable": 33,
+      "failed": 0,
+      "duration_hours": 33.0,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb14": {
+      "edf_count": 26,
+      "readable": 26,
+      "failed": 0,
+      "duration_hours": 26.0,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb15": {
+      "edf_count": 40,
+      "readable": 40,
+      "failed": 0,
+      "duration_hours": 40.01,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb16": {
+      "edf_count": 19,
+      "readable": 19,
+      "failed": 0,
+      "duration_hours": 19.0,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb17": {
+      "edf_count": 21,
+      "readable": 21,
+      "failed": 0,
+      "duration_hours": 21.006666666666668,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb18": {
+      "edf_count": 36,
+      "readable": 36,
+      "failed": 0,
+      "duration_hours": 35.63472222222222,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb19": {
+      "edf_count": 30,
+      "readable": 30,
+      "failed": 0,
+      "duration_hours": 29.929444444444446,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb20": {
+      "edf_count": 29,
+      "readable": 29,
+      "failed": 0,
+      "duration_hours": 27.601666666666667,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb21": {
+      "edf_count": 33,
+      "readable": 33,
+      "failed": 0,
+      "duration_hours": 32.83027777777778,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb22": {
+      "edf_count": 31,
+      "readable": 31,
+      "failed": 0,
+      "duration_hours": 31.003055555555555,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb23": {
+      "edf_count": 9,
+      "readable": 9,
+      "failed": 0,
+      "duration_hours": 26.55833333333333,
+      "sampling_rates": {},
+      "channel_counts": {}
+    },
+    "chb24": {
+      "edf_count": 22,
+      "readable": 22,
+      "failed": 0,
+      "duration_hours": 21.296388888888888,
+      "sampling_rates": {},
+      "channel_counts": {}
+    }
+  },
+  "totals": {
+    "patients": 24,
+    "edf_files": 686,
+    "readable_edf": 686,
+    "failed_edf": 0,
+    "total_duration_hours": 982.935277777778,
+    "sampling_rates": {
+      "256.0": 686
+    },
+    "channel_counts": {
+      "23": 276,
+      "24": 54,
+      "28": 275,
+      "29": 14,
+      "25": 1,
+      "22": 26,
+      "31": 1,
+      "38": 39
+    }
+  }
+}

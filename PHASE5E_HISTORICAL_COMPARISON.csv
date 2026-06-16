@@ -1,0 +1,13 @@
+phase,description,roc_auc,pr_auc,recall,precision,f1_event,tp_events,fp_events,fn_events,note
+PHASE5C_BEST_F1,Temporal XGBoost + Event Detection (mpp=0.95),UNKNOWN,UNKNOWN,0.391304,0.9,0.545455,9,1,14,Sourced from PHASE5C_BEST_CONFIGURATION.json
+PHASE5D,Failure analysis (no model change),UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,UNKNOWN,Same metrics as Phase5C; root cause: PEAK_FILTER_FAILURE
+PHASE5E_mpp=0.50,Phase5E Peak Sweep mpp=0.50,UNKNOWN,UNKNOWN,0.5217,0.2069,0.2963,12,46,11,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.55,Phase5E Peak Sweep mpp=0.55,UNKNOWN,UNKNOWN,0.5217,0.2449,0.3333,12,37,11,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.60,Phase5E Peak Sweep mpp=0.60,UNKNOWN,UNKNOWN,0.4783,0.2683,0.3438,11,30,12,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.65,Phase5E Peak Sweep mpp=0.65,UNKNOWN,UNKNOWN,0.4783,0.3438,0.4,11,21,12,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.70,Phase5E Peak Sweep mpp=0.70,UNKNOWN,UNKNOWN,0.4783,0.44,0.4583,11,14,12,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.75,Phase5E Peak Sweep mpp=0.75,UNKNOWN,UNKNOWN,0.4783,0.5,0.4889,11,11,12,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.80,Phase5E Peak Sweep mpp=0.80,UNKNOWN,UNKNOWN,0.4783,0.55,0.5116,11,9,12,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.85,Phase5E Peak Sweep mpp=0.85,UNKNOWN,UNKNOWN,0.3913,0.6,0.4737,9,6,14,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.90,Phase5E Peak Sweep mpp=0.90,UNKNOWN,UNKNOWN,0.3913,0.8182,0.5294,9,2,14,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"
+PHASE5E_mpp=0.95,Phase5E Peak Sweep mpp=0.95,UNKNOWN,UNKNOWN,0.3913,0.9,0.5455,9,1,14,"Event-level; smoothing_window=21, threshold=0.01, min_duration=1"

@@ -1,5 +1,5 @@
 Folder PATH listing for volume New Volume
-Volume serial number is 1005-FD24
+Volume serial number is 00000068 1005:FD24
 E:.
 |   .gitignore
 |   capture_runtime.py
@@ -7,6 +7,9 @@ E:.
 |   CERTIFICATION_STATE_REPORT.md
 |   chbmit_model.json
 |   CORPUS_AUDIT_REPORT.json
+|   dataset_audit_v4.json
+|   dataset_cleaning_log_v4.txt
+|   dataset_summary_v4.txt
 |   DEPLOYED_ROUTE_INVENTORY.md
 |   DEPLOYMENT_ENTRYPOINT_AUDIT.md
 |   Dockerfile
@@ -23,11 +26,36 @@ E:.
 |   FRONTEND_RUNTIME_VERIFICATION.md
 |   FRONTEND_SURFACE_MAP.md
 |   LOCAL_DEPLOYMENT_VERIFICATION.md
+|   merge_audit_v4.json
 |   MODEL_STABILITY_REPORT.txt
 |   old_train_chbmit.py
 |   PATIENT_EXPANSION_REPORT.txt
 |   PATIENT_SEIZURE_DISTRIBUTION.csv
 |   PATIENT_WINDOW_COUNTS.csv
+|   PHASE1_BEST_BA.csv
+|   PHASE1_BEST_F1.csv
+|   PHASE1_BEST_YOUDEN.csv
+|   PHASE1_LOPO_RESULTS.csv
+|   PHASE1_THRESHOLD_SWEEP.csv
+|   PHASE2_XGBOOST.joblib
+|   PHASE3A_FEATURE_IMPORTANCE.csv
+|   PHASE3A_XGBOOST_V3.joblib
+|   PHASE3B_PATIENT_DISJOINT.joblib
+|   PHASE3B_PATIENT_DISJOINT_IMPORTANCE.csv
+|   PHASE4A_CONFUSION_MATRIX.png
+|   PHASE4A_FEATURE_IMPORTANCE.csv
+|   PHASE4A_FEATURE_IMPORTANCE.png
+|   PHASE4A_METRICS.json
+|   PHASE4A_ROC_CURVE.png
+|   PHASE4A_XGBOOST.joblib
+|   PHASE4B_DATASET_AUDIT.json
+|   PHASE4B_FEATURE_IMPORTANCE.csv
+|   PHASE4B_LEAKAGE_AUDIT.json
+|   PHASE4B_METRICS.json
+|   PHASE4B_PATIENT_DISJOINT.joblib
+|   PHASE4B_PATIENT_RESULTS.csv
+|   PHASE4B_PATIENT_SPLIT.json
+|   PHASE4B_THRESHOLD_SWEEP.csv
 |   PRE_EXPANSION_AUDIT.txt
 |   pyproject.toml
 |   pytest_output.log
@@ -35,6 +63,11 @@ E:.
 |   REAL_CORPUS_FAILURE_REPORT.md
 |   REAL_CORPUS_REMEDIATION_REPORT.md
 |   REAL_CORPUS_ROOT_CAUSE_REPORT.md
+|   real_feature_dataset_v2.parquet
+|   real_feature_dataset_v3.parquet
+|   real_feature_dataset_v3_clean.parquet
+|   real_feature_dataset_v4.parquet
+|   real_feature_dataset_v4_clean.parquet
 |   RELEASE_BASELINE.md
 |   REMAINING_GAP_ANALYSIS.md
 |   RENDER_DEPLOYMENT_CHECKLIST.md
@@ -47,16 +80,20 @@ E:.
 |   runtime_server_8001.log
 |   SEIZURE_AUDIT_REPORT.json
 |   seizure_counts.txt
+|   SEIZURE_INTERVAL_DATABASE.json
 |   SEIZURE_RECONSTRUCTION.json
 |   server.log
 |   STARTUP_FLOW_AUDIT.md
 |   struct.txt
+|   structr.txt
 |   structure1.txt
 |   TRAINING_RUN_1_REPORT.txt
 |   TRAINING_RUN_2_REPORT.txt
 |   TRAINING_RUN_3_REPORT.txt
 |   UI_REPLACEMENT_MAP.md
 |   v21.json
+|   v4_production.log
+|   VALIDATION_LOG_v4.txt
 |   valid_edf_base64.txt
 |   VERIFIER_STATUS_REPORT.md
 |   WINDOW_INVENTORY_FINAL.json
@@ -128,6 +165,29 @@ E:.
 |   |       |   six.py
 |   |       |   threadpoolctl.py
 |   |       |   
+|   |       +---antropy
+|   |       |   |   entropy.py
+|   |       |   |   fractal.py
+|   |       |   |   utils.py
+|   |       |   |   __init__.py
+|   |       |   |   
+|   |       |   \---__pycache__
+|   |       |           entropy.cpython-313.pyc
+|   |       |           fractal.cpython-313.pyc
+|   |       |           utils.cpython-313.pyc
+|   |       |           __init__.cpython-313.pyc
+|   |       |           
+|   |       +---antropy-0.2.2.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |   
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |           
 |   |       +---catboost
 |   |       |   |   carry.py
 |   |       |   |   core.py
@@ -376,6 +436,22 @@ E:.
 |   |       |       RECORD
 |   |       |       WHEEL
 |   |       |       
+|   |       +---cramjam
+|   |       |   |   cramjam.cp313-win_amd64.pyd
+|   |       |   |   __init__.py
+|   |       |   |   
+|   |       |   \---__pycache__
+|   |       |           __init__.cpython-313.pyc
+|   |       |           
+|   |       +---cramjam-2.11.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |   
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |           
 |   |       +---cycler
 |   |       |   |   py.typed
 |   |       |   |   __init__.py
@@ -461,6 +537,70 @@ E:.
 |   |       |   |   
 |   |       |   \---licenses
 |   |       |           LICENSE.txt
+|   |       |           
+|   |       +---fastparquet
+|   |       |   |   api.py
+|   |       |   |   cencoding.c
+|   |       |   |   cencoding.cp313-win_amd64.pyd
+|   |       |   |   cencoding.pyx
+|   |       |   |   compression.py
+|   |       |   |   converted_types.py
+|   |       |   |   core.py
+|   |       |   |   dataframe.py
+|   |       |   |   encoding.py
+|   |       |   |   evolve.py
+|   |       |   |   json.py
+|   |       |   |   parquet.thrift
+|   |       |   |   schema.py
+|   |       |   |   speedups.c
+|   |       |   |   speedups.cp313-win_amd64.pyd
+|   |       |   |   speedups.pyx
+|   |       |   |   thrift_structures.py
+|   |       |   |   util.py
+|   |       |   |   writer.py
+|   |       |   |   _version.py
+|   |       |   |   __init__.py
+|   |       |   |   
+|   |       |   +---parquet_thrift
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---parquet
+|   |       |   |   |   |   ttypes.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           ttypes.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   \---__pycache__
+|   |       |           api.cpython-313.pyc
+|   |       |           compression.cpython-313.pyc
+|   |       |           converted_types.cpython-313.pyc
+|   |       |           core.cpython-313.pyc
+|   |       |           dataframe.cpython-313.pyc
+|   |       |           encoding.cpython-313.pyc
+|   |       |           evolve.cpython-313.pyc
+|   |       |           json.cpython-313.pyc
+|   |       |           schema.cpython-313.pyc
+|   |       |           thrift_structures.cpython-313.pyc
+|   |       |           util.cpython-313.pyc
+|   |       |           writer.cpython-313.pyc
+|   |       |           _version.cpython-313.pyc
+|   |       |           __init__.cpython-313.pyc
+|   |       |           
+|   |       +---fastparquet-2026.5.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |   
+|   |       |   \---licenses
+|   |       |           LICENSE
 |   |       |           
 |   |       +---fontTools
 |   |       |   |   afmLib.py
@@ -1282,6 +1422,142 @@ E:.
 |   |       |           LICENSE
 |   |       |           LICENSE.external
 |   |       |           
+|   |       +---fsspec
+|   |       |   |   archive.py
+|   |       |   |   asyn.py
+|   |       |   |   caching.py
+|   |       |   |   callbacks.py
+|   |       |   |   compression.py
+|   |       |   |   config.py
+|   |       |   |   conftest.py
+|   |       |   |   core.py
+|   |       |   |   dircache.py
+|   |       |   |   exceptions.py
+|   |       |   |   fuse.py
+|   |       |   |   generic.py
+|   |       |   |   gui.py
+|   |       |   |   json.py
+|   |       |   |   mapping.py
+|   |       |   |   parquet.py
+|   |       |   |   registry.py
+|   |       |   |   spec.py
+|   |       |   |   transaction.py
+|   |       |   |   utils.py
+|   |       |   |   _version.py
+|   |       |   |   __init__.py
+|   |       |   |   
+|   |       |   +---implementations
+|   |       |   |   |   arrow.py
+|   |       |   |   |   asyn_wrapper.py
+|   |       |   |   |   cached.py
+|   |       |   |   |   cache_mapper.py
+|   |       |   |   |   cache_metadata.py
+|   |       |   |   |   chained.py
+|   |       |   |   |   dask.py
+|   |       |   |   |   data.py
+|   |       |   |   |   dbfs.py
+|   |       |   |   |   dirfs.py
+|   |       |   |   |   ftp.py
+|   |       |   |   |   gist.py
+|   |       |   |   |   git.py
+|   |       |   |   |   github.py
+|   |       |   |   |   http.py
+|   |       |   |   |   http_sync.py
+|   |       |   |   |   jupyter.py
+|   |       |   |   |   libarchive.py
+|   |       |   |   |   local.py
+|   |       |   |   |   memory.py
+|   |       |   |   |   reference.py
+|   |       |   |   |   sftp.py
+|   |       |   |   |   smb.py
+|   |       |   |   |   tar.py
+|   |       |   |   |   webhdfs.py
+|   |       |   |   |   zip.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           arrow.cpython-313.pyc
+|   |       |   |           asyn_wrapper.cpython-313.pyc
+|   |       |   |           cached.cpython-313.pyc
+|   |       |   |           cache_mapper.cpython-313.pyc
+|   |       |   |           cache_metadata.cpython-313.pyc
+|   |       |   |           chained.cpython-313.pyc
+|   |       |   |           dask.cpython-313.pyc
+|   |       |   |           data.cpython-313.pyc
+|   |       |   |           dbfs.cpython-313.pyc
+|   |       |   |           dirfs.cpython-313.pyc
+|   |       |   |           ftp.cpython-313.pyc
+|   |       |   |           gist.cpython-313.pyc
+|   |       |   |           git.cpython-313.pyc
+|   |       |   |           github.cpython-313.pyc
+|   |       |   |           http.cpython-313.pyc
+|   |       |   |           http_sync.cpython-313.pyc
+|   |       |   |           jupyter.cpython-313.pyc
+|   |       |   |           libarchive.cpython-313.pyc
+|   |       |   |           local.cpython-313.pyc
+|   |       |   |           memory.cpython-313.pyc
+|   |       |   |           reference.cpython-313.pyc
+|   |       |   |           sftp.cpython-313.pyc
+|   |       |   |           smb.cpython-313.pyc
+|   |       |   |           tar.cpython-313.pyc
+|   |       |   |           webhdfs.cpython-313.pyc
+|   |       |   |           zip.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---tests
+|   |       |   |   \---abstract
+|   |       |   |       |   common.py
+|   |       |   |       |   copy.py
+|   |       |   |       |   get.py
+|   |       |   |       |   mv.py
+|   |       |   |       |   open.py
+|   |       |   |       |   pipe.py
+|   |       |   |       |   put.py
+|   |       |   |       |   __init__.py
+|   |       |   |       |   
+|   |       |   |       \---__pycache__
+|   |       |   |               common.cpython-313.pyc
+|   |       |   |               copy.cpython-313.pyc
+|   |       |   |               get.cpython-313.pyc
+|   |       |   |               mv.cpython-313.pyc
+|   |       |   |               open.cpython-313.pyc
+|   |       |   |               pipe.cpython-313.pyc
+|   |       |   |               put.cpython-313.pyc
+|   |       |   |               __init__.cpython-313.pyc
+|   |       |   |               
+|   |       |   \---__pycache__
+|   |       |           archive.cpython-313.pyc
+|   |       |           asyn.cpython-313.pyc
+|   |       |           caching.cpython-313.pyc
+|   |       |           callbacks.cpython-313.pyc
+|   |       |           compression.cpython-313.pyc
+|   |       |           config.cpython-313.pyc
+|   |       |           conftest.cpython-313.pyc
+|   |       |           core.cpython-313.pyc
+|   |       |           dircache.cpython-313.pyc
+|   |       |           exceptions.cpython-313.pyc
+|   |       |           fuse.cpython-313.pyc
+|   |       |           generic.cpython-313.pyc
+|   |       |           gui.cpython-313.pyc
+|   |       |           json.cpython-313.pyc
+|   |       |           mapping.cpython-313.pyc
+|   |       |           parquet.cpython-313.pyc
+|   |       |           registry.cpython-313.pyc
+|   |       |           spec.cpython-313.pyc
+|   |       |           transaction.cpython-313.pyc
+|   |       |           utils.cpython-313.pyc
+|   |       |           _version.cpython-313.pyc
+|   |       |           __init__.cpython-313.pyc
+|   |       |           
+|   |       +---fsspec-2026.4.0.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   WHEEL
+|   |       |   |   
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |           
 |   |       +---graphviz
 |   |       |   |   base.py
 |   |       |   |   copying.py
@@ -1796,6 +2072,114 @@ E:.
 |   |       |   \---licenses
 |   |       |           LICENSE
 |   |       |           
+|   |       +---llvmlite
+|   |       |   |   utils.py
+|   |       |   |   _version.py
+|   |       |   |   __init__.py
+|   |       |   |   
+|   |       |   +---binding
+|   |       |   |   |   analysis.py
+|   |       |   |   |   common.py
+|   |       |   |   |   config.py
+|   |       |   |   |   context.py
+|   |       |   |   |   dylib.py
+|   |       |   |   |   executionengine.py
+|   |       |   |   |   ffi.py
+|   |       |   |   |   initfini.py
+|   |       |   |   |   linker.py
+|   |       |   |   |   llvmlite.dll
+|   |       |   |   |   module.py
+|   |       |   |   |   newpassmanagers.py
+|   |       |   |   |   object_file.py
+|   |       |   |   |   options.py
+|   |       |   |   |   orcjit.py
+|   |       |   |   |   targets.py
+|   |       |   |   |   typeref.py
+|   |       |   |   |   value.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           analysis.cpython-313.pyc
+|   |       |   |           common.cpython-313.pyc
+|   |       |   |           config.cpython-313.pyc
+|   |       |   |           context.cpython-313.pyc
+|   |       |   |           dylib.cpython-313.pyc
+|   |       |   |           executionengine.cpython-313.pyc
+|   |       |   |           ffi.cpython-313.pyc
+|   |       |   |           initfini.cpython-313.pyc
+|   |       |   |           linker.cpython-313.pyc
+|   |       |   |           module.cpython-313.pyc
+|   |       |   |           newpassmanagers.cpython-313.pyc
+|   |       |   |           object_file.cpython-313.pyc
+|   |       |   |           options.cpython-313.pyc
+|   |       |   |           orcjit.cpython-313.pyc
+|   |       |   |           targets.cpython-313.pyc
+|   |       |   |           typeref.cpython-313.pyc
+|   |       |   |           value.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---ir
+|   |       |   |   |   builder.py
+|   |       |   |   |   context.py
+|   |       |   |   |   instructions.py
+|   |       |   |   |   module.py
+|   |       |   |   |   transforms.py
+|   |       |   |   |   types.py
+|   |       |   |   |   values.py
+|   |       |   |   |   _utils.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           builder.cpython-313.pyc
+|   |       |   |           context.cpython-313.pyc
+|   |       |   |           instructions.cpython-313.pyc
+|   |       |   |           module.cpython-313.pyc
+|   |       |   |           transforms.cpython-313.pyc
+|   |       |   |           types.cpython-313.pyc
+|   |       |   |           values.cpython-313.pyc
+|   |       |   |           _utils.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---tests
+|   |       |   |   |   customize.py
+|   |       |   |   |   refprune_proto.py
+|   |       |   |   |   test_binding.py
+|   |       |   |   |   test_ir.py
+|   |       |   |   |   test_refprune.py
+|   |       |   |   |   test_valuerepr.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   __main__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           customize.cpython-313.pyc
+|   |       |   |           refprune_proto.cpython-313.pyc
+|   |       |   |           test_binding.cpython-313.pyc
+|   |       |   |           test_ir.cpython-313.pyc
+|   |       |   |           test_refprune.cpython-313.pyc
+|   |       |   |           test_valuerepr.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           __main__.cpython-313.pyc
+|   |       |   |           
+|   |       |   \---__pycache__
+|   |       |           utils.cpython-313.pyc
+|   |       |           _version.cpython-313.pyc
+|   |       |           __init__.cpython-313.pyc
+|   |       |           
+|   |       +---llvmlite-0.47.0.dist-info
+|   |       |   |   DELVEWHEEL
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |   
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |           LICENSE.thirdparty
+|   |       |           
+|   |       +---llvmlite.libs
+|   |       |       msvcp140-8f141b4454fa78db34bc1f28c571b4da.dll
+|   |       |       
 |   |       +---markupsafe
 |   |       |   |   py.typed
 |   |       |   |   _native.py
@@ -3976,6 +4360,8 @@ E:.
 |   |       |   |           misc.cpython-313.pyc
 |   |       |   |           mixin.cpython-313.pyc
 |   |       |   |           numerics.cpython-313.pyc
+|   |       |   |           numerics._arange_div-1084.py313.1.nbc
+|   |       |   |           numerics._arange_div-1084.py313.nbi
 |   |       |   |           progressbar.cpython-313.pyc
 |   |       |   |           spectrum.cpython-313.pyc
 |   |       |   |           _bunch.cpython-313.pyc
@@ -4663,6 +5049,1728 @@ E:.
 |   |       |   |   
 |   |       |   \---licenses
 |   |       |           LICENSE.md
+|   |       |           
+|   |       +---numba
+|   |       |   |   extending.py
+|   |       |   |   mathnames.h
+|   |       |   |   mviewbuf.c
+|   |       |   |   mviewbuf.cp313-win_amd64.pyd
+|   |       |   |   pythoncapi_compat.h
+|   |       |   |   runtests.py
+|   |       |   |   _arraystruct.h
+|   |       |   |   _devicearray.cp313-win_amd64.pyd
+|   |       |   |   _devicearray.h
+|   |       |   |   _dispatcher.cp313-win_amd64.pyd
+|   |       |   |   _dynfunc.c
+|   |       |   |   _dynfunc.cp313-win_amd64.pyd
+|   |       |   |   _dynfuncmod.c
+|   |       |   |   _hashtable.h
+|   |       |   |   _helperlib.c
+|   |       |   |   _helperlib.cp313-win_amd64.pyd
+|   |       |   |   _helperlib.pyi
+|   |       |   |   _helpermod.c
+|   |       |   |   _lapack.c
+|   |       |   |   _numba_common.h
+|   |       |   |   _pymodule.h
+|   |       |   |   _random.c
+|   |       |   |   _typeof.h
+|   |       |   |   _unicodetype_db.h
+|   |       |   |   _version.py
+|   |       |   |   __init__.py
+|   |       |   |   __main__.py
+|   |       |   |   
+|   |       |   +---cext
+|   |       |   |   |   cext.h
+|   |       |   |   |   dictobject.c
+|   |       |   |   |   dictobject.h
+|   |       |   |   |   listobject.c
+|   |       |   |   |   listobject.h
+|   |       |   |   |   utils.c
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---cloudpickle
+|   |       |   |   |   cloudpickle.py
+|   |       |   |   |   cloudpickle_fast.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           cloudpickle.cpython-313.pyc
+|   |       |   |           cloudpickle_fast.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---core
+|   |       |   |   |   analysis.py
+|   |       |   |   |   base.py
+|   |       |   |   |   boxing.py
+|   |       |   |   |   bytecode.py
+|   |       |   |   |   byteflow.py
+|   |       |   |   |   caching.py
+|   |       |   |   |   callconv.py
+|   |       |   |   |   callwrapper.py
+|   |       |   |   |   ccallback.py
+|   |       |   |   |   cgutils.py
+|   |       |   |   |   codegen.py
+|   |       |   |   |   compiler.py
+|   |       |   |   |   compiler_lock.py
+|   |       |   |   |   compiler_machinery.py
+|   |       |   |   |   config.py
+|   |       |   |   |   consts.py
+|   |       |   |   |   controlflow.py
+|   |       |   |   |   cpu.py
+|   |       |   |   |   cpu_options.py
+|   |       |   |   |   debuginfo.py
+|   |       |   |   |   decorators.py
+|   |       |   |   |   descriptors.py
+|   |       |   |   |   dispatcher.py
+|   |       |   |   |   entrypoints.py
+|   |       |   |   |   environment.py
+|   |       |   |   |   errors.py
+|   |       |   |   |   event.py
+|   |       |   |   |   extending.py
+|   |       |   |   |   extending.pyi
+|   |       |   |   |   externals.py
+|   |       |   |   |   fastmathpass.py
+|   |       |   |   |   funcdesc.py
+|   |       |   |   |   generators.py
+|   |       |   |   |   imputils.py
+|   |       |   |   |   inline_closurecall.py
+|   |       |   |   |   interpreter.py
+|   |       |   |   |   intrinsics.py
+|   |       |   |   |   ir.py
+|   |       |   |   |   ir_utils.py
+|   |       |   |   |   itanium_mangler.py
+|   |       |   |   |   llvm_bindings.py
+|   |       |   |   |   lowering.py
+|   |       |   |   |   object_mode_passes.py
+|   |       |   |   |   optional.py
+|   |       |   |   |   options.py
+|   |       |   |   |   postproc.py
+|   |       |   |   |   pylowering.py
+|   |       |   |   |   pythonapi.py
+|   |       |   |   |   registry.py
+|   |       |   |   |   removerefctpass.py
+|   |       |   |   |   serialize.py
+|   |       |   |   |   sigutils.py
+|   |       |   |   |   ssa.py
+|   |       |   |   |   targetconfig.py
+|   |       |   |   |   target_extension.py
+|   |       |   |   |   tracing.py
+|   |       |   |   |   transforms.py
+|   |       |   |   |   typed_passes.py
+|   |       |   |   |   typeinfer.py
+|   |       |   |   |   untyped_passes.py
+|   |       |   |   |   utils.py
+|   |       |   |   |   withcontexts.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---annotations
+|   |       |   |   |   |   pretty_annotate.py
+|   |       |   |   |   |   template.html
+|   |       |   |   |   |   type_annotations.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           pretty_annotate.cpython-313.pyc
+|   |       |   |   |           type_annotations.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---datamodel
+|   |       |   |   |   |   manager.py
+|   |       |   |   |   |   models.py
+|   |       |   |   |   |   packer.py
+|   |       |   |   |   |   registry.py
+|   |       |   |   |   |   testing.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           manager.cpython-313.pyc
+|   |       |   |   |           models.cpython-313.pyc
+|   |       |   |   |           packer.cpython-313.pyc
+|   |       |   |   |           registry.cpython-313.pyc
+|   |       |   |   |           testing.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---rewrites
+|   |       |   |   |   |   ir_print.py
+|   |       |   |   |   |   registry.py
+|   |       |   |   |   |   static_binop.py
+|   |       |   |   |   |   static_getitem.py
+|   |       |   |   |   |   static_raise.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           ir_print.cpython-313.pyc
+|   |       |   |   |           registry.cpython-313.pyc
+|   |       |   |   |           static_binop.cpython-313.pyc
+|   |       |   |   |           static_getitem.cpython-313.pyc
+|   |       |   |   |           static_raise.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---runtime
+|   |       |   |   |   |   context.py
+|   |       |   |   |   |   nrt.cpp
+|   |       |   |   |   |   nrt.h
+|   |       |   |   |   |   nrt.py
+|   |       |   |   |   |   nrtdynmod.py
+|   |       |   |   |   |   nrtopt.py
+|   |       |   |   |   |   nrt_external.h
+|   |       |   |   |   |   _nrt_python.c
+|   |       |   |   |   |   _nrt_python.cp313-win_amd64.pyd
+|   |       |   |   |   |   _nrt_pythonmod.c
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           context.cpython-313.pyc
+|   |       |   |   |           nrt.cpython-313.pyc
+|   |       |   |   |           nrtdynmod.cpython-313.pyc
+|   |       |   |   |           nrtopt.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---typeconv
+|   |       |   |   |   |   castgraph.py
+|   |       |   |   |   |   rules.py
+|   |       |   |   |   |   typeconv.py
+|   |       |   |   |   |   _typeconv.cp313-win_amd64.pyd
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           castgraph.cpython-313.pyc
+|   |       |   |   |           rules.cpython-313.pyc
+|   |       |   |   |           typeconv.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---types
+|   |       |   |   |   |   abstract.py
+|   |       |   |   |   |   common.py
+|   |       |   |   |   |   containers.py
+|   |       |   |   |   |   functions.py
+|   |       |   |   |   |   function_type.py
+|   |       |   |   |   |   iterators.py
+|   |       |   |   |   |   misc.py
+|   |       |   |   |   |   npytypes.py
+|   |       |   |   |   |   scalars.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   __init__.pyi
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           abstract.cpython-313.pyc
+|   |       |   |   |           common.cpython-313.pyc
+|   |       |   |   |           containers.cpython-313.pyc
+|   |       |   |   |           functions.cpython-313.pyc
+|   |       |   |   |           function_type.cpython-313.pyc
+|   |       |   |   |           iterators.cpython-313.pyc
+|   |       |   |   |           misc.cpython-313.pyc
+|   |       |   |   |           npytypes.cpython-313.pyc
+|   |       |   |   |           scalars.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---typing
+|   |       |   |   |   |   arraydecl.py
+|   |       |   |   |   |   asnumbatype.py
+|   |       |   |   |   |   bufproto.py
+|   |       |   |   |   |   builtins.py
+|   |       |   |   |   |   cffi_utils.py
+|   |       |   |   |   |   cmathdecl.py
+|   |       |   |   |   |   collections.py
+|   |       |   |   |   |   context.py
+|   |       |   |   |   |   ctypes_utils.py
+|   |       |   |   |   |   dictdecl.py
+|   |       |   |   |   |   enumdecl.py
+|   |       |   |   |   |   listdecl.py
+|   |       |   |   |   |   mathdecl.py
+|   |       |   |   |   |   npdatetime.py
+|   |       |   |   |   |   npydecl.py
+|   |       |   |   |   |   setdecl.py
+|   |       |   |   |   |   templates.py
+|   |       |   |   |   |   typeof.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           arraydecl.cpython-313.pyc
+|   |       |   |   |           asnumbatype.cpython-313.pyc
+|   |       |   |   |           bufproto.cpython-313.pyc
+|   |       |   |   |           builtins.cpython-313.pyc
+|   |       |   |   |           cffi_utils.cpython-313.pyc
+|   |       |   |   |           cmathdecl.cpython-313.pyc
+|   |       |   |   |           collections.cpython-313.pyc
+|   |       |   |   |           context.cpython-313.pyc
+|   |       |   |   |           ctypes_utils.cpython-313.pyc
+|   |       |   |   |           dictdecl.cpython-313.pyc
+|   |       |   |   |           enumdecl.cpython-313.pyc
+|   |       |   |   |           listdecl.cpython-313.pyc
+|   |       |   |   |           mathdecl.cpython-313.pyc
+|   |       |   |   |           npdatetime.cpython-313.pyc
+|   |       |   |   |           npydecl.cpython-313.pyc
+|   |       |   |   |           setdecl.cpython-313.pyc
+|   |       |   |   |           templates.cpython-313.pyc
+|   |       |   |   |           typeof.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---unsafe
+|   |       |   |   |   |   bytes.py
+|   |       |   |   |   |   eh.py
+|   |       |   |   |   |   nrt.py
+|   |       |   |   |   |   refcount.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           bytes.cpython-313.pyc
+|   |       |   |   |           eh.cpython-313.pyc
+|   |       |   |   |           nrt.cpython-313.pyc
+|   |       |   |   |           refcount.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           analysis.cpython-313.pyc
+|   |       |   |           base.cpython-313.pyc
+|   |       |   |           boxing.cpython-313.pyc
+|   |       |   |           bytecode.cpython-313.pyc
+|   |       |   |           byteflow.cpython-313.pyc
+|   |       |   |           caching.cpython-313.pyc
+|   |       |   |           callconv.cpython-313.pyc
+|   |       |   |           callwrapper.cpython-313.pyc
+|   |       |   |           ccallback.cpython-313.pyc
+|   |       |   |           cgutils.cpython-313.pyc
+|   |       |   |           codegen.cpython-313.pyc
+|   |       |   |           compiler.cpython-313.pyc
+|   |       |   |           compiler_lock.cpython-313.pyc
+|   |       |   |           compiler_machinery.cpython-313.pyc
+|   |       |   |           config.cpython-313.pyc
+|   |       |   |           consts.cpython-313.pyc
+|   |       |   |           controlflow.cpython-313.pyc
+|   |       |   |           cpu.cpython-313.pyc
+|   |       |   |           cpu_options.cpython-313.pyc
+|   |       |   |           debuginfo.cpython-313.pyc
+|   |       |   |           decorators.cpython-313.pyc
+|   |       |   |           descriptors.cpython-313.pyc
+|   |       |   |           dispatcher.cpython-313.pyc
+|   |       |   |           entrypoints.cpython-313.pyc
+|   |       |   |           environment.cpython-313.pyc
+|   |       |   |           errors.cpython-313.pyc
+|   |       |   |           event.cpython-313.pyc
+|   |       |   |           extending.cpython-313.pyc
+|   |       |   |           externals.cpython-313.pyc
+|   |       |   |           fastmathpass.cpython-313.pyc
+|   |       |   |           funcdesc.cpython-313.pyc
+|   |       |   |           generators.cpython-313.pyc
+|   |       |   |           imputils.cpython-313.pyc
+|   |       |   |           inline_closurecall.cpython-313.pyc
+|   |       |   |           interpreter.cpython-313.pyc
+|   |       |   |           intrinsics.cpython-313.pyc
+|   |       |   |           ir.cpython-313.pyc
+|   |       |   |           ir_utils.cpython-313.pyc
+|   |       |   |           itanium_mangler.cpython-313.pyc
+|   |       |   |           llvm_bindings.cpython-313.pyc
+|   |       |   |           lowering.cpython-313.pyc
+|   |       |   |           object_mode_passes.cpython-313.pyc
+|   |       |   |           optional.cpython-313.pyc
+|   |       |   |           options.cpython-313.pyc
+|   |       |   |           postproc.cpython-313.pyc
+|   |       |   |           pylowering.cpython-313.pyc
+|   |       |   |           pythonapi.cpython-313.pyc
+|   |       |   |           registry.cpython-313.pyc
+|   |       |   |           removerefctpass.cpython-313.pyc
+|   |       |   |           serialize.cpython-313.pyc
+|   |       |   |           sigutils.cpython-313.pyc
+|   |       |   |           ssa.cpython-313.pyc
+|   |       |   |           targetconfig.cpython-313.pyc
+|   |       |   |           target_extension.cpython-313.pyc
+|   |       |   |           tracing.cpython-313.pyc
+|   |       |   |           transforms.cpython-313.pyc
+|   |       |   |           typed_passes.cpython-313.pyc
+|   |       |   |           typeinfer.cpython-313.pyc
+|   |       |   |           untyped_passes.cpython-313.pyc
+|   |       |   |           utils.cpython-313.pyc
+|   |       |   |           withcontexts.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---cpython
+|   |       |   |   |   builtins.py
+|   |       |   |   |   charseq.py
+|   |       |   |   |   cmathimpl.py
+|   |       |   |   |   enumimpl.py
+|   |       |   |   |   hashing.py
+|   |       |   |   |   heapq.py
+|   |       |   |   |   iterators.py
+|   |       |   |   |   listobj.py
+|   |       |   |   |   mathimpl.py
+|   |       |   |   |   numbers.py
+|   |       |   |   |   printimpl.py
+|   |       |   |   |   randomimpl.py
+|   |       |   |   |   rangeobj.py
+|   |       |   |   |   setobj.py
+|   |       |   |   |   slicing.py
+|   |       |   |   |   tupleobj.py
+|   |       |   |   |   unicode.py
+|   |       |   |   |   unicode_support.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---unsafe
+|   |       |   |   |   |   numbers.py
+|   |       |   |   |   |   tuple.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           numbers.cpython-313.pyc
+|   |       |   |   |           tuple.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           builtins.cpython-313.pyc
+|   |       |   |           charseq.cpython-313.pyc
+|   |       |   |           cmathimpl.cpython-313.pyc
+|   |       |   |           enumimpl.cpython-313.pyc
+|   |       |   |           hashing.cpython-313.pyc
+|   |       |   |           heapq.cpython-313.pyc
+|   |       |   |           iterators.cpython-313.pyc
+|   |       |   |           listobj.cpython-313.pyc
+|   |       |   |           mathimpl.cpython-313.pyc
+|   |       |   |           numbers.cpython-313.pyc
+|   |       |   |           printimpl.cpython-313.pyc
+|   |       |   |           randomimpl.cpython-313.pyc
+|   |       |   |           rangeobj.cpython-313.pyc
+|   |       |   |           setobj.cpython-313.pyc
+|   |       |   |           slicing.cpython-313.pyc
+|   |       |   |           tupleobj.cpython-313.pyc
+|   |       |   |           unicode.cpython-313.pyc
+|   |       |   |           unicode_support.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---cuda
+|   |       |   |   |   api.py
+|   |       |   |   |   api_util.py
+|   |       |   |   |   args.py
+|   |       |   |   |   cg.py
+|   |       |   |   |   codegen.py
+|   |       |   |   |   compiler.py
+|   |       |   |   |   cpp_function_wrappers.cu
+|   |       |   |   |   cudadecl.py
+|   |       |   |   |   cudaimpl.py
+|   |       |   |   |   cudamath.py
+|   |       |   |   |   cuda_fp16.h
+|   |       |   |   |   cuda_fp16.hpp
+|   |       |   |   |   cuda_paths.py
+|   |       |   |   |   decorators.py
+|   |       |   |   |   descriptor.py
+|   |       |   |   |   deviceufunc.py
+|   |       |   |   |   device_init.py
+|   |       |   |   |   dispatcher.py
+|   |       |   |   |   errors.py
+|   |       |   |   |   extending.py
+|   |       |   |   |   initialize.py
+|   |       |   |   |   intrinsics.py
+|   |       |   |   |   intrinsic_wrapper.py
+|   |       |   |   |   libdevice.py
+|   |       |   |   |   libdevicedecl.py
+|   |       |   |   |   libdevicefuncs.py
+|   |       |   |   |   libdeviceimpl.py
+|   |       |   |   |   mathimpl.py
+|   |       |   |   |   models.py
+|   |       |   |   |   nvvmutils.py
+|   |       |   |   |   printimpl.py
+|   |       |   |   |   random.py
+|   |       |   |   |   simulator_init.py
+|   |       |   |   |   stubs.py
+|   |       |   |   |   target.py
+|   |       |   |   |   testing.py
+|   |       |   |   |   types.py
+|   |       |   |   |   ufuncs.py
+|   |       |   |   |   vectorizers.py
+|   |       |   |   |   vector_types.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---cudadrv
+|   |       |   |   |   |   devicearray.py
+|   |       |   |   |   |   devices.py
+|   |       |   |   |   |   driver.py
+|   |       |   |   |   |   drvapi.py
+|   |       |   |   |   |   dummyarray.py
+|   |       |   |   |   |   enums.py
+|   |       |   |   |   |   error.py
+|   |       |   |   |   |   libs.py
+|   |       |   |   |   |   ndarray.py
+|   |       |   |   |   |   nvrtc.py
+|   |       |   |   |   |   nvvm.py
+|   |       |   |   |   |   rtapi.py
+|   |       |   |   |   |   runtime.py
+|   |       |   |   |   |   _extras.cp313-win_amd64.pyd
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           devicearray.cpython-313.pyc
+|   |       |   |   |           devices.cpython-313.pyc
+|   |       |   |   |           driver.cpython-313.pyc
+|   |       |   |   |           drvapi.cpython-313.pyc
+|   |       |   |   |           dummyarray.cpython-313.pyc
+|   |       |   |   |           enums.cpython-313.pyc
+|   |       |   |   |           error.cpython-313.pyc
+|   |       |   |   |           libs.cpython-313.pyc
+|   |       |   |   |           ndarray.cpython-313.pyc
+|   |       |   |   |           nvrtc.cpython-313.pyc
+|   |       |   |   |           nvvm.cpython-313.pyc
+|   |       |   |   |           rtapi.cpython-313.pyc
+|   |       |   |   |           runtime.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---kernels
+|   |       |   |   |   |   reduction.py
+|   |       |   |   |   |   transpose.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           reduction.cpython-313.pyc
+|   |       |   |   |           transpose.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---simulator
+|   |       |   |   |   |   api.py
+|   |       |   |   |   |   compiler.py
+|   |       |   |   |   |   kernel.py
+|   |       |   |   |   |   kernelapi.py
+|   |       |   |   |   |   reduction.py
+|   |       |   |   |   |   vector_types.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   +---cudadrv
+|   |       |   |   |   |   |   devicearray.py
+|   |       |   |   |   |   |   devices.py
+|   |       |   |   |   |   |   driver.py
+|   |       |   |   |   |   |   drvapi.py
+|   |       |   |   |   |   |   dummyarray.py
+|   |       |   |   |   |   |   error.py
+|   |       |   |   |   |   |   libs.py
+|   |       |   |   |   |   |   nvvm.py
+|   |       |   |   |   |   |   runtime.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           devicearray.cpython-313.pyc
+|   |       |   |   |   |           devices.cpython-313.pyc
+|   |       |   |   |   |           driver.cpython-313.pyc
+|   |       |   |   |   |           drvapi.cpython-313.pyc
+|   |       |   |   |   |           dummyarray.cpython-313.pyc
+|   |       |   |   |   |           error.cpython-313.pyc
+|   |       |   |   |   |           libs.cpython-313.pyc
+|   |       |   |   |   |           nvvm.cpython-313.pyc
+|   |       |   |   |   |           runtime.cpython-313.pyc
+|   |       |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |           
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           api.cpython-313.pyc
+|   |       |   |   |           compiler.cpython-313.pyc
+|   |       |   |   |           kernel.cpython-313.pyc
+|   |       |   |   |           kernelapi.cpython-313.pyc
+|   |       |   |   |           reduction.cpython-313.pyc
+|   |       |   |   |           vector_types.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---tests
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   +---cudadrv
+|   |       |   |   |   |   |   test_array_attr.py
+|   |       |   |   |   |   |   test_context_stack.py
+|   |       |   |   |   |   |   test_cuda_array_slicing.py
+|   |       |   |   |   |   |   test_cuda_auto_context.py
+|   |       |   |   |   |   |   test_cuda_devicerecord.py
+|   |       |   |   |   |   |   test_cuda_driver.py
+|   |       |   |   |   |   |   test_cuda_libraries.py
+|   |       |   |   |   |   |   test_cuda_memory.py
+|   |       |   |   |   |   |   test_cuda_ndarray.py
+|   |       |   |   |   |   |   test_deallocations.py
+|   |       |   |   |   |   |   test_detect.py
+|   |       |   |   |   |   |   test_emm_plugins.py
+|   |       |   |   |   |   |   test_events.py
+|   |       |   |   |   |   |   test_host_alloc.py
+|   |       |   |   |   |   |   test_init.py
+|   |       |   |   |   |   |   test_inline_ptx.py
+|   |       |   |   |   |   |   test_is_fp16.py
+|   |       |   |   |   |   |   test_linker.py
+|   |       |   |   |   |   |   test_managed_alloc.py
+|   |       |   |   |   |   |   test_mvc.py
+|   |       |   |   |   |   |   test_nvvm_driver.py
+|   |       |   |   |   |   |   test_pinned.py
+|   |       |   |   |   |   |   test_profiler.py
+|   |       |   |   |   |   |   test_ptds.py
+|   |       |   |   |   |   |   test_reset_device.py
+|   |       |   |   |   |   |   test_runtime.py
+|   |       |   |   |   |   |   test_select_device.py
+|   |       |   |   |   |   |   test_streams.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           test_array_attr.cpython-313.pyc
+|   |       |   |   |   |           test_context_stack.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_array_slicing.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_auto_context.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_devicerecord.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_driver.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_libraries.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_memory.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_ndarray.cpython-313.pyc
+|   |       |   |   |   |           test_deallocations.cpython-313.pyc
+|   |       |   |   |   |           test_detect.cpython-313.pyc
+|   |       |   |   |   |           test_emm_plugins.cpython-313.pyc
+|   |       |   |   |   |           test_events.cpython-313.pyc
+|   |       |   |   |   |           test_host_alloc.cpython-313.pyc
+|   |       |   |   |   |           test_init.cpython-313.pyc
+|   |       |   |   |   |           test_inline_ptx.cpython-313.pyc
+|   |       |   |   |   |           test_is_fp16.cpython-313.pyc
+|   |       |   |   |   |           test_linker.cpython-313.pyc
+|   |       |   |   |   |           test_managed_alloc.cpython-313.pyc
+|   |       |   |   |   |           test_mvc.cpython-313.pyc
+|   |       |   |   |   |           test_nvvm_driver.cpython-313.pyc
+|   |       |   |   |   |           test_pinned.cpython-313.pyc
+|   |       |   |   |   |           test_profiler.cpython-313.pyc
+|   |       |   |   |   |           test_ptds.cpython-313.pyc
+|   |       |   |   |   |           test_reset_device.cpython-313.pyc
+|   |       |   |   |   |           test_runtime.cpython-313.pyc
+|   |       |   |   |   |           test_select_device.cpython-313.pyc
+|   |       |   |   |   |           test_streams.cpython-313.pyc
+|   |       |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |           
+|   |       |   |   |   +---cudapy
+|   |       |   |   |   |   |   cache_usecases.py
+|   |       |   |   |   |   |   cache_with_cpu_usecases.py
+|   |       |   |   |   |   |   extensions_usecases.py
+|   |       |   |   |   |   |   recursion_usecases.py
+|   |       |   |   |   |   |   test_alignment.py
+|   |       |   |   |   |   |   test_array.py
+|   |       |   |   |   |   |   test_array_args.py
+|   |       |   |   |   |   |   test_array_methods.py
+|   |       |   |   |   |   |   test_atomics.py
+|   |       |   |   |   |   |   test_blackscholes.py
+|   |       |   |   |   |   |   test_boolean.py
+|   |       |   |   |   |   |   test_caching.py
+|   |       |   |   |   |   |   test_casting.py
+|   |       |   |   |   |   |   test_cffi.py
+|   |       |   |   |   |   |   test_compiler.py
+|   |       |   |   |   |   |   test_complex.py
+|   |       |   |   |   |   |   test_complex_kernel.py
+|   |       |   |   |   |   |   test_constmem.py
+|   |       |   |   |   |   |   test_const_string.py
+|   |       |   |   |   |   |   test_cooperative_groups.py
+|   |       |   |   |   |   |   test_cuda_array_interface.py
+|   |       |   |   |   |   |   test_cuda_jit_no_types.py
+|   |       |   |   |   |   |   test_datetime.py
+|   |       |   |   |   |   |   test_debug.py
+|   |       |   |   |   |   |   test_debuginfo.py
+|   |       |   |   |   |   |   test_device_func.py
+|   |       |   |   |   |   |   test_dispatcher.py
+|   |       |   |   |   |   |   test_enums.py
+|   |       |   |   |   |   |   test_errors.py
+|   |       |   |   |   |   |   test_exception.py
+|   |       |   |   |   |   |   test_extending.py
+|   |       |   |   |   |   |   test_fastmath.py
+|   |       |   |   |   |   |   test_forall.py
+|   |       |   |   |   |   |   test_freevar.py
+|   |       |   |   |   |   |   test_frexp_ldexp.py
+|   |       |   |   |   |   |   test_globals.py
+|   |       |   |   |   |   |   test_gufunc.py
+|   |       |   |   |   |   |   test_gufunc_scalar.py
+|   |       |   |   |   |   |   test_gufunc_scheduling.py
+|   |       |   |   |   |   |   test_idiv.py
+|   |       |   |   |   |   |   test_inspect.py
+|   |       |   |   |   |   |   test_intrinsics.py
+|   |       |   |   |   |   |   test_ipc.py
+|   |       |   |   |   |   |   test_iterators.py
+|   |       |   |   |   |   |   test_lang.py
+|   |       |   |   |   |   |   test_laplace.py
+|   |       |   |   |   |   |   test_libdevice.py
+|   |       |   |   |   |   |   test_lineinfo.py
+|   |       |   |   |   |   |   test_localmem.py
+|   |       |   |   |   |   |   test_mandel.py
+|   |       |   |   |   |   |   test_math.py
+|   |       |   |   |   |   |   test_matmul.py
+|   |       |   |   |   |   |   test_minmax.py
+|   |       |   |   |   |   |   test_montecarlo.py
+|   |       |   |   |   |   |   test_multigpu.py
+|   |       |   |   |   |   |   test_multiprocessing.py
+|   |       |   |   |   |   |   test_multithreads.py
+|   |       |   |   |   |   |   test_nondet.py
+|   |       |   |   |   |   |   test_operator.py
+|   |       |   |   |   |   |   test_optimization.py
+|   |       |   |   |   |   |   test_overload.py
+|   |       |   |   |   |   |   test_powi.py
+|   |       |   |   |   |   |   test_print.py
+|   |       |   |   |   |   |   test_py2_div_issue.py
+|   |       |   |   |   |   |   test_random.py
+|   |       |   |   |   |   |   test_record_dtype.py
+|   |       |   |   |   |   |   test_recursion.py
+|   |       |   |   |   |   |   test_reduction.py
+|   |       |   |   |   |   |   test_retrieve_autoconverted_arrays.py
+|   |       |   |   |   |   |   test_serialize.py
+|   |       |   |   |   |   |   test_slicing.py
+|   |       |   |   |   |   |   test_sm.py
+|   |       |   |   |   |   |   test_sm_creation.py
+|   |       |   |   |   |   |   test_sync.py
+|   |       |   |   |   |   |   test_transpose.py
+|   |       |   |   |   |   |   test_ufuncs.py
+|   |       |   |   |   |   |   test_userexc.py
+|   |       |   |   |   |   |   test_vectorize.py
+|   |       |   |   |   |   |   test_vectorize_complex.py
+|   |       |   |   |   |   |   test_vectorize_decor.py
+|   |       |   |   |   |   |   test_vectorize_device.py
+|   |       |   |   |   |   |   test_vectorize_scalar_arg.py
+|   |       |   |   |   |   |   test_vector_type.py
+|   |       |   |   |   |   |   test_warning.py
+|   |       |   |   |   |   |   test_warp_ops.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           cache_usecases.cpython-313.pyc
+|   |       |   |   |   |           cache_with_cpu_usecases.cpython-313.pyc
+|   |       |   |   |   |           extensions_usecases.cpython-313.pyc
+|   |       |   |   |   |           recursion_usecases.cpython-313.pyc
+|   |       |   |   |   |           test_alignment.cpython-313.pyc
+|   |       |   |   |   |           test_array.cpython-313.pyc
+|   |       |   |   |   |           test_array_args.cpython-313.pyc
+|   |       |   |   |   |           test_array_methods.cpython-313.pyc
+|   |       |   |   |   |           test_atomics.cpython-313.pyc
+|   |       |   |   |   |           test_blackscholes.cpython-313.pyc
+|   |       |   |   |   |           test_boolean.cpython-313.pyc
+|   |       |   |   |   |           test_caching.cpython-313.pyc
+|   |       |   |   |   |           test_casting.cpython-313.pyc
+|   |       |   |   |   |           test_cffi.cpython-313.pyc
+|   |       |   |   |   |           test_compiler.cpython-313.pyc
+|   |       |   |   |   |           test_complex.cpython-313.pyc
+|   |       |   |   |   |           test_complex_kernel.cpython-313.pyc
+|   |       |   |   |   |           test_constmem.cpython-313.pyc
+|   |       |   |   |   |           test_const_string.cpython-313.pyc
+|   |       |   |   |   |           test_cooperative_groups.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_array_interface.cpython-313.pyc
+|   |       |   |   |   |           test_cuda_jit_no_types.cpython-313.pyc
+|   |       |   |   |   |           test_datetime.cpython-313.pyc
+|   |       |   |   |   |           test_debug.cpython-313.pyc
+|   |       |   |   |   |           test_debuginfo.cpython-313.pyc
+|   |       |   |   |   |           test_device_func.cpython-313.pyc
+|   |       |   |   |   |           test_dispatcher.cpython-313.pyc
+|   |       |   |   |   |           test_enums.cpython-313.pyc
+|   |       |   |   |   |           test_errors.cpython-313.pyc
+|   |       |   |   |   |           test_exception.cpython-313.pyc
+|   |       |   |   |   |           test_extending.cpython-313.pyc
+|   |       |   |   |   |           test_fastmath.cpython-313.pyc
+|   |       |   |   |   |           test_forall.cpython-313.pyc
+|   |       |   |   |   |           test_freevar.cpython-313.pyc
+|   |       |   |   |   |           test_frexp_ldexp.cpython-313.pyc
+|   |       |   |   |   |           test_globals.cpython-313.pyc
+|   |       |   |   |   |           test_gufunc.cpython-313.pyc
+|   |       |   |   |   |           test_gufunc_scalar.cpython-313.pyc
+|   |       |   |   |   |           test_gufunc_scheduling.cpython-313.pyc
+|   |       |   |   |   |           test_idiv.cpython-313.pyc
+|   |       |   |   |   |           test_inspect.cpython-313.pyc
+|   |       |   |   |   |           test_intrinsics.cpython-313.pyc
+|   |       |   |   |   |           test_ipc.cpython-313.pyc
+|   |       |   |   |   |           test_iterators.cpython-313.pyc
+|   |       |   |   |   |           test_lang.cpython-313.pyc
+|   |       |   |   |   |           test_laplace.cpython-313.pyc
+|   |       |   |   |   |           test_libdevice.cpython-313.pyc
+|   |       |   |   |   |           test_lineinfo.cpython-313.pyc
+|   |       |   |   |   |           test_localmem.cpython-313.pyc
+|   |       |   |   |   |           test_mandel.cpython-313.pyc
+|   |       |   |   |   |           test_math.cpython-313.pyc
+|   |       |   |   |   |           test_matmul.cpython-313.pyc
+|   |       |   |   |   |           test_minmax.cpython-313.pyc
+|   |       |   |   |   |           test_montecarlo.cpython-313.pyc
+|   |       |   |   |   |           test_multigpu.cpython-313.pyc
+|   |       |   |   |   |           test_multiprocessing.cpython-313.pyc
+|   |       |   |   |   |           test_multithreads.cpython-313.pyc
+|   |       |   |   |   |           test_nondet.cpython-313.pyc
+|   |       |   |   |   |           test_operator.cpython-313.pyc
+|   |       |   |   |   |           test_optimization.cpython-313.pyc
+|   |       |   |   |   |           test_overload.cpython-313.pyc
+|   |       |   |   |   |           test_powi.cpython-313.pyc
+|   |       |   |   |   |           test_print.cpython-313.pyc
+|   |       |   |   |   |           test_py2_div_issue.cpython-313.pyc
+|   |       |   |   |   |           test_random.cpython-313.pyc
+|   |       |   |   |   |           test_record_dtype.cpython-313.pyc
+|   |       |   |   |   |           test_recursion.cpython-313.pyc
+|   |       |   |   |   |           test_reduction.cpython-313.pyc
+|   |       |   |   |   |           test_retrieve_autoconverted_arrays.cpython-313.pyc
+|   |       |   |   |   |           test_serialize.cpython-313.pyc
+|   |       |   |   |   |           test_slicing.cpython-313.pyc
+|   |       |   |   |   |           test_sm.cpython-313.pyc
+|   |       |   |   |   |           test_sm_creation.cpython-313.pyc
+|   |       |   |   |   |           test_sync.cpython-313.pyc
+|   |       |   |   |   |           test_transpose.cpython-313.pyc
+|   |       |   |   |   |           test_ufuncs.cpython-313.pyc
+|   |       |   |   |   |           test_userexc.cpython-313.pyc
+|   |       |   |   |   |           test_vectorize.cpython-313.pyc
+|   |       |   |   |   |           test_vectorize_complex.cpython-313.pyc
+|   |       |   |   |   |           test_vectorize_decor.cpython-313.pyc
+|   |       |   |   |   |           test_vectorize_device.cpython-313.pyc
+|   |       |   |   |   |           test_vectorize_scalar_arg.cpython-313.pyc
+|   |       |   |   |   |           test_vector_type.cpython-313.pyc
+|   |       |   |   |   |           test_warning.cpython-313.pyc
+|   |       |   |   |   |           test_warp_ops.cpython-313.pyc
+|   |       |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |           
+|   |       |   |   |   +---cudasim
+|   |       |   |   |   |   |   support.py
+|   |       |   |   |   |   |   test_cudasim_issues.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           support.cpython-313.pyc
+|   |       |   |   |   |           test_cudasim_issues.cpython-313.pyc
+|   |       |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |           
+|   |       |   |   |   +---data
+|   |       |   |   |   |   |   cuda_include.cu
+|   |       |   |   |   |   |   error.cu
+|   |       |   |   |   |   |   jitlink.cu
+|   |       |   |   |   |   |   jitlink.ptx
+|   |       |   |   |   |   |   warn.cu
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |           
+|   |       |   |   |   +---doc_examples
+|   |       |   |   |   |   |   test_cg.py
+|   |       |   |   |   |   |   test_cpu_gpu_compat.py
+|   |       |   |   |   |   |   test_ffi.py
+|   |       |   |   |   |   |   test_laplace.py
+|   |       |   |   |   |   |   test_matmul.py
+|   |       |   |   |   |   |   test_montecarlo.py
+|   |       |   |   |   |   |   test_random.py
+|   |       |   |   |   |   |   test_reduction.py
+|   |       |   |   |   |   |   test_sessionize.py
+|   |       |   |   |   |   |   test_ufunc.py
+|   |       |   |   |   |   |   test_vecadd.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   +---ffi
+|   |       |   |   |   |   |   |   functions.cu
+|   |       |   |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   |   
+|   |       |   |   |   |   |   \---__pycache__
+|   |       |   |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |   |           
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           test_cg.cpython-313.pyc
+|   |       |   |   |   |           test_cpu_gpu_compat.cpython-313.pyc
+|   |       |   |   |   |           test_ffi.cpython-313.pyc
+|   |       |   |   |   |           test_laplace.cpython-313.pyc
+|   |       |   |   |   |           test_matmul.cpython-313.pyc
+|   |       |   |   |   |           test_montecarlo.cpython-313.pyc
+|   |       |   |   |   |           test_random.cpython-313.pyc
+|   |       |   |   |   |           test_reduction.cpython-313.pyc
+|   |       |   |   |   |           test_sessionize.cpython-313.pyc
+|   |       |   |   |   |           test_ufunc.cpython-313.pyc
+|   |       |   |   |   |           test_vecadd.cpython-313.pyc
+|   |       |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |           
+|   |       |   |   |   +---nocuda
+|   |       |   |   |   |   |   test_dummyarray.py
+|   |       |   |   |   |   |   test_function_resolution.py
+|   |       |   |   |   |   |   test_import.py
+|   |       |   |   |   |   |   test_library_lookup.py
+|   |       |   |   |   |   |   test_nvvm.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           test_dummyarray.cpython-313.pyc
+|   |       |   |   |   |           test_function_resolution.cpython-313.pyc
+|   |       |   |   |   |           test_import.cpython-313.pyc
+|   |       |   |   |   |           test_library_lookup.cpython-313.pyc
+|   |       |   |   |   |           test_nvvm.cpython-313.pyc
+|   |       |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |           
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           api.cpython-313.pyc
+|   |       |   |           api_util.cpython-313.pyc
+|   |       |   |           args.cpython-313.pyc
+|   |       |   |           cg.cpython-313.pyc
+|   |       |   |           codegen.cpython-313.pyc
+|   |       |   |           compiler.cpython-313.pyc
+|   |       |   |           cudadecl.cpython-313.pyc
+|   |       |   |           cudaimpl.cpython-313.pyc
+|   |       |   |           cudamath.cpython-313.pyc
+|   |       |   |           cuda_paths.cpython-313.pyc
+|   |       |   |           decorators.cpython-313.pyc
+|   |       |   |           descriptor.cpython-313.pyc
+|   |       |   |           deviceufunc.cpython-313.pyc
+|   |       |   |           device_init.cpython-313.pyc
+|   |       |   |           dispatcher.cpython-313.pyc
+|   |       |   |           errors.cpython-313.pyc
+|   |       |   |           extending.cpython-313.pyc
+|   |       |   |           initialize.cpython-313.pyc
+|   |       |   |           intrinsics.cpython-313.pyc
+|   |       |   |           intrinsic_wrapper.cpython-313.pyc
+|   |       |   |           libdevice.cpython-313.pyc
+|   |       |   |           libdevicedecl.cpython-313.pyc
+|   |       |   |           libdevicefuncs.cpython-313.pyc
+|   |       |   |           libdeviceimpl.cpython-313.pyc
+|   |       |   |           mathimpl.cpython-313.pyc
+|   |       |   |           models.cpython-313.pyc
+|   |       |   |           nvvmutils.cpython-313.pyc
+|   |       |   |           printimpl.cpython-313.pyc
+|   |       |   |           random.cpython-313.pyc
+|   |       |   |           simulator_init.cpython-313.pyc
+|   |       |   |           stubs.cpython-313.pyc
+|   |       |   |           target.cpython-313.pyc
+|   |       |   |           testing.cpython-313.pyc
+|   |       |   |           types.cpython-313.pyc
+|   |       |   |           ufuncs.cpython-313.pyc
+|   |       |   |           vectorizers.cpython-313.pyc
+|   |       |   |           vector_types.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---experimental
+|   |       |   |   |   function_type.py
+|   |       |   |   |   structref.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---jitclass
+|   |       |   |   |   |   base.py
+|   |       |   |   |   |   boxing.py
+|   |       |   |   |   |   decorators.py
+|   |       |   |   |   |   overloads.py
+|   |       |   |   |   |   _box.cp313-win_amd64.pyd
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           base.cpython-313.pyc
+|   |       |   |   |           boxing.cpython-313.pyc
+|   |       |   |   |           decorators.cpython-313.pyc
+|   |       |   |   |           overloads.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           function_type.cpython-313.pyc
+|   |       |   |           structref.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---misc
+|   |       |   |   |   appdirs.py
+|   |       |   |   |   cffiimpl.py
+|   |       |   |   |   cmdlang.gdb
+|   |       |   |   |   coverage_support.py
+|   |       |   |   |   dump_style.py
+|   |       |   |   |   findlib.py
+|   |       |   |   |   firstlinefinder.py
+|   |       |   |   |   gdb_hook.py
+|   |       |   |   |   gdb_print_extension.py
+|   |       |   |   |   init_utils.py
+|   |       |   |   |   inspection.py
+|   |       |   |   |   literal.py
+|   |       |   |   |   llvm_pass_timings.py
+|   |       |   |   |   memoryutils.py
+|   |       |   |   |   mergesort.py
+|   |       |   |   |   numba_entry.py
+|   |       |   |   |   numba_gdbinfo.py
+|   |       |   |   |   numba_sysinfo.py
+|   |       |   |   |   POST.py
+|   |       |   |   |   quicksort.py
+|   |       |   |   |   special.py
+|   |       |   |   |   timsort.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---help
+|   |       |   |   |   |   inspector.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           inspector.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           appdirs.cpython-313.pyc
+|   |       |   |           cffiimpl.cpython-313.pyc
+|   |       |   |           coverage_support.cpython-313.pyc
+|   |       |   |           dump_style.cpython-313.pyc
+|   |       |   |           findlib.cpython-313.pyc
+|   |       |   |           firstlinefinder.cpython-313.pyc
+|   |       |   |           gdb_hook.cpython-313.pyc
+|   |       |   |           gdb_print_extension.cpython-313.pyc
+|   |       |   |           init_utils.cpython-313.pyc
+|   |       |   |           inspection.cpython-313.pyc
+|   |       |   |           literal.cpython-313.pyc
+|   |       |   |           llvm_pass_timings.cpython-313.pyc
+|   |       |   |           memoryutils.cpython-313.pyc
+|   |       |   |           mergesort.cpython-313.pyc
+|   |       |   |           numba_entry.cpython-313.pyc
+|   |       |   |           numba_gdbinfo.cpython-313.pyc
+|   |       |   |           numba_sysinfo.cpython-313.pyc
+|   |       |   |           POST.cpython-313.pyc
+|   |       |   |           quicksort.cpython-313.pyc
+|   |       |   |           special.cpython-313.pyc
+|   |       |   |           timsort.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---np
+|   |       |   |   |   arraymath.py
+|   |       |   |   |   arrayobj.py
+|   |       |   |   |   extensions.py
+|   |       |   |   |   linalg.py
+|   |       |   |   |   npdatetime.py
+|   |       |   |   |   npdatetime_helpers.py
+|   |       |   |   |   npyfuncs.py
+|   |       |   |   |   npyimpl.py
+|   |       |   |   |   numpy_support.py
+|   |       |   |   |   ufunc_db.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---math
+|   |       |   |   |   |   cmathimpl.py
+|   |       |   |   |   |   mathimpl.py
+|   |       |   |   |   |   numbers.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           cmathimpl.cpython-313.pyc
+|   |       |   |   |           mathimpl.cpython-313.pyc
+|   |       |   |   |           numbers.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---polynomial
+|   |       |   |   |   |   polynomial_core.py
+|   |       |   |   |   |   polynomial_functions.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           polynomial_core.cpython-313.pyc
+|   |       |   |   |           polynomial_functions.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---random
+|   |       |   |   |   |   distributions.py
+|   |       |   |   |   |   generator_core.py
+|   |       |   |   |   |   generator_methods.py
+|   |       |   |   |   |   random_methods.py
+|   |       |   |   |   |   _constants.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           distributions.cpython-313.pyc
+|   |       |   |   |           generator_core.cpython-313.pyc
+|   |       |   |   |           generator_methods.cpython-313.pyc
+|   |       |   |   |           random_methods.cpython-313.pyc
+|   |       |   |   |           _constants.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---ufunc
+|   |       |   |   |   |   array_exprs.py
+|   |       |   |   |   |   decorators.py
+|   |       |   |   |   |   dufunc.py
+|   |       |   |   |   |   gufunc.py
+|   |       |   |   |   |   omppool.cp313-win_amd64.pyd
+|   |       |   |   |   |   parallel.py
+|   |       |   |   |   |   sigparse.py
+|   |       |   |   |   |   tbbpool.cp313-win_amd64.pyd
+|   |       |   |   |   |   ufuncbuilder.py
+|   |       |   |   |   |   ufunc_base.py
+|   |       |   |   |   |   workqueue.cp313-win_amd64.pyd
+|   |       |   |   |   |   wrappers.py
+|   |       |   |   |   |   _internal.cp313-win_amd64.pyd
+|   |       |   |   |   |   _num_threads.cp313-win_amd64.pyd
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           array_exprs.cpython-313.pyc
+|   |       |   |   |           decorators.cpython-313.pyc
+|   |       |   |   |           dufunc.cpython-313.pyc
+|   |       |   |   |           gufunc.cpython-313.pyc
+|   |       |   |   |           parallel.cpython-313.pyc
+|   |       |   |   |           sigparse.cpython-313.pyc
+|   |       |   |   |           ufuncbuilder.cpython-313.pyc
+|   |       |   |   |           ufunc_base.cpython-313.pyc
+|   |       |   |   |           wrappers.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---unsafe
+|   |       |   |   |   |   ndarray.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           ndarray.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           arraymath.cpython-313.pyc
+|   |       |   |           arrayobj.cpython-313.pyc
+|   |       |   |           extensions.cpython-313.pyc
+|   |       |   |           linalg.cpython-313.pyc
+|   |       |   |           npdatetime.cpython-313.pyc
+|   |       |   |           npdatetime_helpers.cpython-313.pyc
+|   |       |   |           npyfuncs.cpython-313.pyc
+|   |       |   |           npyimpl.cpython-313.pyc
+|   |       |   |           numpy_support.cpython-313.pyc
+|   |       |   |           ufunc_db.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---parfors
+|   |       |   |   |   array_analysis.py
+|   |       |   |   |   parfor.py
+|   |       |   |   |   parfor_lowering.py
+|   |       |   |   |   parfor_lowering_utils.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           array_analysis.cpython-313.pyc
+|   |       |   |           parfor.cpython-313.pyc
+|   |       |   |           parfor_lowering.cpython-313.pyc
+|   |       |   |           parfor_lowering_utils.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---pycc
+|   |       |   |   |   cc.py
+|   |       |   |   |   compiler.py
+|   |       |   |   |   decorators.py
+|   |       |   |   |   llvm_types.py
+|   |       |   |   |   modulemixin.c
+|   |       |   |   |   platform.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           cc.cpython-313.pyc
+|   |       |   |           compiler.cpython-313.pyc
+|   |       |   |           decorators.cpython-313.pyc
+|   |       |   |           llvm_types.cpython-313.pyc
+|   |       |   |           platform.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---scripts
+|   |       |   |   |   generate_lower_listing.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           generate_lower_listing.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---stencils
+|   |       |   |   |   stencil.py
+|   |       |   |   |   stencilparfor.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           stencil.cpython-313.pyc
+|   |       |   |           stencilparfor.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---testing
+|   |       |   |   |   loader.py
+|   |       |   |   |   main.py
+|   |       |   |   |   notebook.py
+|   |       |   |   |   _runtests.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   __main__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           loader.cpython-313.pyc
+|   |       |   |           main.cpython-313.pyc
+|   |       |   |           notebook.cpython-313.pyc
+|   |       |   |           _runtests.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           __main__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---tests
+|   |       |   |   |   annotation_usecases.py
+|   |       |   |   |   cache_usecases.py
+|   |       |   |   |   cffi_usecases.py
+|   |       |   |   |   cfunc_cache_usecases.py
+|   |       |   |   |   chained_assign_usecases.py
+|   |       |   |   |   cloudpickle_main_class.py
+|   |       |   |   |   compile_with_pycc.py
+|   |       |   |   |   complex_usecases.py
+|   |       |   |   |   ctypes_usecases.py
+|   |       |   |   |   doctest_usecase.py
+|   |       |   |   |   dummy_module.py
+|   |       |   |   |   enum_usecases.py
+|   |       |   |   |   errorhandling_usecases.py
+|   |       |   |   |   error_usecases.py
+|   |       |   |   |   gdb_support.py
+|   |       |   |   |   inlining_usecases.py
+|   |       |   |   |   matmul_usecase.py
+|   |       |   |   |   orphaned_semaphore_usecase.py
+|   |       |   |   |   overload_usecases.py
+|   |       |   |   |   parfors_cache_usecases.py
+|   |       |   |   |   parfor_iss9490_usecase.py
+|   |       |   |   |   pdlike_usecase.py
+|   |       |   |   |   recursion_usecases.py
+|   |       |   |   |   serialize_usecases.py
+|   |       |   |   |   support.py
+|   |       |   |   |   test_alignment.py
+|   |       |   |   |   test_analysis.py
+|   |       |   |   |   test_annotations.py
+|   |       |   |   |   test_api.py
+|   |       |   |   |   test_array_analysis.py
+|   |       |   |   |   test_array_attr.py
+|   |       |   |   |   test_array_constants.py
+|   |       |   |   |   test_array_exprs.py
+|   |       |   |   |   test_array_iterators.py
+|   |       |   |   |   test_array_manipulation.py
+|   |       |   |   |   test_array_methods.py
+|   |       |   |   |   test_array_reductions.py
+|   |       |   |   |   test_array_return.py
+|   |       |   |   |   test_asnumbatype.py
+|   |       |   |   |   test_auto_constants.py
+|   |       |   |   |   test_blackscholes.py
+|   |       |   |   |   test_boundscheck.py
+|   |       |   |   |   test_buffer_protocol.py
+|   |       |   |   |   test_builtins.py
+|   |       |   |   |   test_byteflow.py
+|   |       |   |   |   test_caching.py
+|   |       |   |   |   test_casting.py
+|   |       |   |   |   test_cffi.py
+|   |       |   |   |   test_cfunc.py
+|   |       |   |   |   test_cgutils.py
+|   |       |   |   |   test_chained_assign.py
+|   |       |   |   |   test_chrome_trace.py
+|   |       |   |   |   test_cli.py
+|   |       |   |   |   test_closure.py
+|   |       |   |   |   test_codegen.py
+|   |       |   |   |   test_compiler_flags.py
+|   |       |   |   |   test_compiler_lock.py
+|   |       |   |   |   test_compile_cache.py
+|   |       |   |   |   test_complex.py
+|   |       |   |   |   test_comprehension.py
+|   |       |   |   |   test_conditions_as_predicates.py
+|   |       |   |   |   test_config.py
+|   |       |   |   |   test_conversion.py
+|   |       |   |   |   test_copy_propagate.py
+|   |       |   |   |   test_ctypes.py
+|   |       |   |   |   test_dataflow.py
+|   |       |   |   |   test_datamodel.py
+|   |       |   |   |   test_debug.py
+|   |       |   |   |   test_debuginfo.py
+|   |       |   |   |   test_deprecations.py
+|   |       |   |   |   test_dictimpl.py
+|   |       |   |   |   test_dictobject.py
+|   |       |   |   |   test_dicts.py
+|   |       |   |   |   test_dispatcher.py
+|   |       |   |   |   test_doctest.py
+|   |       |   |   |   test_dyn_array.py
+|   |       |   |   |   test_dyn_func.py
+|   |       |   |   |   test_entrypoints.py
+|   |       |   |   |   test_enums.py
+|   |       |   |   |   test_errorhandling.py
+|   |       |   |   |   test_errormodels.py
+|   |       |   |   |   test_event.py
+|   |       |   |   |   test_exceptions.py
+|   |       |   |   |   test_extended_arg.py
+|   |       |   |   |   test_extending.py
+|   |       |   |   |   test_extending_types.py
+|   |       |   |   |   test_fancy_indexing.py
+|   |       |   |   |   test_fastmath.py
+|   |       |   |   |   test_findlib.py
+|   |       |   |   |   test_firstlinefinder.py
+|   |       |   |   |   test_flow_control.py
+|   |       |   |   |   test_funcdesc.py
+|   |       |   |   |   test_function_type.py
+|   |       |   |   |   test_func_interface.py
+|   |       |   |   |   test_func_lifetime.py
+|   |       |   |   |   test_gdb_bindings.py
+|   |       |   |   |   test_gdb_dwarf.py
+|   |       |   |   |   test_generators.py
+|   |       |   |   |   test_getitem_on_types.py
+|   |       |   |   |   test_gil.py
+|   |       |   |   |   test_globals.py
+|   |       |   |   |   test_hashing.py
+|   |       |   |   |   test_heapq.py
+|   |       |   |   |   test_help.py
+|   |       |   |   |   test_import.py
+|   |       |   |   |   test_indexing.py
+|   |       |   |   |   test_init_utils.py
+|   |       |   |   |   test_inlining.py
+|   |       |   |   |   test_interpreter.py
+|   |       |   |   |   test_interproc.py
+|   |       |   |   |   test_intwidth.py
+|   |       |   |   |   test_ir.py
+|   |       |   |   |   test_ir_inlining.py
+|   |       |   |   |   test_ir_utils.py
+|   |       |   |   |   test_itanium_mangler.py
+|   |       |   |   |   test_iteration.py
+|   |       |   |   |   test_jitclasses.py
+|   |       |   |   |   test_jitmethod.py
+|   |       |   |   |   test_jit_module.py
+|   |       |   |   |   test_linalg.py
+|   |       |   |   |   test_listimpl.py
+|   |       |   |   |   test_listobject.py
+|   |       |   |   |   test_lists.py
+|   |       |   |   |   test_literal_dispatch.py
+|   |       |   |   |   test_llvm_pass_timings.py
+|   |       |   |   |   test_llvm_version_check.py
+|   |       |   |   |   test_locals.py
+|   |       |   |   |   test_looplifting.py
+|   |       |   |   |   test_make_function_to_jit_function.py
+|   |       |   |   |   test_mandelbrot.py
+|   |       |   |   |   test_mangling.py
+|   |       |   |   |   test_map_filter_reduce.py
+|   |       |   |   |   test_mathlib.py
+|   |       |   |   |   test_maxmin.py
+|   |       |   |   |   test_misc_coverage_support.py
+|   |       |   |   |   test_mixed_tuple_unroller.py
+|   |       |   |   |   test_moved_modules.py
+|   |       |   |   |   test_multi3.py
+|   |       |   |   |   test_nan.py
+|   |       |   |   |   test_ndarray_subclasses.py
+|   |       |   |   |   test_nested_calls.py
+|   |       |   |   |   test_npdatetime.py
+|   |       |   |   |   test_np_functions.py
+|   |       |   |   |   test_np_randomgen.py
+|   |       |   |   |   test_nrt.py
+|   |       |   |   |   test_nrt_refct.py
+|   |       |   |   |   test_numberctor.py
+|   |       |   |   |   test_numbers.py
+|   |       |   |   |   test_numconv.py
+|   |       |   |   |   test_numpyadapt.py
+|   |       |   |   |   test_numpy_support.py
+|   |       |   |   |   test_num_threads.py
+|   |       |   |   |   test_objects.py
+|   |       |   |   |   test_object_mode.py
+|   |       |   |   |   test_obj_lifetime.py
+|   |       |   |   |   test_operators.py
+|   |       |   |   |   test_optimisation_pipelines.py
+|   |       |   |   |   test_optional.py
+|   |       |   |   |   test_overlap.py
+|   |       |   |   |   test_parallel_backend.py
+|   |       |   |   |   test_parfors.py
+|   |       |   |   |   test_parfors_caching.py
+|   |       |   |   |   test_parfors_passes.py
+|   |       |   |   |   test_pipeline.py
+|   |       |   |   |   test_polynomial.py
+|   |       |   |   |   test_practical_lowering_issues.py
+|   |       |   |   |   test_print.py
+|   |       |   |   |   test_profiler.py
+|   |       |   |   |   test_pycc.py
+|   |       |   |   |   test_pythonapi.py
+|   |       |   |   |   test_python_int.py
+|   |       |   |   |   test_random.py
+|   |       |   |   |   test_range.py
+|   |       |   |   |   test_recarray_usecases.py
+|   |       |   |   |   test_record_dtype.py
+|   |       |   |   |   test_recursion.py
+|   |       |   |   |   test_refop_pruning.py
+|   |       |   |   |   test_remove_dead.py
+|   |       |   |   |   test_repr.py
+|   |       |   |   |   test_return_values.py
+|   |       |   |   |   test_runtests.py
+|   |       |   |   |   test_serialize.py
+|   |       |   |   |   test_sets.py
+|   |       |   |   |   test_slices.py
+|   |       |   |   |   test_sort.py
+|   |       |   |   |   test_ssa.py
+|   |       |   |   |   test_stencils.py
+|   |       |   |   |   test_storeslice.py
+|   |       |   |   |   test_struct_ref.py
+|   |       |   |   |   test_support.py
+|   |       |   |   |   test_svml.py
+|   |       |   |   |   test_sysinfo.py
+|   |       |   |   |   test_sys_monitoring.py
+|   |       |   |   |   test_sys_stdin_assignment.py
+|   |       |   |   |   test_target_extension.py
+|   |       |   |   |   test_target_overloadselector.py
+|   |       |   |   |   test_threadsafety.py
+|   |       |   |   |   test_tracing.py
+|   |       |   |   |   test_try_except.py
+|   |       |   |   |   test_tuples.py
+|   |       |   |   |   test_typeconv.py
+|   |       |   |   |   test_typedlist.py
+|   |       |   |   |   test_typedobjectutils.py
+|   |       |   |   |   test_typeguard.py
+|   |       |   |   |   test_typeinfer.py
+|   |       |   |   |   test_typenames.py
+|   |       |   |   |   test_typeof.py
+|   |       |   |   |   test_types.py
+|   |       |   |   |   test_typingerror.py
+|   |       |   |   |   test_ufuncs.py
+|   |       |   |   |   test_unicode.py
+|   |       |   |   |   test_unicode_array.py
+|   |       |   |   |   test_unicode_names.py
+|   |       |   |   |   test_unpack_sequence.py
+|   |       |   |   |   test_unpickle_without_module.py
+|   |       |   |   |   test_unsafe_intrinsics.py
+|   |       |   |   |   test_usecases.py
+|   |       |   |   |   test_vectorization.py
+|   |       |   |   |   test_vectorization_type_inference.py
+|   |       |   |   |   test_warnings.py
+|   |       |   |   |   test_withlifting.py
+|   |       |   |   |   threading_backend_usecases.py
+|   |       |   |   |   typedlist_usecases.py
+|   |       |   |   |   usecases.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---doc_examples
+|   |       |   |   |   |   test_examples.py
+|   |       |   |   |   |   test_interval_example.py
+|   |       |   |   |   |   test_jitclass.py
+|   |       |   |   |   |   test_literally_usage.py
+|   |       |   |   |   |   test_literal_container_usage.py
+|   |       |   |   |   |   test_llvm_pass_timings.py
+|   |       |   |   |   |   test_numpy_generators.py
+|   |       |   |   |   |   test_parallel_chunksize.py
+|   |       |   |   |   |   test_rec_array.py
+|   |       |   |   |   |   test_structref_usage.py
+|   |       |   |   |   |   test_typed_dict_usage.py
+|   |       |   |   |   |   test_typed_list_usage.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           test_examples.cpython-313.pyc
+|   |       |   |   |           test_interval_example.cpython-313.pyc
+|   |       |   |   |           test_jitclass.cpython-313.pyc
+|   |       |   |   |           test_literally_usage.cpython-313.pyc
+|   |       |   |   |           test_literal_container_usage.cpython-313.pyc
+|   |       |   |   |           test_llvm_pass_timings.cpython-313.pyc
+|   |       |   |   |           test_numpy_generators.cpython-313.pyc
+|   |       |   |   |           test_parallel_chunksize.cpython-313.pyc
+|   |       |   |   |           test_rec_array.cpython-313.pyc
+|   |       |   |   |           test_structref_usage.cpython-313.pyc
+|   |       |   |   |           test_typed_dict_usage.cpython-313.pyc
+|   |       |   |   |           test_typed_list_usage.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---gdb
+|   |       |   |   |   |   test_array_arg.py
+|   |       |   |   |   |   test_basic.py
+|   |       |   |   |   |   test_break_on_symbol.py
+|   |       |   |   |   |   test_break_on_symbol_version.py
+|   |       |   |   |   |   test_conditional_breakpoint.py
+|   |       |   |   |   |   test_pretty_print.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           test_array_arg.cpython-313.pyc
+|   |       |   |   |           test_basic.cpython-313.pyc
+|   |       |   |   |           test_break_on_symbol.cpython-313.pyc
+|   |       |   |   |           test_break_on_symbol_version.cpython-313.pyc
+|   |       |   |   |           test_conditional_breakpoint.cpython-313.pyc
+|   |       |   |   |           test_pretty_print.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---npyufunc
+|   |       |   |   |   |   cache_usecases.py
+|   |       |   |   |   |   test_caching.py
+|   |       |   |   |   |   test_dufunc.py
+|   |       |   |   |   |   test_errors.py
+|   |       |   |   |   |   test_gufunc.py
+|   |       |   |   |   |   test_parallel_env_variable.py
+|   |       |   |   |   |   test_parallel_low_work.py
+|   |       |   |   |   |   test_parallel_ufunc_issues.py
+|   |       |   |   |   |   test_ufunc.py
+|   |       |   |   |   |   test_ufuncbuilding.py
+|   |       |   |   |   |   test_update_inplace.py
+|   |       |   |   |   |   test_vectorize_decor.py
+|   |       |   |   |   |   ufuncbuilding_usecases.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           cache_usecases.cpython-313.pyc
+|   |       |   |   |           test_caching.cpython-313.pyc
+|   |       |   |   |           test_dufunc.cpython-313.pyc
+|   |       |   |   |           test_errors.cpython-313.pyc
+|   |       |   |   |           test_gufunc.cpython-313.pyc
+|   |       |   |   |           test_parallel_env_variable.cpython-313.pyc
+|   |       |   |   |           test_parallel_low_work.cpython-313.pyc
+|   |       |   |   |           test_parallel_ufunc_issues.cpython-313.pyc
+|   |       |   |   |           test_ufunc.cpython-313.pyc
+|   |       |   |   |           test_ufuncbuilding.cpython-313.pyc
+|   |       |   |   |           test_update_inplace.cpython-313.pyc
+|   |       |   |   |           test_vectorize_decor.cpython-313.pyc
+|   |       |   |   |           ufuncbuilding_usecases.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---pycc_distutils_usecase
+|   |       |   |   |   |   setup_distutils.py
+|   |       |   |   |   |   setup_distutils_nested.py
+|   |       |   |   |   |   setup_setuptools.py
+|   |       |   |   |   |   setup_setuptools_nested.py
+|   |       |   |   |   |   source_module.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   +---nested
+|   |       |   |   |   |   |   source_module.py
+|   |       |   |   |   |   |   __init__.py
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---__pycache__
+|   |       |   |   |   |           source_module.cpython-313.pyc
+|   |       |   |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |   |           
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           setup_distutils.cpython-313.pyc
+|   |       |   |   |           setup_distutils_nested.cpython-313.pyc
+|   |       |   |   |           setup_setuptools.cpython-313.pyc
+|   |       |   |   |           setup_setuptools_nested.cpython-313.pyc
+|   |       |   |   |           source_module.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           annotation_usecases.cpython-313.pyc
+|   |       |   |           cache_usecases.cpython-313.pyc
+|   |       |   |           cffi_usecases.cpython-313.pyc
+|   |       |   |           cfunc_cache_usecases.cpython-313.pyc
+|   |       |   |           chained_assign_usecases.cpython-313.pyc
+|   |       |   |           cloudpickle_main_class.cpython-313.pyc
+|   |       |   |           compile_with_pycc.cpython-313.pyc
+|   |       |   |           complex_usecases.cpython-313.pyc
+|   |       |   |           ctypes_usecases.cpython-313.pyc
+|   |       |   |           doctest_usecase.cpython-313.pyc
+|   |       |   |           dummy_module.cpython-313.pyc
+|   |       |   |           enum_usecases.cpython-313.pyc
+|   |       |   |           errorhandling_usecases.cpython-313.pyc
+|   |       |   |           error_usecases.cpython-313.pyc
+|   |       |   |           gdb_support.cpython-313.pyc
+|   |       |   |           inlining_usecases.cpython-313.pyc
+|   |       |   |           matmul_usecase.cpython-313.pyc
+|   |       |   |           orphaned_semaphore_usecase.cpython-313.pyc
+|   |       |   |           overload_usecases.cpython-313.pyc
+|   |       |   |           parfors_cache_usecases.cpython-313.pyc
+|   |       |   |           parfor_iss9490_usecase.cpython-313.pyc
+|   |       |   |           pdlike_usecase.cpython-313.pyc
+|   |       |   |           recursion_usecases.cpython-313.pyc
+|   |       |   |           serialize_usecases.cpython-313.pyc
+|   |       |   |           support.cpython-313.pyc
+|   |       |   |           test_alignment.cpython-313.pyc
+|   |       |   |           test_analysis.cpython-313.pyc
+|   |       |   |           test_annotations.cpython-313.pyc
+|   |       |   |           test_api.cpython-313.pyc
+|   |       |   |           test_array_analysis.cpython-313.pyc
+|   |       |   |           test_array_attr.cpython-313.pyc
+|   |       |   |           test_array_constants.cpython-313.pyc
+|   |       |   |           test_array_exprs.cpython-313.pyc
+|   |       |   |           test_array_iterators.cpython-313.pyc
+|   |       |   |           test_array_manipulation.cpython-313.pyc
+|   |       |   |           test_array_methods.cpython-313.pyc
+|   |       |   |           test_array_reductions.cpython-313.pyc
+|   |       |   |           test_array_return.cpython-313.pyc
+|   |       |   |           test_asnumbatype.cpython-313.pyc
+|   |       |   |           test_auto_constants.cpython-313.pyc
+|   |       |   |           test_blackscholes.cpython-313.pyc
+|   |       |   |           test_boundscheck.cpython-313.pyc
+|   |       |   |           test_buffer_protocol.cpython-313.pyc
+|   |       |   |           test_builtins.cpython-313.pyc
+|   |       |   |           test_byteflow.cpython-313.pyc
+|   |       |   |           test_caching.cpython-313.pyc
+|   |       |   |           test_casting.cpython-313.pyc
+|   |       |   |           test_cffi.cpython-313.pyc
+|   |       |   |           test_cfunc.cpython-313.pyc
+|   |       |   |           test_cgutils.cpython-313.pyc
+|   |       |   |           test_chained_assign.cpython-313.pyc
+|   |       |   |           test_chrome_trace.cpython-313.pyc
+|   |       |   |           test_cli.cpython-313.pyc
+|   |       |   |           test_closure.cpython-313.pyc
+|   |       |   |           test_codegen.cpython-313.pyc
+|   |       |   |           test_compiler_flags.cpython-313.pyc
+|   |       |   |           test_compiler_lock.cpython-313.pyc
+|   |       |   |           test_compile_cache.cpython-313.pyc
+|   |       |   |           test_complex.cpython-313.pyc
+|   |       |   |           test_comprehension.cpython-313.pyc
+|   |       |   |           test_conditions_as_predicates.cpython-313.pyc
+|   |       |   |           test_config.cpython-313.pyc
+|   |       |   |           test_conversion.cpython-313.pyc
+|   |       |   |           test_copy_propagate.cpython-313.pyc
+|   |       |   |           test_ctypes.cpython-313.pyc
+|   |       |   |           test_dataflow.cpython-313.pyc
+|   |       |   |           test_datamodel.cpython-313.pyc
+|   |       |   |           test_debug.cpython-313.pyc
+|   |       |   |           test_debuginfo.cpython-313.pyc
+|   |       |   |           test_deprecations.cpython-313.pyc
+|   |       |   |           test_dictimpl.cpython-313.pyc
+|   |       |   |           test_dictobject.cpython-313.pyc
+|   |       |   |           test_dicts.cpython-313.pyc
+|   |       |   |           test_dispatcher.cpython-313.pyc
+|   |       |   |           test_doctest.cpython-313.pyc
+|   |       |   |           test_dyn_array.cpython-313.pyc
+|   |       |   |           test_dyn_func.cpython-313.pyc
+|   |       |   |           test_entrypoints.cpython-313.pyc
+|   |       |   |           test_enums.cpython-313.pyc
+|   |       |   |           test_errorhandling.cpython-313.pyc
+|   |       |   |           test_errormodels.cpython-313.pyc
+|   |       |   |           test_event.cpython-313.pyc
+|   |       |   |           test_exceptions.cpython-313.pyc
+|   |       |   |           test_extended_arg.cpython-313.pyc
+|   |       |   |           test_extending.cpython-313.pyc
+|   |       |   |           test_extending_types.cpython-313.pyc
+|   |       |   |           test_fancy_indexing.cpython-313.pyc
+|   |       |   |           test_fastmath.cpython-313.pyc
+|   |       |   |           test_findlib.cpython-313.pyc
+|   |       |   |           test_firstlinefinder.cpython-313.pyc
+|   |       |   |           test_flow_control.cpython-313.pyc
+|   |       |   |           test_funcdesc.cpython-313.pyc
+|   |       |   |           test_function_type.cpython-313.pyc
+|   |       |   |           test_func_interface.cpython-313.pyc
+|   |       |   |           test_func_lifetime.cpython-313.pyc
+|   |       |   |           test_gdb_bindings.cpython-313.pyc
+|   |       |   |           test_gdb_dwarf.cpython-313.pyc
+|   |       |   |           test_generators.cpython-313.pyc
+|   |       |   |           test_getitem_on_types.cpython-313.pyc
+|   |       |   |           test_gil.cpython-313.pyc
+|   |       |   |           test_globals.cpython-313.pyc
+|   |       |   |           test_hashing.cpython-313.pyc
+|   |       |   |           test_heapq.cpython-313.pyc
+|   |       |   |           test_help.cpython-313.pyc
+|   |       |   |           test_import.cpython-313.pyc
+|   |       |   |           test_indexing.cpython-313.pyc
+|   |       |   |           test_init_utils.cpython-313.pyc
+|   |       |   |           test_inlining.cpython-313.pyc
+|   |       |   |           test_interpreter.cpython-313.pyc
+|   |       |   |           test_interproc.cpython-313.pyc
+|   |       |   |           test_intwidth.cpython-313.pyc
+|   |       |   |           test_ir.cpython-313.pyc
+|   |       |   |           test_ir_inlining.cpython-313.pyc
+|   |       |   |           test_ir_utils.cpython-313.pyc
+|   |       |   |           test_itanium_mangler.cpython-313.pyc
+|   |       |   |           test_iteration.cpython-313.pyc
+|   |       |   |           test_jitclasses.cpython-313.pyc
+|   |       |   |           test_jitmethod.cpython-313.pyc
+|   |       |   |           test_jit_module.cpython-313.pyc
+|   |       |   |           test_linalg.cpython-313.pyc
+|   |       |   |           test_listimpl.cpython-313.pyc
+|   |       |   |           test_listobject.cpython-313.pyc
+|   |       |   |           test_lists.cpython-313.pyc
+|   |       |   |           test_literal_dispatch.cpython-313.pyc
+|   |       |   |           test_llvm_pass_timings.cpython-313.pyc
+|   |       |   |           test_llvm_version_check.cpython-313.pyc
+|   |       |   |           test_locals.cpython-313.pyc
+|   |       |   |           test_looplifting.cpython-313.pyc
+|   |       |   |           test_make_function_to_jit_function.cpython-313.pyc
+|   |       |   |           test_mandelbrot.cpython-313.pyc
+|   |       |   |           test_mangling.cpython-313.pyc
+|   |       |   |           test_map_filter_reduce.cpython-313.pyc
+|   |       |   |           test_mathlib.cpython-313.pyc
+|   |       |   |           test_maxmin.cpython-313.pyc
+|   |       |   |           test_misc_coverage_support.cpython-313.pyc
+|   |       |   |           test_mixed_tuple_unroller.cpython-313.pyc
+|   |       |   |           test_moved_modules.cpython-313.pyc
+|   |       |   |           test_multi3.cpython-313.pyc
+|   |       |   |           test_nan.cpython-313.pyc
+|   |       |   |           test_ndarray_subclasses.cpython-313.pyc
+|   |       |   |           test_nested_calls.cpython-313.pyc
+|   |       |   |           test_npdatetime.cpython-313.pyc
+|   |       |   |           test_np_functions.cpython-313.pyc
+|   |       |   |           test_np_randomgen.cpython-313.pyc
+|   |       |   |           test_nrt.cpython-313.pyc
+|   |       |   |           test_nrt_refct.cpython-313.pyc
+|   |       |   |           test_numberctor.cpython-313.pyc
+|   |       |   |           test_numbers.cpython-313.pyc
+|   |       |   |           test_numconv.cpython-313.pyc
+|   |       |   |           test_numpyadapt.cpython-313.pyc
+|   |       |   |           test_numpy_support.cpython-313.pyc
+|   |       |   |           test_num_threads.cpython-313.pyc
+|   |       |   |           test_objects.cpython-313.pyc
+|   |       |   |           test_object_mode.cpython-313.pyc
+|   |       |   |           test_obj_lifetime.cpython-313.pyc
+|   |       |   |           test_operators.cpython-313.pyc
+|   |       |   |           test_optimisation_pipelines.cpython-313.pyc
+|   |       |   |           test_optional.cpython-313.pyc
+|   |       |   |           test_overlap.cpython-313.pyc
+|   |       |   |           test_parallel_backend.cpython-313.pyc
+|   |       |   |           test_parfors.cpython-313.pyc
+|   |       |   |           test_parfors_caching.cpython-313.pyc
+|   |       |   |           test_parfors_passes.cpython-313.pyc
+|   |       |   |           test_pipeline.cpython-313.pyc
+|   |       |   |           test_polynomial.cpython-313.pyc
+|   |       |   |           test_practical_lowering_issues.cpython-313.pyc
+|   |       |   |           test_print.cpython-313.pyc
+|   |       |   |           test_profiler.cpython-313.pyc
+|   |       |   |           test_pycc.cpython-313.pyc
+|   |       |   |           test_pythonapi.cpython-313.pyc
+|   |       |   |           test_python_int.cpython-313.pyc
+|   |       |   |           test_random.cpython-313.pyc
+|   |       |   |           test_range.cpython-313.pyc
+|   |       |   |           test_recarray_usecases.cpython-313.pyc
+|   |       |   |           test_record_dtype.cpython-313.pyc
+|   |       |   |           test_recursion.cpython-313.pyc
+|   |       |   |           test_refop_pruning.cpython-313.pyc
+|   |       |   |           test_remove_dead.cpython-313.pyc
+|   |       |   |           test_repr.cpython-313.pyc
+|   |       |   |           test_return_values.cpython-313.pyc
+|   |       |   |           test_runtests.cpython-313.pyc
+|   |       |   |           test_serialize.cpython-313.pyc
+|   |       |   |           test_sets.cpython-313.pyc
+|   |       |   |           test_slices.cpython-313.pyc
+|   |       |   |           test_sort.cpython-313.pyc
+|   |       |   |           test_ssa.cpython-313.pyc
+|   |       |   |           test_stencils.cpython-313.pyc
+|   |       |   |           test_storeslice.cpython-313.pyc
+|   |       |   |           test_struct_ref.cpython-313.pyc
+|   |       |   |           test_support.cpython-313.pyc
+|   |       |   |           test_svml.cpython-313.pyc
+|   |       |   |           test_sysinfo.cpython-313.pyc
+|   |       |   |           test_sys_monitoring.cpython-313.pyc
+|   |       |   |           test_sys_stdin_assignment.cpython-313.pyc
+|   |       |   |           test_target_extension.cpython-313.pyc
+|   |       |   |           test_target_overloadselector.cpython-313.pyc
+|   |       |   |           test_threadsafety.cpython-313.pyc
+|   |       |   |           test_tracing.cpython-313.pyc
+|   |       |   |           test_try_except.cpython-313.pyc
+|   |       |   |           test_tuples.cpython-313.pyc
+|   |       |   |           test_typeconv.cpython-313.pyc
+|   |       |   |           test_typedlist.cpython-313.pyc
+|   |       |   |           test_typedobjectutils.cpython-313.pyc
+|   |       |   |           test_typeguard.cpython-313.pyc
+|   |       |   |           test_typeinfer.cpython-313.pyc
+|   |       |   |           test_typenames.cpython-313.pyc
+|   |       |   |           test_typeof.cpython-313.pyc
+|   |       |   |           test_types.cpython-313.pyc
+|   |       |   |           test_typingerror.cpython-313.pyc
+|   |       |   |           test_ufuncs.cpython-313.pyc
+|   |       |   |           test_unicode.cpython-313.pyc
+|   |       |   |           test_unicode_array.cpython-313.pyc
+|   |       |   |           test_unicode_names.cpython-313.pyc
+|   |       |   |           test_unpack_sequence.cpython-313.pyc
+|   |       |   |           test_unpickle_without_module.cpython-313.pyc
+|   |       |   |           test_unsafe_intrinsics.cpython-313.pyc
+|   |       |   |           test_usecases.cpython-313.pyc
+|   |       |   |           test_vectorization.cpython-313.pyc
+|   |       |   |           test_vectorization_type_inference.cpython-313.pyc
+|   |       |   |           test_warnings.cpython-313.pyc
+|   |       |   |           test_withlifting.cpython-313.pyc
+|   |       |   |           threading_backend_usecases.cpython-313.pyc
+|   |       |   |           typedlist_usecases.cpython-313.pyc
+|   |       |   |           usecases.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---typed
+|   |       |   |   |   dictimpl.py
+|   |       |   |   |   dictobject.py
+|   |       |   |   |   listobject.py
+|   |       |   |   |   py.typed
+|   |       |   |   |   typeddict.py
+|   |       |   |   |   typedlist.py
+|   |       |   |   |   typedobjectutils.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           dictimpl.cpython-313.pyc
+|   |       |   |           dictobject.cpython-313.pyc
+|   |       |   |           listobject.cpython-313.pyc
+|   |       |   |           typeddict.cpython-313.pyc
+|   |       |   |           typedlist.cpython-313.pyc
+|   |       |   |           typedobjectutils.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---types
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   \---__pycache__
+|   |       |           extending.cpython-313.pyc
+|   |       |           runtests.cpython-313.pyc
+|   |       |           _version.cpython-313.pyc
+|   |       |           __init__.cpython-313.pyc
+|   |       |           __main__.cpython-313.pyc
+|   |       |           
+|   |       +---numba-0.65.1.dist-info
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   top_level.txt
+|   |       |   |   WHEEL
+|   |       |   |   
+|   |       |   \---licenses
+|   |       |           LICENSE
+|   |       |           LICENSES.third-party
 |   |       |           
 |   |       +---numpy
 |   |       |   |   conftest.py
@@ -16344,6 +18452,1031 @@ E:.
 |   |       |           AUTHORS.md
 |   |       |           LICENSE.txt
 |   |       |           
+|   |       +---psutil
+|   |       |   |   _common.py
+|   |       |   |   _ntuples.py
+|   |       |   |   _psaix.py
+|   |       |   |   _psbsd.py
+|   |       |   |   _pslinux.py
+|   |       |   |   _psosx.py
+|   |       |   |   _psposix.py
+|   |       |   |   _pssunos.py
+|   |       |   |   _psutil_windows.pyd
+|   |       |   |   _pswindows.py
+|   |       |   |   __init__.py
+|   |       |   |   
+|   |       |   \---__pycache__
+|   |       |           _common.cpython-313.pyc
+|   |       |           _ntuples.cpython-313.pyc
+|   |       |           _psaix.cpython-313.pyc
+|   |       |           _psbsd.cpython-313.pyc
+|   |       |           _pslinux.cpython-313.pyc
+|   |       |           _psosx.cpython-313.pyc
+|   |       |           _psposix.cpython-313.pyc
+|   |       |           _pssunos.cpython-313.pyc
+|   |       |           _pswindows.cpython-313.pyc
+|   |       |           __init__.cpython-313.pyc
+|   |       |           
+|   |       +---psutil-7.2.2.dist-info
+|   |       |       INSTALLER
+|   |       |       LICENSE
+|   |       |       METADATA
+|   |       |       RECORD
+|   |       |       REQUESTED
+|   |       |       top_level.txt
+|   |       |       WHEEL
+|   |       |       
+|   |       +---pyarrow
+|   |       |   |   acero.py
+|   |       |   |   array.pxi
+|   |       |   |   arrow.dll
+|   |       |   |   arrow.lib
+|   |       |   |   arrow_acero.dll
+|   |       |   |   arrow_acero.lib
+|   |       |   |   arrow_compute.dll
+|   |       |   |   arrow_compute.lib
+|   |       |   |   arrow_dataset.dll
+|   |       |   |   arrow_dataset.lib
+|   |       |   |   arrow_flight.dll
+|   |       |   |   arrow_flight.lib
+|   |       |   |   arrow_python.dll
+|   |       |   |   arrow_python.lib
+|   |       |   |   arrow_python_flight.dll
+|   |       |   |   arrow_python_flight.lib
+|   |       |   |   arrow_python_parquet_encryption.dll
+|   |       |   |   arrow_python_parquet_encryption.lib
+|   |       |   |   arrow_substrait.dll
+|   |       |   |   arrow_substrait.lib
+|   |       |   |   benchmark.pxi
+|   |       |   |   benchmark.py
+|   |       |   |   builder.pxi
+|   |       |   |   cffi.py
+|   |       |   |   compat.pxi
+|   |       |   |   compute.py
+|   |       |   |   config.pxi
+|   |       |   |   conftest.py
+|   |       |   |   csv.py
+|   |       |   |   cuda.py
+|   |       |   |   dataset.py
+|   |       |   |   device.pxi
+|   |       |   |   error.pxi
+|   |       |   |   feather.py
+|   |       |   |   flight.py
+|   |       |   |   fs.py
+|   |       |   |   gandiva.pyx
+|   |       |   |   io.pxi
+|   |       |   |   ipc.pxi
+|   |       |   |   ipc.py
+|   |       |   |   json.py
+|   |       |   |   jvm.py
+|   |       |   |   lib.cp313-win_amd64.pyd
+|   |       |   |   lib.pxd
+|   |       |   |   lib.pyx
+|   |       |   |   memory.pxi
+|   |       |   |   orc.py
+|   |       |   |   pandas-shim.pxi
+|   |       |   |   pandas_compat.py
+|   |       |   |   parquet.dll
+|   |       |   |   parquet.lib
+|   |       |   |   public-api.pxi
+|   |       |   |   py.typed
+|   |       |   |   scalar.pxi
+|   |       |   |   substrait.py
+|   |       |   |   table.pxi
+|   |       |   |   tensor.pxi
+|   |       |   |   types.pxi
+|   |       |   |   types.py
+|   |       |   |   util.py
+|   |       |   |   _acero.cp313-win_amd64.pyd
+|   |       |   |   _acero.pxd
+|   |       |   |   _acero.pyx
+|   |       |   |   _azurefs.cp313-win_amd64.pyd
+|   |       |   |   _azurefs.pyx
+|   |       |   |   _compute.cp313-win_amd64.pyd
+|   |       |   |   _compute.pxd
+|   |       |   |   _compute.pyx
+|   |       |   |   _compute_docstrings.py
+|   |       |   |   _csv.cp313-win_amd64.pyd
+|   |       |   |   _csv.pxd
+|   |       |   |   _csv.pyx
+|   |       |   |   _cuda.pxd
+|   |       |   |   _cuda.pyx
+|   |       |   |   _dataset.cp313-win_amd64.pyd
+|   |       |   |   _dataset.pxd
+|   |       |   |   _dataset.pyx
+|   |       |   |   _dataset_orc.cp313-win_amd64.pyd
+|   |       |   |   _dataset_orc.pyx
+|   |       |   |   _dataset_parquet.cp313-win_amd64.pyd
+|   |       |   |   _dataset_parquet.pxd
+|   |       |   |   _dataset_parquet.pyx
+|   |       |   |   _dataset_parquet_encryption.cp313-win_amd64.pyd
+|   |       |   |   _dataset_parquet_encryption.pyx
+|   |       |   |   _dlpack.pxi
+|   |       |   |   _feather.cp313-win_amd64.pyd
+|   |       |   |   _feather.pyx
+|   |       |   |   _flight.cp313-win_amd64.pyd
+|   |       |   |   _flight.pyx
+|   |       |   |   _fs.cp313-win_amd64.pyd
+|   |       |   |   _fs.pxd
+|   |       |   |   _fs.pyx
+|   |       |   |   _gcsfs.cp313-win_amd64.pyd
+|   |       |   |   _gcsfs.pyx
+|   |       |   |   _generated_version.py
+|   |       |   |   _hdfs.cp313-win_amd64.pyd
+|   |       |   |   _hdfs.pyx
+|   |       |   |   _json.cp313-win_amd64.pyd
+|   |       |   |   _json.pxd
+|   |       |   |   _json.pyx
+|   |       |   |   _orc.cp313-win_amd64.pyd
+|   |       |   |   _orc.pxd
+|   |       |   |   _orc.pyx
+|   |       |   |   _parquet.cp313-win_amd64.pyd
+|   |       |   |   _parquet.pxd
+|   |       |   |   _parquet.pyx
+|   |       |   |   _parquet_encryption.cp313-win_amd64.pyd
+|   |       |   |   _parquet_encryption.pxd
+|   |       |   |   _parquet_encryption.pyx
+|   |       |   |   _pyarrow_cpp_tests.cp313-win_amd64.pyd
+|   |       |   |   _pyarrow_cpp_tests.pxd
+|   |       |   |   _pyarrow_cpp_tests.pyx
+|   |       |   |   _s3fs.cp313-win_amd64.pyd
+|   |       |   |   _s3fs.pyx
+|   |       |   |   _substrait.cp313-win_amd64.pyd
+|   |       |   |   _substrait.pyx
+|   |       |   |   __init__.pxd
+|   |       |   |   __init__.py
+|   |       |   |   __init__.pyi
+|   |       |   |   
+|   |       |   +---include
+|   |       |   |   +---arrow
+|   |       |   |   |   |   api.h
+|   |       |   |   |   |   array.h
+|   |       |   |   |   |   buffer.h
+|   |       |   |   |   |   buffer_builder.h
+|   |       |   |   |   |   builder.h
+|   |       |   |   |   |   chunked_array.h
+|   |       |   |   |   |   chunk_resolver.h
+|   |       |   |   |   |   compare.h
+|   |       |   |   |   |   config.h
+|   |       |   |   |   |   datum.h
+|   |       |   |   |   |   device.h
+|   |       |   |   |   |   device_allocation_type_set.h
+|   |       |   |   |   |   extension_type.h
+|   |       |   |   |   |   memory_pool.h
+|   |       |   |   |   |   memory_pool_test.h
+|   |       |   |   |   |   pretty_print.h
+|   |       |   |   |   |   record_batch.h
+|   |       |   |   |   |   result.h
+|   |       |   |   |   |   scalar.h
+|   |       |   |   |   |   sparse_tensor.h
+|   |       |   |   |   |   status.h
+|   |       |   |   |   |   stl.h
+|   |       |   |   |   |   stl_allocator.h
+|   |       |   |   |   |   stl_iterator.h
+|   |       |   |   |   |   table.h
+|   |       |   |   |   |   table_builder.h
+|   |       |   |   |   |   tensor.h
+|   |       |   |   |   |   type.h
+|   |       |   |   |   |   type_fwd.h
+|   |       |   |   |   |   type_traits.h
+|   |       |   |   |   |   visitor.h
+|   |       |   |   |   |   visitor_generate.h
+|   |       |   |   |   |   visit_array_inline.h
+|   |       |   |   |   |   visit_data_inline.h
+|   |       |   |   |   |   visit_scalar_inline.h
+|   |       |   |   |   |   visit_type_inline.h
+|   |       |   |   |   |   
+|   |       |   |   |   +---acero
+|   |       |   |   |   |       accumulation_queue.h
+|   |       |   |   |   |       aggregate_node.h
+|   |       |   |   |   |       api.h
+|   |       |   |   |   |       asof_join_node.h
+|   |       |   |   |   |       backpressure_handler.h
+|   |       |   |   |   |       benchmark_util.h
+|   |       |   |   |   |       bloom_filter.h
+|   |       |   |   |   |       exec_plan.h
+|   |       |   |   |   |       hash_join.h
+|   |       |   |   |   |       hash_join_dict.h
+|   |       |   |   |   |       hash_join_node.h
+|   |       |   |   |   |       map_node.h
+|   |       |   |   |   |       options.h
+|   |       |   |   |   |       order_by_impl.h
+|   |       |   |   |   |       partition_util.h
+|   |       |   |   |   |       query_context.h
+|   |       |   |   |   |       schema_util.h
+|   |       |   |   |   |       task_util.h
+|   |       |   |   |   |       test_nodes.h
+|   |       |   |   |   |       time_series_util.h
+|   |       |   |   |   |       tpch_node.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       util.h
+|   |       |   |   |   |       visibility.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---adapters
+|   |       |   |   |   |   +---orc
+|   |       |   |   |   |   |       adapter.h
+|   |       |   |   |   |   |       options.h
+|   |       |   |   |   |   |       
+|   |       |   |   |   |   \---tensorflow
+|   |       |   |   |   |           convert.h
+|   |       |   |   |   |           
+|   |       |   |   |   +---array
+|   |       |   |   |   |       array_base.h
+|   |       |   |   |   |       array_binary.h
+|   |       |   |   |   |       array_decimal.h
+|   |       |   |   |   |       array_dict.h
+|   |       |   |   |   |       array_nested.h
+|   |       |   |   |   |       array_primitive.h
+|   |       |   |   |   |       array_run_end.h
+|   |       |   |   |   |       builder_adaptive.h
+|   |       |   |   |   |       builder_base.h
+|   |       |   |   |   |       builder_binary.h
+|   |       |   |   |   |       builder_decimal.h
+|   |       |   |   |   |       builder_dict.h
+|   |       |   |   |   |       builder_nested.h
+|   |       |   |   |   |       builder_primitive.h
+|   |       |   |   |   |       builder_run_end.h
+|   |       |   |   |   |       builder_time.h
+|   |       |   |   |   |       builder_union.h
+|   |       |   |   |   |       concatenate.h
+|   |       |   |   |   |       data.h
+|   |       |   |   |   |       diff.h
+|   |       |   |   |   |       statistics.h
+|   |       |   |   |   |       util.h
+|   |       |   |   |   |       validate.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---c
+|   |       |   |   |   |       abi.h
+|   |       |   |   |   |       bridge.h
+|   |       |   |   |   |       dlpack.h
+|   |       |   |   |   |       dlpack_abi.h
+|   |       |   |   |   |       helpers.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---compute
+|   |       |   |   |   |   |   api.h
+|   |       |   |   |   |   |   api_aggregate.h
+|   |       |   |   |   |   |   api_scalar.h
+|   |       |   |   |   |   |   api_vector.h
+|   |       |   |   |   |   |   cast.h
+|   |       |   |   |   |   |   exec.h
+|   |       |   |   |   |   |   expression.h
+|   |       |   |   |   |   |   function.h
+|   |       |   |   |   |   |   function_options.h
+|   |       |   |   |   |   |   initialize.h
+|   |       |   |   |   |   |   kernel.h
+|   |       |   |   |   |   |   ordering.h
+|   |       |   |   |   |   |   registry.h
+|   |       |   |   |   |   |   type_fwd.h
+|   |       |   |   |   |   |   util.h
+|   |       |   |   |   |   |   visibility.h
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---row
+|   |       |   |   |   |           grouper.h
+|   |       |   |   |   |           
+|   |       |   |   |   +---csv
+|   |       |   |   |   |       api.h
+|   |       |   |   |   |       chunker.h
+|   |       |   |   |   |       column_builder.h
+|   |       |   |   |   |       column_decoder.h
+|   |       |   |   |   |       converter.h
+|   |       |   |   |   |       invalid_row.h
+|   |       |   |   |   |       options.h
+|   |       |   |   |   |       parser.h
+|   |       |   |   |   |       reader.h
+|   |       |   |   |   |       test_common.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       writer.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---dataset
+|   |       |   |   |   |       api.h
+|   |       |   |   |   |       dataset.h
+|   |       |   |   |   |       dataset_writer.h
+|   |       |   |   |   |       discovery.h
+|   |       |   |   |   |       file_base.h
+|   |       |   |   |   |       file_csv.h
+|   |       |   |   |   |       file_ipc.h
+|   |       |   |   |   |       file_json.h
+|   |       |   |   |   |       file_orc.h
+|   |       |   |   |   |       file_parquet.h
+|   |       |   |   |   |       parquet_encryption_config.h
+|   |       |   |   |   |       partition.h
+|   |       |   |   |   |       plan.h
+|   |       |   |   |   |       projector.h
+|   |       |   |   |   |       scanner.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       visibility.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---engine
+|   |       |   |   |   |   |   api.h
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---substrait
+|   |       |   |   |   |           api.h
+|   |       |   |   |   |           extension_set.h
+|   |       |   |   |   |           extension_types.h
+|   |       |   |   |   |           options.h
+|   |       |   |   |   |           relation.h
+|   |       |   |   |   |           serde.h
+|   |       |   |   |   |           test_plan_builder.h
+|   |       |   |   |   |           test_util.h
+|   |       |   |   |   |           type_fwd.h
+|   |       |   |   |   |           util.h
+|   |       |   |   |   |           visibility.h
+|   |       |   |   |   |           
+|   |       |   |   |   +---extension
+|   |       |   |   |   |       bool8.h
+|   |       |   |   |   |       fixed_shape_tensor.h
+|   |       |   |   |   |       json.h
+|   |       |   |   |   |       opaque.h
+|   |       |   |   |   |       parquet_variant.h
+|   |       |   |   |   |       uuid.h
+|   |       |   |   |   |       variable_shape_tensor.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---filesystem
+|   |       |   |   |   |       api.h
+|   |       |   |   |   |       azurefs.h
+|   |       |   |   |   |       filesystem.h
+|   |       |   |   |   |       filesystem_library.h
+|   |       |   |   |   |       gcsfs.h
+|   |       |   |   |   |       hdfs.h
+|   |       |   |   |   |       localfs.h
+|   |       |   |   |   |       mockfs.h
+|   |       |   |   |   |       path_util.h
+|   |       |   |   |   |       s3fs.h
+|   |       |   |   |   |       s3_test_util.h
+|   |       |   |   |   |       test_util.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---flight
+|   |       |   |   |   |       api.h
+|   |       |   |   |   |       client.h
+|   |       |   |   |   |       client_auth.h
+|   |       |   |   |   |       client_cookie_middleware.h
+|   |       |   |   |   |       client_middleware.h
+|   |       |   |   |   |       client_tracing_middleware.h
+|   |       |   |   |   |       middleware.h
+|   |       |   |   |   |       otel_logging.h
+|   |       |   |   |   |       platform.h
+|   |       |   |   |   |       server.h
+|   |       |   |   |   |       server_auth.h
+|   |       |   |   |   |       server_middleware.h
+|   |       |   |   |   |       server_tracing_middleware.h
+|   |       |   |   |   |       test_auth_handlers.h
+|   |       |   |   |   |       test_definitions.h
+|   |       |   |   |   |       test_flight_server.h
+|   |       |   |   |   |       test_util.h
+|   |       |   |   |   |       transport.h
+|   |       |   |   |   |       transport_server.h
+|   |       |   |   |   |       types.h
+|   |       |   |   |   |       types_async.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       visibility.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---io
+|   |       |   |   |   |       api.h
+|   |       |   |   |   |       buffered.h
+|   |       |   |   |   |       caching.h
+|   |       |   |   |   |       compressed.h
+|   |       |   |   |   |       concurrency.h
+|   |       |   |   |   |       file.h
+|   |       |   |   |   |       hdfs.h
+|   |       |   |   |   |       interfaces.h
+|   |       |   |   |   |       memory.h
+|   |       |   |   |   |       mman.h
+|   |       |   |   |   |       slow.h
+|   |       |   |   |   |       stdio.h
+|   |       |   |   |   |       test_common.h
+|   |       |   |   |   |       transform.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---ipc
+|   |       |   |   |   |       api.h
+|   |       |   |   |   |       dictionary.h
+|   |       |   |   |   |       feather.h
+|   |       |   |   |   |       message.h
+|   |       |   |   |   |       options.h
+|   |       |   |   |   |       reader.h
+|   |       |   |   |   |       test_common.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       util.h
+|   |       |   |   |   |       writer.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---json
+|   |       |   |   |   |       api.h
+|   |       |   |   |   |       chunked_builder.h
+|   |       |   |   |   |       chunker.h
+|   |       |   |   |   |       converter.h
+|   |       |   |   |   |       from_string.h
+|   |       |   |   |   |       object_parser.h
+|   |       |   |   |   |       object_writer.h
+|   |       |   |   |   |       options.h
+|   |       |   |   |   |       parser.h
+|   |       |   |   |   |       rapidjson_defs.h
+|   |       |   |   |   |       reader.h
+|   |       |   |   |   |       test_common.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---python
+|   |       |   |   |   |   |   api.h
+|   |       |   |   |   |   |   arrow_to_pandas.h
+|   |       |   |   |   |   |   async.h
+|   |       |   |   |   |   |   benchmark.h
+|   |       |   |   |   |   |   common.h
+|   |       |   |   |   |   |   config.h
+|   |       |   |   |   |   |   csv.h
+|   |       |   |   |   |   |   datetime.h
+|   |       |   |   |   |   |   decimal.h
+|   |       |   |   |   |   |   extension_type.h
+|   |       |   |   |   |   |   filesystem.h
+|   |       |   |   |   |   |   flight.h
+|   |       |   |   |   |   |   gdb.h
+|   |       |   |   |   |   |   helpers.h
+|   |       |   |   |   |   |   inference.h
+|   |       |   |   |   |   |   io.h
+|   |       |   |   |   |   |   ipc.h
+|   |       |   |   |   |   |   iterators.h
+|   |       |   |   |   |   |   lib.h
+|   |       |   |   |   |   |   lib_api.h
+|   |       |   |   |   |   |   numpy_convert.h
+|   |       |   |   |   |   |   numpy_init.h
+|   |       |   |   |   |   |   numpy_interop.h
+|   |       |   |   |   |   |   numpy_to_arrow.h
+|   |       |   |   |   |   |   parquet_encryption.h
+|   |       |   |   |   |   |   platform.h
+|   |       |   |   |   |   |   pyarrow.h
+|   |       |   |   |   |   |   pyarrow_api.h
+|   |       |   |   |   |   |   pyarrow_lib.h
+|   |       |   |   |   |   |   python_test.h
+|   |       |   |   |   |   |   python_to_arrow.h
+|   |       |   |   |   |   |   type_traits.h
+|   |       |   |   |   |   |   udf.h
+|   |       |   |   |   |   |   util.h
+|   |       |   |   |   |   |   visibility.h
+|   |       |   |   |   |   |   
+|   |       |   |   |   |   \---vendored
+|   |       |   |   |   |           pythoncapi_compat.h
+|   |       |   |   |   |           
+|   |       |   |   |   +---telemetry
+|   |       |   |   |   |       logging.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---tensor
+|   |       |   |   |   |       converter.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---testing
+|   |       |   |   |   |       async_test_util.h
+|   |       |   |   |   |       builder.h
+|   |       |   |   |   |       executor_util.h
+|   |       |   |   |   |       extension_type.h
+|   |       |   |   |   |       fixed_width_test_util.h
+|   |       |   |   |   |       future_util.h
+|   |       |   |   |   |       generator.h
+|   |       |   |   |   |       gtest_compat.h
+|   |       |   |   |   |       gtest_util.h
+|   |       |   |   |   |       matchers.h
+|   |       |   |   |   |       math.h
+|   |       |   |   |   |       process.h
+|   |       |   |   |   |       random.h
+|   |       |   |   |   |       uniform_real.h
+|   |       |   |   |   |       util.h
+|   |       |   |   |   |       visibility.h
+|   |       |   |   |   |       
+|   |       |   |   |   +---util
+|   |       |   |   |   |       algorithm.h
+|   |       |   |   |   |       aligned_storage.h
+|   |       |   |   |   |       align_util.h
+|   |       |   |   |   |       async_generator.h
+|   |       |   |   |   |       async_generator_fwd.h
+|   |       |   |   |   |       async_util.h
+|   |       |   |   |   |       base64.h
+|   |       |   |   |   |       basic_decimal.h
+|   |       |   |   |   |       benchmark_util.h
+|   |       |   |   |   |       binary_view_util.h
+|   |       |   |   |   |       bitmap.h
+|   |       |   |   |   |       bitmap_builders.h
+|   |       |   |   |   |       bitmap_generate.h
+|   |       |   |   |   |       bitmap_ops.h
+|   |       |   |   |   |       bitmap_reader.h
+|   |       |   |   |   |       bitmap_visit.h
+|   |       |   |   |   |       bitmap_writer.h
+|   |       |   |   |   |       bit_block_counter.h
+|   |       |   |   |   |       bit_run_reader.h
+|   |       |   |   |   |       bit_util.h
+|   |       |   |   |   |       byte_size.h
+|   |       |   |   |   |       cancel.h
+|   |       |   |   |   |       checked_cast.h
+|   |       |   |   |   |       compare.h
+|   |       |   |   |   |       compression.h
+|   |       |   |   |   |       concurrent_map.h
+|   |       |   |   |   |       config.h
+|   |       |   |   |   |       converter.h
+|   |       |   |   |   |       cpu_info.h
+|   |       |   |   |   |       crc32.h
+|   |       |   |   |   |       debug.h
+|   |       |   |   |   |       decimal.h
+|   |       |   |   |   |       delimiting.h
+|   |       |   |   |   |       endian.h
+|   |       |   |   |   |       float16.h
+|   |       |   |   |   |       formatting.h
+|   |       |   |   |   |       functional.h
+|   |       |   |   |   |       future.h
+|   |       |   |   |   |       hashing.h
+|   |       |   |   |   |       hash_util.h
+|   |       |   |   |   |       int_util.h
+|   |       |   |   |   |       int_util_overflow.h
+|   |       |   |   |   |       io_util.h
+|   |       |   |   |   |       iterator.h
+|   |       |   |   |   |       key_value_metadata.h
+|   |       |   |   |   |       launder.h
+|   |       |   |   |   |       list_util.h
+|   |       |   |   |   |       logger.h
+|   |       |   |   |   |       logging.h
+|   |       |   |   |   |       macros.h
+|   |       |   |   |   |       math_constants.h
+|   |       |   |   |   |       mutex.h
+|   |       |   |   |   |       parallel.h
+|   |       |   |   |   |       pcg_random.h
+|   |       |   |   |   |       prefetch.h
+|   |       |   |   |   |       queue.h
+|   |       |   |   |   |       range.h
+|   |       |   |   |   |       ree_util.h
+|   |       |   |   |   |       regex.h
+|   |       |   |   |   |       rows_to_batches.h
+|   |       |   |   |   |       secure_string.h
+|   |       |   |   |   |       simd.h
+|   |       |   |   |   |       small_vector.h
+|   |       |   |   |   |       string.h
+|   |       |   |   |   |       string_util.h
+|   |       |   |   |   |       task_group.h
+|   |       |   |   |   |       test_common.h
+|   |       |   |   |   |       thread_pool.h
+|   |       |   |   |   |       time.h
+|   |       |   |   |   |       tracing.h
+|   |       |   |   |   |       type_fwd.h
+|   |       |   |   |   |       type_traits.h
+|   |       |   |   |   |       ubsan.h
+|   |       |   |   |   |       union_util.h
+|   |       |   |   |   |       unreachable.h
+|   |       |   |   |   |       uri.h
+|   |       |   |   |   |       utf8.h
+|   |       |   |   |   |       value_parsing.h
+|   |       |   |   |   |       vector.h
+|   |       |   |   |   |       visibility.h
+|   |       |   |   |   |       windows_compatibility.h
+|   |       |   |   |   |       windows_fixup.h
+|   |       |   |   |   |       
+|   |       |   |   |   \---vendored
+|   |       |   |   |       |   datetime.h
+|   |       |   |   |       |   ProducerConsumerQueue.h
+|   |       |   |   |       |   strptime.h
+|   |       |   |   |       |   xxhash.h
+|   |       |   |   |       |   
+|   |       |   |   |       +---datetime
+|   |       |   |   |       |       date.h
+|   |       |   |   |       |       ios.h
+|   |       |   |   |       |       tz.h
+|   |       |   |   |       |       tz_private.h
+|   |       |   |   |       |       visibility.h
+|   |       |   |   |       |       
+|   |       |   |   |       +---double-conversion
+|   |       |   |   |       |       bignum-dtoa.h
+|   |       |   |   |       |       bignum.h
+|   |       |   |   |       |       cached-powers.h
+|   |       |   |   |       |       diy-fp.h
+|   |       |   |   |       |       double-conversion.h
+|   |       |   |   |       |       double-to-string.h
+|   |       |   |   |       |       fast-dtoa.h
+|   |       |   |   |       |       fixed-dtoa.h
+|   |       |   |   |       |       ieee.h
+|   |       |   |   |       |       string-to-double.h
+|   |       |   |   |       |       strtod.h
+|   |       |   |   |       |       utils.h
+|   |       |   |   |       |       
+|   |       |   |   |       +---pcg
+|   |       |   |   |       |       pcg_extras.hpp
+|   |       |   |   |       |       pcg_random.hpp
+|   |       |   |   |       |       pcg_uint128.hpp
+|   |       |   |   |       |       
+|   |       |   |   |       +---portable-snippets
+|   |       |   |   |       |       debug-trap.h
+|   |       |   |   |       |       
+|   |       |   |   |       +---safeint
+|   |       |   |   |       |       safe_math.h
+|   |       |   |   |       |       safe_math_impl.h
+|   |       |   |   |       |       
+|   |       |   |   |       \---xxhash
+|   |       |   |   |               xxhash.h
+|   |       |   |   |               
+|   |       |   |   \---parquet
+|   |       |   |       |   benchmark_util.h
+|   |       |   |       |   bloom_filter.h
+|   |       |   |       |   bloom_filter_reader.h
+|   |       |   |       |   bloom_filter_writer.h
+|   |       |   |       |   column_page.h
+|   |       |   |       |   column_reader.h
+|   |       |   |       |   column_scanner.h
+|   |       |   |       |   column_writer.h
+|   |       |   |       |   encoding.h
+|   |       |   |       |   exception.h
+|   |       |   |       |   file_reader.h
+|   |       |   |       |   file_writer.h
+|   |       |   |       |   hasher.h
+|   |       |   |       |   index_location.h
+|   |       |   |       |   level_comparison.h
+|   |       |   |       |   level_comparison_inc.h
+|   |       |   |       |   level_conversion.h
+|   |       |   |       |   level_conversion_inc.h
+|   |       |   |       |   metadata.h
+|   |       |   |       |   page_index.h
+|   |       |   |       |   parquet_version.h
+|   |       |   |       |   platform.h
+|   |       |   |       |   printer.h
+|   |       |   |       |   properties.h
+|   |       |   |       |   schema.h
+|   |       |   |       |   size_statistics.h
+|   |       |   |       |   statistics.h
+|   |       |   |       |   stream_reader.h
+|   |       |   |       |   stream_writer.h
+|   |       |   |       |   test_util.h
+|   |       |   |       |   types.h
+|   |       |   |       |   type_fwd.h
+|   |       |   |       |   visit_type_inline.h
+|   |       |   |       |   windows_compatibility.h
+|   |       |   |       |   windows_fixup.h
+|   |       |   |       |   xxhasher.h
+|   |       |   |       |   
+|   |       |   |       +---api
+|   |       |   |       |       io.h
+|   |       |   |       |       reader.h
+|   |       |   |       |       schema.h
+|   |       |   |       |       writer.h
+|   |       |   |       |       
+|   |       |   |       +---arrow
+|   |       |   |       |       reader.h
+|   |       |   |       |       schema.h
+|   |       |   |       |       test_util.h
+|   |       |   |       |       writer.h
+|   |       |   |       |       
+|   |       |   |       +---encryption
+|   |       |   |       |       crypto_factory.h
+|   |       |   |       |       encryption.h
+|   |       |   |       |       file_key_material_store.h
+|   |       |   |       |       file_key_unwrapper.h
+|   |       |   |       |       file_key_wrapper.h
+|   |       |   |       |       file_system_key_material_store.h
+|   |       |   |       |       key_encryption_key.h
+|   |       |   |       |       key_material.h
+|   |       |   |       |       key_metadata.h
+|   |       |   |       |       key_toolkit.h
+|   |       |   |       |       kms_client.h
+|   |       |   |       |       kms_client_factory.h
+|   |       |   |       |       local_wrap_kms_client.h
+|   |       |   |       |       test_encryption_util.h
+|   |       |   |       |       test_in_memory_kms.h
+|   |       |   |       |       two_level_cache_with_expiration.h
+|   |       |   |       |       type_fwd.h
+|   |       |   |       |       
+|   |       |   |       \---geospatial
+|   |       |   |               statistics.h
+|   |       |   |               
+|   |       |   +---includes
+|   |       |   |       common.pxd
+|   |       |   |       libarrow.pxd
+|   |       |   |       libarrow_acero.pxd
+|   |       |   |       libarrow_cuda.pxd
+|   |       |   |       libarrow_dataset.pxd
+|   |       |   |       libarrow_dataset_parquet.pxd
+|   |       |   |       libarrow_feather.pxd
+|   |       |   |       libarrow_flight.pxd
+|   |       |   |       libarrow_fs.pxd
+|   |       |   |       libarrow_python.pxd
+|   |       |   |       libarrow_substrait.pxd
+|   |       |   |       libgandiva.pxd
+|   |       |   |       libparquet.pxd
+|   |       |   |       libparquet_encryption.pxd
+|   |       |   |       __init__.pxd
+|   |       |   |       
+|   |       |   +---interchange
+|   |       |   |   |   buffer.py
+|   |       |   |   |   column.py
+|   |       |   |   |   dataframe.py
+|   |       |   |   |   from_dataframe.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           buffer.cpython-313.pyc
+|   |       |   |           column.cpython-313.pyc
+|   |       |   |           dataframe.cpython-313.pyc
+|   |       |   |           from_dataframe.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---parquet
+|   |       |   |   |   core.py
+|   |       |   |   |   encryption.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           core.cpython-313.pyc
+|   |       |   |           encryption.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---src
+|   |       |   |   \---arrow
+|   |       |   |       \---python
+|   |       |   |           |   api.h
+|   |       |   |           |   arrow_to_pandas.cc
+|   |       |   |           |   arrow_to_pandas.h
+|   |       |   |           |   arrow_to_python_internal.h
+|   |       |   |           |   async.h
+|   |       |   |           |   benchmark.cc
+|   |       |   |           |   benchmark.h
+|   |       |   |           |   CMakeLists.txt
+|   |       |   |           |   common.cc
+|   |       |   |           |   common.h
+|   |       |   |           |   config.cc
+|   |       |   |           |   config.h
+|   |       |   |           |   config_internal.h.cmake
+|   |       |   |           |   csv.cc
+|   |       |   |           |   csv.h
+|   |       |   |           |   datetime.cc
+|   |       |   |           |   datetime.h
+|   |       |   |           |   decimal.cc
+|   |       |   |           |   decimal.h
+|   |       |   |           |   extension_type.cc
+|   |       |   |           |   extension_type.h
+|   |       |   |           |   filesystem.cc
+|   |       |   |           |   filesystem.h
+|   |       |   |           |   flight.cc
+|   |       |   |           |   flight.h
+|   |       |   |           |   gdb.cc
+|   |       |   |           |   gdb.h
+|   |       |   |           |   helpers.cc
+|   |       |   |           |   helpers.h
+|   |       |   |           |   inference.cc
+|   |       |   |           |   inference.h
+|   |       |   |           |   io.cc
+|   |       |   |           |   io.h
+|   |       |   |           |   ipc.cc
+|   |       |   |           |   ipc.h
+|   |       |   |           |   iterators.h
+|   |       |   |           |   numpy_convert.cc
+|   |       |   |           |   numpy_convert.h
+|   |       |   |           |   numpy_init.cc
+|   |       |   |           |   numpy_init.h
+|   |       |   |           |   numpy_internal.h
+|   |       |   |           |   numpy_interop.h
+|   |       |   |           |   numpy_to_arrow.cc
+|   |       |   |           |   numpy_to_arrow.h
+|   |       |   |           |   parquet_encryption.cc
+|   |       |   |           |   parquet_encryption.h
+|   |       |   |           |   platform.h
+|   |       |   |           |   pyarrow.cc
+|   |       |   |           |   pyarrow.h
+|   |       |   |           |   pyarrow_api.h
+|   |       |   |           |   pyarrow_lib.h
+|   |       |   |           |   python_test.cc
+|   |       |   |           |   python_test.h
+|   |       |   |           |   python_to_arrow.cc
+|   |       |   |           |   python_to_arrow.h
+|   |       |   |           |   type_traits.h
+|   |       |   |           |   udf.cc
+|   |       |   |           |   udf.h
+|   |       |   |           |   util.cc
+|   |       |   |           |   util.h
+|   |       |   |           |   visibility.h
+|   |       |   |           |   
+|   |       |   |           \---vendored
+|   |       |   |                   CMakeLists.txt
+|   |       |   |                   pythoncapi_compat.h
+|   |       |   |                   
+|   |       |   +---tests
+|   |       |   |   |   arrow_16597.py
+|   |       |   |   |   arrow_39313.py
+|   |       |   |   |   arrow_7980.py
+|   |       |   |   |   bound_function_visit_strings.pyx
+|   |       |   |   |   conftest.py
+|   |       |   |   |   extensions.pyx
+|   |       |   |   |   pandas_examples.py
+|   |       |   |   |   pandas_threaded_import.py
+|   |       |   |   |   pyarrow_cython_example.pyx
+|   |       |   |   |   read_record_batch.py
+|   |       |   |   |   strategies.py
+|   |       |   |   |   test_acero.py
+|   |       |   |   |   test_adhoc_memory_leak.py
+|   |       |   |   |   test_array.py
+|   |       |   |   |   test_builder.py
+|   |       |   |   |   test_cffi.py
+|   |       |   |   |   test_compute.py
+|   |       |   |   |   test_convert_builtin.py
+|   |       |   |   |   test_cpp_internals.py
+|   |       |   |   |   test_csv.py
+|   |       |   |   |   test_cuda.py
+|   |       |   |   |   test_cuda_numba_interop.py
+|   |       |   |   |   test_cython.py
+|   |       |   |   |   test_dataset.py
+|   |       |   |   |   test_dataset_encryption.py
+|   |       |   |   |   test_deprecations.py
+|   |       |   |   |   test_device.py
+|   |       |   |   |   test_dlpack.py
+|   |       |   |   |   test_exec_plan.py
+|   |       |   |   |   test_extension_type.py
+|   |       |   |   |   test_feather.py
+|   |       |   |   |   test_flight.py
+|   |       |   |   |   test_flight_async.py
+|   |       |   |   |   test_fs.py
+|   |       |   |   |   test_gandiva.py
+|   |       |   |   |   test_gdb.py
+|   |       |   |   |   test_io.py
+|   |       |   |   |   test_ipc.py
+|   |       |   |   |   test_json.py
+|   |       |   |   |   test_jvm.py
+|   |       |   |   |   test_memory.py
+|   |       |   |   |   test_misc.py
+|   |       |   |   |   test_orc.py
+|   |       |   |   |   test_pandas.py
+|   |       |   |   |   test_scalars.py
+|   |       |   |   |   test_schema.py
+|   |       |   |   |   test_sparse_tensor.py
+|   |       |   |   |   test_strategies.py
+|   |       |   |   |   test_substrait.py
+|   |       |   |   |   test_table.py
+|   |       |   |   |   test_tensor.py
+|   |       |   |   |   test_types.py
+|   |       |   |   |   test_udf.py
+|   |       |   |   |   test_util.py
+|   |       |   |   |   test_without_numpy.py
+|   |       |   |   |   util.py
+|   |       |   |   |   wsgi_examples.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   +---data
+|   |       |   |   |   +---feather
+|   |       |   |   |   |       v0.17.0.version.2-compression.lz4.feather
+|   |       |   |   |   |       
+|   |       |   |   |   +---orc
+|   |       |   |   |   |       decimal.jsn.gz
+|   |       |   |   |   |       decimal.orc
+|   |       |   |   |   |       README.md
+|   |       |   |   |   |       TestOrcFile.emptyFile.jsn.gz
+|   |       |   |   |   |       TestOrcFile.emptyFile.orc
+|   |       |   |   |   |       TestOrcFile.test1.jsn.gz
+|   |       |   |   |   |       TestOrcFile.test1.orc
+|   |       |   |   |   |       TestOrcFile.testDate1900.jsn.gz
+|   |       |   |   |   |       TestOrcFile.testDate1900.orc
+|   |       |   |   |   |       
+|   |       |   |   |   \---parquet
+|   |       |   |   |           v0.7.1.all-named-index.parquet
+|   |       |   |   |           v0.7.1.column-metadata-handling.parquet
+|   |       |   |   |           v0.7.1.parquet
+|   |       |   |   |           v0.7.1.some-named-index.parquet
+|   |       |   |   |           
+|   |       |   |   +---interchange
+|   |       |   |   |   |   test_conversion.py
+|   |       |   |   |   |   test_interchange_spec.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           test_conversion.cpython-313.pyc
+|   |       |   |   |           test_interchange_spec.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   +---parquet
+|   |       |   |   |   |   common.py
+|   |       |   |   |   |   conftest.py
+|   |       |   |   |   |   encryption.py
+|   |       |   |   |   |   test_basic.py
+|   |       |   |   |   |   test_compliant_nested_type.py
+|   |       |   |   |   |   test_dataset.py
+|   |       |   |   |   |   test_data_types.py
+|   |       |   |   |   |   test_datetime.py
+|   |       |   |   |   |   test_encryption.py
+|   |       |   |   |   |   test_metadata.py
+|   |       |   |   |   |   test_pandas.py
+|   |       |   |   |   |   test_parquet_file.py
+|   |       |   |   |   |   test_parquet_writer.py
+|   |       |   |   |   |   __init__.py
+|   |       |   |   |   |   
+|   |       |   |   |   \---__pycache__
+|   |       |   |   |           common.cpython-313.pyc
+|   |       |   |   |           conftest.cpython-313.pyc
+|   |       |   |   |           encryption.cpython-313.pyc
+|   |       |   |   |           test_basic.cpython-313.pyc
+|   |       |   |   |           test_compliant_nested_type.cpython-313.pyc
+|   |       |   |   |           test_dataset.cpython-313.pyc
+|   |       |   |   |           test_data_types.cpython-313.pyc
+|   |       |   |   |           test_datetime.cpython-313.pyc
+|   |       |   |   |           test_encryption.cpython-313.pyc
+|   |       |   |   |           test_metadata.cpython-313.pyc
+|   |       |   |   |           test_pandas.cpython-313.pyc
+|   |       |   |   |           test_parquet_file.cpython-313.pyc
+|   |       |   |   |           test_parquet_writer.cpython-313.pyc
+|   |       |   |   |           __init__.cpython-313.pyc
+|   |       |   |   |           
+|   |       |   |   \---__pycache__
+|   |       |   |           arrow_16597.cpython-313.pyc
+|   |       |   |           arrow_39313.cpython-313.pyc
+|   |       |   |           arrow_7980.cpython-313.pyc
+|   |       |   |           conftest.cpython-313.pyc
+|   |       |   |           pandas_examples.cpython-313.pyc
+|   |       |   |           pandas_threaded_import.cpython-313.pyc
+|   |       |   |           read_record_batch.cpython-313.pyc
+|   |       |   |           strategies.cpython-313.pyc
+|   |       |   |           test_acero.cpython-313.pyc
+|   |       |   |           test_adhoc_memory_leak.cpython-313.pyc
+|   |       |   |           test_array.cpython-313.pyc
+|   |       |   |           test_builder.cpython-313.pyc
+|   |       |   |           test_cffi.cpython-313.pyc
+|   |       |   |           test_compute.cpython-313.pyc
+|   |       |   |           test_convert_builtin.cpython-313.pyc
+|   |       |   |           test_cpp_internals.cpython-313.pyc
+|   |       |   |           test_csv.cpython-313.pyc
+|   |       |   |           test_cuda.cpython-313.pyc
+|   |       |   |           test_cuda_numba_interop.cpython-313.pyc
+|   |       |   |           test_cython.cpython-313.pyc
+|   |       |   |           test_dataset.cpython-313.pyc
+|   |       |   |           test_dataset_encryption.cpython-313.pyc
+|   |       |   |           test_deprecations.cpython-313.pyc
+|   |       |   |           test_device.cpython-313.pyc
+|   |       |   |           test_dlpack.cpython-313.pyc
+|   |       |   |           test_exec_plan.cpython-313.pyc
+|   |       |   |           test_extension_type.cpython-313.pyc
+|   |       |   |           test_feather.cpython-313.pyc
+|   |       |   |           test_flight.cpython-313.pyc
+|   |       |   |           test_flight_async.cpython-313.pyc
+|   |       |   |           test_fs.cpython-313.pyc
+|   |       |   |           test_gandiva.cpython-313.pyc
+|   |       |   |           test_gdb.cpython-313.pyc
+|   |       |   |           test_io.cpython-313.pyc
+|   |       |   |           test_ipc.cpython-313.pyc
+|   |       |   |           test_json.cpython-313.pyc
+|   |       |   |           test_jvm.cpython-313.pyc
+|   |       |   |           test_memory.cpython-313.pyc
+|   |       |   |           test_misc.cpython-313.pyc
+|   |       |   |           test_orc.cpython-313.pyc
+|   |       |   |           test_pandas.cpython-313.pyc
+|   |       |   |           test_scalars.cpython-313.pyc
+|   |       |   |           test_schema.cpython-313.pyc
+|   |       |   |           test_sparse_tensor.cpython-313.pyc
+|   |       |   |           test_strategies.cpython-313.pyc
+|   |       |   |           test_substrait.cpython-313.pyc
+|   |       |   |           test_table.cpython-313.pyc
+|   |       |   |           test_tensor.cpython-313.pyc
+|   |       |   |           test_types.cpython-313.pyc
+|   |       |   |           test_udf.cpython-313.pyc
+|   |       |   |           test_util.cpython-313.pyc
+|   |       |   |           test_without_numpy.cpython-313.pyc
+|   |       |   |           util.cpython-313.pyc
+|   |       |   |           wsgi_examples.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   +---vendored
+|   |       |   |   |   docscrape.py
+|   |       |   |   |   version.py
+|   |       |   |   |   __init__.py
+|   |       |   |   |   
+|   |       |   |   \---__pycache__
+|   |       |   |           docscrape.cpython-313.pyc
+|   |       |   |           version.cpython-313.pyc
+|   |       |   |           __init__.cpython-313.pyc
+|   |       |   |           
+|   |       |   \---__pycache__
+|   |       |           acero.cpython-313.pyc
+|   |       |           benchmark.cpython-313.pyc
+|   |       |           cffi.cpython-313.pyc
+|   |       |           compute.cpython-313.pyc
+|   |       |           conftest.cpython-313.pyc
+|   |       |           csv.cpython-313.pyc
+|   |       |           cuda.cpython-313.pyc
+|   |       |           dataset.cpython-313.pyc
+|   |       |           feather.cpython-313.pyc
+|   |       |           flight.cpython-313.pyc
+|   |       |           fs.cpython-313.pyc
+|   |       |           ipc.cpython-313.pyc
+|   |       |           json.cpython-313.pyc
+|   |       |           jvm.cpython-313.pyc
+|   |       |           orc.cpython-313.pyc
+|   |       |           pandas_compat.cpython-313.pyc
+|   |       |           substrait.cpython-313.pyc
+|   |       |           types.cpython-313.pyc
+|   |       |           util.cpython-313.pyc
+|   |       |           _compute_docstrings.cpython-313.pyc
+|   |       |           _generated_version.cpython-313.pyc
+|   |       |           __init__.cpython-313.pyc
+|   |       |           
+|   |       +---pyarrow-24.0.0.dist-info
+|   |       |   |   DELVEWHEEL
+|   |       |   |   INSTALLER
+|   |       |   |   METADATA
+|   |       |   |   RECORD
+|   |       |   |   REQUESTED
+|   |       |   |   WHEEL
+|   |       |   |   
+|   |       |   \---licenses
+|   |       |           LICENSE.txt
+|   |       |           NOTICE.txt
+|   |       |           
+|   |       +---pyarrow.libs
+|   |       |       msvcp140-f22b3317cfb3fad7db3a18f8f234f32b.dll
+|   |       |       msvcp140_atomic_wait-a67379821634a4f3a32730b57a436c71.dll
+|   |       |       
 |   |       +---pyparsing
 |   |       |   |   actions.py
 |   |       |   |   common.py
@@ -24013,6 +27146,7 @@ E:.
 |   |       idna.exe
 |   |       mne.exe
 |   |       normalizer.exe
+|   |       numba
 |   |       numpy-config.exe
 |   |       pip.exe
 |   |       pip3.13.exe
@@ -26503,6 +29637,9 @@ E:.
 |           chb01-summary.txt
 |           chb01_01.edf
 |           
++---checkpoints_v4
+|       v4_checkpoint.pkl
+|       
 +---data
 |       chbmit_model.json
 |       
@@ -27085,12 +30222,717 @@ E:.
 |   \---validation
 |           __init__.py
 |           
++---phase4c_outputs
+|       PHASE4C_ENSEMBLE.joblib
+|       PHASE4C_EXTRA_TREES.joblib
+|       PHASE4C_FEATURE_IMPORTANCE.csv
+|       PHASE4C_HGB.joblib
+|       PHASE4C_LEAKAGE_AUDIT.json
+|       PHASE4C_MODEL_RANKING.csv
+|       PHASE4C_PATIENT_RESULTS_ENSEMBLE.csv
+|       PHASE4C_PATIENT_RESULTS_EXTRA_TREES.csv
+|       PHASE4C_PATIENT_RESULTS_HIST_GRADIENT_BOOSTING.csv
+|       PHASE4C_PATIENT_RESULTS_RANDOM_FOREST.csv
+|       PHASE4C_PATIENT_RESULTS_XGBOOST.csv
+|       PHASE4C_PATIENT_SPLIT.json
+|       PHASE4C_RANDOM_FOREST.joblib
+|       PHASE4C_RESULTS_SUMMARY.csv
+|       PHASE4C_XGBOOST.joblib
+|       
 +---preprocessing
 |       pipeline.py
 |       README.md
 |       version.py
 |       _provenance.py
 |       __init__.py
+|       
++---real_feature_dataset_v4_shards
+|       chb01_chb01_01.parquet
+|       chb01_chb01_02.parquet
+|       chb01_chb01_03.parquet
+|       chb01_chb01_04.parquet
+|       chb01_chb01_05.parquet
+|       chb01_chb01_06.parquet
+|       chb01_chb01_07.parquet
+|       chb01_chb01_08.parquet
+|       chb01_chb01_09.parquet
+|       chb01_chb01_10.parquet
+|       chb01_chb01_11.parquet
+|       chb01_chb01_12.parquet
+|       chb01_chb01_13.parquet
+|       chb01_chb01_14.parquet
+|       chb01_chb01_15.parquet
+|       chb01_chb01_16.parquet
+|       chb01_chb01_17.parquet
+|       chb01_chb01_18.parquet
+|       chb01_chb01_19.parquet
+|       chb01_chb01_20.parquet
+|       chb01_chb01_21.parquet
+|       chb01_chb01_22.parquet
+|       chb01_chb01_23.parquet
+|       chb01_chb01_24.parquet
+|       chb01_chb01_25.parquet
+|       chb01_chb01_26.parquet
+|       chb01_chb01_27.parquet
+|       chb01_chb01_29.parquet
+|       chb01_chb01_30.parquet
+|       chb01_chb01_31.parquet
+|       chb01_chb01_32.parquet
+|       chb01_chb01_33.parquet
+|       chb01_chb01_34.parquet
+|       chb01_chb01_36.parquet
+|       chb01_chb01_37.parquet
+|       chb01_chb01_38.parquet
+|       chb01_chb01_39.parquet
+|       chb01_chb01_40.parquet
+|       chb01_chb01_41.parquet
+|       chb01_chb01_42.parquet
+|       chb01_chb01_43.parquet
+|       chb01_chb01_46.parquet
+|       chb02_chb02_01.parquet
+|       chb02_chb02_02.parquet
+|       chb02_chb02_03.parquet
+|       chb02_chb02_04.parquet
+|       chb02_chb02_05.parquet
+|       chb02_chb02_06.parquet
+|       chb02_chb02_07.parquet
+|       chb02_chb02_08.parquet
+|       chb02_chb02_09.parquet
+|       chb02_chb02_10.parquet
+|       chb02_chb02_11.parquet
+|       chb02_chb02_12.parquet
+|       chb02_chb02_13.parquet
+|       chb02_chb02_14.parquet
+|       chb02_chb02_15.parquet
+|       chb02_chb02_16+.parquet
+|       chb02_chb02_16.parquet
+|       chb02_chb02_17.parquet
+|       chb02_chb02_18.parquet
+|       chb02_chb02_19.parquet
+|       chb02_chb02_20.parquet
+|       chb02_chb02_21.parquet
+|       chb02_chb02_22.parquet
+|       chb02_chb02_23.parquet
+|       chb02_chb02_24.parquet
+|       chb02_chb02_25.parquet
+|       chb02_chb02_26.parquet
+|       chb02_chb02_27.parquet
+|       chb02_chb02_28.parquet
+|       chb02_chb02_29.parquet
+|       chb02_chb02_30.parquet
+|       chb02_chb02_31.parquet
+|       chb02_chb02_32.parquet
+|       chb02_chb02_33.parquet
+|       chb02_chb02_34.parquet
+|       chb02_chb02_35.parquet
+|       chb03_chb03_01.parquet
+|       chb03_chb03_02.parquet
+|       chb03_chb03_03.parquet
+|       chb03_chb03_04.parquet
+|       chb03_chb03_05.parquet
+|       chb03_chb03_06.parquet
+|       chb03_chb03_07.parquet
+|       chb03_chb03_08.parquet
+|       chb03_chb03_09.parquet
+|       chb03_chb03_10.parquet
+|       chb03_chb03_11.parquet
+|       chb03_chb03_12.parquet
+|       chb03_chb03_13.parquet
+|       chb03_chb03_14.parquet
+|       chb03_chb03_15.parquet
+|       chb03_chb03_16.parquet
+|       chb03_chb03_17.parquet
+|       chb03_chb03_18.parquet
+|       chb03_chb03_19.parquet
+|       chb03_chb03_20.parquet
+|       chb03_chb03_21.parquet
+|       chb03_chb03_22.parquet
+|       chb03_chb03_23.parquet
+|       chb03_chb03_24.parquet
+|       chb03_chb03_25.parquet
+|       chb03_chb03_26.parquet
+|       chb03_chb03_27.parquet
+|       chb03_chb03_28.parquet
+|       chb03_chb03_29.parquet
+|       chb03_chb03_30.parquet
+|       chb03_chb03_31.parquet
+|       chb03_chb03_32.parquet
+|       chb03_chb03_33.parquet
+|       chb03_chb03_34.parquet
+|       chb03_chb03_35.parquet
+|       chb03_chb03_36.parquet
+|       chb03_chb03_37.parquet
+|       chb03_chb03_38.parquet
+|       chb04_chb04_01.parquet
+|       chb04_chb04_02.parquet
+|       chb04_chb04_03.parquet
+|       chb04_chb04_04.parquet
+|       chb04_chb04_05.parquet
+|       chb04_chb04_06.parquet
+|       chb04_chb04_07.parquet
+|       chb04_chb04_08.parquet
+|       chb04_chb04_09.parquet
+|       chb04_chb04_10.parquet
+|       chb04_chb04_11.parquet
+|       chb04_chb04_12.parquet
+|       chb04_chb04_13.parquet
+|       chb04_chb04_14.parquet
+|       chb04_chb04_15.parquet
+|       chb04_chb04_16.parquet
+|       chb04_chb04_17.parquet
+|       chb04_chb04_18.parquet
+|       chb04_chb04_19.parquet
+|       chb04_chb04_21.parquet
+|       chb04_chb04_22.parquet
+|       chb04_chb04_23.parquet
+|       chb04_chb04_24.parquet
+|       chb04_chb04_25.parquet
+|       chb04_chb04_26.parquet
+|       chb04_chb04_27.parquet
+|       chb04_chb04_28.parquet
+|       chb04_chb04_29.parquet
+|       chb04_chb04_30.parquet
+|       chb04_chb04_31.parquet
+|       chb04_chb04_32.parquet
+|       chb04_chb04_33.parquet
+|       chb04_chb04_34.parquet
+|       chb04_chb04_35.parquet
+|       chb04_chb04_36.parquet
+|       chb04_chb04_37.parquet
+|       chb04_chb04_38.parquet
+|       chb04_chb04_39.parquet
+|       chb04_chb04_40.parquet
+|       chb04_chb04_41.parquet
+|       chb04_chb04_42.parquet
+|       chb04_chb04_43.parquet
+|       chb05_chb05_01.parquet
+|       chb05_chb05_02.parquet
+|       chb05_chb05_03.parquet
+|       chb05_chb05_04.parquet
+|       chb05_chb05_05.parquet
+|       chb05_chb05_06.parquet
+|       chb05_chb05_07.parquet
+|       chb05_chb05_08.parquet
+|       chb05_chb05_09.parquet
+|       chb05_chb05_10.parquet
+|       chb05_chb05_11.parquet
+|       chb05_chb05_12.parquet
+|       chb05_chb05_13.parquet
+|       chb05_chb05_14.parquet
+|       chb05_chb05_15.parquet
+|       chb05_chb05_16.parquet
+|       chb05_chb05_17.parquet
+|       chb05_chb05_18.parquet
+|       chb05_chb05_19.parquet
+|       chb05_chb05_20.parquet
+|       chb05_chb05_21.parquet
+|       chb05_chb05_22.parquet
+|       chb05_chb05_23.parquet
+|       chb05_chb05_24.parquet
+|       chb05_chb05_25.parquet
+|       chb05_chb05_26.parquet
+|       chb05_chb05_27.parquet
+|       chb05_chb05_28.parquet
+|       chb05_chb05_29.parquet
+|       chb05_chb05_30.parquet
+|       chb05_chb05_31.parquet
+|       chb05_chb05_32.parquet
+|       chb05_chb05_33.parquet
+|       chb05_chb05_34.parquet
+|       chb05_chb05_35.parquet
+|       chb05_chb05_36.parquet
+|       chb05_chb05_37.parquet
+|       chb05_chb05_38.parquet
+|       chb05_chb05_39.parquet
+|       chb06_chb06_01.parquet
+|       chb06_chb06_02.parquet
+|       chb06_chb06_03.parquet
+|       chb06_chb06_04.parquet
+|       chb06_chb06_05.parquet
+|       chb06_chb06_06.parquet
+|       chb06_chb06_07.parquet
+|       chb06_chb06_08.parquet
+|       chb06_chb06_09.parquet
+|       chb06_chb06_10.parquet
+|       chb06_chb06_12.parquet
+|       chb06_chb06_13.parquet
+|       chb06_chb06_14.parquet
+|       chb06_chb06_15.parquet
+|       chb06_chb06_16.parquet
+|       chb06_chb06_17.parquet
+|       chb06_chb06_18.parquet
+|       chb06_chb06_24.parquet
+|       chb07_chb07_01.parquet
+|       chb07_chb07_02.parquet
+|       chb07_chb07_03.parquet
+|       chb07_chb07_04.parquet
+|       chb07_chb07_05.parquet
+|       chb07_chb07_06.parquet
+|       chb07_chb07_07.parquet
+|       chb07_chb07_08.parquet
+|       chb07_chb07_09.parquet
+|       chb07_chb07_10.parquet
+|       chb07_chb07_11.parquet
+|       chb07_chb07_12.parquet
+|       chb07_chb07_13.parquet
+|       chb07_chb07_14.parquet
+|       chb07_chb07_15.parquet
+|       chb07_chb07_16.parquet
+|       chb07_chb07_17.parquet
+|       chb07_chb07_18.parquet
+|       chb07_chb07_19.parquet
+|       chb08_chb08_02.parquet
+|       chb08_chb08_03.parquet
+|       chb08_chb08_04.parquet
+|       chb08_chb08_05.parquet
+|       chb08_chb08_10.parquet
+|       chb08_chb08_11.parquet
+|       chb08_chb08_12.parquet
+|       chb08_chb08_13.parquet
+|       chb08_chb08_14.parquet
+|       chb08_chb08_15.parquet
+|       chb08_chb08_16.parquet
+|       chb08_chb08_17.parquet
+|       chb08_chb08_18.parquet
+|       chb08_chb08_19.parquet
+|       chb08_chb08_20.parquet
+|       chb08_chb08_21.parquet
+|       chb08_chb08_22.parquet
+|       chb08_chb08_23.parquet
+|       chb08_chb08_24.parquet
+|       chb08_chb08_29.parquet
+|       chb09_chb09_01.parquet
+|       chb09_chb09_02.parquet
+|       chb09_chb09_03.parquet
+|       chb09_chb09_04.parquet
+|       chb09_chb09_05.parquet
+|       chb09_chb09_06.parquet
+|       chb09_chb09_07.parquet
+|       chb09_chb09_08.parquet
+|       chb09_chb09_09.parquet
+|       chb09_chb09_10.parquet
+|       chb09_chb09_11.parquet
+|       chb09_chb09_12.parquet
+|       chb09_chb09_13.parquet
+|       chb09_chb09_14.parquet
+|       chb09_chb09_15.parquet
+|       chb09_chb09_16.parquet
+|       chb09_chb09_17.parquet
+|       chb09_chb09_18.parquet
+|       chb09_chb09_19.parquet
+|       chb10_chb10_01.parquet
+|       chb10_chb10_02.parquet
+|       chb10_chb10_03.parquet
+|       chb10_chb10_04.parquet
+|       chb10_chb10_05.parquet
+|       chb10_chb10_06.parquet
+|       chb10_chb10_07.parquet
+|       chb10_chb10_08.parquet
+|       chb10_chb10_12.parquet
+|       chb10_chb10_13.parquet
+|       chb10_chb10_14.parquet
+|       chb10_chb10_15.parquet
+|       chb10_chb10_16.parquet
+|       chb10_chb10_17.parquet
+|       chb10_chb10_18.parquet
+|       chb10_chb10_19.parquet
+|       chb10_chb10_20.parquet
+|       chb10_chb10_21.parquet
+|       chb10_chb10_22.parquet
+|       chb10_chb10_27.parquet
+|       chb10_chb10_28.parquet
+|       chb10_chb10_30.parquet
+|       chb10_chb10_31.parquet
+|       chb10_chb10_38.parquet
+|       chb10_chb10_89.parquet
+|       chb11_chb11_01.parquet
+|       chb11_chb11_02.parquet
+|       chb11_chb11_03.parquet
+|       chb11_chb11_04.parquet
+|       chb11_chb11_05.parquet
+|       chb11_chb11_06.parquet
+|       chb11_chb11_07.parquet
+|       chb11_chb11_08.parquet
+|       chb11_chb11_09.parquet
+|       chb11_chb11_10.parquet
+|       chb11_chb11_11.parquet
+|       chb11_chb11_12.parquet
+|       chb11_chb11_13.parquet
+|       chb11_chb11_14.parquet
+|       chb11_chb11_15.parquet
+|       chb11_chb11_16.parquet
+|       chb11_chb11_17.parquet
+|       chb11_chb11_18.parquet
+|       chb11_chb11_19.parquet
+|       chb11_chb11_24.parquet
+|       chb11_chb11_25.parquet
+|       chb11_chb11_26.parquet
+|       chb11_chb11_27.parquet
+|       chb11_chb11_53.parquet
+|       chb11_chb11_54.parquet
+|       chb11_chb11_55.parquet
+|       chb11_chb11_56.parquet
+|       chb11_chb11_58.parquet
+|       chb11_chb11_60.parquet
+|       chb11_chb11_61.parquet
+|       chb11_chb11_62.parquet
+|       chb11_chb11_63.parquet
+|       chb11_chb11_82.parquet
+|       chb11_chb11_92.parquet
+|       chb11_chb11_99.parquet
+|       chb12_chb12_06.parquet
+|       chb12_chb12_08.parquet
+|       chb12_chb12_09.parquet
+|       chb12_chb12_10.parquet
+|       chb12_chb12_11.parquet
+|       chb12_chb12_19.parquet
+|       chb12_chb12_20.parquet
+|       chb12_chb12_21.parquet
+|       chb12_chb12_23.parquet
+|       chb12_chb12_24.parquet
+|       chb12_chb12_27.parquet
+|       chb12_chb12_28.parquet
+|       chb12_chb12_29.parquet
+|       chb12_chb12_32.parquet
+|       chb12_chb12_33.parquet
+|       chb12_chb12_34.parquet
+|       chb12_chb12_35.parquet
+|       chb12_chb12_36.parquet
+|       chb12_chb12_37.parquet
+|       chb12_chb12_38.parquet
+|       chb12_chb12_39.parquet
+|       chb12_chb12_40.parquet
+|       chb12_chb12_41.parquet
+|       chb12_chb12_42.parquet
+|       chb13_chb13_02.parquet
+|       chb13_chb13_03.parquet
+|       chb13_chb13_04.parquet
+|       chb13_chb13_05.parquet
+|       chb13_chb13_06.parquet
+|       chb13_chb13_07.parquet
+|       chb13_chb13_08.parquet
+|       chb13_chb13_09.parquet
+|       chb13_chb13_10.parquet
+|       chb13_chb13_11.parquet
+|       chb13_chb13_12.parquet
+|       chb13_chb13_13.parquet
+|       chb13_chb13_14.parquet
+|       chb13_chb13_15.parquet
+|       chb13_chb13_16.parquet
+|       chb13_chb13_18.parquet
+|       chb13_chb13_19.parquet
+|       chb13_chb13_21.parquet
+|       chb13_chb13_22.parquet
+|       chb13_chb13_24.parquet
+|       chb13_chb13_30.parquet
+|       chb13_chb13_36.parquet
+|       chb13_chb13_37.parquet
+|       chb13_chb13_38.parquet
+|       chb13_chb13_39.parquet
+|       chb13_chb13_40.parquet
+|       chb13_chb13_47.parquet
+|       chb13_chb13_55.parquet
+|       chb13_chb13_56.parquet
+|       chb13_chb13_58.parquet
+|       chb13_chb13_59.parquet
+|       chb13_chb13_60.parquet
+|       chb13_chb13_62.parquet
+|       chb14_chb14_01.parquet
+|       chb14_chb14_02.parquet
+|       chb14_chb14_03.parquet
+|       chb14_chb14_04.parquet
+|       chb14_chb14_06.parquet
+|       chb14_chb14_07.parquet
+|       chb14_chb14_11.parquet
+|       chb14_chb14_12.parquet
+|       chb14_chb14_13.parquet
+|       chb14_chb14_14.parquet
+|       chb14_chb14_16.parquet
+|       chb14_chb14_17.parquet
+|       chb14_chb14_18.parquet
+|       chb14_chb14_19.parquet
+|       chb14_chb14_20.parquet
+|       chb14_chb14_22.parquet
+|       chb14_chb14_24.parquet
+|       chb14_chb14_25.parquet
+|       chb14_chb14_26.parquet
+|       chb14_chb14_27.parquet
+|       chb14_chb14_29.parquet
+|       chb14_chb14_30.parquet
+|       chb14_chb14_32.parquet
+|       chb14_chb14_37.parquet
+|       chb14_chb14_39.parquet
+|       chb14_chb14_42.parquet
+|       chb15_chb15_01.parquet
+|       chb15_chb15_02.parquet
+|       chb15_chb15_03.parquet
+|       chb15_chb15_04.parquet
+|       chb15_chb15_05.parquet
+|       chb15_chb15_06.parquet
+|       chb15_chb15_07.parquet
+|       chb15_chb15_08.parquet
+|       chb15_chb15_09.parquet
+|       chb15_chb15_10.parquet
+|       chb15_chb15_11.parquet
+|       chb15_chb15_12.parquet
+|       chb15_chb15_13.parquet
+|       chb15_chb15_14.parquet
+|       chb15_chb15_15.parquet
+|       chb15_chb15_16.parquet
+|       chb15_chb15_17.parquet
+|       chb15_chb15_19.parquet
+|       chb15_chb15_20.parquet
+|       chb15_chb15_22.parquet
+|       chb15_chb15_26.parquet
+|       chb15_chb15_28.parquet
+|       chb15_chb15_29.parquet
+|       chb15_chb15_30.parquet
+|       chb15_chb15_31.parquet
+|       chb15_chb15_32.parquet
+|       chb15_chb15_33.parquet
+|       chb15_chb15_35.parquet
+|       chb15_chb15_37.parquet
+|       chb15_chb15_40.parquet
+|       chb15_chb15_45.parquet
+|       chb15_chb15_46.parquet
+|       chb15_chb15_49.parquet
+|       chb15_chb15_50.parquet
+|       chb15_chb15_51.parquet
+|       chb15_chb15_52.parquet
+|       chb15_chb15_54.parquet
+|       chb15_chb15_61.parquet
+|       chb15_chb15_62.parquet
+|       chb15_chb15_63.parquet
+|       chb16_chb16_01.parquet
+|       chb16_chb16_02.parquet
+|       chb16_chb16_03.parquet
+|       chb16_chb16_04.parquet
+|       chb16_chb16_05.parquet
+|       chb16_chb16_06.parquet
+|       chb16_chb16_07.parquet
+|       chb16_chb16_08.parquet
+|       chb16_chb16_09.parquet
+|       chb16_chb16_10.parquet
+|       chb16_chb16_11.parquet
+|       chb16_chb16_12.parquet
+|       chb16_chb16_13.parquet
+|       chb16_chb16_14.parquet
+|       chb16_chb16_15.parquet
+|       chb16_chb16_16.parquet
+|       chb16_chb16_17.parquet
+|       chb16_chb16_18.parquet
+|       chb16_chb16_19.parquet
+|       chb17_chb17a_03.parquet
+|       chb17_chb17a_04.parquet
+|       chb17_chb17a_05.parquet
+|       chb17_chb17a_06.parquet
+|       chb17_chb17a_08.parquet
+|       chb17_chb17b_57.parquet
+|       chb17_chb17b_58.parquet
+|       chb17_chb17b_59.parquet
+|       chb17_chb17b_60.parquet
+|       chb17_chb17b_63.parquet
+|       chb17_chb17b_67.parquet
+|       chb17_chb17b_68.parquet
+|       chb17_chb17b_69.parquet
+|       chb17_chb17c_02.parquet
+|       chb17_chb17c_03.parquet
+|       chb17_chb17c_04.parquet
+|       chb17_chb17c_05.parquet
+|       chb17_chb17c_06.parquet
+|       chb17_chb17c_07.parquet
+|       chb17_chb17c_08.parquet
+|       chb17_chb17c_13.parquet
+|       chb18_chb18_01.parquet
+|       chb18_chb18_02.parquet
+|       chb18_chb18_03.parquet
+|       chb18_chb18_04.parquet
+|       chb18_chb18_05.parquet
+|       chb18_chb18_06.parquet
+|       chb18_chb18_07.parquet
+|       chb18_chb18_08.parquet
+|       chb18_chb18_09.parquet
+|       chb18_chb18_10.parquet
+|       chb18_chb18_11.parquet
+|       chb18_chb18_12.parquet
+|       chb18_chb18_13.parquet
+|       chb18_chb18_14.parquet
+|       chb18_chb18_15.parquet
+|       chb18_chb18_16.parquet
+|       chb18_chb18_17.parquet
+|       chb18_chb18_18.parquet
+|       chb18_chb18_19.parquet
+|       chb18_chb18_20.parquet
+|       chb18_chb18_21.parquet
+|       chb18_chb18_22.parquet
+|       chb18_chb18_23.parquet
+|       chb18_chb18_24.parquet
+|       chb18_chb18_25.parquet
+|       chb18_chb18_26.parquet
+|       chb18_chb18_27.parquet
+|       chb18_chb18_28.parquet
+|       chb18_chb18_29.parquet
+|       chb18_chb18_30.parquet
+|       chb18_chb18_31.parquet
+|       chb18_chb18_32.parquet
+|       chb18_chb18_33.parquet
+|       chb18_chb18_34.parquet
+|       chb18_chb18_35.parquet
+|       chb18_chb18_36.parquet
+|       chb19_chb19_01.parquet
+|       chb19_chb19_02.parquet
+|       chb19_chb19_03.parquet
+|       chb19_chb19_04.parquet
+|       chb19_chb19_05.parquet
+|       chb19_chb19_06.parquet
+|       chb19_chb19_07.parquet
+|       chb19_chb19_08.parquet
+|       chb19_chb19_09.parquet
+|       chb19_chb19_10.parquet
+|       chb19_chb19_11.parquet
+|       chb19_chb19_12.parquet
+|       chb19_chb19_13.parquet
+|       chb19_chb19_14.parquet
+|       chb19_chb19_15.parquet
+|       chb19_chb19_16.parquet
+|       chb19_chb19_17.parquet
+|       chb19_chb19_18.parquet
+|       chb19_chb19_19.parquet
+|       chb19_chb19_20.parquet
+|       chb19_chb19_21.parquet
+|       chb19_chb19_22.parquet
+|       chb19_chb19_23.parquet
+|       chb19_chb19_24.parquet
+|       chb19_chb19_25.parquet
+|       chb19_chb19_26.parquet
+|       chb19_chb19_27.parquet
+|       chb19_chb19_28.parquet
+|       chb19_chb19_29.parquet
+|       chb19_chb19_30.parquet
+|       chb20_chb20_01.parquet
+|       chb20_chb20_02.parquet
+|       chb20_chb20_03.parquet
+|       chb20_chb20_04.parquet
+|       chb20_chb20_05.parquet
+|       chb20_chb20_06.parquet
+|       chb20_chb20_07.parquet
+|       chb20_chb20_08.parquet
+|       chb20_chb20_11.parquet
+|       chb20_chb20_12.parquet
+|       chb20_chb20_13.parquet
+|       chb20_chb20_14.parquet
+|       chb20_chb20_15.parquet
+|       chb20_chb20_16.parquet
+|       chb20_chb20_17.parquet
+|       chb20_chb20_21.parquet
+|       chb20_chb20_22.parquet
+|       chb20_chb20_23.parquet
+|       chb20_chb20_25.parquet
+|       chb20_chb20_26.parquet
+|       chb20_chb20_27.parquet
+|       chb20_chb20_28.parquet
+|       chb20_chb20_29.parquet
+|       chb20_chb20_30.parquet
+|       chb20_chb20_31.parquet
+|       chb20_chb20_34.parquet
+|       chb20_chb20_59.parquet
+|       chb20_chb20_60.parquet
+|       chb20_chb20_68.parquet
+|       chb21_chb21_01.parquet
+|       chb21_chb21_02.parquet
+|       chb21_chb21_03.parquet
+|       chb21_chb21_04.parquet
+|       chb21_chb21_05.parquet
+|       chb21_chb21_06.parquet
+|       chb21_chb21_07.parquet
+|       chb21_chb21_08.parquet
+|       chb21_chb21_09.parquet
+|       chb21_chb21_10.parquet
+|       chb21_chb21_11.parquet
+|       chb21_chb21_12.parquet
+|       chb21_chb21_13.parquet
+|       chb21_chb21_14.parquet
+|       chb21_chb21_15.parquet
+|       chb21_chb21_16.parquet
+|       chb21_chb21_17.parquet
+|       chb21_chb21_18.parquet
+|       chb21_chb21_19.parquet
+|       chb21_chb21_20.parquet
+|       chb21_chb21_21.parquet
+|       chb21_chb21_22.parquet
+|       chb21_chb21_23.parquet
+|       chb21_chb21_24.parquet
+|       chb21_chb21_25.parquet
+|       chb21_chb21_26.parquet
+|       chb21_chb21_27.parquet
+|       chb21_chb21_28.parquet
+|       chb21_chb21_29.parquet
+|       chb21_chb21_30.parquet
+|       chb21_chb21_31.parquet
+|       chb21_chb21_32.parquet
+|       chb21_chb21_33.parquet
+|       chb22_chb22_01.parquet
+|       chb22_chb22_02.parquet
+|       chb22_chb22_03.parquet
+|       chb22_chb22_04.parquet
+|       chb22_chb22_05.parquet
+|       chb22_chb22_06.parquet
+|       chb22_chb22_07.parquet
+|       chb22_chb22_08.parquet
+|       chb22_chb22_09.parquet
+|       chb22_chb22_10.parquet
+|       chb22_chb22_11.parquet
+|       chb22_chb22_15.parquet
+|       chb22_chb22_16.parquet
+|       chb22_chb22_17.parquet
+|       chb22_chb22_18.parquet
+|       chb22_chb22_19.parquet
+|       chb22_chb22_20.parquet
+|       chb22_chb22_21.parquet
+|       chb22_chb22_22.parquet
+|       chb22_chb22_23.parquet
+|       chb22_chb22_24.parquet
+|       chb22_chb22_25.parquet
+|       chb22_chb22_26.parquet
+|       chb22_chb22_27.parquet
+|       chb22_chb22_28.parquet
+|       chb22_chb22_29.parquet
+|       chb22_chb22_30.parquet
+|       chb22_chb22_38.parquet
+|       chb22_chb22_51.parquet
+|       chb22_chb22_54.parquet
+|       chb22_chb22_77.parquet
+|       chb23_chb23_06.parquet
+|       chb23_chb23_07.parquet
+|       chb23_chb23_08.parquet
+|       chb23_chb23_09.parquet
+|       chb23_chb23_10.parquet
+|       chb23_chb23_16.parquet
+|       chb23_chb23_17.parquet
+|       chb23_chb23_19.parquet
+|       chb23_chb23_20.parquet
+|       chb24_chb24_01.parquet
+|       chb24_chb24_02.parquet
+|       chb24_chb24_03.parquet
+|       chb24_chb24_04.parquet
+|       chb24_chb24_05.parquet
+|       chb24_chb24_06.parquet
+|       chb24_chb24_07.parquet
+|       chb24_chb24_08.parquet
+|       chb24_chb24_09.parquet
+|       chb24_chb24_10.parquet
+|       chb24_chb24_11.parquet
+|       chb24_chb24_12.parquet
+|       chb24_chb24_13.parquet
+|       chb24_chb24_14.parquet
+|       chb24_chb24_15.parquet
+|       chb24_chb24_16.parquet
+|       chb24_chb24_17.parquet
+|       chb24_chb24_18.parquet
+|       chb24_chb24_19.parquet
+|       chb24_chb24_20.parquet
+|       chb24_chb24_21.parquet
+|       chb24_chb24_22.parquet
 |       
 +---runtime_evidence_real_corpus
 |       failure1_application_platform.txt
@@ -27181,16 +31023,29 @@ E:.
 |               
 +---scripts
 |       acquire_real_dataset.py
+|       advanced_feature_foundation_v2.py
 |       application_frontend_gateway.py
+|       audit_feature_dataset_v3.py
+|       audit_feature_foundation.py
 |       build_application_frontend_snapshot.py
 |       build_autonomous_operations_workstation_snapshot.py
 |       build_chbmit_features.sh
+|       build_feature_dataset_v3.py
 |       build_operational_workstation_snapshot.py
+|       build_real_feature_dataset.py
+|       build_real_feature_dataset_v2.py
+|       build_real_feature_dataset_v3_production.py
+|       build_real_feature_dataset_v4_production.py
 |       build_real_window_dataset.py
+|       build_seizure_interval_database.py
 |       build_workstation_snapshot.py
 |       corpus_audit.py
+|       dataset_v4_size_estimator.py
+|       feature_v3_sandbox.py
+|       feature_v3_validation.py
 |       fix_seizure_parser.py
 |       generate_real_window_inventory.py
+|       prepare_v3_training_dataset.py
 |       README.md
 |       resume_chbmit_training.py
 |       run_clinical_knowledge_workflow.py
@@ -27200,7 +31055,16 @@ E:.
 |       seizure_audit.py
 |       seizure_parser_forensics.py
 |       serve_neurovision.py
+|       system_readiness_check.py
 |       train_chbmit.py
+|       train_phase1_baseline.py
+|       train_phase1_threshold_audit.py
+|       train_phase2_xgboost.py
+|       train_phase3a_xgboost_v3.py
+|       train_phase3b_patient_disjoint.py
+|       train_phase4b_patient_disjoint.py
+|       train_phase4c_generalization_optimization.py
+|       v4_feature_foundation_validation.py
 |       verify_dbe1_asgi_entrypoint.py
 |       verify_dbe2_docker_deployment.py
 |       verify_dbe3_duplicate_upload.py
@@ -27247,6 +31111,13 @@ E:.
 |       window_inventory_audit.py
 |       _repo_bootstrap.py
 |       __init__.py
+|       
++---scripts_v4_new
+|       audit_v4_dataset.py
+|       build_shard_dataset_v4.py
+|       merge_v4_shards.py
+|       prepare_v4_training_dataset.py
+|       train_phase4a_xgboost.py
 |       
 +---tests
 |   |   conftest.py

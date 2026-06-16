@@ -1,0 +1,67 @@
+======================================================================
+PHASE5B TEMPORAL XGBOOST v3 — CERTIFICATION REPORT
+======================================================================
+
+DATASET STATISTICS
+  Total rows           : 1767930
+  Total patients       : 24
+  Total EDFs           : 686
+  Positive labels      : 6297
+  Negative labels      : 1761633
+
+FEATURE COUNTS
+  Base features        : 96
+  Lag features         : 192
+  Rolling mean features: 96
+  Stability features   : 96
+  Position features    : 4
+  Total features       : 484
+
+MEMORY AUDIT
+  Total estimated GB   : 3.183939
+  X_train: 1220370x484 (2.2004 GB)
+  X_val: 187793x484 (0.3386 GB)
+  X_test: 357709x484 (0.6450 GB)
+
+SPLIT STATISTICS
+  Train patients       : 16
+  Val patients         : 3
+  Test patients        : 5
+  Train rows           : 1220370
+  Val rows             : 187793
+  Test rows            : 357709
+
+METRICS (threshold=0.5)
+  ROC-AUC              : 0.913429
+  PR-AUC               : 0.164016
+  Balanced Accuracy    : 0.826419
+  Recall               : 0.779273
+  Specificity          : 0.873565
+  Precision            : 0.012666
+  F1                   : 0.024927
+  MCC                  : 0.089027
+  Kappa                : 0.020925
+  Brier Score          : 0.089262
+  Calibration Error    : 0.488356
+
+BEST THRESHOLDS
+  Best F1 threshold    : 0.99 (F1=0.2725)
+  Best Recall thresh   : 0.01 (Recall=0.9812)
+  Best BalAcc thresh   : 0.64 (BalAcc=0.8267)
+
+RUNTIME: 671.96 seconds
+
+OUTPUT ARTIFACTS
+  [OK] PHASE5B_ENGINEERED_DATASET.parquet
+  [OK] PHASE5B_PATIENT_SPLIT.json
+  [OK] PHASE5B_LEAKAGE_AUDIT.json
+  [OK] PHASE5B_MEMORY_AUDIT.json
+  [OK] PHASE5B_TEMPORAL_XGBOOST.joblib
+  [OK] PHASE5B_METRICS.json
+  [OK] PHASE5B_THRESHOLD_SWEEP.csv
+  [OK] PHASE5B_FEATURE_IMPORTANCE.csv
+  [MISSING] PHASE5B_CERTIFICATION_REPORT.txt
+
+======================================================================
+END OF CERTIFICATION REPORT
+======================================================================

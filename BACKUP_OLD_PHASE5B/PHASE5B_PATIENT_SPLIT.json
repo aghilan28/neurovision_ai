@@ -1,0 +1,39 @@
+{
+  "train_patients": [
+    "chb04",
+    "chb01",
+    "chb17",
+    "chb09",
+    "chb16",
+    "chb12",
+    "chb14",
+    "chb02",
+    "chb03",
+    "chb13",
+    "chb05",
+    "chb19",
+    "chb22",
+    "chb23",
+    "chb10",
+    "chb06"
+  ],
+  "val_patients": [
+    "chb24",
+    "chb21",
+    "chb18"
+  ],
+  "test_patients": [
+    "chb15",
+    "chb11",
+    "chb07",
+    "chb08",
+    "chb20"
+  ],
+  "train_count": 16,
+  "val_count": 3,
+  "test_count": 5,
+  "total_patients": 24,
+  "train_ratio": 0.7,
+  "val_ratio": 0.15,
+  "test_ratio": 0.15
+}

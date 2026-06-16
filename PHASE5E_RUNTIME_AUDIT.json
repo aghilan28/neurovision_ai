@@ -1,0 +1,91 @@
+{
+  "total_runtime_sec": 22.287,
+  "peak_memory_mb": 7288.16,
+  "cpu_percent_at_end": 1.2,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+  "checkpoints": [
+    {
+      "label": "START",
+      "elapsed_sec": 0.001,
+      "memory_mb": 93.57
+    },
+    {
+      "label": "STEP0_SCHEMA_DISCOVERY",
+      "elapsed_sec": 14.014,
+      "memory_mb": 7286.19
+    },
+    {
+      "label": "STEP1_ARTIFACT_VALIDATION",
+      "elapsed_sec": 14.04,
+      "memory_mb": 7288.16
+    },
+    {
+      "label": "STEP2_RECONSTRUCT_TEST_PIPELINE",
+      "elapsed_sec": 17.55,
+      "memory_mb": 5827.14
+    },
+    {
+      "label": "STEP3_VERIFY_REPRODUCTION",
+      "elapsed_sec": 17.961,
+      "memory_mb": 4745.17
+    },
+    {
+      "label": "STEP4_5_PEAK_SWEEP",
+      "elapsed_sec": 19.605,
+      "memory_mb": 4745.35
+    },
+    {
+      "label": "STEP6_FN_RECOVERY",
+      "elapsed_sec": 19.722,
+      "memory_mb": 4746.55
+    },
+    {
+      "label": "STEP7_PATIENT_FORENSICS",
+      "elapsed_sec": 22.163,
+      "memory_mb": 4859.77
+    },
+    {
+      "label": "STEP8_OPTIMAL_CONFIGURATIONS",
+      "elapsed_sec": 22.176,
+      "memory_mb": 4754.91
+    },
+    {
+      "label": "STEP9_PRODUCTION_RECOMMENDATION",
+      "elapsed_sec": 22.18,
+      "memory_mb": 4754.92
+    },
+    {
+      "label": "STEP10_HISTORICAL_COMPARISON",
+      "elapsed_sec": 22.186,
+      "memory_mb": 4755.13
+    }
+  ],
+  "input_artifact_sizes_bytes": {
+    "parquet": 3634462487,
+    "model": 1613008,
+    "feature_signature": 15249,
+    "patient_split": 501,
+    "event_metrics": 504,
+    "event_predictions": 803,
+    "configuration_search": 3098858,
+    "best_configuration": 922,
+    "fn_events": 7217,
+    "root_cause_analysis": 5356,
+    "execution_report": 18734
+  },
+  "output_artifact_sizes_bytes": {
+    "PHASE5E_SCHEMA_DISCOVERY.json": 45832,
+    "PHASE5E_ARTIFACT_AUDIT.json": 3961,
+    "PHASE5E_REPRODUCTION_AUDIT.json": 658,
+    "PHASE5E_PEAK_SWEEP_RESULTS.csv": 1006,
+    "PHASE5E_FN_RECOVERY.csv": 2130,
+    "PHASE5E_PATIENT_FORENSICS.csv": 2248,
+    "PHASE5E_OPTIMAL_CONFIGURATIONS.json": 3784,
+    "PHASE5E_PRODUCTION_RECOMMENDATION.json": 2998,
+    "PHASE5E_HISTORICAL_COMPARISON.csv": 1980,
+    "PHASE5E_RUNTIME_AUDIT.json": 2361,
+    "PHASE5E_SELF_AUDIT.json": 2168,
+    "PHASE5E_EXECUTION_REPORT.txt": 0
+  }
+}

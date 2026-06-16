@@ -1,0 +1,24 @@
+{
+  "timestamp_start": "2026-06-14T10:28:42.254079+00:00",
+  "stages": {
+    "schema_discovery_seconds": 7.7244,
+    "dataset_load_seconds": 13.009,
+    "model_inference_calibration_seconds": 0.8006,
+    "gt_reconstruction_seconds": 1.0632,
+    "smoothing_seconds": 1.2266,
+    "fn_determination_seconds": 0.663,
+    "per_event_forensics_seconds": 0.2316,
+    "patient_failure_forensics_seconds": 0.0163,
+    "patient_shift_analysis_seconds": 0.0424,
+    "output_write_seconds": 0.0196
+  },
+  "peak_memory_mb": 5360.21,
+  "rows_processed_test": 357709,
+  "rows_processed_calibration": 187793,
+  "patients_processed": 5,
+  "edfs_processed": 151,
+  "total_gt_events": 23,
+  "total_fn_events": 14,
+  "timestamp_end": "2026-06-14T10:29:07.053249+00:00",
+  "runtime_seconds": 24.7992
+}
