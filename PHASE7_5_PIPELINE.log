@@ -1,0 +1,224 @@
+2026-06-19 22:02:09,494 [INFO] ======================================================================
+2026-06-19 22:02:09,494 [INFO] PHASE 7.5 — TRUE GENERALIZATION RECOVERY ENGINE (COMPLETE FIXED)
+2026-06-19 22:02:09,494 [INFO]   Started: 2026-06-19T16:32:09.491821+00:00
+2026-06-19 22:02:09,494 [INFO]   Random seed: 42
+2026-06-19 22:02:09,495 [INFO]   Available memory: 8529.1 MB
+2026-06-19 22:02:09,495 [INFO] ======================================================================
+2026-06-19 22:02:09,495 [INFO] ============================================================
+2026-06-19 22:02:09,496 [INFO] STEP 0: INPUT VALIDATION
+2026-06-19 22:02:09,496 [INFO] ============================================================
+2026-06-19 22:02:09,498 [INFO] [STEP0_INPUT_VALIDATION] PASSED | {"uploaded_count": 10, "parquet": "PHASE5B_ENGINEERED_DATASET.parquet", "model": "PHASE5B_TEMPORAL_XGBOOST.joblib"}
+2026-06-19 22:02:09,498 [INFO] ============================================================
+2026-06-19 22:02:09,498 [INFO] STEP 1: SCHEMA DISCOVERY ENGINE
+2026-06-19 22:02:09,498 [INFO] ============================================================
+2026-06-19 22:02:09,562 [INFO] [STEP1_SCHEMA_DISCOVERY] PASSED | {"patient_col": "patient", "label_col": "label", "feature_count": 484, "metadata_cols": 9}
+2026-06-19 22:02:09,564 [INFO] ============================================================
+2026-06-19 22:02:09,565 [INFO] STEP 2: FEATURE ORDER FORENSICS
+2026-06-19 22:02:09,565 [INFO] ============================================================
+2026-06-19 22:02:09,769 [INFO] [STEP2_FEATURE_ORDER_FORENSICS] WARNING | {"msg": "Model has no stored feature names \u2014 using signature order"}
+2026-06-19 22:02:09,770 [INFO] [STEP2_FEATURE_ORDER_FORENSICS] PASSED | {"model_feature_count": 484, "signature_feature_count": 484, "order_verified": true, "model_path": "PHASE5B_TEMPORAL_XGBOOST.joblib", "model_type": "XGBClassifier"}
+2026-06-19 22:02:09,770 [INFO] ============================================================
+2026-06-19 22:02:09,770 [INFO] STEP 3: PATIENT SPLIT FORENSICS
+2026-06-19 22:02:09,770 [INFO] ============================================================
+2026-06-19 22:02:09,772 [INFO] [STEP3_PATIENT_SPLIT_FORENSICS] PASSED | {"train": 16, "test": 5, "calib": 3}
+2026-06-19 22:02:09,772 [INFO] ============================================================
+2026-06-19 22:02:09,772 [INFO] STEP 4: MEMORY AUDIT
+2026-06-19 22:02:09,772 [INFO] ============================================================
+2026-06-19 22:02:09,784 [INFO] [STEP4_MEMORY_AUDIT] PASSED | {"parquet_path": "PHASE5B_ENGINEERED_DATASET.parquet", "parquet_size_gb": 3.634, "num_row_groups": 2, "total_rows": 1765872, "total_cols": 493, "loading_strategy": "streaming_chunked_with_predicate_pushdown", "chunk_size": 50000, "streaming": true}
+2026-06-19 22:02:09,785 [INFO] ============================================================
+2026-06-19 22:02:09,785 [INFO] STEP 5: ROOT CAUSE INGESTION
+2026-06-19 22:02:09,785 [INFO] ============================================================
+2026-06-19 22:02:09,793 [INFO] [STEP5_ROOT_CAUSE] PASSED | {"patients": ["chb14", "chb22", "chb02"], "global_actions": 1}
+2026-06-19 22:02:09,793 [INFO] Ranking features using metadata summaries...
+2026-06-19 22:02:09,793 [INFO] ============================================================
+2026-06-19 22:02:09,793 [INFO] STEP 7: DOMAIN SHIFT FORENSICS
+2026-06-19 22:02:09,793 [INFO] ============================================================
+2026-06-19 22:02:09,854 [INFO] [STEP7_FEATURE_STABILITY] ARTIFACT_VALIDATED | {"path": "PHASE7_5_FEATURE_STABILITY.csv", "rows": 484, "cols": 5}
+2026-06-19 22:02:09,856 [INFO] [STEP7_FEATURE_STABILITY] PASSED | {"features_analyzed": 484, "mean_ks_overall": 0.236}
+2026-06-19 22:02:09,856 [INFO] ============================================================
+2026-06-19 22:02:09,856 [INFO] STEP 8: FALSE NEGATIVE MINING
+2026-06-19 22:02:09,857 [INFO] ============================================================
+2026-06-19 22:02:09,872 [INFO] [STEP8_FN_MINING] PASSED | {"fn_features": 484}
+2026-06-19 22:02:09,872 [INFO] ============================================================
+2026-06-19 22:02:09,873 [INFO] STEP 9: GOOD VS BAD SEPARATION ANALYSIS
+2026-06-19 22:02:09,873 [INFO] ============================================================
+2026-06-19 22:02:09,921 [INFO] [STEP9_GENERALIZATION] ARTIFACT_VALIDATED | {"path": "PHASE7_5_GENERALIZATION_SCORECARD.csv", "rows": 484, "cols": 4}
+2026-06-19 22:02:09,922 [INFO] [STEP9_GENERALIZATION] PASSED | {"features_scored": 484, "mean_generalization": 0.7702}
+2026-06-19 22:02:09,922 [INFO] ============================================================
+2026-06-19 22:02:09,923 [INFO] STEP 10: MASTER FEATURE RANKING
+2026-06-19 22:02:09,923 [INFO] ============================================================
+2026-06-19 22:02:10,864 [INFO] [STEP10_MASTER_RANKING] ARTIFACT_VALIDATED | {"path": "PHASE7_5_MASTER_FEATURE_RANKING.csv", "rows": 484, "cols": 7}
+2026-06-19 22:02:10,864 [INFO] [STEP10_MASTER_RANKING] PASSED | {"features_ranked": 484}
+2026-06-19 22:02:10,865 [INFO] Selected top 250 features for projection pushdown.
+2026-06-19 22:02:10,865 [INFO] Loading train data (streaming)...
+2026-06-19 22:02:10,865 [INFO]   Loading TRAIN patients: ['chb01', 'chb04', 'chb06', 'chb07', 'chb08']... (16 total)
+2026-06-19 22:02:22,468 [INFO]   Loaded 1220370 rows, final memory: 4808.9 MB
+2026-06-19 22:02:22,468 [INFO] Loading validation data (streaming)...
+2026-06-19 22:02:22,468 [INFO]   Loading VALIDATION patients: ['chb03', 'chb15', 'chb23']... (3 total)
+2026-06-19 22:02:29,580 [INFO]   Loaded 187793 rows, final memory: 6563.7 MB
+2026-06-19 22:02:29,581 [INFO] Loading test data (streaming)...
+2026-06-19 22:02:29,581 [INFO]   Loading TEST_CHB02 patients: ['chb02']... (1 total)
+2026-06-19 22:02:36,414 [INFO]   Loaded 63300 rows, final memory: 7005.9 MB
+2026-06-19 22:02:36,414 [INFO]   Loading TEST_CHB05 patients: ['chb05']... (1 total)
+2026-06-19 22:02:42,861 [INFO]   Loaded 70010 rows, final memory: 7202.4 MB
+2026-06-19 22:02:42,861 [INFO]   Loading TEST_CHB09 patients: ['chb09']... (1 total)
+2026-06-19 22:02:49,342 [INFO]   Loaded 122078 rows, final memory: 7386.3 MB
+2026-06-19 22:02:49,343 [INFO]   Loading TEST_CHB14 patients: ['chb14']... (1 total)
+2026-06-19 22:02:57,300 [INFO]   Loaded 46670 rows, final memory: 7493.0 MB
+2026-06-19 22:02:57,301 [INFO]   Loading TEST_CHB22 patients: ['chb22']... (1 total)
+2026-06-19 22:03:06,116 [INFO]   Loaded 55651 rows, final memory: 7565.4 MB
+2026-06-19 22:03:06,246 [INFO]   Patient splits verified: Train=16, Val=3, Test=5
+2026-06-19 22:03:06,247 [INFO]   No overlap detected.
+2026-06-19 22:03:06,247 [INFO] ============================================================
+2026-06-19 22:03:06,247 [INFO] STEP 24: CLASS DISTRIBUTION AUDIT
+2026-06-19 22:03:06,247 [INFO] ============================================================
+2026-06-19 22:03:06,262 [INFO] [STEP24_CLASS_DISTRIBUTION] PASSED | {"splits": [{"name": "TRAIN", "rows": 1220370, "positive": 4058, "negative": 1216312, "positive_rate": 0.0033}, {"name": "VALIDATION", "rows": 187793, "positive": 1496, "negative": 186297, "positive_rate": 0.008}, {"name": "TEST_CHB02", "rows": 63300, "positive": 94, "negative": 63206, "positive_rate": 0.0015}, {"name": "TEST_CHB05", "rows": 70010, "positive": 291, "negative": 69719, "positive_rate": 0.0042}, {"name": "TEST_CHB09", "rows": 122078, "positive": 147, "negative": 121931, "positive_rate": 0.0012}, {"name": "TEST_CHB14", "rows": 46670, "positive": 103, "negative": 46567, "positive_rate": 0.0022}, {"name": "TEST_CHB22", "rows": 55651, "positive": 108, "negative": 55543, "positive_rate": 0.0019}], "train_positive_rate": 0.0033, "val_positive_rate": 0.008, "test_positive_rate_avg": 0.0022}
+2026-06-19 22:03:06,263 [INFO] ============================================================
+2026-06-19 22:03:06,263 [INFO] STEP 25: DUPLICATE WINDOW AUDIT
+2026-06-19 22:03:06,263 [INFO] ============================================================
+2026-06-19 22:03:06,589 [INFO] [STEP25_DUPLICATE_AUDIT] PASSED | {"duplicate_rows": 0, "duplicate_groups": 0}
+2026-06-19 22:03:06,590 [INFO] Computing relative features for train (unsupervised baseline)...
+2026-06-19 22:04:38,499 [INFO] ============================================================
+2026-06-19 22:04:38,500 [INFO] STEP 6: PATIENT RELATIVE FEATURE ENGINEERING
+2026-06-19 22:04:38,500 [INFO] ============================================================
+2026-06-19 22:04:38,502 [INFO] [STEP6_RELATIVE_FEATURES] PASSED | {"relative_features": 250, "total_features": 734}
+2026-06-19 22:04:38,503 [INFO] ============================================================
+2026-06-19 22:04:38,503 [INFO] STEP 6B: CORRELATION REDUNDANCY AUDIT
+2026-06-19 22:04:38,503 [INFO] ============================================================
+2026-06-19 22:04:48,260 [INFO] [STEP6B_CORRELATION_AUDIT] PASSED | {"total_pairs": 464, "features_to_drop": 245}
+2026-06-19 22:04:48,264 [INFO]   Correlation audit: 464 pairs >0.95, keeping 255 features
+2026-06-19 22:04:48,264 [INFO] ============================================================
+2026-06-19 22:04:48,264 [INFO] STEP 6C: VARIANCE THRESHOLD AUDIT
+2026-06-19 22:04:48,264 [INFO] ============================================================
+2026-06-19 22:04:50,350 [INFO] [STEP6C_VARIANCE_AUDIT] PASSED | {"low_variance_count": 39}
+2026-06-19 22:04:50,350 [INFO]   Variance audit: 39 low-variance features removed, keeping 216
+2026-06-19 22:04:50,350 [INFO] ============================================================
+2026-06-19 22:04:50,351 [INFO] STEP 6D: MISSING VALUE AUDIT
+2026-06-19 22:04:50,351 [INFO] ============================================================
+2026-06-19 22:04:50,887 [INFO] [STEP6D_MISSING_AUDIT] PASSED | {"features_with_missing": 0}
+2026-06-19 22:04:50,887 [INFO] Computing relative features for validation...
+2026-06-19 22:05:02,883 [INFO] Computing relative features for test patients...
+2026-06-19 22:05:18,378 [INFO] ============================================================
+2026-06-19 22:05:18,378 [INFO] STEP 7: DOMAIN SHIFT FORENSICS
+2026-06-19 22:05:18,378 [INFO] ============================================================
+2026-06-19 22:05:48,272 [INFO] [STEP7_FEATURE_STABILITY] ARTIFACT_VALIDATED | {"path": "PHASE7_5_RELATIVE_FEATURE_DRIFT.csv", "rows": 250, "cols": 5}
+2026-06-19 22:05:48,288 [INFO] [STEP7_FEATURE_STABILITY] ARTIFACT_VALIDATED | {"path": "PHASE7_5_FEATURE_STABILITY.csv", "rows": 484, "cols": 5}
+2026-06-19 22:05:48,289 [INFO] [STEP7_FEATURE_STABILITY] PASSED | {"features_analyzed": 484, "mean_ks_overall": 0.236}
+2026-06-19 22:05:48,289 [INFO] ============================================================
+2026-06-19 22:05:48,289 [INFO] STEP 11: FEATURE SELECTION SWEEP (Validation Set)
+2026-06-19 22:05:48,290 [INFO] ============================================================
+2026-06-19 22:05:48,740 [INFO]   Using 50000 train samples for feature selection sweep
+2026-06-19 22:05:51,410 [INFO]   n_features=  50 -> Val F1=0.0290
+2026-06-19 22:05:54,946 [INFO]   n_features=  75 -> Val F1=0.0472
+2026-06-19 22:05:59,857 [INFO]   n_features= 100 -> Val F1=0.0702
+2026-06-19 22:06:07,854 [INFO]   n_features= 150 -> Val F1=0.0680
+2026-06-19 22:06:18,972 [INFO]   n_features= 200 -> Val F1=0.0934
+2026-06-19 22:06:28,554 [INFO]   n_features= 216 -> Val F1=0.1148
+2026-06-19 22:06:28,647 [INFO] [STEP11_FEATURE_SELECTION] ARTIFACT_VALIDATED | {"path": "PHASE7_5_FEATURE_SELECTION_RESULTS.csv", "rows": 6, "cols": 2}
+2026-06-19 22:06:28,647 [INFO] [STEP11_FEATURE_SELECTION] PASSED | {"best_n_features": 216, "best_val_f1": 0.1148}
+2026-06-19 22:06:28,647 [INFO]   Selected 216 features (Val F1=0.1148)
+2026-06-19 22:06:28,923 [INFO] ============================================================
+2026-06-19 22:06:28,923 [INFO] STEP 12: HARD EXAMPLE REWEIGHTING (Validation Set)
+2026-06-19 22:06:28,923 [INFO] ============================================================
+2026-06-19 22:06:29,014 [INFO]   Hard patients (from train/calib only): 0 of 3 total
+2026-06-19 22:06:29,014 [INFO]   No eligible hard patients found in train/calibration.
+2026-06-19 22:06:29,014 [INFO]   Skipping sample weighting sweep.
+2026-06-19 22:06:29,016 [INFO] ============================================================
+2026-06-19 22:06:29,016 [INFO] STEP 13: HYPERPARAMETER SEARCH (Validation Set)
+2026-06-19 22:06:29,017 [INFO] ============================================================
+2026-06-19 22:06:29,027 [INFO]   Searching 30 random configurations
+2026-06-19 22:15:48,745 [INFO]   Config 5/30: Val F1=0.1778
+2026-06-19 22:22:31,840 [INFO]   Config 10/30: Val F1=0.2159
+2026-06-19 22:27:39,752 [INFO]   Config 15/30: Val F1=0.2241
+2026-06-19 22:30:40,368 [INFO]   Config 20/30: Val F1=0.1793
+2026-06-19 22:33:11,522 [INFO]   Config 25/30: Val F1=0.1560
+2026-06-19 22:39:24,211 [INFO]   Config 30/30: Val F1=0.2209
+2026-06-19 22:39:24,333 [INFO] [STEP13_HYPERPARAM_SEARCH] ARTIFACT_VALIDATED | {"path": "PHASE7_5_HYPERPARAMETER_SEARCH.csv", "rows": 30, "cols": 9}
+2026-06-19 22:39:24,333 [INFO] [STEP13_HYPERPARAM_SEARCH] PASSED | {"subsample": 0.8, "scale_pos_weight": 448.5, "n_estimators": 300, "min_child_weight": 8, "max_depth": 4, "learning_rate": 0.01438449888287663, "gamma": 0.2, "colsample_bytree": 0.9, "best_val_f1": 0.2241}
+2026-06-19 22:39:24,334 [INFO]   Best params: {'subsample': 0.8, 'scale_pos_weight': 448.5, 'n_estimators': 300, 'min_child_weight': 8, 'max_depth': 4, 'learning_rate': 0.01438449888287663, 'gamma': 0.2, 'colsample_bytree': 0.9} -> Val F1=0.2241
+2026-06-19 22:39:24,355 [INFO] ============================================================
+2026-06-19 22:39:24,356 [INFO] STEP 14: MODEL TRAINING (with Early Stopping)
+2026-06-19 22:39:24,356 [INFO] ============================================================
+2026-06-19 22:49:24,790 [INFO] [STEP14_TRAIN_MODEL] ARTIFACT_VALIDATED | {"path": "PHASE7_5_RETRAINED_MODEL.joblib", "size_bytes": 534121}
+2026-06-19 22:49:24,799 [INFO] [STEP14_TRAIN_MODEL] PASSED | {"feature_count": 216, "train_rows": 1220370, "train_positives": 4058, "train_negatives": 1216312, "best_iteration": 299}
+2026-06-19 22:49:24,959 [INFO] ============================================================
+2026-06-19 22:49:24,959 [INFO] STEP 15: CALIBRATION REBUILD
+2026-06-19 22:49:24,960 [INFO] ============================================================
+2026-06-19 22:49:26,505 [INFO] [STEP15_CALIBRATION] ARTIFACT_VALIDATED | {"path": "PHASE7_5_CALIBRATION_RESULTS.csv", "rows": 4, "cols": 2}
+2026-06-19 22:49:27,775 [INFO] [STEP15_CALIBRATION] ARTIFACT_VALIDATED | {"path": "PHASE7_5_CALIBRATOR.joblib", "size_bytes": 1638}
+2026-06-19 22:49:27,775 [INFO] [STEP15_CALIBRATION] PASSED | {"best_method": "isotonic", "best_brier": 0.006839, "optimal_threshold": 0.165}
+2026-06-19 22:49:27,775 [INFO]   Best calibration: isotonic (Brier=0.006839), threshold=0.165
+2026-06-19 22:49:27,777 [INFO] ============================================================
+2026-06-19 22:49:27,777 [INFO] STEP 16: TEST EVALUATION
+2026-06-19 22:49:27,777 [INFO] ============================================================
+2026-06-19 22:49:33,863 [INFO]   chb02: F1=0.0697 [0.0583, 0.0824]
+2026-06-19 22:49:40,235 [INFO]   chb05: F1=0.0413 [0.0370, 0.0452]
+2026-06-19 22:49:49,912 [INFO]   chb09: F1=0.0084 [0.0072, 0.0098]
+2026-06-19 22:49:55,122 [INFO]   chb14: F1=0.0000 [0.0000, 0.0000]
+2026-06-19 22:50:00,394 [INFO]   chb22: F1=0.4539 [0.4010, 0.5114]
+2026-06-19 22:50:00,997 [INFO] [STEP16_TEST_EVAL] ARTIFACT_VALIDATED | {"path": "PHASE7_5_TEST_RESULTS.csv", "rows": 5, "cols": 24}
+2026-06-19 22:50:01,006 [INFO] [STEP16_TEST_EVAL] PASSED | {"patients_evaluated": 5, "mean_f1": 0.1147, "overall_f1": 0.024, "overall_auc": 0.8816}
+2026-06-19 22:50:01,007 [INFO] ============================================================
+2026-06-19 22:50:01,007 [INFO] STEP 17: PATIENT RECOVERY ANALYSIS
+2026-06-19 22:50:01,007 [INFO] ============================================================
+2026-06-19 22:50:01,025 [INFO] [STEP17_RECOVERY] ARTIFACT_VALIDATED | {"path": "PHASE7_5_RECOVERY_AUDIT.csv", "rows": 5, "cols": 6}
+2026-06-19 22:50:01,027 [INFO] [STEP17_RECOVERY] PASSED | {"patients": ["chb02", "chb05", "chb09", "chb14", "chb22"], "mean_improvement_vs_phase7": -0.3637}
+2026-06-19 22:50:01,027 [INFO] ============================================================
+2026-06-19 22:50:01,027 [INFO] STEP 18: ABLATION STUDIES
+2026-06-19 22:50:01,027 [INFO] ============================================================
+2026-06-19 22:50:01,404 [INFO]   Ablation: Baseline_OrigFeatures (64 features)
+2026-06-19 22:50:08,016 [INFO]   Ablation: Relative_Features_Only (152 features)
+2026-06-19 22:50:18,651 [INFO]   Ablation: Combined_Orig_Rel (216 features)
+2026-06-19 22:50:36,607 [INFO]   Ablation: FN_Mining_TopFeatures (1 features)
+2026-06-19 22:50:38,697 [INFO]   Ablation: Combined_All (216 features)
+2026-06-19 22:50:52,724 [INFO] [STEP18_ABLATION] ARTIFACT_VALIDATED | {"path": "PHASE7_5_ABLATION_RESULTS.csv", "rows": 25, "cols": 6}
+2026-06-19 22:50:52,724 [INFO] [STEP18_ABLATION] PASSED | {"configs_evaluated": 5, "total_result_rows": 25}
+2026-06-19 22:50:52,727 [INFO] ============================================================
+2026-06-19 22:50:52,727 [INFO] STEP 19: FINAL COMPARISON
+2026-06-19 22:50:52,727 [INFO] ============================================================
+2026-06-19 22:50:52,746 [INFO] [STEP19_FINAL_COMPARISON] ARTIFACT_VALIDATED | {"path": "PHASE7_5_FINAL_COMPARISON.csv", "rows": 35, "cols": 11}
+2026-06-19 22:50:52,746 [INFO] [STEP19_FINAL_COMPARISON] PASSED | {"total_comparison_rows": 35}
+2026-06-19 22:50:52,746 [INFO] ============================================================
+2026-06-19 22:50:52,746 [INFO] STEP 26: FEATURE IMPORTANCE STABILITY ACROSS FOLDS
+2026-06-19 22:50:52,747 [INFO] ============================================================
+2026-06-19 22:50:55,961 [INFO]   Using 100000 samples for importance stability
+2026-06-19 22:53:11,239 [INFO] [STEP26_IMPORTANCE_STABILITY] ARTIFACT_VALIDATED | {"path": "PHASE7_5_IMPORTANCE_STABILITY.csv", "rows": 216, "cols": 6}
+2026-06-19 22:53:11,242 [INFO] [STEP26_IMPORTANCE_STABILITY] PASSED | {"n_folds": 5, "features": 216}
+2026-06-19 22:53:11,591 [INFO] ============================================================
+2026-06-19 22:53:11,591 [INFO] STEP 20: SUCCESS CRITERIA ENGINE
+2026-06-19 22:53:11,591 [INFO] ============================================================
+2026-06-19 22:53:11,600 [INFO] [STEP20_SUCCESS_CRITERIA] FAIL | {"verdict": "FAIL", "overall_mean_f1_75": 0.1147, "phase7_mean_f1": 0.2961, "f1_improvement": -0.1815, "overall_auc": 0.8816, "overall_pr_auc": 0.1532, "overall_brier": 0.013416, "overall_mcc": 0.0898, "overall_balanced_accuracy": 0.8429, "target_patients": ["chb14", "chb22", "chb02"], "target_improvements": {"chb14": {"f1_75": 0.0, "improvement_vs_phase7": -0.2143, "improved": false}, "chb22": {"f1_75": 0.4539, "improvement_vs_phase7": -0.0076, "improved": false}, "chb02": {"f1_75": 0.0697, "improvement_vs_phase7": -0.7874, "improved": false}}, "n_improved": 0, "n_target": 3, "regressed_gt_10": 4, "pass_conditions": {"overall_f1 > phase7_f1": false, "targets_improved_ge_50": false, "no_regression_gt_10": false, "auc_not_degraded": true, "auc_improved": true, "brier_not_degraded": true, "mcc_positive": false, "balanced_accuracy_good": true, "pr_auc_reasonable": false}, "pass_count": 4, "total_conditions": 9}
+2026-06-19 22:53:12,088 [INFO]   Targets improved: 0/3, Regressed >10%: 4
+2026-06-19 22:53:12,088 [INFO] ============================================================
+2026-06-19 22:53:12,088 [INFO] STEP 22: SHAP EXPLAINABILITY (Memory-Safe)
+2026-06-19 22:53:12,089 [INFO] ============================================================
+2026-06-19 22:53:13,000 [INFO] [STEP22_SHAP] PASSED | {"features_analyzed": 20}
+2026-06-19 22:53:13,200 [INFO] ============================================================
+2026-06-19 22:53:13,200 [INFO] STEP 21: SELF AUDIT
+2026-06-19 22:53:13,201 [INFO] ============================================================
+2026-06-19 22:53:13,446 [INFO] [STEP21_SELF_AUDIT] PARTIAL | {"all_pass": false}
+2026-06-19 22:53:13,448 [INFO] ============================================================
+2026-06-19 22:53:13,449 [INFO] STEP 23: EXECUTION REPORT
+2026-06-19 22:53:13,450 [INFO] ============================================================
+2026-06-19 22:53:13,476 [ERROR] UNEXPECTED ERROR: 'charmap' codec can't encode character '\u0394' in position 1893: character maps to <undefined>
+Traceback (most recent call last):
+  File "E:\Project\neurovision_ai\PHASE7_5_TRUE_GENERALIZATION_RECOVERY.py", line 3098, in main
+    step23_execution_report(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        schema, split_audit, best_params, selected_features,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        calibrator_method, threshold, test_results_75, recovery_df,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        success_audit, self_audit, overall_metrics
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\Project\neurovision_ai\PHASE7_5_TRUE_GENERALIZATION_RECOVERY.py", line 2685, in step23_execution_report
+    f.write(report_text)
+    ~~~~~~~^^^^^^^^^^^^^
+  File "C:\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u0394' in position 1893: character maps to <undefined>
+
+2026-06-19 22:53:13,477 [INFO] [MAIN] FATAL | {"error": "'charmap' codec can't encode character '\\u0394' in position 1893: character maps to <undefined>"}

@@ -1,0 +1,10 @@
+{
+  "model_type": "XGBClassifier",
+  "n_features_in": 484,
+  "has_predict_proba": true,
+  "count_match": true,
+  "order_match": "UNKNOWN",
+  "total_mismatches": 0,
+  "first_mismatch": null,
+  "status": "PASS"
+}

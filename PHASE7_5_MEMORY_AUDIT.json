@@ -1,0 +1,10 @@
+{
+  "parquet_path": "PHASE5B_ENGINEERED_DATASET.parquet",
+  "parquet_size_gb": 3.634,
+  "num_row_groups": 2,
+  "total_rows": 1765872,
+  "total_cols": 493,
+  "loading_strategy": "streaming_chunked_with_predicate_pushdown",
+  "chunk_size": 50000,
+  "streaming": true
+}

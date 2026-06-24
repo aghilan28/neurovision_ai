@@ -1,0 +1,27 @@
+{
+  "n_folds": 5,
+  "features_analyzed": 216,
+  "top_20_features": [
+    "iqr_mean_lag1__rel",
+    "wavelet_energy_1_mean_lag3__rel",
+    "min_max_lag1__rel",
+    "theta_relative_mean_rolling_mean_5__rel",
+    "wavelet_energy_0_mean_lag1__rel",
+    "delta_power_max_lag1__rel",
+    "theta_relative_mean_rolling_mean_5",
+    "alpha_relative_mean_rolling_mean_5__rel",
+    "theta_relative_max_rolling_mean_5__rel",
+    "delta_power_max__rel",
+    "wavelet_energy_1_mean_rolling_mean_5__rel",
+    "zero_crossings_mean",
+    "iqr_mean__rel",
+    "beta_power_max__rel",
+    "line_length_max_lag1__rel",
+    "delta_relative_std_rolling_mean_5__rel",
+    "min_max__rel",
+    "delta_power_mean_rolling_mean_5__rel",
+    "mad_mean_lag3__rel",
+    "theta_relative_mean"
+  ],
+  "mean_rank_std": 36.12314319007452
+}

@@ -1,0 +1,5 @@
+method,brier_score
+none,0.052822
+isotonic,0.006839
+platt,0.006906
+beta,0.006896

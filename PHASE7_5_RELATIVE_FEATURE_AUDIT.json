@@ -1,0 +1,34 @@
+{
+  "original_feature_count": 484,
+  "relative_feature_count": 250,
+  "total_feature_count": 734,
+  "patients_with_baselines": [
+    "chb01",
+    "chb04",
+    "chb06",
+    "chb07",
+    "chb08",
+    "chb10",
+    "chb11",
+    "chb12",
+    "chb13",
+    "chb16",
+    "chb17",
+    "chb18",
+    "chb19",
+    "chb20",
+    "chb21",
+    "chb24"
+  ],
+  "baseline_method": "unsupervised_first_N_minutes_or_median",
+  "normalization": "z_score_per_patient_per_feature",
+  "nan_handling": "finite_check_clip_to_pm10",
+  "sample_relative_features": [
+    "wavelet_energy_0_mean_rolling_mean_5__rel",
+    "mad_mean__rel",
+    "min_max__rel",
+    "petrosian_fd_max_lag3__rel",
+    "delta_power_mean_rolling_mean_5__rel"
+  ],
+  "note": "Baseline computed without using labels (safe for deployment)"
+}

@@ -1,0 +1,5 @@
+patient,n_features,tp,fp,fn,precision,recall,f1,description,valid_transformation
+chb14,0,0,2,8,0.0,0.0,0.0,BASELINE,
+chb14,25,0,1,8,0.0,0.0,0.0,TOP_25_SHIFTED_FEATURES,False
+chb14,50,0,0,8,0.0,0.0,0.0,TOP_50_SHIFTED_FEATURES,False
+chb14,100,0,0,8,0.0,0.0,0.0,TOP_100_SHIFTED_FEATURES,False

@@ -1,0 +1,6 @@
+patient,archetype,root_cause,max_prob_positive,mean_feature_ks
+chb02,calibration_misaligned,MARGINAL_CALIBRATION_MISALIGNMENT,1.0,0.1805755950413223
+chb05,stable,UNKNOWN,,
+chb09,stable,UNKNOWN,,
+chb14,attenuated,MULTI_FACTOR_CORRUPTION,0.40884,0.380302035123967
+chb22,calibration_misaligned,MARGINAL_CALIBRATION_MISALIGNMENT,1.0,0.1338887541322314

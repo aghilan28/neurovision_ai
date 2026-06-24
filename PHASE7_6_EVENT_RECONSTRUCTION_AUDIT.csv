@@ -1,0 +1,4 @@
+patient,archetype,mpp_used,n_pred_events,n_true_events,tp,fp,fn,precision,recall,event_f1
+chb03,stable,0.5,10,7,7,3,0,0.7,1.0,0.8235
+chb15,stable,0.5,4,20,2,2,18,0.5,0.1,0.1667
+chb23,stable,0.5,9,7,7,2,0,0.7778,1.0,0.875

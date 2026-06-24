@@ -1,0 +1,69 @@
+{
+  "uploaded_files": {
+    "PHASE5B_FEATURE_SIGNATURE.json": {
+      "found": true,
+      "path": ".\\PHASE5B_FEATURE_SIGNATURE.json",
+      "size_bytes": 15249
+    },
+    "PHASE5B_PATIENT_SPLIT.json": {
+      "found": true,
+      "path": ".\\PHASE5B_PATIENT_SPLIT.json",
+      "size_bytes": 501
+    },
+    "PHASE5E_PRODUCTION_RECOMMENDATION.json": {
+      "found": true,
+      "path": ".\\PHASE5E_PRODUCTION_RECOMMENDATION.json",
+      "size_bytes": 2998
+    },
+    "PHASE6_ROOT_CAUSE_SUMMARY.csv": {
+      "found": true,
+      "path": ".\\PHASE6_ROOT_CAUSE_SUMMARY.csv",
+      "size_bytes": 556
+    },
+    "PHASE6_REMEDIATION_PLAN.json": {
+      "found": true,
+      "path": ".\\PHASE6_REMEDIATION_PLAN.json",
+      "size_bytes": 2483
+    },
+    "PHASE6_FEATURE_SHIFT_ANALYSIS.csv": {
+      "found": true,
+      "path": ".\\PHASE6_FEATURE_SHIFT_ANALYSIS.csv",
+      "size_bytes": 245286
+    },
+    "PHASE6_IMPORTANCE_SHIFT_ANALYSIS.csv": {
+      "found": true,
+      "path": ".\\PHASE6_IMPORTANCE_SHIFT_ANALYSIS.csv",
+      "size_bytes": 19503
+    },
+    "PHASE6_FN_SIGNATURE_ANALYSIS.csv": {
+      "found": true,
+      "path": ".\\PHASE6_FN_SIGNATURE_ANALYSIS.csv",
+      "size_bytes": 36102
+    },
+    "PHASE6_GOOD_VS_BAD_PATIENTS.csv": {
+      "found": true,
+      "path": ".\\PHASE6_GOOD_VS_BAD_PATIENTS.csv",
+      "size_bytes": 45601
+    },
+    "PHASE7_FINAL_COMPARISON.csv": {
+      "found": true,
+      "path": ".\\PHASE7_FINAL_COMPARISON.csv",
+      "size_bytes": 1647
+    }
+  },
+  "local_files": {
+    "parquet": {
+      "path": "PHASE5B_ENGINEERED_DATASET.parquet",
+      "size_bytes": 3634462487
+    },
+    "model": {
+      "path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+      "size_bytes": 1613008
+    },
+    "importance": {
+      "path": "PHASE5B_FEATURE_IMPORTANCE.csv",
+      "size_bytes": 26179
+    }
+  },
+  "status": "PASSED"
+}

@@ -1,0 +1,133 @@
+{
+  "all_ok": false,
+  "artifacts": {
+    "PHASE7_RAW_PROBABILITIES.parquet": {
+      "status": "PASS",
+      "exists": true,
+      "size": 11043124,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_THRESHOLD_EXPERIMENTS.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 4515,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_PATIENT_OPTIMAL_THRESHOLDS.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 85,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_ADAPTIVE_THRESHOLD_RESULTS.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 300,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_CALIBRATION_COMPARISON.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 465,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_CALIBRATION_NESTED_RESULTS.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 446,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_CALIBRATED_RESULTS.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 337,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_CHB14_DOMAIN_SHIFT_RECOVERY.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 179,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_CHB14_DOMAIN_SHIFT_RESULTS.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 295,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_COMBINED_MODEL_RESULTS.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 474,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_ABLATION_RESULTS.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 3174,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_FINAL_COMPARISON.csv": {
+      "status": "PASS",
+      "exists": true,
+      "size": 1647,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_RECOVERY_SUMMARY.json": {
+      "status": "PASS",
+      "exists": true,
+      "size": 465,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_EXECUTION_REPORT.txt": {
+      "status": "FAIL",
+      "exists": false,
+      "size": 0,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_SELF_AUDIT.json": {
+      "status": "FAIL",
+      "exists": false,
+      "size": 0,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    },
+    "PHASE7_RUNTIME_AUDIT.json": {
+      "status": "FAIL",
+      "exists": false,
+      "size": 0,
+      "parse_ok": true,
+      "row_ok": true,
+      "error": null
+    }
+  }
+}

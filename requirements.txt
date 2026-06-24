@@ -1,25 +1,12 @@
-# NeuroVision AI — pinned runtime dependencies.
-# Pinned exactly for reproducibility (AP-6 / NR-10).
-#
-# V1 reference baselines are framework-free pure NumPy so results are
-# bit-for-bit reproducible and auditable.
-numpy==2.4.6
+--extra-index-url https://download.pytorch.org/whl/cpu
 
-# Productization P1 — Real EEG Foundation Layer.
-# MNE-Python is the industry-standard reader for clinical/research EEG formats
-# (EDF/EDF+/BDF/BDF+/FIF/SET). scipy is required to read EEGLAB ``.set`` files
-# (MATLAB v5 containers) and to deterministically generate the test fixtures.
-mne==1.12.1
-scipy==1.17.1
+torch==2.3.1
+xgboost==2.0.3
+pandas==2.2.2
+numpy==1.26.4
+pyarrow==16.1.0
+joblib==1.4.2
+fastapi==0.111.0
+pydantic==2.7.4
+uvicorn==0.30.1
 
-# Development / verification only (not a runtime dependency of any module):
-pytest==9.0.3
-ruff==0.15.15
-
-# Track 3 — Real Product Application: the HTTP API layer (FastAPI). Used only by
-# backend/application_platform/api and the Track-3 tests/verification; never enters a
-# reproducibility hash. httpx powers the FastAPI TestClient used in tests + verification.
-fastapi==0.121.2
-uvicorn==0.34.3
-httpx==0.28.1
-python-multipart==0.0.12

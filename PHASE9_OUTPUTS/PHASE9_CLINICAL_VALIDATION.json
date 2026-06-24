@@ -1,0 +1,50 @@
+{
+  "execution_timestamp": "2026-06-21 09:36:44",
+  "config": {
+    "mpp": 0.1,
+    "disc_threshold_floor": 0.5,
+    "smooth_window": 5,
+    "gap_tolerance": 2,
+    "calibration_window_count": 600,
+    "calibration_sigma_multiplier": 2.0
+  },
+  "dataset": {
+    "total_recordings_audited": 686,
+    "total_patients_audited": 24,
+    "total_windows_audited": 1767930,
+    "total_recording_hours": 491.09166666667335
+  },
+  "seizure_detection": {
+    "total_ground_truth_seizures": 198,
+    "total_seizures_successfully_intercepted": 50,
+    "overall_sensitivity_recall": 0.263681592039801,
+    "overall_precision": 0.03443794671864847,
+    "overall_event_f1": 0.06091954022988505,
+    "total_TP": 53,
+    "total_FP": 1486,
+    "total_FN": 148
+  },
+  "false_alarm_burden": {
+    "global_fpr_per_hour": 3.025911659398238,
+    "total_false_alarm_records_logged": 16427
+  },
+  "notification_latency": {
+    "mean_latency_windows": 1.0,
+    "median_latency_windows": -1.0,
+    "std_latency_windows": 8.708616422830897,
+    "min_latency_windows": -9.0,
+    "max_latency_windows": 46.0,
+    "n_early_detections": 34,
+    "n_delayed_detections": 12,
+    "n_instantaneous_detections": 4
+  },
+  "patient_calibration_summary": {
+    "mean_file_disc_threshold": 0.6466376942833781,
+    "median_file_disc_threshold": 0.5150784161964737,
+    "min_file_disc_threshold": 0.5,
+    "max_file_disc_threshold": 1.4161089650341003,
+    "n_recordings_with_floor_threshold": 331,
+    "n_recordings_with_raised_threshold": 355,
+    "n_recordings_with_zero_calibration_events": 19
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "fn_features_analyzed": 484,
+  "top_fn_features": [
+    "wavelet_energy_2_std_rolling_mean_5",
+    "alpha_power_std_rolling_mean_5",
+    "wavelet_energy_2_std",
+    "alpha_power_max_rolling_mean_5",
+    "wavelet_energy_2_max_rolling_mean_5",
+    "wavelet_energy_2_max",
+    "wavelet_energy_2_std_lag1",
+    "wavelet_energy_2_max_lag1",
+    "alpha_power_mean_rolling_mean_5",
+    "wavelet_energy_2_std_lag3"
+  ],
+  "mean_fn_ks": 0.3824
+}

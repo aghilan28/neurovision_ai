@@ -1,0 +1,20 @@
+{
+  "success": true,
+  "success_message": "RECOVERY SUCCESSFUL",
+  "fail_improved": true,
+  "fail_improvement_notes": [
+    "chb14: 0.2143 vs 0.0000 (inf%)",
+    "chb22: 0.2857 vs 0.0000 (inf%)",
+    "chb02: 0.8000 vs 0.0000 (inf%)"
+  ],
+  "good_degraded": false,
+  "degradation_notes": [],
+  "baseline_good": {
+    "chb05": 0.0,
+    "chb09": 0.0
+  },
+  "combined_good_f1": {
+    "chb05": 0.1923076923076923,
+    "chb09": 0.5333333333333333
+  }
+}

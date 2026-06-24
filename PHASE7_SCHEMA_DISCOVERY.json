@@ -1,0 +1,69 @@
+{
+  "parquet_path": "E:\\Project\\neurovision_ai\\PHASE5B_ENGINEERED_DATASET.parquet",
+  "parquet_total_columns": 493,
+  "parquet_total_rows": 1765872,
+  "column_mapping": {
+    "patient": "patient",
+    "edf": "edf",
+    "label": "label",
+    "window_index": "window_index",
+    "window_start_sec": "window_start_sec",
+    "window_end_sec": "window_end_sec"
+  },
+  "candidates_considered": {
+    "patient": [
+      "patient"
+    ],
+    "edf": [
+      "edf"
+    ],
+    "label": [
+      "label"
+    ],
+    "window_index": [
+      "window_index"
+    ],
+    "window_start_sec": [
+      "window_start_sec"
+    ],
+    "window_end_sec": [
+      "window_end_sec"
+    ]
+  },
+  "ambiguities": {},
+  "feature_names_present": 484,
+  "feature_names_missing": 0,
+  "missing_feature_names": [],
+  "all_columns_sample": [
+    "mean_mean",
+    "mean_std",
+    "mean_max",
+    "std_mean",
+    "std_std",
+    "std_max",
+    "variance_mean",
+    "variance_std",
+    "variance_max",
+    "rms_mean",
+    "rms_std",
+    "rms_max",
+    "max_mean",
+    "max_std",
+    "max_max",
+    "min_mean",
+    "min_std",
+    "min_max",
+    "ptp_mean",
+    "ptp_std",
+    "ptp_max",
+    "line_length_mean",
+    "line_length_std",
+    "line_length_max",
+    "zero_crossings_mean",
+    "zero_crossings_std",
+    "zero_crossings_max",
+    "iqr_mean",
+    "iqr_std",
+    "iqr_max"
+  ]
+}

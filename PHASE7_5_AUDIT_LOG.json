@@ -1,0 +1,370 @@
+[
+  {
+    "step": "STEP0_INPUT_VALIDATION",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:46.726350+00:00",
+    "elapsed_s": 0.01,
+    "memory_mb": 203.8,
+    "path": "PHASE7_5_INPUT_VALIDATION.json",
+    "size_bytes": 1912
+  },
+  {
+    "step": "STEP0_INPUT_VALIDATION",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:46.726711+00:00",
+    "elapsed_s": 0.01,
+    "memory_mb": 203.8,
+    "uploaded_count": 10,
+    "parquet": "PHASE5B_ENGINEERED_DATASET.parquet",
+    "model": "PHASE5B_TEMPORAL_XGBOOST.joblib"
+  },
+  {
+    "step": "STEP1_SCHEMA_DISCOVERY",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:46.799606+00:00",
+    "elapsed_s": 0.09,
+    "memory_mb": 208.5,
+    "path": "PHASE7_5_SCHEMA_DISCOVERY.json",
+    "size_bytes": 15713
+  },
+  {
+    "step": "STEP1_SCHEMA_DISCOVERY",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:46.799954+00:00",
+    "elapsed_s": 0.09,
+    "memory_mb": 208.5,
+    "patient_col": "patient",
+    "label_col": "label",
+    "feature_count": 484,
+    "metadata_cols": 9
+  },
+  {
+    "step": "STEP2_FEATURE_ORDER_FORENSICS",
+    "status": "WARNING",
+    "timestamp": "2026-06-19T14:33:46.976406+00:00",
+    "elapsed_s": 0.26,
+    "memory_mb": 220.7,
+    "msg": "Model has no stored feature names \u2014 using signature order"
+  },
+  {
+    "step": "STEP2_FEATURE_ORDER_FORENSICS",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:46.979538+00:00",
+    "elapsed_s": 0.27,
+    "memory_mb": 220.7,
+    "path": "PHASE7_5_FEATURE_ORDER_AUDIT.json",
+    "size_bytes": 182
+  },
+  {
+    "step": "STEP2_FEATURE_ORDER_FORENSICS",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:46.979837+00:00",
+    "elapsed_s": 0.27,
+    "memory_mb": 220.7,
+    "model_feature_count": 484,
+    "signature_feature_count": 484,
+    "order_verified": true,
+    "model_path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+    "model_type": "XGBClassifier"
+  },
+  {
+    "step": "STEP3_PATIENT_SPLIT_FORENSICS",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:46.993360+00:00",
+    "elapsed_s": 0.28,
+    "memory_mb": 220.7,
+    "path": "PHASE7_5_SPLIT_AUDIT.json",
+    "size_bytes": 529
+  },
+  {
+    "step": "STEP3_PATIENT_SPLIT_FORENSICS",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:46.993708+00:00",
+    "elapsed_s": 0.28,
+    "memory_mb": 220.7,
+    "train": 16,
+    "test": 5,
+    "calib": 3
+  },
+  {
+    "step": "STEP4_MEMORY_AUDIT",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:47.027906+00:00",
+    "elapsed_s": 0.31,
+    "memory_mb": 221.5,
+    "path": "PHASE7_5_MEMORY_AUDIT.json",
+    "size_bytes": 286
+  },
+  {
+    "step": "STEP4_MEMORY_AUDIT",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:47.028530+00:00",
+    "elapsed_s": 0.32,
+    "memory_mb": 221.5,
+    "parquet_path": "PHASE5B_ENGINEERED_DATASET.parquet",
+    "parquet_size_gb": 3.634,
+    "num_row_groups": 2,
+    "total_rows": 1765872,
+    "total_cols": 493,
+    "loading_strategy": "pyarrow_dataset_scanner_with_predicate_pushdown",
+    "streaming": true,
+    "batch_processing": true
+  },
+  {
+    "step": "STEP5_ROOT_CAUSE",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:47.110970+00:00",
+    "elapsed_s": 0.4,
+    "memory_mb": 222.3,
+    "path": "PHASE7_5_ROOT_CAUSE_AUDIT.json",
+    "size_bytes": 1013
+  },
+  {
+    "step": "STEP5_ROOT_CAUSE",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:47.111498+00:00",
+    "elapsed_s": 0.4,
+    "memory_mb": 222.3,
+    "patients": [
+      "chb14",
+      "chb22",
+      "chb02"
+    ],
+    "global_actions": 1
+  },
+  {
+    "step": "STEP7_FEATURE_STABILITY",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:47.214578+00:00",
+    "elapsed_s": 0.5,
+    "memory_mb": 224.5,
+    "path": "PHASE7_5_FEATURE_STABILITY.csv",
+    "rows": 484,
+    "cols": 5
+  },
+  {
+    "step": "STEP7_FEATURE_STABILITY",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:47.215535+00:00",
+    "elapsed_s": 0.5,
+    "memory_mb": 224.5,
+    "features_analyzed": 484,
+    "mean_ks_overall": 0.236
+  },
+  {
+    "step": "STEP8_FN_MINING",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:47.262208+00:00",
+    "elapsed_s": 0.55,
+    "memory_mb": 224.6,
+    "path": "PHASE7_5_FN_MINING_AUDIT.json",
+    "size_bytes": 455
+  },
+  {
+    "step": "STEP8_FN_MINING",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:47.262657+00:00",
+    "elapsed_s": 0.55,
+    "memory_mb": 224.6,
+    "fn_features": 484
+  },
+  {
+    "step": "STEP9_GENERALIZATION",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:47.304726+00:00",
+    "elapsed_s": 0.59,
+    "memory_mb": 224.6,
+    "path": "PHASE7_5_GENERALIZATION_SCORECARD.csv",
+    "rows": 484,
+    "cols": 4
+  },
+  {
+    "step": "STEP9_GENERALIZATION",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:47.305538+00:00",
+    "elapsed_s": 0.59,
+    "memory_mb": 224.6,
+    "features_scored": 484,
+    "mean_generalization": 0.7702
+  },
+  {
+    "step": "STEP10_MASTER_RANKING",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:33:48.211499+00:00",
+    "elapsed_s": 1.5,
+    "memory_mb": 226.2,
+    "path": "PHASE7_5_MASTER_FEATURE_RANKING.csv",
+    "rows": 484,
+    "cols": 7
+  },
+  {
+    "step": "STEP10_MASTER_RANKING",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:33:48.211867+00:00",
+    "elapsed_s": 1.5,
+    "memory_mb": 226.2,
+    "features_ranked": 484
+  },
+  {
+    "step": "STEP24_CLASS_DISTRIBUTION",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:34:33.035378+00:00",
+    "elapsed_s": 46.32,
+    "memory_mb": 7363.0,
+    "path": "PHASE7_5_CLASS_DISTRIBUTION_AUDIT.json",
+    "size_bytes": 1160
+  },
+  {
+    "step": "STEP24_CLASS_DISTRIBUTION",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:34:33.035736+00:00",
+    "elapsed_s": 46.32,
+    "memory_mb": 7363.0,
+    "splits": [
+      {
+        "name": "TRAIN",
+        "rows": 1220370,
+        "positive": 4058,
+        "negative": 1216312,
+        "positive_rate": 0.0033
+      },
+      {
+        "name": "CALIBRATION",
+        "rows": 187793,
+        "positive": 1496,
+        "negative": 186297,
+        "positive_rate": 0.008
+      },
+      {
+        "name": "TEST_CHB02",
+        "rows": 63300,
+        "positive": 94,
+        "negative": 63206,
+        "positive_rate": 0.0015
+      },
+      {
+        "name": "TEST_CHB05",
+        "rows": 70010,
+        "positive": 291,
+        "negative": 69719,
+        "positive_rate": 0.0042
+      },
+      {
+        "name": "TEST_CHB09",
+        "rows": 122078,
+        "positive": 147,
+        "negative": 121931,
+        "positive_rate": 0.0012
+      },
+      {
+        "name": "TEST_CHB14",
+        "rows": 46670,
+        "positive": 103,
+        "negative": 46567,
+        "positive_rate": 0.0022
+      },
+      {
+        "name": "TEST_CHB22",
+        "rows": 55651,
+        "positive": 108,
+        "negative": 55543,
+        "positive_rate": 0.0019
+      }
+    ],
+    "train_positive_rate": 0.0033,
+    "calib_positive_rate": 0.008,
+    "test_positive_rate_avg": 0.0022
+  },
+  {
+    "step": "STEP25_DUPLICATE_AUDIT",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:34:33.296516+00:00",
+    "elapsed_s": 46.58,
+    "memory_mb": 7364.5,
+    "path": "PHASE7_5_DUPLICATE_AUDIT.json",
+    "size_bytes": 219
+  },
+  {
+    "step": "STEP25_DUPLICATE_AUDIT",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:34:33.296813+00:00",
+    "elapsed_s": 46.58,
+    "memory_mb": 7364.5,
+    "duplicate_rows": 0,
+    "duplicate_groups": 0
+  },
+  {
+    "step": "STEP6_RELATIVE_FEATURES",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:35:37.230986+00:00",
+    "elapsed_s": 110.52,
+    "memory_mb": 7055.6,
+    "path": "PHASE7_5_RELATIVE_FEATURE_AUDIT.json",
+    "size_bytes": 816
+  },
+  {
+    "step": "STEP6_RELATIVE_FEATURES",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:35:37.231864+00:00",
+    "elapsed_s": 110.52,
+    "memory_mb": 7055.6,
+    "relative_features": 250,
+    "total_features": 734
+  },
+  {
+    "step": "STEP6B_CORRELATION_AUDIT",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:36:22.092499+00:00",
+    "elapsed_s": 155.38,
+    "memory_mb": 7175.1,
+    "path": "PHASE7_5_CORRELATION_AUDIT.json",
+    "size_bytes": 1710
+  },
+  {
+    "step": "STEP6B_CORRELATION_AUDIT",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:36:22.092857+00:00",
+    "elapsed_s": 155.38,
+    "memory_mb": 7175.1,
+    "total_pairs": 454,
+    "features_to_drop": 246
+  },
+  {
+    "step": "STEP7_FEATURE_STABILITY",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:37:11.628898+00:00",
+    "elapsed_s": 204.92,
+    "memory_mb": 7839.9,
+    "path": "PHASE7_5_RELATIVE_FEATURE_DRIFT.csv",
+    "rows": 250,
+    "cols": 5
+  },
+  {
+    "step": "STEP7_FEATURE_STABILITY",
+    "status": "RELATIVE_DRIFT",
+    "timestamp": "2026-06-19T14:37:11.629339+00:00",
+    "elapsed_s": 204.92,
+    "memory_mb": 7839.9,
+    "features_analyzed": 50,
+    "patients_analyzed": 5
+  },
+  {
+    "step": "STEP7_FEATURE_STABILITY",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T14:37:11.644822+00:00",
+    "elapsed_s": 204.93,
+    "memory_mb": 7840.2,
+    "path": "PHASE7_5_FEATURE_STABILITY.csv",
+    "rows": 484,
+    "cols": 5
+  },
+  {
+    "step": "STEP7_FEATURE_STABILITY",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T14:37:11.645508+00:00",
+    "elapsed_s": 204.93,
+    "memory_mb": 7840.2,
+    "features_analyzed": 484,
+    "mean_ks_overall": 0.236
+  }
+]

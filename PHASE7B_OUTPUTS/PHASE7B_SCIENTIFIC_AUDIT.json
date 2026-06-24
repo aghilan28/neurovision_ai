@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-06-20T12:06:40.892909",
+  "all_pass": true,
+  "results": {
+    "metrics_consistency": {
+      "pass": true,
+      "inconsistent_patients": 0,
+      "total_patients": 5
+    },
+    "f1_recomputation": {
+      "pass": true,
+      "max_diff": 0.0,
+      "mean_diff": 0.0
+    },
+    "predicted_events_consistency": {
+      "pass": true,
+      "mismatch_patients": 0
+    },
+    "cascade_consistency": {
+      "pass": true,
+      "invalid_patients": 0
+    },
+    "forensic_completeness": {
+      "pass": false,
+      "error": "No forensic analysis"
+    },
+    "comparison_completeness": {
+      "pass": true,
+      "n_patients": 5
+    }
+  },
+  "summary": "5/6 checks passed"
+}

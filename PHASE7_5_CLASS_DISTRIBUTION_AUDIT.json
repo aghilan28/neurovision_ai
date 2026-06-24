@@ -1,0 +1,56 @@
+{
+  "splits": [
+    {
+      "name": "TRAIN",
+      "rows": 1220370,
+      "positive": 4058,
+      "negative": 1216312,
+      "positive_rate": 0.0033
+    },
+    {
+      "name": "VALIDATION",
+      "rows": 187793,
+      "positive": 1496,
+      "negative": 186297,
+      "positive_rate": 0.008
+    },
+    {
+      "name": "TEST_CHB02",
+      "rows": 63300,
+      "positive": 94,
+      "negative": 63206,
+      "positive_rate": 0.0015
+    },
+    {
+      "name": "TEST_CHB05",
+      "rows": 70010,
+      "positive": 291,
+      "negative": 69719,
+      "positive_rate": 0.0042
+    },
+    {
+      "name": "TEST_CHB09",
+      "rows": 122078,
+      "positive": 147,
+      "negative": 121931,
+      "positive_rate": 0.0012
+    },
+    {
+      "name": "TEST_CHB14",
+      "rows": 46670,
+      "positive": 103,
+      "negative": 46567,
+      "positive_rate": 0.0022
+    },
+    {
+      "name": "TEST_CHB22",
+      "rows": 55651,
+      "positive": 108,
+      "negative": 55543,
+      "positive_rate": 0.0019
+    }
+  ],
+  "train_positive_rate": 0.0033,
+  "val_positive_rate": 0.008,
+  "test_positive_rate_avg": 0.0022
+}

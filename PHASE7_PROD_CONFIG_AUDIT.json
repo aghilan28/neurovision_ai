@@ -1,0 +1,58 @@
+{
+  "source": "PHASE5E_PRODUCTION_RECOMMENDATION.json",
+  "smoothing_window": 21,
+  "threshold": 0.01,
+  "min_duration": 1,
+  "min_peak_probability": 0.95,
+  "patient_production_metrics": {
+    "chb02": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "chb05": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "chb09": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "chb14": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "chb22": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "raw_keys_found": [
+    "recommended_min_peak_probability",
+    "rationale",
+    "current_production_mpp",
+    "current_metrics",
+    "recommended_metrics",
+    "evidence_table",
+    "additional_notes"
+  ]
+}

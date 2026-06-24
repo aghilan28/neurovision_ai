@@ -1,0 +1,22 @@
+{
+  "verdict": "FAILED",
+  "passed_conditions": 1,
+  "total_conditions": 5,
+  "mean_phase76_event_f1": 0.3079,
+  "mean_phase7_event_f1": 0.4784,
+  "f1_delta": -0.1705,
+  "n_patients_improved": 1,
+  "n_patients_regressed_gt10": 4,
+  "chb14_event_f1": 0.0976,
+  "chb14_improved": true,
+  "mean_precision": 0.2162,
+  "precision_recovered": false,
+  "mean_fp_per_patient": 45.0,
+  "conditions": {
+    "avg_event_f1_exceeds_phase7": false,
+    "at_least_3_patients_improve": false,
+    "no_more_than_1_patient_regresses_gt10pct": false,
+    "precision_collapse_reduced": false,
+    "chb14_improves_above_zero": true
+  }
+}

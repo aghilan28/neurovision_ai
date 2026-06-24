@@ -1,0 +1,326 @@
+{
+  "execution_timestamp": "2026-06-21 10:33:44",
+  "phase": "PHASE10_SPATIO_TEMPORAL_ACCUMULATOR",
+  "config": {
+    "mpp": 0.1,
+    "disc_threshold_floor": 0.5,
+    "smooth_window": 5,
+    "gap_tolerance": 2,
+    "min_duration_windows": 5,
+    "consolidation_gap_windows": 5,
+    "calibration_window_count": 600,
+    "calibration_sigma_multiplier": 1.0
+  },
+  "dataset": {
+    "total_recordings_audited": 686,
+    "total_patients_audited": 24,
+    "total_windows_audited": 1767930,
+    "total_recording_hours": 491.09166666667335
+  },
+  "seizure_detection": {
+    "total_ground_truth_seizures": 198,
+    "total_seizures_successfully_intercepted": 73,
+    "overall_sensitivity_recall": 0.3842364532019704,
+    "overall_precision": 0.04173354735152488,
+    "overall_event_f1": 0.07528957528957529,
+    "total_TP": 78,
+    "total_FP": 1791,
+    "total_FN": 125
+  },
+  "false_alarm_burden": {
+    "global_fpr_per_hour": 3.646976973070151,
+    "total_false_alarm_records_logged": 16297,
+    "n_stage2_discriminator_rejects": 13760,
+    "n_temporal_persistence_rejects": 746,
+    "false_alarm_breakdown_by_source": {
+      "stage2_discriminator_adaptive_gate": 13760,
+      "surviving_event_no_gt_overlap": 1791,
+      "temporal_persistence_filter_transient_artifact": 746
+    }
+  },
+  "notification_latency": {
+    "mean_latency_windows": 1.2465753424657535,
+    "median_latency_windows": -1.0,
+    "std_latency_windows": 10.129004632591657,
+    "min_latency_windows": -15.0,
+    "max_latency_windows": 53.0,
+    "n_early_detections": 50,
+    "n_delayed_detections": 19,
+    "n_instantaneous_detections": 4
+  },
+  "patient_calibration_summary": {
+    "mean_file_disc_threshold": 0.5770635430635712,
+    "median_file_disc_threshold": 0.5,
+    "min_file_disc_threshold": 0.5,
+    "max_file_disc_threshold": 1.0192763609004616,
+    "n_recordings_with_floor_threshold": 413,
+    "n_recordings_with_raised_threshold": 273,
+    "n_recordings_with_zero_calibration_events": 19
+  },
+  "per_patient_performance": {
+    "chb01": {
+      "TP": 6,
+      "FP": 126,
+      "FN": 1,
+      "recall": 0.8571428571428571,
+      "precision": 0.045454545454545456,
+      "f1": 0.08633093525179857,
+      "recording_hours": 20.253055555555562,
+      "fpr_per_hour": 6.221283482602074,
+      "n_recordings": 42
+    },
+    "chb02": {
+      "TP": 2,
+      "FP": 83,
+      "FN": 1,
+      "recall": 0.6666666666666666,
+      "precision": 0.023529411764705882,
+      "f1": 0.045454545454545456,
+      "recording_hours": 17.61333333333334,
+      "fpr_per_hour": 4.712339137017409,
+      "n_recordings": 36
+    },
+    "chb03": {
+      "TP": 6,
+      "FP": 14,
+      "FN": 1,
+      "recall": 0.8571428571428571,
+      "precision": 0.3,
+      "f1": 0.4444444444444444,
+      "recording_hours": 18.979722222222232,
+      "fpr_per_hour": 0.7376293412560184,
+      "n_recordings": 38
+    },
+    "chb04": {
+      "TP": 4,
+      "FP": 268,
+      "FN": 0,
+      "recall": 1.0,
+      "precision": 0.014705882352941176,
+      "f1": 0.028985507246376812,
+      "recording_hours": 78.01,
+      "fpr_per_hour": 3.4354569926932443,
+      "n_recordings": 42
+    },
+    "chb05": {
+      "TP": 1,
+      "FP": 144,
+      "FN": 4,
+      "recall": 0.2,
+      "precision": 0.006896551724137931,
+      "f1": 0.013333333333333332,
+      "recording_hours": 19.479722222222232,
+      "fpr_per_hour": 7.39230253682604,
+      "n_recordings": 39
+    },
+    "chb06": {
+      "TP": 4,
+      "FP": 89,
+      "FN": 6,
+      "recall": 0.4,
+      "precision": 0.043010752688172046,
+      "f1": 0.07766990291262137,
+      "recording_hours": 33.35777777777778,
+      "fpr_per_hour": 2.6680434348144693,
+      "n_recordings": 18
+    },
+    "chb07": {
+      "TP": 3,
+      "FP": 188,
+      "FN": 0,
+      "recall": 1.0,
+      "precision": 0.015706806282722512,
+      "f1": 0.03092783505154639,
+      "recording_hours": 33.51583333333333,
+      "fpr_per_hour": 5.609289141947835,
+      "n_recordings": 19
+    },
+    "chb08": {
+      "TP": 0,
+      "FP": 37,
+      "FN": 5,
+      "recall": 0.0,
+      "precision": 0.0,
+      "f1": 0.0,
+      "recording_hours": 9.992222222222223,
+      "fpr_per_hour": 3.7028800177916157,
+      "n_recordings": 20
+    },
+    "chb09": {
+      "TP": 0,
+      "FP": 284,
+      "FN": 4,
+      "recall": 0.0,
+      "precision": 0.0,
+      "f1": 0.0,
+      "recording_hours": 33.926388888888894,
+      "fpr_per_hour": 8.371064805338353,
+      "n_recordings": 19
+    },
+    "chb10": {
+      "TP": 4,
+      "FP": 63,
+      "FN": 3,
+      "recall": 0.5714285714285714,
+      "precision": 0.05970149253731343,
+      "f1": 0.10810810810810811,
+      "recording_hours": 24.99805555555556,
+      "fpr_per_hour": 2.52019601524563,
+      "n_recordings": 25
+    },
+    "chb11": {
+      "TP": 2,
+      "FP": 74,
+      "FN": 1,
+      "recall": 0.6666666666666666,
+      "precision": 0.02631578947368421,
+      "f1": 0.05063291139240506,
+      "recording_hours": 17.377500000000005,
+      "fpr_per_hour": 4.258380089195798,
+      "n_recordings": 35
+    },
+    "chb12": {
+      "TP": 2,
+      "FP": 6,
+      "FN": 38,
+      "recall": 0.05,
+      "precision": 0.25,
+      "f1": 0.08333333333333334,
+      "recording_hours": 11.834166666666668,
+      "fpr_per_hour": 0.5070065488345891,
+      "n_recordings": 24
+    },
+    "chb13": {
+      "TP": 4,
+      "FP": 110,
+      "FN": 8,
+      "recall": 0.3333333333333333,
+      "precision": 0.03508771929824561,
+      "f1": 0.06349206349206349,
+      "recording_hours": 16.48166666666667,
+      "fpr_per_hour": 6.674082313681867,
+      "n_recordings": 33
+    },
+    "chb14": {
+      "TP": 0,
+      "FP": 32,
+      "FN": 8,
+      "recall": 0.0,
+      "precision": 0.0,
+      "f1": 0.0,
+      "recording_hours": 12.985555555555557,
+      "fpr_per_hour": 2.464276546590228,
+      "n_recordings": 26
+    },
+    "chb15": {
+      "TP": 13,
+      "FP": 7,
+      "FN": 11,
+      "recall": 0.5416666666666666,
+      "precision": 0.65,
+      "f1": 0.5909090909090908,
+      "recording_hours": 19.983055555555556,
+      "fpr_per_hour": 0.35029677921572444,
+      "n_recordings": 40
+    },
+    "chb16": {
+      "TP": 3,
+      "FP": 33,
+      "FN": 7,
+      "recall": 0.3,
+      "precision": 0.08333333333333333,
+      "f1": 0.13043478260869565,
+      "recording_hours": 9.489444444444445,
+      "fpr_per_hour": 3.4775481529184473,
+      "n_recordings": 19
+    },
+    "chb17": {
+      "TP": 3,
+      "FP": 45,
+      "FN": 0,
+      "recall": 1.0,
+      "precision": 0.0625,
+      "f1": 0.11764705882352941,
+      "recording_hours": 10.491666666666667,
+      "fpr_per_hour": 4.289118347895155,
+      "n_recordings": 21
+    },
+    "chb18": {
+      "TP": 3,
+      "FP": 24,
+      "FN": 3,
+      "recall": 0.5,
+      "precision": 0.1111111111111111,
+      "f1": 0.1818181818181818,
+      "recording_hours": 17.797500000000007,
+      "fpr_per_hour": 1.3485040033712594,
+      "n_recordings": 36
+    },
+    "chb19": {
+      "TP": 2,
+      "FP": 10,
+      "FN": 1,
+      "recall": 0.6666666666666666,
+      "precision": 0.16666666666666666,
+      "f1": 0.26666666666666666,
+      "recording_hours": 14.948055555555557,
+      "fpr_per_hour": 0.6689833311653317,
+      "n_recordings": 30
+    },
+    "chb20": {
+      "TP": 4,
+      "FP": 49,
+      "FN": 4,
+      "recall": 0.5,
+      "precision": 0.07547169811320754,
+      "f1": 0.13114754098360656,
+      "recording_hours": 13.785000000000002,
+      "fpr_per_hour": 3.5545883206383744,
+      "n_recordings": 29
+    },
+    "chb21": {
+      "TP": 1,
+      "FP": 43,
+      "FN": 3,
+      "recall": 0.25,
+      "precision": 0.022727272727272728,
+      "f1": 0.04166666666666667,
+      "recording_hours": 16.396944444444447,
+      "fpr_per_hour": 2.622439817716715,
+      "n_recordings": 33
+    },
+    "chb22": {
+      "TP": 4,
+      "FP": 33,
+      "FN": 0,
+      "recall": 1.0,
+      "precision": 0.10810810810810811,
+      "f1": 0.1951219512195122,
+      "recording_hours": 15.484444444444446,
+      "fpr_per_hour": 2.1311710677382316,
+      "n_recordings": 31
+    },
+    "chb23": {
+      "TP": 7,
+      "FP": 12,
+      "FN": 0,
+      "recall": 1.0,
+      "precision": 0.3684210526315789,
+      "f1": 0.5384615384615384,
+      "recording_hours": 13.274444444444443,
+      "fpr_per_hour": 0.9039926341340924,
+      "n_recordings": 9
+    },
+    "chb24": {
+      "TP": 0,
+      "FP": 17,
+      "FN": 16,
+      "recall": 0.0,
+      "precision": 0.0,
+      "f1": 0.0,
+      "recording_hours": 10.636111111111111,
+      "fpr_per_hour": 1.598328545312092,
+      "n_recordings": 22
+    }
+  }
+}

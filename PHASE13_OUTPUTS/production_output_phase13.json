@@ -1,0 +1,15 @@
+{
+  "status": "SUCCESS",
+  "metadata": {
+    "patient_id": "chb01",
+    "file_source": "chb01_01.edf",
+    "total_windows_processed": 10000,
+    "execution_time_seconds": 1.7794
+  },
+  "calibration_profile": {
+    "baseline_mu": 0.495985,
+    "baseline_sigma": 0.003581,
+    "computed_decision_gate": 0.5
+  },
+  "clinical_alerts_detected": []
+}

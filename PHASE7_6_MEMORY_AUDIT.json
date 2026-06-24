@@ -1,0 +1,18 @@
+{
+  "parquet_path": "PHASE5B_ENGINEERED_DATASET.parquet",
+  "parquet_size_gb": 3.634,
+  "num_row_groups": 2,
+  "total_rows": 1765872,
+  "total_cols": 493,
+  "loading_strategy": "streaming_chunked_predicate_pushdown",
+  "chunk_size_rows": 50000,
+  "forbidden_operations": [
+    "df.values",
+    ".to_numpy()",
+    "np.array(df)",
+    "X = train_df[features] for full dataset"
+  ],
+  "current_rss_mb": 168.2,
+  "available_mb": 7467.74,
+  "peak_allocation_limit_gb": 8.0
+}

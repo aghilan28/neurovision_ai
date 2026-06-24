@@ -1,0 +1,7 @@
+{
+  "model_feature_count": 484,
+  "signature_feature_count": 484,
+  "order_verified": true,
+  "model_path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+  "model_type": "XGBClassifier"
+}

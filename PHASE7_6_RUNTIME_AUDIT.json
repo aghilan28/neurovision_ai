@@ -1,0 +1,33 @@
+{
+  "script_start": "2026-06-19T19:03:12.696287+00:00",
+  "script_end": "2026-06-19T19:35:33.525169+00:00",
+  "total_elapsed_sec": 1940.8,
+  "total_elapsed_min": 32.3,
+  "peak_rss_mb": 7730.29,
+  "current_rss_mb": 2678.36,
+  "random_seed": 42,
+  "parquet_path": "PHASE5B_ENGINEERED_DATASET.parquet",
+  "model_path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+  "best_post_processing_config": {
+    "smoothing": 11,
+    "threshold": 0.3,
+    "merge_gap_sec": 60.0,
+    "min_duration_sec": 20.0,
+    "min_windows": 5,
+    "confidence_density": 0.2,
+    "global_mpp": 0.5
+  },
+  "attenuated_mpp": 0.5,
+  "forbidden_operations_verified": [
+    "no_retraining",
+    "no_feature_engineering",
+    "no_feature_selection",
+    "no_hyperparameter_tuning",
+    "no_test_patient_optimization",
+    "no_test_label_access_for_tuning",
+    "no_values_call_on_full_df",
+    "no_to_numpy_on_full_df",
+    "no_contiguous_2gb_allocation"
+  ],
+  "audit_log_events": 30
+}

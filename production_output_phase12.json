@@ -1,0 +1,128 @@
+{
+  "status": "SUCCESS",
+  "metadata": {
+    "patient_id": "chb01",
+    "file_source": "chb01_01.edf",
+    "total_windows_processed": 1767930,
+    "execution_time_seconds": 139.2493
+  },
+  "calibration_profile": {
+    "baseline_mu": 0.497401,
+    "baseline_sigma": 0.002558,
+    "computed_decision_gate": 0.5
+  },
+  "clinical_alerts_detected": [
+    {
+      "alert_id": 1,
+      "start_window_index": 534893,
+      "end_window_index": 534994,
+      "duration_seconds": 102.0,
+      "peak_seizure_probability": 0.8497,
+      "discriminator_confidence": 0.5081
+    },
+    {
+      "alert_id": 2,
+      "start_window_index": 837322,
+      "end_window_index": 837523,
+      "duration_seconds": 202.0,
+      "peak_seizure_probability": 0.9219,
+      "discriminator_confidence": 0.505
+    },
+    {
+      "alert_id": 3,
+      "start_window_index": 839074,
+      "end_window_index": 839185,
+      "duration_seconds": 112.0,
+      "peak_seizure_probability": 0.9248,
+      "discriminator_confidence": 0.5003
+    },
+    {
+      "alert_id": 4,
+      "start_window_index": 840025,
+      "end_window_index": 840123,
+      "duration_seconds": 99.0,
+      "peak_seizure_probability": 0.8971,
+      "discriminator_confidence": 0.5106
+    },
+    {
+      "alert_id": 5,
+      "start_window_index": 843551,
+      "end_window_index": 843649,
+      "duration_seconds": 99.0,
+      "peak_seizure_probability": 0.9309,
+      "discriminator_confidence": 0.5085
+    },
+    {
+      "alert_id": 6,
+      "start_window_index": 849724,
+      "end_window_index": 849947,
+      "duration_seconds": 224.0,
+      "peak_seizure_probability": 0.9526,
+      "discriminator_confidence": 0.5049
+    },
+    {
+      "alert_id": 7,
+      "start_window_index": 850635,
+      "end_window_index": 850739,
+      "duration_seconds": 105.0,
+      "peak_seizure_probability": 0.8029,
+      "discriminator_confidence": 0.5133
+    },
+    {
+      "alert_id": 8,
+      "start_window_index": 866120,
+      "end_window_index": 866234,
+      "duration_seconds": 115.0,
+      "peak_seizure_probability": 0.946,
+      "discriminator_confidence": 0.5033
+    },
+    {
+      "alert_id": 9,
+      "start_window_index": 879374,
+      "end_window_index": 879487,
+      "duration_seconds": 114.0,
+      "peak_seizure_probability": 0.8857,
+      "discriminator_confidence": 0.5049
+    },
+    {
+      "alert_id": 10,
+      "start_window_index": 880240,
+      "end_window_index": 880460,
+      "duration_seconds": 221.0,
+      "peak_seizure_probability": 0.9144,
+      "discriminator_confidence": 0.5115
+    },
+    {
+      "alert_id": 11,
+      "start_window_index": 936051,
+      "end_window_index": 936160,
+      "duration_seconds": 110.0,
+      "peak_seizure_probability": 0.92,
+      "discriminator_confidence": 0.5031
+    },
+    {
+      "alert_id": 12,
+      "start_window_index": 1129038,
+      "end_window_index": 1129315,
+      "duration_seconds": 278.0,
+      "peak_seizure_probability": 0.9276,
+      "discriminator_confidence": 0.5056
+    },
+    {
+      "alert_id": 13,
+      "start_window_index": 1129430,
+      "end_window_index": 1129523,
+      "duration_seconds": 94.0,
+      "peak_seizure_probability": 0.9248,
+      "discriminator_confidence": 0.5005
+    },
+    {
+      "alert_id": 14,
+      "start_window_index": 1198850,
+      "end_window_index": 1198942,
+      "duration_seconds": 93.0,
+      "peak_seizure_probability": 0.9245,
+      "discriminator_confidence": 0.5015
+    }
+  ]
+}

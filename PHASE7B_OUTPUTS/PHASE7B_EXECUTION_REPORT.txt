@@ -1,0 +1,40 @@
+========================================================================
+          NEUROVISION AI PHASE 7B PIPELINE SYSTEM EXECUTION REPORT       
+========================================================================
+Execution Timestamp: 2026-06-20 23:29:35
+Pipeline Run Status: SUCCESS / PASS
+------------------------------------------------------------------------
+1. ARCHITECTURAL INPUT VERIFICATION
+   - Parquet Data Path Source: E:\Project\neurovision_ai\real_feature_dataset_v4_clean.parquet
+   - Base Model Archetype: E:\Project\neurovision_ai\PHASE5B_TEMPORAL_XGBOOST.joblib
+   - Total Cross-Validation Patients Identified: 3
+   - Total Out-of-Sample Test Patients Evaluated: 5
+------------------------------------------------------------------------
+2. STEP 7 OPTIMIZED HYPERPARAMETER CONFIGURATIONS
+   - Minimum Peak Probability (mpp): 0.1
+   - Discriminator Inclusion Threshold: 0.4
+   - Convolution Smoothing Window: 5.0
+   - Seizure Event Gap Tolerance: 2.0
+------------------------------------------------------------------------
+3. STAGE 2 CASCADE DISCRIMINATOR SUMMARY
+   - Classifier Chosen via CV: RandomForestClassifier
+   - Training Feature Subsets Extracted: 20 keys
+------------------------------------------------------------------------
+4. SYSTEM PERFORMANCE PROFILE VS HISTORICAL BASELINES
+   - Phase 7B (Cascade) Mean Event F1: 0.2052
+   - Phase 7.0 (Baseline) Mean Event F1: 0.4784
+   - Global Margin Delta: -0.2732
+------------------------------------------------------------------------
+5. UNSEEN PATIENT GENERALIZATION RESULTS OVERVIEW
+   * Patient chb02: F1=0.2222 [TP=2, FP=13, FN=1]
+   * Patient chb05: F1=0.2381 [TP=5, FP=32, FN=0]
+   * Patient chb09: F1=0.3158 [TP=3, FP=13, FN=0]
+   * Patient chb14: F1=0.0000 [TP=0, FP=0, FN=8]
+   * Patient chb22: F1=0.2500 [TP=1, FP=4, FN=2]
+------------------------------------------------------------------------
+6. SCIENTIFIC SELF-AUDIT SIGNALS
+   - Macro Mean Test Precision: 0.1312
+   - Macro Mean Test Recall: 0.6000
+   - Severe Regressions Observed (>10%): 1
+   - Maximum Empirical Forensic Separation (KS): 0.7626
+========================================================================

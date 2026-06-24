@@ -1,0 +1,48 @@
+[09:55:04] STEP 0: Discovering schema from E:\Project\neurovision_ai\real_feature_dataset_v4_clean.parquet
+[09:55:04] STEP 0: Total columns=487 | meta_cols=['label', 'patient', 'edf'] | numeric_feature_cols=484
+[09:55:04] STEP 0: Loading full dataset via type-safe chunked reader
+[09:55:58] STEP 0: Loaded dataframe shape=(1767930, 487)
+[09:55:59] STEP 1: Loading base model from E:\Project\neurovision_ai\PHASE5B_TEMPORAL_XGBOOST.joblib
+[09:56:06] STEP 1: base_model has no feature_names_in_ attribute -- enforcing natural numerical sort fallback over the 96 base columns
+[09:56:06] STEP 1: First 5 aligned columns: ['f0', 'f1', 'f2', 'f3', 'f4']
+[09:56:06] STEP 1: Last 5 aligned columns: ['f479', 'f480', 'f481', 'f482', 'f483']
+[09:56:06] STEP 1b: Loading Stage-2 discriminator from E:\Project\neurovision_ai\PHASE7B_FP_DISCRIMINATOR.pkl
+[09:56:09] STEP 1c: Phase-10 engine configuration summary:
+[09:56:09]          CALIBRATION_SIGMA_MULTIPLIER = 1.0 (was 2.0 in Phase 9)
+[09:56:09]          MIN_DURATION_WINDOWS          = 5
+[09:56:09]          CONSOLIDATION_GAP_WINDOWS     = 5
+[09:56:10] STEP 2: Running Phase-10 Spatio-Temporal cascade across 24 patients / 686 recordings
+[09:57:13] STEP 2: Processed 25 recordings... (last file_disc_threshold=0.5000, transient_rejected=21)
+[09:58:30] STEP 2: Processed 50 recordings... (last file_disc_threshold=0.6398, transient_rejected=38)
+[09:59:39] STEP 2: Processed 75 recordings... (last file_disc_threshold=0.5000, transient_rejected=56)
+[10:00:45] STEP 2: Processed 100 recordings... (last file_disc_threshold=0.5000, transient_rejected=59)
+[10:01:57] STEP 2: Processed 125 recordings... (last file_disc_threshold=0.5000, transient_rejected=62)
+[10:04:11] STEP 2: Processed 150 recordings... (last file_disc_threshold=0.5000, transient_rejected=130)
+[10:05:47] STEP 2: Processed 175 recordings... (last file_disc_threshold=0.8708, transient_rejected=167)
+[10:07:06] STEP 2: Processed 200 recordings... (last file_disc_threshold=0.5000, transient_rejected=194)
+[10:09:24] STEP 2: Processed 225 recordings... (last file_disc_threshold=0.7237, transient_rejected=245)
+[10:10:54] STEP 2: Processed 250 recordings... (last file_disc_threshold=0.6349, transient_rejected=285)
+[10:13:49] STEP 2: Processed 275 recordings... (last file_disc_threshold=0.5135, transient_rejected=569)
+[10:15:16] STEP 2: Processed 300 recordings... (last file_disc_threshold=0.5000, transient_rejected=594)
+[10:16:26] STEP 2: Processed 325 recordings... (last file_disc_threshold=0.5833, transient_rejected=604)
+[10:17:41] STEP 2: Processed 350 recordings... (last file_disc_threshold=0.5000, transient_rejected=612)
+[10:18:51] STEP 2: Processed 375 recordings... (last file_disc_threshold=0.7830, transient_rejected=643)
+[10:20:07] STEP 2: Processed 400 recordings... (last file_disc_threshold=0.5000, transient_rejected=671)
+[10:21:21] STEP 2: Processed 425 recordings... (last file_disc_threshold=0.5000, transient_rejected=671)
+[10:22:28] STEP 2: Processed 450 recordings... (last file_disc_threshold=0.5000, transient_rejected=671)
+[10:23:36] STEP 2: Processed 475 recordings... (last file_disc_threshold=0.5000, transient_rejected=685)
+[10:24:39] STEP 2: Processed 500 recordings... (last file_disc_threshold=0.5000, transient_rejected=691)
+[10:25:44] STEP 2: Processed 525 recordings... (last file_disc_threshold=0.5000, transient_rejected=693)
+[10:26:50] STEP 2: Processed 550 recordings... (last file_disc_threshold=0.6446, transient_rejected=695)
+[10:27:58] STEP 2: Processed 575 recordings... (last file_disc_threshold=0.9343, transient_rejected=703)
+[10:29:22] STEP 2: Processed 600 recordings... (last file_disc_threshold=0.5000, transient_rejected=716)
+[10:30:37] STEP 2: Processed 625 recordings... (last file_disc_threshold=0.5000, transient_rejected=720)
+[10:31:41] STEP 2: Processed 650 recordings... (last file_disc_threshold=0.5000, transient_rejected=731)
+[10:33:12] STEP 2: Processed 675 recordings... (last file_disc_threshold=0.5000, transient_rejected=741)
+[10:33:43] STEP 2: Phase-10 cascade complete across 686 recordings | total_transient_rejects=746 | total_stage2_rejects=13760
+[10:33:43] STEP 3: Wrote E:\Project\neurovision_ai\PHASE10_OUTPUTS\PHASE10_CLINICAL_METRICS.csv (686 rows)
+[10:33:43] STEP 4: Wrote E:\Project\neurovision_ai\PHASE10_OUTPUTS\PHASE10_LATENCY_REPORT.csv (73 rows)
+[10:33:44] STEP 5: Wrote E:\Project\neurovision_ai\PHASE10_OUTPUTS\PHASE10_FALSE_ALARM_REPORT.csv (16297 rows)
+[10:33:44] STEP 5b: Wrote E:\Project\neurovision_ai\PHASE10_OUTPUTS\PHASE10_CALIBRATION_LEDGER.csv (686 rows)
+[10:33:44] STEP 6: Wrote E:\Project\neurovision_ai\PHASE10_OUTPUTS\PHASE10_CLINICAL_VALIDATION.json
+[10:33:44] PHASE 10 PIPELINE COMPLETE in 2319.5s. Global F1=0.0753 | Sensitivity=0.3842 | Precision=0.0417 | FPR/h=3.6470 | Transient_rejects=746 | Stage2_rejects=13760

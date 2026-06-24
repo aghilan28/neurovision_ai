@@ -1,0 +1,12 @@
+{
+  "duplicate_check_columns": [
+    "patient",
+    "edf",
+    "window_index"
+  ],
+  "total_rows": 1220370,
+  "duplicate_rows": 0,
+  "duplicate_rate": 0.0,
+  "duplicate_groups": 0,
+  "sample_duplicates": []
+}

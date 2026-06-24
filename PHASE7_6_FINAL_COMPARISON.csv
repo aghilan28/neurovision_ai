@@ -1,0 +1,6 @@
+patient,phase7_best_event_f1,phase75_window_f1,phase76_event_f1,phase76_precision,phase76_recall,phase76_tp,phase76_fp,phase76_fn,archetype
+chb02,0.8571,0.8571,0.6,0.4286,1.0,3,4,0,calibration_misaligned
+chb05,0.1923,0.1923,0.0909,0.0476,1.0,5,100,0,stable
+chb09,0.6667,0.6667,0.0842,0.044,1.0,4,87,0,stable
+chb14,0.2143,0.2143,0.0976,0.0606,0.25,2,31,6,attenuated
+chb22,0.4615,0.4615,0.6667,0.5,1.0,3,3,0,calibration_misaligned

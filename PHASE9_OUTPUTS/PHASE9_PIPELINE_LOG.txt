@@ -1,0 +1,44 @@
+[09:01:37] STEP 0: Discovering schema from E:\Project\neurovision_ai\real_feature_dataset_v4_clean.parquet
+[09:01:37] STEP 0: Total columns=487 | meta_cols=['label', 'patient', 'edf'] | numeric_feature_cols=484
+[09:01:37] STEP 0: Loading full dataset via type-safe chunked reader
+[09:02:19] STEP 0: Loaded dataframe shape=(1767930, 487)
+[09:02:19] STEP 1: Loading base model from E:\Project\neurovision_ai\PHASE5B_TEMPORAL_XGBOOST.joblib
+[09:02:43] STEP 1: base_model has no feature_names_in_ attribute -- enforcing natural numerical sort fallback over the 96 base columns
+[09:02:43] STEP 1: First 5 aligned columns: ['f0', 'f1', 'f2', 'f3', 'f4']
+[09:02:43] STEP 1: Last 5 aligned columns: ['f479', 'f480', 'f481', 'f482', 'f483']
+[09:02:43] STEP 1b: Loading Stage-2 discriminator from E:\Project\neurovision_ai\PHASE7B_FP_DISCRIMINATOR.pkl
+[09:02:45] STEP 2: Running patient-calibrated cascade across 24 patients / 686 recordings
+[09:03:52] STEP 2: Processed 25 recordings... (last file_disc_threshold=0.5686)
+[09:05:04] STEP 2: Processed 50 recordings... (last file_disc_threshold=0.8281)
+[09:06:09] STEP 2: Processed 75 recordings... (last file_disc_threshold=0.5000)
+[09:07:15] STEP 2: Processed 100 recordings... (last file_disc_threshold=0.5000)
+[09:08:28] STEP 2: Processed 125 recordings... (last file_disc_threshold=0.5107)
+[09:10:29] STEP 2: Processed 150 recordings... (last file_disc_threshold=0.6209)
+[09:11:52] STEP 2: Processed 175 recordings... (last file_disc_threshold=0.9646)
+[09:13:05] STEP 2: Processed 200 recordings... (last file_disc_threshold=0.5000)
+[09:15:09] STEP 2: Processed 225 recordings... (last file_disc_threshold=0.9312)
+[09:16:28] STEP 2: Processed 250 recordings... (last file_disc_threshold=0.8092)
+[09:19:04] STEP 2: Processed 275 recordings... (last file_disc_threshold=0.6732)
+[09:20:19] STEP 2: Processed 300 recordings... (last file_disc_threshold=0.5000)
+[09:21:22] STEP 2: Processed 325 recordings... (last file_disc_threshold=0.8155)
+[09:22:30] STEP 2: Processed 350 recordings... (last file_disc_threshold=0.5000)
+[09:23:36] STEP 2: Processed 375 recordings... (last file_disc_threshold=0.7830)
+[09:24:46] STEP 2: Processed 400 recordings... (last file_disc_threshold=0.6658)
+[09:25:59] STEP 2: Processed 425 recordings... (last file_disc_threshold=0.5000)
+[09:27:06] STEP 2: Processed 450 recordings... (last file_disc_threshold=0.5000)
+[09:28:13] STEP 2: Processed 475 recordings... (last file_disc_threshold=0.6733)
+[09:29:11] STEP 2: Processed 500 recordings... (last file_disc_threshold=0.5000)
+[09:30:06] STEP 2: Processed 525 recordings... (last file_disc_threshold=0.5000)
+[09:30:57] STEP 2: Processed 550 recordings... (last file_disc_threshold=0.8483)
+[09:31:54] STEP 2: Processed 575 recordings... (last file_disc_threshold=0.9343)
+[09:33:03] STEP 2: Processed 600 recordings... (last file_disc_threshold=0.5000)
+[09:34:03] STEP 2: Processed 625 recordings... (last file_disc_threshold=0.5239)
+[09:34:58] STEP 2: Processed 650 recordings... (last file_disc_threshold=0.5000)
+[09:36:14] STEP 2: Processed 675 recordings... (last file_disc_threshold=0.5000)
+[09:36:43] STEP 2: Patient-calibrated cascade complete across 686 recordings
+[09:36:43] STEP 3: Wrote E:\Project\neurovision_ai\PHASE9_OUTPUTS\PHASE9_CLINICAL_METRICS.csv (686 rows)
+[09:36:43] STEP 4: Wrote E:\Project\neurovision_ai\PHASE9_OUTPUTS\PHASE9_LATENCY_REPORT.csv (50 rows)
+[09:36:44] STEP 5: Wrote E:\Project\neurovision_ai\PHASE9_OUTPUTS\PHASE9_FALSE_ALARM_REPORT.csv (16427 rows)
+[09:36:44] STEP 5b: Wrote E:\Project\neurovision_ai\PHASE9_OUTPUTS\PHASE9_CALIBRATION_LEDGER.csv (686 rows)
+[09:36:44] STEP 6: Wrote E:\Project\neurovision_ai\PHASE9_OUTPUTS\PHASE9_CLINICAL_VALIDATION.json
+[09:36:44] PHASE 9 PIPELINE COMPLETE in 2106.8s. Global F1=0.0609 | Sensitivity=0.2637 | FPR/h=3.0259

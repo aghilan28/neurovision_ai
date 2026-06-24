@@ -1,0 +1,2 @@
+mean_test_f1,mean_test_precision,mean_test_recall,total_predicted_events,total_true_events,max_regression_observed,total_regressions_gt10pct,max_ks_separation
+0.0,0.0,0.0,10,23,-0.8571,5,0.9976651100733822

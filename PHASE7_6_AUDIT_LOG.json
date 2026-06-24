@@ -1,0 +1,378 @@
+[
+  {
+    "step": "STEP0_INPUT_VALIDATION",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:03:12.701425+00:00",
+    "elapsed_s": 0.01,
+    "memory_mb": 162.9,
+    "parquet_path": "PHASE5B_ENGINEERED_DATASET.parquet",
+    "model_path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+    "files_found": 7
+  },
+  {
+    "step": "STEP1_SCHEMA_DISCOVERY",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:03:12.734823+00:00",
+    "elapsed_s": 0.04,
+    "memory_mb": 167.2,
+    "patient_col": "patient",
+    "label_col": "label",
+    "win_start_col": null,
+    "feature_count": 484
+  },
+  {
+    "step": "STEP2_PATIENT_SPLIT",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:03:12.742541+00:00",
+    "elapsed_s": 0.05,
+    "memory_mb": 168.2,
+    "train": 16,
+    "calib": 3,
+    "test": 5,
+    "root_cause_patients": [
+      "chb14",
+      "chb22",
+      "chb02"
+    ],
+    "archetypes": {
+      "chb14": "attenuated",
+      "chb22": "calibration_misaligned",
+      "chb02": "calibration_misaligned"
+    },
+    "attenuated_threshold": 0.70442
+  },
+  {
+    "step": "STEP3_MEMORY_AUDIT",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:03:12.752007+00:00",
+    "elapsed_s": 0.06,
+    "memory_mb": 168.2,
+    "parquet_path": "PHASE5B_ENGINEERED_DATASET.parquet",
+    "parquet_size_gb": 3.634,
+    "num_row_groups": 2,
+    "total_rows": 1765872,
+    "total_cols": 493,
+    "loading_strategy": "streaming_chunked_predicate_pushdown",
+    "chunk_size_rows": 50000,
+    "forbidden_operations": [
+      "df.values",
+      ".to_numpy()",
+      "np.array(df)",
+      "X = train_df[features] for full dataset"
+    ],
+    "current_rss_mb": 168.2,
+    "available_mb": 7467.74,
+    "peak_allocation_limit_gb": 8.0
+  },
+  {
+    "step": "STEP4_LOAD_MODEL",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:03:12.994857+00:00",
+    "elapsed_s": 0.3,
+    "memory_mb": 182.6,
+    "model_path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+    "model_type": "XGBClassifier",
+    "feature_count": 484,
+    "feature_order_verified": true
+  },
+  {
+    "step": "STEP5_CALIBRATION",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:03:43.021480+00:00",
+    "elapsed_s": 30.33,
+    "memory_mb": 2830.8,
+    "path": "PHASE7_6_CALIBRATION_AUDIT.csv",
+    "rows": 3,
+    "cols": 6
+  },
+  {
+    "step": "STEP5_CALIBRATION",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:03:43.040710+00:00",
+    "elapsed_s": 30.34,
+    "memory_mb": 2830.8,
+    "best_method": "none",
+    "best_event_f1": 0.4746,
+    "results": [
+      {
+        "method": "none",
+        "event_f1": 0.4746,
+        "brier": 0.008589,
+        "tp": 14,
+        "fp": 11,
+        "fn": 20
+      },
+      {
+        "method": "platt",
+        "event_f1": 0.3556,
+        "brier": 0.007123,
+        "tp": 8,
+        "fp": 3,
+        "fn": 26
+      },
+      {
+        "method": "isotonic",
+        "event_f1": 0.1622,
+        "brier": 0.007034,
+        "tp": 3,
+        "fp": 0,
+        "fn": 31
+      }
+    ]
+  },
+  {
+    "step": "STEP6_EVENT_MERGE_AUDIT",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:03:47.490512+00:00",
+    "elapsed_s": 34.79,
+    "memory_mb": 2742.7,
+    "path": "PHASE7_6_EVENT_MERGE_AUDIT.csv",
+    "rows": 35,
+    "cols": 6
+  },
+  {
+    "step": "STEP6_EVENT_MERGE_AUDIT",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:03:47.907848+00:00",
+    "elapsed_s": 35.21,
+    "memory_mb": 2742.7,
+    "best_merge_gap_sec": 90,
+    "best_min_duration_sec": 20,
+    "best_event_f1": 0.5091,
+    "configs_tested": 35
+  },
+  {
+    "step": "STEP7_EVENT_CONFIDENCE_AUDIT",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:03:48.511340+00:00",
+    "elapsed_s": 35.82,
+    "memory_mb": 2742.7,
+    "path": "PHASE7_6_EVENT_CONFIDENCE_AUDIT.csv",
+    "rows": 21,
+    "cols": 12
+  },
+  {
+    "step": "STEP7_EVENT_CONFIDENCE_AUDIT",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:03:48.515851+00:00",
+    "elapsed_s": 35.82,
+    "memory_mb": 2742.8,
+    "total_events": 21,
+    "fp_events": 7,
+    "tp_events": 14,
+    "fp_mean_peak_prob": 0.8463,
+    "tp_mean_peak_prob": 0.9
+  },
+  {
+    "step": "STEP10_PARAMETER_SWEEP",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:34:21.524510+00:00",
+    "elapsed_s": 1868.83,
+    "memory_mb": 2723.8,
+    "path": "PHASE7_6_PARAMETER_SWEEP_AUDIT.csv",
+    "rows": 10800,
+    "cols": 10
+  },
+  {
+    "step": "STEP10_PARAMETER_SWEEP",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:34:21.527781+00:00",
+    "elapsed_s": 1868.83,
+    "memory_mb": 2723.8,
+    "configs_tested": 10800,
+    "best_event_f1_on_calibration": 0.5792,
+    "best_config": {
+      "smoothing": 11,
+      "threshold": 0.3,
+      "merge_gap_sec": 60.0,
+      "min_duration_sec": 20.0,
+      "min_windows": 5,
+      "confidence_density": 0.2,
+      "global_mpp": 0.5
+    },
+    "top_n_stable": 5,
+    "loocv_folds": 3
+  },
+  {
+    "step": "STEP8_ATTENUATED_SIGNAL_AUDIT",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:34:22.219945+00:00",
+    "elapsed_s": 1869.52,
+    "memory_mb": 2723.8,
+    "path": "PHASE7_6_ATTENUATED_SIGNAL_AUDIT.csv",
+    "rows": 8,
+    "cols": 5
+  },
+  {
+    "step": "STEP8_ATTENUATED_SIGNAL_AUDIT",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:34:22.221462+00:00",
+    "elapsed_s": 1869.53,
+    "memory_mb": 2723.8,
+    "calibration_attenuated_patients": [
+      "chb03",
+      "chb15",
+      "chb23"
+    ],
+    "best_attenuated_mpp": 0.5,
+    "configs_tested": 8
+  },
+  {
+    "step": "STEP9_ARCHETYPE_ENGINE",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:34:22.239048+00:00",
+    "elapsed_s": 1869.54,
+    "memory_mb": 2723.8,
+    "path": "PHASE7_6_ARCHETYPES.csv",
+    "rows": 5,
+    "cols": 5
+  },
+  {
+    "step": "STEP9_ARCHETYPE_ENGINE",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:34:22.239761+00:00",
+    "elapsed_s": 1869.54,
+    "memory_mb": 2723.8,
+    "patients": 5
+  },
+  {
+    "step": "STEP11_FP_FORENSICS",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:34:22.332430+00:00",
+    "elapsed_s": 1869.64,
+    "memory_mb": 2723.8,
+    "path": "PHASE7_6_FALSE_POSITIVE_FORENSICS.csv",
+    "rows": 7,
+    "cols": 12
+  },
+  {
+    "step": "STEP11_FP_FORENSICS",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:34:22.333485+00:00",
+    "elapsed_s": 1869.64,
+    "memory_mb": 2723.8,
+    "fp_count": 7,
+    "mean_fp_peak_prob": 0.7902
+  },
+  {
+    "step": "STEP12_ABLATION",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:34:23.099865+00:00",
+    "elapsed_s": 1870.4,
+    "memory_mb": 2723.9,
+    "path": "PHASE7_6_ABLATION_RESULTS.csv",
+    "rows": 8,
+    "cols": 7
+  },
+  {
+    "step": "STEP12_ABLATION",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:34:23.100559+00:00",
+    "elapsed_s": 1870.4,
+    "memory_mb": 2723.9,
+    "configs_tested": 8
+  },
+  {
+    "step": "STEP13_EVENT_RECONSTRUCTION",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:34:23.192134+00:00",
+    "elapsed_s": 1870.5,
+    "memory_mb": 2723.9,
+    "path": "PHASE7_6_EVENT_RECONSTRUCTION_AUDIT.csv",
+    "rows": 3,
+    "cols": 11
+  },
+  {
+    "step": "STEP13_EVENT_RECONSTRUCTION",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:34:23.193128+00:00",
+    "elapsed_s": 1870.5,
+    "memory_mb": 2723.9,
+    "patients": 3,
+    "mean_event_f1": 0.6217
+  },
+  {
+    "step": "STEP14_TEST_EVALUATION",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:35:33.180762+00:00",
+    "elapsed_s": 1940.49,
+    "memory_mb": 3924.9,
+    "path": "PHASE7_6_TEST_RESULTS.csv",
+    "rows": 5,
+    "cols": 12
+  },
+  {
+    "step": "STEP14_TEST_EVALUATION",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:35:33.183603+00:00",
+    "elapsed_s": 1940.49,
+    "memory_mb": 3924.9,
+    "patients_evaluated": 5,
+    "mean_event_f1": 0.3079
+  },
+  {
+    "step": "STEP15_RECOVERY",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:35:33.212620+00:00",
+    "elapsed_s": 1940.52,
+    "memory_mb": 3924.9,
+    "path": "PHASE7_6_RECOVERY_AUDIT.csv",
+    "rows": 5,
+    "cols": 6
+  },
+  {
+    "step": "STEP15_RECOVERY",
+    "status": "ARTIFACT_VALIDATED",
+    "timestamp": "2026-06-19T19:35:33.412341+00:00",
+    "elapsed_s": 1940.72,
+    "memory_mb": 2674.2,
+    "path": "PHASE7_6_FINAL_COMPARISON.csv",
+    "rows": 5,
+    "cols": 10
+  },
+  {
+    "step": "STEP15_RECOVERY",
+    "status": "PASSED",
+    "timestamp": "2026-06-19T19:35:33.413455+00:00",
+    "elapsed_s": 1940.72,
+    "memory_mb": 2674.2,
+    "patients_compared": 5,
+    "mean_phase76_f1": 0.3079,
+    "mean_phase7_f1": 0.4784
+  },
+  {
+    "step": "STEP16_SUCCESS_CRITERIA",
+    "status": "FAILED",
+    "timestamp": "2026-06-19T19:35:33.431568+00:00",
+    "elapsed_s": 1940.74,
+    "memory_mb": 2674.4,
+    "verdict": "FAILED",
+    "passed_conditions": 1,
+    "total_conditions": 5,
+    "mean_phase76_event_f1": 0.3079,
+    "mean_phase7_event_f1": 0.4784,
+    "f1_delta": -0.1705,
+    "n_patients_improved": 1,
+    "n_patients_regressed_gt10": 4,
+    "chb14_event_f1": 0.0976,
+    "chb14_improved": true,
+    "mean_precision": 0.2162,
+    "precision_recovered": false,
+    "mean_fp_per_patient": 45.0,
+    "conditions": {
+      "avg_event_f1_exceeds_phase7": false,
+      "at_least_3_patients_improve": false,
+      "no_more_than_1_patient_regresses_gt10pct": false,
+      "precision_collapse_reduced": false,
+      "chb14_improves_above_zero": true
+    }
+  },
+  {
+    "step": "STEP17_SELF_AUDIT",
+    "status": "PARTIAL",
+    "timestamp": "2026-06-19T19:35:33.524148+00:00",
+    "elapsed_s": 1940.83,
+    "memory_mb": 2678.4,
+    "all_pass": false
+  }
+]

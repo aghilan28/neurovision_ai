@@ -1,0 +1,94 @@
+======================================================================
+PHASE7 TRUE GENERALIZATION RECOVERY — EXECUTION REPORT
+======================================================================
+Generated : 2026-06-17T15:11:19.553325+00:00
+Python    : 3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]
+Platform  : Windows-11-10.0.26200-SP0
+
+======================================================================
+FIXES APPLIED IN THIS VERSION
+======================================================================
+  FIX-1: Dynamic schema discovery from parquet at runtime
+  FIX-2: Patient split reads 'calibration_patients' with fallback to 'val_patients'
+  FIX-3: Feature importance column names discovered dynamically
+  FIX-4: PyArrow Dataset Scanner with batch processing (memory-safe)
+  FIX-5: FN reconstruction mirrors Phase5C smooth→thr→duration→peak pipeline
+  FIX-6: No data leakage - expanding window for domain shift
+  FIX-7: Production config loaded from Phase5E JSON; hardcodes are fallback
+  FIX-8: Exact feature name ORDER validated against model.feature_names_in_
+  FIX-9: Hardened Feature-order checking to FAIL on mismatch
+  FIX-10: Column existence check for 'duration_windows' in all accesses
+  FIX-11: ALL metrics computed from ACTUAL inference, no placeholders
+  FIX-12: CHB05/CHB09 degradation constraint enforced with REAL metrics
+  FIX-13: Fixed syntax error in domain shift recovery
+  FIX-14: Load ALL needed patients (train + calib + test)
+  FIX-15: Fixed Platt scaling predict_proba usage
+  FIX-16: Calibration with nested validation (no selection bias)
+  FIX-17: Directly attacks Phase 6 forensic findings
+  FIX-18: Patient-specific production baselines for success evaluation
+  FIX-19: Memory management - clear chunks after loading
+  FIX-20: Combined model actually applies calibration and domain shift
+  FIX-21: Domain shift probabilities stored and used in combined model
+  FIX-22: Ablation studies to test interaction effects
+  FIX-23: Model-aware domain shift validation
+
+======================================================================
+PRODUCTION CONFIG (as discovered)
+======================================================================
+  smoothing_window     : 21
+  threshold            : 0.01
+  min_duration         : 1
+  min_peak_probability : 0.95
+
+======================================================================
+PRODUCTION BASELINES (Patient-Specific)
+======================================================================
+  chb02: F1=0.0000, Recall=0.0000
+  chb05: F1=0.0000, Recall=0.0000
+  chb09: F1=0.0000, Recall=0.0000
+  chb14: F1=0.0000, Recall=0.0000
+  chb22: F1=0.0000, Recall=0.0000
+
+======================================================================
+RECOVERY TARGETS
+======================================================================
+  Failed Patients      : ['chb14', 'chb22', 'chb02']
+  Good References      : ['chb05', 'chb09']
+
+======================================================================
+RECOVERY RESULTS
+======================================================================
+  Status               : RECOVERY SUCCESSFUL
+  Failed Patients Improved : True
+  Good Patients Degraded   : False
+
+  Improvement Details:
+    chb14: 0.2143 vs 0.0000 (inf%)
+    chb22: 0.2857 vs 0.0000 (inf%)
+    chb02: 0.8000 vs 0.0000 (inf%)
+
+======================================================================
+SELF AUDIT MATRIX SUMMARY
+======================================================================
+  OVERALL STATUS       : FAIL
+
+  * PHASE7_RAW_PROBABILITIES.parquet              -> PASS (11,043,124 bytes)
+  * PHASE7_THRESHOLD_EXPERIMENTS.csv              -> PASS (4,515 bytes)
+  * PHASE7_PATIENT_OPTIMAL_THRESHOLDS.csv         -> PASS (85 bytes)
+  * PHASE7_ADAPTIVE_THRESHOLD_RESULTS.csv         -> PASS (300 bytes)
+  * PHASE7_CALIBRATION_COMPARISON.csv             -> PASS (465 bytes)
+  * PHASE7_CALIBRATION_NESTED_RESULTS.csv         -> PASS (446 bytes)
+  * PHASE7_CALIBRATED_RESULTS.csv                 -> PASS (337 bytes)
+  * PHASE7_CHB14_DOMAIN_SHIFT_RECOVERY.csv        -> PASS (179 bytes)
+  * PHASE7_CHB14_DOMAIN_SHIFT_RESULTS.csv         -> PASS (295 bytes)
+  * PHASE7_COMBINED_MODEL_RESULTS.csv             -> PASS (474 bytes)
+  * PHASE7_ABLATION_RESULTS.csv                   -> PASS (3,174 bytes)
+  * PHASE7_FINAL_COMPARISON.csv                   -> PASS (1,647 bytes)
+  * PHASE7_RECOVERY_SUMMARY.json                  -> PASS (465 bytes)
+  * PHASE7_EXECUTION_REPORT.txt                   -> FAIL (0 bytes)
+  * PHASE7_SELF_AUDIT.json                        -> FAIL (0 bytes)
+  * PHASE7_RUNTIME_AUDIT.json                     -> FAIL (0 bytes)
+
+======================================================================
+END OF PHASE7 EXECUTION REPORT
+======================================================================

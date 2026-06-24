@@ -1,0 +1,110 @@
+{
+  "parquet": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5B_ENGINEERED_DATASET.parquet",
+    "exists": true,
+    "size_bytes": 3634462487,
+    "status": "PASS"
+  },
+  "model": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5B_TEMPORAL_XGBOOST.joblib",
+    "exists": true,
+    "size_bytes": 1613008,
+    "status": "PASS"
+  },
+  "feature_signature": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5B_FEATURE_SIGNATURE.json",
+    "exists": true,
+    "size_bytes": 15249,
+    "status": "PASS"
+  },
+  "patient_split": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5B_PATIENT_SPLIT.json",
+    "exists": true,
+    "size_bytes": 501,
+    "status": "PASS"
+  },
+  "phase5e_production": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5E_PRODUCTION_RECOMMENDATION.json",
+    "exists": true,
+    "size_bytes": 2998,
+    "status": "PASS"
+  },
+  "phase6_performance": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE6_PATIENT_PERFORMANCE.csv",
+    "exists": true,
+    "size_bytes": 1034,
+    "status": "PASS"
+  },
+  "phase6_shift": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE6_FEATURE_SHIFT_ANALYSIS.csv",
+    "exists": true,
+    "size_bytes": 245286,
+    "status": "PASS"
+  },
+  "phase6_confidence": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE6_CONFIDENCE_ANALYSIS.csv",
+    "exists": true,
+    "size_bytes": 962,
+    "status": "PASS"
+  },
+  "phase6_root_cause": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE6_ROOT_CAUSE_SUMMARY.csv",
+    "exists": true,
+    "size_bytes": 556,
+    "status": "PASS"
+  },
+  "phase6_remediation": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE6_REMEDIATION_PLAN.json",
+    "exists": true,
+    "size_bytes": 2483,
+    "status": "PASS"
+  },
+  "feature_importance": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5B_FEATURE_IMPORTANCE.csv",
+    "exists": true,
+    "size_bytes": 26179,
+    "status": "PRESENT"
+  },
+  "phase5d_fn_events": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5D_FALSE_NEGATIVE_EVENTS.csv",
+    "exists": true,
+    "size_bytes": 7217,
+    "status": "PRESENT"
+  },
+  "phase5c_event_predictions": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5C_EVENT_PREDICTIONS.csv",
+    "exists": true,
+    "size_bytes": 803,
+    "status": "PRESENT"
+  },
+  "phase5c_event_metrics": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5C_EVENT_METRICS.csv",
+    "exists": true,
+    "size_bytes": 504,
+    "status": "PRESENT"
+  },
+  "phase6_good_vs_bad": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE6_GOOD_VS_BAD_PATIENTS.csv",
+    "exists": true,
+    "size_bytes": 45601,
+    "status": "PRESENT"
+  },
+  "phase6_imp_shift": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE6_IMPORTANCE_SHIFT_ANALYSIS.csv",
+    "exists": true,
+    "size_bytes": 19503,
+    "status": "PRESENT"
+  },
+  "phase6_fn_sig": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE6_FN_SIGNATURE_ANALYSIS.csv",
+    "exists": true,
+    "size_bytes": 36102,
+    "status": "PRESENT"
+  },
+  "phase5c_best_config": {
+    "path": "E:\\Project\\neurovision_ai\\PHASE5C_BEST_CONFIGURATION.json",
+    "exists": true,
+    "size_bytes": 922,
+    "status": "PRESENT"
+  }
+}

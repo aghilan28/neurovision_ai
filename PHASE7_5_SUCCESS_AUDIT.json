@@ -1,0 +1,49 @@
+{
+  "verdict": "FAIL",
+  "overall_mean_f1_75": 0.1147,
+  "phase7_mean_f1": 0.2961,
+  "f1_improvement": -0.1815,
+  "overall_auc": 0.8816,
+  "overall_pr_auc": 0.1532,
+  "overall_brier": 0.013416,
+  "overall_mcc": 0.0898,
+  "overall_balanced_accuracy": 0.8429,
+  "target_patients": [
+    "chb14",
+    "chb22",
+    "chb02"
+  ],
+  "target_improvements": {
+    "chb14": {
+      "f1_75": 0.0,
+      "improvement_vs_phase7": -0.2143,
+      "improved": false
+    },
+    "chb22": {
+      "f1_75": 0.4539,
+      "improvement_vs_phase7": -0.0076,
+      "improved": false
+    },
+    "chb02": {
+      "f1_75": 0.0697,
+      "improvement_vs_phase7": -0.7874,
+      "improved": false
+    }
+  },
+  "n_improved": 0,
+  "n_target": 3,
+  "regressed_gt_10": 4,
+  "pass_conditions": {
+    "overall_f1 > phase7_f1": false,
+    "targets_improved_ge_50": false,
+    "no_regression_gt_10": "False",
+    "auc_not_degraded": true,
+    "auc_improved": true,
+    "brier_not_degraded": true,
+    "mcc_positive": false,
+    "balanced_accuracy_good": true,
+    "pr_auc_reasonable": false
+  },
+  "pass_count": "4",
+  "total_conditions": 9
+}

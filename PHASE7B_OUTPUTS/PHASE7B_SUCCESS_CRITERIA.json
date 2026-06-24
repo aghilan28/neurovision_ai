@@ -1,0 +1,45 @@
+{
+  "verdict": "PASS",
+  "mean_event_f1": 0.20522138680033417,
+  "baseline_mean_f1": 0.4784,
+  "delta_vs_baseline": -0.27317861319966585,
+  "mean_precision": 0.1311936936936937,
+  "baseline_mean_precision": 0.2477,
+  "mean_recall": 0.6,
+  "criterion_1_f1_exceeds_baseline": false,
+  "criterion_2_precision_exceeds_baseline": false,
+  "criterion_3_no_severe_regressions": true,
+  "severe_regression_count": 1,
+  "per_patient_regressions": [
+    {
+      "patient": "chb02",
+      "f1": 0.2222222222222222,
+      "regression_pct": -0.08284144107469973,
+      "severe": false
+    },
+    {
+      "patient": "chb05",
+      "f1": 0.2380952380952381,
+      "regression_pct": -0.1601872582943213,
+      "severe": false
+    },
+    {
+      "patient": "chb09",
+      "f1": 0.3157894736842105,
+      "regression_pct": -0.5387746794219417,
+      "severe": false
+    },
+    {
+      "patient": "chb14",
+      "f1": 0.0,
+      "regression_pct": 1.0,
+      "severe": true
+    },
+    {
+      "patient": "chb22",
+      "f1": 0.25,
+      "regression_pct": -0.21819662120903727,
+      "severe": false
+    }
+  ]
+}

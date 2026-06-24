@@ -1,0 +1,6 @@
+patient,archetype,mpp_used,n_windows,n_pred_events,n_true_events,tp,fp,fn,precision,recall,event_f1
+chb02,calibration_misaligned,0.5,63300,7,3,3,4,0,0.4286,1.0,0.6
+chb05,stable,0.5,70010,105,5,5,100,0,0.0476,1.0,0.0909
+chb09,stable,0.5,122078,91,4,4,87,0,0.044,1.0,0.0842
+chb14,attenuated,0.5,46670,33,8,2,31,6,0.0606,0.25,0.0976
+chb22,calibration_misaligned,0.5,55651,6,3,3,3,0,0.5,1.0,0.6667

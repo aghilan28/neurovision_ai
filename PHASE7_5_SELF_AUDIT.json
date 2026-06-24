@@ -1,0 +1,160 @@
+{
+  "all_pass": false,
+  "artifacts_checked": 27,
+  "artifacts_valid": 26,
+  "artifacts": {
+    "PHASE7_5_INPUT_VALIDATION.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1912
+    },
+    "PHASE7_5_SCHEMA_DISCOVERY.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 15713
+    },
+    "PHASE7_5_FEATURE_ORDER_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 182
+    },
+    "PHASE7_5_SPLIT_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 529
+    },
+    "PHASE7_5_MEMORY_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 275
+    },
+    "PHASE7_5_ROOT_CAUSE_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1013
+    },
+    "PHASE7_5_RELATIVE_FEATURE_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 816
+    },
+    "PHASE7_5_FEATURE_STABILITY.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 28673,
+      "rows": 484
+    },
+    "PHASE7_5_FN_MINING_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 455
+    },
+    "PHASE7_5_GENERALIZATION_SCORECARD.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 28763,
+      "rows": 484
+    },
+    "PHASE7_5_MASTER_FEATURE_RANKING.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 35517,
+      "rows": 484
+    },
+    "PHASE7_5_FEATURE_SELECTION_RESULTS.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 87,
+      "rows": 6
+    },
+    "PHASE7_5_SAMPLE_WEIGHT_AUDIT.csv": {
+      "exists": false,
+      "valid": false,
+      "error": "FILE_NOT_FOUND"
+    },
+    "PHASE7_5_HYPERPARAMETER_SEARCH.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1708,
+      "rows": 30
+    },
+    "PHASE7_5_RETRAINED_MODEL.joblib": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 534121,
+      "type": "XGBClassifier"
+    },
+    "PHASE7_5_CALIBRATION_RESULTS.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 85,
+      "rows": 4
+    },
+    "PHASE7_5_CALIBRATOR.joblib": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1638,
+      "type": "dict"
+    },
+    "PHASE7_5_TEST_RESULTS.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 928,
+      "rows": 5
+    },
+    "PHASE7_5_RECOVERY_AUDIT.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 282,
+      "rows": 5
+    },
+    "PHASE7_5_ABLATION_RESULTS.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1256,
+      "rows": 25
+    },
+    "PHASE7_5_FINAL_COMPARISON.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 2468,
+      "rows": 35
+    },
+    "PHASE7_5_SUCCESS_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1153
+    },
+    "PHASE7_5_CORRELATION_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1761
+    },
+    "PHASE7_5_PROBABILITY_DISTRIBUTION.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 381
+    },
+    "PHASE7_5_MCNEMAR_RESULTS.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 101
+    },
+    "PHASE7_5_VARIANCE_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1356
+    },
+    "PHASE7_5_MISSING_VALUE_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 142
+    }
+  },
+  "memory_stats": {
+    "rss_mb": 8397.02,
+    "available_mb": 3581.65,
+    "total_mb": 16227.33,
+    "usage_percent": 51.7
+  }
+}

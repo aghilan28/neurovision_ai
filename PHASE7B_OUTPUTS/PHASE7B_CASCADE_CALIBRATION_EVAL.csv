@@ -1,0 +1,4 @@
+patient,s1_tp,s1_fp,s1_fn,s1_f1,cascade_tp,cascade_fp,cascade_fn,cascade_f1
+chb03,1,435,6,0.004514672686230249,1,2,6,0.2
+chb15,0,364,20,0.0,0,0,20,0.0
+chb23,0,36,7,0.0,0,2,7,0.0

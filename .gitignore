@@ -44,3 +44,17 @@ PHASE6_*.txt
 # OS
 .DS_Store
 Thumbs.db
+
+# Virtual Environments
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Massive Model Binaries and Datasets (Do NOT upload to Git)
+*.joblib
+*.parquet
+*.edf
+
+# Docker local states
+.dockerignore

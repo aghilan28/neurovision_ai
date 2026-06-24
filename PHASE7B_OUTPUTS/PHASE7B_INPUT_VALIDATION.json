@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-06-20T13:38:59.170561",
+  "phase": "7B",
+  "artifacts": {
+    "parquet": {
+      "path": "PHASE5B_ENGINEERED_DATASET.parquet",
+      "found": true,
+      "size_bytes": 3634462487,
+      "all_candidates": [
+        "PHASE5B_ENGINEERED_DATASET.parquet",
+        "real_feature_dataset_v3.parquet",
+        "E:\\Project\\neurovision_ai\\BACKUP_OLD_PHASE5B\\PHASE5B_ENGINEERED_DATASET.parquet",
+        "real_feature_dataset_v4_clean.parquet",
+        "E:\\Project\\neurovision_ai\\PHASE5B_ENGINEERED_DATASET.parquet",
+        "real_feature_dataset_v4.parquet",
+        "E:\\Project\\neurovision_ai\\real_feature_dataset_v3.parquet",
+        "E:\\Project\\neurovision_ai\\real_feature_dataset_v4.parquet",
+        "real_feature_dataset_v5_temporal.parquet",
+        "E:\\Project\\neurovision_ai\\real_feature_dataset_v5_temporal.parquet"
+      ]
+    },
+    "model": {
+      "path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+      "found": true
+    },
+    "uploads": {
+      "PHASE5B_FEATURE_SIGNATURE.json": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE5B_FEATURE_SIGNATURE.json",
+        "found": true
+      },
+      "PHASE5B_PATIENT_SPLIT.json": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE5B_PATIENT_SPLIT.json",
+        "found": true
+      },
+      "PHASE5E_PRODUCTION_RECOMMENDATION.json": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE5E_PRODUCTION_RECOMMENDATION.json",
+        "found": true
+      },
+      "PHASE6_ROOT_CAUSE_SUMMARY.csv": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE6_ROOT_CAUSE_SUMMARY.csv",
+        "found": true
+      },
+      "PHASE6_FEATURE_SHIFT_ANALYSIS.csv": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE6_FEATURE_SHIFT_ANALYSIS.csv",
+        "found": true
+      },
+      "PHASE7_FINAL_COMPARISON.csv": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE7_FINAL_COMPARISON.csv",
+        "found": true
+      },
+      "PHASE7_5_FINAL_COMPARISON.csv": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE7_5_FINAL_COMPARISON.csv",
+        "found": true
+      },
+      "PHASE7_6_FINAL_COMPARISON.csv": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE7_6_FINAL_COMPARISON.csv",
+        "found": true
+      },
+      "PHASE7_6_TEST_RESULTS.csv": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE7_6_TEST_RESULTS.csv",
+        "found": true
+      },
+      "PHASE7_6_RECOVERY_AUDIT.csv": {
+        "path": "E:\\Project\\neurovision_ai\\PHASE7_6_RECOVERY_AUDIT.csv",
+        "found": true
+      }
+    }
+  },
+  "status": "PASS",
+  "critical_found": true,
+  "parquet_path": "PHASE5B_ENGINEERED_DATASET.parquet",
+  "model_path": "PHASE5B_TEMPORAL_XGBOOST.joblib",
+  "upload_paths": {
+    "PHASE5B_FEATURE_SIGNATURE.json": "E:\\Project\\neurovision_ai\\PHASE5B_FEATURE_SIGNATURE.json",
+    "PHASE5B_PATIENT_SPLIT.json": "E:\\Project\\neurovision_ai\\PHASE5B_PATIENT_SPLIT.json",
+    "PHASE5E_PRODUCTION_RECOMMENDATION.json": "E:\\Project\\neurovision_ai\\PHASE5E_PRODUCTION_RECOMMENDATION.json",
+    "PHASE6_ROOT_CAUSE_SUMMARY.csv": "E:\\Project\\neurovision_ai\\PHASE6_ROOT_CAUSE_SUMMARY.csv",
+    "PHASE6_FEATURE_SHIFT_ANALYSIS.csv": "E:\\Project\\neurovision_ai\\PHASE6_FEATURE_SHIFT_ANALYSIS.csv",
+    "PHASE7_FINAL_COMPARISON.csv": "E:\\Project\\neurovision_ai\\PHASE7_FINAL_COMPARISON.csv",
+    "PHASE7_5_FINAL_COMPARISON.csv": "E:\\Project\\neurovision_ai\\PHASE7_5_FINAL_COMPARISON.csv",
+    "PHASE7_6_FINAL_COMPARISON.csv": "E:\\Project\\neurovision_ai\\PHASE7_6_FINAL_COMPARISON.csv",
+    "PHASE7_6_TEST_RESULTS.csv": "E:\\Project\\neurovision_ai\\PHASE7_6_TEST_RESULTS.csv",
+    "PHASE7_6_RECOVERY_AUDIT.csv": "E:\\Project\\neurovision_ai\\PHASE7_6_RECOVERY_AUDIT.csv"
+  }
+}

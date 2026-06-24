@@ -1,0 +1,85 @@
+======================================================================
+PHASE 7.6 — EVENT-LEVEL GENERALIZATION RECOVERY ENGINE
+EXECUTION REPORT
+======================================================================
+Script start:          2026-06-19T19:03:12.696287+00:00
+Script end:            2026-06-19T19:35:33.526265+00:00
+Total runtime:         1940.8s (32.3 min)
+Peak memory (RSS):     7730.3 MB
+Random seed:           42
+
+--- PIPELINE MODE ---
+  MODE: POST-PROCESSING ONLY (no retraining, no feature engineering)
+  TARGET: EVENT-LEVEL F1
+  OPTIMIZATION DATA: CALIBRATION PATIENTS ONLY
+  TEST DATA: HELD OUT UNTIL FINAL EVALUATION
+
+--- SPLIT ---
+  Train patients:       16
+  Calibration patients: 3
+  Test patients:        5
+  Calibration list:     ['chb03', 'chb15', 'chb23']
+  Test list:            ['chb02', 'chb05', 'chb09', 'chb14', 'chb22']
+
+--- BEST POST-PROCESSING CONFIG (from calibration with LOOCV) ---
+  smoothing: 11
+  threshold: 0.3
+  merge_gap_sec: 60.0
+  min_duration_sec: 20.0
+  min_windows: 5
+  confidence_density: 0.2
+  global_mpp: 0.5
+  attenuated_archetype_mpp: 0.5
+
+--- TEST RESULTS (EVENT-LEVEL) ---
+  chb02   : F1=0.6000  P=0.4286  R=1.0000  TP=3  FP=4  FN=0  archetype=calibration_misaligned
+  chb05   : F1=0.0909  P=0.0476  R=1.0000  TP=5  FP=100  FN=0  archetype=stable
+  chb09   : F1=0.0842  P=0.0440  R=1.0000  TP=4  FP=87  FN=0  archetype=stable
+  chb14   : F1=0.0976  P=0.0606  R=0.2500  TP=2  FP=31  FN=6  archetype=attenuated
+  chb22   : F1=0.6667  P=0.5000  R=1.0000  TP=3  FP=3  FN=0  archetype=calibration_misaligned
+  MEAN EVENT F1: 0.3079
+
+--- RECOVERY vs PHASE 7 ---
+  chb02   : Phase7=0.8571  Phase7.6=0.6000  Delta=-0.2571  Improved=False
+  chb05   : Phase7=0.1923  Phase7.6=0.0909  Delta=-0.1014  Improved=False
+  chb09   : Phase7=0.6667  Phase7.6=0.0842  Delta=-0.5825  Improved=False
+  chb14   : Phase7=0.2143  Phase7.6=0.0976  Delta=-0.1167  Improved=False
+  chb22   : Phase7=0.4615  Phase7.6=0.6667  Delta=+0.2052  Improved=True
+
+--- ABLATION SUMMARY ---
+  BASELINE                 : F1=0.0000  TP=0  FP=0  FN=34
+  MERGE_ONLY               : F1=0.0000  TP=0  FP=0  FN=34
+  CONFIDENCE_ONLY          : F1=0.4082  TP=10  FP=5  FN=24
+  THRESHOLD_ONLY           : F1=0.0000  TP=0  FP=0  FN=34
+  SMOOTHING_ONLY           : F1=0.1111  TP=2  FP=0  FN=32
+  MERGE_CONFIDENCE         : F1=0.4490  TP=11  FP=4  FN=23
+  MERGE_THRESHOLD          : F1=0.0000  TP=0  FP=0  FN=34
+  FULL_SYSTEM              : F1=0.5614  TP=16  FP=7  FN=18
+
+--- SUCCESS VERDICT ---
+  VERDICT: FAILED
+  Conditions passed: 1/5
+  Mean Phase 7.6 event F1: 0.3079
+  Mean Phase 7 event F1:   0.4784
+  F1 delta vs Phase 7:     -0.1705
+  Patients improved:       1
+  Patients regressed >10%: 4
+  CHB14 event F1:          0.0976
+  CHB14 improved:          True
+  Precision recovered:     False
+
+--- PASS CONDITIONS ---
+  [FAIL] avg_event_f1_exceeds_phase7
+  [FAIL] at_least_3_patients_improve
+  [FAIL] no_more_than_1_patient_regresses_gt10pct
+  [FAIL] precision_collapse_reduced
+  [PASS] chb14_improves_above_zero
+
+--- SELF AUDIT ---
+  Artifacts checked:     18
+  Artifacts valid:       16
+  All pass:              False
+
+--- AUDIT LOG ---
+  Total audit events:    30
+======================================================================

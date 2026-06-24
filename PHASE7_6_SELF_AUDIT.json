@@ -1,0 +1,117 @@
+{
+  "all_pass": false,
+  "artifacts_checked": 18,
+  "artifacts_valid": 16,
+  "artifacts": {
+    "PHASE7_6_INPUT_VALIDATION.json": {
+      "exists": true,
+      "valid": false,
+      "size_bytes": 1265,
+      "error": "Missing keys: ['parquet_path', 'model_path']"
+    },
+    "PHASE7_6_SCHEMA_DISCOVERY.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 15506
+    },
+    "PHASE7_6_PATIENT_SPLIT_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1290
+    },
+    "PHASE7_6_MEMORY_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 486
+    },
+    "PHASE7_6_CALIBRATION_AUDIT.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 126,
+      "rows": 3
+    },
+    "PHASE7_6_EVENT_MERGE_AUDIT.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 810,
+      "rows": 35
+    },
+    "PHASE7_6_EVENT_CONFIDENCE_AUDIT.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 2602,
+      "rows": 21
+    },
+    "PHASE7_6_ATTENUATED_SIGNAL_AUDIT.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 208,
+      "rows": 8
+    },
+    "PHASE7_6_ARCHETYPES.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 354,
+      "rows": 5
+    },
+    "PHASE7_6_PARAMETER_SWEEP_AUDIT.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 424226,
+      "rows": 10800
+    },
+    "PHASE7_6_FALSE_POSITIVE_FORENSICS.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 1212,
+      "rows": 7
+    },
+    "PHASE7_6_ABLATION_RESULTS.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 351,
+      "rows": 8
+    },
+    "PHASE7_6_EVENT_RECONSTRUCTION_AUDIT.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 225,
+      "rows": 3
+    },
+    "PHASE7_6_TEST_RESULTS.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 400,
+      "rows": 5
+    },
+    "PHASE7_6_RECOVERY_AUDIT.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 292,
+      "rows": 5
+    },
+    "PHASE7_6_FINAL_COMPARISON.csv": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 435,
+      "rows": 5
+    },
+    "PHASE7_6_SUCCESS_AUDIT.json": {
+      "exists": true,
+      "valid": true,
+      "size_bytes": 637
+    },
+    "PHASE7_6_RUNTIME_AUDIT.json": {
+      "exists": false,
+      "valid": false,
+      "error": "FILE_NOT_FOUND"
+    }
+  },
+  "memory_stats": {
+    "rss_mb": 2678.36,
+    "available_mb": 8000.09,
+    "total_mb": 16227.33,
+    "usage_percent": 16.5
+  },
+  "peak_rss_mb": 7730.29
+}

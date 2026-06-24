@@ -1,0 +1,6 @@
+patient,phase7_best_event_f1,phase76_event_f1,improvement_vs_phase7,improved,regressed_gt10pct
+chb02,0.8571,0.6,-0.2571,False,True
+chb05,0.1923,0.0909,-0.1014,False,True
+chb09,0.6667,0.0842,-0.5825,False,True
+chb14,0.2143,0.0976,-0.1167,False,True
+chb22,0.4615,0.6667,0.2052,True,False
