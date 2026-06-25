@@ -13,6 +13,7 @@ operations / Track-1-4 — it only *constructs and serves* what already exists.
 """
 
 from __future__ import annotations
+from .landing import mount_landing_page
 
 import contextlib
 from dataclasses import dataclass
@@ -147,6 +148,7 @@ def build_application(config: Optional[ServerConfig] = None):
     config = config or load_config()
     service = build_service(config)
     app = create_app(service)
+    mount_landing_page(app)
 
     # Attach config + service to app state (operators/tests can introspect without globals).
     app.state.service = service
