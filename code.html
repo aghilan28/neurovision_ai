@@ -1,330 +1,207 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
-<head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>NeuroVision | Neurological Intelligence Platform</title>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NeuroVision | Authentication Portal</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-
-<!-- Tailwind Configuration — Full Design Token System from DESIGN.md -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      "colors": {
-        "tertiary-fixed-dim": "#e7c365",
-        "surface-variant": "#36343a",
-        "surface-container-high": "#2b292f",
-        "on-tertiary-fixed-variant": "#594400",
-        "tertiary-container": "#c9a74d",
-        "surface-container-highest": "#36343a",
-        "on-background": "#e6e0e9",
-        "surface-container-lowest": "#0f0d13",
-        "tertiary-fixed": "#ffdf93",
-        "secondary-container": "#4d4465",
-        "on-primary-fixed": "#22005d",
-        "on-primary-fixed-variant": "#4f378a",
-        "background": "#141218",
-        "surface": "#141218",
-        "primary-fixed": "#e9ddff",
-        "surface-dim": "#141218",
-        "primary-container": "#6750a4",
-        "on-primary": "#381e72",
-        "inverse-primary": "#6750a4",
-        "on-surface-variant": "#cbc4d2",
-        "primary": "#cfbcff",
-        "on-error-container": "#ffdad6",
-        "on-surface": "#e6e0e9",
-        "error": "#ffb4ab",
-        "surface-tint": "#cfbcff",
-        "on-error": "#690005",
-        "surface-container-low": "#1d1b20",
-        "secondary-fixed-dim": "#cdc0e9",
-        "on-secondary": "#342b4b",
-        "error-container": "#93000a",
-        "on-secondary-container": "#bfb2da",
-        "inverse-on-surface": "#322f35",
-        "on-tertiary": "#3e2e00",
-        "on-tertiary-container": "#503d00",
-        "secondary-fixed": "#e9ddff",
-        "outline-variant": "#494551",
-        "surface-bright": "#3b383e",
-        "inverse-surface": "#e6e0e9",
-        "on-primary-container": "#e0d2ff",
-        "secondary": "#cdc0e9",
-        "on-tertiary-fixed": "#241a00",
-        "primary-fixed-dim": "#cfbcff",
-        "on-secondary-fixed-variant": "#4b4263",
-        "outline": "#948e9c",
-        "tertiary": "#e7c365",
-        "on-secondary-fixed": "#1f1635",
-        "surface-container": "#211f24",
-        "clinical-teal": "#14B8A6",
-        "degraded": "#6b5b4a"
-      },
-      "borderRadius": {
-        "DEFAULT": "0.125rem",
-        "sm": "0.125rem",
-        "lg": "0.25rem",
-        "xl": "0.5rem",
-        "2xl": "0.5rem",
-        "full": "0.75rem"
-      },
-      "spacing": {
-        "section-gap": "48px",
-        "container-padding": "24px",
-        "unit": "4px",
-        "gutter": "16px"
-      },
-      "fontFamily": {
-        "headline-md": ["Playfair Display", "serif"],
-        "data-metric": ["JetBrains Mono", "monospace"],
-        "body-sm": ["Geist", "sans-serif"],
-        "body-md": ["Geist", "sans-serif"],
-        "data-label": ["JetBrains Mono", "monospace"],
-        "display-lg": ["Playfair Display", "serif"],
-        "body-lg": ["Geist", "sans-serif"],
-        "headline-sm": ["Playfair Display", "serif"]
-      },
-      "fontSize": {
-        "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
-        "data-metric": ["11px", {"lineHeight": "14px", "fontWeight": "400"}],
-        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-        "data-label": ["13px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-        "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "500"}]
-      },
-      "transitionDuration": {
-        "bloom": "300ms"
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#003f38",
+                    "primary-fixed": "#e9ddff",
+                    "surface-container-low": "#1d1a23",
+                    "on-surface": "#e7e0ed",
+                    "on-tertiary": "#482900",
+                    "secondary-fixed": "#71f8e4",
+                    "outline": "#958ea0",
+                    "on-secondary-fixed-variant": "#005048",
+                    "on-primary": "#3c0091",
+                    "surface-container": "#211e27",
+                    "on-background": "#e7e0ed",
+                    "secondary-container": "#04b4a2",
+                    "tertiary": "#ffb869",
+                    "surface-container-high": "#2c2832",
+                    "surface-tint": "#d0bcff",
+                    "on-tertiary-container": "#3f2300",
+                    "on-primary-fixed": "#23005c",
+                    "outline-variant": "#494454",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#15121b",
+                    "background": "#15121b",
+                    "primary-container": "#a078ff",
+                    "inverse-on-surface": "#322f39",
+                    "inverse-surface": "#e7e0ed",
+                    "surface": "#15121b",
+                    "inverse-primary": "#6d3bd7",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-secondary": "#003731",
+                    "on-error": "#690005",
+                    "primary": "#d0bcff",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "surface-container-highest": "#37333d",
+                    "on-primary-container": "#340080",
+                    "tertiary-fixed": "#ffdcbb",
+                    "on-tertiary-fixed": "#2c1700",
+                    "tertiary-fixed-dim": "#ffb869",
+                    "secondary": "#4fdbc8",
+                    "primary-fixed-dim": "#d0bcff",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed": "#00201c",
+                    "error-container": "#93000a",
+                    "surface-bright": "#3b3742",
+                    "on-surface-variant": "#cbc3d7",
+                    "surface-variant": "#37333d",
+                    "surface-container-lowest": "#0f0d15",
+                    "tertiary-container": "#ca801e",
+                    "secondary-fixed-dim": "#4fdbc8"
+            },
+            "borderRadius": {
+                    "sm": "0.125rem",
+                    "DEFAULT": "0.25rem",
+                    "md": "0.375rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-page": "24px",
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "split-right": "55%",
+                    "split-left": "45%"
+            },
+            "fontFamily": {
+                    "sub-header": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "headline-lg": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "label-mono": ["JetBrains Mono"],
+                    "body-md": ["Geist"],
+                    "body-sm": ["Geist"],
+                    "display-xl": ["Geist"]
+            },
+            "fontSize": {
+                    "sub-header": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-mono": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
       }
-    }
-  }
-}
-</script>
-
+    </script>
 <style>
-    /* ─── Base Reset & Theme ─── */
-    body {
-        background-color: #141218;
-        color: #e6e0e9;
-        overflow-x: hidden;
-        font-family: 'Geist', sans-serif;
-    }
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #15121b;
+            color: #e7e0ed;
+            overflow: hidden;
+            height: 100vh;
+        }
 
-    /* ─── Glassmorphism Navigation ─── */
-    .glass-nav {
-        background: rgba(20, 18, 24, 0.7);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                    padding-top 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                    padding-bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
 
-    .glass-nav.nav-compact {
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-    }
+        .glass-panel {
+            background: rgba(26, 22, 33, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(45, 40, 56, 0.5);
+        }
 
-    /* ─── Reveal-on-Scroll Animation ─── */
-    .reveal-up {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+        .pulse-green {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
 
-    .reveal-up.active {
-        opacity: 1;
-        transform: translateY(0);
-    }
+        .alert-red {
+            background: #ffb4ab !important;
+            animation: alertPulse 1.25s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
 
-    /* ─── Hover Bloom — Neural Violet Outer Bloom Accent ─── */
-    .hover-bloom {
-        transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    }
+        .status-card {
+            min-height: 52px;
+        }
 
-    .hover-bloom:hover,
-    .hover-bloom:focus-visible {
-        box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
-        border-color: rgba(139, 92, 246, 0.5);
-    }
+        .status-pip {
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity, background-color;
+        }
 
-    .hover-bloom:focus-visible {
-        outline: none;
-        box-shadow: 0 0 24px rgba(139, 92, 246, 0.4);
-        border-color: rgba(139, 92, 246, 0.6);
-    }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
 
-    /* ─── Pipeline Node Connector ─── */
-    .pipeline-node::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: -16px;
-        width: 16px;
-        height: 1px;
-        background: #494551;
-        z-index: 0;
-    }
+        @keyframes alertPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.55; transform: scale(0.82); }
+        }
 
-    .pipeline-node:last-child::after {
-        display: none;
-    }
+        .transition-all-custom {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    /* ─── Material Symbols ─── */
-    .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
+        input:focus {
+            outline: none;
+            border-color: #d0bcff !important;
+            box-shadow: 0 0 0 1px rgba(208, 188, 255, 0.2);
+        }
 
-    /* ─── Custom Scrollbar ─── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #141218; }
-    ::-webkit-scrollbar-thumb { background: #36343a; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #494551; }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
 
-    /* ─── Smooth Counter Animation ─── */
-    .counter-value {
-        transition: color 0.5s ease;
-    }
-
-    .counter-value.degraded {
-        color: #6b5b4a !important;
-    }
-
-    /* ─── Status Indicator ─── */
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.5s ease;
-    }
-
-    .status-dot.online {
-        background-color: #14B8A6;
-        box-shadow: 0 0 6px rgba(20, 184, 166, 0.5);
-    }
-
-    .status-dot.degraded {
-        background-color: #6b5b4a;
-        box-shadow: 0 0 6px rgba(107, 91, 74, 0.4);
-    }
-
-    /* ─── Modal Overlay ─── */
-    .modal-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 100;
-        background: rgba(15, 13, 19, 0.85);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .modal-overlay.open {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .modal-panel {
-        background: #211f24;
-        border: 1px solid rgba(73, 69, 81, 0.2);
-        border-radius: 0.5rem;
-        max-width: 540px;
-        width: 100%;
-        padding: 32px;
-        transform: translateY(16px) scale(0.97);
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .modal-overlay.open .modal-panel {
-        transform: translateY(0) scale(1);
-    }
-
-    /* ─── Loading Pulse ─── */
-    @keyframes shimmer {
-        0% { opacity: 0.4; }
-        50% { opacity: 0.7; }
-        100% { opacity: 0.4; }
-    }
-
-    .loading-shimmer {
-        animation: shimmer 1.5s ease-in-out infinite;
-    }
-
-    /* ─── Drag-and-Drop Zone ─── */
-    .drop-zone {
-        border: 1px dashed rgba(73, 69, 81, 0.5);
-        border-radius: 0.25rem;
-        transition: border-color 0.3s ease, background-color 0.3s ease;
-    }
-
-    .drop-zone.drag-over {
-        border-color: #14B8A6;
-        background-color: rgba(20, 184, 166, 0.05);
-    }
-
-    .drop-zone:hover {
-        border-color: rgba(207, 188, 255, 0.4);
-    }
-
-    /* ─── No-scrollbar Utility ─── */
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-</style>
+        .role-card.active {
+            border-color: #d0bcff;
+            background: rgba(208, 188, 255, 0.1);
+        }
+    </style>
 </head>
-
-<body class="selection:bg-primary-container selection:text-on-primary-container">
-
-<!-- ═══════════════════════════════════════════════════════════
-     NAVIGATION SHELL — Glassmorphism Header with Scroll Reactivity
-     ═══════════════════════════════════════════════════════════ -->
-<nav id="main-nav" class="glass-nav fixed top-0 w-full z-50 border-b border-outline-variant/20">
-    <div id="nav-inner" class="flex justify-between items-center h-20 px-container-padding max-w-screen-2xl mx-auto transition-all duration-300">
-        <!-- Brand Anchor -->
-        <div class="flex items-center gap-2">
-            <span class="font-headline-sm text-headline-sm tracking-tight text-on-surface">Neuro<span class="text-primary">Vision</span></span>
-        </div>
-        <!-- Links -->
-        <div class="hidden md:flex items-center gap-8">
-            <a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Platform</a>
-            <a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Intelligence</a>
-            <a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Research</a>
-            <a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">About</a>
-        </div>
-        <!-- Actions -->
-        <div class="flex items-center gap-4">
-            <button class="text-on-surface-variant font-body-md text-body-md hover:text-on-surface transition-colors">Sign In</button>
-            <button id="nav-start-analysis-btn" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-body-md text-body-md active:scale-95 transition-transform duration-200">Start Analysis</button>
-        </div>
-    </div>
-</nav>
-
-<main>
-<!-- ═══════════════════════════════════════════════════════════
-     HERO SECTION — WebGL Shader Background
-     ═══════════════════════════════════════════════════════════ -->
-<section class="relative h-screen flex flex-col justify-center items-center text-center overflow-hidden pt-20">
-
-<!-- WebGL Node-Link Graph Background — ANIMATION_1 -->
+<body class="flex items-stretch overflow-hidden select-none">
+<!-- Left Panel (45%) -->
+<aside class="w-[45%] h-full bg-[#0F0C13] border-r border-outline-variant/30 flex flex-col p-12 relative overflow-hidden">
+<!-- Logo & Subtitle -->
+<div class="z-10">
+<h1 class="font-headline-lg text-headline-lg flex items-center tracking-tight">
+<span class="text-white font-bold">Neuro</span><span class="text-primary font-bold">Vision</span>
+</h1>
+<p class="font-sub-header text-sub-header text-on-surface-variant mt-2 opacity-80">
+                NEUROLOGICAL INTELLIGENCE PLATFORM
+            </p>
+</div>
+<!-- Hero Statement -->
+<div class="mt-20 z-10 max-w-md">
+<h2 class="font-display-xl text-display-xl leading-tight text-white mb-6">
+                Transforming EEG Signals Into <span class="text-primary">Clinical Intelligence</span>.
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+                Advanced neural decoding and real-time biometric analysis for precision clinical diagnostics.
+            </p>
+</div>
+<!-- EEG Visualization -->
+<div class="mt-12 flex-grow relative z-10 rounded-xl overflow-hidden glass-panel group">
+<!-- STITCH_SHADER_START:ANIMATION_2 class="absolute inset-0 w-full h-full opacity-60" -->
 <div class="absolute inset-0 w-full h-full opacity-60" style="display:block;">
-<canvas id="shader-canvas-ANIMATION_1" style="display:block;width:100%;height:100%" width="1280" height="1024"></canvas>
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
 <script>
 (function() {
-  const canvas = document.getElementById('shader-canvas-ANIMATION_1');
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
 
   // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
-  // Fires on initial layout and whenever the element is resized via ResizeObserver.
+  // This fires on initial layout and whenever the element is resized.
   function syncSize() {
     const w = canvas.clientWidth  || 1280;
     const h = canvas.clientHeight || 720;
@@ -333,130 +210,78 @@ tailwind.config = {
       canvas.height = h;
     }
   }
-
   if (typeof ResizeObserver !== 'undefined') {
     new ResizeObserver(syncSize).observe(canvas);
   }
   syncSize();
 
-  // WebGL context fetch with fallback for legacy browsers
   const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
   if (!gl) return;
-
-  // ─── Vertex Shader — Passthrough ───
   const vs = `attribute vec2 a_position;
 varying vec2 v_texCoord;
 void main() {
   v_texCoord = a_position * 0.5 + 0.5;
   gl_Position = vec4(a_position, 0.0, 1.0);
 }`;
-
-  // ─── Fragment Shader — Neural Node-Link Graph ───
-  // Preserved exactly: vec3 background #1A141F, Simplex noise/hash, Clinical Teal #14B8A6
   const fs = `precision highp float;
+varying vec2 v_texCoord;
 uniform float u_time;
 uniform vec2 u_resolution;
-uniform vec2 u_mouse;
 
-varying vec2 v_texCoord;
-
-// Simplex noise or simple hash for node positioning
-float hash(vec2 p) {
-    p = fract(p * vec2(123.34, 456.21));
-    p += dot(p, p + 45.32);
-    return fract(p.x * p.y);
+float noise(vec2 p) {
+    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
 }
 
-vec2 get_node_pos(vec2 id, float time) {
-    float h = hash(id);
-    return id + vec2(
-        sin(time * 0.5 + h * 6.28),
-        cos(time * 0.7 + h * 6.28)
-    ) * 0.3;
+float getWave(float x, float offset, float speed, float amplitude, float frequency) {
+    float n = noise(vec2(floor(x * frequency + u_time * speed), offset));
+    float nextN = noise(vec2(floor(x * frequency + u_time * speed) + 1.0, offset));
+    float f = fract(x * frequency + u_time * speed);
+    float smoothN = mix(n, nextN, smoothstep(0.0, 1.0, f));
+    return smoothN * amplitude;
 }
 
 void main() {
-    vec2 uv = (gl_FragCoord.xy * 2.0 - u_resolution.xy) / min(u_resolution.x, u_resolution.y);
-    uv *= 2.5; // Zoom out to see more nodes
-
-    vec2 mouse_uv = (u_mouse / u_resolution.xy) * 2.0 - 1.0;
-    mouse_uv.y = -mouse_uv.y; // Correct Y orientation
-    mouse_uv *= 2.5;
-
-    vec3 background_color = vec3(0.102, 0.078, 0.122); // Deep Graphite Plum #1A141F
-    vec3 color = background_color;
-
-    vec2 grid_uv = fract(uv) - 0.5;
-    vec2 grid_id = floor(uv);
-
-    float min_dist = 1.0;
+    vec2 uv = v_texCoord;
     
-    // Check neighboring cells for nodes
-    for(int y = -1; y <= 1; y++) {
-        for(int x = -1; x <= 1; x++) {
-            vec2 neighbor_id = grid_id + vec2(float(x), float(y));
-            vec2 node_pos = get_node_pos(neighbor_id, u_time);
-            
-            float d = length(uv - node_pos);
-            
-            // Draw nodes — Clinical Teal #14B8A6
-            float node_circle = smoothstep(0.04, 0.02, d);
-            color = mix(color, vec3(0.078, 0.722, 0.651), node_circle * 0.5);
-
-            // Draw connections to nearby nodes
-            for(int ny = -1; ny <= 1; ny++) {
-                for(int nx = -1; nx <= 1; nx++) {
-                    if(nx == 0 && ny == 0) continue;
-                    vec2 next_neighbor_id = neighbor_id + vec2(float(nx), float(ny));
-                    vec2 next_node_pos = get_node_pos(next_neighbor_id, u_time);
-                    
-                    // Simple line drawing logic
-                    vec2 pa = uv - node_pos;
-                    vec2 ba = next_node_pos - node_pos;
-                    float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
-                    float line_dist = length(pa - ba * h);
-                    
-                    float line_mask = smoothstep(0.015, 0.005, line_dist);
-                    line_mask *= smoothstep(1.5, 0.5, length(ba)); // Fade lines based on distance
-                    
-                    // Mix in Violet and Teal accents for lines
-                    float pulse = sin(u_time * 0.5 + hash(neighbor_id) * 10.0) * 0.5 + 0.5;
-                    vec3 line_color = mix(vec3(0.545, 0.361, 0.965), vec3(0.078, 0.722, 0.651), pulse);
-                    color = mix(color, line_color, line_mask * 0.15);
-                }
-            }
-        }
-    }
-
-    // Subtle vignettes and depth
-    color *= smoothstep(5.0, 1.0, length(uv));
+    // Clinical Teal: #2dd4bf -> vec3(0.176, 0.831, 0.749)
+    vec3 teal = vec3(0.176, 0.831, 0.749);
+    vec3 bg = vec3(0.082, 0.071, 0.106); // Deep Graphite Plum approx
+    
+    float wave = 0.0;
+    
+    // Create multiple layers for a realistic EEG look
+    wave += getWave(uv.x, 1.0, 2.5, 0.08, 15.0);
+    wave += getWave(uv.x, 2.0, 1.8, 0.04, 30.0);
+    wave += getWave(uv.x, 3.0, 4.0, 0.02, 60.0);
+    
+    float line = smoothstep(0.005, 0.0, abs(uv.y - 0.5 - wave));
+    float glow = smoothstep(0.06, 0.0, abs(uv.y - 0.5 - wave)) * 0.3;
+    
+    vec3 color = mix(bg, teal, line + glow);
+    
+    // Fade edges
+    float edgeFade = smoothstep(0.0, 0.1, uv.x) * smoothstep(1.0, 0.9, uv.x);
+    color = mix(bg, color, edgeFade);
     
     gl_FragColor = vec4(color, 1.0);
 }`;
-
-  // ─── Shader Compilation Helper ───
   function cs(type, src) {
     const s = gl.createShader(type);
     gl.shaderSource(s, src);
     gl.compileShader(s);
     return s;
   }
-
   const prog = gl.createProgram();
   gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
   gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
   gl.linkProgram(prog);
   gl.useProgram(prog);
-
-  // ─── Geometry: Fullscreen Quad ───
   const buf = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, buf);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
   const pos = gl.getAttribLocation(prog, 'a_position');
   gl.enableVertexAttribArray(pos);
   gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
-
-  // ─── Uniform Locations ───
   const uTime = gl.getUniformLocation(prog, 'u_time');
   const uRes = gl.getUniformLocation(prog, 'u_resolution');
   const uMouse = gl.getUniformLocation(prog, 'u_mouse');
@@ -474,7 +299,6 @@ void main() {
     }
   });
 
-  // ─── Render Loop ───
   function render(t) {
     if (typeof ResizeObserver === 'undefined') syncSize();
     gl.viewport(0, 0, canvas.width, canvas.height);
@@ -488,748 +312,466 @@ void main() {
 })();
 </script>
 </div>
-
-<!-- Hero Content -->
-<div class="relative z-10 max-w-4xl px-container-padding reveal-up active">
-    <span class="font-data-label text-data-label tracking-[0.2em] text-clinical-teal mb-6 block uppercase">Neurological Intelligence Platform</span>
-    <h1 class="font-display-lg text-display-lg md:text-7xl mb-8 leading-tight">
-        The Brain Speaks.<br>
-        <span class="italic font-normal">NV Listens.</span>
-    </h1>
-    <p class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto leading-relaxed">
-        Real-time EEG analysis. Seizure intelligence. Clinical interpretation. Powered by AI trained on real patient data.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-        <button id="hero-upload-btn" class="group relative px-8 py-4 bg-primary text-on-primary rounded-lg font-body-md overflow-hidden transition-all hover:shadow-[0_0_20px_rgba(207,188,255,0.4)]">
-            <span class="relative z-10">Upload EEG File</span>
-        </button>
-        <button class="px-8 py-4 border border-outline-variant text-on-surface rounded-lg font-body-md hover:bg-surface-container transition-all">
-            View Demo Analysis
-        </button>
-    </div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+<div class="absolute top-4 left-4 flex items-center space-x-2 bg-surface-container-lowest/80 px-3 py-1 rounded-full border border-outline-variant/30">
+<div class="w-2 h-2 rounded-full bg-secondary pulse-green"></div>
+<span class="font-label-mono text-label-mono text-secondary uppercase tracking-widest">Monitoring Active</span>
 </div>
-
-<!-- Scroll Indicator -->
-<div class="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-40 animate-bounce">
-    <span class="material-symbols-outlined text-4xl">keyboard_arrow_down</span>
-</div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     LIVE STATISTICS BAR — Wired to GET /health on port 8080
-     ═══════════════════════════════════════════════════════════ -->
-<section class="bg-surface-container-lowest border-y border-outline-variant/10 py-16">
-<div class="max-w-screen-2xl mx-auto px-container-padding">
-
-    <!-- Connection Status Bar -->
-    <div class="flex items-center justify-center gap-2 mb-8">
-        <span id="status-dot" class="status-dot online"></span>
-        <span id="status-label" class="font-data-label text-data-label text-clinical-teal uppercase tracking-wider">status: live</span>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-outline-variant/20">
-        <div class="text-center md:text-left px-4">
-            <span class="font-data-label text-data-label text-on-surface-variant uppercase mb-2 block">Analyses Completed</span>
-            <div id="stat-analyses" class="font-data-metric text-4xl md:text-5xl text-on-surface tabular-nums counter-value">—</div>
-        </div>
-        <div class="text-center md:text-left px-4">
-            <span class="font-data-label text-data-label text-on-surface-variant uppercase mb-2 block">Signals Processed</span>
-            <div id="stat-signals" class="font-data-metric text-4xl md:text-5xl text-on-surface tabular-nums counter-value">—</div>
-        </div>
-        <div class="text-center md:text-left px-4">
-            <span class="font-data-label text-data-label text-on-surface-variant uppercase mb-2 block">Reports Generated</span>
-            <div id="stat-reports" class="font-data-metric text-4xl md:text-5xl text-on-surface tabular-nums counter-value">—</div>
-        </div>
-        <div class="text-center md:text-left px-4">
-            <span class="font-data-label text-data-label text-on-surface-variant uppercase mb-2 block">Avg. Confidence</span>
-            <div id="stat-confidence" class="font-data-metric text-4xl md:text-5xl text-primary tabular-nums counter-value">—</div>
-        </div>
-    </div>
-</div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     TRUST INDICATORS — Feature Cards
-     ═══════════════════════════════════════════════════════════ -->
-<section class="py-section-gap px-container-padding">
-<div class="max-w-screen-2xl mx-auto">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
-
-    <!-- Card 1: Patient-Disjoint Validation -->
-    <div class="group p-8 bg-surface-container border border-outline-variant/30 rounded-xl transition-all duration-500 hover-bloom reveal-up" tabindex="0">
-        <div class="w-12 h-12 flex items-center justify-center bg-primary-container/20 rounded-lg mb-6 group-hover:scale-110 transition-transform">
-            <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
-        </div>
-        <h3 class="font-headline-sm text-headline-sm mb-4">Patient-Disjoint Validation</h3>
-        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-            Our models are validated on unseen patient sets to ensure clinical generalizability across diverse demographics and hardware.
-        </p>
-    </div>
-
-    <!-- Card 2: Real EDF Processing -->
-    <div class="group p-8 bg-surface-container border border-outline-variant/30 rounded-xl transition-all duration-500 hover-bloom reveal-up" tabindex="0">
-        <div class="w-12 h-12 flex items-center justify-center bg-clinical-teal/10 rounded-lg mb-6 group-hover:scale-110 transition-transform">
-            <span class="material-symbols-outlined text-clinical-teal text-3xl">database</span>
-        </div>
-        <h3 class="font-headline-sm text-headline-sm mb-4">Real EDF Processing</h3>
-        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-            Native support for standard EDF/EDF+ clinical formats with automated metadata extraction and channel re-montaging.
-        </p>
-    </div>
-
-    <!-- Card 3: Explainable Intelligence -->
-    <div class="group p-8 bg-surface-container border border-outline-variant/30 rounded-xl transition-all duration-500 hover-bloom reveal-up" tabindex="0">
-        <div class="w-12 h-12 flex items-center justify-center bg-tertiary-container/20 rounded-lg mb-6 group-hover:scale-110 transition-transform">
-            <span class="material-symbols-outlined text-tertiary text-3xl">visibility</span>
-        </div>
-        <h3 class="font-headline-sm text-headline-sm mb-4">Explainable Intelligence</h3>
-        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-            Every prediction is mapped back to the raw signal with integrated saliency heatmaps for neurophysiologist review.
-        </p>
-    </div>
-
-    <!-- Card 4: Clinical-Grade Output -->
-    <div class="group p-8 bg-surface-container border border-outline-variant/30 rounded-xl transition-all duration-500 hover-bloom reveal-up" tabindex="0">
-        <div class="w-12 h-12 flex items-center justify-center bg-primary-container/20 rounded-lg mb-6 group-hover:scale-110 transition-transform">
-            <span class="material-symbols-outlined text-primary text-3xl">clinical_notes</span>
-        </div>
-        <h3 class="font-headline-sm text-headline-sm mb-4">Clinical-Grade Output</h3>
-        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-            Standardized ACNS nomenclature reports generated automatically, significantly reducing interpretation time.
-        </p>
-    </div>
-
-</div>
-</div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     NEURAL PIPELINE — 8-Layer Analysis Pipeline
-     ═══════════════════════════════════════════════════════════ -->
-<section class="py-section-gap bg-surface-container-low overflow-hidden">
-<div class="max-w-screen-2xl mx-auto px-container-padding">
-<div class="mb-16 reveal-up">
-    <h2 class="font-headline-md text-headline-md mb-2">The Neural Pipeline</h2>
-    <p class="text-on-surface-variant">Eight layers of forensic analysis for clinical certainty.</p>
-</div>
-<div class="relative overflow-x-auto pb-8 no-scrollbar">
-<div class="flex min-w-max gap-4 px-4 items-center">
-
-    <!-- Stage 01 -->
-    <div class="pipeline-node relative group">
-        <div class="w-48 p-6 bg-surface-container-highest border border-outline-variant/20 rounded-lg text-center transition-all hover:bg-surface-container hover:border-primary/50">
-            <span class="font-data-label text-[10px] text-primary/60 block mb-2">01</span>
-            <h4 class="font-body-md font-bold text-on-surface text-sm">Signal Acquisition</h4>
-            <div class="mt-4 h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div class="h-full bg-primary w-full animate-pulse"></div>
+<div class="absolute bottom-4 right-4 font-label-mono text-label-mono text-on-surface-variant/60">
+                Real-Time Processing Enabled
             </div>
-        </div>
-    </div>
-
-    <!-- Stage 02 -->
-    <div class="pipeline-node relative group">
-        <div class="w-48 p-6 bg-surface-container-highest border border-outline-variant/20 rounded-lg text-center transition-all hover:bg-surface-container hover:border-primary/50">
-            <span class="font-data-label text-[10px] text-primary/60 block mb-2">02</span>
-            <h4 class="font-body-md font-bold text-on-surface text-sm">Artifact Detection</h4>
-            <div class="mt-4 h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div class="h-full bg-primary w-2/3"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stage 03 -->
-    <div class="pipeline-node relative group">
-        <div class="w-48 p-6 bg-surface-container-highest border border-outline-variant/20 rounded-lg text-center transition-all hover:bg-surface-container hover:border-primary/50">
-            <span class="font-data-label text-[10px] text-primary/60 block mb-2">03</span>
-            <h4 class="font-body-md font-bold text-on-surface text-sm">Feature Extraction</h4>
-            <div class="mt-4 h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div class="h-full bg-primary w-1/2"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stage 04 -->
-    <div class="pipeline-node relative group">
-        <div class="w-48 p-6 bg-surface-container-highest border border-outline-variant/20 rounded-lg text-center transition-all hover:bg-surface-container hover:border-primary/50">
-            <span class="font-data-label text-[10px] text-primary/60 block mb-2">04</span>
-            <h4 class="font-body-md font-bold text-on-surface text-sm">Brain Characterization</h4>
-            <div class="mt-4 h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div class="h-full bg-clinical-teal w-full"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stage 05 -->
-    <div class="pipeline-node relative group">
-        <div class="w-48 p-6 bg-surface-container-highest border border-outline-variant/20 rounded-lg text-center transition-all hover:bg-surface-container hover:border-primary/50">
-            <span class="font-data-label text-[10px] text-primary/60 block mb-2">05</span>
-            <h4 class="font-body-md font-bold text-on-surface text-sm">Seizure Prediction</h4>
-            <div class="mt-4 h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div class="h-full bg-primary w-1/3"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stage 06 -->
-    <div class="pipeline-node relative group">
-        <div class="w-48 p-6 bg-surface-container-highest border border-outline-variant/20 rounded-lg text-center transition-all hover:bg-surface-container hover:border-primary/50">
-            <span class="font-data-label text-[10px] text-primary/60 block mb-2">06</span>
-            <h4 class="font-body-md font-bold text-on-surface text-sm">Clinical Interpretation</h4>
-            <div class="mt-4 h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div class="h-full bg-primary w-3/4"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stage 07 -->
-    <div class="pipeline-node relative group">
-        <div class="w-48 p-6 bg-surface-container-highest border border-outline-variant/20 rounded-lg text-center transition-all hover:bg-surface-container hover:border-primary/50">
-            <span class="font-data-label text-[10px] text-primary/60 block mb-2">07</span>
-            <h4 class="font-body-md font-bold text-on-surface text-sm">Evidence Analysis</h4>
-            <div class="mt-4 h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div class="h-full bg-primary w-full"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Stage 08 -->
-    <div class="pipeline-node relative group">
-        <div class="w-48 p-6 bg-surface-container-highest border border-outline-variant/20 rounded-lg text-center transition-all hover:bg-surface-container hover:border-primary/50">
-            <span class="font-data-label text-[10px] text-primary/60 block mb-2">08</span>
-            <h4 class="font-body-md font-bold text-on-surface text-sm">Report Generation</h4>
-            <div class="mt-4 h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div class="h-full bg-clinical-teal w-full animate-pulse"></div>
-            </div>
-        </div>
-    </div>
-
+</div>
+<!-- System Status -->
+<div class="mt-8 grid grid-cols-2 gap-4 z-10" id="system-status-grid" aria-live="polite">
+<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="ai-engine">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="ai-engine"></div>
+<span class="font-label-mono text-label-mono uppercase truncate">AI Engine</span>
+</div>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="ai-engine">Sync</span>
+</div>
+<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="signal-proc">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="signal-proc"></div>
+<span class="font-label-mono text-label-mono uppercase truncate">Signal Proc</span>
+</div>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="signal-proc">Sync</span>
+</div>
+<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="pred-model">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="pred-model"></div>
+<span class="font-label-mono text-label-mono uppercase truncate">Pred Model</span>
+</div>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="pred-model">Sync</span>
+</div>
+<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="clinical-interp">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="clinical-interp"></div>
+<span class="font-label-mono text-label-mono uppercase truncate">Clinical Interp</span>
+</div>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="clinical-interp">Sync</span>
 </div>
 </div>
+<!-- Trust Message -->
+<div class="mt-auto z-10 pt-8 border-t border-outline-variant/20">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-mono text-[10px] uppercase tracking-widest">Patient-Disjoint Validation Standard v4.2</span>
 </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     CTA SECTION
-     ═══════════════════════════════════════════════════════════ -->
-<section class="py-24 px-container-padding relative">
-<div class="max-w-4xl mx-auto bg-primary-container/10 border border-primary/20 p-12 rounded-2xl text-center reveal-up">
-    <h2 class="font-headline-md text-headline-md mb-6">Ready to upgrade your clinical workflow?</h2>
-    <p class="font-body-lg text-body-lg text-on-surface-variant mb-10">
-        Join over 400 hospitals worldwide utilizing NeuroVision for precision diagnostics.
-    </p>
-    <div class="flex flex-wrap justify-center gap-4">
-        <button id="cta-request-btn" class="bg-primary text-on-primary px-10 py-4 rounded-lg font-bold active:scale-95 transition-transform duration-200">Request Institutional Access</button>
-        <button class="bg-surface border border-outline px-10 py-4 rounded-lg">Talk to a Clinical Expert</button>
-    </div>
 </div>
-</section>
-</main>
-
-<!-- ═══════════════════════════════════════════════════════════
-     UPLOAD MODAL — Routes to /upload sequence layer
-     ═══════════════════════════════════════════════════════════ -->
-<div id="upload-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-panel">
-        <div class="flex items-center justify-between mb-6">
-            <h2 id="modal-title" class="font-headline-sm text-headline-sm text-on-surface">Upload EEG File</h2>
-            <button id="modal-close-btn" class="text-on-surface-variant hover:text-on-surface transition-colors" aria-label="Close modal">
-                <span class="material-symbols-outlined text-2xl">close</span>
-            </button>
-        </div>
-
-        <!-- Drop Zone -->
-        <div id="drop-zone" class="drop-zone p-8 text-center mb-6 cursor-pointer">
-            <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-3 block">cloud_upload</span>
-            <p class="font-body-md text-body-md text-on-surface-variant mb-2">Drag & drop your EDF/EDF+ file here</p>
-            <p class="font-body-sm text-body-sm text-on-surface-variant opacity-60">or click to browse</p>
-            <input id="file-input" type="file" accept=".edf,.edf+" class="hidden" />
-        </div>
-
-        <!-- File Info Display -->
-        <div id="file-info" class="hidden mb-6 p-4 bg-surface-container-highest border border-outline-variant/20 rounded-lg">
-            <div class="flex items-center gap-3">
-                <span class="material-symbols-outlined text-clinical-teal">description</span>
-                <div class="flex-1 min-w-0">
-                    <p id="file-name" class="font-body-md text-on-surface truncate"></p>
-                    <p id="file-size" class="font-body-sm text-body-sm text-on-surface-variant"></p>
-                </div>
-                <button id="file-remove-btn" class="text-on-surface-variant hover:text-error transition-colors">
-                    <span class="material-symbols-outlined text-xl">delete</span>
+<!-- Subtle Gradient Background -->
+<div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none"></div>
+</aside>
+<!-- Right Panel (55%) -->
+<main class="w-[55%] h-full bg-surface-container-lowest flex items-center justify-center p-gutter relative overflow-y-auto scrollbar-hide">
+<div class="w-full max-w-[420px] py-12">
+<!-- Tab Switcher -->
+<div class="flex p-1 bg-surface-container-low rounded-xl mb-10">
+<button class="flex-1 py-2 font-sub-header text-sub-header rounded-lg transition-all-custom bg-primary-container text-on-primary-container" id="btn-signin" onclick="toggleMode('signin')">
+                    SIGN IN
                 </button>
-            </div>
-        </div>
-
-        <!-- Upload Progress -->
-        <div id="upload-progress" class="hidden mb-6">
-            <div class="flex items-center justify-between mb-2">
-                <span class="font-data-label text-data-label text-on-surface-variant uppercase">Uploading</span>
-                <span id="upload-percent" class="font-data-label text-data-label text-clinical-teal">0%</span>
-            </div>
-            <div class="h-1 w-full bg-outline-variant/20 rounded-full overflow-hidden">
-                <div id="upload-bar" class="h-full bg-clinical-teal transition-all duration-300" style="width: 0%"></div>
-            </div>
-        </div>
-
-        <!-- Upload Error -->
-        <div id="upload-error" class="hidden mb-6 p-4 bg-error-container/20 border border-error/30 rounded-lg">
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-error text-xl">error</span>
-                <p id="upload-error-msg" class="font-body-sm text-body-sm text-error"></p>
-            </div>
-        </div>
-
-        <!-- Submit Button -->
-        <button id="upload-submit-btn" class="w-full bg-primary text-on-primary px-8 py-3 rounded-lg font-body-md active:scale-95 transition-transform duration-200 disabled:opacity-40 disabled:cursor-not-allowed" disabled>
-            Start Analysis
-        </button>
-    </div>
+<button class="flex-1 py-2 font-sub-header text-sub-header rounded-lg transition-all-custom text-on-surface-variant hover:text-white" id="btn-signup" onclick="toggleMode('signup')">
+                    CREATE ACCOUNT
+                </button>
 </div>
-
-<!-- ═══════════════════════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════════════════════ -->
-<footer class="bg-surface-container-lowest border-t border-outline-variant/20 w-full py-section-gap">
-<div class="max-w-screen-2xl mx-auto px-container-padding flex flex-col md:flex-row justify-between items-center gap-gutter">
-    <div class="flex flex-col items-center md:items-start gap-4">
-        <span class="font-headline-sm text-headline-sm text-on-surface">Neuro<span class="text-primary">Vision</span></span>
-        <p class="font-body-sm text-body-sm text-on-surface-variant">Built for clinical research. Not a medical device.</p>
-    </div>
-    <div class="flex items-center gap-8">
-        <a class="text-on-surface-variant font-body-sm text-body-sm hover:text-tertiary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
-        <a class="text-on-surface-variant font-body-sm text-body-sm hover:text-tertiary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
-        <a class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm hover:text-tertiary transition-colors opacity-80 hover:opacity-100" href="https://github.com">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.744.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            GitHub
-        </a>
-    </div>
+<!-- Auth Container -->
+<div id="auth-form-container">
+<!-- Sign In Mode -->
+<div class="space-y-6" id="signin-section">
+<header>
+<h3 class="font-headline-md text-headline-md text-white">Welcome back</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enter your credentials to access clinical tools.</p>
+</header>
+<form class="space-y-4" onsubmit="handleAuth(event, 'signin')">
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Institutional Email</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signin-email" name="email" autocomplete="username" placeholder="name@medical-center.org" required="" type="email"/>
 </div>
+<div class="space-y-1 relative">
+<div class="flex justify-between items-center">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Password</label>
+<a class="font-label-mono text-[10px] text-primary uppercase hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom pr-12" id="signin-pass" name="password" autocomplete="current-password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors" onclick="togglePass(event, 'signin-pass')" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="hidden text-error font-body-sm text-sm bg-error-container/20 p-3 rounded-lg border border-error/30" id="signin-error">
+                            Authentication failed. Please verify your credentials.
+                        </div>
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-lg hover:scale-[0.99] active:scale-[0.97] transition-all flex justify-center items-center" id="signin-submit" type="submit">
+<span>ACCESS PLATFORM</span>
+</button>
+</form>
+</div>
+<!-- Create Account Mode (Hidden by default) -->
+<div class="hidden space-y-6" id="signup-section">
+<header>
+<h3 class="font-headline-md text-headline-md text-white">Register Portal</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Connect your institution to the NeuroVision network.</p>
+</header>
+<form class="space-y-4" onsubmit="handleAuth(event, 'signup')">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Full Name</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-name" name="full_name" autocomplete="name" placeholder="Dr. Sarah Chen" required="" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Institution</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-institution" name="institution" autocomplete="organization" placeholder="Neuro-Center" required="" type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Professional Role</label>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<button class="role-card active p-3 border border-outline-variant/30 rounded-lg flex flex-col items-start transition-all" onclick="selectRole(this)" type="button">
+<span class="material-symbols-outlined text-primary mb-1">neurology</span>
+<span class="font-label-mono text-[10px] uppercase">Clinician</span>
+</button>
+<button class="role-card p-3 border border-outline-variant/30 rounded-lg flex flex-col items-start transition-all" onclick="selectRole(this)" type="button">
+<span class="material-symbols-outlined text-on-surface-variant mb-1">psychology</span>
+<span class="font-label-mono text-[10px] uppercase">Researcher</span>
+</button>
+<button class="role-card p-3 border border-outline-variant/30 rounded-lg flex flex-col items-start transition-all" onclick="selectRole(this)" type="button">
+<span class="material-symbols-outlined text-on-surface-variant mb-1">school</span>
+<span class="font-label-mono text-[10px] uppercase">Student</span>
+</button>
+<button class="role-card p-3 border border-outline-variant/30 rounded-lg flex flex-col items-start transition-all" onclick="selectRole(this)" type="button">
+<span class="material-symbols-outlined text-on-surface-variant mb-1">admin_panel_settings</span>
+<span class="font-label-mono text-[10px] uppercase">Admin</span>
+</button>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Email</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-email" name="email" autocomplete="username" placeholder="sarah.chen@clinic.org" required="" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Create Password</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-pass" name="password" autocomplete="new-password" oninput="checkStrength(this.value)" placeholder="••••••••" required="" type="password"/>
+<div class="grid grid-cols-4 gap-1 mt-2">
+<div class="h-1 rounded bg-surface-container-high transition-colors" id="req-len"></div>
+<div class="h-1 rounded bg-surface-container-high transition-colors" id="req-up"></div>
+<div class="h-1 rounded bg-surface-container-high transition-colors" id="req-low"></div>
+<div class="h-1 rounded bg-surface-container-high transition-colors" id="req-num"></div>
+</div>
+<p class="font-label-mono text-[9px] text-on-surface-variant/60 mt-1 uppercase">8+ chars, upper, lower, number required</p>
+</div>
+<div class="hidden text-error font-body-sm text-sm bg-error-container/20 p-3 rounded-lg border border-error/30" id="signup-error">
+                            Account initialization failed. Please verify your details.
+                        </div>
+<div class="space-y-4 pt-2">
+<label class="flex items-start space-x-3 cursor-pointer group">
+<input class="mt-1 rounded bg-[#0F0C13] border-outline-variant/40 text-primary focus:ring-primary/20" required="" type="checkbox"/>
+<span class="font-body-sm text-[12px] text-on-surface-variant group-hover:text-white transition-colors">I agree to the GDPR-compliant Neural Data Processing Agreement.</span>
+</label>
+<label class="flex items-start space-x-3 cursor-pointer group">
+<input class="mt-1 rounded bg-[#0F0C13] border-outline-variant/40 text-primary focus:ring-primary/20" required="" type="checkbox"/>
+<span class="font-body-sm text-[12px] text-on-surface-variant group-hover:text-white transition-colors">I verify I am a licensed healthcare or research professional.</span>
+</label>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-lg hover:scale-[0.99] transition-all flex justify-center items-center" id="signup-submit" type="submit">
+<span>INITIALIZE ACCOUNT</span>
+</button>
+</form>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-12 text-center">
+<p class="font-label-mono text-[10px] text-on-surface-variant/40 uppercase tracking-widest">
+                    © 2024 NEUROVISION AI • CLINICAL EDITION • SSL SECURED
+                </p>
 </footer>
-
-<!-- ═══════════════════════════════════════════════════════════
-     APPLICATION LOGIC — Reactive Telemetry, Modal, Scroll, Animations
-     ═══════════════════════════════════════════════════════════ -->
+</div>
+<!-- Success Toast -->
+<div class="fixed bottom-10 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 bg-secondary text-on-secondary px-8 py-4 rounded-xl shadow-2xl transition-all duration-500 z-50 flex items-center space-x-3 font-bold" id="toast">
+<span class="material-symbols-outlined">check_circle</span>
+<span>Welcome to NeuroVision</span>
+</div>
+</main>
 <script>
-(function() {
-    'use strict';
+        const NV_API_BASE = (() => {
+            const protocol = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
+            const host = window.location.hostname || 'localhost';
+            if (window.location.port === '8080') return window.location.origin;
+            return `${protocol}//${host}:8080`;
+        })();
 
-    // ───────────────────────────────────────────────────────
-    // CONFIGURATION
-    // ───────────────────────────────────────────────────────
-    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:8080'
-        : `${window.location.protocol}//${window.location.hostname}:8080`;
-    const HEALTH_ENDPOINT = `${API_BASE}/health`;
-    const UPLOAD_ENDPOINT = `${API_BASE}/upload`;
-    const POLL_INTERVAL_MS = 5000;
+        const TELEMETRY_POLL_MS = 5000;
+        const STATUS_IDS = ['ai-engine', 'signal-proc', 'pred-model', 'clinical-interp'];
+        let telemetryTimer = null;
 
-    // ───────────────────────────────────────────────────────
-    // SMOOTH COUNTER ANIMATION ENGINE
-    // ───────────────────────────────────────────────────────
-    const activeAnimations = new Map();
-
-    function animateCounter(element, targetValue, durationMs) {
-        durationMs = durationMs || 800;
-        const currentText = element.textContent.trim();
-        const currentParsed = parseFloat(currentText.replace(/[^0-9.]/g, ''));
-
-        // If current is placeholder, start from 0
-        const startValue = isNaN(currentParsed) ? 0 : currentParsed;
-        const startTime = performance.now();
-
-        // Cancel any existing animation on this element
-        if (activeAnimations.has(element)) {
-            cancelAnimationFrame(activeAnimations.get(element));
-        }
-
-        function tick(now) {
-            const elapsed = now - startTime;
-            const progress = Math.min(elapsed / durationMs, 1);
-            // Ease-out cubic
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const currentValue = startValue + (targetValue - startValue) * eased;
-            element.textContent = formatMetricValue(currentValue, element.dataset.format);
-            if (progress < 1) {
-                activeAnimations.set(element, requestAnimationFrame(tick));
-            } else {
-                activeAnimations.delete(element);
+        function asBoolean(value) {
+            if (typeof value === 'boolean') return value;
+            if (typeof value === 'number') return Number.isFinite(value) && value !== 0;
+            if (typeof value === 'string') {
+                const normalized = value.trim().toLowerCase();
+                return ['true', '1', 'yes', 'ok', 'ready', 'online'].includes(normalized);
             }
+            if (Array.isArray(value)) return value.length > 0 && value.every(asBoolean);
+            return false;
         }
 
-        activeAnimations.set(element, requestAnimationFrame(tick));
-    }
-
-    function formatMetricValue(value, format) {
-        switch(format) {
-            case 'comma-int':
-                return Math.round(value).toLocaleString('en-US');
-            case 'petabytes':
-                return value.toFixed(1) + ' PB';
-            case 'millions':
-                return (value / 1000000).toFixed(1) + 'M';
-            case 'percent':
-                return value.toFixed(1) + '%';
-            default:
-                return Math.round(value).toLocaleString('en-US');
+        function safeString(value, fallback) {
+            if (typeof value === 'string' && value.trim()) return value.trim();
+            if (typeof value === 'number' && Number.isFinite(value)) return String(value);
+            return fallback;
         }
-    }
 
-    // ───────────────────────────────────────────────────────
-    // TELEMETRY STATE
-    // ───────────────────────────────────────────────────────
-    let connectionState = 'loading'; // 'loading' | 'live' | 'degraded'
-    let pollTimer = null;
-    let consecutiveErrors = 0;
+        function setStatus(id, ok, label) {
+            const pip = document.querySelector(`[data-status-pip="${id}"]`);
+            const text = document.querySelector(`[data-status-text="${id}"]`);
+            const card = document.querySelector(`[data-status-id="${id}"]`);
+            if (!pip || !text || !card) return;
 
-    const statAnalyses = document.getElementById('stat-analyses');
-    const statSignals = document.getElementById('stat-signals');
-    const statReports = document.getElementById('stat-reports');
-    const statConfidence = document.getElementById('stat-confidence');
-    const statusDot = document.getElementById('status-dot');
-    const statusLabel = document.getElementById('status-label');
+            pip.classList.toggle('bg-secondary', ok);
+            pip.classList.toggle('pulse-green', ok);
+            pip.classList.toggle('alert-red', !ok);
+            pip.setAttribute('aria-label', `${id} ${ok ? 'ready' : 'not ready'}`);
 
-    // Set format hints for counter animation
-    statAnalyses.dataset.format = 'comma-int';
-    statSignals.dataset.format = 'petabytes';
-    statReports.dataset.format = 'millions';
-    statConfidence.dataset.format = 'percent';
+            text.textContent = label || (ok ? 'Ready' : 'Alert');
+            text.classList.toggle('text-secondary', ok);
+            text.classList.toggle('text-error', !ok);
 
-    function updateConnectionState(state) {
-        connectionState = state;
-        const allCounters = document.querySelectorAll('.counter-value');
-
-        if (state === 'live') {
-            statusDot.className = 'status-dot online';
-            statusLabel.textContent = 'status: live';
-            statusLabel.classList.remove('text-degraded');
-            statusLabel.classList.add('text-clinical-teal');
-            allCounters.forEach(el => el.classList.remove('degraded'));
-        } else if (state === 'degraded') {
-            statusDot.className = 'status-dot degraded';
-            statusLabel.textContent = 'status: degraded';
-            statusLabel.classList.remove('text-clinical-teal');
-            statusLabel.classList.add('text-degraded');
-            allCounters.forEach(el => el.classList.add('degraded'));
-        } else {
-            statusDot.className = 'status-dot degraded';
-            statusLabel.textContent = 'status: connecting…';
-            statusLabel.classList.remove('text-clinical-teal');
-            statusLabel.classList.add('text-degraded');
+            card.classList.toggle('border-secondary/40', ok);
+            card.classList.toggle('border-error/40', !ok);
+            card.style.transform = 'translateZ(0)';
         }
-    }
 
-    function safeCastNumber(value, fallback) {
-        fallback = fallback || 0;
-        const num = Number(value);
-        return (typeof num === 'number' && isFinite(num)) ? num : fallback;
-    }
+        function mapHealthToStatuses(payload) {
+            const xgbReady = asBoolean(payload && payload.xgb_model_ready);
+            const bilstmReady = asBoolean(payload && payload.bilstm_ready);
+            const serviceOk = safeString(payload && payload.status, 'degraded').toLowerCase() === 'ok';
+            const bothReady = xgbReady && bilstmReady;
 
-    async function fetchHealthData() {
-        try {
+            setStatus('ai-engine', serviceOk && bothReady, serviceOk && bothReady ? 'Ready' : 'Degraded');
+            setStatus('signal-proc', xgbReady || bilstmReady, xgbReady || bilstmReady ? 'Stream' : 'Offline');
+            setStatus('pred-model', xgbReady, xgbReady ? 'XGB' : 'Alert');
+            setStatus('clinical-interp', bilstmReady, bilstmReady ? 'BiLSTM' : 'Alert');
+        }
+
+        function markTelemetryOffline() {
+            STATUS_IDS.forEach((id) => setStatus(id, false, 'Link'));
+        }
+
+        async function pollHealth() {
             const controller = new AbortController();
-            const timeoutId = setTimeout(function() { controller.abort(); }, 8000);
-
-            const response = await fetch(HEALTH_ENDPOINT, {
-                method: 'GET',
-                signal: controller.signal,
-                headers: { 'Accept': 'application/json' }
-            });
-
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-                throw new Error('HTTP ' + response.status);
+            const timeoutId = window.setTimeout(() => controller.abort(), 3500);
+            try {
+                const response = await fetch(`${NV_API_BASE}/health`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-store',
+                    headers: { 'Accept': 'application/json' },
+                    signal: controller.signal
+                });
+                if (!response.ok) throw new Error(`Health check failed with HTTP ${response.status}`);
+                const payload = await response.json();
+                mapHealthToStatuses(payload || {});
+            } catch (error) {
+                markTelemetryOffline();
+            } finally {
+                window.clearTimeout(timeoutId);
             }
+        }
 
-            const data = await response.json();
-            consecutiveErrors = 0;
+        function startTelemetryLoop() {
+            if (telemetryTimer) window.clearInterval(telemetryTimer);
+            pollHealth();
+            telemetryTimer = window.setInterval(pollHealth, TELEMETRY_POLL_MS);
+        }
 
-            // Extract active_sessions data array and coerce types
-            var activeSessions = data.active_sessions;
-            if (!Array.isArray(activeSessions)) {
-                activeSessions = [];
+        // Check local storage on load and start live telemetry polling.
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('nv_session')) {
+                window.location.href = '/dashboard';
+                return;
             }
-
-            // Map telemetry fields — clean type coercion before UI injection
-            var analyses = safeCastNumber(data.analyses_completed, 842912);
-            var signalsPB = safeCastNumber(data.signals_processed_pb, 14.2);
-            var reports = safeCastNumber(data.reports_generated, 1200000);
-            var confidence = safeCastNumber(data.avg_confidence_pct, 99.8);
-
-            // Override with active_sessions array if present
-            if (activeSessions.length >= 4) {
-                analyses = safeCastNumber(activeSessions[0], analyses);
-                signalsPB = safeCastNumber(activeSessions[1], signalsPB);
-                reports = safeCastNumber(activeSessions[2], reports);
-                confidence = safeCastNumber(activeSessions[3], confidence);
-            } else if (activeSessions.length >= 1) {
-                analyses = safeCastNumber(activeSessions[0], analyses);
-            }
-
-            // Animate counters with smooth layout tracking
-            animateCounter(statAnalyses, analyses, 800);
-            animateCounter(statSignals, signalsPB, 800);
-            animateCounter(statReports, reports, 800);
-            animateCounter(statConfidence, confidence, 800);
-
-            updateConnectionState('live');
-
-        } catch (err) {
-            consecutiveErrors++;
-
-            if (consecutiveErrors >= 3) {
-                updateConnectionState('degraded');
-            }
-
-            // On first load, show placeholder values
-            if (statAnalyses.textContent.trim() === '—') {
-                statAnalyses.textContent = '842,912';
-                statSignals.textContent = '14.2 PB';
-                statReports.textContent = '1.2M';
-                statConfidence.textContent = '99.8%';
-            }
-
-            // Do not throw — keep the UI responsive
-            console.warn('[NeuroVision Telemetry] Fetch failed:', err.message);
-        }
-    }
-
-    // Start the polling loop
-    function startTelemetryPolling() {
-        fetchHealthData();
-        pollTimer = setInterval(fetchHealthData, POLL_INTERVAL_MS);
-    }
-
-    startTelemetryPolling();
-
-    // ───────────────────────────────────────────────────────
-    // UPLOAD MODAL CONTROLLER
-    // ───────────────────────────────────────────────────────
-    var uploadModal = document.getElementById('upload-modal');
-    var heroUploadBtn = document.getElementById('hero-upload-btn');
-    var navStartBtn = document.getElementById('nav-start-analysis-btn');
-    var ctaRequestBtn = document.getElementById('cta-request-btn');
-    var modalCloseBtn = document.getElementById('modal-close-btn');
-    var dropZone = document.getElementById('drop-zone');
-    var fileInput = document.getElementById('file-input');
-    var fileInfo = document.getElementById('file-info');
-    var fileName = document.getElementById('file-name');
-    var fileSize = document.getElementById('file-size');
-    var fileRemoveBtn = document.getElementById('file-remove-btn');
-    var uploadSubmitBtn = document.getElementById('upload-submit-btn');
-    var uploadProgress = document.getElementById('upload-progress');
-    var uploadBar = document.getElementById('upload-bar');
-    var uploadPercent = document.getElementById('upload-percent');
-    var uploadError = document.getElementById('upload-error');
-    var uploadErrorMsg = document.getElementById('upload-error-msg');
-
-    var selectedFile = null;
-
-    function openModal() {
-        uploadModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        resetModalState();
-    }
-
-    function closeModal() {
-        uploadModal.classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    function resetModalState() {
-        selectedFile = null;
-        fileInput.value = '';
-        fileInfo.classList.add('hidden');
-        uploadProgress.classList.add('hidden');
-        uploadError.classList.add('hidden');
-        uploadSubmitBtn.disabled = true;
-        uploadSubmitBtn.textContent = 'Start Analysis';
-        uploadBar.style.width = '0%';
-        uploadPercent.textContent = '0%';
-    }
-
-    function formatFileSize(bytes) {
-        if (bytes < 1024) return bytes + ' B';
-        if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-        return (bytes / 1048576).toFixed(1) + ' MB';
-    }
-
-    function handleFileSelection(file) {
-        if (!file) return;
-        selectedFile = file;
-        fileName.textContent = file.name;
-        fileSize.textContent = formatFileSize(file.size);
-        fileInfo.classList.remove('hidden');
-        uploadError.classList.add('hidden');
-        uploadSubmitBtn.disabled = false;
-    }
-
-    // Button bindings — toggle modal and route to /upload sequence layer
-    heroUploadBtn.addEventListener('click', openModal);
-    navStartBtn.addEventListener('click', openModal);
-    ctaRequestBtn.addEventListener('click', openModal);
-    modalCloseBtn.addEventListener('click', closeModal);
-
-    // Close on overlay click
-    uploadModal.addEventListener('click', function(e) {
-        if (e.target === uploadModal) closeModal();
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && uploadModal.classList.contains('open')) {
-            closeModal();
-        }
-    });
-
-    // Drop zone click to browse
-    dropZone.addEventListener('click', function() {
-        fileInput.click();
-    });
-
-    // File input change
-    fileInput.addEventListener('change', function() {
-        if (fileInput.files && fileInput.files.length > 0) {
-            handleFileSelection(fileInput.files[0]);
-        }
-    });
-
-    // Drag and drop handlers
-    dropZone.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        dropZone.classList.add('drag-over');
-    });
-
-    dropZone.addEventListener('dragleave', function(e) {
-        e.preventDefault();
-        dropZone.classList.remove('drag-over');
-    });
-
-    dropZone.addEventListener('drop', function(e) {
-        e.preventDefault();
-        dropZone.classList.remove('drag-over');
-        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-            handleFileSelection(e.dataTransfer.files[0]);
-        }
-    });
-
-    // Remove file
-    fileRemoveBtn.addEventListener('click', function() {
-        selectedFile = null;
-        fileInput.value = '';
-        fileInfo.classList.add('hidden');
-        uploadSubmitBtn.disabled = true;
-    });
-
-    // Submit — POST to /upload endpoint
-    uploadSubmitBtn.addEventListener('click', async function() {
-        if (!selectedFile) return;
-
-        uploadSubmitBtn.disabled = true;
-        uploadSubmitBtn.textContent = 'Uploading…';
-        uploadProgress.classList.remove('hidden');
-        uploadError.classList.add('hidden');
-
-        var formData = new FormData();
-        formData.append('file', selectedFile);
-
-        try {
-            var xhr = new XMLHttpRequest();
-
-            xhr.upload.addEventListener('progress', function(e) {
-                if (e.lengthComputable) {
-                    var pct = Math.round((e.loaded / e.total) * 100);
-                    uploadBar.style.width = pct + '%';
-                    uploadPercent.textContent = pct + '%';
-                }
-            });
-
-            xhr.addEventListener('load', function() {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    uploadBar.style.width = '100%';
-                    uploadPercent.textContent = '100%';
-                    uploadSubmitBtn.textContent = 'Analysis Started ✓';
-
-                    setTimeout(function() {
-                        closeModal();
-                        // Route to /upload sequence — redirect if the backend serves a results page
-                        window.location.href = UPLOAD_ENDPOINT;
-                    }, 1200);
-                } else {
-                    throw new Error('Server returned ' + xhr.status);
-                }
-            });
-
-            xhr.addEventListener('error', function() {
-                uploadError.classList.remove('hidden');
-                uploadErrorMsg.textContent = 'Network error. Please check your connection and try again.';
-                uploadSubmitBtn.disabled = false;
-                uploadSubmitBtn.textContent = 'Start Analysis';
-            });
-
-            xhr.addEventListener('abort', function() {
-                uploadError.classList.remove('hidden');
-                uploadErrorMsg.textContent = 'Upload was cancelled.';
-                uploadSubmitBtn.disabled = false;
-                uploadSubmitBtn.textContent = 'Start Analysis';
-            });
-
-            xhr.open('POST', UPLOAD_ENDPOINT);
-            xhr.send(formData);
-
-        } catch (err) {
-            uploadError.classList.remove('hidden');
-            uploadErrorMsg.textContent = err.message || 'An unexpected error occurred.';
-            uploadSubmitBtn.disabled = false;
-            uploadSubmitBtn.textContent = 'Start Analysis';
-        }
-    });
-
-    // ───────────────────────────────────────────────────────
-    // SCROLL-BASED NAV HEIGHT TRANSITION
-    // Glass nav transitions from h-20 to h-16 when scroll > 50px
-    // ───────────────────────────────────────────────────────
-    var mainNav = document.getElementById('main-nav');
-    var navInner = document.getElementById('nav-inner');
-    var scrollThreshold = 50;
-
-    function handleScroll() {
-        var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-        if (currentScroll > scrollThreshold) {
-            navInner.classList.remove('h-20');
-            navInner.classList.add('h-16');
-            mainNav.classList.add('nav-compact');
-        } else {
-            navInner.classList.remove('h-16');
-            navInner.classList.add('h-20');
-            mainNav.classList.remove('nav-compact');
-        }
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    // ───────────────────────────────────────────────────────
-    // REVEAL-ON-SCROLL — IntersectionObserver
-    // ───────────────────────────────────────────────────────
-    var observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
+            startTelemetryLoop();
         });
-    }, observerOptions);
 
-    document.querySelectorAll('.reveal-up').forEach(function(el) {
-        observer.observe(el);
-    });
+        function toggleMode(mode) {
+            const signinSection = document.getElementById('signin-section');
+            const signupSection = document.getElementById('signup-section');
+            const btnSignin = document.getElementById('btn-signin');
+            const btnSignup = document.getElementById('btn-signup');
+            const nextMode = mode === 'signup' ? 'signup' : 'signin';
 
-})();
-</script>
+            if (nextMode === 'signin') {
+                signinSection.classList.remove('hidden');
+                signupSection.classList.add('hidden');
+                btnSignin.classList.add('bg-primary-container', 'text-on-primary-container');
+                btnSignin.classList.remove('text-on-surface-variant');
+                btnSignup.classList.remove('bg-primary-container', 'text-on-primary-container');
+                btnSignup.classList.add('text-on-surface-variant');
+            } else {
+                signinSection.classList.add('hidden');
+                signupSection.classList.remove('hidden');
+                btnSignup.classList.add('bg-primary-container', 'text-on-primary-container');
+                btnSignup.classList.remove('text-on-surface-variant');
+                btnSignin.classList.remove('bg-primary-container', 'text-on-primary-container');
+                btnSignin.classList.add('text-on-surface-variant');
+            }
+        }
 
-</body>
-</html>
+        function togglePass(eventOrId, explicitId) {
+            const id = explicitId || eventOrId;
+            const input = document.getElementById(id);
+            const trigger = explicitId && eventOrId ? eventOrId.currentTarget : null;
+            const icon = trigger ? trigger.querySelector('.material-symbols-outlined') : null;
+            if (!input) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                if (icon) icon.innerText = 'visibility_off';
+            } else {
+                input.type = 'password';
+                if (icon) icon.innerText = 'visibility';
+            }
+        }
+
+        function selectRole(element) {
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.classList.remove('active');
+                card.querySelector('.material-symbols-outlined').style.color = '#cbc3d7';
+            });
+            element.classList.add('active');
+            element.querySelector('.material-symbols-outlined').style.color = '#d0bcff';
+        }
+
+        function checkStrength(val) {
+            const reqs = {
+                len: String(val).length >= 8,
+                up: /[A-Z]/.test(String(val)),
+                low: /[a-z]/.test(String(val)),
+                num: /[0-9]/.test(String(val))
+            };
+
+            const colors = {
+                active: 'bg-primary',
+                inactive: 'bg-surface-container-high'
+            };
+
+            document.getElementById('req-len').className = `h-1 rounded transition-colors ${reqs.len ? colors.active : colors.inactive}`;
+            document.getElementById('req-up').className = `h-1 rounded transition-colors ${reqs.up ? colors.active : colors.inactive}`;
+            document.getElementById('req-low').className = `h-1 rounded transition-colors ${reqs.low ? colors.active : colors.inactive}`;
+            document.getElementById('req-num').className = `h-1 rounded transition-colors ${reqs.num ? colors.active : colors.inactive}`;
+            return reqs.len && reqs.up && reqs.low && reqs.num;
+        }
+
+        function showError(type, message) {
+            const err = document.getElementById(`${type}-error`) || document.getElementById('signin-error');
+            if (!err) return;
+            err.textContent = message;
+            err.classList.remove('hidden');
+        }
+
+        function hideError(type) {
+            const err = document.getElementById(`${type}-error`) || document.getElementById('signin-error');
+            if (!err) return;
+            err.classList.add('hidden');
+        }
+
+        function collectAuthPayload(form, type) {
+            const emailInput = form.querySelector('input[type="email"]');
+            const passwordInput = form.querySelector('input[type="password"], input[id$="pass"]');
+            const roleCard = document.querySelector('.role-card.active span:last-child');
+            const fullName = document.getElementById('signup-name');
+            const institution = document.getElementById('signup-institution');
+            const email = emailInput ? String(emailInput.value || '').trim() : '';
+            const password = passwordInput ? String(passwordInput.value || '') : '';
+            return {
+                username: email,
+                email: email,
+                password: password,
+                password_confirm: password,
+                role: roleCard ? roleCard.textContent.trim().toLowerCase() : 'clinician',
+                full_name: fullName ? fullName.value.trim() : '',
+                institution: institution ? institution.value.trim() : '',
+                type: type
+            };
+        }
+
+        async function requestJson(path, body) {
+            const response = await fetch(`${NV_API_BASE}${path}`, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-store',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+            let payload = {};
+            try { payload = await response.json(); } catch (_) { payload = {}; }
+            if (!response.ok) {
+                const detail = payload && (payload.detail || payload.message || payload.error);
+                throw new Error(typeof detail === 'string' ? detail : `Request failed with HTTP ${response.status}`);
+            }
+            return payload;
+        }
+
+        async function authenticateWithGateway(type, payload) {
+            if (type === 'signup') {
+                await requestJson('/v1/auth/register', {
+                    username: payload.username,
+                    password: payload.password,
+                    roles: [payload.role]
+                });
+            }
+            return requestJson('/v1/auth/login', {
+                username: payload.username,
+                password: payload.password
+            });
+        }
+
+        async function handleAuth(event, type) {
+            event.preventDefault();
+            const submitBtn = document.getElementById(`${type}-submit`);
+            const originalContent = submitBtn.innerHTML;
+            const form = event.target;
+            const payload = collectAuthPayload(form, type);
+
+            hideError(type);
+            if (type === 'signup' && !checkStrength(payload.password)) {
+                showError(type, 'Password does not satisfy the institutional strength policy.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <div class="flex space-x-1">
+                    <div class="w-2 h-2 bg-on-primary rounded-full animate-bounce"></div>
+                    <div class="w-2 h-2 bg-on-primary rounded-full animate-bounce [animation-delay:-.3s]"></div>
+                    <div class="w-2 h-2 bg-on-primary rounded-full animate-bounce [animation-delay:-.5s]"></div>
+                </div>
+            `;
+
+            try {
+                const response = await authenticateWithGateway(type, payload);
+                const token = safeString(response && (response.token || response.access_token), '');
+                if (!token) throw new Error('Authentication gateway returned no session token.');
+                localStorage.setItem('nv_session', token);
+                localStorage.setItem('nv_session_role', payload.role);
+                localStorage.setItem('nv_session_user', payload.username);
+                showToast();
+                window.setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 1200);
+            } catch (error) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalContent;
+                showError(type, error.message || 'Authentication failed. Please verify your credentials.');
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+        }
+    </script>
+</body></html>

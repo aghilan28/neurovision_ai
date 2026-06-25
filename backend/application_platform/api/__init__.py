@@ -24,9 +24,10 @@ the real HTTP surface deterministically in tests + the verification script.
 from __future__ import annotations
 
 import base64
-from typing import Optional
+from typing import Any, Optional
 
 from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from pydantic import BaseModel, Field
 
@@ -63,6 +64,13 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
     app = FastAPI(title="NeuroVision Application API",
                   version=APPLICATION_PLATFORM_VERSION,
                   description="Real EEG upload -> prediction -> report product API (Track 3).")
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=False,
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["Accept", "Authorization", "Content-Type"],
+    )
 
     # DBE-5: install controlled authentication-failure handlers so an invalid token / an
     # authorization denial renders a 401/403 (never a stack-trace-leaking HTTP 500).
@@ -73,9 +81,29 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
 
     # --- health / status ----------------------------------------------------
     @app.get("/health")
-    def health():
-        return {"status": "ok", "service": "neurovision-application-api",
-                "version": APPLICATION_PLATFORM_VERSION, "api_version": API_V1}
+    def health(svc: ApplicationPlatformService = Depends(hub)):
+        """Return liveness plus model-readiness flags consumed by the auth portal.
+
+        The frontend polls this endpoint every five seconds. Values are explicitly
+        coerced to standard JSON primitives so telemetry widgets never receive
+        model/runtime objects or numpy-like scalar types.
+        """
+        model_info: dict[str, Any] = dict(getattr(svc, "_model_info", {}) or {})
+        backend = getattr(svc, "backend", None)
+        model_context = getattr(backend, "model_context", None) if backend is not None else None
+        model_ready = bool(model_info) or model_context is not None
+        architecture = str(model_info.get("architecture", "")).lower()
+        xgb_ready = model_ready and (not architecture or "xgb" in architecture or "xgboost" in architecture or bool(model_info.get("model_id")))
+        bilstm_ready = bool(model_info.get("bilstm_ready", False) or getattr(svc, "bilstm_ready", False))
+        return {
+            "status": "ok" if model_ready else "degraded",
+            "service": "neurovision-application-api",
+            "version": str(APPLICATION_PLATFORM_VERSION),
+            "api_version": str(API_V1),
+            "xgb_model_ready": bool(xgb_ready),
+            "bilstm_ready": bool(bilstm_ready),
+            "model_prepared": bool(model_ready),
+        }
 
     @app.get(f"/{API_V1}/dataset/status")
     def dataset_status(svc: ApplicationPlatformService = Depends(hub)):
