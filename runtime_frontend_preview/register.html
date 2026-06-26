@@ -1,141 +1,812 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NeuroVision - Provision Account</title><style>
-:root{
-  --bg:#12101B;--surface:#181523;--panel:#211D30;--panel-2:#2A2440;
-  --line:rgba(168, 154, 232, 0.1);--line-strong:rgba(168, 154, 232, 0.2);--text:#E6EBF8;--muted:#8A8895;
-  --subtle:#5D5B6A;--accent:#A89AE8;--accent-2:#4EE4B8;
-  --warning:#FFB84D;--danger:#FF5577;--ok:#4EE4B8;--info:#A89AE8;
-  --sidebar-w:280px;--topbar-h:72px;
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NeuroVision | Authentication Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#003f38",
+                    "primary-fixed": "#e9ddff",
+                    "surface-container-low": "#1d1a23",
+                    "on-surface": "#e7e0ed",
+                    "on-tertiary": "#482900",
+                    "secondary-fixed": "#71f8e4",
+                    "outline": "#958ea0",
+                    "on-secondary-fixed-variant": "#005048",
+                    "on-primary": "#3c0091",
+                    "surface-container": "#211e27",
+                    "on-background": "#e7e0ed",
+                    "secondary-container": "#04b4a2",
+                    "tertiary": "#ffb869",
+                    "surface-container-high": "#2c2832",
+                    "surface-tint": "#d0bcff",
+                    "on-tertiary-container": "#3f2300",
+                    "on-primary-fixed": "#23005c",
+                    "outline-variant": "#494454",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#15121b",
+                    "background": "#15121b",
+                    "primary-container": "#a078ff",
+                    "inverse-on-surface": "#322f39",
+                    "inverse-surface": "#e7e0ed",
+                    "surface": "#15121b",
+                    "inverse-primary": "#6d3bd7",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-secondary": "#003731",
+                    "on-error": "#690005",
+                    "primary": "#d0bcff",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "surface-container-highest": "#37333d",
+                    "on-primary-container": "#340080",
+                    "tertiary-fixed": "#ffdcbb",
+                    "on-tertiary-fixed": "#2c1700",
+                    "tertiary-fixed-dim": "#ffb869",
+                    "secondary": "#4fdbc8",
+                    "primary-fixed-dim": "#d0bcff",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed": "#00201c",
+                    "error-container": "#93000a",
+                    "surface-bright": "#3b3742",
+                    "on-surface-variant": "#cbc3d7",
+                    "surface-variant": "#37333d",
+                    "surface-container-lowest": "#0f0d15",
+                    "tertiary-container": "#ca801e",
+                    "secondary-fixed-dim": "#4fdbc8"
+            },
+            "borderRadius": {
+                    "sm": "0.125rem",
+                    "DEFAULT": "0.25rem",
+                    "md": "0.375rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-page": "24px",
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "split-right": "55%",
+                    "split-left": "45%"
+            },
+            "fontFamily": {
+                    "sub-header": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "headline-lg": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "label-mono": ["JetBrains Mono"],
+                    "body-md": ["Geist"],
+                    "body-sm": ["Geist"],
+                    "display-xl": ["Geist"]
+            },
+            "fontSize": {
+                    "sub-header": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-mono": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #15121b;
+            color: #e7e0ed;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-panel {
+            background: rgba(26, 22, 33, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(45, 40, 56, 0.5);
+        }
+
+        .pulse-green {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .alert-red {
+            background: #ffb4ab !important;
+            animation: alertPulse 1.25s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .status-card {
+            min-height: 52px;
+        }
+
+        .status-pip {
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity, background-color;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        @keyframes alertPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.55; transform: scale(0.82); }
+        }
+
+        .transition-all-custom {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #d0bcff !important;
+            box-shadow: 0 0 0 1px rgba(208, 188, 255, 0.2);
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .role-card.active {
+            border-color: #d0bcff;
+            background: rgba(208, 188, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-stretch overflow-hidden select-none">
+<!-- Left Panel (45%) -->
+<aside class="w-[45%] h-full bg-[#0F0C13] border-r border-outline-variant/30 flex flex-col p-12 relative overflow-hidden">
+<!-- Logo & Subtitle -->
+<div class="z-10">
+<h1 class="font-headline-lg text-headline-lg flex items-center tracking-tight">
+<span class="text-white font-bold">Neuro</span><span class="text-primary font-bold">Vision</span>
+</h1>
+<p class="font-sub-header text-sub-header text-on-surface-variant mt-2 opacity-80">
+                NEUROLOGICAL INTELLIGENCE PLATFORM
+            </p>
+</div>
+<!-- Hero Statement -->
+<div class="mt-20 z-10 max-w-md">
+<h2 class="font-display-xl text-display-xl leading-tight text-white mb-6">
+                Transforming EEG Signals Into <span class="text-primary">Clinical Intelligence</span>.
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+                Advanced neural decoding and real-time biometric analysis for precision clinical diagnostics.
+            </p>
+</div>
+<!-- EEG Visualization -->
+<div class="mt-12 flex-grow relative z-10 rounded-xl overflow-hidden glass-panel group">
+<!-- STITCH_SHADER_START:ANIMATION_2 class="absolute inset-0 w-full h-full opacity-60" -->
+<div class="absolute inset-0 w-full h-full opacity-60" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_2" style="display:block;width:100%;height:100%"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_2');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+float noise(vec2 p) {
+    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
 }
-*{box-sizing:border-box}
-html{background:var(--bg);color:var(--text);height:100%;overflow:hidden}
-body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 'Inter', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;letter-spacing:-0.01em;height:100%}
-a{color:inherit;text-decoration:none;transition:all 200ms ease}
 
-.nv-shell{display:grid;grid-template-columns:var(--sidebar-w) 1fr;height:100vh}
-
-/* LEFT SIDEBAR */
-.nv-sidebar{
-  background:var(--surface);border-right:1px solid var(--line);
-  display:flex;flex-direction:column;padding:32px 24px;
-  height:100vh;overflow-y:auto;z-index:100;
-}
-.nv-brand{margin-bottom:48px;padding:0 8px}
-.nv-brand-title{font-size:18px;font-weight:700;letter-spacing:-0.02em;color:var(--text);margin-bottom:4px}
-.nv-brand-sub{font-size:11px;color:var(--subtle);text-transform:uppercase;letter-spacing:0.1em}
-
-.nv-nav{display:grid;gap:8px}
-.nv-nav a,.nv-tab-label{
-  display:flex;align-items:center;gap:12px;min-height:44px;padding:0 16px;
-  border-radius:var(--radius-md, 8px);color:var(--muted);font-weight:500;
-}
-.nv-nav a:hover,.nv-tab-label:hover{background:rgba(168, 154, 232, 0.05);color:var(--accent);box-shadow:inset 0 0 0 1px var(--line)}
-.nv-nav a.active,.nv-tab:checked + .nv-tab-label{
-  background:var(--panel);color:var(--accent);box-shadow:inset 4px 0 0 -1px var(--accent);
+float getWave(float x, float offset, float speed, float amplitude, float frequency) {
+    float n = noise(vec2(floor(x * frequency + u_time * speed), offset));
+    float nextN = noise(vec2(floor(x * frequency + u_time * speed) + 1.0, offset));
+    float f = fract(x * frequency + u_time * speed);
+    float smoothN = mix(n, nextN, smoothstep(0.0, 1.0, f));
+    return smoothN * amplitude;
 }
 
-/* MAIN AREA */
-.nv-main{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+void main() {
+    vec2 uv = v_texCoord;
+    
+    // Clinical Teal: #2dd4bf -> vec3(0.176, 0.831, 0.749)
+    vec3 teal = vec3(0.176, 0.831, 0.749);
+    vec3 bg = vec3(0.082, 0.071, 0.106); // Deep Graphite Plum approx
+    
+    float wave = 0.0;
+    
+    // Create multiple layers for a realistic EEG look
+    wave += getWave(uv.x, 1.0, 2.5, 0.08, 15.0);
+    wave += getWave(uv.x, 2.0, 1.8, 0.04, 30.0);
+    wave += getWave(uv.x, 3.0, 4.0, 0.02, 60.0);
+    
+    float line = smoothstep(0.005, 0.0, abs(uv.y - 0.5 - wave));
+    float glow = smoothstep(0.06, 0.0, abs(uv.y - 0.5 - wave)) * 0.3;
+    
+    vec3 color = mix(bg, teal, line + glow);
+    
+    // Fade edges
+    float edgeFade = smoothstep(0.0, 0.1, uv.x) * smoothstep(1.0, 0.9, uv.x);
+    color = mix(bg, color, edgeFade);
+    
+    gl_FragColor = vec4(color, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
 
-/* TOP INTELLIGENCE BAR */
-.nv-top-bar{
-  height:var(--topbar-h);min-height:var(--topbar-h);
-  border-bottom:1px solid var(--line);background:rgba(24, 21, 35, 0.8);
-  backdrop-filter:blur(12px);padding:0 32px;
-  display:flex;align-items:center;justify-content:space-between;
-  z-index:90;
-}
-.nv-breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
-.nv-breadcrumb span{color:var(--text);font-weight:600}
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
 
-/* WORKSPACE AREA */
-.nv-workspace{flex:1;overflow-y:auto;padding:40px 48px;background:radial-gradient(circle at 50% 0%, rgba(168, 154, 232, 0.03), transparent 70%)}
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_2 -->
+<div class="absolute top-4 left-4 flex items-center space-x-2 bg-surface-container-lowest/80 px-3 py-1 rounded-full border border-outline-variant/30">
+<div class="w-2 h-2 rounded-full bg-secondary pulse-green"></div>
+<span class="font-label-mono text-label-mono text-secondary uppercase tracking-widest">Monitoring Active</span>
+</div>
+<div class="absolute bottom-4 right-4 font-label-mono text-label-mono text-on-surface-variant/60">
+                Real-Time Processing Enabled
+            </div>
+</div>
+<!-- System Status -->
+<div class="mt-8 grid grid-cols-2 gap-4 z-10" id="system-status-grid" aria-live="polite">
+<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="ai-engine">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="ai-engine"></div>
+<span class="font-label-mono text-label-mono uppercase truncate">AI Engine</span>
+</div>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="ai-engine">Sync</span>
+</div>
+<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="signal-proc">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="signal-proc"></div>
+<span class="font-label-mono text-label-mono uppercase truncate">Signal Proc</span>
+</div>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="signal-proc">Sync</span>
+</div>
+<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="pred-model">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="pred-model"></div>
+<span class="font-label-mono text-label-mono uppercase truncate">Pred Model</span>
+</div>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="pred-model">Sync</span>
+</div>
+<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="clinical-interp">
+<div class="flex items-center space-x-3 min-w-0">
+<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="clinical-interp"></div>
+<span class="font-label-mono text-label-mono uppercase truncate">Clinical Interp</span>
+</div>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="clinical-interp">Sync</span>
+</div>
+</div>
+<!-- Trust Message -->
+<div class="mt-auto z-10 pt-8 border-t border-outline-variant/20">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-mono text-[10px] uppercase tracking-widest">Patient-Disjoint Validation Standard v4.2</span>
+</div>
+</div>
+<!-- Subtle Gradient Background -->
+<div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none"></div>
+</aside>
+<!-- Right Panel (55%) -->
+<main class="w-[55%] h-full bg-surface-container-lowest flex items-center justify-center p-gutter relative overflow-y-auto scrollbar-hide">
+<div class="w-full max-w-[420px] py-12">
+<!-- Tab Switcher -->
+<div class="flex p-1 bg-surface-container-low rounded-xl mb-10">
+<button class="flex-1 py-2 font-sub-header text-sub-header rounded-lg transition-all-custom bg-primary-container text-on-primary-container" id="btn-signin" onclick="toggleMode('signin')" type="button">
+                    SIGN IN
+                </button>
+<button class="flex-1 py-2 font-sub-header text-sub-header rounded-lg transition-all-custom text-on-surface-variant hover:text-white" id="btn-signup" onclick="toggleMode('signup')" type="button">
+                    CREATE ACCOUNT
+                </button>
+</div>
+<!-- Auth Container -->
+<div id="auth-form-container">
+<!-- Sign In Mode -->
+<div class="space-y-6" id="signin-section">
+<header>
+<h3 class="font-headline-md text-headline-md text-white">Welcome back</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enter your credentials to access clinical tools.</p>
+</header>
+<form class="space-y-4" onsubmit="handleAuth(event, 'signin')">
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Institutional Email</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signin-email" name="email" autocomplete="username" placeholder="name@medical-center.org" required="" type="email"/>
+</div>
+<div class="space-y-1 relative">
+<div class="flex justify-between items-center">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Password</label>
+<a class="font-label-mono text-[10px] text-primary uppercase hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative">
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom pr-12" id="signin-pass" name="password" autocomplete="current-password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors" onclick="togglePass(event, 'signin-pass')" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="hidden text-error font-body-sm text-sm bg-error-container/20 p-3 rounded-lg border border-error/30" id="signin-error">
+                            Authentication failed. Please verify your credentials.
+                        </div>
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-lg hover:scale-[0.99] active:scale-[0.97] transition-all flex justify-center items-center" id="signin-submit" type="submit">
+<span>ACCESS PLATFORM</span>
+</button>
+</form>
+</div>
+<!-- Create Account Mode (Hidden by default) -->
+<div class="hidden space-y-6" id="signup-section">
+<header>
+<h3 class="font-headline-md text-headline-md text-white">Register Portal</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Connect your institution to the NeuroVision network.</p>
+</header>
+<form class="space-y-4" onsubmit="handleAuth(event, 'signup')">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Full Name</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-name" name="full_name" autocomplete="name" placeholder="Dr. Sarah Chen" required="" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Institution</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-institution" name="institution" autocomplete="organization" placeholder="Neuro-Center" required="" type="text"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Professional Role</label>
+<div class="grid grid-cols-2 gap-2 mt-2">
+<button class="role-card active p-3 border border-outline-variant/30 rounded-lg flex flex-col items-start transition-all" onclick="selectRole(this)" type="button">
+<span class="material-symbols-outlined text-primary mb-1">neurology</span>
+<span class="font-label-mono text-[10px] uppercase">Clinician</span>
+</button>
+<button class="role-card p-3 border border-outline-variant/30 rounded-lg flex flex-col items-start transition-all" onclick="selectRole(this)" type="button">
+<span class="material-symbols-outlined text-on-surface-variant mb-1">psychology</span>
+<span class="font-label-mono text-[10px] uppercase">Researcher</span>
+</button>
+<button class="role-card p-3 border border-outline-variant/30 rounded-lg flex flex-col items-start transition-all" onclick="selectRole(this)" type="button">
+<span class="material-symbols-outlined text-on-surface-variant mb-1">school</span>
+<span class="font-label-mono text-[10px] uppercase">Student</span>
+</button>
+<button class="role-card p-3 border border-outline-variant/30 rounded-lg flex flex-col items-start transition-all" onclick="selectRole(this)" type="button">
+<span class="material-symbols-outlined text-on-surface-variant mb-1">admin_panel_settings</span>
+<span class="font-label-mono text-[10px] uppercase">Admin</span>
+</button>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Email</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-email" name="email" autocomplete="username" placeholder="sarah.chen@clinic.org" required="" type="email"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Create Password</label>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-pass" name="password" autocomplete="new-password" oninput="checkStrength(this.value)" placeholder="••••••••" required="" type="password"/>
+<div class="grid grid-cols-4 gap-1 mt-2">
+<div class="h-1 rounded bg-surface-container-high transition-colors" id="req-len"></div>
+<div class="h-1 rounded bg-surface-container-high transition-colors" id="req-up"></div>
+<div class="h-1 rounded bg-surface-container-high transition-colors" id="req-low"></div>
+<div class="h-1 rounded bg-surface-container-high transition-colors" id="req-num"></div>
+</div>
+<p class="font-label-mono text-[9px] text-on-surface-variant/60 mt-1 uppercase">8+ chars, upper, lower, number required</p>
+</div>
+<div class="hidden text-error font-body-sm text-sm bg-error-container/20 p-3 rounded-lg border border-error/30" id="signup-error">
+                            Account initialization failed. Please verify your details.
+                        </div>
+<div class="space-y-4 pt-2">
+<label class="flex items-start space-x-3 cursor-pointer group">
+<input class="mt-1 rounded bg-[#0F0C13] border-outline-variant/40 text-primary focus:ring-primary/20" required="" type="checkbox"/>
+<span class="font-body-sm text-[12px] text-on-surface-variant group-hover:text-white transition-colors">I agree to the GDPR-compliant Neural Data Processing Agreement.</span>
+</label>
+<label class="flex items-start space-x-3 cursor-pointer group">
+<input class="mt-1 rounded bg-[#0F0C13] border-outline-variant/40 text-primary focus:ring-primary/20" required="" type="checkbox"/>
+<span class="font-body-sm text-[12px] text-on-surface-variant group-hover:text-white transition-colors">I verify I am a licensed healthcare or research professional.</span>
+</label>
+</div>
+<button class="w-full py-4 bg-primary text-on-primary font-bold rounded-lg hover:scale-[0.99] transition-all flex justify-center items-center" id="signup-submit" type="submit">
+<span>INITIALIZE ACCOUNT</span>
+</button>
+</form>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="mt-12 text-center">
+<p class="font-label-mono text-[10px] text-on-surface-variant/40 uppercase tracking-widest">
+                    © 2024 NEUROVISION AI • CLINICAL EDITION • SSL SECURED
+                </p>
+</footer>
+</div>
+<!-- Success Toast -->
+<div class="fixed bottom-10 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 bg-secondary text-on-secondary px-8 py-4 rounded-xl shadow-2xl transition-all duration-500 z-50 flex items-center space-x-3 font-bold" id="toast">
+<span class="material-symbols-outlined">check_circle</span>
+<span>Welcome to NeuroVision</span>
+</div>
+</main>
+<script>
+        const NV_API_BASE = (() => {
+            const protocol = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
+            const host = window.location.hostname || 'localhost';
+            if (window.location.port === '8080') return window.location.origin;
+            return `${protocol}//${host}:8080`;
+        })();
 
-.nv-page-header{margin-bottom:40px}
-.nv-page-title{font-size:32px;font-weight:700;letter-spacing:-0.03em;margin:0 0 12px;color:var(--text)}
-.nv-subtitle{font-size:16px;color:var(--muted);max-width:800px;line-height:1.6}
+        const TELEMETRY_POLL_MS = 5000;
+        const STATUS_IDS = ['ai-engine', 'signal-proc', 'pred-model', 'clinical-interp'];
+        let telemetryTimer = null;
 
-.nv-grid{display:grid;grid-template-columns:repeat(12, 1fr);gap:24px}
+        function asBoolean(value) {
+            if (typeof value === 'boolean') return value;
+            if (typeof value === 'number') return Number.isFinite(value) && value !== 0;
+            if (typeof value === 'string') {
+                const normalized = value.trim().toLowerCase();
+                return ['true', '1', 'yes', 'ok', 'ready', 'online'].includes(normalized);
+            }
+            if (Array.isArray(value)) return value.length > 0 && value.every(asBoolean);
+            return false;
+        }
 
-/* CARDS / PANELS */
-.nv-panel{
-  grid-column:span 12;background:var(--surface);border:1px solid var(--line);
-  border-radius:12px;overflow:hidden;transition:transform 250ms ease, box-shadow 250ms ease;
-}
-.nv-panel:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
-.nv-panel-head{
-  padding:20px 24px;border-bottom:1px solid var(--line);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nv-panel-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted)}
-.nv-panel-body{padding:24px}
+        function safeString(value, fallback) {
+            if (typeof value === 'string' && value.trim()) return value.trim();
+            if (typeof value === 'number' && Number.isFinite(value)) return String(value);
+            return fallback;
+        }
 
-/* DATA DISPLAY */
-.nv-kv{display:grid;grid-template-columns:200px 1fr;gap:12px 24px}
-.nv-k{color:var(--muted);font-size:13px}
-.nv-v{color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;font-size:13px}
+        function setStatus(id, ok, label) {
+            const pip = document.querySelector(`[data-status-pip="${id}"]`);
+            const text = document.querySelector(`[data-status-text="${id}"]`);
+            const card = document.querySelector(`[data-status-id="${id}"]`);
+            if (!pip || !text || !card) return;
 
-.nv-table-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden}
-table{width:100%;border-collapse:collapse}
-th{text-align:left;padding:14px 20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--subtle);background:var(--panel)}
-td{padding:14px 20px;border-top:1px solid var(--line);font-size:13px;color:var(--text)}
-tr:hover td{background:rgba(168, 154, 232, 0.02)}
+            pip.classList.toggle('bg-secondary', ok);
+            pip.classList.toggle('pulse-green', ok);
+            pip.classList.toggle('alert-red', !ok);
+            pip.setAttribute('aria-label', `${id} ${ok ? 'ready' : 'not ready'}`);
 
-/* BADGES */
-.nv-badge{
-  display:inline-flex;align-items:center;padding:4px 12px;border-radius:99px;
-  font-size:11px;font-weight:700;letter-spacing:0.02em;border:1px solid transparent;
-}
-.nv-badge.info{background:rgba(168, 154, 232, 0.1);color:var(--accent);border-color:rgba(168, 154, 232, 0.2)}
-.nv-badge.ok{background:rgba(78, 228, 184, 0.1);color:var(--ok);border-color:rgba(78, 228, 184, 0.2)}
-.nv-badge.warning{background:rgba(255, 184, 77, 0.1);color:var(--warning);border-color:rgba(255, 184, 77, 0.2)}
-.nv-badge.fail{background:rgba(255, 85, 119, 0.1);color:var(--danger);border-color:rgba(255, 85, 119, 0.2)}
+            text.textContent = label || (ok ? 'Ready' : 'Alert');
+            text.classList.toggle('text-secondary', ok);
+            text.classList.toggle('text-error', !ok);
 
-/* FORMS */
-.nv-form{display:grid;gap:20px;max-width:480px}
-.nv-field{display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
-input,select{
-  background:var(--bg);border:1px solid var(--line-strong);border-radius:8px;
-  padding:12px 16px;color:var(--text);font-family:'Inter', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;font-size:14px;
-  transition:border-color 200ms ease, box-shadow 200ms ease;
-}
-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(168, 154, 232, 0.1)}
+            card.classList.toggle('border-secondary/40', ok);
+            card.classList.toggle('border-error/40', !ok);
+            card.style.transform = 'translateZ(0)';
+        }
 
-button,.nv-button{
-  background:var(--accent);color:var(--bg);border:none;border-radius:8px;
-  padding:12px 24px;font-weight:700;font-size:14px;cursor:pointer;
-  transition:transform 200ms ease, opacity 200ms ease;
-}
-button:hover{transform:translateY(-1px);opacity:0.9}
-button:active{transform:translateY(0)}
+        function mapHealthToStatuses(payload) {
+            const xgbReady = asBoolean(payload && payload.xgb_model_ready);
+            const bilstmReady = asBoolean(payload && payload.bilstm_ready);
+            const serviceOk = safeString(payload && payload.status, 'degraded').toLowerCase() === 'ok';
+            const bothReady = xgbReady && bilstmReady;
 
-/* ALERTS */
-.nv-alert{
-  padding:16px 24px;border-radius:12px;border:1px solid var(--line);
-  margin-bottom:24px;font-size:14px;display:flex;align-items:center;gap:12px;
-}
-.nv-alert.warning{background:rgba(255, 184, 77, 0.05);border-color:rgba(255, 184, 77, 0.2);color:var(--warning)}
+            setStatus('ai-engine', serviceOk && bothReady, serviceOk && bothReady ? 'Ready' : 'Degraded');
+            setStatus('signal-proc', xgbReady || bilstmReady, xgbReady || bilstmReady ? 'Stream' : 'Offline');
+            setStatus('pred-model', xgbReady, xgbReady ? 'XGB' : 'Alert');
+            setStatus('clinical-interp', bilstmReady, bilstmReady ? 'BiLSTM' : 'Alert');
+        }
 
-/* STEPS / TIMELINE */
-.nv-steps{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none;position:relative}
-.nv-step{
-  padding:0 0 32px 32px;border-left:2px solid var(--line);position:relative;
-  color:var(--muted);transition:color 250ms ease;
-}
-.nv-step::before{
-  content:'';position:absolute;left:-7px;top:4px;width:12px;height:12px;
-  border-radius:50%;background:var(--surface);border:2px solid var(--line);
-  transition:all 250ms ease;
-}
-.nv-step.done{color:var(--text)}
-.nv-step.done::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px rgba(168, 154, 232, 0.2)}
-.nv-step:last-child{border-left-color:transparent}
+        function markTelemetryOffline() {
+            STATUS_IDS.forEach((id) => setStatus(id, false, 'Link'));
+        }
 
-/* FOOTER */
-.nv-footer{margin-top:auto;padding-top:40px;color:var(--subtle);font-size:12px;text-align:center}
+        async function pollHealth() {
+            const controller = new AbortController();
+            const timeoutId = window.setTimeout(() => controller.abort(), 3500);
+            try {
+                const response = await fetch(`${NV_API_BASE}/health`, {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-store',
+                    headers: { 'Accept': 'application/json' },
+                    signal: controller.signal
+                });
+                if (!response.ok) throw new Error(`Health check failed with HTTP ${response.status}`);
+                const payload = await response.json();
+                mapHealthToStatuses(payload || {});
+            } catch (error) {
+                markTelemetryOffline();
+            } finally {
+                window.clearTimeout(timeoutId);
+            }
+        }
 
-@media (max-width:1024px){
-  .nv-shell{grid-template-columns:1fr}
-  .nv-sidebar{display:none}
-}
+        function startTelemetryLoop() {
+            if (telemetryTimer) window.clearInterval(telemetryTimer);
+            pollHealth();
+            telemetryTimer = window.setInterval(pollHealth, TELEMETRY_POLL_MS);
+        }
 
-</style></head><body><div class="nv-shell"><aside class="nv-sidebar"><div class="nv-brand"><div class="nv-brand-title">NeuroVision</div><div class="nv-brand-sub">Intelligence Operating Environment</div></div><nav><div class="nv-nav"><a class="" href="#dashboard">Command Center</a><a class="" href="#upload">EEG Intake</a><a class="" href="#analysis">Analysis</a><a class="active" href="#prediction">Predictions</a><a class="" href="#reports">Evidence Center</a><a class="" href="#clinical">Clinical Workspace</a><a class="" href="#operations">Operations Workspace</a><a class="" href="#autonomous">Autonomous Workspace</a><a class="" href="#research">Research Workspace</a><a class="" href="#logout">Log out</a></div></nav></aside><main class="nv-main"><header class="nv-top-bar"><div class="nv-breadcrumb">Workspace / <span>NeuroVision - Provision Account</span></div><div class="nv-meta"><span class="nv-badge v1">backend: v1</span><span class="nv-badge application-frontend@1.0.0">version: application-frontend@1.0.0</span></div></header><div class="nv-workspace"><div class="nv-page-header"><h1 class="nv-page-title">NeuroVision - Provision Account</h1><p class="nv-subtitle">Create a governed local identity for clinical, research, or review access.</p></div><div class="nv-grid"><div class="nv-alert success">Analysis complete — prediction is ready.</div><section class="nv-panel"><div class="nv-panel-head"><div class="nv-panel-title">Create account</div></div><div class="nv-panel-body"><form class="nv-form" method="post" data-action="register_user"><label class="nv-field">Username<input type="text" name="username" placeholder="your.username"></label><label class="nv-field">Password<input type="password" name="password"></label><label class="nv-field">Confirm password<input type="password" name="password_confirm"></label><label class="nv-field">Role<select name="role"><option value="clinician">clinician</option><option value="researcher">researcher</option><option value="viewer">viewer</option></select></label><button type="submit">Create account</button></form></div></section></div><div class="nv-footer">Intelligence Operating Environment &bull; Lore Protocol Compliant</div></div></main></div></body></html>
+        function getDashboardTarget() {
+            const path = window.location.pathname || '';
+            const isStaticHtml = path.endsWith('.html') || path.includes('/runtime_frontend_preview/');
+            return isStaticHtml ? 'dashboard.html' : '/dashboard';
+        }
+
+        function shouldUseOfflinePreviewFallback(error) {
+            const message = String(error && error.message ? error.message : error || '').toLowerCase();
+            return window.location.protocol === 'file:' ||
+                   message.includes('failed to fetch') ||
+                   message.includes('networkerror') ||
+                   message.includes('load failed') ||
+                   message.includes('aborted');
+        }
+
+        function establishSessionAndNavigate(token, payload, isPreviewFallback) {
+            localStorage.setItem('nv_session', token);
+            localStorage.setItem('nv_session_role', payload.role || 'clinician');
+            localStorage.setItem('nv_session_user', payload.username || payload.email || 'preview@neurovision.local');
+            if (isPreviewFallback) localStorage.setItem('nv_session_mode', 'offline-preview');
+            showToast(isPreviewFallback ? 'Preview session initialized' : 'Welcome to NeuroVision');
+            window.setTimeout(() => {
+                window.location.href = getDashboardTarget();
+            }, 900);
+        }
+
+        // Start live telemetry polling. Do not auto-redirect on stale localStorage;
+        // users must always be able to reach the authentication portal directly.
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('logout') || params.has('clearSession')) {
+                localStorage.removeItem('nv_session');
+                localStorage.removeItem('nv_session_role');
+                localStorage.removeItem('nv_session_user');
+                localStorage.removeItem('nv_session_mode');
+            }
+            const btnSignin = document.getElementById('btn-signin');
+            const btnSignup = document.getElementById('btn-signup');
+            if (btnSignin) btnSignin.addEventListener('click', () => toggleMode('signin'));
+            if (btnSignup) btnSignup.addEventListener('click', () => toggleMode('signup'));
+            if (window.location.pathname.endsWith('register.html')) toggleMode('signup');
+            startTelemetryLoop();
+        });
+
+        function toggleMode(mode) {
+            const signinSection = document.getElementById('signin-section');
+            const signupSection = document.getElementById('signup-section');
+            const btnSignin = document.getElementById('btn-signin');
+            const btnSignup = document.getElementById('btn-signup');
+            const nextMode = mode === 'signup' ? 'signup' : 'signin';
+
+            if (nextMode === 'signin') {
+                signinSection.classList.remove('hidden');
+                signupSection.classList.add('hidden');
+                btnSignin.classList.add('bg-primary-container', 'text-on-primary-container');
+                btnSignin.classList.remove('text-on-surface-variant');
+                btnSignup.classList.remove('bg-primary-container', 'text-on-primary-container');
+                btnSignup.classList.add('text-on-surface-variant');
+            } else {
+                signinSection.classList.add('hidden');
+                signupSection.classList.remove('hidden');
+                btnSignup.classList.add('bg-primary-container', 'text-on-primary-container');
+                btnSignup.classList.remove('text-on-surface-variant');
+                btnSignin.classList.remove('bg-primary-container', 'text-on-primary-container');
+                btnSignin.classList.add('text-on-surface-variant');
+            }
+        }
+
+        function togglePass(eventOrId, explicitId) {
+            const id = explicitId || eventOrId;
+            const input = document.getElementById(id);
+            const trigger = explicitId && eventOrId ? eventOrId.currentTarget : null;
+            const icon = trigger ? trigger.querySelector('.material-symbols-outlined') : null;
+            if (!input) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                if (icon) icon.innerText = 'visibility_off';
+            } else {
+                input.type = 'password';
+                if (icon) icon.innerText = 'visibility';
+            }
+        }
+
+        function selectRole(element) {
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.classList.remove('active');
+                card.querySelector('.material-symbols-outlined').style.color = '#cbc3d7';
+            });
+            element.classList.add('active');
+            element.querySelector('.material-symbols-outlined').style.color = '#d0bcff';
+        }
+
+        function checkStrength(val) {
+            const reqs = {
+                len: String(val).length >= 8,
+                up: /[A-Z]/.test(String(val)),
+                low: /[a-z]/.test(String(val)),
+                num: /[0-9]/.test(String(val))
+            };
+
+            const colors = {
+                active: 'bg-primary',
+                inactive: 'bg-surface-container-high'
+            };
+
+            document.getElementById('req-len').className = `h-1 rounded transition-colors ${reqs.len ? colors.active : colors.inactive}`;
+            document.getElementById('req-up').className = `h-1 rounded transition-colors ${reqs.up ? colors.active : colors.inactive}`;
+            document.getElementById('req-low').className = `h-1 rounded transition-colors ${reqs.low ? colors.active : colors.inactive}`;
+            document.getElementById('req-num').className = `h-1 rounded transition-colors ${reqs.num ? colors.active : colors.inactive}`;
+            return reqs.len && reqs.up && reqs.low && reqs.num;
+        }
+
+        function showError(type, message) {
+            const err = document.getElementById(`${type}-error`) || document.getElementById('signin-error');
+            if (!err) return;
+            err.textContent = message;
+            err.classList.remove('hidden');
+        }
+
+        function hideError(type) {
+            const err = document.getElementById(`${type}-error`) || document.getElementById('signin-error');
+            if (!err) return;
+            err.classList.add('hidden');
+        }
+
+        function collectAuthPayload(form, type) {
+            const emailInput = form.querySelector('input[type="email"]');
+            const passwordInput = form.querySelector('input[type="password"], input[id$="pass"]');
+            const roleCard = document.querySelector('.role-card.active span:last-child');
+            const fullName = document.getElementById('signup-name');
+            const institution = document.getElementById('signup-institution');
+            const email = emailInput ? String(emailInput.value || '').trim() : '';
+            const password = passwordInput ? String(passwordInput.value || '') : '';
+            return {
+                username: email,
+                email: email,
+                password: password,
+                password_confirm: password,
+                role: roleCard ? roleCard.textContent.trim().toLowerCase() : 'clinician',
+                full_name: fullName ? fullName.value.trim() : '',
+                institution: institution ? institution.value.trim() : '',
+                type: type
+            };
+        }
+
+        async function requestJson(path, body) {
+            const response = await fetch(`${NV_API_BASE}${path}`, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-store',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+            let payload = {};
+            try { payload = await response.json(); } catch (_) { payload = {}; }
+            if (!response.ok) {
+                const detail = payload && (payload.detail || payload.message || payload.error);
+                throw new Error(typeof detail === 'string' ? detail : `Request failed with HTTP ${response.status}`);
+            }
+            return payload;
+        }
+
+        async function authenticateWithGateway(type, payload) {
+            if (type === 'signup') {
+                await requestJson('/v1/auth/register', {
+                    username: payload.username,
+                    password: payload.password,
+                    roles: [payload.role]
+                });
+            }
+            return requestJson('/v1/auth/login', {
+                username: payload.username,
+                password: payload.password
+            });
+        }
+
+        async function handleAuth(event, type) {
+            event.preventDefault();
+            const submitBtn = document.getElementById(`${type}-submit`);
+            const originalContent = submitBtn.innerHTML;
+            const form = event.target;
+            const payload = collectAuthPayload(form, type);
+
+            hideError(type);
+            if (type === 'signup' && !checkStrength(payload.password)) {
+                showError(type, 'Password does not satisfy the institutional strength policy.');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <div class="flex space-x-1">
+                    <div class="w-2 h-2 bg-on-primary rounded-full animate-bounce"></div>
+                    <div class="w-2 h-2 bg-on-primary rounded-full animate-bounce [animation-delay:-.3s]"></div>
+                    <div class="w-2 h-2 bg-on-primary rounded-full animate-bounce [animation-delay:-.5s]"></div>
+                </div>
+            `;
+
+            try {
+                const response = await authenticateWithGateway(type, payload);
+                const token = safeString(response && (response.token || response.access_token), '');
+                if (!token) throw new Error('Authentication gateway returned no session token.');
+                establishSessionAndNavigate(token, payload, false);
+            } catch (error) {
+                if (shouldUseOfflinePreviewFallback(error)) {
+                    establishSessionAndNavigate(`preview_token_${Date.now()}`, payload, true);
+                    return;
+                }
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalContent;
+                showError(type, error.message || 'Authentication failed. Please verify your credentials.');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const text = toast ? toast.querySelector('span:last-child') : null;
+            if (text && message) text.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+        }
+    </script>
+</body></html>

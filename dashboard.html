@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NeuroVision | Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = { darkMode:"class", theme:{ extend:{
+    colors:{ background:"#15121b",surface:"#15121b","surface-dim":"#15121b","surface-container-low":"#1d1a23","surface-container":"#211e27","surface-container-high":"#2c2832","surface-container-highest":"#37333d","on-surface":"#e7e0ed","on-background":"#e7e0ed","on-surface-variant":"#cbc3d7",outline:"#958ea0","outline-variant":"#494454",primary:"#d0bcff","primary-container":"#a078ff","on-primary":"#3c0091","on-primary-container":"#340080",secondary:"#4fdbc8","secondary-container":"#04b4a2",tertiary:"#ffb869",error:"#ffb4ab" },
+    fontFamily:{ sans:["Geist","sans-serif"], mono:["JetBrains Mono","monospace"] }
+  }}};
+</script>
+<style>
+  body{font-family:"Geist",sans-serif;background:#15121b;color:#e7e0ed}
+  .material-symbols-outlined{font-family:"Material Symbols Outlined";font-style:normal;line-height:1;-webkit-font-smoothing:antialiased;display:inline-block}
+  .glass{background:rgba(33,30,39,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .btn-primary{background:#a078ff;color:#fff}.btn-primary:hover{background:#b18fff}
+  .pulse-dot{box-shadow:0 0 0 0 rgba(79,219,200,.6);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(79,219,200,.6)}70%{box-shadow:0 0 0 8px rgba(79,219,200,0)}100%{box-shadow:0 0 0 0 rgba(79,219,200,0)}}
+  .stage.done .stage-icon{background:rgba(79,219,200,.15);color:#4fdbc8}
+  .stage.active .stage-icon{background:rgba(160,120,255,.18);color:#d0bcff}
+  .scrollbar-hide::-webkit-scrollbar{display:none}.scrollbar-hide{scrollbar-width:none}
+</style>
+</head>
+<body class="min-h-screen">
+<header class="sticky top-0 z-40 glass border-b border-outline-variant/20">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <span class="material-symbols-outlined text-primary text-[24px]">insights</span>
+      <span class="font-semibold tracking-tight">NeuroVision</span>
+      <span class="text-[10px] font-mono uppercase tracking-widest text-on-surface-variant/60 border border-outline-variant/30 rounded px-1.5 py-0.5 ml-1">Command Center</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <div id="user-badge" class="hidden sm:flex items-center gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px]">account_circle</span><span id="user-name">clinician</span></div>
+      <a href="/" class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-all"><span class="material-symbols-outlined text-[18px]">home</span> Home</a>
+      <button onclick="signOut()" class="inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg border border-outline-variant/40 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all"><span class="material-symbols-outlined text-[18px]">logout</span> Sign out</button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 py-10">
+  <section class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+    <div>
+      <h1 class="text-3xl font-semibold tracking-tight">Welcome back, <span id="welcome-name" class="text-primary">clinician</span></h1>
+      <p class="text-on-surface-variant mt-2">Run a complete, auditable EEG analysis — from upload to evidence.</p>
+    </div>
+    <div id="health-card" class="glass rounded-xl border border-outline-variant/20 px-5 py-4 flex items-center gap-3">
+      <span id="health-dot" class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+      <div><div class="text-xs font-mono uppercase tracking-widest text-on-surface-variant/70">Platform</div><div id="health-text" class="text-sm font-medium">Connecting…</div></div>
+    </div>
+  </section>
+
+  <div class="grid lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2 space-y-6">
+      <div class="glass rounded-2xl border border-outline-variant/20 p-6">
+        <div class="flex items-center justify-between mb-5"><h2 class="font-semibold">Analysis Pipeline</h2><span id="analysis-id" class="hidden text-[11px] font-mono text-on-surface-variant/60"></span></div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="stage" id="stage-upload"><div class="flex items-center gap-2"><span class="stage-icon w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">upload</span></span><span class="text-sm">Upload</span></div></div>
+          <div class="stage" id="stage-analyze"><div class="flex items-center gap-2"><span class="stage-icon w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">neurology</span></span><span class="text-sm">Analyze</span></div></div>
+          <div class="stage" id="stage-predict"><div class="flex items-center gap-2"><span class="stage-icon w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">insights</span></span><span class="text-sm">Predict</span></div></div>
+          <div class="stage" id="stage-report"><div class="flex items-center gap-2"><span class="stage-icon w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">description</span></span><span class="text-sm">Report</span></div></div>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl border border-outline-variant/20 p-6">
+        <h2 class="font-semibold mb-1">EEG Intake</h2>
+        <p class="text-sm text-on-surface-variant mb-5">Select a real EDF recording to validate, analyze, and generate an evidence bundle.</p>
+        <label class="flex flex-col items-center justify-center gap-3 border-2 border-dashed border-outline-variant/40 rounded-xl py-8 cursor-pointer hover:border-primary/50 transition-colors">
+          <span class="material-symbols-outlined text-[34px] text-on-surface-variant">cloud_upload</span>
+          <span class="text-sm text-on-surface-variant"><span id="file-name" class="text-primary font-medium">Choose an EDF file</span> or drop it here</span>
+          <input id="eeg-file" type="file" accept=".edf,.bdf,.csv,.txt" class="hidden"/>
+        </label>
+        <button id="run-btn" onclick="runAnalysis()" disabled class="btn-primary w-full mt-5 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed transition-all hover:scale-[1.01] active:scale-95"><span class="material-symbols-outlined">play_arrow</span> Run Analysis</button>
+        <div id="run-error" class="hidden mt-3 text-sm text-error bg-error/10 border border-error/30 rounded-lg p-3"></div>
+      </div>
+
+      <div id="result-card" class="hidden glass rounded-2xl border border-outline-variant/20 p-6">
+        <div class="flex items-center justify-between mb-4"><h2 class="font-semibold">Prediction Review</h2><a id="report-link" href="#" target="_blank" class="text-sm text-secondary inline-flex items-center gap-1 hover:underline">Open report <span class="material-symbols-outlined text-[16px]">open_in_new</span></a></div>
+        <div class="grid sm:grid-cols-3 gap-4">
+          <div class="bg-surface-container-low rounded-xl p-4"><div class="text-xs font-mono uppercase tracking-widest text-on-surface-variant/70">Prediction</div><div id="r-label" class="text-xl font-semibold mt-2">—</div></div>
+          <div class="bg-surface-container-low rounded-xl p-4"><div class="text-xs font-mono uppercase tracking-widest text-on-surface-variant/70">Confidence</div><div id="r-conf" class="text-xl font-semibold mt-2">—</div></div>
+          <div class="bg-surface-container-low rounded-xl p-4"><div class="text-xs font-mono uppercase tracking-widest text-on-surface-variant/70">Readiness</div><div id="r-ready" class="text-xl font-semibold mt-2">—</div></div>
+        </div>
+        <pre id="r-evidence" class="mt-4 text-xs font-mono text-on-surface-variant bg-surface-dim rounded-lg p-4 overflow-x-auto scrollbar-hide"></pre>
+      </div>
+    </div>
+
+    <aside class="space-y-6">
+      <div class="glass rounded-2xl border border-outline-variant/20 p-6">
+        <h3 class="font-semibold mb-4">Quick Actions</h3>
+        <div class="space-y-2 text-sm">
+          <a href="#" onclick="newAnalysis();return false;" class="flex items-center gap-2 text-on-surface-variant hover:text-on-surface py-2"><span class="material-symbols-outlined text-[18px] text-primary">add</span> New analysis</a>
+          <a href="/docs" target="_blank" class="flex items-center gap-2 text-on-surface-variant hover:text-on-surface py-2"><span class="material-symbols-outlined text-[18px] text-tertiary">menu_book</span> API docs</a>
+        </div>
+      </div>
+      <div class="glass rounded-2xl border border-outline-variant/20 p-6">
+        <h3 class="font-semibold mb-3">Principles</h3>
+        <ul class="space-y-2.5 text-sm text-on-surface-variant">
+          <li class="flex items-start gap-2"><span class="material-symbols-outlined text-secondary text-[16px] mt-0.5">check</span>Faithful uncertainty</li>
+          <li class="flex items-start gap-2"><span class="material-symbols-outlined text-secondary text-[16px] mt-0.5">check</span>Deterministic pipeline</li>
+          <li class="flex items-start gap-2"><span class="material-symbols-outlined text-secondary text-[16px] mt-0.5">check</span>Auditable lineage</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script>
+  const TOKEN = localStorage.getItem("nv_session");
+  const USER = localStorage.getItem("nv_session_user") || "clinician";
+  if (!TOKEN) { window.location.replace("/login"); }
+  document.getElementById("welcome-name").textContent = USER;
+  document.getElementById("user-name").textContent = USER;
+  document.getElementById("user-badge").classList.remove("hidden");
+
+  function apiBase(){const p=window.location.protocol==="file:"?"http:":window.location.protocol;const h=window.location.hostname||"localhost";const port=window.location.port?":"+window.location.port:"";return p+"//"+h+port;}
+  function authHeaders(){return{"Authorization":"Bearer "+(TOKEN||""),"Content-Type":"application/json"};}
+  function signOut(){localStorage.removeItem("nv_session");localStorage.removeItem("nv_session_role");localStorage.removeItem("nv_session_user");window.location.href="/";}
+
+  async function pollHealth(){
+    const dot=document.getElementById("health-dot");const txt=document.getElementById("health-text");
+    try{const res=await fetch(apiBase()+"/health",{cache:"no-store"});const d=await res.json();const ok=d.status==="ok";txt.textContent=ok?"Operational":"Degraded";dot.className="w-2.5 h-2.5 rounded-full "+(ok?"bg-secondary pulse-dot":"bg-error");}
+    catch(e){txt.textContent="Offline";dot.className="w-2.5 h-2.5 rounded-full bg-error";}
+  }
+  pollHealth();setInterval(pollHealth,5000);
+
+  const fileInput=document.getElementById("eeg-file");const runBtn=document.getElementById("run-btn");
+  fileInput.addEventListener("change",()=>{const f=fileInput.files[0];document.getElementById("file-name").textContent=f?f.name:"Choose an EDF file";runBtn.disabled=!f;});
+  function setStage(name,state){const el=document.getElementById("stage-"+name);if(!el)return;el.classList.remove("active","done");if(state)el.classList.add(state);}
+  function resetStages(){["upload","analyze","predict","report"].forEach(s=>setStage(s,null));}
+  function newAnalysis(){fileInput.value="";document.getElementById("file-name").textContent="Choose an EDF file";runBtn.disabled=true;document.getElementById("result-card").classList.add("hidden");document.getElementById("analysis-id").classList.add("hidden");resetStages();}
+  function showError(msg){const e=document.getElementById("run-error");e.textContent=msg;e.classList.remove("hidden");}
+  function clearError(){document.getElementById("run-error").classList.add("hidden");}
+  function toBase64(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const bin=r.result;let s="";const bytes=new Uint8Array(bin);const chunk=0x8000;for(let i=0;i<bytes.length;i+=chunk){s+=String.fromCharCode.apply(null,bytes.subarray(i,i+chunk));}resolve(btoa(s));};r.onerror=reject;r.readAsArrayBuffer(file);});}
+
+  async function runAnalysis(){
+    clearError();const file=fileInput.files[0];if(!file)return;
+    runBtn.disabled=true;runBtn.innerHTML='<span class="material-symbols-outlined">progress_activity</span> Processing…';resetStages();setStage("upload","active");
+    try{
+      const b64=await toBase64(file);setStage("upload","done");setStage("analyze","active");
+      const resp=await fetch(apiBase()+"/v1/uploads",{method:"POST",headers:authHeaders(),body:JSON.stringify({filename:file.name,content_base64:b64})});
+      const data=await resp.json();
+      if(!resp.ok||!data.accepted){throw new Error((data.detail&&(data.detail.reason||data.detail))||data.reason||"Upload was not accepted.");}
+      const analysisId=data.analysis_id;document.getElementById("analysis-id").textContent="analysis · "+analysisId;document.getElementById("analysis-id").classList.remove("hidden");
+      setStage("analyze","done");setStage("predict","active");
+      const pr=await fetch(apiBase()+"/v1/analyses/"+analysisId+"/prediction",{headers:authHeaders()});const pdata=await pr.json();const pred=(pdata.prediction)||{};
+      setStage("predict","done");setStage("report","active");
+      document.getElementById("r-label").textContent=pred.predicted_label||pred.predicted_class||"—";
+      document.getElementById("r-conf").textContent=(pred.confidence!=null)?(Math.round(pred.confidence*1000)/10+"%"):"—";
+      document.getElementById("r-ready").textContent=(data.readiness&&data.readiness.classification)||"—";
+      document.getElementById("r-evidence").textContent=JSON.stringify(pred.evidence||pred,null,2);
+      document.getElementById("report-link").href=apiBase()+"/v1/analyses/"+analysisId+"/reports?format=html&type=analysis";
+      document.getElementById("result-card").classList.remove("hidden");setStage("report","done");
+    }catch(err){showError(err.message||"Analysis failed. Please verify the file and your session.");resetStages();}
+    finally{runBtn.disabled=false;runBtn.innerHTML='<span class="material-symbols-outlined">play_arrow</span> Run Analysis';}
+  }
+</script>
+</body>
+</html>

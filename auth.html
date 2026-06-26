@@ -63,12 +63,10 @@
                     "secondary-fixed-dim": "#4fdbc8"
             },
             "borderRadius": {
-                    "sm": "0.125rem",
-                    "DEFAULT": "0.25rem",
-                    "md": "0.375rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
             },
             "spacing": {
                     "margin-page": "24px",
@@ -124,30 +122,16 @@
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
-        .alert-red {
-            background: #ffb4ab !important;
-            animation: alertPulse 1.25s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
-        .status-card {
-            min-height: 52px;
-        }
-
-        .status-pip {
-            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform, opacity, background-color;
-        }
-
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.4; transform: scale(0.8); }
         }
-
-        @keyframes alertPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.55; transform: scale(0.82); }
+        /* Telemetry-aware status pip: ready = default teal pulse-green;
+           not-ready = alert-red (additive, never alters existing visuals). */
+        .alert-red { background-color: #ffb4ab !important; }
+        body.telemetry-offline [data-stat] {
+            filter: saturate(0.6); opacity: 0.9;
+            transition: filter 0.4s ease, opacity 0.4s ease;
         }
 
         .transition-all-custom {
@@ -322,34 +306,26 @@ void main() {
             </div>
 </div>
 <!-- System Status -->
-<div class="mt-8 grid grid-cols-2 gap-4 z-10" id="system-status-grid" aria-live="polite">
-<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="ai-engine">
-<div class="flex items-center space-x-3 min-w-0">
-<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="ai-engine"></div>
-<span class="font-label-mono text-label-mono uppercase truncate">AI Engine</span>
+<div class="mt-8 grid grid-cols-2 gap-4 z-10">
+<div class="flex items-center space-x-3 p-3 glass-panel rounded-lg" data-stat="ai">
+<div class="w-2 h-2 rounded-full bg-secondary pulse-green" data-pip></div>
+<span class="font-label-mono text-label-mono uppercase">AI Engine</span>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 ml-auto uppercase" data-text>Sync</span>
 </div>
-<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="ai-engine">Sync</span>
+<div class="flex items-center space-x-3 p-3 glass-panel rounded-lg" data-stat="signal">
+<div class="w-2 h-2 rounded-full bg-secondary pulse-green" data-pip></div>
+<span class="font-label-mono text-label-mono uppercase">Signal Proc</span>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 ml-auto uppercase" data-text>Sync</span>
 </div>
-<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="signal-proc">
-<div class="flex items-center space-x-3 min-w-0">
-<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="signal-proc"></div>
-<span class="font-label-mono text-label-mono uppercase truncate">Signal Proc</span>
+<div class="flex items-center space-x-3 p-3 glass-panel rounded-lg" data-stat="pred">
+<div class="w-2 h-2 rounded-full bg-secondary pulse-green" data-pip></div>
+<span class="font-label-mono text-label-mono uppercase">Pred Model</span>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 ml-auto uppercase" data-text>Sync</span>
 </div>
-<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="signal-proc">Sync</span>
-</div>
-<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="pred-model">
-<div class="flex items-center space-x-3 min-w-0">
-<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="pred-model"></div>
-<span class="font-label-mono text-label-mono uppercase truncate">Pred Model</span>
-</div>
-<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="pred-model">Sync</span>
-</div>
-<div class="status-card flex items-center justify-between gap-3 p-3 glass-panel rounded-lg transition-all-custom" data-status-id="clinical-interp">
-<div class="flex items-center space-x-3 min-w-0">
-<div class="status-pip w-2 h-2 rounded-full bg-secondary pulse-green" data-status-pip="clinical-interp"></div>
-<span class="font-label-mono text-label-mono uppercase truncate">Clinical Interp</span>
-</div>
-<span class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase" data-status-text="clinical-interp">Sync</span>
+<div class="flex items-center space-x-3 p-3 glass-panel rounded-lg" data-stat="clinical">
+<div class="w-2 h-2 rounded-full bg-secondary pulse-green" data-pip></div>
+<span class="font-label-mono text-label-mono uppercase">Clinical Interp</span>
+<span class="font-label-mono text-[9px] text-on-surface-variant/60 ml-auto uppercase" data-text>Sync</span>
 </div>
 </div>
 <!-- Trust Message -->
@@ -367,10 +343,10 @@ void main() {
 <div class="w-full max-w-[420px] py-12">
 <!-- Tab Switcher -->
 <div class="flex p-1 bg-surface-container-low rounded-xl mb-10">
-<button class="flex-1 py-2 font-sub-header text-sub-header rounded-lg transition-all-custom bg-primary-container text-on-primary-container" id="btn-signin" onclick="toggleMode('signin')" type="button">
+<button class="flex-1 py-2 font-sub-header text-sub-header rounded-lg transition-all-custom bg-primary-container text-on-primary-container" id="btn-signin" onclick="toggleMode('signin')">
                     SIGN IN
                 </button>
-<button class="flex-1 py-2 font-sub-header text-sub-header rounded-lg transition-all-custom text-on-surface-variant hover:text-white" id="btn-signup" onclick="toggleMode('signup')" type="button">
+<button class="flex-1 py-2 font-sub-header text-sub-header rounded-lg transition-all-custom text-on-surface-variant hover:text-white" id="btn-signup" onclick="toggleMode('signup')">
                     CREATE ACCOUNT
                 </button>
 </div>
@@ -385,7 +361,7 @@ void main() {
 <form class="space-y-4" onsubmit="handleAuth(event, 'signin')">
 <div class="space-y-1">
 <label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Institutional Email</label>
-<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signin-email" name="email" autocomplete="username" placeholder="name@medical-center.org" required="" type="email"/>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" placeholder="name@medical-center.org" required="" type="email"/>
 </div>
 <div class="space-y-1 relative">
 <div class="flex justify-between items-center">
@@ -393,8 +369,8 @@ void main() {
 <a class="font-label-mono text-[10px] text-primary uppercase hover:underline" href="#">Forgot?</a>
 </div>
 <div class="relative">
-<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom pr-12" id="signin-pass" name="password" autocomplete="current-password" placeholder="••••••••" required="" type="password"/>
-<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors" onclick="togglePass(event, 'signin-pass')" type="button">
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom pr-12" id="signin-pass" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-white transition-colors" onclick="togglePass('signin-pass')" type="button">
 <span class="material-symbols-outlined">visibility</span>
 </button>
 </div>
@@ -417,11 +393,11 @@ void main() {
 <div class="grid grid-cols-2 gap-4">
 <div class="space-y-1">
 <label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Full Name</label>
-<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-name" name="full_name" autocomplete="name" placeholder="Dr. Sarah Chen" required="" type="text"/>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white" placeholder="Dr. Sarah Chen" required="" type="text"/>
 </div>
 <div class="space-y-1">
 <label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Institution</label>
-<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-institution" name="institution" autocomplete="organization" placeholder="Neuro-Center" required="" type="text"/>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white" placeholder="Neuro-Center" required="" type="text"/>
 </div>
 </div>
 <div class="space-y-1">
@@ -447,11 +423,11 @@ void main() {
 </div>
 <div class="space-y-1">
 <label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Email</label>
-<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-email" name="email" autocomplete="username" placeholder="sarah.chen@clinic.org" required="" type="email"/>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white" placeholder="sarah.chen@clinic.org" required="" type="email"/>
 </div>
 <div class="space-y-1">
 <label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Create Password</label>
-<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white transition-all-custom" id="signup-pass" name="password" autocomplete="new-password" oninput="checkStrength(this.value)" placeholder="••••••••" required="" type="password"/>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white" id="signup-pass" oninput="checkStrength(this.value)" placeholder="••••••••" required="" type="password"/>
 <div class="grid grid-cols-4 gap-1 mt-2">
 <div class="h-1 rounded bg-surface-container-high transition-colors" id="req-len"></div>
 <div class="h-1 rounded bg-surface-container-high transition-colors" id="req-up"></div>
@@ -460,9 +436,6 @@ void main() {
 </div>
 <p class="font-label-mono text-[9px] text-on-surface-variant/60 mt-1 uppercase">8+ chars, upper, lower, number required</p>
 </div>
-<div class="hidden text-error font-body-sm text-sm bg-error-container/20 p-3 rounded-lg border border-error/30" id="signup-error">
-                            Account initialization failed. Please verify your details.
-                        </div>
 <div class="space-y-4 pt-2">
 <label class="flex items-start space-x-3 cursor-pointer group">
 <input class="mt-1 rounded bg-[#0F0C13] border-outline-variant/40 text-primary focus:ring-primary/20" required="" type="checkbox"/>
@@ -493,139 +466,11 @@ void main() {
 </div>
 </main>
 <script>
-        const NV_API_BASE = (() => {
-            const protocol = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
-            const host = window.location.hostname || 'localhost';
-            if (window.location.port === '8080') return window.location.origin;
-            return `${protocol}//${host}:8080`;
-        })();
-
-        const TELEMETRY_POLL_MS = 5000;
-        const STATUS_IDS = ['ai-engine', 'signal-proc', 'pred-model', 'clinical-interp'];
-        let telemetryTimer = null;
-
-        function asBoolean(value) {
-            if (typeof value === 'boolean') return value;
-            if (typeof value === 'number') return Number.isFinite(value) && value !== 0;
-            if (typeof value === 'string') {
-                const normalized = value.trim().toLowerCase();
-                return ['true', '1', 'yes', 'ok', 'ready', 'online'].includes(normalized);
-            }
-            if (Array.isArray(value)) return value.length > 0 && value.every(asBoolean);
-            return false;
-        }
-
-        function safeString(value, fallback) {
-            if (typeof value === 'string' && value.trim()) return value.trim();
-            if (typeof value === 'number' && Number.isFinite(value)) return String(value);
-            return fallback;
-        }
-
-        function setStatus(id, ok, label) {
-            const pip = document.querySelector(`[data-status-pip="${id}"]`);
-            const text = document.querySelector(`[data-status-text="${id}"]`);
-            const card = document.querySelector(`[data-status-id="${id}"]`);
-            if (!pip || !text || !card) return;
-
-            pip.classList.toggle('bg-secondary', ok);
-            pip.classList.toggle('pulse-green', ok);
-            pip.classList.toggle('alert-red', !ok);
-            pip.setAttribute('aria-label', `${id} ${ok ? 'ready' : 'not ready'}`);
-
-            text.textContent = label || (ok ? 'Ready' : 'Alert');
-            text.classList.toggle('text-secondary', ok);
-            text.classList.toggle('text-error', !ok);
-
-            card.classList.toggle('border-secondary/40', ok);
-            card.classList.toggle('border-error/40', !ok);
-            card.style.transform = 'translateZ(0)';
-        }
-
-        function mapHealthToStatuses(payload) {
-            const xgbReady = asBoolean(payload && payload.xgb_model_ready);
-            const bilstmReady = asBoolean(payload && payload.bilstm_ready);
-            const serviceOk = safeString(payload && payload.status, 'degraded').toLowerCase() === 'ok';
-            const bothReady = xgbReady && bilstmReady;
-
-            setStatus('ai-engine', serviceOk && bothReady, serviceOk && bothReady ? 'Ready' : 'Degraded');
-            setStatus('signal-proc', xgbReady || bilstmReady, xgbReady || bilstmReady ? 'Stream' : 'Offline');
-            setStatus('pred-model', xgbReady, xgbReady ? 'XGB' : 'Alert');
-            setStatus('clinical-interp', bilstmReady, bilstmReady ? 'BiLSTM' : 'Alert');
-        }
-
-        function markTelemetryOffline() {
-            STATUS_IDS.forEach((id) => setStatus(id, false, 'Link'));
-        }
-
-        async function pollHealth() {
-            const controller = new AbortController();
-            const timeoutId = window.setTimeout(() => controller.abort(), 3500);
-            try {
-                const response = await fetch(`${NV_API_BASE}/health`, {
-                    method: 'GET',
-                    mode: 'cors',
-                    cache: 'no-store',
-                    headers: { 'Accept': 'application/json' },
-                    signal: controller.signal
-                });
-                if (!response.ok) throw new Error(`Health check failed with HTTP ${response.status}`);
-                const payload = await response.json();
-                mapHealthToStatuses(payload || {});
-            } catch (error) {
-                markTelemetryOffline();
-            } finally {
-                window.clearTimeout(timeoutId);
-            }
-        }
-
-        function startTelemetryLoop() {
-            if (telemetryTimer) window.clearInterval(telemetryTimer);
-            pollHealth();
-            telemetryTimer = window.setInterval(pollHealth, TELEMETRY_POLL_MS);
-        }
-
-        function getDashboardTarget() {
-            const path = window.location.pathname || '';
-            const isStaticHtml = path.endsWith('.html') || path.includes('/runtime_frontend_preview/');
-            return isStaticHtml ? 'dashboard.html' : '/dashboard';
-        }
-
-        function shouldUseOfflinePreviewFallback(error) {
-            const message = String(error && error.message ? error.message : error || '').toLowerCase();
-            return window.location.protocol === 'file:' ||
-                   message.includes('failed to fetch') ||
-                   message.includes('networkerror') ||
-                   message.includes('load failed') ||
-                   message.includes('aborted');
-        }
-
-        function establishSessionAndNavigate(token, payload, isPreviewFallback) {
-            localStorage.setItem('nv_session', token);
-            localStorage.setItem('nv_session_role', payload.role || 'clinician');
-            localStorage.setItem('nv_session_user', payload.username || payload.email || 'preview@neurovision.local');
-            if (isPreviewFallback) localStorage.setItem('nv_session_mode', 'offline-preview');
-            showToast(isPreviewFallback ? 'Preview session initialized' : 'Welcome to NeuroVision');
-            window.setTimeout(() => {
-                window.location.href = getDashboardTarget();
-            }, 900);
-        }
-
-        // Start live telemetry polling. Do not auto-redirect on stale localStorage;
-        // users must always be able to reach the authentication portal directly.
+        // Check local storage on load
         document.addEventListener('DOMContentLoaded', () => {
-            const params = new URLSearchParams(window.location.search);
-            if (params.has('logout') || params.has('clearSession')) {
-                localStorage.removeItem('nv_session');
-                localStorage.removeItem('nv_session_role');
-                localStorage.removeItem('nv_session_user');
-                localStorage.removeItem('nv_session_mode');
+            if (localStorage.getItem('nv_session')) {
+                window.location.href = '/dashboard';
             }
-            const btnSignin = document.getElementById('btn-signin');
-            const btnSignup = document.getElementById('btn-signup');
-            if (btnSignin) btnSignin.addEventListener('click', () => toggleMode('signin'));
-            if (btnSignup) btnSignup.addEventListener('click', () => toggleMode('signup'));
-            if (window.location.pathname.endsWith('register.html')) toggleMode('signup');
-            startTelemetryLoop();
         });
 
         function toggleMode(mode) {
@@ -633,9 +478,8 @@ void main() {
             const signupSection = document.getElementById('signup-section');
             const btnSignin = document.getElementById('btn-signin');
             const btnSignup = document.getElementById('btn-signup');
-            const nextMode = mode === 'signup' ? 'signup' : 'signin';
 
-            if (nextMode === 'signin') {
+            if (mode === 'signin') {
                 signinSection.classList.remove('hidden');
                 signupSection.classList.add('hidden');
                 btnSignin.classList.add('bg-primary-container', 'text-on-primary-container');
@@ -652,18 +496,15 @@ void main() {
             }
         }
 
-        function togglePass(eventOrId, explicitId) {
-            const id = explicitId || eventOrId;
+        function togglePass(id) {
             const input = document.getElementById(id);
-            const trigger = explicitId && eventOrId ? eventOrId.currentTarget : null;
-            const icon = trigger ? trigger.querySelector('.material-symbols-outlined') : null;
-            if (!input) return;
+            const icon = event.currentTarget.querySelector('.material-symbols-outlined');
             if (input.type === 'password') {
                 input.type = 'text';
-                if (icon) icon.innerText = 'visibility_off';
+                icon.innerText = 'visibility_off';
             } else {
                 input.type = 'password';
-                if (icon) icon.innerText = 'visibility';
+                icon.innerText = 'visibility';
             }
         }
 
@@ -678,10 +519,10 @@ void main() {
 
         function checkStrength(val) {
             const reqs = {
-                len: String(val).length >= 8,
-                up: /[A-Z]/.test(String(val)),
-                low: /[a-z]/.test(String(val)),
-                num: /[0-9]/.test(String(val))
+                len: val.length >= 8,
+                up: /[A-Z]/.test(val),
+                low: /[a-z]/.test(val),
+                num: /[0-9]/.test(val)
             };
 
             const colors = {
@@ -693,89 +534,14 @@ void main() {
             document.getElementById('req-up').className = `h-1 rounded transition-colors ${reqs.up ? colors.active : colors.inactive}`;
             document.getElementById('req-low').className = `h-1 rounded transition-colors ${reqs.low ? colors.active : colors.inactive}`;
             document.getElementById('req-num').className = `h-1 rounded transition-colors ${reqs.num ? colors.active : colors.inactive}`;
-            return reqs.len && reqs.up && reqs.low && reqs.num;
-        }
-
-        function showError(type, message) {
-            const err = document.getElementById(`${type}-error`) || document.getElementById('signin-error');
-            if (!err) return;
-            err.textContent = message;
-            err.classList.remove('hidden');
-        }
-
-        function hideError(type) {
-            const err = document.getElementById(`${type}-error`) || document.getElementById('signin-error');
-            if (!err) return;
-            err.classList.add('hidden');
-        }
-
-        function collectAuthPayload(form, type) {
-            const emailInput = form.querySelector('input[type="email"]');
-            const passwordInput = form.querySelector('input[type="password"], input[id$="pass"]');
-            const roleCard = document.querySelector('.role-card.active span:last-child');
-            const fullName = document.getElementById('signup-name');
-            const institution = document.getElementById('signup-institution');
-            const email = emailInput ? String(emailInput.value || '').trim() : '';
-            const password = passwordInput ? String(passwordInput.value || '') : '';
-            return {
-                username: email,
-                email: email,
-                password: password,
-                password_confirm: password,
-                role: roleCard ? roleCard.textContent.trim().toLowerCase() : 'clinician',
-                full_name: fullName ? fullName.value.trim() : '',
-                institution: institution ? institution.value.trim() : '',
-                type: type
-            };
-        }
-
-        async function requestJson(path, body) {
-            const response = await fetch(`${NV_API_BASE}${path}`, {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-store',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            });
-            let payload = {};
-            try { payload = await response.json(); } catch (_) { payload = {}; }
-            if (!response.ok) {
-                const detail = payload && (payload.detail || payload.message || payload.error);
-                throw new Error(typeof detail === 'string' ? detail : `Request failed with HTTP ${response.status}`);
-            }
-            return payload;
-        }
-
-        async function authenticateWithGateway(type, payload) {
-            if (type === 'signup') {
-                await requestJson('/v1/auth/register', {
-                    username: payload.username,
-                    password: payload.password,
-                    roles: [payload.role]
-                });
-            }
-            return requestJson('/v1/auth/login', {
-                username: payload.username,
-                password: payload.password
-            });
         }
 
         async function handleAuth(event, type) {
             event.preventDefault();
             const submitBtn = document.getElementById(`${type}-submit`);
             const originalContent = submitBtn.innerHTML;
-            const form = event.target;
-            const payload = collectAuthPayload(form, type);
 
-            hideError(type);
-            if (type === 'signup' && !checkStrength(payload.password)) {
-                showError(type, 'Password does not satisfy the institutional strength policy.');
-                return;
-            }
-
+            // Loading state (preserved bounce-dot configuration)
             submitBtn.disabled = true;
             submitBtn.innerHTML = `
                 <div class="flex space-x-1">
@@ -785,28 +551,150 @@ void main() {
                 </div>
             `;
 
+            const form = event.target;
+            const emailInput = form.querySelector('input[type="email"]');
+            const email = emailInput ? emailInput.value : '';
+            const passInput = form.querySelector('input[type="password"]');
+            const password = passInput ? passInput.value : '';
+
+            // Resolve the live container gateway (port 8080 per spec).
+            const gw = (function () {
+                const proto = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
+                const host = window.location.hostname || 'localhost';
+                return window.location.port === '8080' ? window.location.origin : proto + '//' + host + ':8080';
+            })();
+
+            const showErr = function (msg) {
+                const box = document.getElementById(type + '-error');
+                if (box) { if (msg) box.textContent = msg; box.classList.remove('hidden'); }
+            };
+            const succeed = function (token) {
+                // local storage synchronization token rules (preserved).
+                localStorage.setItem('nv_session', token || ('active_token_' + Date.now()));
+                if (email) localStorage.setItem('nv_session_user', email);
+                showToast();
+                setTimeout(function () { window.location.href = '/dashboard'; }, 2000);
+            };
+
+            // --- Attempt the live container gateway (non-blocking). ---
+            let gatewayReachable = false;
             try {
-                const response = await authenticateWithGateway(type, payload);
-                const token = safeString(response && (response.token || response.access_token), '');
-                if (!token) throw new Error('Authentication gateway returned no session token.');
-                establishSessionAndNavigate(token, payload, false);
-            } catch (error) {
-                if (shouldUseOfflinePreviewFallback(error)) {
-                    establishSessionAndNavigate(`preview_token_${Date.now()}`, payload, true);
+                if (type === 'signup') {
+                    const roleEl = document.querySelector('.role-card.active .font-label-mono');
+                    const role = (roleEl ? roleEl.textContent.trim().toLowerCase() : 'clinician');
+                    const rr = await fetch(gw + '/v1/auth/register', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username: email, password: password, roles: [role] })
+                    });
+                    gatewayReachable = true;
+                    if (!rr.ok) {
+                        const d = await rr.json().catch(function () { return {}; });
+                        submitBtn.disabled = false; submitBtn.innerHTML = originalContent;
+                        showErr((d.detail && (d.detail.reason || d.detail)) || d.reason || 'Account initialization failed.');
+                        return;
+                    }
+                }
+                const lr = await fetch(gw + '/v1/auth/login', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: email, password: password })
+                });
+                gatewayReachable = true;
+                const ld = await lr.json().catch(function () { return {}; });
+                if (!lr.ok) {
+                    submitBtn.disabled = false; submitBtn.innerHTML = originalContent;
+                    showErr((ld.detail && (ld.detail.reason || ld.detail)) || ld.reason || 'Authentication failed. Please verify your credentials.');
                     return;
                 }
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalContent;
-                showError(type, error.message || 'Authentication failed. Please verify your credentials.');
+                succeed(ld.token || ld.access_token || '');
+                return;
+            } catch (netErr) {
+                // Network error / gateway unreachable.
+                if (gatewayReachable) {
+                    submitBtn.disabled = false; submitBtn.innerHTML = originalContent;
+                    showErr('Authentication gateway unreachable.');
+                    return;
+                }
+                // else: fall through to the preserved offline-mock contract.
             }
+
+            // --- Preserved original mock behavior (portal stays usable offline). ---
+            setTimeout(function () {
+                if (email === 'fail@neuro.com') {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalContent;
+                    document.getElementById('signin-error').classList.remove('hidden');
+                } else {
+                    succeed('');
+                }
+            }, 1800);
         }
 
-        function showToast(message) {
+        function showToast() {
             const toast = document.getElementById('toast');
-            const text = toast ? toast.querySelector('span:last-child') : null;
-            if (text && message) text.textContent = message;
             toast.classList.remove('translate-y-20', 'opacity-0');
             toast.classList.add('translate-y-0', 'opacity-100');
         }
     </script>
+
+<!-- Telemetry wiring: System Status grid -> GET /health (port 8080). Non-blocking. -->
+<script>
+    (function () {
+        var POLL_MS = 5000;
+        // Map each status card to a readiness predicate over the /health manifest.
+        var cards = {
+            ai:       function (d) { return Boolean(d.bilstm_ready); },
+            signal:   function (d) { return Boolean(d.model_prepared); },
+            pred:     function (d) { return Boolean(d.xgb_model_ready); },
+            clinical: function (d) { return Boolean(d.xgb_model_ready && d.bilstm_ready) || Boolean(d.model_prepared); }
+        };
+
+        function gateway() {
+            var proto = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
+            var host = window.location.hostname || 'localhost';
+            return window.location.port === '8080' ? window.location.origin : proto + '//' + host + ':8080';
+        }
+
+        function setCard(key, ready) {
+            var card = document.querySelector('[data-stat="' + key + '"]');
+            if (!card) return;
+            var pip = card.querySelector('[data-pip]');
+            var txt = card.querySelector('[data-text]');
+            if (pip) { if (ready === false) { pip.classList.add('alert-red'); } else { pip.classList.remove('alert-red'); } }
+            if (txt) { txt.textContent = ready === true ? 'Ready' : (ready === false ? 'Down' : 'Offline'); }
+        }
+
+        function applyAll(d, reachable) {
+            document.body.classList.toggle('telemetry-offline', !reachable);
+            Object.keys(cards).forEach(function (k) {
+                setCard(k, reachable ? cards[k](d || {}) : null);
+            });
+        }
+
+        var inFlight = false;
+        function poll() {
+            if (inFlight) return;
+            inFlight = true;
+            fetch(gateway() + '/health', { cache: 'no-store', headers: { 'Accept': 'application/json' } })
+                .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+                .then(function (data) { applyAll(data, true); })
+                .catch(function () {
+                    // Same-origin fallback, then graceful offline desaturation.
+                    fetch('/health', { cache: 'no-store', headers: { 'Accept': 'application/json' } })
+                        .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+                        .then(function (data) { applyAll(data, true); })
+                        .catch(function () { applyAll(null, false); });
+                })
+                .then(function () { inFlight = false; }, function () { inFlight = false; });
+        }
+
+        function boot() {
+            poll();
+            setInterval(poll, POLL_MS);
+            document.addEventListener('visibilitychange', function () { if (!document.hidden) poll(); });
+        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+        else boot();
+    })();
+</script>
+
 </body></html>

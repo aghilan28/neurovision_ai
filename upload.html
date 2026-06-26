@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NeuroVision | EEG Upload &amp; Analysis Sequence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+tailwind.config = { darkMode:"class", theme:{ extend:{
+  colors:{ background:"#141218",surface:"#141218","surface-dim":"#141218","surface-container-lowest":"#0f0d13","surface-container-low":"#1d1b20","surface-container":"#211f24","surface-container-high":"#2b292f","surface-container-highest":"#36343a","on-surface":"#e6e0e9","on-background":"#e6e0e9","on-surface-variant":"#cbc4d2",outline:"#948e9c","outline-variant":"#494551",primary:"#cfbcff","primary-container":"#6750a4","on-primary":"#381e72","on-primary-container":"#e0d2ff",secondary:"#cdc0e9",tertiary:"#e7c365","on-tertiary":"#3e2e00","clinical-teal":"#14B8A6",error:"#ffb4ab","on-error":"#690005" },
+  fontFamily:{ headline:["Playfair Display","serif"],sans:["Geist","sans-serif"],mono:["JetBrains Mono","monospace"] }
+}}};
+</script>
+<style>
+  body{background:#141218;color:#e6e0e9;font-family:'Geist',sans-serif;overflow-x:hidden}
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
+  .glass{background:rgba(20,18,24,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  .hover-bloom{transition:box-shadow .4s ease,border-color .4s ease}.hover-bloom:hover{box-shadow:0 0 20px rgba(139,92,246,.3);border-color:rgba(139,92,246,.5)}
+  .dropzone{border:1px dashed #494551;transition:border-color .25s ease,background-color .25s ease}.dropzone.drag{border-color:#cfbcff;background-color:rgba(207,188,255,.06)}
+  .spin{animation:nv-spin .9s linear infinite}@keyframes nv-spin{to{transform:rotate(360deg)}}
+  .status-dot{width:8px;height:8px;border-radius:9999px;display:inline-block}.status-dot.online{background:#14B8A6}.status-dot.offline{background:#ffb4ab}
+  .stage.done .si{background:rgba(20,184,166,.15);color:#14B8A6}.stage.active .si{background:rgba(207,188,255,.18);color:#cfbcff}
+  ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#141218}::-webkit-scrollbar-thumb{background:#36343a;border-radius:3px}
+</style>
+</head>
+<body>
+<nav class="glass fixed top-0 w-full z-50 border-b border-outline-variant/20">
+<div class="flex justify-between items-center h-16 px-6 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-2"><a href="/" class="font-[\"Playfair_Display\"] text-xl tracking-tight text-on-surface">Neuro<span class="text-primary">Vision</span></a></div>
+<div class="flex items-center gap-4">
+<a href="/" class="text-on-surface-variant font-mono text-sm hover:text-on-surface transition-colors inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">arrow_back</span> Home</a>
+<a href="/dashboard" class="text-on-surface-variant font-mono text-sm hover:text-on-surface transition-colors">Dashboard</a>
+<button onclick="signOut()" class="text-on-surface-variant font-mono text-sm hover:text-on-surface transition-colors inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">logout</span></button>
+</div>
+</div>
+</nav>
+
+<main class="max-w-4xl mx-auto px-6 pt-28 pb-20">
+<div class="mb-10">
+<span class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-teal">Upload Sequence</span>
+<h1 class="font-[\"Playfair_Display\"] text-4xl font-semibold mt-3">EEG Intake &amp; Analysis</h1>
+<p class="text-on-surface-variant mt-3 max-w-2xl">Select a standard EDF/EDF+ recording. It is structurally validated, bounded, and routed through the full neural pipeline to a calibrated prediction and evidence bundle.</p>
+</div>
+
+<!-- Pipeline -->
+<div class="bg-surface-container-low border border-outline-variant/20 rounded-lg p-6 mb-6">
+<div class="flex items-center justify-between mb-5"><h2 class="font-semibold">Analysis Pipeline</h2><span id="analysis-id" class="hidden font-mono text-[11px] text-on-surface-variant/60"></span></div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<div class="stage" id="stage-upload"><div class="flex items-center gap-2"><span class="si w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">upload</span></span><span class="text-sm">Upload</span></div></div>
+<div class="stage" id="stage-analyze"><div class="flex items-center gap-2"><span class="si w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">neurology</span></span><span class="text-sm">Analyze</span></div></div>
+<div class="stage" id="stage-predict"><div class="flex items-center gap-2"><span class="si w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">insights</span></span><span class="text-sm">Predict</span></div></div>
+<div class="stage" id="stage-report"><div class="flex items-center gap-2"><span class="si w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">description</span></span><span class="text-sm">Report</span></div></div>
+</div>
+</div>
+
+<!-- Dropzone -->
+<div class="bg-surface-container border border-outline-variant/20 rounded-lg p-6 mb-6">
+<label id="dropzone" class="dropzone flex flex-col items-center justify-center gap-3 rounded-lg py-12 cursor-pointer hover:border-primary/50">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">cloud_upload</span>
+<span class="text-sm text-on-surface-variant"><span id="dz-label" class="text-primary">Choose an EDF recording</span> or drag it here</span>
+<span id="dz-meta" class="font-mono text-[11px] text-on-surface-variant/60 hidden"></span>
+<input id="eeg-input" type="file" accept=".edf,.edf+,.bdf,.csv,.txt" class="hidden">
+</label>
+<button id="run-btn" onclick="runAnalysis()" disabled class="bg-primary text-on-primary w-full mt-5 py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 transition-transform"><span class="material-symbols-outlined">play_arrow</span> Run Analysis</button>
+<div id="run-error" class="hidden mt-3 text-sm text-error bg-error-container/15 border border-error/30 rounded-lg p-3"></div>
+</div>
+
+<!-- Result -->
+<div id="result-card" class="hidden bg-surface-container border border-outline-variant/20 rounded-lg p-6">
+<div class="flex items-center justify-between mb-4"><h2 class="font-semibold">Prediction Review</h2><a id="report-link" href="#" target="_blank" class="text-sm text-clinical-teal inline-flex items-center gap-1 hover:underline">Open report <span class="material-symbols-outlined text-[16px]">open_in_new</span></a></div>
+<div class="grid sm:grid-cols-3 gap-4">
+<div class="bg-surface-container-low rounded-lg p-4"><div class="font-mono text-[11px] uppercase tracking-wider text-on-surface-variant/70">Prediction</div><div id="r-label" class="text-xl font-semibold mt-2">—</div></div>
+<div class="bg-surface-container-low rounded-lg p-4"><div class="font-mono text-[11px] uppercase tracking-wider text-on-surface-variant/70">Confidence</div><div id="r-conf" class="text-xl font-semibold mt-2 font-mono">—</div></div>
+<div class="bg-surface-container-low rounded-lg p-4"><div class="font-mono text-[11px] uppercase tracking-wider text-on-surface-variant/70">Readiness</div><div id="r-ready" class="text-xl font-semibold mt-2">—</div></div>
+</div>
+<pre id="r-evidence" class="mt-4 text-xs font-mono text-on-surface-variant bg-surface-dim rounded-lg p-4 overflow-x-auto"></pre>
+</div>
+</main>
+
+<script>
+const TOKEN = localStorage.getItem('nv_session');
+if (!TOKEN) { window.location.replace('/login'); }
+
+function apiBase(){const p=window.location.protocol==='file:'?'http:':window.location.protocol;const h=window.location.hostname||'localhost';const port=window.location.port?':'+window.location.port:'';return p+'//'+h+port;}
+function authHeaders(){return{'Authorization':'Bearer '+(TOKEN||''),'Content-Type':'application/json'};}
+function signOut(){localStorage.removeItem('nv_session');localStorage.removeItem('nv_session_role');localStorage.removeItem('nv_session_user');window.location.href='/';}
+
+const eegInput=document.getElementById('eeg-input'),runBtn=document.getElementById('run-btn'),dropzone=document.getElementById('dropzone');
+eegInput.addEventListener('change',()=>{const f=eegInput.files[0];document.getElementById('dz-label').textContent=f?f.name:'Choose an EDF recording';const meta=document.getElementById('dz-meta');if(f){meta.textContent=(f.size?(f.size/1048576).toFixed(2)+' MB · ':'')+(f.type||'binary');meta.classList.remove('hidden');}else meta.classList.add('hidden');runBtn.disabled=!f;document.getElementById('run-error').classList.add('hidden');});
+['dragenter','dragover'].forEach(ev=>dropzone.addEventListener(ev,e=>{e.preventDefault();dropzone.classList.add('drag');}));
+['dragleave','drop'].forEach(ev=>dropzone.addEventListener(ev,e=>{e.preventDefault();dropzone.classList.remove('drag');}));
+dropzone.addEventListener('drop',e=>{const dt=e.dataTransfer;if(dt&&dt.files&&dt.files.length){eegInput.files=dt.files;eegInput.dispatchEvent(new Event('change'));}});
+
+function setStage(n,s){const el=document.getElementById('stage-'+n);if(!el)return;el.classList.remove('active','done');if(s)el.classList.add(s);}
+function resetStages(){['upload','analyze','predict','report'].forEach(s=>setStage(s,null));}
+function showError(m){const e=document.getElementById('run-error');e.textContent=m;e.classList.remove('hidden');}
+function toBase64(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const bytes=new Uint8Array(r.result);let s='';const ch=0x8000;for(let i=0;i<bytes.length;i+=ch){s+=String.fromCharCode.apply(null,bytes.subarray(i,i+ch));}resolve(btoa(s));};r.onerror=reject;r.readAsArrayBuffer(file);});}
+
+async function runAnalysis(){
+  document.getElementById('run-error').classList.add('hidden');
+  const file=eegInput.files[0];if(!file)return;
+  runBtn.disabled=true;runBtn.innerHTML='<span class="material-symbols-outlined spin">progress_activity</span> Processing…';resetStages();setStage('upload','active');
+  try{
+    const b64=await toBase64(file);setStage('upload','done');setStage('analyze','active');
+    const resp=await fetch(apiBase()+'/v1/uploads',{method:'POST',headers:authHeaders(),body:JSON.stringify({filename:file.name,content_base64:b64})});
+    const data=await resp.json();
+    if(!resp.ok||!data.accepted){throw new Error((data.detail&&(data.detail.reason||data.detail))||data.reason||'Upload was not accepted by the gateway.');}
+    const aid=data.analysis_id;document.getElementById('analysis-id').textContent='analysis · '+aid;document.getElementById('analysis-id').classList.remove('hidden');
+    setStage('analyze','done');setStage('predict','active');
+    const pr=await fetch(apiBase()+'/v1/analyses/'+aid+'/prediction',{headers:authHeaders()});const pdata=await pr.json();const pred=pdata.prediction||{};
+    setStage('predict','done');setStage('report','active');
+    document.getElementById('r-label').textContent=pred.predicted_label||pred.predicted_class||'—';
+    const conf=pred.confidence;document.getElementById('r-conf').textContent=(typeof conf==='number'&&isFinite(conf))?(Math.round(conf*1000)/10+'%'):'—';
+    document.getElementById('r-ready').textContent=(data.readiness&&data.readiness.classification)||'—';
+    document.getElementById('r-evidence').textContent=JSON.stringify(pred.evidence||pred,null,2);
+    document.getElementById('report-link').href=apiBase()+'/v1/analyses/'+aid+'/reports?format=html&type=analysis';
+    document.getElementById('result-card').classList.remove('hidden');setStage('report','done');
+  }catch(err){showError(err.message||'Analysis failed. Verify the file and your session.');resetStages();}
+  finally{runBtn.disabled=false;runBtn.innerHTML='<span class="material-symbols-outlined">play_arrow</span> Run Analysis';}
+}
+</script>
+</body></html>
