@@ -421,7 +421,7 @@
             </div>
           </div>
           <div class="flex flex-col gap-4 max-w-sm mx-auto">
-            <button type="button" class="bg-primary text-on-primary-fixed py-3.5 rounded font-medium text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20 border border-primary">View Intelligence Report</button>
+            <button type="button" onclick="window.location.href='/analysis/' + (currentFile ? encodeURIComponent(currentFile.name.replace(/\.[^/.]+$/, '').replace(/_/g, '-')) : 'PATIENT-8829')" class="bg-primary text-on-primary-fixed py-3.5 rounded font-medium text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20 border border-primary">View Intelligence Report</button>
             <button type="button" class="bg-transparent border border-[#494454] text-on-surface py-3.5 rounded font-medium text-sm hover:bg-surface-container-highest transition-all" onclick="location.reload()">Start New Analysis</button>
           </div>
         </div>
