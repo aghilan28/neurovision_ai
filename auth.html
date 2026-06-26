@@ -393,11 +393,11 @@ void main() {
 <div class="grid grid-cols-2 gap-4">
 <div class="space-y-1">
 <label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Full Name</label>
-<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white" placeholder="Dr. Sarah Chen" required="" type="text"/>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white" id="signup-name" placeholder="Dr. Sarah Chen" required="" type="text"/>
 </div>
 <div class="space-y-1">
 <label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Institution</label>
-<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white" placeholder="Neuro-Center" required="" type="text"/>
+<input class="w-full bg-[#0F0C13] border border-outline-variant/40 rounded-lg px-4 py-3 font-body-md text-white" id="signup-institution" placeholder="Neuro-Center" required="" type="text"/>
 </div>
 </div>
 <div class="space-y-1">
@@ -468,7 +468,14 @@ void main() {
 <script>
         // Check local storage on load
         document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('nv_session')) {
+            const raw = localStorage.getItem('nv_session');
+            if (!raw) return;
+            try {
+                const parsed = JSON.parse(raw);
+                if (parsed && parsed.token) {
+                    window.location.href = '/dashboard';
+                }
+            } catch (e) {
                 window.location.href = '/dashboard';
             }
         });
@@ -569,9 +576,22 @@ void main() {
                 if (box) { if (msg) box.textContent = msg; box.classList.remove('hidden'); }
             };
             const succeed = function (token) {
-                // local storage synchronization token rules (preserved).
-                localStorage.setItem('nv_session', token || ('active_token_' + Date.now()));
+                const roleEl = document.querySelector('.role-card.active .font-label-mono');
+                const role = (roleEl ? roleEl.textContent.trim().toLowerCase() : 'clinician');
+                const fullName = (type === 'signup') ? (document.getElementById('signup-name') ? document.getElementById('signup-name').value.trim() : '') : '';
+                const institution = (type === 'signup') ? (document.getElementById('signup-institution') ? document.getElementById('signup-institution').value.trim() : '') : '';
+                const name = fullName || (localStorage.getItem('nv_profile_name') || email || 'Clinician');
+                const inst = institution || (localStorage.getItem('nv_profile_institution') || '');
+                const storedRole = role || (localStorage.getItem('nv_session_role') || 'clinician');
+                const session = {
+                    token: token || ('active_token_' + Date.now()),
+                    user: { name: name, email: email, institution: inst, role: storedRole }
+                };
+                localStorage.setItem('nv_session', JSON.stringify(session));
                 if (email) localStorage.setItem('nv_session_user', email);
+                localStorage.setItem('nv_session_role', storedRole);
+                localStorage.setItem('nv_profile_name', name);
+                localStorage.setItem('nv_profile_institution', inst);
                 showToast();
                 setTimeout(function () { window.location.href = '/dashboard'; }, 2000);
             };

@@ -49,6 +49,19 @@ class LoginBody(BaseModel):
     password: str = Field(min_length=1)
 
 
+class ApiLoginBody(BaseModel):
+    username: str = Field(min_length=1, description="email or username")
+    password: str = Field(min_length=1)
+
+
+class ApiRegisterBody(BaseModel):
+    name: str = Field(min_length=1)
+    institution: str = Field(default="")
+    role: str = Field(default="clinician")
+    email: str = Field(min_length=1)
+    password: str = Field(min_length=6)
+
+
 class UploadBody(BaseModel):
     filename: str = Field(min_length=1)
     content_base64: str = Field(min_length=1, description="base64-encoded EEG file bytes")
@@ -138,6 +151,57 @@ def create_app(service: ApplicationPlatformService) -> FastAPI:
         # login() returns a namespace with .token and .session (or a raw str for compat).
         token = result.token if hasattr(result, "token") else result
         return {"token": token, "token_type": "bearer"}
+
+    # --- RBAC auth bridge: /api/v1/* (frontend-facing contract) -------------
+    # Maps the authentication-portal payload schema onto the real service and
+    # enriches the login response with role metadata so the frontend can route
+    # per RBAC (CLINICIAN/RESEARCHER/STUDENT -> /dashboard, ADMIN -> /status).
+    _ROLE_ALIASES = {"student": "viewer", "clinician": "clinician",
+                     "researcher": "researcher", "admin": "admin"}
+
+    def _user_profile(svc: ApplicationPlatformService, user_id: str) -> dict:
+        """Resolve a user_id -> {user_id, username, roles, role, status} safely."""
+        try:
+            u = svc.backend.auth.users.get_user(user_id)
+            roles = sorted(r.value for r in u.roles)
+            return {"user_id": u.user_id, "username": u.username, "roles": roles,
+                    "role": roles[0] if roles else "viewer", "status": u.status.value}
+        except Exception:
+            return {"user_id": user_id, "username": "", "roles": [],
+                    "role": "viewer", "status": "active"}
+
+    @app.post("/api/v1/auth/login")
+    def api_login(body: ApiLoginBody, svc: ApplicationPlatformService = Depends(hub)):
+        try:
+            result = svc.login(username=body.username, password=body.password)
+        except ApplicationPlatformError as exc:
+            raise HTTPException(status_code=401, detail=str(exc))
+        token = result.token if hasattr(result, "token") else result
+        sess = getattr(result, "session", None)
+        uid = getattr(sess, "user_id", "") if sess else ""
+        sid = getattr(sess, "session_id", "") if sess else ""
+        profile = _user_profile(svc, uid)
+        return {"token": token, "token_type": "bearer",
+                "user_id": profile.get("user_id", uid),
+                "username": profile.get("username", body.username),
+                "role": profile.get("role", "viewer"),
+                "roles": profile.get("roles", ["viewer"]),
+                "status": profile.get("status", "active"),
+                "session_id": sid}
+
+    @app.post("/api/v1/users/register", status_code=201)
+    def api_register(body: ApiRegisterBody, svc: ApplicationPlatformService = Depends(hub)):
+        mapped = _ROLE_ALIASES.get(body.role.lower(), "viewer")
+        try:
+            rec = svc.backend.auth.register(
+                username=body.email, password=body.password, roles=[mapped],
+                metadata={"name": body.name, "institution": body.institution})
+        except Exception as exc:  # noqa: BLE001
+            raise HTTPException(status_code=400, detail=str(exc))
+        roles = sorted(r.value for r in rec.roles)
+        return {"user_id": rec.user_id, "username": rec.username,
+                "roles": roles, "role": roles[0] if roles else "viewer",
+                "status": rec.status.value}
 
     # --- upload + analyze ----------------------------------------------------
     @app.post(f"/{API_V1}/uploads")

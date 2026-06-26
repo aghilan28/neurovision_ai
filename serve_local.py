@@ -8,6 +8,10 @@ is wired in one place:
     GET /auth      -> auth.html      (authentication portal alias)
     GET /upload    -> upload.html    (EEG upload & analysis sequence)
     GET /dashboard -> dashboard.html (authenticated Command Center)
+    GET /patients  -> placeholder.html (patient records workspace)
+    GET /export    -> placeholder.html (export center workspace)
+    GET /status    -> placeholder.html (system status workspace)
+    GET /telemetry -> production_output.json (engine telemetry)
     GET /static/.. -> static assets
     GET /health    -> live platform telemetry
     /v1/..         -> the full product API (auth, uploads, analyses, reports, ...)
@@ -17,6 +21,7 @@ Run:
 """
 from __future__ import annotations
 
+import json
 import os
 import sys
 from pathlib import Path
@@ -56,7 +61,7 @@ def _build_full_app():
 def _build_fallback_app():
     from fastapi import FastAPI, HTTPException
     from fastapi.middleware.cors import CORSMiddleware
-    from fastapi.responses import FileResponse
+    from fastapi.responses import FileResponse, JSONResponse
     from fastapi.staticfiles import StaticFiles
 
     root = _PROJECT_ROOT
@@ -66,8 +71,12 @@ def _build_fallback_app():
         "/auth": "auth.html",
         "/upload": "upload.html",
         "/dashboard": "dashboard.html",
+        "/patients": "placeholder.html",
+        "/export": "placeholder.html",
+        "/status": "placeholder.html",
     }
     no_cache = {"Cache-Control": "no-cache"}
+    telemetry_file = root / "production_output.json"
 
     app = FastAPI(title="NeuroVision (local)")
     app.add_middleware(
@@ -88,6 +97,25 @@ def _build_fallback_app():
     for route, filename in pages.items():
         app.add_api_route(route, serve(filename), methods=["GET"], include_in_schema=False)
 
+    @app.get("/telemetry")
+    def telemetry():
+        if not telemetry_file.is_file():
+            return JSONResponse({
+                "status": "no_data",
+                "metadata": {},
+                "calibration_profile": {},
+                "clinical_alerts_detected": [],
+                "active_sessions": 0,
+            }, headers=no_cache)
+        try:
+            with telemetry_file.open("r", encoding="utf-8") as fh:
+                data = json.load(fh)
+        except Exception as exc:  # noqa: BLE001
+            raise HTTPException(status_code=500, detail=f"telemetry unreadable: {exc}")
+        if "active_sessions" not in data:
+            data["active_sessions"] = 0
+        return JSONResponse(data, headers=no_cache)
+
     static_dir = root / "static"
     if static_dir.is_dir():
         app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
@@ -95,7 +123,10 @@ def _build_fallback_app():
     @app.get("/health")
     def health():
         return {"status": "ok", "service": "neurovision-local", "version": "fallback",
-                "model_prepared": False}
+                "model_prepared": False,
+                "xgb_model_ready": False,
+                "bilstm_ready": False,
+                "active_sessions": 0}
 
     return app
 
