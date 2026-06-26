@@ -5,6 +5,7 @@ Single-process FastAPI system backend runner providing active stream validation,
 real-time telemetry inference pipelines, and unified workspace serving.
 """
 
+import sys
 import os
 import json
 import time
@@ -16,23 +17,37 @@ from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
+# Ensure the current directory and project root are explicitly in sys.path for Uvicorn worker reloading
+current_dir = os.path.abspath(os.path.dirname(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+if os.getcwd() not in sys.path:
+    sys.path.insert(0, os.getcwd())
+
 # Initialize Logging
 logging.basicConfig(level=logging.INFO, format="[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s")
 logger = logging.getLogger("NeuroVision-Backend")
 
-# Attempt integration with existing repository wiring if present
+# Attempt independent integration with existing repository wiring
+HAS_NEUROVISION_API = False
 try:
     import neurovision_api
+    HAS_NEUROVISION_API = True
+    logger.info("Existing repository wiring (neurovision_api) detected and linked successfully.")
+except Exception as e:
+    logger.warning(f"Notice: Could not link 'neurovision_api' (Operating in native fallback simulation mode for calibration). Reason: {e}")
+
+HAS_NEUROVISION_INFERENCE = False
+try:
     import neurovision_inference
-    HAS_EXISTING_WIRING = True
-    logger.info("Existing repository wiring (neurovision_api, neurovision_inference) detected and linked.")
-except ImportError:
-    HAS_EXISTING_WIRING = False
-    logger.info("Operating in robust single-process standalone mode (native fallback simulation enabled).")
+    HAS_NEUROVISION_INFERENCE = True
+    logger.info("Existing repository wiring (neurovision_inference) detected and linked successfully.")
+except Exception as e:
+    logger.warning(f"Notice: Could not link 'neurovision_inference' (Operating in native fallback simulation mode for inference). Reason: {e}")
 
 app = FastAPI(
     title="NeuroVision Clinical Intelligence API",
-    version="4.2.0",
+    version="4.2.1",
     description="Backend platform runner for clinical EEG analysis session wizard and real-time streaming telemetry."
 )
 
@@ -49,7 +64,7 @@ app.add_middleware(
 def get_code_html_path() -> str:
     possible_paths = [
         "code.html",
-        os.path.join(os.path.dirname(__file__), "code.html"),
+        os.path.join(current_dir, "code.html"),
         "/home/user/code.html",
         "/home/user/uploads/code.html"
     ]
@@ -116,7 +131,7 @@ async def calibrate_signal(file: UploadFile = File(...)):
     logger.info(f"Ingested file blob size: {file_size} bytes")
 
     # If existing wiring is available, pass through to existing calibration logic
-    if HAS_EXISTING_WIRING and hasattr(neurovision_api, 'calibrate_matrix_profile'):
+    if HAS_NEUROVISION_API and hasattr(neurovision_api, 'calibrate_matrix_profile'):
         try:
             telemetry = neurovision_api.calibrate_matrix_profile(file_bytes, file.filename)
             return JSONResponse(content=telemetry, status_code=200)
@@ -155,7 +170,7 @@ async def predict_pipeline(
         await file.read() # Load blob into memory
 
     # If existing wiring is available, allow it to generate the streaming generator
-    if HAS_EXISTING_WIRING and hasattr(neurovision_inference, 'generate_realtime_inference_stream'):
+    if HAS_NEUROVISION_INFERENCE and hasattr(neurovision_inference, 'generate_realtime_inference_stream'):
         try:
             stream_generator = neurovision_inference.generate_realtime_inference_stream(target_name)
             return StreamingResponse(stream_generator, media_type="application/x-ndjson")
