@@ -15,6 +15,7 @@ from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 
 # Ensure the current directory and project root are explicitly in sys.path for Uvicorn worker reloading
@@ -47,8 +48,8 @@ except Exception as e:
 
 app = FastAPI(
     title="NeuroVision Clinical Intelligence API",
-    version="4.2.1",
-    description="Backend platform runner for clinical EEG analysis session wizard and real-time streaming telemetry."
+    version="4.2.2",
+    description="Backend platform runner for clinical EEG analysis session wizard, existing dashboard wiring, and real-time streaming telemetry."
 )
 
 # Enable CORS for full-stack integration
@@ -85,15 +86,37 @@ async def serve_wizard(request: Request):
         logger.error(f"Error serving code.html: {e}")
         raise HTTPException(status_code=500, detail=f"Frontend integration template error: {e}")
 
-# Unified platform navigation routes fallback
+# Unified platform navigation routes serving actual project HTML files with fallback
 @app.get("/dashboard", response_class=HTMLResponse)
 @app.get("/patients", response_class=HTMLResponse)
 @app.get("/export", response_class=HTMLResponse)
 @app.get("/status", response_class=HTMLResponse)
 @app.get("/auth", response_class=HTMLResponse)
-async def serve_navigation_placeholders(request: Request):
-    """Provides fallback rendering for unified platform sidebar links."""
-    route_name = request.url.path.strip("/").upper()
+async def serve_navigation_pages(request: Request):
+    """Serves the actual project HTML file for the requested route if available in the repo."""
+    route_path = request.url.path.strip("/")
+    
+    # Map routes to potential actual HTML file names in the repository (including runtime_frontend_preview)
+    route_file_map = {
+        "dashboard": ["dashboard.html", "runtime_frontend_preview/dashboard.html", "templates/dashboard.html"],
+        "patients": ["patients.html", "clinical.html", "runtime_frontend_preview/clinical.html", "placeholder.html"],
+        "export": ["export.html", "reports.html", "runtime_frontend_preview/reports.html", "placeholder.html"],
+        "status": ["status.html", "operational.html", "runtime_frontend_preview/operational.html", "placeholder.html"],
+        "auth": ["auth.html", "login.html", "runtime_frontend_preview/login.html"]
+    }
+
+    possible_files = route_file_map.get(route_path, [f"{route_path}.html", "placeholder.html"])
+    
+    for fname in possible_files:
+        fpath = os.path.join(current_dir, fname)
+        if os.path.exists(fpath):
+            logger.info(f"Serving existing repository file '{fname}' for route '/{route_path}'")
+            with open(fpath, "r", encoding="utf-8") as f:
+                return HTMLResponse(content=f.read(), status_code=200)
+
+    # Fallback if the file is truly missing
+    logger.warning(f"Project HTML file for route '/{route_path}' not found. Serving unified fallback viewpane.")
+    route_name = route_path.upper()
     content = f"""
     <!DOCTYPE html>
     <html lang="en" class="dark">
@@ -107,7 +130,7 @@ async def serve_navigation_placeholders(request: Request):
     <body class="min-h-screen flex items-center justify-center bg-[#15121b] text-[#e7e0ed] font-['Inter']">
         <div class="bg-[#211e27] border border-[#494454] p-12 rounded-xl text-center max-w-lg space-y-6">
             <h1 class="text-3xl font-semibold tracking-tight">{route_name} MODULE</h1>
-            <p class="text-[#cbc3d7] text-base">You have navigated to the {route_name} workspace viewpane. This unified platform route is correctly wired to the global navigation architecture.</p>
+            <p class="text-[#cbc3d7] text-base">You have navigated to the {route_name} workspace viewpane. The expected HTML file (<code>{route_path}.html</code>) was not found at the project root.</p>
             <div class="pt-4">
                 <a href="/upload" class="inline-block bg-[#d0bcff] text-[#3c0091] px-8 py-3 rounded font-medium text-sm hover:brightness-110 transition-all">Return to Analysis Session</a>
             </div>
@@ -290,6 +313,9 @@ async def predict_pipeline(
             yield json.dumps(comp_event) + "\n"
 
     return StreamingResponse(event_generator(), media_type="application/x-ndjson")
+
+# Mount the project root directory to serve any static assets, JSON snapshots, or additional HTML pages requested by the dashboard
+app.mount("/", StaticFiles(directory=current_dir), name="static")
 
 if __name__ == "__main__":
     logger.info("Initializing NeuroVision platform local runner on http://0.0.0.0:8000")
