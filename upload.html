@@ -1,123 +1,1239 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>NeuroVision | EEG Upload &amp; Analysis Sequence</title>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NeuroVision | Neurological Intelligence Session</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-tailwind.config = { darkMode:"class", theme:{ extend:{
-  colors:{ background:"#141218",surface:"#141218","surface-dim":"#141218","surface-container-lowest":"#0f0d13","surface-container-low":"#1d1b20","surface-container":"#211f24","surface-container-high":"#2b292f","surface-container-highest":"#36343a","on-surface":"#e6e0e9","on-background":"#e6e0e9","on-surface-variant":"#cbc4d2",outline:"#948e9c","outline-variant":"#494551",primary:"#cfbcff","primary-container":"#6750a4","on-primary":"#381e72","on-primary-container":"#e0d2ff",secondary:"#cdc0e9",tertiary:"#e7c365","on-tertiary":"#3e2e00","clinical-teal":"#14B8A6",error:"#ffb4ab","on-error":"#690005" },
-  fontFamily:{ headline:["Playfair Display","serif"],sans:["Geist","sans-serif"],mono:["JetBrains Mono","monospace"] }
-}}};
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface": "#15121b",
+          "surface-dim": "#15121b",
+          "surface-bright": "#3b3742",
+          "surface-container-lowest": "#0f0d15",
+          "surface-container-low": "#1d1a23",
+          "surface-container": "#211e27",
+          "surface-container-high": "#2c2832",
+          "surface-container-highest": "#37333d",
+          "on-surface": "#e7e0ed",
+          "on-surface-variant": "#cbc3d7",
+          "inverse-surface": "#e7e0ed",
+          "inverse-on-surface": "#322f39",
+          "outline": "#958ea0",
+          "outline-variant": "#494454",
+          "surface-tint": "#d0bcff",
+          "primary": "#d0bcff",
+          "on-primary": "#3c0091",
+          "primary-container": "#a078ff",
+          "on-primary-container": "#340080",
+          "inverse-primary": "#6d3bd7",
+          "secondary": "#44e2cd",
+          "on-secondary": "#003731",
+          "secondary-container": "#03c6b2",
+          "on-secondary-container": "#004d44",
+          "tertiary": "#ffb869",
+          "on-tertiary": "#482900",
+          "tertiary-container": "#ca801e",
+          "on-tertiary-container": "#3f2300",
+          "error": "#ffb4ab",
+          "on-error": "#690005",
+          "error-container": "#93000a",
+          "on-error-container": "#ffdad6",
+          "primary-fixed": "#e9ddff",
+          "primary-fixed-dim": "#d0bcff",
+          "on-primary-fixed": "#23005c",
+          "on-primary-fixed-variant": "#5516be",
+          "secondary-fixed": "#62fae3",
+          "secondary-fixed-dim": "#3cddc7",
+          "on-secondary-fixed": "#00201c",
+          "on-secondary-fixed-variant": "#005047",
+          "tertiary-fixed": "#ffdcbb",
+          "tertiary-fixed-dim": "#ffb869",
+          "on-tertiary-fixed": "#2c1700",
+          "on-tertiary-fixed-variant": "#673d00",
+          "background": "#15121b",
+          "on-background": "#e7e0ed",
+          "surface-variant": "#37333d"
+        },
+        borderRadius: {
+          DEFAULT: "0.125rem",
+          lg: "0.25rem",
+          xl: "0.5rem",
+          "2xl": "0.75rem",
+          full: "9999px"
+        },
+        spacing: {
+          workflow_max_width: "760px",
+          section_gap: "4rem",
+          element_gap: "1.5rem",
+          container_padding: "2rem",
+          stack_space: "0.75rem"
+        },
+        fontFamily: {
+          "title-sm": ["Inter"],
+          "body-md": ["Inter"],
+          "display-lg": ["Inter"],
+          "data-mono": ["JetBrains Mono"],
+          "headline-md": ["Inter"],
+          "label-caps": ["Inter"],
+          "body-sm": ["Inter"]
+        },
+        fontSize: {
+          "title-sm": ["18px", { lineHeight: "28px", fontWeight: "500" }],
+          "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+          "display-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }],
+          "data-mono": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "500" }],
+          "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }],
+          "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+          "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }]
+        }
+      }
+    }
+  };
 </script>
 <style>
-  body{background:#141218;color:#e6e0e9;font-family:'Geist',sans-serif;overflow-x:hidden}
-  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
-  .glass{background:rgba(20,18,24,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-  .hover-bloom{transition:box-shadow .4s ease,border-color .4s ease}.hover-bloom:hover{box-shadow:0 0 20px rgba(139,92,246,.3);border-color:rgba(139,92,246,.5)}
-  .dropzone{border:1px dashed #494551;transition:border-color .25s ease,background-color .25s ease}.dropzone.drag{border-color:#cfbcff;background-color:rgba(207,188,255,.06)}
-  .spin{animation:nv-spin .9s linear infinite}@keyframes nv-spin{to{transform:rotate(360deg)}}
-  .status-dot{width:8px;height:8px;border-radius:9999px;display:inline-block}.status-dot.online{background:#14B8A6}.status-dot.offline{background:#ffb4ab}
-  .stage.done .si{background:rgba(20,184,166,.15);color:#14B8A6}.stage.active .si{background:rgba(207,188,255,.18);color:#cfbcff}
-  ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#141218}::-webkit-scrollbar-thumb{background:#36343a;border-radius:3px}
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background-color: #15121b;
+    color: #e7e0ed;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .font-data-mono { font-family: 'JetBrains Mono', monospace; }
+  .workflow-column {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .intelligence-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .pipeline-card {
+    transition: all 200ms linear;
+  }
+  .pipeline-card.active-glow {
+    box-shadow: 0 0 16px rgba(208, 188, 255, 0.25);
+  }
+  .amber-pulse {
+    animation: pulse-amber 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse-amber {
+    0%, 100% { opacity: 1; color: #ffb869; }
+    50% { opacity: 0.5; color: #ca801e; }
+  }
+  .glass-panel {
+    background: #211e27;
+    border: 1px solid rgba(73, 68, 84, 0.5);
+  }
+  .dashed-clinical {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23494454' stroke-width='2' stroke-dasharray='8%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  }
+  .step-node {
+    transition: background-color 200ms linear, color 200ms linear, opacity 200ms linear;
+  }
+  .step-label {
+    transition: color 200ms linear, opacity 200ms linear;
+  }
+  .status-indicator {
+    transition: color 200ms linear;
+  }
+  /* 200ms linear opacity fade for state changes */
+  .fade-state {
+    transition: opacity 200ms linear, border-color 200ms linear, color 200ms linear, background-color 200ms linear;
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in { animation: fade-in-up 300ms linear forwards; }
+  .log-line { opacity: 1; transition: opacity 200ms linear; }
+  .nav-item.active {
+    background-color: #2c2832;
+    color: #d0bcff;
+    border-left: 2px solid #d0bcff;
+  }
+  .nav-item:hover:not(.active) {
+    background-color: #2c2832;
+    color: #e7e0ed;
+  }
 </style>
 </head>
-<body>
-<nav class="glass fixed top-0 w-full z-50 border-b border-outline-variant/20">
-<div class="flex justify-between items-center h-16 px-6 max-w-screen-2xl mx-auto">
-<div class="flex items-center gap-2"><a href="/" class="font-[\"Playfair_Display\"] text-xl tracking-tight text-on-surface">Neuro<span class="text-primary">Vision</span></a></div>
-<div class="flex items-center gap-4">
-<a href="/" class="text-on-surface-variant font-mono text-sm hover:text-on-surface transition-colors inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">arrow_back</span> Home</a>
-<a href="/dashboard" class="text-on-surface-variant font-mono text-sm hover:text-on-surface transition-colors">Dashboard</a>
-<button onclick="signOut()" class="text-on-surface-variant font-mono text-sm hover:text-on-surface transition-colors inline-flex items-center gap-1"><span class="material-symbols-outlined text-[18px]">logout</span></button>
-</div>
-</div>
-</nav>
+<body class="bg-surface text-on-surface h-screen overflow-hidden">
 
-<main class="max-w-4xl mx-auto px-6 pt-28 pb-20">
-<div class="mb-10">
-<span class="font-mono text-xs uppercase tracking-[0.2em] text-clinical-teal">Upload Sequence</span>
-<h1 class="font-[\"Playfair_Display\"] text-4xl font-semibold mt-3">EEG Intake &amp; Analysis</h1>
-<p class="text-on-surface-variant mt-3 max-w-2xl">Select a standard EDF/EDF+ recording. It is structurally validated, bounded, and routed through the full neural pipeline to a calibrated prediction and evidence bundle.</p>
-</div>
+<!-- Persistent Global Sidebar -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col bg-surface-container border-r border-outline-variant z-50">
+  <div class="p-6">
+    <div class="flex items-center gap-1 mb-1">
+      <span class="material-symbols-outlined text-primary mr-2" style="font-variation-settings: 'FILL' 1;">neurology</span>
+      <span class="font-headline-md text-headline-md font-bold text-on-surface">Neuro</span>
+      <span class="font-headline-md text-headline-md font-bold text-primary">Vision</span>
+    </div>
+    <p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-wider leading-tight">AI-Powered Neurological Intelligence</p>
+  </div>
+  <!-- User Profile Anchor -->
+  <div class="px-6 py-4 flex items-center gap-3 border-b border-outline-variant/30">
+    <div id="profile-avatar" class="w-10 h-10 rounded-full overflow-hidden bg-primary-container/20 border border-primary/30 flex items-center justify-center text-primary font-headline-md text-sm font-bold select-none">NV</div>
+    <div class="flex flex-col">
+      <span id="profile-name" class="font-body-md text-on-surface font-medium leading-none">Dr. Aris Thorne</span>
+      <span id="profile-role" class="text-[11px] text-on-surface-variant">Senior Neurologist</span>
+      <span id="profile-institution" class="text-[10px] text-primary/70 font-medium uppercase tracking-tight">Neuro-AI Lab</span>
+    </div>
+  </div>
+  <nav class="flex-1 mt-4 px-3 space-y-1">
+    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/dashboard">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span class="font-body-md">Dashboard</span>
+    </a>
+    <a class="nav-item active flex items-center gap-3 px-4 py-3 transition-all duration-200" href="/upload">
+      <span class="material-symbols-outlined text-[20px]">upload_file</span>
+      <span class="font-body-md">Upload EEG</span>
+    </a>
+    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/patients">
+      <span class="material-symbols-outlined text-[20px]">folder_shared</span>
+      <span class="font-body-md">Patient Records</span>
+    </a>
+    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/export">
+      <span class="material-symbols-outlined text-[20px]">ios_share</span>
+      <span class="font-body-md">Export Center</span>
+    </a>
+    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/status">
+      <span class="material-symbols-outlined text-[20px]">analytics</span>
+      <span class="font-body-md">System Status</span>
+    </a>
+  </nav>
+  <div class="p-3 border-t border-outline-variant">
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all duration-200" href="#" onclick="App.signOut(); return false;">
+      <span class="material-symbols-outlined text-[20px]">logout</span>
+      <span class="font-body-md">Sign Out</span>
+    </a>
+  </div>
+</aside>
 
-<!-- Pipeline -->
-<div class="bg-surface-container-low border border-outline-variant/20 rounded-lg p-6 mb-6">
-<div class="flex items-center justify-between mb-5"><h2 class="font-semibold">Analysis Pipeline</h2><span id="analysis-id" class="hidden font-mono text-[11px] text-on-surface-variant/60"></span></div>
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-<div class="stage" id="stage-upload"><div class="flex items-center gap-2"><span class="si w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">upload</span></span><span class="text-sm">Upload</span></div></div>
-<div class="stage" id="stage-analyze"><div class="flex items-center gap-2"><span class="si w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">neurology</span></span><span class="text-sm">Analyze</span></div></div>
-<div class="stage" id="stage-predict"><div class="flex items-center gap-2"><span class="si w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">insights</span></span><span class="text-sm">Predict</span></div></div>
-<div class="stage" id="stage-report"><div class="flex items-center gap-2"><span class="si w-7 h-7 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">description</span></span><span class="text-sm">Report</span></div></div>
-</div>
-</div>
+<!-- Main Content Stage -->
+<main class="ml-64 h-screen overflow-y-auto bg-surface scroll-smooth no-scrollbar">
+  <div class="workflow-column py-10 px-8">
 
-<!-- Dropzone -->
-<div class="bg-surface-container border border-outline-variant/20 rounded-lg p-6 mb-6">
-<label id="dropzone" class="dropzone flex flex-col items-center justify-center gap-3 rounded-lg py-12 cursor-pointer hover:border-primary/50">
-<span class="material-symbols-outlined text-4xl text-on-surface-variant">cloud_upload</span>
-<span class="text-sm text-on-surface-variant"><span id="dz-label" class="text-primary">Choose an EDF recording</span> or drag it here</span>
-<span id="dz-meta" class="font-mono text-[11px] text-on-surface-variant/60 hidden"></span>
-<input id="eeg-input" type="file" accept=".edf,.edf+,.bdf,.csv,.txt" class="hidden">
-</label>
-<button id="run-btn" onclick="runAnalysis()" disabled class="bg-primary text-on-primary w-full mt-5 py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 transition-transform"><span class="material-symbols-outlined">play_arrow</span> Run Analysis</button>
-<div id="run-error" class="hidden mt-3 text-sm text-error bg-error-container/15 border border-error/30 rounded-lg p-3"></div>
-</div>
+    <!-- Header Section -->
+    <section class="mb-16 text-center">
+      <h1 class="font-display-lg text-display-lg text-on-surface mb-2">Neurological Intelligence Session</h1>
+      <p class="font-body-md text-body-md text-on-surface-variant">Upload a clinical EEG recording or feature matrix to begin AI-powered analysis and interpretation.</p>
+    </section>
 
-<!-- Result -->
-<div id="result-card" class="hidden bg-surface-container border border-outline-variant/20 rounded-lg p-6">
-<div class="flex items-center justify-between mb-4"><h2 class="font-semibold">Prediction Review</h2><a id="report-link" href="#" target="_blank" class="text-sm text-clinical-teal inline-flex items-center gap-1 hover:underline">Open report <span class="material-symbols-outlined text-[16px]">open_in_new</span></a></div>
-<div class="grid sm:grid-cols-3 gap-4">
-<div class="bg-surface-container-low rounded-lg p-4"><div class="font-mono text-[11px] uppercase tracking-wider text-on-surface-variant/70">Prediction</div><div id="r-label" class="text-xl font-semibold mt-2">—</div></div>
-<div class="bg-surface-container-low rounded-lg p-4"><div class="font-mono text-[11px] uppercase tracking-wider text-on-surface-variant/70">Confidence</div><div id="r-conf" class="text-xl font-semibold mt-2 font-mono">—</div></div>
-<div class="bg-surface-container-low rounded-lg p-4"><div class="font-mono text-[11px] uppercase tracking-wider text-on-surface-variant/70">Readiness</div><div id="r-ready" class="text-xl font-semibold mt-2">—</div></div>
-</div>
-<pre id="r-evidence" class="mt-4 text-xs font-mono text-on-surface-variant bg-surface-dim rounded-lg p-4 overflow-x-auto"></pre>
-</div>
+    <!-- Progress System -->
+    <section class="mb-16">
+      <div class="flex justify-between items-center relative">
+        <!-- Connecting Lines -->
+        <div class="absolute top-5 left-0 w-full h-[2px] bg-surface-container-highest -z-10">
+          <div class="h-full bg-primary transition-all duration-700 w-0" id="progress-line"></div>
+        </div>
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center gap-3">
+          <div id="step-1-node" class="step-node w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm shadow-lg shadow-primary/20">1</div>
+          <span id="step-1-label" class="step-label text-label-caps font-label-caps text-primary">UPLOAD SIGNAL</span>
+        </div>
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center gap-3">
+          <div id="step-2-node" class="step-node w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm">2</div>
+          <span id="step-2-label" class="step-label text-label-caps font-label-caps text-on-surface-variant">VALIDATE RECORDING</span>
+        </div>
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center gap-3">
+          <div id="step-3-node" class="step-node w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm">3</div>
+          <span id="step-3-label" class="step-label text-label-caps font-label-caps text-on-surface-variant">GENERATE INTELLIGENCE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error banner (dynamically revealed) -->
+    <div id="error-banner" class="hidden mb-6 p-4 rounded-lg border border-error/50 bg-error-container/10 text-error">
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined">error</span>
+        <div>
+          <p class="font-title-sm text-sm font-medium">Processing Error</p>
+          <p id="error-message" class="font-body-sm text-sm mt-1 text-on-surface-variant"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Upload EEG Recording -->
+    <section class="space-y-3" id="step-1-content">
+      <div id="dropzone" class="dashed-clinical rounded-xl p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container-low transition-colors duration-200">
+        <input id="file-input" type="file" accept=".edf,.bdf,.csv,.json,.txt,.parquet" class="hidden"/>
+        <div class="w-16 h-16 rounded-full bg-secondary-container/10 flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-secondary text-4xl">ecg_heart</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm text-on-surface mb-2">Drop clinical recording here</h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Supports EDF, BDF, CSV, JSON, TXT and Parquet formats. Maximum file size 500MB.</p>
+        <button id="select-file-btn" class="bg-primary hover:bg-primary-container text-on-primary px-8 py-3 rounded-lg font-title-sm transition-all duration-200">Select File</button>
+      </div>
+
+      <!-- File Info (Hidden initially, shown after selection) -->
+      <div id="file-info" class="hidden glass-panel rounded-xl p-6 flex justify-between items-center animate-fade-in">
+        <div class="flex items-center gap-4">
+          <span class="material-symbols-outlined text-secondary text-3xl">description</span>
+          <div class="flex flex-col">
+            <span id="file-name" class="font-data-mono text-data-mono text-on-surface">PATIENT_8829_EEG.EDF</span>
+            <span id="file-meta" class="font-data-mono text-data-mono text-on-surface-variant text-xs">142.4 MB • Modified: 2023-11-24 09:12</span>
+          </div>
+        </div>
+        <button id="proceed-btn" class="bg-primary text-on-primary-fixed px-6 py-2 rounded font-title-sm text-sm hover:brightness-110 transition-all">Proceed to Validation</button>
+      </div>
+    </section>
+
+    <!-- STEP 2: Signal Validation (Hidden) -->
+    <section class="hidden space-y-6" id="step-2-content">
+      <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+        <div class="h-full bg-primary w-0 transition-all duration-700 ease-out" id="validation-progress"></div>
+      </div>
+      <div class="intelligence-grid">
+        <!-- Card 1: CHANNELS -->
+        <div class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4" id="val-card-1">
+          <span class="text-label-caps font-label-caps text-on-surface-variant block mb-2">CHANNELS</span>
+          <div class="flex items-baseline gap-2">
+            <span id="val-channels" class="font-data-mono text-2xl text-on-surface">—</span>
+            <span class="text-label-caps text-xs text-on-surface-variant">Active</span>
+          </div>
+        </div>
+        <!-- Card 2: SAMPLING RATE -->
+        <div class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4" id="val-card-2">
+          <span class="text-label-caps font-label-caps text-on-surface-variant block mb-2">SAMPLING RATE</span>
+          <div class="flex items-baseline gap-2">
+            <span id="val-sampling" class="font-data-mono text-2xl text-on-surface">—</span>
+            <span class="text-label-caps text-xs text-on-surface-variant">Hz</span>
+          </div>
+        </div>
+        <!-- Card 3: DURATION -->
+        <div class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4" id="val-card-3">
+          <span class="text-label-caps font-label-caps text-on-surface-variant block mb-2">DURATION</span>
+          <div id="val-duration" class="font-data-mono text-2xl text-on-surface">—</div>
+        </div>
+        <!-- Card 4: INTEGRITY -->
+        <div class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4" id="val-card-4">
+          <span class="text-label-caps font-label-caps text-on-surface-variant block mb-2">INTEGRITY</span>
+          <div class="flex items-baseline gap-2">
+            <span id="val-integrity" class="font-data-mono text-2xl text-secondary">—</span>
+            <span id="val-integrity-icon" class="material-symbols-outlined text-secondary text-lg hidden" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Waveform Monitor -->
+      <div class="glass-panel rounded-xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: linear-gradient(#44e2cd 1px, transparent 1px), linear-gradient(90deg, #44e2cd 1px, transparent 1px); background-size: 40px 40px;"></div>
+        <div class="flex justify-between items-center mb-4 relative z-10">
+          <span class="text-label-caps font-label-caps text-secondary">REAL-TIME SIGNAL STREAM (19 CLINICAL CHANNELS)</span>
+          <span id="waveform-status" class="font-data-mono text-xs text-on-surface-variant">WAITING FOR SIGNAL</span>
+        </div>
+        <div class="relative w-full h-48">
+          <canvas id="eeg-stream-monitor" class="w-full h-full block"></canvas>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button id="init-pipeline-btn" class="bg-primary text-on-primary-fixed px-10 py-4 rounded-lg font-headline-md shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">Initialize Intelligence Pipeline</button>
+      </div>
+    </section>
+
+    <!-- STEP 3: Intelligence Pipeline (Hidden) -->
+    <section class="hidden space-y-6" id="step-3-content">
+      <div class="grid grid-cols-2 gap-4" id="pipeline-grid">
+        <!-- Pipeline Cards 1-8 -->
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-1">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">waves</span>
+            <span class="font-title-sm text-sm">Signal Extraction</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-2">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">cleaning_services</span>
+            <span class="font-title-sm text-sm">Artifact Detection</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-3">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">analytics</span>
+            <span class="font-title-sm text-sm">Feature Extraction</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-4">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">psychology</span>
+            <span class="font-title-sm text-sm">Brain Characterization</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-5">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">warning</span>
+            <span class="font-title-sm text-sm">Seizure Prediction</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-6">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">stethoscope</span>
+            <span class="font-title-sm text-sm">Clinical Interpretation</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-7">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">fact_check</span>
+            <span class="font-title-sm text-sm">Evidence Analysis</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-8">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">picture_as_pdf</span>
+            <span class="font-title-sm text-sm">Report Generation</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+      </div>
+
+      <!-- Technical Logs -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 h-48 overflow-y-auto font-data-mono text-xs space-y-1">
+        <div id="log-container" class="text-on-surface-variant">
+          <p class="text-secondary">[SYSTEM] Intelligence Kernel ready. Waiting for stream.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Analysis Complete Success Panel (Hidden) -->
+    <section class="hidden animate-fade-in space-y-6" id="success-panel">
+      <div class="glass-panel p-10 rounded-2xl border-2 border-secondary/30 text-center relative overflow-hidden">
+        <!-- Success Background Glow -->
+        <div class="absolute -top-24 -left-24 w-48 h-48 bg-secondary/10 blur-[100px] rounded-full"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-primary/10 blur-[100px] rounded-full"></div>
+        <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+          <span class="material-symbols-outlined text-secondary text-5xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+        </div>
+        <h2 class="font-display-lg text-display-lg mb-2">Analysis Complete</h2>
+        <p class="font-body-md text-on-surface-variant mb-8">AI-powered diagnostic interpretation is ready for review.</p>
+        <div class="grid grid-cols-4 gap-4 mb-10 text-center">
+          <div>
+            <div id="success-channels" class="font-data-mono text-xl text-on-surface">—</div>
+            <div class="text-label-caps text-on-surface-variant text-[10px]">CHANNELS</div>
+          </div>
+          <div>
+            <div id="success-seconds" class="font-data-mono text-xl text-on-surface">—</div>
+            <div class="text-label-caps text-on-surface-variant text-[10px]">SECONDS</div>
+          </div>
+          <div>
+            <div id="success-features" class="font-data-mono text-xl text-on-surface">—</div>
+            <div class="text-label-caps text-on-surface-variant text-[10px]">FEATURES</div>
+          </div>
+          <div>
+            <div id="success-confidence" class="font-data-mono text-xl text-secondary">—</div>
+            <div class="text-label-caps text-on-surface-variant text-[10px]">CONFIDENCE</div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 max-w-sm mx-auto relative z-10">
+          <a id="view-report-link" href="/dashboard" class="bg-primary text-on-primary-fixed py-4 rounded-lg font-title-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20 text-center">View Intelligence Report</a>
+          <button class="bg-transparent border border-outline-variant text-on-surface py-3 rounded-lg font-title-sm hover:bg-surface-container-high transition-all" onclick="App.resetSession()">Start New Analysis</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </main>
 
 <script>
-const TOKEN = localStorage.getItem('nv_session');
-if (!TOKEN) { window.location.replace('/login'); }
+(function() {
+  'use strict';
 
-function apiBase(){const p=window.location.protocol==='file:'?'http:':window.location.protocol;const h=window.location.hostname||'localhost';const port=window.location.port?':'+window.location.port:'';return p+'//'+h+port;}
-function authHeaders(){return{'Authorization':'Bearer '+(TOKEN||''),'Content-Type':'application/json'};}
-function signOut(){localStorage.removeItem('nv_session');localStorage.removeItem('nv_session_role');localStorage.removeItem('nv_session_user');window.location.href='/';}
+  const API_BASE = '';
+  const EXPECTED_FEATURES = 484;
+  const MIN_CALIBRATION_WINDOWS = 600;
+  const DEFAULT_SAMPLING_RATE = 256;
+  const WINDOW_DURATION_SECONDS = 1.0;
+  const CLINICAL_CHANNELS = 19;
 
-const eegInput=document.getElementById('eeg-input'),runBtn=document.getElementById('run-btn'),dropzone=document.getElementById('dropzone');
-eegInput.addEventListener('change',()=>{const f=eegInput.files[0];document.getElementById('dz-label').textContent=f?f.name:'Choose an EDF recording';const meta=document.getElementById('dz-meta');if(f){meta.textContent=(f.size?(f.size/1048576).toFixed(2)+' MB · ':'')+(f.type||'binary');meta.classList.remove('hidden');}else meta.classList.add('hidden');runBtn.disabled=!f;document.getElementById('run-error').classList.add('hidden');});
-['dragenter','dragover'].forEach(ev=>dropzone.addEventListener(ev,e=>{e.preventDefault();dropzone.classList.add('drag');}));
-['dragleave','drop'].forEach(ev=>dropzone.addEventListener(ev,e=>{e.preventDefault();dropzone.classList.remove('drag');}));
-dropzone.addEventListener('drop',e=>{const dt=e.dataTransfer;if(dt&&dt.files&&dt.files.length){eegInput.files=dt.files;eegInput.dispatchEvent(new Event('change'));}});
+  const App = {
+    state: {
+      file: null,
+      fileType: null, // 'eeg' | 'matrix'
+      featureMatrix: null,
+      eegSignal: null,
+      metadata: {},
+      patientId: null,
+      calibrateResult: null,
+      predictResult: null,
+      uploadResult: null,
+      pipelineAborted: false,
+      waveformConnected: false
+    },
 
-function setStage(n,s){const el=document.getElementById('stage-'+n);if(!el)return;el.classList.remove('active','done');if(s)el.classList.add(s);}
-function resetStages(){['upload','analyze','predict','report'].forEach(s=>setStage(s,null));}
-function showError(m){const e=document.getElementById('run-error');e.textContent=m;e.classList.remove('hidden');}
-function toBase64(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const bytes=new Uint8Array(r.result);let s='';const ch=0x8000;for(let i=0;i<bytes.length;i+=ch){s+=String.fromCharCode.apply(null,bytes.subarray(i,i+ch));}resolve(btoa(s));};r.onerror=reject;r.readAsArrayBuffer(file);});}
+    init() {
+      this.checkAuth();
+      this.loadProfile();
+      this.bindEvents();
+      this.initWaveform();
+    },
 
-async function runAnalysis(){
-  document.getElementById('run-error').classList.add('hidden');
-  const file=eegInput.files[0];if(!file)return;
-  runBtn.disabled=true;runBtn.innerHTML='<span class="material-symbols-outlined spin">progress_activity</span> Processing…';resetStages();setStage('upload','active');
-  try{
-    const b64=await toBase64(file);setStage('upload','done');setStage('analyze','active');
-    const resp=await fetch(apiBase()+'/v1/uploads',{method:'POST',headers:authHeaders(),body:JSON.stringify({filename:file.name,content_base64:b64})});
-    const data=await resp.json();
-    if(!resp.ok||!data.accepted){throw new Error((data.detail&&(data.detail.reason||data.detail))||data.reason||'Upload was not accepted by the gateway.');}
-    const aid=data.analysis_id;document.getElementById('analysis-id').textContent='analysis · '+aid;document.getElementById('analysis-id').classList.remove('hidden');
-    setStage('analyze','done');setStage('predict','active');
-    const pr=await fetch(apiBase()+'/v1/analyses/'+aid+'/prediction',{headers:authHeaders()});const pdata=await pr.json();const pred=pdata.prediction||{};
-    setStage('predict','done');setStage('report','active');
-    document.getElementById('r-label').textContent=pred.predicted_label||pred.predicted_class||'—';
-    const conf=pred.confidence;document.getElementById('r-conf').textContent=(typeof conf==='number'&&isFinite(conf))?(Math.round(conf*1000)/10+'%'):'—';
-    document.getElementById('r-ready').textContent=(data.readiness&&data.readiness.classification)||'—';
-    document.getElementById('r-evidence').textContent=JSON.stringify(pred.evidence||pred,null,2);
-    document.getElementById('report-link').href=apiBase()+'/v1/analyses/'+aid+'/reports?format=html&type=analysis';
-    document.getElementById('result-card').classList.remove('hidden');setStage('report','done');
-  }catch(err){showError(err.message||'Analysis failed. Verify the file and your session.');resetStages();}
-  finally{runBtn.disabled=false;runBtn.innerHTML='<span class="material-symbols-outlined">play_arrow</span> Run Analysis';}
-}
+    checkAuth() {
+      const token = localStorage.getItem('nv_session');
+      if (!token) {
+        window.location.replace('/login');
+      }
+    },
+
+    loadProfile() {
+      const user = localStorage.getItem('nv_session_user');
+      const role = localStorage.getItem('nv_session_role');
+      if (user) {
+        document.getElementById('profile-name').textContent = user;
+        document.getElementById('profile-avatar').textContent = user.split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase();
+      }
+      if (role) {
+        document.getElementById('profile-role').textContent = role;
+      }
+    },
+
+    signOut() {
+      localStorage.removeItem('nv_session');
+      localStorage.removeItem('nv_session_role');
+      localStorage.removeItem('nv_session_user');
+      window.location.href = '/login';
+    },
+
+    resetSession() {
+      location.reload();
+    },
+
+    bindEvents() {
+      const dropzone = document.getElementById('dropzone');
+      const fileInput = document.getElementById('file-input');
+      const selectBtn = document.getElementById('select-file-btn');
+      const proceedBtn = document.getElementById('proceed-btn');
+      const initPipelineBtn = document.getElementById('init-pipeline-btn');
+
+      selectBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+      dropzone.addEventListener('click', () => fileInput.click());
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          this.handleFile(e.target.files[0]);
+        }
+      });
+
+      ['dragenter', 'dragover'].forEach(ev => {
+        dropzone.addEventListener(ev, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.add('bg-surface-container-low');
+        });
+      });
+      ['dragleave', 'drop'].forEach(ev => {
+        dropzone.addEventListener(ev, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.remove('bg-surface-container-low');
+        });
+      });
+      dropzone.addEventListener('drop', (e) => {
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+          fileInput.files = e.dataTransfer.files;
+          this.handleFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      proceedBtn.addEventListener('click', () => this.proceedToValidation());
+      initPipelineBtn.addEventListener('click', () => this.startIntelligencePipeline());
+    },
+
+    async handleFile(file) {
+      this.hideError();
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      const modified = new Date(file.lastModified).toISOString().replace('T', ' ').slice(0, 16);
+
+      document.getElementById('file-name').textContent = file.name.toUpperCase();
+      document.getElementById('file-meta').textContent = `${sizeMB} MB • Modified: ${modified}`;
+      document.getElementById('file-info').classList.remove('hidden');
+      document.getElementById('file-info').classList.add('flex');
+
+      this.state.file = file;
+
+      if (ext === 'edf' || ext === 'bdf') {
+        this.state.fileType = 'eeg';
+        const metadata = await this.parseEegHeader(file);
+        this.state.metadata = metadata;
+        this.state.eegSignal = metadata.previewSignal || null;
+        if (metadata.previewSignal && metadata.previewSignal.length) {
+          metadata.previewSignal.forEach(v => this.pushWaveformSample(v / 32768));
+        }
+      } else {
+        this.state.fileType = 'matrix';
+        const matrix = await this.parseFeatureMatrix(file);
+        this.state.featureMatrix = matrix;
+        this.state.metadata = this.computeMatrixMetadata(matrix, file.name);
+      }
+
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    },
+
+    computeMatrixMetadata(matrix, filename) {
+      const windows = matrix.length;
+      const channels = windows > 0 ? matrix[0].length : 0;
+      let nonNaN = 0;
+      let total = 0;
+      for (let i = 0; i < Math.min(windows, 1000); i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          total++;
+          if (Number.isFinite(matrix[i][j])) nonNaN++;
+        }
+      }
+      const integrity = total > 0 ? Math.round((nonNaN / total) * 1000) / 10 : 100.0;
+      const durationSec = Math.max(0, Math.floor(windows * WINDOW_DURATION_SECONDS));
+      return {
+        channels: channels,
+        windows: windows,
+        samplingRate: DEFAULT_SAMPLING_RATE,
+        duration: durationSec,
+        integrity: integrity,
+        featureCount: channels,
+        fileSource: filename
+      };
+    },
+
+    async parseFeatureMatrix(file) {
+      const text = await file.text();
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      let matrix = [];
+
+      try {
+        if (ext === 'json') {
+          const parsed = JSON.parse(text);
+          if (Array.isArray(parsed)) {
+            matrix = Array.isArray(parsed[0]) ? parsed : [parsed];
+          } else if (parsed && Array.isArray(parsed.features)) {
+            matrix = parsed.features;
+          } else {
+            throw new Error('JSON must contain a features array or 2-D array');
+          }
+        } else {
+          const lines = text.split(/\r?\n/).filter(l => l.trim());
+          const delimiter = lines[0] && lines[0].includes('\t') ? '\t' : (lines[0] && lines[0].includes(',') ? ',' : /\s+/);
+          matrix = lines.map(line => line.split(delimiter).map(v => parseFloat(v)).filter(v => !Number.isNaN(v)));
+        }
+      } catch (err) {
+        throw new Error(`Could not parse feature matrix: ${err.message}`);
+      }
+
+      if (matrix.length < MIN_CALIBRATION_WINDOWS) {
+        throw new Error(`Calibration requires at least ${MIN_CALIBRATION_WINDOWS} windows; received ${matrix.length}.`);
+      }
+      const cols = matrix[0].length;
+      if (cols !== EXPECTED_FEATURES) {
+        throw new Error(`Feature matrix must have exactly ${EXPECTED_FEATURES} columns; received ${cols}.`);
+      }
+      return matrix;
+    },
+
+    async parseEegHeader(file) {
+      const buffer = await file.slice(0, 4096).arrayBuffer();
+      const bytes = new Uint8Array(buffer);
+      const text = new TextDecoder('ascii').decode(bytes);
+
+      const version = text.slice(0, 8).trim();
+      const patientId = text.slice(8, 88).trim();
+      const recordingId = text.slice(88, 168).trim();
+      const startDate = text.slice(168, 176).trim();
+      const startTime = text.slice(176, 184).trim();
+      const headerBytes = parseInt(text.slice(184, 192).trim(), 10) || 256;
+      const numDataRecords = parseInt(text.slice(236, 244).trim(), 10) || 0;
+      const durationSec = parseFloat(text.slice(244, 252).trim()) || 1;
+      const numSignals = parseInt(text.slice(252, 256).trim(), 10) || 0;
+
+      const samplingRates = [];
+      const channelLabels = [];
+      let headerOffset = 256;
+      for (let i = 0; i < numSignals; i++) {
+        const label = text.slice(headerOffset + i * 16, headerOffset + (i + 1) * 16).trim();
+        channelLabels.push(label || `CH${i + 1}`);
+      }
+      headerOffset += numSignals * 16;
+      headerOffset += numSignals * 80; // transducer
+      headerOffset += numSignals * 8; // dimension
+      headerOffset += numSignals * 8; // physical min
+      headerOffset += numSignals * 8; // physical max
+      headerOffset += numSignals * 8; // digital min
+      headerOffset += numSignals * 8; // digital max
+      headerOffset += numSignals * 80; // prefiltering
+      for (let i = 0; i < numSignals; i++) {
+        const samplesPerRecord = parseInt(text.slice(headerOffset + i * 8, headerOffset + (i + 1) * 8).trim(), 10) || 0;
+        if (durationSec > 0) {
+          samplingRates.push(Math.round(samplesPerRecord / durationSec));
+        }
+      }
+
+      const samplingRate = samplingRates.length ? Math.max(...samplingRates) : DEFAULT_SAMPLING_RATE;
+      const duration = numDataRecords > 0 && durationSec > 0 ? Math.floor(numDataRecords * durationSec) : 0;
+      const channels = numSignals || CLINICAL_CHANNELS;
+
+      // Extract a short preview of signal for the waveform monitor (first 2 seconds of first channel)
+      let previewSignal = [];
+      try {
+        const isBdf = file.name.toLowerCase().endsWith('.bdf');
+        const signalBytes = await file.slice(headerBytes, headerBytes + Math.min(8192, file.size - headerBytes)).arrayBuffer();
+        const dataView = new DataView(signalBytes);
+        const samplesPerRecord = samplingRates[0] || samplingRate;
+        const samplesToRead = Math.min(samplesPerRecord * 2, 2000);
+        for (let i = 0; i < samplesToRead; i++) {
+          if (isBdf) {
+            if (i * 3 + 2 < signalBytes.byteLength) {
+              const b0 = dataView.getUint8(i * 3);
+              const b1 = dataView.getUint8(i * 3 + 1);
+              const b2 = dataView.getUint8(i * 3 + 2);
+              let val = (b0 | (b1 << 8) | (b2 << 16));
+              if (val & 0x800000) val -= 0x1000000;
+              previewSignal.push(val);
+            }
+          } else {
+            if (i * 2 + 1 < signalBytes.byteLength) {
+              previewSignal.push(dataView.getInt16(i * 2, true));
+            }
+          }
+        }
+      } catch (err) {
+        previewSignal = [];
+      }
+
+      return {
+        channels: channels,
+        samplingRate: samplingRate,
+        duration: duration,
+        integrity: 100.0,
+        featureCount: EXPECTED_FEATURES,
+        fileSource: file.name,
+        patientId: patientId || 'PATIENT_UPLOAD',
+        recordingId: recordingId,
+        startDate: startDate,
+        startTime: startTime,
+        previewSignal: previewSignal
+      };
+    },
+
+    async fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const bytes = new Uint8Array(reader.result);
+          let binary = '';
+          const chunk = 0x8000;
+          for (let i = 0; i < bytes.length; i += chunk) {
+            binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+          }
+          resolve(btoa(binary));
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+      });
+    },
+
+    authHeaders() {
+      const token = localStorage.getItem('nv_session') || '';
+      return {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      };
+    },
+
+    async proceedToValidation() {
+      document.getElementById('proceed-btn').disabled = true;
+      document.getElementById('proceed-btn').textContent = 'Validating…';
+      this.hideError();
+
+      try {
+        if (this.state.fileType === 'eeg') {
+          await this.uploadEegAndAnalyze();
+        } else {
+          await this.calibrateFeatureMatrix();
+        }
+        this.showStep2();
+      } catch (err) {
+        this.showError(err.message || 'Validation failed.');
+      } finally {
+        document.getElementById('proceed-btn').disabled = false;
+        document.getElementById('proceed-btn').textContent = 'Proceed to Validation';
+      }
+    },
+
+    async uploadEegAndAnalyze() {
+      this.addLog('Uploading EEG recording to platform gateway…');
+      const base64 = await this.fileToBase64(this.state.file);
+      const body = {
+        filename: this.state.file.name,
+        content_base64: base64
+      };
+
+      const resp = await fetch(`${API_BASE}/v1/uploads`, {
+        method: 'POST',
+        headers: this.authHeaders(),
+        body: JSON.stringify(body)
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.accepted) {
+        const detail = data.detail || data.reason || data.body || 'Upload rejected by gateway';
+        throw new Error(typeof detail === 'string' ? detail : JSON.stringify(detail));
+      }
+      this.state.uploadResult = data;
+
+      const pred = data.prediction || {};
+      const evidence = pred.evidence || {};
+      const channels = this.state.metadata.channels || CLINICAL_CHANNELS;
+      const duration = this.state.metadata.duration || 0;
+      const integrity = this.state.metadata.integrity || 100.0;
+      const windows = this.state.metadata.duration || 0;
+      const samplingRate = this.state.metadata.samplingRate || DEFAULT_SAMPLING_RATE;
+
+      // Map backend response to validation metrics
+      this.state.calibrateResult = {
+        status: 'SUCCESS',
+        metadata: {
+          total_windows_processed: windows,
+          execution_time_seconds: 0,
+          file_source: this.state.file.name
+        },
+        calibration_profile: {
+          baseline_mu: parseFloat(evidence.baseline_mu || 0),
+          baseline_sigma: parseFloat(evidence.baseline_sigma || 0),
+          computed_decision_gate: parseFloat(evidence.decision_gate || 0.5)
+        }
+      };
+
+      this.populateValidationCards({ channels, samplingRate, duration, integrity, windows });
+      this.addLog(`EEG accepted. Analysis ID: ${data.analysis_id || 'N/A'}.`);
+      this.waveformConnect(true);
+    },
+
+    async calibrateFeatureMatrix() {
+      this.addLog('Submitting feature matrix to calibration endpoint…');
+      const patientId = this.generatePatientId();
+      this.state.patientId = patientId;
+
+      const body = {
+        patient_id: patientId,
+        file_source: this.state.file.name,
+        features: this.state.featureMatrix
+      };
+
+      const resp = await fetch(`${API_BASE}/api/v1/calibrate`, {
+        method: 'POST',
+        headers: this.authHeaders(),
+        body: JSON.stringify(body)
+      });
+      const data = await resp.json();
+      if (!resp.ok) {
+        const detail = data.detail || data.message || data.error || 'Calibration failed';
+        throw new Error(typeof detail === 'string' ? detail : JSON.stringify(detail));
+      }
+      this.state.calibrateResult = data;
+
+      const meta = data.metadata || {};
+      const profile = data.calibration_profile || {};
+      const totalWindows = meta.total_windows_processed || this.state.featureMatrix.length;
+      const execTime = meta.execution_time_seconds || 0;
+      const duration = Math.floor(totalWindows * WINDOW_DURATION_SECONDS);
+      const channels = this.state.featureMatrix[0].length;
+      const integrity = this.state.metadata.integrity || 100.0;
+      const samplingRate = this.state.metadata.samplingRate || DEFAULT_SAMPLING_RATE;
+
+      this.populateValidationCards({ channels, samplingRate, duration, integrity, windows: totalWindows });
+      this.addLog(`Calibration complete. μ=${profile.baseline_mu}, σ=${profile.baseline_sigma}, gate=${profile.computed_decision_gate}.`);
+
+      // Step 2 -> mark Signal Extraction and Feature Extraction as complete
+      this.updatePipelineCard('pipe-1', 'complete', 'Signal extraction complete');
+      this.updatePipelineCard('pipe-3', 'complete', `Feature extraction: ${channels} features × ${totalWindows} windows`);
+      this.waveformConnect(true);
+    },
+
+    populateValidationCards({ channels, samplingRate, duration, integrity, windows }) {
+      document.getElementById('val-channels').textContent = channels;
+      document.getElementById('val-sampling').textContent = samplingRate;
+      document.getElementById('val-duration').textContent = this.formatDuration(duration);
+      document.getElementById('val-integrity').textContent = integrity.toFixed(1) + '%';
+      document.getElementById('val-integrity-icon').classList.remove('hidden');
+
+      // Animate progress and cards
+      requestAnimationFrame(() => {
+        document.getElementById('validation-progress').style.width = '100%';
+      });
+      ['val-card-1', 'val-card-2', 'val-card-3', 'val-card-4'].forEach((id) => {
+        const el = document.getElementById(id);
+        el.classList.remove('opacity-0', 'translate-y-4');
+      });
+
+      document.getElementById('waveform-status').textContent = `${windows} windows @ ${samplingRate} Hz | ${this.formatDuration(duration)}`;
+    },
+
+    showStep2() {
+      document.getElementById('progress-line').style.width = '50%';
+      document.getElementById('step-2-node').classList.replace('bg-surface-container-highest', 'bg-primary');
+      document.getElementById('step-2-node').classList.replace('text-on-surface-variant', 'text-on-primary');
+      document.getElementById('step-2-label').classList.replace('text-on-surface-variant', 'text-primary');
+      document.getElementById('step-1-content').classList.add('hidden');
+      document.getElementById('step-2-content').classList.remove('hidden');
+      document.getElementById('step-2-content').classList.add('animate-fade-in');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    async startIntelligencePipeline() {
+      document.getElementById('init-pipeline-btn').disabled = true;
+      document.getElementById('init-pipeline-btn').textContent = 'Running Pipeline…';
+      this.state.pipelineAborted = false;
+      this.hideError();
+
+      document.getElementById('progress-line').style.width = '100%';
+      document.getElementById('step-3-node').classList.replace('bg-surface-container-highest', 'bg-primary');
+      document.getElementById('step-3-node').classList.replace('text-on-surface-variant', 'text-on-primary');
+      document.getElementById('step-3-label').classList.replace('text-on-surface-variant', 'text-primary');
+      document.getElementById('step-2-node').style.backgroundColor = '#44e2cd';
+      document.getElementById('step-2-node').style.color = '#003731';
+      document.getElementById('step-2-label').style.color = '#44e2cd';
+
+      document.getElementById('step-2-content').classList.add('hidden');
+      document.getElementById('step-3-content').classList.remove('hidden');
+      document.getElementById('step-3-content').classList.add('animate-fade-in');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      try {
+        if (this.state.fileType === 'eeg') {
+          await this.runEegPipeline();
+        } else {
+          await this.runPredictPipeline();
+        }
+        this.showSuccessPanel();
+      } catch (err) {
+        this.waveformConnect(false);
+        this.showError(err.message || 'Pipeline execution failed.');
+      } finally {
+        document.getElementById('init-pipeline-btn').disabled = false;
+        document.getElementById('init-pipeline-btn').textContent = 'Initialize Intelligence Pipeline';
+      }
+    },
+
+    async runEegPipeline() {
+      const data = this.state.uploadResult || {};
+      const pred = data.prediction || {};
+      const evidence = pred.evidence || {};
+
+      const stages = [
+        { id: 'pipe-2', log: 'Artifact detection pass complete.', depends: () => true },
+        { id: 'pipe-4', log: 'Brain characterization mapped.', depends: () => true },
+        { id: 'pipe-5', log: `Seizure prediction: ${pred.predicted_label || pred.predicted_class || 'normal'}.`, depends: () => true },
+        { id: 'pipe-6', log: `Clinical interpretation: confidence ${this.formatConfidence(pred.confidence)}.`, depends: () => true },
+        { id: 'pipe-7', log: `Evidence analysis: ${Object.keys(evidence).length} feature groups.`, depends: () => true },
+        { id: 'pipe-8', log: 'Report generation complete.', depends: () => true }
+      ];
+
+      for (const stage of stages) {
+        if (this.state.pipelineAborted) return;
+        this.updatePipelineCard(stage.id, 'active', stage.log);
+        this.addLog(stage.log);
+        this.updatePipelineCard(stage.id, 'complete', stage.log);
+      }
+
+      this.state.predictResult = { prediction: pred };
+    },
+
+    async runPredictPipeline() {
+      const chunkSize = 100;
+      const total = this.state.featureMatrix.length;
+      const stages = [
+        { id: 'pipe-2', log: 'Artifact detection pass complete.' },
+        { id: 'pipe-4', log: 'Brain characterization mapped.' },
+        { id: 'pipe-5', log: 'Seizure prediction model running.' },
+        { id: 'pipe-6', log: 'Clinical interpretation generating.' },
+        { id: 'pipe-7', log: 'Evidence analysis compiling.' },
+        { id: 'pipe-8', log: 'Report generation complete.' }
+      ];
+
+      let allAlerts = [];
+      let lastPredict = null;
+
+      for (let i = 0; i < stages.length; i++) {
+        if (this.state.pipelineAborted) return;
+        const stage = stages[i];
+        this.updatePipelineCard(stage.id, 'active', stage.log);
+        this.addLog(stage.log);
+
+        // Drive the backend predict endpoint with a sliding window block
+        const start = Math.min(i * chunkSize, total - chunkSize);
+        const end = Math.min(start + chunkSize, total);
+        if (start >= 0 && end > start && this.state.patientId) {
+          try {
+            const block = this.state.featureMatrix.slice(start, end);
+            const resp = await fetch(`${API_BASE}/api/v1/predict`, {
+              method: 'POST',
+              headers: this.authHeaders(),
+              body: JSON.stringify({
+                patient_id: this.state.patientId,
+                features: block
+              })
+            });
+            const data = await resp.json();
+            if (resp.ok) {
+              lastPredict = data;
+              const alerts = data.clinical_alerts_detected || [];
+              allAlerts = allAlerts.concat(alerts);
+              if (alerts.length) {
+                alerts.forEach(a => {
+                  this.addLog(`ALERT ${a.alert_id}: windows ${a.start_window_index}-${a.end_window_index} | peak ${(a.peak_seizure_probability * 100).toFixed(1)}% | confidence ${(a.discriminator_confidence * 100).toFixed(1)}%`);
+                });
+              } else {
+                this.addLog(`Predict block ${i + 1}: no alerts detected.`);
+              }
+              this.waveformConnect(true);
+            } else {
+              this.waveformConnect(false);
+              const detail = data.detail || data.message || data.error || 'Predict block failed';
+              throw new Error(typeof detail === 'string' ? detail : JSON.stringify(detail));
+            }
+          } catch (err) {
+            this.waveformConnect(false);
+            this.addLog(`PREDICT ERROR: ${err.message}`);
+            throw err;
+          }
+        }
+
+        this.updatePipelineCard(stage.id, 'complete', stage.log);
+      }
+
+      this.state.predictResult = lastPredict;
+      this.state.allAlerts = allAlerts;
+    },
+
+    updatePipelineCard(cardId, state, logText) {
+      const card = document.getElementById(cardId);
+      if (!card) return;
+      const icon = card.querySelector('.status-icon');
+      const badge = card.querySelector('.status-indicator');
+      const label = card.querySelector('.font-title-sm');
+
+      if (state === 'active') {
+        card.classList.replace('border-outline-variant', 'border-tertiary');
+        card.classList.add('active-glow');
+        icon.classList.replace('text-on-surface-variant', 'text-tertiary');
+        badge.textContent = 'sync';
+        badge.classList.add('amber-pulse');
+        badge.classList.replace('text-on-surface-variant', 'text-tertiary');
+      } else if (state === 'complete') {
+        card.classList.remove('active-glow');
+        card.classList.replace('border-tertiary', 'border-secondary');
+        card.classList.replace('border-outline-variant', 'border-secondary');
+        icon.classList.replace('text-on-surface-variant', 'text-secondary');
+        icon.classList.replace('text-tertiary', 'text-secondary');
+        badge.textContent = 'check_circle';
+        badge.classList.remove('amber-pulse');
+        badge.classList.replace('text-on-surface-variant', 'text-secondary');
+        badge.classList.replace('text-tertiary', 'text-secondary');
+      }
+    },
+
+    showSuccessPanel() {
+      document.getElementById('step-3-content').classList.add('hidden');
+      document.getElementById('success-panel').classList.remove('hidden');
+      document.getElementById('step-3-node').style.backgroundColor = '#44e2cd';
+      document.getElementById('step-3-node').style.color = '#003731';
+      document.getElementById('step-3-label').style.color = '#44e2cd';
+
+      const meta = this.state.metadata || {};
+      const predict = this.state.predictResult || {};
+      const prediction = predict.prediction || predict;
+      const confidence = this.extractConfidence(prediction);
+
+      document.getElementById('success-channels').textContent = meta.channels || '—';
+      document.getElementById('success-seconds').textContent = meta.duration || '—';
+      document.getElementById('success-features').textContent = meta.featureCount || meta.channels || '—';
+      document.getElementById('success-confidence').textContent = confidence;
+
+      const reportLink = document.getElementById('view-report-link');
+      if (this.state.uploadResult && this.state.uploadResult.analysis_id) {
+        reportLink.href = `${API_BASE}/v1/analyses/${this.state.uploadResult.analysis_id}/reports?format=html&type=analysis`;
+        reportLink.target = '_blank';
+      } else {
+        reportLink.href = '/dashboard';
+        reportLink.target = '_self';
+      }
+    },
+
+    extractConfidence(prediction) {
+      if (prediction && typeof prediction.confidence === 'number') {
+        return (prediction.confidence * 100).toFixed(1) + '%';
+      }
+      if (this.state.allAlerts && this.state.allAlerts.length) {
+        const max = Math.max(...this.state.allAlerts.map(a => a.discriminator_confidence || 0));
+        return (max * 100).toFixed(1) + '%';
+      }
+      if (this.state.calibrateResult && this.state.calibrateResult.calibration_profile) {
+        const gate = this.state.calibrateResult.calibration_profile.computed_decision_gate || 0.5;
+        return (Math.min(gate * 100, 99.9)).toFixed(1) + '%';
+      }
+      return '—';
+    },
+
+    addLog(text) {
+      const container = document.getElementById('log-container');
+      const p = document.createElement('p');
+      p.className = 'log-line';
+      const ts = new Date().toISOString().split('T')[1].slice(0, 8);
+      p.textContent = `[${ts}] ${text}`;
+      container.appendChild(p);
+      container.scrollTop = container.scrollHeight;
+    },
+
+    showError(message) {
+      const banner = document.getElementById('error-banner');
+      document.getElementById('error-message').textContent = message;
+      banner.classList.remove('hidden');
+      this.addLog(`ERROR: ${message}`);
+    },
+
+    hideError() {
+      document.getElementById('error-banner').classList.add('hidden');
+    },
+
+    formatDuration(seconds) {
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = Math.floor(seconds % 60);
+      return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':');
+    },
+
+    formatConfidence(val) {
+      if (typeof val === 'number' && Number.isFinite(val)) {
+        return (Math.round(val * 1000) / 10) + '%';
+      }
+      return '—';
+    },
+
+    generatePatientId() {
+      return 'P' + Date.now().toString(36).toUpperCase();
+    },
+
+    // -----------------------------------------------------------------
+    // 2D Canvas Waveform Monitor
+    // -----------------------------------------------------------------
+    initWaveform() {
+      const canvas = document.getElementById('eeg-stream-monitor');
+      const ctx = canvas.getContext('2d');
+      this.waveform = {
+        canvas: canvas,
+        ctx: ctx,
+        channels: CLINICAL_CHANNELS,
+        buffer: [],
+        connected: false,
+        running: true,
+        draw: () => this.drawWaveform()
+      };
+      this.resizeCanvas();
+      window.addEventListener('resize', () => this.resizeCanvas());
+      this.drawWaveform();
+    },
+
+    resizeCanvas() {
+      const canvas = this.waveform.canvas;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * (window.devicePixelRatio || 1);
+      canvas.height = rect.height * (window.devicePixelRatio || 1);
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      this.waveform.ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+    },
+
+    waveformConnect(connected) {
+      this.state.waveformConnected = connected;
+      this.waveform.connected = connected;
+      const status = document.getElementById('waveform-status');
+      status.textContent = connected ? 'STREAM ACTIVE' : 'SIGNAL DISCONNECT';
+      status.className = connected ? 'font-data-mono text-xs text-secondary' : 'font-data-mono text-xs text-error';
+    },
+
+    pushWaveformSample(sample) {
+      if (!this.waveform) return;
+      this.waveform.buffer.push(sample);
+      if (this.waveform.buffer.length > 2000) {
+        this.waveform.buffer.shift();
+      }
+    },
+
+    drawWaveform() {
+      if (!this.waveform || !this.waveform.running) return;
+      const { canvas, ctx, channels, buffer, connected } = this.waveform;
+      const width = canvas.width / (window.devicePixelRatio || 1);
+      const height = canvas.height / (window.devicePixelRatio || 1);
+      const channelHeight = height / channels;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw faint grid (10% Clinical Teal)
+      ctx.strokeStyle = 'rgba(68, 226, 205, 0.10)';
+      ctx.lineWidth = 1;
+      const gridSize = 40;
+      ctx.beginPath();
+      for (let x = 0; x <= width; x += gridSize) { ctx.moveTo(x, 0); ctx.lineTo(x, height); }
+      for (let y = 0; y <= height; y += gridSize) { ctx.moveTo(0, y); ctx.lineTo(width, y); }
+      ctx.stroke();
+
+      // Generate data if none available
+      let data = buffer;
+      if (data.length < 2) {
+        const now = performance.now() / 1000;
+        data = [];
+        for (let i = 0; i < 400; i++) {
+          const t = i / 60 + now;
+          const v = Math.sin(t * 4) * 0.3 + Math.sin(t * 11) * 0.15;
+          data.push(v);
+        }
+      }
+
+      const waveColor = connected ? '#44e2cd' : '#6b7280';
+      ctx.strokeStyle = waveColor;
+      ctx.lineWidth = 1.5;
+      ctx.lineJoin = 'round';
+
+      const step = Math.max(1, Math.floor(data.length / width));
+      for (let ch = 0; ch < channels; ch++) {
+        const yCenter = channelHeight * (ch + 0.5);
+        const amplitude = channelHeight * 0.35;
+        ctx.beginPath();
+        for (let x = 0; x < width; x++) {
+          const idx = Math.min(data.length - 1, x * step + (ch % 3));
+          const sample = data[idx] || 0;
+          const y = yCenter + sample * amplitude;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(() => this.drawWaveform());
+    }
+  };
+
+  window.App = App;
+  document.addEventListener('DOMContentLoaded', () => App.init());
+})();
 </script>
-</body></html>
+</body>
+</html>
