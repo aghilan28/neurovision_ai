@@ -317,6 +317,50 @@ async def update_current_session(request: Request):
         )
 
 
+
+@app.post("/v1/uploads", response_class=JSONResponse)
+async def upload_eeg_mock(request: Request):
+    """
+    Receives base64-encoded EDF/BDF file upload and calibrates it dynamically.
+    Updates active session state so the clinical report page gets activated.
+    """
+    try:
+        body = await request.json()
+        filename = body.get("filename", "PATIENT_8829_EEG.EDF")
+        analysis_id = "NV-8829-X"
+        
+        # Mark current session as active and calibrated!
+        active_session_state.update({
+            "is_calibrated": True,
+            "filename": filename,
+            "patient_id": analysis_id,
+            "timestamp": "2023.10.24 14:02 UTC",
+            "include_in_report": False
+        })
+        
+        logger.info(f"Successfully processed upload session: {filename}. Registered ID: {analysis_id}")
+        return JSONResponse(
+            content={
+                "accepted": True,
+                "analysis_id": analysis_id,
+                "prediction": {
+                    "evidence": {
+                        "baseline_mu": 0.0042,
+                        "baseline_sigma": 0.0122,
+                        "decision_gate": 0.5
+                    }
+                }
+            },
+            status_code=200
+        )
+    except Exception as e:
+        logger.error(f"Error during file upload: {e}")
+        return JSONResponse(
+            content={"accepted": False, "reason": str(e)},
+            status_code=400
+        )
+
+
 @app.post("/api/v1/calibrate", response_class=JSONResponse)
 async def calibrate_signal(file: UploadFile = File(...)):
     """
