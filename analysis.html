@@ -1,324 +1,481 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NeuroVision | Clinical Intelligence Report</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            surface: "#16121b",
-            "surface-dim": "#16121b",
-            "surface-bright": "#3c3741",
-            "surface-container-lowest": "#100d15",
-            "surface-container-low": "#1e1a23",
-            "surface-container": "#221e27",
-            "surface-container-high": "#2d2736",
-            "surface-container-highest": "#38333d",
-            "on-surface": "#e8dfed",
-            "on-surface-variant": "#cbc3d7",
-            outline: "#958ea0",
-            "outline-variant": "#494454",
-            primary: "#d0bcff",
-            "on-primary": "#3c0091",
-            secondary: "#44e2cd",
-            "on-secondary": "#003731",
-            error: "#ffb4ab",
-            "on-error": "#690005",
-            background: "#16121b",
-            "on-background": "#e8dfed"
-          },
-          fontFamily: {
-            inter: ["Inter", "sans-serif"],
-            mono: ["JetBrains Mono", "monospace"]
-          }
+<!DOCTYPE html><html class="dark" lang="en" style="width: 1280px; height: 2772px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NeuroVision | Flagship Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#3c3741",
+                        "secondary-fixed": "#62fae3",
+                        "background": "#16121b",
+                        "secondary-fixed-dim": "#3cddc7",
+                        "primary-fixed": "#e9ddff",
+                        "surface-dim": "#16121b",
+                        "on-primary": "#3c0091",
+                        "error-container": "#93000a",
+                        "surface-tint": "#d0bcff",
+                        "on-primary-fixed": "#23005c",
+                        "surface-container-highest": "#38333d",
+                        "surface-container-lowest": "#100d15",
+                        "primary-container": "#a078ff",
+                        "on-secondary-fixed-variant": "#005047",
+                        "surface": "#16121b",
+                        "surface-container": "#221e27",
+                        "on-secondary-container": "#004d44",
+                        "primary-fixed-dim": "#d0bcff",
+                        "secondary-container": "#03c6b2",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffafd3",
+                        "on-background": "#e8dfed",
+                        "surface-container-high": "#2d2832",
+                        "inverse-surface": "#e8dfed",
+                        "on-tertiary-container": "#560038",
+                        "on-primary-container": "#340080",
+                        "on-tertiary-fixed": "#3d0026",
+                        "inverse-on-surface": "#332e38",
+                        "tertiary-container": "#e364a7",
+                        "primary": "#d0bcff",
+                        "surface-container-low": "#1e1a23",
+                        "on-tertiary": "#620040",
+                        "outline": "#958ea0",
+                        "inverse-primary": "#6d3bd7",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-tertiary-fixed-variant": "#85145a",
+                        "on-secondary-fixed": "#00201c",
+                        "outline-variant": "#494454",
+                        "secondary": "#44e2cd",
+                        "tertiary-fixed": "#ffd8e7",
+                        "surface-variant": "#38333d",
+                        "on-surface": "#e8dfed",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#003731",
+                        "on-surface-variant": "#cbc3d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "8px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    }
+                }
+            }
         }
-      }
+    </script>
+<style>
+        body {
+            background-color: #16121b; /* Level 0 Base */
+            color: #e8dfed;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e1a23;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #38333d;
+            border-radius: 10px;
+        }
+        .tonal-card {
+            background: #221e27; /* Level 1 */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .tonal-card:hover {
+            border-color: rgba(139, 92, 246, 0.3); /* Neural Violet */
+        }
+        .semi-gauge {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            overflow: hidden;
+        }
+        .gauge-bar {
+            width: 200px;
+            height: 200px;
+            border: 12px solid #38333d;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+        .gauge-fill {
+            position: absolute;
+            top: 0; left: 0;
+            width: 200px;
+            height: 200px;
+            border: 12px solid #8B5CF6;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-radius: 50%;
+            transform: rotate(calc(45deg + (0.734 * 180deg)));
+            transition: transform 1.5s ease-out;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    
+    .zebra-row:nth-child(even) { background-color: #2d2736 !important; }
+    .hover-bloom {
+        transition: border-color 300ms linear !important;
     }
-  </script>
-  <style>
-    body { background-color: #16121b; color: #e8dfed; font-family: 'Inter', sans-serif; }
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #44e2cd; font-weight: 500; }
-    .card-base { background-color: #25202b; border: 1px solid rgba(73, 68, 84, 0.25); border-radius: 8px; }
-    .card-inner { background-color: #1e1a23; border: 1px solid rgba(73, 68, 84, 0.25); border-radius: 6px; }
-    .chip { background-color: rgba(68, 226, 205, 0.10); color: #44e2cd; padding: 1px 6px; border-radius: 2px; font-weight: 500; font-size: 12px; }
-    .hover-bloom { transition: border-color 300ms linear, box-shadow 300ms linear; }
-    .hover-bloom:hover { border-color: rgba(208, 188, 255, 0.40); }
-    .sidebar-link { transition: all 150ms linear; }
-    .sidebar-active { background-color: rgba(68, 226, 205, 0.08); border-left: 2px solid #44e2cd; color: #e8dfed; }
-    .trust-bar-fill { transition: width 800ms cubic-bezier(0.4, 0, 0.2, 1); }
-    .zebra-row:nth-child(even) { background-color: #2d2736; }
+    .hover-bloom:hover, .hover-bloom:focus-within {
+        border-color: #d0bcff !important;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none !important; }
+    .no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
   </style>
 </head>
-<body class="min-h-screen flex overflow-hidden bg-surface">
-
-  <!-- LEFT SIDEBAR -->
-  <aside class="w-[280px] h-screen bg-surface-container border-r border-outline-variant/20 flex flex-col shrink-0 select-none z-30">
-    <div class="p-6 pb-4">
-      <div class="flex items-center gap-3 mb-8">
-        <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">neurology</span>
-        <span class="font-inter text-lg font-bold text-on-surface tracking-tight">NeuroVision</span>
-      </div>
-      <nav class="space-y-0.5">
-        <a href="/upload" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-r-lg text-on-surface-variant text-xs font-medium">
-          <span class="material-symbols-outlined text-base">monitoring</span>
-          <div class="flex flex-col leading-tight">
-            <span class="text-xs font-medium">Flagship Analysis</span>
-            <span class="font-mono text-[9px] text-on-surface-variant/60 tracking-wider">CLINICAL AI v4.2</span>
-          </div>
-        </a>
-        <a href="#seizure-assessment" class="sidebar-active sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-r-lg text-xs font-medium">
-          <span class="material-symbols-outlined text-base text-secondary">assessment</span>
-          <span>Seizure Assessment</span>
-        </a>
-        <a href="#clinical-narrative" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-r-lg text-on-surface-variant text-xs font-medium hover:bg-white/5">
-          <span class="material-symbols-outlined text-base">clinical_notes</span>
-          <span>Clinical Narrative</span>
-        </a>
-        <a href="#evidence-analysis" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-r-lg text-on-surface-variant text-xs font-medium hover:bg-white/5">
-          <span class="material-symbols-outlined text-base">science</span>
-          <span>Evidence Analysis</span>
-        </a>
-        <a href="#brain-intelligence" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-r-lg text-on-surface-variant text-xs font-medium hover:bg-white/5">
-          <span class="material-symbols-outlined text-base">psychology</span>
-          <span>Brain Intelligence</span>
-        </a>
-        <a href="#signal-intelligence" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-r-lg text-on-surface-variant text-xs font-medium hover:bg-white/5">
-          <span class="material-symbols-outlined text-base">waves</span>
-          <span>Signal Intelligence</span>
-        </a>
-        <a href="#case-intelligence" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-r-lg text-on-surface-variant text-xs font-medium hover:bg-white/5">
-          <span class="material-symbols-outlined text-base">folder_copy</span>
-          <span>Case Intelligence</span>
-        </a>
-      </nav>
+<body class="font-body-md text-body-md flex min-h-screen">
+<!-- SideNavBar (Authority: JSON & Context) -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] bg-[#221e27] border-r border-[#494454]/20 flex flex-col py-6 z-50">
+<div class="px-gutter mb-stack-lg">
+<h1 class="font-headline-md text-headline-md text-primary font-bold">NeuroVision</h1>
+<div class="flex items-center mt-2 space-x-3">
+<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Flagship Analysis</div>
+<div class="text-[10px] uppercase tracking-widest text-outline">Clinical AI v4.2</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="group flex items-center px-4 py-3 rounded transition-all text-secondary-fixed-dim font-bold border-r-2 border-primary bg-surface-container-highest" href="#assessment">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-label-md text-label-md">Seizure Assessment</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#narrative">
+<span class="material-symbols-outlined mr-3">description</span>
+<span class="font-label-md text-label-md">Clinical Narrative</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#evidence">
+<span class="material-symbols-outlined mr-3">query_stats</span>
+<span class="font-label-md text-label-md">Evidence Analysis</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#brain">
+<span class="material-symbols-outlined mr-3">psychology</span>
+<span class="font-label-md text-label-md">Brain Intelligence</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#signal">
+<span class="material-symbols-outlined mr-3">sensors</span>
+<span class="font-label-md text-label-md">Signal Intelligence</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#case">
+<span class="material-symbols-outlined mr-3">folder_shared</span>
+<span class="font-label-md text-label-md">Case Intelligence</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button id="btn-export-report" onclick="window.print()" class="w-full py-3 bg-[#d0bcff] text-[#3c0091] font-label-md text-label-md rounded-lg flex items-center justify-center space-x-2 active:scale-95 duration-100 mb-stack-md">
+<span class="material-symbols-outlined">ios_share</span>
+<span class="">Export Report</span>
+</button>
+<a class="flex items-center px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="/dashboard">
+<span class="material-symbols-outlined mr-3">arrow_back</span>
+<span class="font-label-md text-label-md">Back To Dashboard</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="flex-1 ml-[280px] h-screen overflow-y-auto no-scrollbar flex flex-col bg-[#16121b]">
+<!-- TopAppBar (Authority: JSON) -->
+<header class="sticky top-0 z-40 bg-surface-dim/80 backdrop-blur-md border-b border-white/10 h-16 flex items-center justify-between px-gutter">
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-2">
+<span class="font-label-md text-label-md text-outline">Patient ID:</span>
+<span id="hdr-pid" class="font-label-md text-label-md font-bold text-primary">NV-8829-X</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center space-x-2">
+<span class="font-label-md text-label-md text-outline">Date:</span>
+<span id="hdr-date" class="font-label-md text-label-md text-on-surface">2023.10.24 14:02 UTC</span>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="px-4 py-1.5 border border-primary text-primary font-label-md text-label-md rounded hover:bg-primary/10 transition-all">
+                    Export
+                </button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-white/10">
+<img class="w-full h-full object-cover" data-alt="A professional medical profile avatar of a neurologist in a dark clinic environment, soft atmospheric violet lighting, high detail photographic style, sophisticated dark neutral color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArVePL5mzWCOtDCeSLeKJ2Y1sGlQ-wH-DkVubs6A9dXf_2l8X3aAFgjOXuFk4TCOIsd-lc0CVVS56U7SxhI7uuQuIenPH-GFZg7PulrJgaiYuO8E19fn804gclPy1efXXxUmlezsQDVcPZWneJgqERJAlwT4TJZC2KXUXaWBPRQT-4p7G8aAdC1X_P87xBiUjNEHz9jKslrM4aQ7rwaST1UgN3LJFjBoD7-ytdtMNu8jexMpvT8qQe1_naDeSn5mWCBHEY0Mk3hvPe">
+</div>
+</div>
+</header>
+<!-- Analysis Stage -->
+<div class="flex-1 w-full max-w-[1400px] mx-auto p-gutter space-y-gutter custom-scrollbar overflow-y-auto">
+<!-- Section 1: Seizure Assessment -->
+<section class="fade-in" id="assessment" style="opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-error uppercase tracking-[0.2em] mb-1 block">Seizure Assessment</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Clinical Risk Assessment</h2>
+</div>
+<div class="tonal-card p-stack-lg flex flex-col md:flex-row items-center gap-stack-lg">
+<div class="flex flex-col items-center space-y-4"><div class="relative flex flex-col items-center">
+    <div class="relative w-48 h-48 flex items-center justify-center mb-4">
+        <!-- Background Track -->
+        <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="8" fill="transparent" class="text-surface-container-highest"></circle>
+            <!-- Active Risk Arc -->
+            <circle cx="50" cy="50" r="44" stroke="#EF4444" stroke-width="10" fill="transparent" stroke-dasharray="276.46" stroke-dashoffset="73.4" stroke-linecap="round" class="drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" style="stroke-dashoffset: calc(276.46 * (1 - 0.734));"></circle>
+        </svg>
+        <!-- Percentage Text -->
+        <div class="flex flex-col items-center justify-center z-10">
+            <span class="font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]">73.4%</span>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Probability</span>
+        </div>
     </div>
-    <div class="mt-auto p-6 border-t border-outline-variant/20 space-y-3">
-      <button onclick="window.print()" class="w-full bg-primary text-on-primary px-4 py-2.5 rounded font-medium text-xs hover:brightness-110 transition-all flex items-center justify-center gap-2">
-        <span class="material-symbols-outlined text-sm">download</span>
-        Export Report
-      </button>
-      <a href="/dashboard" class="w-full flex items-center justify-center gap-2 px-4 py-2 rounded text-xs font-medium text-on-surface-variant hover:bg-white/5 transition-all border border-outline-variant/20">
-        <span class="material-symbols-outlined text-sm">arrow_back</span>
-        Back to Dashboard
-      </a>
+    <!-- Badge and Trend -->
+    <div class="flex items-center space-x-4">
+        <span class="px-4 py-1.5 bg-error text-on-error font-label-sm text-label-sm rounded-full animate-pulse font-bold shadow-lg shadow-error/20">HIGH RISK</span>
+        <div class="flex flex-col items-start border-l border-white/10 pl-4">
+            <span class="text-[10px] text-outline uppercase font-label-sm mb-1">Trend</span>
+            <div class="flex items-end space-x-1 h-5">
+                <div class="w-1.5 bg-primary/20 h-1.5 rounded-full"></div>
+                <div class="w-1.5 bg-primary/40 h-2.5 rounded-full"></div>
+                <div class="w-1.5 bg-primary/60 h-3.5 rounded-full"></div>
+                <div class="w-1.5 bg-primary h-5 rounded-full shadow-[0_0_8px_rgba(208,188,255,0.5)]"></div>
+            </div>
+        </div>
     </div>
-  </aside>
+</div></div>
+<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+<div class="p-4 bg-surface-container-low rounded-lg border border-white/5">
+<div class="text-outline font-label-sm text-label-sm mb-1">Model Confidence</div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-headline-md font-bold text-secondary">94%</span>
 
-  <!-- MAIN STAGE -->
-  <main class="flex-1 h-screen overflow-y-auto no-scrollbar relative">
-    <!-- STICKY TOP HEADER -->
-    <header class="sticky top-0 z-40 bg-surface/90 backdrop-blur border-b border-outline-variant/20 px-8 py-3 flex justify-between items-center">
-      <div class="flex items-center gap-6">
-        <div class="flex items-center gap-2">
-          <span class="font-mono text-[10px] text-on-surface-variant tracking-widest uppercase">Patient ID:</span>
-          <span id="hdr-pid" class="font-mono text-xs text-on-surface font-bold">--</span>
-        </div>
-        <div class="w-px h-3 bg-outline-variant/40"></div>
-        <div class="flex items-center gap-2">
-          <span class="font-mono text-[10px] text-on-surface-variant tracking-widest uppercase">Date:</span>
-          <span id="hdr-date" class="font-mono text-xs text-on-surface">--</span>
-        </div>
-      </div>
-      <div class="flex items-center gap-3">
-        <button class="w-7 h-7 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" title="Help">
-          <span class="material-symbols-outlined text-base">help</span>
-        </button>
-        <button class="w-7 h-7 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" title="Settings">
-          <span class="material-symbols-outlined text-base">settings</span>
-        </button>
-        <button onclick="window.print()" class="bg-surface-container-high border border-outline-variant/30 text-on-surface px-3 py-1.5 rounded text-xs font-medium hover:border-primary/40 transition-all">
-          Export
-        </button>
-        <div class="w-7 h-7 rounded-full bg-surface-container-high border border-outline-variant/30 flex items-center justify-center cursor-pointer">
-          <span class="material-symbols-outlined text-xs text-on-surface-variant">person</span>
-        </div>
-      </div>
-    </header>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-white/5">
+<div class="text-outline font-label-sm text-label-sm mb-1">Prediction Stability</div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-headline-md font-bold text-primary">91%</span>
 
-    <!-- CONTENT -->
-    <div class="max-w-5xl mx-auto px-8 py-8 space-y-8">
-
-      <!-- SEIZURE ASSESSMENT HEADER -->
-      <section id="seizure-assessment" class="flex items-center justify-between">
-        <div>
-          <h1 class="font-inter text-xl font-semibold text-on-surface tracking-tight">Seizure Assessment</h1>
-          <p class="text-xs text-on-surface-variant mt-1">AI-augmented review of the submitted 24-hour ambulatory EEG recording.</p>
-        </div>
-        <div id="unlit-badge" class="hidden px-3 py-1 rounded border border-outline-variant/30 bg-surface-container-low text-on-surface-variant text-[10px] font-mono uppercase tracking-wider">
-          Awaiting Data
-        </div>
-      </section>
-
-      <!-- CLINICAL NARRATIVE -->
-      <section id="clinical-narrative" class="card-base p-6 hover-bloom">
-        <div class="flex items-start justify-between mb-4">
-          <div>
-            <div class="section-label mb-1">Clinical Narrative</div>
-            <h2 class="font-inter text-sm font-semibold text-on-surface">AI Neurological Interpretation</h2>
-          </div>
-          <div class="flex items-center gap-2">
-            <button id="btn-copy" type="button" class="flex items-center gap-2 px-3 py-2 rounded bg-surface-container-high border border-outline-variant/30 text-xs text-on-surface hover:border-primary/40 transition-all">
-              <span class="material-symbols-outlined text-sm">content_copy</span>
-              Copy Narrative
-            </button>
-            <button id="btn-include" type="button" class="flex items-center gap-2 px-3 py-2 rounded bg-surface-container-high border border-outline-variant/30 text-xs text-on-surface hover:border-primary/40 transition-all" onclick="toggleInclude()">
-              <span id="include-icon" class="material-symbols-outlined text-sm text-on-surface-variant">check_box_outline_blank</span>
-              <span id="include-text">Include In Report</span>
-            </button>
-          </div>
-        </div>
-        <div class="card-inner p-5">
-          <p id="narrative-text" class="text-[13px] text-on-surface-variant leading-[1.7]">
-            Loading clinical narrative...
-          </p>
-          <div class="mt-4 flex items-center justify-between border-t border-outline-variant/20 pt-3">
-            <span class="font-mono text-[9px] text-on-surface-variant/50 tracking-widest uppercase italic">Research Use Only</span>
-            <span class="font-mono text-[9px] text-on-surface-variant/50">Generated by Clinical AI v4.2 Core</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- EVIDENCE INTELLIGENCE -->
-      <section id="evidence-analysis" class="card-base p-6 hover-bloom">
-        <div class="mb-4">
-          <div class="section-label mb-1">Evidence Intelligence</div>
-          <h2 class="font-inter text-sm font-semibold text-on-surface">Why The AI Concluded This</h2>
-        </div>
-        <div class="h-8 rounded bg-[#2d2736] flex overflow-hidden mb-3" style="gap: 2px">
-          <div id="bar-supporting" class="h-full bg-primary/70 rounded-l" style="flex: 0 1 0%"></div>
-          <div id="bar-opposing" class="h-full bg-error/60 rounded-r" style="flex: 0 1 0%"></div>
-        </div>
-        <div class="flex justify-between mb-5">
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-semibold text-on-surface">Supporting Factors</span>
-            <span id="lbl-supporting" class="font-mono text-xs text-secondary font-bold">+0% Impact</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-semibold text-on-surface">Opposing Factors</span>
-            <span id="lbl-opposing" class="font-mono text-xs text-error font-bold">-0% Impact</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div id="list-supporting" class="space-y-3"></div>
-          <div id="list-opposing" class="space-y-3"></div>
-        </div>
-      </section>
-
-      <!-- BRAIN INTELLIGENCE -->
-      <section id="brain-intelligence" class="card-base p-6 hover-bloom">
-        <div class="mb-4">
-          <div class="section-label mb-1">Brain Intelligence</div>
-          <h2 class="font-inter text-sm font-semibold text-on-surface">Neural Characterization</h2>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-          <!-- Spectral Dominance (left, 5 cols) -->
-          <div class="lg:col-span-5 card-inner p-4">
-            <div class="flex justify-between items-center mb-3">
-              <span class="font-mono text-[9px] tracking-widest text-on-surface-variant uppercase font-bold">Spectral Dominance</span>
-              <span id="spectral-label" class="font-mono text-[9px] text-secondary tracking-wider">--</span>
-            </div>
-            <div id="spectral-grid" class="space-y-0.5"></div>
-          </div>
-          <!-- Topographical Map (center, 4 cols) -->
-          <div class="lg:col-span-4 card-inner p-4 flex items-center justify-center relative">
-            <canvas id="topo-canvas" class="w-full aspect-square"></canvas>
-          </div>
-          <!-- AI Localization Card (right, 3 cols) -->
-          <div class="lg:col-span-3 card-inner p-4 flex flex-col">
-            <div class="font-mono text-[9px] tracking-widest text-on-surface-variant uppercase font-bold mb-3">AI Localization Card</div>
-            <div class="mb-3">
-              <div class="text-[9px] text-on-surface-variant mb-0.5">Most Likely Origin</div>
-              <div id="loc-region" class="text-sm font-semibold text-on-surface leading-tight">--</div>
-            </div>
-            <div class="grid grid-cols-2 gap-3 mb-4">
-              <div>
-                <div class="text-[9px] text-on-surface-variant mb-0.5">Confidence</div>
-                <div id="loc-confidence" class="font-mono text-sm font-bold text-secondary">--</div>
-              </div>
-              <div>
-                <div class="text-[9px] text-on-surface-variant mb-0.5">Evidence Strength</div>
-                <div id="loc-strength" class="font-mono text-sm font-bold text-primary">--</div>
-              </div>
-            </div>
-            <button type="button" class="mt-auto w-full py-2 rounded bg-surface-container-high border border-outline-variant/30 text-xs font-medium text-on-surface hover:border-primary/40 transition-all">
-              View Full 3D Map
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- SIGNAL INTELLIGENCE -->
-      <section id="signal-intelligence" class="card-base p-6 hover-bloom">
-        <div class="mb-4">
-          <div class="section-label mb-1">Signal Intelligence</div>
-          <h2 class="font-inter text-sm font-semibold text-on-surface">Recording Quality Assessment</h2>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- Quality Score -->
-          <div class="card-inner p-4 flex flex-col items-center justify-center text-center">
-            <div id="quality-frame" class="w-12 h-12 rounded border border-outline-variant/30 flex items-center justify-center mb-2">
-              <span class="font-mono text-sm font-bold text-secondary">--</span>
-            </div>
-            <div class="text-xs font-medium text-on-surface mb-0.5">Quality Score</div>
-            <div id="quality-label" class="font-mono text-[10px] text-on-surface-variant">--</div>
-          </div>
-          <!-- Noise Burden -->
-          <div class="card-inner p-4 flex items-center gap-3">
-            <div class="w-10 h-10 rounded flex items-center justify-center bg-surface-container-high border border-outline-variant/20">
-              <span class="material-symbols-outlined text-on-surface-variant text-sm">hearing</span>
-            </div>
-            <div>
-              <div class="text-xs font-medium text-on-surface">Noise Burden</div>
-              <div id="noise-val" class="font-mono text-[11px] text-on-surface-variant">--</div>
-            </div>
-          </div>
-          <!-- Artifact Burden -->
-          <div class="card-inner p-4 flex items-center gap-3">
-            <div class="w-10 h-10 rounded flex items-center justify-center bg-surface-container-high border border-outline-variant/20">
-              <span class="material-symbols-outlined text-on-surface-variant text-sm">stacked_line_chart</span>
-            </div>
-            <div>
-              <div class="text-xs font-medium text-on-surface">Artifact Burden</div>
-              <div id="artifact-val" class="font-mono text-[11px] text-on-surface-variant">--</div>
-            </div>
-          </div>
-          <!-- Trust Level -->
-          <div class="card-inner p-4 flex flex-col justify-center">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-xs font-medium text-on-surface">Trust Level</span>
-              <span id="trust-val" class="font-mono text-xs font-bold text-secondary">--</span>
-            </div>
-            <div class="w-full h-2 bg-surface-container-high rounded-[2px] overflow-hidden">
-              <div id="trust-bar" class="trust-bar-fill h-full bg-secondary rounded-[2px]" style="width:0%"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CASE INTELLIGENCE -->
-      <section id="case-intelligence" class="card-base p-6 hover-bloom">
-        <div class="mb-4">
-          <div class="section-label mb-1">Case Intelligence</div>
-          <h2 class="font-inter text-sm font-semibold text-on-surface">Most Similar Cases</h2>
-        </div>
-        <div id="cases-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
-      </section>
-
-      <div class="h-6"></div>
-    </div>
-  </main>
-
-  <script>
+</div>
+</div><div class="p-4 bg-surface-container-low rounded-lg border border-white/5"><div class="text-outline font-label-sm text-label-sm mb-1">Analysis Latency</div><div class="flex items-center justify-between"><span class="font-label-md text-headline-md font-bold text-secondary-fixed-dim">1.2s</span><span class="material-symbols-outlined text-secondary-fixed-dim">timer</span></div></div>
+<div class="col-span-full p-6 bg-surface-container border-l-4 border-error rounded-r-lg">
+<div class="text-error font-label-md text-label-md font-bold mb-2">Key Clinical Finding</div>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">Significant focal slowing and rhythmic discharges localized to the left temporal leads (T3, T5). Patterns are highly suggestive of focal-onset seizure activity with secondary generalization risk.</p>
+</div><div class="col-span-full mt-4 space-y-3"><div class="text-primary font-label-md text-label-md font-bold uppercase tracking-wider">Secondary Findings</div><ul class="space-y-2"><li class="flex items-start space-x-2"><span class="material-symbols-outlined text-primary text-[18px]">arrow_right</span><span class="text-on-surface-variant font-body-md text-body-md">Occasional sharp-wave transients in the left hemisphere</span></li><li class="flex items-start space-x-2"><span class="material-symbols-outlined text-primary text-[18px]">arrow_right</span><span class="text-on-surface-variant font-body-md text-body-md">Mild background suppression in the contralateral region</span></li></ul></div>
+</div>
+</div>
+</section>
+<!-- Section 2: Clinical Narrative -->
+<section class="fade-in" id="narrative" style="animation-delay: 0.1s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Clinical Narrative</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">AI Neurological Interpretation</h2>
+</div>
+<div class="tonal-card p-stack-lg border-primary/20 relative group overflow-hidden">
+<div class="absolute top-0 right-0 p-4 flex space-x-2">
+<button id="btn-copy" class="flex items-center space-x-1 px-3 py-1.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface transition-all">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span id="copy-text" class="">Copy Narrative</span>
+</button>
+<button id="btn-include" onclick="toggleInclude()" class="flex items-center space-x-1 px-3 py-1.5 rounded bg-primary/20 text-primary font-label-sm text-label-sm hover:bg-primary/30 transition-all">
+<span id="include-icon" class="material-symbols-outlined text-[16px]">check_box_outline_blank</span>
+<span id="include-text" class="">Include In Report</span>
+</button>
+</div>
+<div class="max-w-3xl space-y-4">
+<p id="narrative-text" class="font-body-lg text-body-lg text-on-surface leading-loose">
+                            Loading clinical narrative...
+                        </p>
+<div class="pt-stack-lg flex items-center justify-between border-t border-white/5 mt-stack-lg">
+<span class="font-label-sm text-label-sm text-outline-variant italic uppercase">Research Use Only</span>
+<div class="flex items-center space-x-2 text-outline">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+<span class="font-label-sm text-label-sm">Generated by Clinical AI v4.2 Core</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Evidence Analysis -->
+<section class="fade-in" id="evidence" style="animation-delay: 0.2s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Evidence Intelligence</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Why The AI Concluded This</h2>
+</div>
+<div class="tonal-card p-stack-lg">
+<div class="h-12 w-full flex items-center mb-stack-lg rounded-lg overflow-hidden bg-[#16121b]" style="gap: 2px;">
+<div id="bar-supporting" class="h-full bg-[#d0bcff] rounded-l" style="width: 0%;"></div>
+<div id="bar-opposing" class="h-full bg-[#ffb4ab] rounded-r" style="width: 0%;"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-2">
+<span class="font-label-md text-label-md text-secondary">Supporting Factors</span>
+<span id="lbl-supporting" class="font-label-md text-label-md text-secondary">+82% Impact</span>
+</div>
+<ul id="list-supporting" class="space-y-3"></ul>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-2">
+<span class="font-label-md text-label-md text-error">Opposing Factors</span>
+<span id="lbl-opposing" class="font-label-md text-label-md text-error">-18% Impact</span>
+</div>
+<ul id="list-opposing" class="space-y-3"></ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Brain Intelligence -->
+<section class="fade-in" id="brain" style="animation-delay: 0.3s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-[0.2em] mb-1 block">Brain Intelligence</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Neural Characterization</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Freq Analysis -->
+<div class="tonal-card p-stack-lg lg:col-span-1">
+<div class="flex items-center justify-between mb-stack-lg">
+<h3 class="font-label-md text-label-md text-primary uppercase">Spectral Dominance</h3>
+<span id="spectral-label" class="font-label-sm text-label-sm text-outline">Resting Alpha</span>
+</div>
+<div id="spectral-grid" class="space-y-2"></div>
+</div>
+<!-- Topography SVG -->
+<div class="tonal-card p-stack-lg lg:col-span-2 flex flex-col md:flex-row gap-gutter items-center">
+<div class="w-full md:w-1/2 flex justify-center">
+<div class="relative group">
+<canvas id="topo-canvas" class="w-full max-w-[300px] aspect-square drop-shadow-2xl opacity-90 group-hover:opacity-100 transition-opacity"></canvas>
+<div class="absolute inset-0 bg-primary/5 rounded-full filter blur-3xl -z-10 animate-pulse"></div>
+</div>
+</div>
+<div class="w-full md:w-1/2 space-y-4">
+<div class="p-4 bg-surface-container-lowest border border-primary/20 rounded-lg">
+<div class="font-label-sm text-label-sm text-primary uppercase mb-2">AI Localization Card</div>
+<div class="space-y-3">
+<div>
+<div class="text-outline font-label-sm text-label-sm">Most Likely Origin</div>
+<div id="loc-region" class="font-headline-md text-headline-md text-on-surface">Left Temporal Region</div>
+</div>
+<div class="flex justify-between border-t border-white/5 pt-3">
+<div>
+<div class="text-outline font-label-sm text-label-sm">Confidence</div>
+<div id="loc-confidence" class="font-label-md text-label-md text-secondary">92%</div>
+</div>
+<div>
+<div class="text-outline font-label-sm text-label-sm">Evidence Strength</div>
+<div id="loc-strength" class="font-label-md text-label-md text-on-surface uppercase">High</div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 bg-surface-container-highest border border-white/10 rounded font-label-md text-label-md hover:bg-surface-bright transition-colors">
+                                View Full 3D Map
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Signal Intelligence -->
+<section class="fade-in" id="signal" style="animation-delay: 0.4s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Signal Intelligence</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Recording Quality Assessment</h2>
+</div>
+<div class="tonal-card p-stack-lg">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center">
+<span id="quality-val" class="font-label-md text-label-md text-secondary">94</span>
+</div>
+<div>
+<div class="text-outline font-label-sm text-label-sm">Quality Score</div>
+<div id="quality-label" class="font-label-md text-label-md text-on-surface">Optimal Signal</div>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="p-3 bg-surface-container-lowest rounded-lg">
+<span class="material-symbols-outlined text-primary">hearing</span>
+</div>
+<div>
+<div class="text-outline font-label-sm text-label-sm">Noise Burden</div>
+<div id="noise-val" class="font-label-md text-label-md text-on-surface">Low (2.1 μV)</div>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="p-3 bg-surface-container-lowest rounded-lg">
+<span class="material-symbols-outlined text-error">waves</span>
+</div>
+<div>
+<div class="text-outline font-label-sm text-label-sm">Artifact Burden</div>
+<div id="artifact-val" class="font-label-md text-label-md text-on-surface">4% Recorded</div>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="w-full flex flex-col">
+<div class="flex justify-between mb-1">
+<span class="text-outline font-label-sm text-label-sm">Trust Level</span>
+<span id="trust-val" class="text-secondary font-label-sm text-label-sm">98%</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full">
+<div id="trust-bar" class="h-full bg-secondary transition-all duration-1000" style="width: 0%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Case Intelligence -->
+<section class="fade-in pb-gutter" id="case" style="animation-delay: 0.5s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Case Intelligence</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Most Similar Cases</h2>
+</div>
+<div id="cases-grid" class="grid grid-cols-1 md:grid-cols-3 gap-gutter"></div>
+</div>
+</section>
+</div>
+</main>
+<script>
     (function() {
       const API = window.location.origin;
       let includeInReport = false;
@@ -340,6 +497,20 @@
           data = fallback(id);
         }
         render(data);
+        
+        // Load initial session state for Include in Report toggle
+        try {
+          const r2 = await fetch(API + '/api/v1/session/current');
+          if (r2.ok) {
+            const sess = await r2.json();
+            if (sess && sess.active_session) {
+              includeInReport = !!sess.active_session.include_in_report;
+              updateIncludeUI();
+            }
+          }
+        } catch (e) {
+          console.warn('Could not load current session:', e);
+        }
       }
 
       function fallback(id) {
@@ -380,41 +551,41 @@
                 { id: 'Fp1', x: 0.35, y: 0.12, intensity: 0.10 },
                 { id: 'Fpz', x: 0.50, y: 0.10, intensity: 0.05 },
                 { id: 'Fp2', x: 0.65, y: 0.12, intensity: 0.10 },
-                { id: 'F7',  x: 0.18, y: 0.22, intensity: 0.80 },
-                { id: 'F3',  x: 0.38, y: 0.22, intensity: 0.30 },
-                { id: 'Fz',  x: 0.50, y: 0.20, intensity: 0.10 },
-                { id: 'F4',  x: 0.62, y: 0.22, intensity: 0.15 },
-                { id: 'F8',  x: 0.82, y: 0.22, intensity: 0.10 },
-                { id: 'T3',  x: 0.12, y: 0.42, intensity: 0.95 },
-                { id: 'C3',  x: 0.38, y: 0.42, intensity: 0.30 },
-                { id: 'Cz',  x: 0.50, y: 0.42, intensity: 0.20 },
-                { id: 'C4',  x: 0.62, y: 0.42, intensity: 0.20 },
-                { id: 'T4',  x: 0.88, y: 0.42, intensity: 0.10 },
-                { id: 'T5',  x: 0.12, y: 0.62, intensity: 0.60 },
-                { id: 'P3',  x: 0.38, y: 0.62, intensity: 0.15 },
-                { id: 'Pz',  x: 0.50, y: 0.62, intensity: 0.10 },
-                { id: 'P4',  x: 0.62, y: 0.62, intensity: 0.10 },
-                { id: 'T6',  x: 0.88, y: 0.62, intensity: 0.10 },
-                { id: 'O1',  x: 0.35, y: 0.82, intensity: 0.10 },
-                { id: 'Oz',  x: 0.50, y: 0.85, intensity: 0.05 },
-                { id: 'O2',  x: 0.65, y: 0.82, intensity: 0.10 },
-                { id: 'A1',  x: 0.02, y: 0.42, intensity: 0.05 },
-                { id: 'A2',  x: 0.98, y: 0.42, intensity: 0.05 }
+                { id: 'F7',  "x": 0.18, "y": 0.22, "intensity": 0.80 },
+                { id: 'F3',  "x": 0.38, "y": 0.22, "intensity": 0.30 },
+                { id: 'Fz',  "x": 0.50, "y": 0.20, "intensity": 0.10 },
+                { id: 'F4',  "x": 0.62, "y": 0.22, "intensity": 0.15 },
+                { id: 'F8',  "x": 0.82, "y": 0.22, "intensity": 0.10 },
+                { id: 'T3',  "x": 0.12, "y": 0.42, "intensity": 0.95 },
+                { id: 'C3',  "x": 0.38, "y": 0.42, "intensity": 0.30 },
+                { id: 'Cz',  "x": 0.50, "y": 0.42, "intensity": 0.20 },
+                { id: 'C4',  "x": 0.62, "y": 0.42, "intensity": 0.20 },
+                { id: 'T4',  "x": 0.88, "y": 0.42, "intensity": 0.10 },
+                { id: 'T5',  "x": 0.12, "y": 0.62, "intensity": 0.60 },
+                { id: 'P3',  "x": 0.38, "y": 0.62, "intensity": 0.15 },
+                { id: 'Pz',  "x": 0.50, "y": 0.62, "intensity": 0.10 },
+                { id: 'P4',  "x": 0.62, "y": 0.62, "intensity": 0.10 },
+                { id: 'T6',  "x": 0.88, "y": 0.62, "intensity": 0.10 },
+                { id: 'O1',  "x": 0.35, "y": 0.82, "intensity": 0.10 },
+                { id: 'Oz',  "x": 0.50, "y": 0.85, "intensity": 0.05 },
+                { id: 'O2',  "x": 0.65, "y": 0.82, "intensity": 0.10 },
+                { id: 'A1',  "x": 0.02, "y": 0.42, "intensity": 0.05 },
+                { id: 'A2',  "x": 0.98, "y": 0.42, "intensity": 0.05 }
               ]
             }
           },
           signal_intelligence: {
             quality_score: 94,
             quality_label: 'Optimal Signal',
-            noise_burden: 'Low (2.1 \u00B5V)',
+            noise_burden: 'Low (2.1 µV)',
             artifact_burden: '4% Recorded',
             trust_level: 98
           },
           case_intelligence: {
             similar_cases: [
-              { score: 94, id: 'NV-1202', outcome: 'Surgical Resection (Successful Seizure Control)' },
-              { score: 82, id: 'NV-9943', outcome: 'Pharmacological Management (Brivaracetam)' },
-              { score: 78, id: 'NV-0042', outcome: 'Non-Epileptogenic Psychogenic Event Identified' }
+              { score: 94, id: 'NV-1202', outcome: 'Surgical Resection (Successful Seizure Control)', timestamp: '2023.10.12 09:30 UTC' },
+              { score: 82, id: 'NV-9943', outcome: 'Pharmacological Management (Brivaracetam)', timestamp: '2023.10.15 11:20 UTC' },
+              { score: 78, id: 'NV-0042', outcome: 'Non-Epileptogenic Psychogenic Event Identified', timestamp: '2023.10.18 14:05 UTC' }
             ]
           }
         };
@@ -424,12 +595,12 @@
         if (!data) return;
         document.getElementById('hdr-pid').textContent = data.patient_id || getId();
         document.getElementById('hdr-date').textContent = data.timestamp || '--';
+        
         renderNarrative(data.clinical_narrative || {});
         renderEvidence(data.evidence_intelligence || {});
         renderBrain(data.brain_intelligence || {});
         renderSignal(data.signal_intelligence || {});
         renderCases(data.case_intelligence || {});
-        document.getElementById('unlit-badge').classList.add('hidden');
       }
 
       function renderNarrative(n) {
@@ -438,16 +609,16 @@
         let html = esc(text);
         highlights.forEach(h => {
           const s = esc(h);
-          html = html.split(s).join('<span class="chip">' + s + '</span>');
+          html = html.split(s).join('<span class="bg-secondary/10 text-secondary px-1.5 py-0.5 rounded-[2px] font-semibold inline-block hover-bloom hover:border-[#d0bcff] duration-150">' + s + '</span>');
         });
         document.getElementById('narrative-text').innerHTML = html;
         document.getElementById('btn-copy').onclick = async () => {
           try {
             await navigator.clipboard.writeText(text);
-            const b = document.getElementById('btn-copy');
-            const o = b.innerHTML;
-            b.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Copied';
-            setTimeout(() => b.innerHTML = o, 1500);
+            const b = document.getElementById('copy-text');
+            const o = b.textContent;
+            b.textContent = 'Copied!';
+            setTimeout(() => b.textContent = o, 1500);
           } catch (e) {}
         };
       }
@@ -458,42 +629,65 @@
         const tot = sup + opp;
         const sp = tot > 0 ? (sup / tot) * 100 : 0;
         const op = tot > 0 ? (opp / tot) * 100 : 0;
-        document.getElementById('bar-supporting').style.flex = sp + ' 1 0%';
-        document.getElementById('bar-opposing').style.flex = op + ' 1 0%';
+        
+        document.getElementById('bar-supporting').style.width = sp + '%';
+        document.getElementById('bar-opposing').style.width = op + '%';
+        
         document.getElementById('lbl-supporting').textContent = '+' + sup + '% Impact';
         document.getElementById('lbl-opposing').textContent = '-' + opp + '% Impact';
+        
         const sL = document.getElementById('list-supporting');
         const oL = document.getElementById('list-opposing');
         sL.innerHTML = '';
         oL.innerHTML = '';
+        
         (e.supporting_factors || []).forEach(f => sL.appendChild(factorRow(f, true)));
         (e.opposing_factors || []).forEach(f => oL.appendChild(factorRow(f, false)));
       }
 
       function factorRow(f, ok) {
-        const d = document.createElement('div');
-        d.className = 'flex items-start gap-3';
+        const li = document.createElement('li');
+        li.className = 'flex items-start space-x-3 group';
         const c = ok ? 'bg-secondary/15 text-secondary' : 'bg-error/15 text-error';
-        const i = ok ? 'check_circle' : 'cancel';
-        d.innerHTML = '<div class="w-[18px] h-[18px] rounded-[4px] ' + c + ' flex items-center justify-center mt-0.5 shrink-0"><span class="material-symbols-outlined text-[13px]">' + i + '</span></div><div><div class="text-xs font-medium text-on-surface">' + esc(f.name) + '</div><div class="text-[11px] text-on-surface-variant mt-0.5">' + esc(f.description) + '</div></div>';
-        return d;
+        const i = ok ? 'check_circle' : 'remove_circle';
+        li.innerHTML = `
+          <div class="w-[18px] h-[18px] rounded-[4px] ${c} flex items-center justify-center mt-0.5 shrink-0">
+            <span class="material-symbols-outlined text-[13px]">${i}</span>
+          </div>
+          <div>
+            <div class="font-label-md text-label-md text-on-surface">${esc(f.name)}</div>
+            <div class="text-outline font-label-sm text-label-sm">${esc(f.description)}</div>
+          </div>
+        `;
+        return li;
       }
 
       function renderBrain(b) {
         const spec = b.spectral_dominance || {};
-        document.getElementById('spectral-label').textContent = spec.label || '--';
+        document.getElementById('spectral-label').textContent = spec.label || 'Resting Alpha';
         const g = document.getElementById('spectral-grid');
         g.innerHTML = '';
+        
         (spec.bands || []).forEach((band, idx) => {
           const row = document.createElement('div');
-          row.className = 'flex items-center gap-3 py-2 px-2 rounded zebra-row';
-          row.innerHTML = '<div class="w-20 shrink-0"><div class="text-xs font-semibold text-on-surface">' + esc(band.name) + '</div><div class="font-mono text-[9px] text-on-surface-variant">' + esc(band.range) + '</div></div><div class="flex-1 h-1.5 bg-surface-container-high rounded-[2px] overflow-hidden"><div class="h-full bg-secondary rounded-[2px]" style="width:' + (band.value || 0) + '%"></div></div><div class="w-8 text-right font-mono text-xs font-bold text-on-surface">' + (band.value || 0) + '%</div>';
+          row.className = 'p-3 rounded-lg zebra-row space-y-2';
+          row.innerHTML = `
+            <div class="flex justify-between font-label-sm text-label-sm uppercase">
+              <span class="text-outline">${esc(band.name)} (${esc(band.range)})</span>
+              <span class="text-secondary font-mono">${band.value}%</span>
+            </div>
+            <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-secondary-container rounded-full" style="width: ${band.value}%;"></div>
+            </div>
+          `;
           g.appendChild(row);
         });
+
         const loc = b.localization || {};
         document.getElementById('loc-region').textContent = loc.region || '--';
         document.getElementById('loc-confidence').textContent = (loc.confidence || 0) + '%';
         document.getElementById('loc-strength').textContent = loc.evidence_strength || '--';
+        
         initTopo('topo-canvas', loc.nodes || [], loc.region || '');
       }
 
@@ -534,7 +728,7 @@
           });
 
           // Faint connections
-          ctx.beginPath(); ctx.strokeStyle = 'rgba(45,39,54,0.5)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.strokeStyle = 'rgba(73, 68, 84, 0.25)'; ctx.lineWidth = 1;
           nodes.forEach((a, i) => {
             nodes.forEach((b, j) => {
               if (i >= j) return;
@@ -553,9 +747,10 @@
             const isLoc = maxN && n.id === maxN.id;
             const r = 2.5 + int * 5;
 
+            // Glow and outer ring
             if (int > 0.1 || isLoc) {
               ctx.beginPath(); ctx.arc(nx, ny, r + 4 + int * 12, 0, Math.PI * 2);
-              ctx.fillStyle = isLoc ? 'rgba(255,180,171,0.25)' : 'rgba(208,188,255,0.20)';
+              ctx.fillStyle = isLoc ? 'rgba(255,180,171,0.25)' : `rgba(208, 188, 255, ${int * 0.4})`;
               ctx.fill();
             }
             ctx.beginPath(); ctx.arc(nx, ny, r, 0, Math.PI * 2);
@@ -577,11 +772,11 @@
       }
 
       function renderSignal(s) {
-        const qs = s.quality_score || 0;
-        document.getElementById('quality-frame').innerHTML = '<span class="font-mono text-sm font-bold text-secondary">' + qs + '</span>';
+        document.getElementById('quality-val').textContent = s.quality_score || 0;
         document.getElementById('quality-label').textContent = s.quality_label || '--';
         document.getElementById('noise-val').textContent = s.noise_burden || '--';
         document.getElementById('artifact-val').textContent = s.artifact_burden || '--';
+        
         const t = s.trust_level || 0;
         document.getElementById('trust-val').textContent = t + '%';
         document.getElementById('trust-bar').style.width = t + '%';
@@ -589,31 +784,106 @@
 
       function renderCases(c) {
         const g = document.getElementById('cases-grid');
+        if (!g) return;
         g.innerHTML = '';
         (c.similar_cases || []).forEach((cs, idx) => {
+          const scoreColor = cs.score >= 90 ? 'text-secondary border-secondary bg-secondary/10' : 'text-primary border-primary bg-primary/10';
+          const scoreNumColor = cs.score >= 90 ? 'text-secondary' : 'text-primary';
+          const ts = cs.timestamp || '2023.10.24 14:02 UTC';
           const d = document.createElement('div');
-          d.className = 'card-inner p-4 hover-bloom cursor-pointer';
-          d.innerHTML = '<div class="flex items-start justify-between mb-3"><div class="w-12 h-12 rounded border border-outline-variant/30 flex items-center justify-center"><span class="font-mono text-sm font-bold text-on-surface">' + (cs.score || 0) + '%</span></div><span class="material-symbols-outlined text-on-surface-variant text-base">history</span></div><div class="font-mono text-[9px] tracking-widest text-on-surface-variant uppercase mb-1">Similarity Score</div><div class="font-mono text-xs font-bold text-on-surface mb-3">Case ' + esc(cs.id) + '</div><div class="px-3 py-2 rounded bg-surface-container-low border border-outline-variant/20"><div class="text-[9px] text-on-surface-variant mb-0.5">Outcome:</div><div class="text-[11px] text-on-surface leading-snug">' + esc(cs.outcome) + '</div></div>';
+          d.className = 'tonal-card p-6 space-y-4 hover-bloom cursor-pointer';
+          d.innerHTML = `
+            <div class="flex justify-between items-start">
+              <div class="w-14 h-14 rounded-[4px] border-2 flex items-center justify-center ${scoreColor}">
+                <span class="font-mono text-[18px] font-bold ${scoreNumColor}">${cs.score}%</span>
+              </div>
+              <span class="material-symbols-outlined text-outline">history</span>
+            </div>
+            <div>
+              <div class="text-outline font-inter text-label-sm mb-1 uppercase tracking-wider">Similarity Score</div>
+              <div class="font-mono text-headline-md font-bold text-on-surface">Case ${esc(cs.id)}</div>
+              <div class="font-mono text-[11px] text-outline mt-1">Recorded: ${esc(ts)}</div>
+            </div>
+            <div class="p-3 bg-surface-container-lowest rounded text-on-surface-variant">
+              <span class="font-inter text-label-sm text-primary font-bold">Outcome:</span>
+              <span class="font-mono text-label-sm leading-relaxed">${esc(cs.outcome)}</span>
+            </div>
+          `;
           g.appendChild(d);
         });
       }
 
       window.toggleInclude = function() {
         includeInReport = !includeInReport;
-        const ic = document.getElementById('include-icon');
-        const tx = document.getElementById('include-text');
-        if (includeInReport) {
-          ic.textContent = 'check_box'; ic.classList.replace('text-on-surface-variant', 'text-secondary'); tx.textContent = 'Included In Report';
-        } else {
-          ic.textContent = 'check_box_outline_blank'; ic.classList.replace('text-secondary', 'text-on-surface-variant'); tx.textContent = 'Include In Report';
-        }
+        updateIncludeUI();
         fetch(API + '/api/v1/session/current', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ include_in_report: includeInReport }) }).catch(() => {});
       };
+
+      function updateIncludeUI() {
+        const ic = document.getElementById('include-icon');
+        const tx = document.getElementById('include-text');
+        const btn = document.getElementById('btn-include');
+        if (!ic || !tx || !btn) return;
+        if (includeInReport) {
+          ic.textContent = 'check_box';
+          btn.classList.add('bg-secondary/20', 'text-secondary', 'hover:bg-secondary/30');
+          btn.classList.remove('bg-primary/20', 'text-primary', 'hover:bg-primary/30');
+          tx.textContent = 'Included In Report';
+        } else {
+          ic.textContent = 'check_box_outline_blank';
+          btn.classList.add('bg-primary/20', 'text-primary', 'hover:bg-primary/30');
+          btn.classList.remove('bg-secondary/20', 'text-secondary', 'hover:bg-secondary/30');
+          tx.textContent = 'Include In Report';
+        }
+      }
 
       function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
       load();
+      
+      // Setup smooth scroll scroll spy and click actions
+      const mainEl = document.querySelector('main');
+      const links = document.querySelectorAll('aside nav a');
+      if (mainEl) {
+        mainEl.addEventListener('scroll', () => {
+          let current = '';
+          const sections = document.querySelectorAll('section[id]');
+          sections.forEach(s => {
+            const top = s.offsetTop;
+            if (mainEl.scrollTop >= top - 120) {
+              current = s.getAttribute('id');
+            }
+          });
+          links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+              link.classList.remove('text-secondary-fixed-dim', 'font-bold', 'border-r-2', 'border-primary', 'bg-surface-container-highest');
+              link.classList.add('text-on-surface-variant', 'hover:bg-surface-container-highest');
+              if (href === '#' + current) {
+                link.classList.add('text-secondary-fixed-dim', 'font-bold', 'border-r-2', 'border-primary', 'bg-surface-container-highest');
+                link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-highest');
+              }
+            }
+          });
+        });
+      }
+
+      // Add click listeners to side links for smooth scrolling
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const targetEl = document.getElementById(href.substring(1));
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        });
+      });
+      
     })();
-  </script>
-</body>
-</html>
+</script>
+
+
+</body></html>
