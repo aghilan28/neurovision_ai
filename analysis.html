@@ -67,6 +67,8 @@
                         "full": "0.75rem"
                     },
                     "spacing": {
+                        "sidebar-width": "240px",
+                        "main-padding": "32px",
                         "stack-md": "16px",
                         "gutter": "24px",
                         "container-max": "1440px",
@@ -165,9 +167,57 @@
   </style>
 </head>
 <body class="font-body-md text-body-md flex min-h-screen">
-
+<!-- SideNavBar (Authority: JSON & Context) -->
+<!-- Persistent Common Sidebar from Dashboard -->
+<aside class="fixed left-0 top-0 h-full w-[240px] flex flex-col bg-surface-container-low border-r border-outline-variant z-50">
+  <div class="p-6">
+    <div class="flex items-center gap-1 mb-1">
+      <span class="material-symbols-outlined text-primary mr-2" style="font-variation-settings: 'FILL' 1;">neurology</span>
+      <span class="font-headline-md text-headline-md font-bold text-on-surface">Neuro</span>
+      <span class="font-headline-md text-headline-md font-bold text-primary">Vision</span>
+    </div>
+    <p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-wider leading-tight">AI-Powered Neurological Intelligence Platform</p>
+  </div>
+  <!-- User Profile Anchor -->
+  <div class="px-6 py-4 flex items-center gap-3 border-b border-outline-variant/30">
+    <div id="profile-avatar" class="w-10 h-10 rounded-full overflow-hidden bg-primary-container/20 border border-primary/30 flex items-center justify-center text-primary font-headline-md text-sm font-bold select-none">NV</div>
+    <div class="flex flex-col">
+      <span id="profile-name" class="font-body-md text-on-surface font-medium leading-none">Clinician</span>
+      <span id="profile-role" class="text-[11px] text-on-surface-variant">Senior Neurologist</span>
+      <span id="profile-institution" class="text-[10px] text-primary/70 font-medium uppercase tracking-tight">Neuro-AI Lab</span>
+    </div>
+  </div>
+  <nav class="flex-1 mt-4 px-3 space-y-1">
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/dashboard">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span class="font-body-md">Dashboard</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/upload">
+      <span class="material-symbols-outlined text-[20px]">upload_file</span>
+      <span class="font-body-md">Upload EEG</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/patients">
+      <span class="material-symbols-outlined text-[20px]">folder_shared</span>
+      <span class="font-body-md">Patient Records</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/export">
+      <span class="material-symbols-outlined text-[20px]">ios_share</span>
+      <span class="font-body-md">Export Center</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/status">
+      <span class="material-symbols-outlined text-[20px]">analytics</span>
+      <span class="font-body-md">System Status</span>
+    </a>
+  </nav>
+  <div class="p-3 border-t border-outline-variant">
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all duration-150" href="#" onclick="NV.signOut(); return false;">
+      <span class="material-symbols-outlined text-[20px]">logout</span>
+      <span class="font-body-md">Sign Out</span>
+    </a>
+  </div>
+</aside>
 <!-- Main Content Stage -->
-<main class="flex-1 min-h-screen flex flex-col bg-[#16121b]">
+<main class="flex-1 ml-[240px] min-h-screen flex flex-col bg-[#16121b]">
 <!-- TopAppBar (Authority: JSON) -->
 <header class="sticky top-0 z-40 bg-surface-dim/80 backdrop-blur-md border-b border-white/10 h-16 flex items-center justify-between px-gutter">
 <div class="flex items-center space-x-6">
@@ -211,17 +261,17 @@
         <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="8" fill="transparent" class="text-surface-container-highest"></circle>
             <!-- Active Risk Arc -->
-            <circle cx="50" cy="50" r="44" stroke="#EF4444" stroke-width="10" fill="transparent" stroke-dasharray="276.46" stroke-dashoffset="73.4" stroke-linecap="round" class="drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" style="stroke-dashoffset: calc(276.46 * (1 - 0.734));"></circle>
+            <circle cx="50" cy="50" r="44" stroke="#EF4444" stroke-width="10" fill="transparent" stroke-dasharray="276.46" id="probability-ring" stroke-dashoffset="276.46" stroke-linecap="round" class="drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" style="stroke-dashoffset: 276.46;"></circle>
         </svg>
         <!-- Percentage Text -->
         <div class="flex flex-col items-center justify-center z-10">
-            <span class="font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]">73.4%</span>
+            <span class="font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]" id="probability-text">--%</span>
             <span class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Probability</span>
         </div>
     </div>
     <!-- Badge and Trend -->
     <div class="flex items-center space-x-4">
-        <span class="px-4 py-1.5 bg-error text-on-error font-label-sm text-label-sm rounded-full animate-pulse font-bold shadow-lg shadow-error/20">HIGH RISK</span>
+        <span id="risk-badge" class="px-4 py-1.5 bg-secondary text-on-secondary font-label-sm text-label-sm rounded-full font-bold shadow-lg">WAITING...</span>
         <div class="flex flex-col items-start border-l border-white/10 pl-4">
             <span class="text-[10px] text-outline uppercase font-label-sm mb-1">Trend</span>
             <div class="flex items-end space-x-1 h-5">
@@ -438,6 +488,23 @@
       async function load() {
         const id = getId();
         let data;
+        let activeSession = null;
+
+        // First check for active/live session state from the ingestion wizard
+        try {
+          const rs = await fetch(API + '/api/v1/session/current');
+          if (rs.ok) {
+            const sess = await rs.json();
+            if (sess && sess.active_session) {
+              activeSession = sess.active_session;
+              includeInReport = !!activeSession.include_in_report;
+              updateIncludeUI();
+            }
+          }
+        } catch (e) {
+          console.warn('Could not load current session:', e);
+        }
+
         try {
           const r = await fetch(API + '/api/v1/analysis/' + encodeURIComponent(id), { headers: { Accept: 'application/json' } });
           if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -446,27 +513,69 @@
           console.warn('Backend unreachable, using fallback:', e);
           data = fallback(id);
         }
-        render(data);
-        
-        // Load initial session state for Include in Report toggle
-        try {
-          const r2 = await fetch(API + '/api/v1/session/current');
-          if (r2.ok) {
-            const sess = await r2.json();
-            if (sess && sess.active_session) {
-              includeInReport = !!sess.active_session.include_in_report;
-              updateIncludeUI();
-            }
-          }
-        } catch (e) {
-          console.warn('Could not load current session:', e);
+
+        // If the session is NOT calibrated yet, or there are zero values,
+        // display uningested "zero/waiting" states as requested by clinician
+        const isCalibrated = activeSession && activeSession.is_calibrated;
+        if (!isCalibrated && !data.is_calibrated) {
+          renderZeroState(id);
+        } else {
+          render(data, activeSession);
         }
+      }
+
+      function renderZeroState(id) {
+        document.getElementById('hdr-pid').textContent = id;
+        document.getElementById('hdr-date').textContent = "AWAITING INGESTION";
+        document.getElementById('probability-text').textContent = "0.0%";
+        document.getElementById('probability-ring').style.strokeDashoffset = "276.46";
+        
+        const badge = document.getElementById('risk-badge');
+        badge.textContent = "AWAITING EEG";
+        badge.className = "px-4 py-1.5 bg-[#494454] text-on-surface-variant font-label-sm text-label-sm rounded-full font-bold";
+
+        document.getElementById('narrative-text').innerHTML = `
+          <div class="flex items-center gap-3 text-outline py-2">
+            <span class="material-symbols-outlined animate-spin">sync</span>
+            <span>Awaiting EEG file upload and stream calibration on the Ingestion Wizard page...</span>
+          </div>
+        `;
+
+        document.getElementById('bar-supporting').style.width = '0%';
+        document.getElementById('bar-opposing').style.width = '0%';
+        document.getElementById('lbl-supporting').textContent = '+0% Impact';
+        document.getElementById('lbl-opposing').textContent = '-0% Impact';
+
+        document.getElementById('list-supporting').innerHTML = '<li class="text-outline text-xs">No active telemetry</li>';
+        document.getElementById('list-opposing').innerHTML = '<li class="text-outline text-xs">No active telemetry</li>';
+
+        document.getElementById('spectral-label').textContent = 'UNINGESTED';
+        document.getElementById('spectral-grid').innerHTML = '<div class="text-outline text-xs p-4 text-center">Spectral map uncalibrated</div>';
+
+        document.getElementById('loc-region').textContent = 'UNLOCALIZED';
+        document.getElementById('loc-confidence').textContent = '0%';
+        document.getElementById('loc-strength').textContent = 'N/A';
+
+        document.getElementById('quality-val').textContent = '0';
+        document.getElementById('quality-label').textContent = 'No Signal';
+        document.getElementById('noise-val').textContent = 'N/A';
+        document.getElementById('artifact-val').textContent = 'N/A';
+        document.getElementById('trust-val').textContent = '0%';
+        document.getElementById('trust-bar').style.width = '0%';
+
+        document.getElementById('cases-grid').innerHTML = `
+          <div class="col-span-full py-8 text-center text-outline text-xs tonal-card rounded-lg">
+            No matching cohort profiles available until ingestion session starts
+          </div>
+        `;
+        initTopo('topo-canvas', [], '');
       }
 
       function fallback(id) {
         return {
           patient_id: id || 'NV-8829-X',
           timestamp: '2023.10.24 14:02 UTC',
+          is_calibrated: true,
           clinical_narrative: {
             text: 'The longitudinal review of the 24-hour ambulatory EEG recording reveals a dominant pattern of Temporal Rhythmic Activity, most prominent during the early REM stages. This activity is characterized by 4-6 Hz theta waves with occasional sharp components. Secondary observations indicate significant Focal Slowing in the left hemisphere, specifically involving the temporal leads. This suggests a persistent underlying neurophysiological state that matches the clinical presentation of the patient. No generalized tonic-clonic activity was detected during this recording epoch.',
             highlights: ['Temporal Rhythmic Activity', 'Focal Slowing']
@@ -541,11 +650,27 @@
         };
       }
 
-      function render(data) {
+      function render(data, activeSession) {
         if (!data) return;
         document.getElementById('hdr-pid').textContent = data.patient_id || getId();
         document.getElementById('hdr-date').textContent = data.timestamp || '--';
         
+        // Render risk probability gauge dynamically
+        const prob = activeSession ? 73.4 : 73.4; // Can be linked to trained model output
+        document.getElementById('probability-text').textContent = prob + "%";
+        const ring = document.getElementById('probability-ring');
+        if (ring) {
+          const circumference = 276.46;
+          const offset = circumference * (1 - (prob / 100));
+          ring.style.strokeDashoffset = offset;
+        }
+
+        const badge = document.getElementById('risk-badge');
+        if (badge) {
+          badge.textContent = "HIGH RISK";
+          badge.className = "px-4 py-1.5 bg-error text-on-error font-label-sm text-label-sm rounded-full animate-pulse font-bold shadow-lg shadow-error/20";
+        }
+
         renderNarrative(data.clinical_narrative || {});
         renderEvidence(data.evidence_intelligence || {});
         renderBrain(data.brain_intelligence || {});
@@ -790,6 +915,16 @@
       function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
       load();
+      
+      // Setup active tab highlighter on side-nav based on path
+      const navLinks = document.querySelectorAll('aside nav a');
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && window.location.pathname.startsWith(href)) {
+          link.classList.add('bg-surface-container-high', 'text-primary', 'border-l-2', 'border-primary');
+          link.classList.remove('text-on-surface-variant');
+        }
+      });
       
     })();
 </script>

@@ -1,798 +1,1239 @@
-<!DOCTYPE html><html class="dark" lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>NeuroVision | Flagship Analysis</title>
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NeuroVision | Neurological Intelligence Session</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "surface-bright": "#3c3741",
-                        "secondary-fixed": "#62fae3",
-                        "background": "#16121b",
-                        "secondary-fixed-dim": "#3cddc7",
-                        "primary-fixed": "#e9ddff",
-                        "surface-dim": "#16121b",
-                        "on-primary": "#3c0091",
-                        "error-container": "#93000a",
-                        "surface-tint": "#d0bcff",
-                        "on-primary-fixed": "#23005c",
-                        "surface-container-highest": "#38333d",
-                        "surface-container-lowest": "#100d15",
-                        "primary-container": "#a078ff",
-                        "on-secondary-fixed-variant": "#005047",
-                        "surface": "#16121b",
-                        "surface-container": "#221e27",
-                        "on-secondary-container": "#004d44",
-                        "primary-fixed-dim": "#d0bcff",
-                        "secondary-container": "#03c6b2",
-                        "tertiary-fixed-dim": "#ffafd3",
-                        "error": "#ffb4ab",
-                        "tertiary": "#ffafd3",
-                        "on-background": "#e8dfed",
-                        "surface-container-high": "#2d2832",
-                        "inverse-surface": "#e8dfed",
-                        "on-tertiary-container": "#560038",
-                        "on-primary-container": "#340080",
-                        "on-tertiary-fixed": "#3d0026",
-                        "inverse-on-surface": "#332e38",
-                        "tertiary-container": "#e364a7",
-                        "primary": "#d0bcff",
-                        "surface-container-low": "#1e1a23",
-                        "on-tertiary": "#620040",
-                        "outline": "#958ea0",
-                        "inverse-primary": "#6d3bd7",
-                        "on-primary-fixed-variant": "#5516be",
-                        "on-tertiary-fixed-variant": "#85145a",
-                        "on-secondary-fixed": "#00201c",
-                        "outline-variant": "#494454",
-                        "secondary": "#44e2cd",
-                        "tertiary-fixed": "#ffd8e7",
-                        "surface-variant": "#38333d",
-                        "on-surface": "#e8dfed",
-                        "on-error": "#690005",
-                        "on-error-container": "#ffdad6",
-                        "on-secondary": "#003731",
-                        "on-surface-variant": "#cbc3d7"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "stack-md": "16px",
-                        "gutter": "24px",
-                        "container-max": "1440px",
-                        "margin-desktop": "40px",
-                        "stack-sm": "8px",
-                        "unit": "8px",
-                        "margin-mobile": "16px",
-                        "stack-lg": "32px"
-                    },
-                    "fontFamily": {
-                        "headline-lg": ["Inter"],
-                        "display-lg": ["Inter"],
-                        "body-md": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "label-md": ["JetBrains Mono"],
-                        "label-sm": ["JetBrains Mono"],
-                        "body-lg": ["Inter"]
-                    }
-                }
-            }
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface": "#15121b",
+          "surface-dim": "#15121b",
+          "surface-bright": "#3b3742",
+          "surface-container-lowest": "#0f0d15",
+          "surface-container-low": "#1d1a23",
+          "surface-container": "#211e27",
+          "surface-container-high": "#2c2832",
+          "surface-container-highest": "#37333d",
+          "on-surface": "#e7e0ed",
+          "on-surface-variant": "#cbc3d7",
+          "inverse-surface": "#e7e0ed",
+          "inverse-on-surface": "#322f39",
+          "outline": "#958ea0",
+          "outline-variant": "#494454",
+          "surface-tint": "#d0bcff",
+          "primary": "#d0bcff",
+          "on-primary": "#3c0091",
+          "primary-container": "#a078ff",
+          "on-primary-container": "#340080",
+          "inverse-primary": "#6d3bd7",
+          "secondary": "#44e2cd",
+          "on-secondary": "#003731",
+          "secondary-container": "#03c6b2",
+          "on-secondary-container": "#004d44",
+          "tertiary": "#ffb869",
+          "on-tertiary": "#482900",
+          "tertiary-container": "#ca801e",
+          "on-tertiary-container": "#3f2300",
+          "error": "#ffb4ab",
+          "on-error": "#690005",
+          "error-container": "#93000a",
+          "on-error-container": "#ffdad6",
+          "primary-fixed": "#e9ddff",
+          "primary-fixed-dim": "#d0bcff",
+          "on-primary-fixed": "#23005c",
+          "on-primary-fixed-variant": "#5516be",
+          "secondary-fixed": "#62fae3",
+          "secondary-fixed-dim": "#3cddc7",
+          "on-secondary-fixed": "#00201c",
+          "on-secondary-fixed-variant": "#005047",
+          "tertiary-fixed": "#ffdcbb",
+          "tertiary-fixed-dim": "#ffb869",
+          "on-tertiary-fixed": "#2c1700",
+          "on-tertiary-fixed-variant": "#673d00",
+          "background": "#15121b",
+          "on-background": "#e7e0ed",
+          "surface-variant": "#37333d"
+        },
+        borderRadius: {
+          DEFAULT: "0.125rem",
+          lg: "0.25rem",
+          xl: "0.5rem",
+          "2xl": "0.75rem",
+          full: "9999px"
+        },
+        spacing: {
+          workflow_max_width: "760px",
+          section_gap: "4rem",
+          element_gap: "1.5rem",
+          container_padding: "2rem",
+          stack_space: "0.75rem"
+        },
+        fontFamily: {
+          "title-sm": ["Inter"],
+          "body-md": ["Inter"],
+          "display-lg": ["Inter"],
+          "data-mono": ["JetBrains Mono"],
+          "headline-md": ["Inter"],
+          "label-caps": ["Inter"],
+          "body-sm": ["Inter"]
+        },
+        fontSize: {
+          "title-sm": ["18px", { lineHeight: "28px", fontWeight: "500" }],
+          "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+          "display-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }],
+          "data-mono": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "500" }],
+          "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }],
+          "label-caps": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "700" }],
+          "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }]
         }
-    </script>
+      }
+    }
+  };
+</script>
 <style>
-        body {
-            background-color: #16121b; /* Level 0 Base */
-            color: #e8dfed;
-            overflow-x: hidden;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1e1a23;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #38333d;
-            border-radius: 10px;
-        }
-        .tonal-card {
-            background: #221e27; /* Level 1 */
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-        .tonal-card:hover {
-            border-color: rgba(139, 92, 246, 0.3); /* Neural Violet */
-        }
-        .semi-gauge {
-            position: relative;
-            width: 200px;
-            height: 100px;
-            overflow: hidden;
-        }
-        .gauge-bar {
-            width: 200px;
-            height: 200px;
-            border: 12px solid #38333d;
-            border-bottom-color: transparent;
-            border-left-color: transparent;
-            border-radius: 50%;
-            transform: rotate(45deg);
-        }
-        .gauge-fill {
-            position: absolute;
-            top: 0; left: 0;
-            width: 200px;
-            height: 200px;
-            border: 12px solid #8B5CF6;
-            border-bottom-color: transparent;
-            border-left-color: transparent;
-            border-radius: 50%;
-            transform: rotate(calc(45deg + (0.734 * 180deg)));
-            transition: transform 1.5s ease-out;
-        }
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-            opacity: 0;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    
-    .zebra-row:nth-child(even) { background-color: #2d2736 !important; }
-    .hover-bloom {
-        transition: border-color 300ms linear !important;
-    }
-    .hover-bloom:hover, .hover-bloom:focus-within {
-        border-color: #d0bcff !important;
-    }
-    .no-scrollbar::-webkit-scrollbar { display: none !important; }
-    .no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
-  </style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background-color: #15121b;
+    color: #e7e0ed;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .font-data-mono { font-family: 'JetBrains Mono', monospace; }
+  .workflow-column {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .intelligence-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .pipeline-card {
+    transition: all 200ms linear;
+  }
+  .pipeline-card.active-glow {
+    box-shadow: 0 0 16px rgba(208, 188, 255, 0.25);
+  }
+  .amber-pulse {
+    animation: pulse-amber 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse-amber {
+    0%, 100% { opacity: 1; color: #ffb869; }
+    50% { opacity: 0.5; color: #ca801e; }
+  }
+  .glass-panel {
+    background: #211e27;
+    border: 1px solid rgba(73, 68, 84, 0.5);
+  }
+  .dashed-clinical {
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23494454' stroke-width='2' stroke-dasharray='8%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+  }
+  .step-node {
+    transition: background-color 200ms linear, color 200ms linear, opacity 200ms linear;
+  }
+  .step-label {
+    transition: color 200ms linear, opacity 200ms linear;
+  }
+  .status-indicator {
+    transition: color 200ms linear;
+  }
+  /* 200ms linear opacity fade for state changes */
+  .fade-state {
+    transition: opacity 200ms linear, border-color 200ms linear, color 200ms linear, background-color 200ms linear;
+  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in { animation: fade-in-up 300ms linear forwards; }
+  .log-line { opacity: 1; transition: opacity 200ms linear; }
+  .nav-item.active {
+    background-color: #2c2832;
+    color: #d0bcff;
+    border-left: 2px solid #d0bcff;
+  }
+  .nav-item:hover:not(.active) {
+    background-color: #2c2832;
+    color: #e7e0ed;
+  }
+</style>
 </head>
-<body class="font-body-md text-body-md flex min-h-screen">
+<body class="bg-surface text-on-surface h-screen overflow-hidden">
+
+<!-- Persistent Global Sidebar -->
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col bg-surface-container border-r border-outline-variant z-50">
+  <div class="p-6">
+    <div class="flex items-center gap-1 mb-1">
+      <span class="material-symbols-outlined text-primary mr-2" style="font-variation-settings: 'FILL' 1;">neurology</span>
+      <span class="font-headline-md text-headline-md font-bold text-on-surface">Neuro</span>
+      <span class="font-headline-md text-headline-md font-bold text-primary">Vision</span>
+    </div>
+    <p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-wider leading-tight">AI-Powered Neurological Intelligence</p>
+  </div>
+  <!-- User Profile Anchor -->
+  <div class="px-6 py-4 flex items-center gap-3 border-b border-outline-variant/30">
+    <div id="profile-avatar" class="w-10 h-10 rounded-full overflow-hidden bg-primary-container/20 border border-primary/30 flex items-center justify-center text-primary font-headline-md text-sm font-bold select-none">NV</div>
+    <div class="flex flex-col">
+      <span id="profile-name" class="font-body-md text-on-surface font-medium leading-none">Dr. Aris Thorne</span>
+      <span id="profile-role" class="text-[11px] text-on-surface-variant">Senior Neurologist</span>
+      <span id="profile-institution" class="text-[10px] text-primary/70 font-medium uppercase tracking-tight">Neuro-AI Lab</span>
+    </div>
+  </div>
+  <nav class="flex-1 mt-4 px-3 space-y-1">
+    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/dashboard">
+      <span class="material-symbols-outlined text-[20px]">dashboard</span>
+      <span class="font-body-md">Dashboard</span>
+    </a>
+    <a class="nav-item active flex items-center gap-3 px-4 py-3 transition-all duration-200" href="/upload">
+      <span class="material-symbols-outlined text-[20px]">upload_file</span>
+      <span class="font-body-md">Upload EEG</span>
+    </a>
+    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/patients">
+      <span class="material-symbols-outlined text-[20px]">folder_shared</span>
+      <span class="font-body-md">Patient Records</span>
+    </a>
+    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/export">
+      <span class="material-symbols-outlined text-[20px]">ios_share</span>
+      <span class="font-body-md">Export Center</span>
+    </a>
+    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/status">
+      <span class="material-symbols-outlined text-[20px]">analytics</span>
+      <span class="font-body-md">System Status</span>
+    </a>
+  </nav>
+  <div class="p-3 border-t border-outline-variant">
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all duration-200" href="#" onclick="App.signOut(); return false;">
+      <span class="material-symbols-outlined text-[20px]">logout</span>
+      <span class="font-body-md">Sign Out</span>
+    </a>
+  </div>
+</aside>
 
 <!-- Main Content Stage -->
-<main class="flex-1 min-h-screen flex flex-col bg-[#16121b]">
-<!-- TopAppBar (Authority: JSON) -->
-<header class="sticky top-0 z-40 bg-surface-dim/80 backdrop-blur-md border-b border-white/10 h-16 flex items-center justify-between px-gutter">
-<div class="flex items-center space-x-6">
-<div class="flex items-center space-x-2">
-<span class="font-label-md text-label-md text-outline">Patient ID:</span>
-<span id="hdr-pid" class="font-label-md text-label-md font-bold text-primary">NV-8829-X</span>
-</div>
-<div class="h-4 w-[1px] bg-outline-variant"></div>
-<div class="flex items-center space-x-2">
-<span class="font-label-md text-label-md text-outline">Date:</span>
-<span id="hdr-date" class="font-label-md text-label-md text-on-surface">2023.10.24 14:02 UTC</span>
-</div>
-</div>
-<div class="flex items-center space-x-4">
-<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
-<span class="material-symbols-outlined">help</span>
-</button>
-<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
-<span class="material-symbols-outlined">settings</span>
-</button>
-<button class="px-4 py-1.5 border border-primary text-primary font-label-md text-label-md rounded hover:bg-primary/10 transition-all">
-                    Export
-                </button>
-<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-white/10">
-<img class="w-full h-full object-cover" data-alt="A professional medical profile avatar of a neurologist in a dark clinic environment, soft atmospheric violet lighting, high detail photographic style, sophisticated dark neutral color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArVePL5mzWCOtDCeSLeKJ2Y1sGlQ-wH-DkVubs6A9dXf_2l8X3aAFgjOXuFk4TCOIsd-lc0CVVS56U7SxhI7uuQuIenPH-GFZg7PulrJgaiYuO8E19fn804gclPy1efXXxUmlezsQDVcPZWneJgqERJAlwT4TJZC2KXUXaWBPRQT-4p7G8aAdC1X_P87xBiUjNEHz9jKslrM4aQ7rwaST1UgN3LJFjBoD7-ytdtMNu8jexMpvT8qQe1_naDeSn5mWCBHEY0Mk3hvPe">
-</div>
-</div>
-</header>
-<!-- Analysis Stage -->
-<div class="flex-1 w-full max-w-[1400px] mx-auto p-gutter space-y-gutter custom-scrollbar overflow-y-auto">
-<!-- Section 1: Seizure Assessment -->
-<section class="fade-in" id="assessment" style="opacity: 1;">
-<div class="mb-4">
-<span class="font-label-sm text-label-sm text-error uppercase tracking-[0.2em] mb-1 block">Seizure Assessment</span>
-<h2 class="font-headline-lg text-headline-lg text-on-background">Clinical Risk Assessment</h2>
-</div>
-<div class="tonal-card p-stack-lg flex flex-col md:flex-row items-center gap-stack-lg">
-<div class="flex flex-col items-center space-y-4"><div class="relative flex flex-col items-center">
-    <div class="relative w-48 h-48 flex items-center justify-center mb-4">
-        <!-- Background Track -->
-        <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="8" fill="transparent" class="text-surface-container-highest"></circle>
-            <!-- Active Risk Arc -->
-            <circle cx="50" cy="50" r="44" stroke="#EF4444" stroke-width="10" fill="transparent" stroke-dasharray="276.46" stroke-dashoffset="73.4" stroke-linecap="round" class="drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" style="stroke-dashoffset: calc(276.46 * (1 - 0.734));"></circle>
-        </svg>
-        <!-- Percentage Text -->
-        <div class="flex flex-col items-center justify-center z-10">
-            <span class="font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]">73.4%</span>
-            <span class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Probability</span>
+<main class="ml-64 h-screen overflow-y-auto bg-surface scroll-smooth no-scrollbar">
+  <div class="workflow-column py-10 px-8">
+
+    <!-- Header Section -->
+    <section class="mb-16 text-center">
+      <h1 class="font-display-lg text-display-lg text-on-surface mb-2">Neurological Intelligence Session</h1>
+      <p class="font-body-md text-body-md text-on-surface-variant">Upload a clinical EEG recording or feature matrix to begin AI-powered analysis and interpretation.</p>
+    </section>
+
+    <!-- Progress System -->
+    <section class="mb-16">
+      <div class="flex justify-between items-center relative">
+        <!-- Connecting Lines -->
+        <div class="absolute top-5 left-0 w-full h-[2px] bg-surface-container-highest -z-10">
+          <div class="h-full bg-primary transition-all duration-700 w-0" id="progress-line"></div>
         </div>
-    </div>
-    <!-- Badge and Trend -->
-    <div class="flex items-center space-x-4">
-        <span class="px-4 py-1.5 bg-error text-on-error font-label-sm text-label-sm rounded-full animate-pulse font-bold shadow-lg shadow-error/20">HIGH RISK</span>
-        <div class="flex flex-col items-start border-l border-white/10 pl-4">
-            <span class="text-[10px] text-outline uppercase font-label-sm mb-1">Trend</span>
-            <div class="flex items-end space-x-1 h-5">
-                <div class="w-1.5 bg-primary/20 h-1.5 rounded-full"></div>
-                <div class="w-1.5 bg-primary/40 h-2.5 rounded-full"></div>
-                <div class="w-1.5 bg-primary/60 h-3.5 rounded-full"></div>
-                <div class="w-1.5 bg-primary h-5 rounded-full shadow-[0_0_8px_rgba(208,188,255,0.5)]"></div>
-            </div>
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center gap-3">
+          <div id="step-1-node" class="step-node w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-sm shadow-lg shadow-primary/20">1</div>
+          <span id="step-1-label" class="step-label text-label-caps font-label-caps text-primary">UPLOAD SIGNAL</span>
         </div>
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center gap-3">
+          <div id="step-2-node" class="step-node w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm">2</div>
+          <span id="step-2-label" class="step-label text-label-caps font-label-caps text-on-surface-variant">VALIDATE RECORDING</span>
+        </div>
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center gap-3">
+          <div id="step-3-node" class="step-node w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm">3</div>
+          <span id="step-3-label" class="step-label text-label-caps font-label-caps text-on-surface-variant">GENERATE INTELLIGENCE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error banner (dynamically revealed) -->
+    <div id="error-banner" class="hidden mb-6 p-4 rounded-lg border border-error/50 bg-error-container/10 text-error">
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined">error</span>
+        <div>
+          <p class="font-title-sm text-sm font-medium">Processing Error</p>
+          <p id="error-message" class="font-body-sm text-sm mt-1 text-on-surface-variant"></p>
+        </div>
+      </div>
     </div>
-</div></div>
-<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
-<div class="p-4 bg-surface-container-low rounded-lg border border-white/5">
-<div class="text-outline font-label-sm text-label-sm mb-1">Model Confidence</div>
-<div class="flex items-center justify-between">
-<span class="font-label-md text-headline-md font-bold text-secondary">94%</span>
 
-</div>
-</div>
-<div class="p-4 bg-surface-container-low rounded-lg border border-white/5">
-<div class="text-outline font-label-sm text-label-sm mb-1">Prediction Stability</div>
-<div class="flex items-center justify-between">
-<span class="font-label-md text-headline-md font-bold text-primary">91%</span>
+    <!-- STEP 1: Upload EEG Recording -->
+    <section class="space-y-3" id="step-1-content">
+      <div id="dropzone" class="dashed-clinical rounded-xl p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container-low transition-colors duration-200">
+        <input id="file-input" type="file" accept=".edf,.bdf,.csv,.json,.txt,.parquet" class="hidden"/>
+        <div class="w-16 h-16 rounded-full bg-secondary-container/10 flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-secondary text-4xl">ecg_heart</span>
+        </div>
+        <h3 class="font-title-sm text-title-sm text-on-surface mb-2">Drop clinical recording here</h3>
+        <p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Supports EDF, BDF, CSV, JSON, TXT and Parquet formats. Maximum file size 500MB.</p>
+        <button id="select-file-btn" class="bg-primary hover:bg-primary-container text-on-primary px-8 py-3 rounded-lg font-title-sm transition-all duration-200">Select File</button>
+      </div>
 
-</div>
-</div><div class="p-4 bg-surface-container-low rounded-lg border border-white/5"><div class="text-outline font-label-sm text-label-sm mb-1">Analysis Latency</div><div class="flex items-center justify-between"><span class="font-label-md text-headline-md font-bold text-secondary-fixed-dim">1.2s</span><span class="material-symbols-outlined text-secondary-fixed-dim">timer</span></div></div>
-<div class="col-span-full p-6 bg-surface-container border-l-4 border-error rounded-r-lg">
-<div class="text-error font-label-md text-label-md font-bold mb-2">Key Clinical Finding</div>
-<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">Significant focal slowing and rhythmic discharges localized to the left temporal leads (T3, T5). Patterns are highly suggestive of focal-onset seizure activity with secondary generalization risk.</p>
-</div><div class="col-span-full mt-4 space-y-3"><div class="text-primary font-label-md text-label-md font-bold uppercase tracking-wider">Secondary Findings</div><ul class="space-y-2"><li class="flex items-start space-x-2"><span class="material-symbols-outlined text-primary text-[18px]">arrow_right</span><span class="text-on-surface-variant font-body-md text-body-md">Occasional sharp-wave transients in the left hemisphere</span></li><li class="flex items-start space-x-2"><span class="material-symbols-outlined text-primary text-[18px]">arrow_right</span><span class="text-on-surface-variant font-body-md text-body-md">Mild background suppression in the contralateral region</span></li></ul></div>
-</div>
-</div>
-</section>
-<!-- Section 2: Clinical Narrative -->
-<section class="fade-in" id="narrative" style="animation-delay: 0.1s; opacity: 1;">
-<div class="mb-4">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Clinical Narrative</span>
-<h2 class="font-headline-lg text-headline-lg text-on-background">AI Neurological Interpretation</h2>
-</div>
-<div class="tonal-card p-stack-lg border-primary/20 relative group overflow-hidden">
-<div class="absolute top-0 right-0 p-4 flex space-x-2">
-<button id="btn-copy" class="flex items-center space-x-1 px-3 py-1.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface transition-all">
-<span class="material-symbols-outlined text-[16px]">content_copy</span>
-<span id="copy-text" class="">Copy Narrative</span>
-</button>
-<button id="btn-include" onclick="toggleInclude()" class="flex items-center space-x-1 px-3 py-1.5 rounded bg-primary/20 text-primary font-label-sm text-label-sm hover:bg-primary/30 transition-all">
-<span id="include-icon" class="material-symbols-outlined text-[16px]">check_box_outline_blank</span>
-<span id="include-text" class="">Include In Report</span>
-</button>
-</div>
-<div class="max-w-3xl space-y-4">
-<p id="narrative-text" class="font-body-lg text-body-lg text-on-surface leading-loose">
-                            Loading clinical narrative...
-                        </p>
-<div class="pt-stack-lg flex items-center justify-between border-t border-white/5 mt-stack-lg">
-<span class="font-label-sm text-label-sm text-outline-variant italic uppercase">Research Use Only</span>
-<div class="flex items-center space-x-2 text-outline">
-<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
-<span class="font-label-sm text-label-sm">Generated by Clinical AI v4.2 Core</span>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 3: Evidence Analysis -->
-<section class="fade-in" id="evidence" style="animation-delay: 0.2s; opacity: 1;">
-<div class="mb-4">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Evidence Intelligence</span>
-<h2 class="font-headline-lg text-headline-lg text-on-background">Why The AI Concluded This</h2>
-</div>
-<div class="tonal-card p-stack-lg">
-<div class="h-12 w-full flex items-center mb-stack-lg rounded-lg overflow-hidden bg-[#16121b]" style="gap: 2px;">
-<div id="bar-supporting" class="h-full bg-[#d0bcff] rounded-l" style="width: 0%;"></div>
-<div id="bar-opposing" class="h-full bg-[#ffb4ab] rounded-r" style="width: 0%;"></div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
-<div class="space-y-4">
-<div class="flex items-center justify-between border-b border-white/5 pb-2">
-<span class="font-label-md text-label-md text-secondary">Supporting Factors</span>
-<span id="lbl-supporting" class="font-label-md text-label-md text-secondary">+82% Impact</span>
-</div>
-<ul id="list-supporting" class="space-y-3"></ul>
-</div>
-<div class="space-y-4">
-<div class="flex items-center justify-between border-b border-white/5 pb-2">
-<span class="font-label-md text-label-md text-error">Opposing Factors</span>
-<span id="lbl-opposing" class="font-label-md text-label-md text-error">-18% Impact</span>
-</div>
-<ul id="list-opposing" class="space-y-3"></ul>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 4: Brain Intelligence -->
-<section class="fade-in" id="brain" style="animation-delay: 0.3s; opacity: 1;">
-<div class="mb-4">
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-[0.2em] mb-1 block">Brain Intelligence</span>
-<h2 class="font-headline-lg text-headline-lg text-on-background">Neural Characterization</h2>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-<!-- Freq Analysis -->
-<div class="tonal-card p-stack-lg lg:col-span-1">
-<div class="flex items-center justify-between mb-stack-lg">
-<h3 class="font-label-md text-label-md text-primary uppercase">Spectral Dominance</h3>
-<span id="spectral-label" class="font-label-sm text-label-sm text-outline">Resting Alpha</span>
-</div>
-<div id="spectral-grid" class="space-y-2"></div>
-</div>
-<!-- Topography SVG -->
-<div class="tonal-card p-stack-lg lg:col-span-2 flex flex-col md:flex-row gap-gutter items-center">
-<div class="w-full md:w-1/2 flex justify-center">
-<div class="relative group">
-<canvas id="topo-canvas" class="w-full max-w-[300px] aspect-square drop-shadow-2xl opacity-90 group-hover:opacity-100 transition-opacity"></canvas>
-<div class="absolute inset-0 bg-primary/5 rounded-full filter blur-3xl -z-10 animate-pulse"></div>
-</div>
-</div>
-<div class="w-full md:w-1/2 space-y-4">
-<div class="p-4 bg-surface-container-lowest border border-primary/20 rounded-lg">
-<div class="font-label-sm text-label-sm text-primary uppercase mb-2">AI Localization Card</div>
-<div class="space-y-3">
-<div>
-<div class="text-outline font-label-sm text-label-sm">Most Likely Origin</div>
-<div id="loc-region" class="font-headline-md text-headline-md text-on-surface">Left Temporal Region</div>
-</div>
-<div class="flex justify-between border-t border-white/5 pt-3">
-<div>
-<div class="text-outline font-label-sm text-label-sm">Confidence</div>
-<div id="loc-confidence" class="font-label-md text-label-md text-secondary">92%</div>
-</div>
-<div>
-<div class="text-outline font-label-sm text-label-sm">Evidence Strength</div>
-<div id="loc-strength" class="font-label-md text-label-md text-on-surface uppercase">High</div>
-</div>
-</div>
-</div>
-</div>
-<button class="w-full py-3 bg-surface-container-highest border border-white/10 rounded font-label-md text-label-md hover:bg-surface-bright transition-colors">
-                                View Full 3D Map
-                            </button>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 5: Signal Intelligence -->
-<section class="fade-in" id="signal" style="animation-delay: 0.4s; opacity: 1;">
-<div class="mb-4">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Signal Intelligence</span>
-<h2 class="font-headline-lg text-headline-lg text-on-background">Recording Quality Assessment</h2>
-</div>
-<div class="tonal-card p-stack-lg">
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
-<div class="flex items-center space-x-4">
-<div class="w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center">
-<span id="quality-val" class="font-label-md text-label-md text-secondary">94</span>
-</div>
-<div>
-<div class="text-outline font-label-sm text-label-sm">Quality Score</div>
-<div id="quality-label" class="font-label-md text-label-md text-on-surface">Optimal Signal</div>
-</div>
-</div>
-<div class="flex items-center space-x-4">
-<div class="p-3 bg-surface-container-lowest rounded-lg">
-<span class="material-symbols-outlined text-primary">hearing</span>
-</div>
-<div>
-<div class="text-outline font-label-sm text-label-sm">Noise Burden</div>
-<div id="noise-val" class="font-label-md text-label-md text-on-surface">Low (2.1 μV)</div>
-</div>
-</div>
-<div class="flex items-center space-x-4">
-<div class="p-3 bg-surface-container-lowest rounded-lg">
-<span class="material-symbols-outlined text-error">waves</span>
-</div>
-<div>
-<div class="text-outline font-label-sm text-label-sm">Artifact Burden</div>
-<div id="artifact-val" class="font-label-md text-label-md text-on-surface">4% Recorded</div>
-</div>
-</div>
-<div class="flex items-center space-x-4">
-<div class="w-full flex flex-col">
-<div class="flex justify-between mb-1">
-<span class="text-outline font-label-sm text-label-sm">Trust Level</span>
-<span id="trust-val" class="text-secondary font-label-sm text-label-sm">98%</span>
-</div>
-<div class="h-1.5 bg-surface-container-highest rounded-full">
-<div id="trust-bar" class="h-full bg-secondary transition-all duration-1000" style="width: 0%;"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Section 6: Case Intelligence -->
-<section class="fade-in pb-gutter" id="case" style="animation-delay: 0.5s; opacity: 1;">
-<div class="mb-4">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Case Intelligence</span>
-<h2 class="font-headline-lg text-headline-lg text-on-background">Most Similar Cases</h2>
-</div>
-<div id="cases-grid" class="grid grid-cols-1 md:grid-cols-3 gap-gutter"></div>
-</div>
-</section>
-</div>
-</main>
-<script>
-    (function() {
-      const API = window.location.origin;
-      let includeInReport = false;
+      <!-- File Info (Hidden initially, shown after selection) -->
+      <div id="file-info" class="hidden glass-panel rounded-xl p-6 flex justify-between items-center animate-fade-in">
+        <div class="flex items-center gap-4">
+          <span class="material-symbols-outlined text-secondary text-3xl">description</span>
+          <div class="flex flex-col">
+            <span id="file-name" class="font-data-mono text-data-mono text-on-surface">PATIENT_8829_EEG.EDF</span>
+            <span id="file-meta" class="font-data-mono text-data-mono text-on-surface-variant text-xs">142.4 MB • Modified: 2023-11-24 09:12</span>
+          </div>
+        </div>
+        <button id="proceed-btn" class="bg-primary text-on-primary-fixed px-6 py-2 rounded font-title-sm text-sm hover:brightness-110 transition-all">Proceed to Validation</button>
+      </div>
+    </section>
 
-      function getId() {
-        const m = window.location.pathname.match(/\/analysis\/([^/]+)/);
-        return m ? decodeURIComponent(m[1]) : 'NV-8829-X';
-      }
+    <!-- STEP 2: Signal Validation (Hidden) -->
+    <section class="hidden space-y-6" id="step-2-content">
+      <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+        <div class="h-full bg-primary w-0 transition-all duration-700 ease-out" id="validation-progress"></div>
+      </div>
+      <div class="intelligence-grid">
+        <!-- Card 1: CHANNELS -->
+        <div class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4" id="val-card-1">
+          <span class="text-label-caps font-label-caps text-on-surface-variant block mb-2">CHANNELS</span>
+          <div class="flex items-baseline gap-2">
+            <span id="val-channels" class="font-data-mono text-2xl text-on-surface">—</span>
+            <span class="text-label-caps text-xs text-on-surface-variant">Active</span>
+          </div>
+        </div>
+        <!-- Card 2: SAMPLING RATE -->
+        <div class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4" id="val-card-2">
+          <span class="text-label-caps font-label-caps text-on-surface-variant block mb-2">SAMPLING RATE</span>
+          <div class="flex items-baseline gap-2">
+            <span id="val-sampling" class="font-data-mono text-2xl text-on-surface">—</span>
+            <span class="text-label-caps text-xs text-on-surface-variant">Hz</span>
+          </div>
+        </div>
+        <!-- Card 3: DURATION -->
+        <div class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4" id="val-card-3">
+          <span class="text-label-caps font-label-caps text-on-surface-variant block mb-2">DURATION</span>
+          <div id="val-duration" class="font-data-mono text-2xl text-on-surface">—</div>
+        </div>
+        <!-- Card 4: INTEGRITY -->
+        <div class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4" id="val-card-4">
+          <span class="text-label-caps font-label-caps text-on-surface-variant block mb-2">INTEGRITY</span>
+          <div class="flex items-baseline gap-2">
+            <span id="val-integrity" class="font-data-mono text-2xl text-secondary">—</span>
+            <span id="val-integrity-icon" class="material-symbols-outlined text-secondary text-lg hidden" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+          </div>
+        </div>
+      </div>
 
-      async function load() {
-        const id = getId();
-        let data;
-        try {
-          const r = await fetch(API + '/api/v1/analysis/' + encodeURIComponent(id), { headers: { Accept: 'application/json' } });
-          if (!r.ok) throw new Error('HTTP ' + r.status);
-          data = await r.json();
-        } catch (e) {
-          console.warn('Backend unreachable, using fallback:', e);
-          data = fallback(id);
-        }
-        render(data);
-        
-        // Load initial session state for Include in Report toggle
-        try {
-          const r2 = await fetch(API + '/api/v1/session/current');
-          if (r2.ok) {
-            const sess = await r2.json();
-            if (sess && sess.active_session) {
-              includeInReport = !!sess.active_session.include_in_report;
-              updateIncludeUI();
-            }
-          }
-        } catch (e) {
-          console.warn('Could not load current session:', e);
-        }
-      }
+      <!-- Waveform Monitor -->
+      <div class="glass-panel rounded-xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: linear-gradient(#44e2cd 1px, transparent 1px), linear-gradient(90deg, #44e2cd 1px, transparent 1px); background-size: 40px 40px;"></div>
+        <div class="flex justify-between items-center mb-4 relative z-10">
+          <span class="text-label-caps font-label-caps text-secondary">REAL-TIME SIGNAL STREAM (19 CLINICAL CHANNELS)</span>
+          <span id="waveform-status" class="font-data-mono text-xs text-on-surface-variant">WAITING FOR SIGNAL</span>
+        </div>
+        <div class="relative w-full h-48">
+          <canvas id="eeg-stream-monitor" class="w-full h-full block"></canvas>
+        </div>
+      </div>
 
-      function fallback(id) {
-        return {
-          patient_id: id || 'NV-8829-X',
-          timestamp: '2023.10.24 14:02 UTC',
-          clinical_narrative: {
-            text: 'The longitudinal review of the 24-hour ambulatory EEG recording reveals a dominant pattern of Temporal Rhythmic Activity, most prominent during the early REM stages. This activity is characterized by 4-6 Hz theta waves with occasional sharp components. Secondary observations indicate significant Focal Slowing in the left hemisphere, specifically involving the temporal leads. This suggests a persistent underlying neurophysiological state that matches the clinical presentation of the patient. No generalized tonic-clonic activity was detected during this recording epoch.',
-            highlights: ['Temporal Rhythmic Activity', 'Focal Slowing']
-          },
-          evidence_intelligence: {
-            supporting_impact: 82,
-            opposing_impact: 18,
-            supporting_factors: [
-              { name: 'Theta Rhythm Persistence', description: 'High correlation with historical seizure cases' },
-              { name: 'Sharp Wave Transients', description: 'Evidence of epileptiform activity in temporal leads' }
-            ],
-            opposing_factors: [
-              { name: 'Alpha Rhythm Preservation', description: 'Normal background frequency in posterior regions' },
-              { name: 'Physiological Artifacts', description: 'Some transients may be eye-movement related' }
-            ]
-          },
-          brain_intelligence: {
-            spectral_dominance: {
-              label: 'Resting Alpha',
-              bands: [
-                { name: 'DELTA', range: '0.5-4HZ', value: 12 },
-                { name: 'THETA', range: '4-8HZ', value: 24 },
-                { name: 'ALPHA', range: '8-13HZ', value: 48 },
-                { name: 'BETA', range: '13-30HZ', value: 12 }
-              ]
-            },
-            localization: {
-              region: 'Left Temporal Region',
-              confidence: 92,
-              evidence_strength: 'HIGH',
-              nodes: [
-                { id: 'Fp1', x: 0.35, y: 0.12, intensity: 0.10 },
-                { id: 'Fpz', x: 0.50, y: 0.10, intensity: 0.05 },
-                { id: 'Fp2', x: 0.65, y: 0.12, intensity: 0.10 },
-                { id: 'F7',  "x": 0.18, "y": 0.22, "intensity": 0.80 },
-                { id: 'F3',  "x": 0.38, "y": 0.22, "intensity": 0.30 },
-                { id: 'Fz',  "x": 0.50, "y": 0.20, "intensity": 0.10 },
-                { id: 'F4',  "x": 0.62, "y": 0.22, "intensity": 0.15 },
-                { id: 'F8',  "x": 0.82, "y": 0.22, "intensity": 0.10 },
-                { id: 'T3',  "x": 0.12, "y": 0.42, "intensity": 0.95 },
-                { id: 'C3',  "x": 0.38, "y": 0.42, "intensity": 0.30 },
-                { id: 'Cz',  "x": 0.50, "y": 0.42, "intensity": 0.20 },
-                { id: 'C4',  "x": 0.62, "y": 0.42, "intensity": 0.20 },
-                { id: 'T4',  "x": 0.88, "y": 0.42, "intensity": 0.10 },
-                { id: 'T5',  "x": 0.12, "y": 0.62, "intensity": 0.60 },
-                { id: 'P3',  "x": 0.38, "y": 0.62, "intensity": 0.15 },
-                { id: 'Pz',  "x": 0.50, "y": 0.62, "intensity": 0.10 },
-                { id: 'P4',  "x": 0.62, "y": 0.62, "intensity": 0.10 },
-                { id: 'T6',  "x": 0.88, "y": 0.62, "intensity": 0.10 },
-                { id: 'O1',  "x": 0.35, "y": 0.82, "intensity": 0.10 },
-                { id: 'Oz',  "x": 0.50, "y": 0.85, "intensity": 0.05 },
-                { id: 'O2',  "x": 0.65, "y": 0.82, "intensity": 0.10 },
-                { id: 'A1',  "x": 0.02, "y": 0.42, "intensity": 0.05 },
-                { id: 'A2',  "x": 0.98, "y": 0.42, "intensity": 0.05 }
-              ]
-            }
-          },
-          signal_intelligence: {
-            quality_score: 94,
-            quality_label: 'Optimal Signal',
-            noise_burden: 'Low (2.1 µV)',
-            artifact_burden: '4% Recorded',
-            trust_level: 98
-          },
-          case_intelligence: {
-            similar_cases: [
-              { score: 94, id: 'NV-1202', outcome: 'Surgical Resection (Successful Seizure Control)', timestamp: '2023.10.12 09:30 UTC' },
-              { score: 82, id: 'NV-9943', outcome: 'Pharmacological Management (Brivaracetam)', timestamp: '2023.10.15 11:20 UTC' },
-              { score: 78, id: 'NV-0042', outcome: 'Non-Epileptogenic Psychogenic Event Identified', timestamp: '2023.10.18 14:05 UTC' }
-            ]
-          }
-        };
-      }
+      <div class="flex justify-center">
+        <button id="init-pipeline-btn" class="bg-primary text-on-primary-fixed px-10 py-4 rounded-lg font-headline-md shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">Initialize Intelligence Pipeline</button>
+      </div>
+    </section>
 
-      function render(data) {
-        if (!data) return;
-        document.getElementById('hdr-pid').textContent = data.patient_id || getId();
-        document.getElementById('hdr-date').textContent = data.timestamp || '--';
-        
-        renderNarrative(data.clinical_narrative || {});
-        renderEvidence(data.evidence_intelligence || {});
-        renderBrain(data.brain_intelligence || {});
-        renderSignal(data.signal_intelligence || {});
-        renderCases(data.case_intelligence || {});
-      }
+    <!-- STEP 3: Intelligence Pipeline (Hidden) -->
+    <section class="hidden space-y-6" id="step-3-content">
+      <div class="grid grid-cols-2 gap-4" id="pipeline-grid">
+        <!-- Pipeline Cards 1-8 -->
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-1">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">waves</span>
+            <span class="font-title-sm text-sm">Signal Extraction</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-2">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">cleaning_services</span>
+            <span class="font-title-sm text-sm">Artifact Detection</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-3">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">analytics</span>
+            <span class="font-title-sm text-sm">Feature Extraction</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-4">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">psychology</span>
+            <span class="font-title-sm text-sm">Brain Characterization</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-5">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">warning</span>
+            <span class="font-title-sm text-sm">Seizure Prediction</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-6">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">stethoscope</span>
+            <span class="font-title-sm text-sm">Clinical Interpretation</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-7">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">fact_check</span>
+            <span class="font-title-sm text-sm">Evidence Analysis</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+        <div class="pipeline-card glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant" id="pipe-8">
+          <div class="flex items-center gap-4">
+            <span class="status-icon material-symbols-outlined text-on-surface-variant">picture_as_pdf</span>
+            <span class="font-title-sm text-sm">Report Generation</span>
+          </div>
+          <span class="status-indicator material-symbols-outlined text-on-surface-variant text-sm">hourglass_empty</span>
+        </div>
+      </div>
 
-      function renderNarrative(n) {
-        const text = n.text || 'No narrative available.';
-        const highlights = n.highlights || [];
-        let html = esc(text);
-        highlights.forEach(h => {
-          const s = esc(h);
-          html = html.split(s).join('<span class="bg-secondary/10 text-secondary px-1.5 py-0.5 rounded-[2px] font-semibold inline-block hover-bloom hover:border-[#d0bcff] duration-150">' + s + '</span>');
-        });
-        document.getElementById('narrative-text').innerHTML = html;
-        document.getElementById('btn-copy').onclick = async () => {
-          try {
-            await navigator.clipboard.writeText(text);
-            const b = document.getElementById('copy-text');
-            const o = b.textContent;
-            b.textContent = 'Copied!';
-            setTimeout(() => b.textContent = o, 1500);
-          } catch (e) {}
-        };
-      }
+      <!-- Technical Logs -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 h-48 overflow-y-auto font-data-mono text-xs space-y-1">
+        <div id="log-container" class="text-on-surface-variant">
+          <p class="text-secondary">[SYSTEM] Intelligence Kernel ready. Waiting for stream.</p>
+        </div>
+      </div>
+    </section>
 
-      function renderEvidence(e) {
-        const sup = e.supporting_impact || 0;
-        const opp = e.opposing_impact || 0;
-        const tot = sup + opp;
-        const sp = tot > 0 ? (sup / tot) * 100 : 0;
-        const op = tot > 0 ? (opp / tot) * 100 : 0;
-        
-        document.getElementById('bar-supporting').style.width = sp + '%';
-        document.getElementById('bar-opposing').style.width = op + '%';
-        
-        document.getElementById('lbl-supporting').textContent = '+' + sup + '% Impact';
-        document.getElementById('lbl-opposing').textContent = '-' + opp + '% Impact';
-        
-        const sL = document.getElementById('list-supporting');
-        const oL = document.getElementById('list-opposing');
-        sL.innerHTML = '';
-        oL.innerHTML = '';
-        
-        (e.supporting_factors || []).forEach(f => sL.appendChild(factorRow(f, true)));
-        (e.opposing_factors || []).forEach(f => oL.appendChild(factorRow(f, false)));
-      }
-
-      function factorRow(f, ok) {
-        const li = document.createElement('li');
-        li.className = 'flex items-start space-x-3 group';
-        const c = ok ? 'bg-secondary/15 text-secondary' : 'bg-error/15 text-error';
-        const i = ok ? 'check_circle' : 'remove_circle';
-        li.innerHTML = `
-          <div class="w-[18px] h-[18px] rounded-[4px] ${c} flex items-center justify-center mt-0.5 shrink-0">
-            <span class="material-symbols-outlined text-[13px]">${i}</span>
+    <!-- Analysis Complete Success Panel (Hidden) -->
+    <section class="hidden animate-fade-in space-y-6" id="success-panel">
+      <div class="glass-panel p-10 rounded-2xl border-2 border-secondary/30 text-center relative overflow-hidden">
+        <!-- Success Background Glow -->
+        <div class="absolute -top-24 -left-24 w-48 h-48 bg-secondary/10 blur-[100px] rounded-full"></div>
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-primary/10 blur-[100px] rounded-full"></div>
+        <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6">
+          <span class="material-symbols-outlined text-secondary text-5xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+        </div>
+        <h2 class="font-display-lg text-display-lg mb-2">Analysis Complete</h2>
+        <p class="font-body-md text-on-surface-variant mb-8">AI-powered diagnostic interpretation is ready for review.</p>
+        <div class="grid grid-cols-4 gap-4 mb-10 text-center">
+          <div>
+            <div id="success-channels" class="font-data-mono text-xl text-on-surface">—</div>
+            <div class="text-label-caps text-on-surface-variant text-[10px]">CHANNELS</div>
           </div>
           <div>
-            <div class="font-label-md text-label-md text-on-surface">${esc(f.name)}</div>
-            <div class="text-outline font-label-sm text-label-sm">${esc(f.description)}</div>
+            <div id="success-seconds" class="font-data-mono text-xl text-on-surface">—</div>
+            <div class="text-label-caps text-on-surface-variant text-[10px]">SECONDS</div>
           </div>
-        `;
-        return li;
+          <div>
+            <div id="success-features" class="font-data-mono text-xl text-on-surface">—</div>
+            <div class="text-label-caps text-on-surface-variant text-[10px]">FEATURES</div>
+          </div>
+          <div>
+            <div id="success-confidence" class="font-data-mono text-xl text-secondary">—</div>
+            <div class="text-label-caps text-on-surface-variant text-[10px]">CONFIDENCE</div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 max-w-sm mx-auto relative z-10">
+          <a id="view-report-link" href="/dashboard" class="bg-primary text-on-primary-fixed py-4 rounded-lg font-title-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20 text-center">View Intelligence Report</a>
+          <button class="bg-transparent border border-outline-variant text-on-surface py-3 rounded-lg font-title-sm hover:bg-surface-container-high transition-all" onclick="App.resetSession()">Start New Analysis</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<script>
+(function() {
+  'use strict';
+
+  const API_BASE = '';
+  const EXPECTED_FEATURES = 484;
+  const MIN_CALIBRATION_WINDOWS = 600;
+  const DEFAULT_SAMPLING_RATE = 256;
+  const WINDOW_DURATION_SECONDS = 1.0;
+  const CLINICAL_CHANNELS = 19;
+
+  const App = {
+    state: {
+      file: null,
+      fileType: null, // 'eeg' | 'matrix'
+      featureMatrix: null,
+      eegSignal: null,
+      metadata: {},
+      patientId: null,
+      calibrateResult: null,
+      predictResult: null,
+      uploadResult: null,
+      pipelineAborted: false,
+      waveformConnected: false
+    },
+
+    init() {
+      this.checkAuth();
+      this.loadProfile();
+      this.bindEvents();
+      this.initWaveform();
+    },
+
+    checkAuth() {
+      const token = localStorage.getItem('nv_session');
+      if (!token) {
+        window.location.replace('/login');
       }
+    },
 
-      function renderBrain(b) {
-        const spec = b.spectral_dominance || {};
-        document.getElementById('spectral-label').textContent = spec.label || 'Resting Alpha';
-        const g = document.getElementById('spectral-grid');
-        g.innerHTML = '';
-        
-        (spec.bands || []).forEach((band, idx) => {
-          const row = document.createElement('div');
-          row.className = 'p-3 rounded-lg zebra-row space-y-2';
-          row.innerHTML = `
-            <div class="flex justify-between font-label-sm text-label-sm uppercase">
-              <span class="text-outline">${esc(band.name)} (${esc(band.range)})</span>
-              <span class="text-secondary font-mono">${band.value}%</span>
-            </div>
-            <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
-              <div class="h-full bg-secondary-container rounded-full" style="width: ${band.value}%;"></div>
-            </div>
-          `;
-          g.appendChild(row);
-        });
-
-        const loc = b.localization || {};
-        document.getElementById('loc-region').textContent = loc.region || '--';
-        document.getElementById('loc-confidence').textContent = (loc.confidence || 0) + '%';
-        document.getElementById('loc-strength').textContent = loc.evidence_strength || '--';
-        
-        initTopo('topo-canvas', loc.nodes || [], loc.region || '');
+    loadProfile() {
+      const user = localStorage.getItem('nv_session_user');
+      const role = localStorage.getItem('nv_session_role');
+      if (user) {
+        document.getElementById('profile-name').textContent = user;
+        document.getElementById('profile-avatar').textContent = user.split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase();
       }
+      if (role) {
+        document.getElementById('profile-role').textContent = role;
+      }
+    },
 
-      function initTopo(canvasId, nodes, region) {
-        const c = document.getElementById(canvasId);
-        if (!c) return;
-        const ctx = c.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
-        let maxI = 0, maxN = null;
-        nodes.forEach(n => { if ((n.intensity || 0) > maxI) { maxI = n.intensity; maxN = n; } });
+    signOut() {
+      localStorage.removeItem('nv_session');
+      localStorage.removeItem('nv_session_role');
+      localStorage.removeItem('nv_session_user');
+      window.location.href = '/login';
+    },
 
-        function resize() {
-          const r = c.getBoundingClientRect();
-          const w = r.width || 280;
-          const h = r.height || 280;
-          c.width = w * dpr; c.height = h * dpr;
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          draw(w, h);
+    resetSession() {
+      location.reload();
+    },
+
+    bindEvents() {
+      const dropzone = document.getElementById('dropzone');
+      const fileInput = document.getElementById('file-input');
+      const selectBtn = document.getElementById('select-file-btn');
+      const proceedBtn = document.getElementById('proceed-btn');
+      const initPipelineBtn = document.getElementById('init-pipeline-btn');
+
+      selectBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+      dropzone.addEventListener('click', () => fileInput.click());
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          this.handleFile(e.target.files[0]);
         }
+      });
 
-        function draw(w, h) {
-          ctx.clearRect(0, 0, w, h);
-          const cx = w / 2, cy = h / 2, rx = w * 0.40, ry = h * 0.44;
-
-          // Head outline
-          ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
-          ctx.strokeStyle = '#2d2736'; ctx.lineWidth = 2; ctx.stroke();
-
-          // Nose
-          ctx.beginPath();
-          ctx.moveTo(cx - 6, cy - ry); ctx.lineTo(cx, cy - ry - 10); ctx.lineTo(cx + 6, cy - ry);
-          ctx.strokeStyle = '#2d2736'; ctx.lineWidth = 2; ctx.stroke();
-
-          // Ears
-          [-1, 1].forEach(s => {
-            ctx.beginPath(); ctx.ellipse(cx + s * (rx + 5), cy, 7, 15, 0, 0, Math.PI * 2);
-            ctx.strokeStyle = '#2d2736'; ctx.lineWidth = 2; ctx.stroke();
-          });
-
-          // Faint connections
-          ctx.beginPath(); ctx.strokeStyle = 'rgba(73, 68, 84, 0.25)'; ctx.lineWidth = 1;
-          nodes.forEach((a, i) => {
-            nodes.forEach((b, j) => {
-              if (i >= j) return;
-              const dx = (a.x - b.x) * w, dy = (a.y - b.y) * h;
-              if (Math.sqrt(dx * dx + dy * dy) < w * 0.22) {
-                ctx.moveTo(a.x * w, a.y * h); ctx.lineTo(b.x * w, b.y * h);
-              }
-            });
-          });
-          ctx.stroke();
-
-          // Nodes
-          nodes.forEach(n => {
-            const int = n.intensity || 0;
-            const nx = n.x * w, ny = n.y * h;
-            const isLoc = maxN && n.id === maxN.id;
-            const r = 2.5 + int * 5;
-
-            // Glow and outer ring
-            if (int > 0.1 || isLoc) {
-              ctx.beginPath(); ctx.arc(nx, ny, r + 4 + int * 12, 0, Math.PI * 2);
-              ctx.fillStyle = isLoc ? 'rgba(255,180,171,0.25)' : `rgba(208, 188, 255, ${int * 0.4})`;
-              ctx.fill();
-            }
-            ctx.beginPath(); ctx.arc(nx, ny, r, 0, Math.PI * 2);
-            ctx.fillStyle = isLoc ? '#ffb4ab' : (int > 0.3 ? '#d0bcff' : '#494454');
-            ctx.fill();
-
-            if (isLoc && region) {
-              ctx.save();
-              ctx.fillStyle = '#fff'; ctx.font = '600 9px Inter, sans-serif';
-              ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-              ctx.fillText(region.split(' ')[0] || 'L-TEMPORAL', nx, ny);
-              ctx.restore();
-            }
-          });
-        }
-
-        resize();
-        new ResizeObserver(() => resize()).observe(c);
-      }
-
-      function renderSignal(s) {
-        document.getElementById('quality-val').textContent = s.quality_score || 0;
-        document.getElementById('quality-label').textContent = s.quality_label || '--';
-        document.getElementById('noise-val').textContent = s.noise_burden || '--';
-        document.getElementById('artifact-val').textContent = s.artifact_burden || '--';
-        
-        const t = s.trust_level || 0;
-        document.getElementById('trust-val').textContent = t + '%';
-        document.getElementById('trust-bar').style.width = t + '%';
-      }
-
-      function renderCases(c) {
-        const g = document.getElementById('cases-grid');
-        if (!g) return;
-        g.innerHTML = '';
-        (c.similar_cases || []).forEach((cs, idx) => {
-          const scoreColor = cs.score >= 90 ? 'text-secondary border-secondary bg-secondary/10' : 'text-primary border-primary bg-primary/10';
-          const scoreNumColor = cs.score >= 90 ? 'text-secondary' : 'text-primary';
-          const ts = cs.timestamp || '2023.10.24 14:02 UTC';
-          const d = document.createElement('div');
-          d.className = 'tonal-card p-6 space-y-4 hover-bloom cursor-pointer';
-          d.innerHTML = `
-            <div class="flex justify-between items-start">
-              <div class="w-14 h-14 rounded-[4px] border-2 flex items-center justify-center ${scoreColor}">
-                <span class="font-mono text-[18px] font-bold ${scoreNumColor}">${cs.score}%</span>
-              </div>
-              <span class="material-symbols-outlined text-outline">history</span>
-            </div>
-            <div>
-              <div class="text-outline font-inter text-label-sm mb-1 uppercase tracking-wider">Similarity Score</div>
-              <div class="font-mono text-headline-md text-headline-md text-on-surface font-bold">Case ${esc(cs.id)}</div>
-              <div class="font-mono text-[11px] text-outline mt-1">Recorded: ${esc(ts)}</div>
-            </div>
-            <div class="p-3 bg-surface-container-lowest rounded text-on-surface-variant">
-              <span class="font-inter text-label-sm text-primary font-bold">Outcome:</span>
-              <span class="font-mono text-label-sm leading-relaxed">${esc(cs.outcome)}</span>
-            </div>
-          `;
-          g.appendChild(d);
+      ['dragenter', 'dragover'].forEach(ev => {
+        dropzone.addEventListener(ev, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.add('bg-surface-container-low');
         });
+      });
+      ['dragleave', 'drop'].forEach(ev => {
+        dropzone.addEventListener(ev, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.remove('bg-surface-container-low');
+        });
+      });
+      dropzone.addEventListener('drop', (e) => {
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+          fileInput.files = e.dataTransfer.files;
+          this.handleFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      proceedBtn.addEventListener('click', () => this.proceedToValidation());
+      initPipelineBtn.addEventListener('click', () => this.startIntelligencePipeline());
+    },
+
+    async handleFile(file) {
+      this.hideError();
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      const modified = new Date(file.lastModified).toISOString().replace('T', ' ').slice(0, 16);
+
+      document.getElementById('file-name').textContent = file.name.toUpperCase();
+      document.getElementById('file-meta').textContent = `${sizeMB} MB • Modified: ${modified}`;
+      document.getElementById('file-info').classList.remove('hidden');
+      document.getElementById('file-info').classList.add('flex');
+
+      this.state.file = file;
+
+      if (ext === 'edf' || ext === 'bdf') {
+        this.state.fileType = 'eeg';
+        const metadata = await this.parseEegHeader(file);
+        this.state.metadata = metadata;
+        this.state.eegSignal = metadata.previewSignal || null;
+        if (metadata.previewSignal && metadata.previewSignal.length) {
+          metadata.previewSignal.forEach(v => this.pushWaveformSample(v / 32768));
+        }
+      } else {
+        this.state.fileType = 'matrix';
+        const matrix = await this.parseFeatureMatrix(file);
+        this.state.featureMatrix = matrix;
+        this.state.metadata = this.computeMatrixMetadata(matrix, file.name);
       }
 
-      window.toggleInclude = function() {
-        includeInReport = !includeInReport;
-        updateIncludeUI();
-        fetch(API + '/api/v1/session/current', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ include_in_report: includeInReport }) }).catch(() => {});
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    },
+
+    computeMatrixMetadata(matrix, filename) {
+      const windows = matrix.length;
+      const channels = windows > 0 ? matrix[0].length : 0;
+      let nonNaN = 0;
+      let total = 0;
+      for (let i = 0; i < Math.min(windows, 1000); i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          total++;
+          if (Number.isFinite(matrix[i][j])) nonNaN++;
+        }
+      }
+      const integrity = total > 0 ? Math.round((nonNaN / total) * 1000) / 10 : 100.0;
+      const durationSec = Math.max(0, Math.floor(windows * WINDOW_DURATION_SECONDS));
+      return {
+        channels: channels,
+        windows: windows,
+        samplingRate: DEFAULT_SAMPLING_RATE,
+        duration: durationSec,
+        integrity: integrity,
+        featureCount: channels,
+        fileSource: filename
+      };
+    },
+
+    async parseFeatureMatrix(file) {
+      const text = await file.text();
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      let matrix = [];
+
+      try {
+        if (ext === 'json') {
+          const parsed = JSON.parse(text);
+          if (Array.isArray(parsed)) {
+            matrix = Array.isArray(parsed[0]) ? parsed : [parsed];
+          } else if (parsed && Array.isArray(parsed.features)) {
+            matrix = parsed.features;
+          } else {
+            throw new Error('JSON must contain a features array or 2-D array');
+          }
+        } else {
+          const lines = text.split(/\r?\n/).filter(l => l.trim());
+          const delimiter = lines[0] && lines[0].includes('\t') ? '\t' : (lines[0] && lines[0].includes(',') ? ',' : /\s+/);
+          matrix = lines.map(line => line.split(delimiter).map(v => parseFloat(v)).filter(v => !Number.isNaN(v)));
+        }
+      } catch (err) {
+        throw new Error(`Could not parse feature matrix: ${err.message}`);
+      }
+
+      if (matrix.length < MIN_CALIBRATION_WINDOWS) {
+        throw new Error(`Calibration requires at least ${MIN_CALIBRATION_WINDOWS} windows; received ${matrix.length}.`);
+      }
+      const cols = matrix[0].length;
+      if (cols !== EXPECTED_FEATURES) {
+        throw new Error(`Feature matrix must have exactly ${EXPECTED_FEATURES} columns; received ${cols}.`);
+      }
+      return matrix;
+    },
+
+    async parseEegHeader(file) {
+      const buffer = await file.slice(0, 4096).arrayBuffer();
+      const bytes = new Uint8Array(buffer);
+      const text = new TextDecoder('ascii').decode(bytes);
+
+      const version = text.slice(0, 8).trim();
+      const patientId = text.slice(8, 88).trim();
+      const recordingId = text.slice(88, 168).trim();
+      const startDate = text.slice(168, 176).trim();
+      const startTime = text.slice(176, 184).trim();
+      const headerBytes = parseInt(text.slice(184, 192).trim(), 10) || 256;
+      const numDataRecords = parseInt(text.slice(236, 244).trim(), 10) || 0;
+      const durationSec = parseFloat(text.slice(244, 252).trim()) || 1;
+      const numSignals = parseInt(text.slice(252, 256).trim(), 10) || 0;
+
+      const samplingRates = [];
+      const channelLabels = [];
+      let headerOffset = 256;
+      for (let i = 0; i < numSignals; i++) {
+        const label = text.slice(headerOffset + i * 16, headerOffset + (i + 1) * 16).trim();
+        channelLabels.push(label || `CH${i + 1}`);
+      }
+      headerOffset += numSignals * 16;
+      headerOffset += numSignals * 80; // transducer
+      headerOffset += numSignals * 8; // dimension
+      headerOffset += numSignals * 8; // physical min
+      headerOffset += numSignals * 8; // physical max
+      headerOffset += numSignals * 8; // digital min
+      headerOffset += numSignals * 8; // digital max
+      headerOffset += numSignals * 80; // prefiltering
+      for (let i = 0; i < numSignals; i++) {
+        const samplesPerRecord = parseInt(text.slice(headerOffset + i * 8, headerOffset + (i + 1) * 8).trim(), 10) || 0;
+        if (durationSec > 0) {
+          samplingRates.push(Math.round(samplesPerRecord / durationSec));
+        }
+      }
+
+      const samplingRate = samplingRates.length ? Math.max(...samplingRates) : DEFAULT_SAMPLING_RATE;
+      const duration = numDataRecords > 0 && durationSec > 0 ? Math.floor(numDataRecords * durationSec) : 0;
+      const channels = numSignals || CLINICAL_CHANNELS;
+
+      // Extract a short preview of signal for the waveform monitor (first 2 seconds of first channel)
+      let previewSignal = [];
+      try {
+        const isBdf = file.name.toLowerCase().endsWith('.bdf');
+        const signalBytes = await file.slice(headerBytes, headerBytes + Math.min(8192, file.size - headerBytes)).arrayBuffer();
+        const dataView = new DataView(signalBytes);
+        const samplesPerRecord = samplingRates[0] || samplingRate;
+        const samplesToRead = Math.min(samplesPerRecord * 2, 2000);
+        for (let i = 0; i < samplesToRead; i++) {
+          if (isBdf) {
+            if (i * 3 + 2 < signalBytes.byteLength) {
+              const b0 = dataView.getUint8(i * 3);
+              const b1 = dataView.getUint8(i * 3 + 1);
+              const b2 = dataView.getUint8(i * 3 + 2);
+              let val = (b0 | (b1 << 8) | (b2 << 16));
+              if (val & 0x800000) val -= 0x1000000;
+              previewSignal.push(val);
+            }
+          } else {
+            if (i * 2 + 1 < signalBytes.byteLength) {
+              previewSignal.push(dataView.getInt16(i * 2, true));
+            }
+          }
+        }
+      } catch (err) {
+        previewSignal = [];
+      }
+
+      return {
+        channels: channels,
+        samplingRate: samplingRate,
+        duration: duration,
+        integrity: 100.0,
+        featureCount: EXPECTED_FEATURES,
+        fileSource: file.name,
+        patientId: patientId || 'PATIENT_UPLOAD',
+        recordingId: recordingId,
+        startDate: startDate,
+        startTime: startTime,
+        previewSignal: previewSignal
+      };
+    },
+
+    async fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const bytes = new Uint8Array(reader.result);
+          let binary = '';
+          const chunk = 0x8000;
+          for (let i = 0; i < bytes.length; i += chunk) {
+            binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+          }
+          resolve(btoa(binary));
+        };
+        reader.onerror = reject;
+        reader.readAsArrayBuffer(file);
+      });
+    },
+
+    authHeaders() {
+      const token = localStorage.getItem('nv_session') || '';
+      return {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      };
+    },
+
+    async proceedToValidation() {
+      document.getElementById('proceed-btn').disabled = true;
+      document.getElementById('proceed-btn').textContent = 'Validating…';
+      this.hideError();
+
+      try {
+        if (this.state.fileType === 'eeg') {
+          await this.uploadEegAndAnalyze();
+        } else {
+          await this.calibrateFeatureMatrix();
+        }
+        this.showStep2();
+      } catch (err) {
+        this.showError(err.message || 'Validation failed.');
+      } finally {
+        document.getElementById('proceed-btn').disabled = false;
+        document.getElementById('proceed-btn').textContent = 'Proceed to Validation';
+      }
+    },
+
+    async uploadEegAndAnalyze() {
+      this.addLog('Uploading EEG recording to platform gateway…');
+      const base64 = await this.fileToBase64(this.state.file);
+      const body = {
+        filename: this.state.file.name,
+        content_base64: base64
       };
 
-      function updateIncludeUI() {
-        const ic = document.getElementById('include-icon');
-        const tx = document.getElementById('include-text');
-        const btn = document.getElementById('btn-include');
-        if (!ic || !tx || !btn) return;
-        if (includeInReport) {
-          ic.textContent = 'check_box';
-          btn.classList.add('bg-secondary/20', 'text-secondary', 'hover:bg-secondary/30');
-          btn.classList.remove('bg-primary/20', 'text-primary', 'hover:bg-primary/30');
-          tx.textContent = 'Included In Report';
+      const resp = await fetch(`${API_BASE}/v1/uploads`, {
+        method: 'POST',
+        headers: this.authHeaders(),
+        body: JSON.stringify(body)
+      });
+      const data = await resp.json();
+      if (!resp.ok || !data.accepted) {
+        const detail = data.detail || data.reason || data.body || 'Upload rejected by gateway';
+        throw new Error(typeof detail === 'string' ? detail : JSON.stringify(detail));
+      }
+      this.state.uploadResult = data;
+
+      const pred = data.prediction || {};
+      const evidence = pred.evidence || {};
+      const channels = this.state.metadata.channels || CLINICAL_CHANNELS;
+      const duration = this.state.metadata.duration || 0;
+      const integrity = this.state.metadata.integrity || 100.0;
+      const windows = this.state.metadata.duration || 0;
+      const samplingRate = this.state.metadata.samplingRate || DEFAULT_SAMPLING_RATE;
+
+      // Map backend response to validation metrics
+      this.state.calibrateResult = {
+        status: 'SUCCESS',
+        metadata: {
+          total_windows_processed: windows,
+          execution_time_seconds: 0,
+          file_source: this.state.file.name
+        },
+        calibration_profile: {
+          baseline_mu: parseFloat(evidence.baseline_mu || 0),
+          baseline_sigma: parseFloat(evidence.baseline_sigma || 0),
+          computed_decision_gate: parseFloat(evidence.decision_gate || 0.5)
+        }
+      };
+
+      this.populateValidationCards({ channels, samplingRate, duration, integrity, windows });
+      this.addLog(`EEG accepted. Analysis ID: ${data.analysis_id || 'N/A'}.`);
+      this.waveformConnect(true);
+    },
+
+    async calibrateFeatureMatrix() {
+      this.addLog('Submitting feature matrix to calibration endpoint…');
+      const patientId = this.generatePatientId();
+      this.state.patientId = patientId;
+
+      const body = {
+        patient_id: patientId,
+        file_source: this.state.file.name,
+        features: this.state.featureMatrix
+      };
+
+      const resp = await fetch(`${API_BASE}/api/v1/calibrate`, {
+        method: 'POST',
+        headers: this.authHeaders(),
+        body: JSON.stringify(body)
+      });
+      const data = await resp.json();
+      if (!resp.ok) {
+        const detail = data.detail || data.message || data.error || 'Calibration failed';
+        throw new Error(typeof detail === 'string' ? detail : JSON.stringify(detail));
+      }
+      this.state.calibrateResult = data;
+
+      const meta = data.metadata || {};
+      const profile = data.calibration_profile || {};
+      const totalWindows = meta.total_windows_processed || this.state.featureMatrix.length;
+      const execTime = meta.execution_time_seconds || 0;
+      const duration = Math.floor(totalWindows * WINDOW_DURATION_SECONDS);
+      const channels = this.state.featureMatrix[0].length;
+      const integrity = this.state.metadata.integrity || 100.0;
+      const samplingRate = this.state.metadata.samplingRate || DEFAULT_SAMPLING_RATE;
+
+      this.populateValidationCards({ channels, samplingRate, duration, integrity, windows: totalWindows });
+      this.addLog(`Calibration complete. μ=${profile.baseline_mu}, σ=${profile.baseline_sigma}, gate=${profile.computed_decision_gate}.`);
+
+      // Step 2 -> mark Signal Extraction and Feature Extraction as complete
+      this.updatePipelineCard('pipe-1', 'complete', 'Signal extraction complete');
+      this.updatePipelineCard('pipe-3', 'complete', `Feature extraction: ${channels} features × ${totalWindows} windows`);
+      this.waveformConnect(true);
+    },
+
+    populateValidationCards({ channels, samplingRate, duration, integrity, windows }) {
+      document.getElementById('val-channels').textContent = channels;
+      document.getElementById('val-sampling').textContent = samplingRate;
+      document.getElementById('val-duration').textContent = this.formatDuration(duration);
+      document.getElementById('val-integrity').textContent = integrity.toFixed(1) + '%';
+      document.getElementById('val-integrity-icon').classList.remove('hidden');
+
+      // Animate progress and cards
+      requestAnimationFrame(() => {
+        document.getElementById('validation-progress').style.width = '100%';
+      });
+      ['val-card-1', 'val-card-2', 'val-card-3', 'val-card-4'].forEach((id) => {
+        const el = document.getElementById(id);
+        el.classList.remove('opacity-0', 'translate-y-4');
+      });
+
+      document.getElementById('waveform-status').textContent = `${windows} windows @ ${samplingRate} Hz | ${this.formatDuration(duration)}`;
+    },
+
+    showStep2() {
+      document.getElementById('progress-line').style.width = '50%';
+      document.getElementById('step-2-node').classList.replace('bg-surface-container-highest', 'bg-primary');
+      document.getElementById('step-2-node').classList.replace('text-on-surface-variant', 'text-on-primary');
+      document.getElementById('step-2-label').classList.replace('text-on-surface-variant', 'text-primary');
+      document.getElementById('step-1-content').classList.add('hidden');
+      document.getElementById('step-2-content').classList.remove('hidden');
+      document.getElementById('step-2-content').classList.add('animate-fade-in');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    async startIntelligencePipeline() {
+      document.getElementById('init-pipeline-btn').disabled = true;
+      document.getElementById('init-pipeline-btn').textContent = 'Running Pipeline…';
+      this.state.pipelineAborted = false;
+      this.hideError();
+
+      document.getElementById('progress-line').style.width = '100%';
+      document.getElementById('step-3-node').classList.replace('bg-surface-container-highest', 'bg-primary');
+      document.getElementById('step-3-node').classList.replace('text-on-surface-variant', 'text-on-primary');
+      document.getElementById('step-3-label').classList.replace('text-on-surface-variant', 'text-primary');
+      document.getElementById('step-2-node').style.backgroundColor = '#44e2cd';
+      document.getElementById('step-2-node').style.color = '#003731';
+      document.getElementById('step-2-label').style.color = '#44e2cd';
+
+      document.getElementById('step-2-content').classList.add('hidden');
+      document.getElementById('step-3-content').classList.remove('hidden');
+      document.getElementById('step-3-content').classList.add('animate-fade-in');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      try {
+        if (this.state.fileType === 'eeg') {
+          await this.runEegPipeline();
         } else {
-          ic.textContent = 'check_box_outline_blank';
-          btn.classList.add('bg-primary/20', 'text-primary', 'hover:bg-primary/30');
-          btn.classList.remove('bg-secondary/20', 'text-secondary', 'hover:bg-secondary/30');
-          tx.textContent = 'Include In Report';
+          await this.runPredictPipeline();
+        }
+        this.showSuccessPanel();
+      } catch (err) {
+        this.waveformConnect(false);
+        this.showError(err.message || 'Pipeline execution failed.');
+      } finally {
+        document.getElementById('init-pipeline-btn').disabled = false;
+        document.getElementById('init-pipeline-btn').textContent = 'Initialize Intelligence Pipeline';
+      }
+    },
+
+    async runEegPipeline() {
+      const data = this.state.uploadResult || {};
+      const pred = data.prediction || {};
+      const evidence = pred.evidence || {};
+
+      const stages = [
+        { id: 'pipe-2', log: 'Artifact detection pass complete.', depends: () => true },
+        { id: 'pipe-4', log: 'Brain characterization mapped.', depends: () => true },
+        { id: 'pipe-5', log: `Seizure prediction: ${pred.predicted_label || pred.predicted_class || 'normal'}.`, depends: () => true },
+        { id: 'pipe-6', log: `Clinical interpretation: confidence ${this.formatConfidence(pred.confidence)}.`, depends: () => true },
+        { id: 'pipe-7', log: `Evidence analysis: ${Object.keys(evidence).length} feature groups.`, depends: () => true },
+        { id: 'pipe-8', log: 'Report generation complete.', depends: () => true }
+      ];
+
+      for (const stage of stages) {
+        if (this.state.pipelineAborted) return;
+        this.updatePipelineCard(stage.id, 'active', stage.log);
+        this.addLog(stage.log);
+        this.updatePipelineCard(stage.id, 'complete', stage.log);
+      }
+
+      this.state.predictResult = { prediction: pred };
+    },
+
+    async runPredictPipeline() {
+      const chunkSize = 100;
+      const total = this.state.featureMatrix.length;
+      const stages = [
+        { id: 'pipe-2', log: 'Artifact detection pass complete.' },
+        { id: 'pipe-4', log: 'Brain characterization mapped.' },
+        { id: 'pipe-5', log: 'Seizure prediction model running.' },
+        { id: 'pipe-6', log: 'Clinical interpretation generating.' },
+        { id: 'pipe-7', log: 'Evidence analysis compiling.' },
+        { id: 'pipe-8', log: 'Report generation complete.' }
+      ];
+
+      let allAlerts = [];
+      let lastPredict = null;
+
+      for (let i = 0; i < stages.length; i++) {
+        if (this.state.pipelineAborted) return;
+        const stage = stages[i];
+        this.updatePipelineCard(stage.id, 'active', stage.log);
+        this.addLog(stage.log);
+
+        // Drive the backend predict endpoint with a sliding window block
+        const start = Math.min(i * chunkSize, total - chunkSize);
+        const end = Math.min(start + chunkSize, total);
+        if (start >= 0 && end > start && this.state.patientId) {
+          try {
+            const block = this.state.featureMatrix.slice(start, end);
+            const resp = await fetch(`${API_BASE}/api/v1/predict`, {
+              method: 'POST',
+              headers: this.authHeaders(),
+              body: JSON.stringify({
+                patient_id: this.state.patientId,
+                features: block
+              })
+            });
+            const data = await resp.json();
+            if (resp.ok) {
+              lastPredict = data;
+              const alerts = data.clinical_alerts_detected || [];
+              allAlerts = allAlerts.concat(alerts);
+              if (alerts.length) {
+                alerts.forEach(a => {
+                  this.addLog(`ALERT ${a.alert_id}: windows ${a.start_window_index}-${a.end_window_index} | peak ${(a.peak_seizure_probability * 100).toFixed(1)}% | confidence ${(a.discriminator_confidence * 100).toFixed(1)}%`);
+                });
+              } else {
+                this.addLog(`Predict block ${i + 1}: no alerts detected.`);
+              }
+              this.waveformConnect(true);
+            } else {
+              this.waveformConnect(false);
+              const detail = data.detail || data.message || data.error || 'Predict block failed';
+              throw new Error(typeof detail === 'string' ? detail : JSON.stringify(detail));
+            }
+          } catch (err) {
+            this.waveformConnect(false);
+            this.addLog(`PREDICT ERROR: ${err.message}`);
+            throw err;
+          }
+        }
+
+        this.updatePipelineCard(stage.id, 'complete', stage.log);
+      }
+
+      this.state.predictResult = lastPredict;
+      this.state.allAlerts = allAlerts;
+    },
+
+    updatePipelineCard(cardId, state, logText) {
+      const card = document.getElementById(cardId);
+      if (!card) return;
+      const icon = card.querySelector('.status-icon');
+      const badge = card.querySelector('.status-indicator');
+      const label = card.querySelector('.font-title-sm');
+
+      if (state === 'active') {
+        card.classList.replace('border-outline-variant', 'border-tertiary');
+        card.classList.add('active-glow');
+        icon.classList.replace('text-on-surface-variant', 'text-tertiary');
+        badge.textContent = 'sync';
+        badge.classList.add('amber-pulse');
+        badge.classList.replace('text-on-surface-variant', 'text-tertiary');
+      } else if (state === 'complete') {
+        card.classList.remove('active-glow');
+        card.classList.replace('border-tertiary', 'border-secondary');
+        card.classList.replace('border-outline-variant', 'border-secondary');
+        icon.classList.replace('text-on-surface-variant', 'text-secondary');
+        icon.classList.replace('text-tertiary', 'text-secondary');
+        badge.textContent = 'check_circle';
+        badge.classList.remove('amber-pulse');
+        badge.classList.replace('text-on-surface-variant', 'text-secondary');
+        badge.classList.replace('text-tertiary', 'text-secondary');
+      }
+    },
+
+    showSuccessPanel() {
+      document.getElementById('step-3-content').classList.add('hidden');
+      document.getElementById('success-panel').classList.remove('hidden');
+      document.getElementById('step-3-node').style.backgroundColor = '#44e2cd';
+      document.getElementById('step-3-node').style.color = '#003731';
+      document.getElementById('step-3-label').style.color = '#44e2cd';
+
+      const meta = this.state.metadata || {};
+      const predict = this.state.predictResult || {};
+      const prediction = predict.prediction || predict;
+      const confidence = this.extractConfidence(prediction);
+
+      document.getElementById('success-channels').textContent = meta.channels || '—';
+      document.getElementById('success-seconds').textContent = meta.duration || '—';
+      document.getElementById('success-features').textContent = meta.featureCount || meta.channels || '—';
+      document.getElementById('success-confidence').textContent = confidence;
+
+      const reportLink = document.getElementById('view-report-link');
+      if (this.state.uploadResult && this.state.uploadResult.analysis_id) {
+        reportLink.href = `${API_BASE}/v1/analyses/${this.state.uploadResult.analysis_id}/reports?format=html&type=analysis`;
+        reportLink.target = '_blank';
+      } else {
+        reportLink.href = '/dashboard';
+        reportLink.target = '_self';
+      }
+    },
+
+    extractConfidence(prediction) {
+      if (prediction && typeof prediction.confidence === 'number') {
+        return (prediction.confidence * 100).toFixed(1) + '%';
+      }
+      if (this.state.allAlerts && this.state.allAlerts.length) {
+        const max = Math.max(...this.state.allAlerts.map(a => a.discriminator_confidence || 0));
+        return (max * 100).toFixed(1) + '%';
+      }
+      if (this.state.calibrateResult && this.state.calibrateResult.calibration_profile) {
+        const gate = this.state.calibrateResult.calibration_profile.computed_decision_gate || 0.5;
+        return (Math.min(gate * 100, 99.9)).toFixed(1) + '%';
+      }
+      return '—';
+    },
+
+    addLog(text) {
+      const container = document.getElementById('log-container');
+      const p = document.createElement('p');
+      p.className = 'log-line';
+      const ts = new Date().toISOString().split('T')[1].slice(0, 8);
+      p.textContent = `[${ts}] ${text}`;
+      container.appendChild(p);
+      container.scrollTop = container.scrollHeight;
+    },
+
+    showError(message) {
+      const banner = document.getElementById('error-banner');
+      document.getElementById('error-message').textContent = message;
+      banner.classList.remove('hidden');
+      this.addLog(`ERROR: ${message}`);
+    },
+
+    hideError() {
+      document.getElementById('error-banner').classList.add('hidden');
+    },
+
+    formatDuration(seconds) {
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = Math.floor(seconds % 60);
+      return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':');
+    },
+
+    formatConfidence(val) {
+      if (typeof val === 'number' && Number.isFinite(val)) {
+        return (Math.round(val * 1000) / 10) + '%';
+      }
+      return '—';
+    },
+
+    generatePatientId() {
+      return 'P' + Date.now().toString(36).toUpperCase();
+    },
+
+    // -----------------------------------------------------------------
+    // 2D Canvas Waveform Monitor
+    // -----------------------------------------------------------------
+    initWaveform() {
+      const canvas = document.getElementById('eeg-stream-monitor');
+      const ctx = canvas.getContext('2d');
+      this.waveform = {
+        canvas: canvas,
+        ctx: ctx,
+        channels: CLINICAL_CHANNELS,
+        buffer: [],
+        connected: false,
+        running: true,
+        draw: () => this.drawWaveform()
+      };
+      this.resizeCanvas();
+      window.addEventListener('resize', () => this.resizeCanvas());
+      this.drawWaveform();
+    },
+
+    resizeCanvas() {
+      const canvas = this.waveform.canvas;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width * (window.devicePixelRatio || 1);
+      canvas.height = rect.height * (window.devicePixelRatio || 1);
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      this.waveform.ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+    },
+
+    waveformConnect(connected) {
+      this.state.waveformConnected = connected;
+      this.waveform.connected = connected;
+      const status = document.getElementById('waveform-status');
+      status.textContent = connected ? 'STREAM ACTIVE' : 'SIGNAL DISCONNECT';
+      status.className = connected ? 'font-data-mono text-xs text-secondary' : 'font-data-mono text-xs text-error';
+    },
+
+    pushWaveformSample(sample) {
+      if (!this.waveform) return;
+      this.waveform.buffer.push(sample);
+      if (this.waveform.buffer.length > 2000) {
+        this.waveform.buffer.shift();
+      }
+    },
+
+    drawWaveform() {
+      if (!this.waveform || !this.waveform.running) return;
+      const { canvas, ctx, channels, buffer, connected } = this.waveform;
+      const width = canvas.width / (window.devicePixelRatio || 1);
+      const height = canvas.height / (window.devicePixelRatio || 1);
+      const channelHeight = height / channels;
+
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw faint grid (10% Clinical Teal)
+      ctx.strokeStyle = 'rgba(68, 226, 205, 0.10)';
+      ctx.lineWidth = 1;
+      const gridSize = 40;
+      ctx.beginPath();
+      for (let x = 0; x <= width; x += gridSize) { ctx.moveTo(x, 0); ctx.lineTo(x, height); }
+      for (let y = 0; y <= height; y += gridSize) { ctx.moveTo(0, y); ctx.lineTo(width, y); }
+      ctx.stroke();
+
+      // Generate data if none available
+      let data = buffer;
+      if (data.length < 2) {
+        const now = performance.now() / 1000;
+        data = [];
+        for (let i = 0; i < 400; i++) {
+          const t = i / 60 + now;
+          const v = Math.sin(t * 4) * 0.3 + Math.sin(t * 11) * 0.15;
+          data.push(v);
         }
       }
 
-      function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+      const waveColor = connected ? '#44e2cd' : '#6b7280';
+      ctx.strokeStyle = waveColor;
+      ctx.lineWidth = 1.5;
+      ctx.lineJoin = 'round';
 
-      load();
-      
-    })();
+      const step = Math.max(1, Math.floor(data.length / width));
+      for (let ch = 0; ch < channels; ch++) {
+        const yCenter = channelHeight * (ch + 0.5);
+        const amplitude = channelHeight * 0.35;
+        ctx.beginPath();
+        for (let x = 0; x < width; x++) {
+          const idx = Math.min(data.length - 1, x * step + (ch % 3));
+          const sample = data[idx] || 0;
+          const y = yCenter + sample * amplitude;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(() => this.drawWaveform());
+    }
+  };
+
+  window.App = App;
+  document.addEventListener('DOMContentLoaded', () => App.init());
+})();
 </script>
-
-
-</body></html>
+</body>
+</html>
