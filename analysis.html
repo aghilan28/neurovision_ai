@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="dark" lang="en" style="width: 1280px; height: 2772px; overflow: hidden; position: relative;"><head>
+<!DOCTYPE html><html class="dark" lang="en"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>NeuroVision | Flagship Analysis</title>
@@ -165,59 +165,9 @@
   </style>
 </head>
 <body class="font-body-md text-body-md flex min-h-screen">
-<!-- SideNavBar (Authority: JSON & Context) -->
-<aside class="fixed left-0 top-0 h-screen w-[280px] bg-[#221e27] border-r border-[#494454]/20 flex flex-col py-6 z-50">
-<div class="px-gutter mb-stack-lg">
-<h1 class="font-headline-md text-headline-md text-primary font-bold">NeuroVision</h1>
-<div class="flex items-center mt-2 space-x-3">
-<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
-</div>
-<div>
-<div class="font-label-md text-label-md text-on-surface">Flagship Analysis</div>
-<div class="text-[10px] uppercase tracking-widest text-outline">Clinical AI v4.2</div>
-</div>
-</div>
-</div>
-<nav class="flex-1 px-4 space-y-1">
-<a class="group flex items-center px-4 py-3 rounded transition-all text-secondary-fixed-dim font-bold border-r-2 border-primary bg-surface-container-highest" href="#assessment">
-<span class="material-symbols-outlined mr-3">analytics</span>
-<span class="font-label-md text-label-md">Seizure Assessment</span>
-</a>
-<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#narrative">
-<span class="material-symbols-outlined mr-3">description</span>
-<span class="font-label-md text-label-md">Clinical Narrative</span>
-</a>
-<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#evidence">
-<span class="material-symbols-outlined mr-3">query_stats</span>
-<span class="font-label-md text-label-md">Evidence Analysis</span>
-</a>
-<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#brain">
-<span class="material-symbols-outlined mr-3">psychology</span>
-<span class="font-label-md text-label-md">Brain Intelligence</span>
-</a>
-<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#signal">
-<span class="material-symbols-outlined mr-3">sensors</span>
-<span class="font-label-md text-label-md">Signal Intelligence</span>
-</a>
-<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#case">
-<span class="material-symbols-outlined mr-3">folder_shared</span>
-<span class="font-label-md text-label-md">Case Intelligence</span>
-</a>
-</nav>
-<div class="px-4 mt-auto">
-<button id="btn-export-report" onclick="window.print()" class="w-full py-3 bg-[#d0bcff] text-[#3c0091] font-label-md text-label-md rounded-lg flex items-center justify-center space-x-2 active:scale-95 duration-100 mb-stack-md">
-<span class="material-symbols-outlined">ios_share</span>
-<span class="">Export Report</span>
-</button>
-<a class="flex items-center px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="/dashboard">
-<span class="material-symbols-outlined mr-3">arrow_back</span>
-<span class="font-label-md text-label-md">Back To Dashboard</span>
-</a>
-</div>
-</aside>
+
 <!-- Main Content Stage -->
-<main class="flex-1 ml-[280px] h-screen overflow-y-auto no-scrollbar flex flex-col bg-[#16121b]">
+<main class="flex-1 min-h-screen flex flex-col bg-[#16121b]">
 <!-- TopAppBar (Authority: JSON) -->
 <header class="sticky top-0 z-40 bg-surface-dim/80 backdrop-blur-md border-b border-white/10 h-16 flex items-center justify-between px-gutter">
 <div class="flex items-center space-x-6">
@@ -801,7 +751,7 @@
             </div>
             <div>
               <div class="text-outline font-inter text-label-sm mb-1 uppercase tracking-wider">Similarity Score</div>
-              <div class="font-mono text-headline-md font-bold text-on-surface">Case ${esc(cs.id)}</div>
+              <div class="font-mono text-headline-md text-headline-md text-on-surface font-bold">Case ${esc(cs.id)}</div>
               <div class="font-mono text-[11px] text-outline mt-1">Recorded: ${esc(ts)}</div>
             </div>
             <div class="p-3 bg-surface-container-lowest rounded text-on-surface-variant">
@@ -840,47 +790,6 @@
       function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
       load();
-      
-      // Setup smooth scroll scroll spy and click actions
-      const mainEl = document.querySelector('main');
-      const links = document.querySelectorAll('aside nav a');
-      if (mainEl) {
-        mainEl.addEventListener('scroll', () => {
-          let current = '';
-          const sections = document.querySelectorAll('section[id]');
-          sections.forEach(s => {
-            const top = s.offsetTop;
-            if (mainEl.scrollTop >= top - 120) {
-              current = s.getAttribute('id');
-            }
-          });
-          links.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href && href.startsWith('#')) {
-              link.classList.remove('text-secondary-fixed-dim', 'font-bold', 'border-r-2', 'border-primary', 'bg-surface-container-highest');
-              link.classList.add('text-on-surface-variant', 'hover:bg-surface-container-highest');
-              if (href === '#' + current) {
-                link.classList.add('text-secondary-fixed-dim', 'font-bold', 'border-r-2', 'border-primary', 'bg-surface-container-highest');
-                link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-highest');
-              }
-            }
-          });
-        });
-      }
-
-      // Add click listeners to side links for smooth scrolling
-      links.forEach(link => {
-        link.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href && href.startsWith('#')) {
-            e.preventDefault();
-            const targetEl = document.getElementById(href.substring(1));
-            if (targetEl) {
-              targetEl.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        });
-      });
       
     })();
 </script>
