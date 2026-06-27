@@ -1,861 +1,889 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>NeuroVision | Neurological Intelligence Session</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <!-- Tailwind Configuration -->
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface": "#15121b",
-                    "surface-dim": "#15121b",
-                    "surface-bright": "#3b3742",
-                    "surface-container-lowest": "#0f0d15",
-                    "surface-container-low": "#1d1a23",
-                    "surface-container": "#211e27",
-                    "surface-container-high": "#2c2832",
-                    "surface-container-highest": "#37333d",
-                    "on-surface": "#e7e0ed",
-                    "on-surface-variant": "#cbc3d7",
-                    "inverse-surface": "#e7e0ed",
-                    "inverse-on-surface": "#322f39",
-                    "outline": "#958ea0",
-                    "outline-variant": "#494454",
-                    "surface-tint": "#d0bcff",
-                    "primary": "#d0bcff",
-                    "on-primary": "#3c0091",
-                    "primary-container": "#a078ff",
-                    "on-primary-container": "#340080",
-                    "inverse-primary": "#6d3bd7",
-                    "secondary": "#44e2cd",
-                    "on-secondary": "#003731",
-                    "secondary-container": "#03c6b2",
-                    "on-secondary-container": "#004d44",
-                    "tertiary": "#ffb869",
-                    "on-tertiary": "#482900",
-                    "tertiary-container": "#ca801e",
-                    "on-tertiary-container": "#3f2300",
-                    "error": "#ffb4ab",
-                    "on-error": "#690005",
-                    "error-container": "#93000a",
-                    "on-error-container": "#ffdad6",
-                    "primary-fixed": "#e9ddff",
-                    "primary-fixed-dim": "#d0bcff",
-                    "on-primary-fixed": "#23005c",
-                    "on-primary-fixed-variant": "#5516be",
-                    "secondary-fixed": "#62fae3",
-                    "secondary-fixed-dim": "#3cddc7",
-                    "on-secondary-fixed": "#00201c",
-                    "on-secondary-fixed-variant": "#005047",
-                    "tertiary-fixed": "#ffdcbb",
-                    "tertiary-fixed-dim": "#ffb869",
-                    "on-tertiary-fixed": "#2c1700",
-                    "on-tertiary-fixed-variant": "#673d00",
-                    "background": "#15121b",
-                    "on-background": "#e7e0ed",
-                    "surface-variant": "#37333d"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "sm": "0.125rem",
-                    "md": "0.375rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "element_gap": "1.5rem",
-                    "container_padding": "2rem",
-                    "stack_space": "0.75rem",
-                    "section_gap": "4rem",
-                    "workflow_max_width": "760px"
-            },
-            "fontFamily": {
-                    "title-sm": ["Inter", "sans-serif"],
-                    "body-md": ["Inter", "sans-serif"],
-                    "display-lg": ["Inter", "sans-serif"],
-                    "data-mono": ["JetBrains Mono", "monospace"],
-                    "headline-md": ["Inter", "sans-serif"],
-                    "label-caps": ["Inter", "sans-serif"],
-                    "body-sm": ["Inter", "sans-serif"]
+<!DOCTYPE html><html class="dark" lang="en" style="width: 1280px; height: 2772px; overflow: hidden; position: relative;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>NeuroVision | Flagship Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#3c3741",
+                        "secondary-fixed": "#62fae3",
+                        "background": "#16121b",
+                        "secondary-fixed-dim": "#3cddc7",
+                        "primary-fixed": "#e9ddff",
+                        "surface-dim": "#16121b",
+                        "on-primary": "#3c0091",
+                        "error-container": "#93000a",
+                        "surface-tint": "#d0bcff",
+                        "on-primary-fixed": "#23005c",
+                        "surface-container-highest": "#38333d",
+                        "surface-container-lowest": "#100d15",
+                        "primary-container": "#a078ff",
+                        "on-secondary-fixed-variant": "#005047",
+                        "surface": "#16121b",
+                        "surface-container": "#221e27",
+                        "on-secondary-container": "#004d44",
+                        "primary-fixed-dim": "#d0bcff",
+                        "secondary-container": "#03c6b2",
+                        "tertiary-fixed-dim": "#ffafd3",
+                        "error": "#ffb4ab",
+                        "tertiary": "#ffafd3",
+                        "on-background": "#e8dfed",
+                        "surface-container-high": "#2d2832",
+                        "inverse-surface": "#e8dfed",
+                        "on-tertiary-container": "#560038",
+                        "on-primary-container": "#340080",
+                        "on-tertiary-fixed": "#3d0026",
+                        "inverse-on-surface": "#332e38",
+                        "tertiary-container": "#e364a7",
+                        "primary": "#d0bcff",
+                        "surface-container-low": "#1e1a23",
+                        "on-tertiary": "#620040",
+                        "outline": "#958ea0",
+                        "inverse-primary": "#6d3bd7",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-tertiary-fixed-variant": "#85145a",
+                        "on-secondary-fixed": "#00201c",
+                        "outline-variant": "#494454",
+                        "secondary": "#44e2cd",
+                        "tertiary-fixed": "#ffd8e7",
+                        "surface-variant": "#38333d",
+                        "on-surface": "#e8dfed",
+                        "on-error": "#690005",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#003731",
+                        "on-surface-variant": "#cbc3d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "8px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    }
+                }
             }
-          }
         }
-      }
     </script>
-    <style>
+<style>
         body {
-            background-color: #15121b; /* Graphite Plum */
-            color: #e7e0ed;
-            font-family: 'Inter', sans-serif;
+            background-color: #16121b; /* Level 0 Base */
+            color: #e8dfed;
+            overflow-x: hidden;
         }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
         }
-        .workflow-column {
-            max-width: 760px;
-            margin: 0 auto;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
         }
-        .intelligence-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1.5rem;
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1e1a23;
         }
-        .pipeline-card {
-            transition: all 200ms linear;
-            background-color: #1d1a23; /* Nested Surface */
-            border: 1px solid #494454; /* 1px crisp micro-border outline-variant/20 */
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #38333d;
+            border-radius: 10px;
         }
-        .amber-pulse {
-            animation: pulse-amber 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .tonal-card {
+            background: #221e27; /* Level 1 */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
-        @keyframes pulse-amber {
-            0%, 100% { opacity: 1; color: #ffb869; }
-            50% { opacity: 0.5; color: #ca801e; }
+        .tonal-card:hover {
+            border-color: rgba(139, 92, 246, 0.3); /* Neural Violet */
         }
-        .glass-panel {
-            background-color: #211e27; /* Elevated Surface */
-            border: 1px solid #494454; /* 1px crisp micro-border */
+        .semi-gauge {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            overflow: hidden;
         }
-        .nested-panel {
-            background-color: #1d1a23; /* Nested Surface */
-            border: 1px solid #494454;
+        .gauge-bar {
+            width: 200px;
+            height: 200px;
+            border: 12px solid #38333d;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-radius: 50%;
+            transform: rotate(45deg);
         }
-        .dashed-clinical {
-            background-color: #211e27;
-            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23494454' stroke-width='2' stroke-dasharray='8%2c 12' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+        .gauge-fill {
+            position: absolute;
+            top: 0; left: 0;
+            width: 200px;
+            height: 200px;
+            border: 12px solid #8B5CF6;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-radius: 50%;
+            transform: rotate(calc(45deg + (0.734 * 180deg)));
+            transition: transform 1.5s ease-out;
         }
-        .violet-glow {
-            box-shadow: 0 0 20px rgba(208, 188, 255, 0.25);
-            border-color: #d0bcff !important;
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
         }
-        .step-node {
-            transition: all 200ms linear;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-    </style>
+    
+    .zebra-row:nth-child(even) { background-color: #2d2736 !important; }
+    .hover-bloom {
+        transition: border-color 300ms linear !important;
+    }
+    .hover-bloom:hover, .hover-bloom:focus-within {
+        border-color: #d0bcff !important;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none !important; }
+    .no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+  </style>
 </head>
-<body class="min-h-screen flex overflow-hidden bg-background">
-  <!-- Persistent Left-Aligned Sidebar Panel -->
-  <aside class="w-64 h-screen bg-surface-container border-r border-[#494454] flex flex-col justify-between shrink-0 select-none">
-    <!-- Top section: Logo & Navigation Links -->
-    <div class="p-6 space-y-8">
-      <!-- Logo/Brand -->
-      <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">neurology</span>
-        <span class="font-headline-md text-2xl font-bold text-on-surface tracking-tight">NeuroVision</span>
-      </div>
-      <!-- Navigation Links -->
-      <nav class="space-y-2">
-        <a href="/dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors text-sm font-medium">
-          <span class="material-symbols-outlined text-lg">dashboard</span>
-          <span>Dashboard</span>
-        </a>
-        <a href="/upload" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-highest text-primary font-bold transition-colors text-sm" style="color: #d0bcff;">
-          <span class="material-symbols-outlined text-lg">upload_file</span>
-          <span>Upload EEG</span>
-        </a>
-        <a href="/patients" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors text-sm font-medium">
-          <span class="material-symbols-outlined text-lg">folder_shared</span>
-          <span>Patient Records</span>
-        </a>
-        <a href="/export" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors text-sm font-medium">
-          <span class="material-symbols-outlined text-lg">ios_share</span>
-          <span>Export Center</span>
-        </a>
-        <a href="/status" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors text-sm font-medium">
-          <span class="material-symbols-outlined text-lg">dns</span>
-          <span>System Status</span>
-        </a>
-        <div class="pt-4 mt-6 border-t border-[#494454]">
-          <a href="/auth" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-colors text-sm font-medium">
-            <span class="material-symbols-outlined text-lg">logout</span>
-            <span>Sign Out</span>
-          </a>
+<body class="font-body-md text-body-md flex min-h-screen">
+<!-- SideNavBar (Authority: JSON & Context) -->
+<aside class="fixed left-0 top-0 h-screen w-[280px] bg-[#221e27] border-r border-[#494454]/20 flex flex-col py-6 z-50">
+<div class="px-gutter mb-stack-lg">
+<h1 class="font-headline-md text-headline-md text-primary font-bold">NeuroVision</h1>
+<div class="flex items-center mt-2 space-x-3">
+<div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Flagship Analysis</div>
+<div class="text-[10px] uppercase tracking-widest text-outline">Clinical AI v4.2</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="group flex items-center px-4 py-3 rounded transition-all text-secondary-fixed-dim font-bold border-r-2 border-primary bg-surface-container-highest" href="#assessment">
+<span class="material-symbols-outlined mr-3">analytics</span>
+<span class="font-label-md text-label-md">Seizure Assessment</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#narrative">
+<span class="material-symbols-outlined mr-3">description</span>
+<span class="font-label-md text-label-md">Clinical Narrative</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#evidence">
+<span class="material-symbols-outlined mr-3">query_stats</span>
+<span class="font-label-md text-label-md">Evidence Analysis</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#brain">
+<span class="material-symbols-outlined mr-3">psychology</span>
+<span class="font-label-md text-label-md">Brain Intelligence</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#signal">
+<span class="material-symbols-outlined mr-3">sensors</span>
+<span class="font-label-md text-label-md">Signal Intelligence</span>
+</a>
+<a class="group flex items-center px-4 py-3 rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#case">
+<span class="material-symbols-outlined mr-3">folder_shared</span>
+<span class="font-label-md text-label-md">Case Intelligence</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button id="btn-export-report" onclick="window.print()" class="w-full py-3 bg-[#d0bcff] text-[#3c0091] font-label-md text-label-md rounded-lg flex items-center justify-center space-x-2 active:scale-95 duration-100 mb-stack-md">
+<span class="material-symbols-outlined">ios_share</span>
+<span class="">Export Report</span>
+</button>
+<a class="flex items-center px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="/dashboard">
+<span class="material-symbols-outlined mr-3">arrow_back</span>
+<span class="font-label-md text-label-md">Back To Dashboard</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="flex-1 ml-[280px] h-screen overflow-y-auto no-scrollbar flex flex-col bg-[#16121b]">
+<!-- TopAppBar (Authority: JSON) -->
+<header class="sticky top-0 z-40 bg-surface-dim/80 backdrop-blur-md border-b border-white/10 h-16 flex items-center justify-between px-gutter">
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-2">
+<span class="font-label-md text-label-md text-outline">Patient ID:</span>
+<span id="hdr-pid" class="font-label-md text-label-md font-bold text-primary">NV-8829-X</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center space-x-2">
+<span class="font-label-md text-label-md text-outline">Date:</span>
+<span id="hdr-date" class="font-label-md text-label-md text-on-surface">2023.10.24 14:02 UTC</span>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="px-4 py-1.5 border border-primary text-primary font-label-md text-label-md rounded hover:bg-primary/10 transition-all">
+                    Export
+                </button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-white/10">
+<img class="w-full h-full object-cover" data-alt="A professional medical profile avatar of a neurologist in a dark clinic environment, soft atmospheric violet lighting, high detail photographic style, sophisticated dark neutral color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArVePL5mzWCOtDCeSLeKJ2Y1sGlQ-wH-DkVubs6A9dXf_2l8X3aAFgjOXuFk4TCOIsd-lc0CVVS56U7SxhI7uuQuIenPH-GFZg7PulrJgaiYuO8E19fn804gclPy1efXXxUmlezsQDVcPZWneJgqERJAlwT4TJZC2KXUXaWBPRQT-4p7G8aAdC1X_P87xBiUjNEHz9jKslrM4aQ7rwaST1UgN3LJFjBoD7-ytdtMNu8jexMpvT8qQe1_naDeSn5mWCBHEY0Mk3hvPe">
+</div>
+</div>
+</header>
+<!-- Analysis Stage -->
+<div class="flex-1 w-full max-w-[1400px] mx-auto p-gutter space-y-gutter custom-scrollbar overflow-y-auto">
+<!-- Section 1: Seizure Assessment -->
+<section class="fade-in" id="assessment" style="opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-error uppercase tracking-[0.2em] mb-1 block">Seizure Assessment</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Clinical Risk Assessment</h2>
+</div>
+<div class="tonal-card p-stack-lg flex flex-col md:flex-row items-center gap-stack-lg">
+<div class="flex flex-col items-center space-y-4"><div class="relative flex flex-col items-center">
+    <div class="relative w-48 h-48 flex items-center justify-center mb-4">
+        <!-- Background Track -->
+        <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="8" fill="transparent" class="text-surface-container-highest"></circle>
+            <!-- Active Risk Arc -->
+            <circle cx="50" cy="50" r="44" stroke="#EF4444" stroke-width="10" fill="transparent" stroke-dasharray="276.46" stroke-dashoffset="73.4" stroke-linecap="round" class="drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" style="stroke-dashoffset: calc(276.46 * (1 - 0.734));"></circle>
+        </svg>
+        <!-- Percentage Text -->
+        <div class="flex flex-col items-center justify-center z-10">
+            <span class="font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]">73.4%</span>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Probability</span>
         </div>
-      </nav>
     </div>
-    <!-- Bottom section: User Info Profile Grid Card -->
-    <div class="p-6 border-t border-[#494454] bg-surface-container-lowest">
-      <div class="flex items-center gap-4">
-        <div class="w-10 h-10 rounded-full bg-surface-container-highest border border-[#494454] flex items-center justify-center shrink-0">
-          <span class="material-symbols-outlined text-on-surface text-lg">person</span>
+    <!-- Badge and Trend -->
+    <div class="flex items-center space-x-4">
+        <span class="px-4 py-1.5 bg-error text-on-error font-label-sm text-label-sm rounded-full animate-pulse font-bold shadow-lg shadow-error/20">HIGH RISK</span>
+        <div class="flex flex-col items-start border-l border-white/10 pl-4">
+            <span class="text-[10px] text-outline uppercase font-label-sm mb-1">Trend</span>
+            <div class="flex items-end space-x-1 h-5">
+                <div class="w-1.5 bg-primary/20 h-1.5 rounded-full"></div>
+                <div class="w-1.5 bg-primary/40 h-2.5 rounded-full"></div>
+                <div class="w-1.5 bg-primary/60 h-3.5 rounded-full"></div>
+                <div class="w-1.5 bg-primary h-5 rounded-full shadow-[0_0_8px_rgba(208,188,255,0.5)]"></div>
+            </div>
         </div>
-        <div class="flex flex-col overflow-hidden">
-          <span class="font-title-sm text-sm font-semibold text-on-surface truncate">Dr. Aris Thorne</span>
-          <span class="font-data-mono text-[11px] text-on-surface-variant truncate">Senior Neurologist</span>
-        </div>
-      </div>
     </div>
-  </aside>
+</div></div>
+<div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+<div class="p-4 bg-surface-container-low rounded-lg border border-white/5">
+<div class="text-outline font-label-sm text-label-sm mb-1">Model Confidence</div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-headline-md font-bold text-secondary">94%</span>
 
-  <!-- Main content viewpane -->
-  <main class="flex-1 h-screen overflow-y-auto px-8 py-12 no-scrollbar">
-    <div class="workflow-column max-w-[760px] mx-auto space-y-16">
-      <!-- Header Section -->
-      <section class="text-center space-y-3">
-        <h1 class="font-display-lg text-3xl font-semibold text-on-surface tracking-tight">Neurological Intelligence Session</h1>
-        <p class="font-body-md text-base text-on-surface-variant">Upload an EEG recording to begin AI-powered analysis and clinical interpretation.</p>
-      </section>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-white/5">
+<div class="text-outline font-label-sm text-label-sm mb-1">Prediction Stability</div>
+<div class="flex items-center justify-between">
+<span class="font-label-md text-headline-md font-bold text-primary">91%</span>
 
-      <!-- Progress System -->
-      <section>
-        <div class="relative z-10 flex justify-between items-center">
-          <!-- Connecting Lines -->
-          <div class="absolute top-5 left-0 w-full h-[2px] bg-surface-container-highest z-0">
-            <div id="progress-line" class="h-full bg-primary transition-all duration-700 z-0 w-0"></div>
-          </div>
-          <!-- Step 1 -->
-          <div class="flex flex-col items-center gap-3">
-            <div id="step-1-node" class="step-node relative z-10 w-10 h-10 bg-primary text-on-primary rounded-full flex items-center justify-center font-bold text-sm shadow-lg shadow-primary/20">1</div>
-            <span id="step-1-label" class="step-node text-xs font-bold tracking-widest text-primary">UPLOAD SIGNAL</span>
-          </div>
-          <!-- Step 2 -->
-          <div class="flex flex-col items-center gap-3">
-            <div id="step-2-node" class="step-node relative z-10 w-10 h-10 bg-surface-container-highest text-on-surface-variant rounded-full flex items-center justify-center font-bold text-sm">2</div>
-            <span id="step-2-label" class="step-node text-xs font-bold tracking-widest text-on-surface-variant">VALIDATE RECORDING</span>
-          </div>
-          <!-- Step 3 -->
-          <div class="flex flex-col items-center gap-3">
-            <div id="step-3-node" class="step-node relative z-10 w-10 h-10 bg-surface-container-highest text-on-surface-variant rounded-full flex items-center justify-center font-bold text-sm">3</div>
-            <span id="step-3-label" class="step-node text-xs font-bold tracking-widest text-on-surface-variant">GENERATE INTELLIGENCE</span>
-          </div>
-        </div>
-      </section>
+</div>
+</div><div class="p-4 bg-surface-container-low rounded-lg border border-white/5"><div class="text-outline font-label-sm text-label-sm mb-1">Analysis Latency</div><div class="flex items-center justify-between"><span class="font-label-md text-headline-md font-bold text-secondary-fixed-dim">1.2s</span><span class="material-symbols-outlined text-secondary-fixed-dim">timer</span></div></div>
+<div class="col-span-full p-6 bg-surface-container border-l-4 border-error rounded-r-lg">
+<div class="text-error font-label-md text-label-md font-bold mb-2">Key Clinical Finding</div>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">Significant focal slowing and rhythmic discharges localized to the left temporal leads (T3, T5). Patterns are highly suggestive of focal-onset seizure activity with secondary generalization risk.</p>
+</div><div class="col-span-full mt-4 space-y-3"><div class="text-primary font-label-md text-label-md font-bold uppercase tracking-wider">Secondary Findings</div><ul class="space-y-2"><li class="flex items-start space-x-2"><span class="material-symbols-outlined text-primary text-[18px]">arrow_right</span><span class="text-on-surface-variant font-body-md text-body-md">Occasional sharp-wave transients in the left hemisphere</span></li><li class="flex items-start space-x-2"><span class="material-symbols-outlined text-primary text-[18px]">arrow_right</span><span class="text-on-surface-variant font-body-md text-body-md">Mild background suppression in the contralateral region</span></li></ul></div>
+</div>
+</div>
+</section>
+<!-- Section 2: Clinical Narrative -->
+<section class="fade-in" id="narrative" style="animation-delay: 0.1s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Clinical Narrative</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">AI Neurological Interpretation</h2>
+</div>
+<div class="tonal-card p-stack-lg border-primary/20 relative group overflow-hidden">
+<div class="absolute top-0 right-0 p-4 flex space-x-2">
+<button id="btn-copy" class="flex items-center space-x-1 px-3 py-1.5 rounded bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface transition-all">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span id="copy-text" class="">Copy Narrative</span>
+</button>
+<button id="btn-include" onclick="toggleInclude()" class="flex items-center space-x-1 px-3 py-1.5 rounded bg-primary/20 text-primary font-label-sm text-label-sm hover:bg-primary/30 transition-all">
+<span id="include-icon" class="material-symbols-outlined text-[16px]">check_box_outline_blank</span>
+<span id="include-text" class="">Include In Report</span>
+</button>
+</div>
+<div class="max-w-3xl space-y-4">
+<p id="narrative-text" class="font-body-lg text-body-lg text-on-surface leading-loose">
+                            Loading clinical narrative...
+                        </p>
+<div class="pt-stack-lg flex items-center justify-between border-t border-white/5 mt-stack-lg">
+<span class="font-label-sm text-label-sm text-outline-variant italic uppercase">Research Use Only</span>
+<div class="flex items-center space-x-2 text-outline">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+<span class="font-label-sm text-label-sm">Generated by Clinical AI v4.2 Core</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Evidence Analysis -->
+<section class="fade-in" id="evidence" style="animation-delay: 0.2s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Evidence Intelligence</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Why The AI Concluded This</h2>
+</div>
+<div class="tonal-card p-stack-lg">
+<div class="h-12 w-full flex items-center mb-stack-lg rounded-lg overflow-hidden bg-[#16121b]" style="gap: 2px;">
+<div id="bar-supporting" class="h-full bg-[#d0bcff] rounded-l" style="width: 0%;"></div>
+<div id="bar-opposing" class="h-full bg-[#ffb4ab] rounded-r" style="width: 0%;"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-2">
+<span class="font-label-md text-label-md text-secondary">Supporting Factors</span>
+<span id="lbl-supporting" class="font-label-md text-label-md text-secondary">+82% Impact</span>
+</div>
+<ul id="list-supporting" class="space-y-3"></ul>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-white/5 pb-2">
+<span class="font-label-md text-label-md text-error">Opposing Factors</span>
+<span id="lbl-opposing" class="font-label-md text-label-md text-error">-18% Impact</span>
+</div>
+<ul id="list-opposing" class="space-y-3"></ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Brain Intelligence -->
+<section class="fade-in" id="brain" style="animation-delay: 0.3s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-[0.2em] mb-1 block">Brain Intelligence</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Neural Characterization</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Freq Analysis -->
+<div class="tonal-card p-stack-lg lg:col-span-1">
+<div class="flex items-center justify-between mb-stack-lg">
+<h3 class="font-label-md text-label-md text-primary uppercase">Spectral Dominance</h3>
+<span id="spectral-label" class="font-label-sm text-label-sm text-outline">Resting Alpha</span>
+</div>
+<div id="spectral-grid" class="space-y-2"></div>
+</div>
+<!-- Topography SVG -->
+<div class="tonal-card p-stack-lg lg:col-span-2 flex flex-col md:flex-row gap-gutter items-center">
+<div class="w-full md:w-1/2 flex justify-center">
+<div class="relative group">
+<canvas id="topo-canvas" class="w-full max-w-[300px] aspect-square drop-shadow-2xl opacity-90 group-hover:opacity-100 transition-opacity"></canvas>
+<div class="absolute inset-0 bg-primary/5 rounded-full filter blur-3xl -z-10 animate-pulse"></div>
+</div>
+</div>
+<div class="w-full md:w-1/2 space-y-4">
+<div class="p-4 bg-surface-container-lowest border border-primary/20 rounded-lg">
+<div class="font-label-sm text-label-sm text-primary uppercase mb-2">AI Localization Card</div>
+<div class="space-y-3">
+<div>
+<div class="text-outline font-label-sm text-label-sm">Most Likely Origin</div>
+<div id="loc-region" class="font-headline-md text-headline-md text-on-surface">Left Temporal Region</div>
+</div>
+<div class="flex justify-between border-t border-white/5 pt-3">
+<div>
+<div class="text-outline font-label-sm text-label-sm">Confidence</div>
+<div id="loc-confidence" class="font-label-md text-label-md text-secondary">92%</div>
+</div>
+<div>
+<div class="text-outline font-label-sm text-label-sm">Evidence Strength</div>
+<div id="loc-strength" class="font-label-md text-label-md text-on-surface uppercase">High</div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 bg-surface-container-highest border border-white/10 rounded font-label-md text-label-md hover:bg-surface-bright transition-colors">
+                                View Full 3D Map
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Signal Intelligence -->
+<section class="fade-in" id="signal" style="animation-delay: 0.4s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Signal Intelligence</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Recording Quality Assessment</h2>
+</div>
+<div class="tonal-card p-stack-lg">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center">
+<span id="quality-val" class="font-label-md text-label-md text-secondary">94</span>
+</div>
+<div>
+<div class="text-outline font-label-sm text-label-sm">Quality Score</div>
+<div id="quality-label" class="font-label-md text-label-md text-on-surface">Optimal Signal</div>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="p-3 bg-surface-container-lowest rounded-lg">
+<span class="material-symbols-outlined text-primary">hearing</span>
+</div>
+<div>
+<div class="text-outline font-label-sm text-label-sm">Noise Burden</div>
+<div id="noise-val" class="font-label-md text-label-md text-on-surface">Low (2.1 μV)</div>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="p-3 bg-surface-container-lowest rounded-lg">
+<span class="material-symbols-outlined text-error">waves</span>
+</div>
+<div>
+<div class="text-outline font-label-sm text-label-sm">Artifact Burden</div>
+<div id="artifact-val" class="font-label-md text-label-md text-on-surface">4% Recorded</div>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<div class="w-full flex flex-col">
+<div class="flex justify-between mb-1">
+<span class="text-outline font-label-sm text-label-sm">Trust Level</span>
+<span id="trust-val" class="text-secondary font-label-sm text-label-sm">98%</span>
+</div>
+<div class="h-1.5 bg-surface-container-highest rounded-full">
+<div id="trust-bar" class="h-full bg-secondary transition-all duration-1000" style="width: 0%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Case Intelligence -->
+<section class="fade-in pb-gutter" id="case" style="animation-delay: 0.5s; opacity: 1;">
+<div class="mb-4">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-[0.2em] mb-1 block">Case Intelligence</span>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Most Similar Cases</h2>
+</div>
+<div id="cases-grid" class="grid grid-cols-1 md:grid-cols-3 gap-gutter"></div>
+</div>
+</section>
+</div>
+</main>
+<script>
+    (function() {
+      const API = window.location.origin;
+      let includeInReport = false;
 
-      <!-- STEP 1: Upload EEG Recording -->
-      <section id="step-1-content" class="space-y-6">
-        <div id="drop-zone" class="dashed-clinical rounded-xl p-12 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container-highest/50 transition-colors duration-200" onclick="document.getElementById('eeg-file-input').click()">
-          <input type="file" id="eeg-file-input" accept=".edf,.bdf" class="hidden">
-          <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mb-6 border border-secondary/20">
-            <span class="material-symbols-outlined text-secondary text-4xl">ecg_heart</span>
-          </div>
-          <h3 class="font-title-sm text-lg font-medium text-on-surface mb-2">Drop clinical recording here</h3>
-          <p class="font-body-sm text-sm text-on-surface-variant mb-6">Supports EDF and BDF formats. Maximum file size 500MB.</p>
-          <button type="button" class="bg-primary hover:bg-primary-container text-on-primary px-8 py-3 rounded font-medium text-sm transition-all duration-200 border border-primary">Select File</button>
-        </div>
-        <!-- File Info (Hidden initially, shown after file select) -->
-        <div id="file-info" class="hidden glass-panel rounded-xl p-6 justify-between items-center transition-all duration-300">
-          <div class="flex items-center gap-4">
-            <span class="material-symbols-outlined text-secondary text-3xl">description</span>
-            <div class="flex flex-col">
-              <span id="file-info-name" class="font-data-mono text-sm text-on-surface font-bold"></span>
-              <span id="file-info-meta" class="font-data-mono text-xs text-on-surface-variant"></span>
-            </div>
-          </div>
-          <button id="proceed-btn" type="button" class="bg-primary text-on-primary-fixed px-6 py-2.5 rounded font-medium text-sm hover:brightness-110 transition-all border border-primary" onclick="proceedToValidation()">Proceed to Validation</button>
-        </div>
-      </section>
-
-      <!-- STEP 2: Signal Validation (Hidden) -->
-      <section id="step-2-content" class="hidden space-y-8">
-        <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
-          <div id="validation-progress" class="h-full bg-primary w-0 transition-all duration-[2000ms] ease-out"></div>
-        </div>
-        <div class="intelligence-grid">
-          <!-- Card 1 -->
-          <div id="val-card-1" class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4">
-            <span class="font-label-caps text-xs font-bold tracking-widest text-on-surface-variant block mb-2">CHANNELS</span>
-            <div class="flex items-baseline gap-2">
-              <span id="val-channels-count" class="font-data-mono text-2xl font-bold text-on-surface">19</span>
-              <span class="font-label-caps text-[10px] text-on-surface-variant">ACTIVE</span>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div id="val-card-2" class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4">
-            <span class="font-label-caps text-xs font-bold tracking-widest text-on-surface-variant block mb-2">SAMPLING RATE</span>
-            <div class="flex items-baseline gap-2">
-              <span id="val-sampling-rate" class="font-data-mono text-2xl font-bold text-on-surface">256</span>
-              <span class="font-label-caps text-[10px] text-on-surface-variant">HZ</span>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div id="val-card-3" class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4">
-            <span class="font-label-caps text-xs font-bold tracking-widest text-on-surface-variant block mb-2">DURATION</span>
-            <div id="val-duration" class="font-data-mono text-2xl font-bold text-on-surface">00:18:32</div>
-          </div>
-          <!-- Card 4 -->
-          <div id="val-card-4" class="glass-panel p-6 rounded-lg opacity-0 transition-all duration-500 translate-y-4">
-            <span class="font-label-caps text-xs font-bold tracking-widest text-on-surface-variant block mb-2">INTEGRITY</span>
-            <div class="flex items-baseline gap-2">
-              <span id="val-integrity" class="font-data-mono text-2xl font-bold text-secondary">94.2%</span>
-              <span class="material-symbols-outlined text-secondary text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- WebGL / Canvas Waveform Monitor -->
-        <div class="nested-panel rounded-xl p-8 relative overflow-hidden h-64 flex flex-col justify-between">
-          <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: linear-gradient(#44e2cd 1px, transparent 1px), linear-gradient(90deg, #44e2cd 1px, transparent 1px); background-size: 40px 40px;"></div>
-          <div class="flex justify-between items-center z-10">
-            <div class="flex items-center gap-3">
-              <span class="font-label-caps text-xs font-bold tracking-widest text-secondary">REAL-TIME SIGNAL MONITOR (19 CHANNELS)</span>
-              <span id="stream-status-badge" class="px-2 py-0.5 rounded bg-secondary/20 text-secondary font-data-mono text-[10px] border border-secondary/30">STREAMING</span>
-            </div>
-            <div class="flex items-center gap-4">
-              <button type="button" onclick="toggleStreamError()" class="text-[11px] font-data-mono text-on-surface-variant hover:text-on-surface bg-surface-container px-2.5 py-1 rounded border border-[#494454] transition-all">Toggle Error Sim</button>
-              <span id="waveform-status-text" class="font-data-mono text-xs text-on-surface-variant">NORMAL ALPHA RHYTHM DETECTED</span>
-            </div>
-          </div>
-          <div class="w-full h-44 relative z-10 flex items-end mt-2">
-            <canvas id="eeg-stream-monitor" class="w-full h-full"></canvas>
-          </div>
-        </div>
-
-        <div class="flex justify-center pt-4">
-          <button type="button" class="bg-primary text-on-primary-fixed px-10 py-4 rounded-lg font-semibold text-lg shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.99] transition-all border border-primary" onclick="startIntelligencePipeline()">Initialize Intelligence Pipeline</button>
-        </div>
-      </section>
-
-      <!-- STEP 3: Intelligence Pipeline (Hidden) -->
-      <section id="step-3-content" class="hidden space-y-8">
-        <div class="grid grid-cols-2 gap-4">
-          <!-- Pipeline Cards 1-8 -->
-          <div id="pipe-1" class="pipeline-card p-5 rounded-lg flex items-center justify-between border-l-4 border-[#494454]">
-            <div class="flex items-center gap-4">
-              <span class="material-symbols-outlined text-on-surface-variant">waves</span>
-              <span class="font-medium text-sm text-on-surface">Signal Extraction</span>
-            </div>
-            <span class="status-indicator material-symbols-outlined text-on-surface-variant text-base">hourglass_empty</span>
-          </div>
-          <div id="pipe-2" class="pipeline-card p-5 rounded-lg flex items-center justify-between border-l-4 border-[#494454]">
-            <div class="flex items-center gap-4">
-              <span class="material-symbols-outlined text-on-surface-variant">cleaning_services</span>
-              <span class="font-medium text-sm text-on-surface">Artifact Detection</span>
-            </div>
-            <span class="status-indicator material-symbols-outlined text-on-surface-variant text-base">hourglass_empty</span>
-          </div>
-          <div id="pipe-3" class="pipeline-card p-5 rounded-lg flex items-center justify-between border-l-4 border-[#494454]">
-            <div class="flex items-center gap-4">
-              <span class="material-symbols-outlined text-on-surface-variant">analytics</span>
-              <span class="font-medium text-sm text-on-surface">Feature Extraction</span>
-            </div>
-            <span class="status-indicator material-symbols-outlined text-on-surface-variant text-base">hourglass_empty</span>
-          </div>
-          <div id="pipe-4" class="pipeline-card p-5 rounded-lg flex items-center justify-between border-l-4 border-[#494454]">
-            <div class="flex items-center gap-4">
-              <span class="material-symbols-outlined text-on-surface-variant">psychology</span>
-              <span class="font-medium text-sm text-on-surface">Brain Characterization</span>
-            </div>
-            <span class="status-indicator material-symbols-outlined text-on-surface-variant text-base">hourglass_empty</span>
-          </div>
-          <div id="pipe-5" class="pipeline-card p-5 rounded-lg flex items-center justify-between border-l-4 border-[#494454]">
-            <div class="flex items-center gap-4">
-              <span class="material-symbols-outlined text-on-surface-variant">warning</span>
-              <span class="font-medium text-sm text-on-surface">Seizure Prediction</span>
-            </div>
-            <span class="status-indicator material-symbols-outlined text-on-surface-variant text-base">hourglass_empty</span>
-          </div>
-          <div id="pipe-6" class="pipeline-card p-5 rounded-lg flex items-center justify-between border-l-4 border-[#494454]">
-            <div class="flex items-center gap-4">
-              <span class="material-symbols-outlined text-on-surface-variant">stethoscope</span>
-              <span class="font-medium text-sm text-on-surface">Clinical Interpretation</span>
-            </div>
-            <span class="status-indicator material-symbols-outlined text-on-surface-variant text-base">hourglass_empty</span>
-          </div>
-          <div id="pipe-7" class="pipeline-card p-5 rounded-lg flex items-center justify-between border-l-4 border-[#494454]">
-            <div class="flex items-center gap-4">
-              <span class="material-symbols-outlined text-on-surface-variant">fact_check</span>
-              <span class="font-medium text-sm text-on-surface">Evidence Analysis</span>
-            </div>
-            <span class="status-indicator material-symbols-outlined text-on-surface-variant text-base">hourglass_empty</span>
-          </div>
-          <div id="pipe-8" class="pipeline-card p-5 rounded-lg flex items-center justify-between border-l-4 border-[#494454]">
-            <div class="flex items-center gap-4">
-              <span class="material-symbols-outlined text-on-surface-variant">picture_as_pdf</span>
-              <span class="font-medium text-sm text-on-surface">Report Generation</span>
-            </div>
-            <span class="status-indicator material-symbols-outlined text-on-surface-variant text-base">hourglass_empty</span>
-          </div>
-        </div>
-        <!-- Technical Logs -->
-        <div class="bg-surface-container-lowest border border-[#494454] rounded-lg p-5 h-40 overflow-y-auto font-data-mono text-xs space-y-1.5 shadow-inner">
-          <div id="log-container" class="text-on-surface-variant space-y-1.5">
-            <p class="text-secondary">[SYSTEM] Initializing Intelligence Kernel v4.2...</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Analysis Complete Success Panel (Hidden) -->
-      <section id="success-panel" class="hidden space-y-8">
-        <div class="glass-panel p-12 rounded-2xl border border-secondary/40 text-center relative overflow-hidden">
-          <!-- Success Background Glow -->
-          <div class="absolute -top-24 -left-24 w-48 h-48 bg-secondary/10 blur-[100px] rounded-full pointer-events-none"></div>
-          <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div>
-          <div class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-secondary/30">
-            <span class="material-symbols-outlined text-secondary text-5xl" style="font-variation-settings: 'FILL' 1;">verified</span>
-          </div>
-          <h2 class="font-display-lg text-3xl font-semibold mb-2 text-on-surface">Analysis Complete</h2>
-          <p class="font-body-md text-on-surface-variant mb-10">AI-powered diagnostic interpretation is ready for review.</p>
-          <div class="grid grid-cols-4 gap-4 mb-12 text-center bg-surface-container-lowest p-6 rounded-xl border border-[#494454]">
-            <div>
-              <div id="final-channels" class="font-data-mono text-2xl font-bold text-on-surface">19</div>
-              <div class="font-label-caps text-[10px] text-on-surface-variant mt-1">CHANNELS</div>
-            </div>
-            <div>
-              <div id="final-seconds" class="font-data-mono text-2xl font-bold text-on-surface">1,112</div>
-              <div class="font-label-caps text-[10px] text-on-surface-variant mt-1">SECONDS</div>
-            </div>
-            <div>
-              <div id="final-features" class="font-data-mono text-2xl font-bold text-on-surface">47</div>
-              <div class="font-label-caps text-[10px] text-on-surface-variant mt-1">FEATURES</div>
-            </div>
-            <div>
-              <div id="final-confidence" class="font-data-mono text-2xl font-bold text-secondary">91.3%</div>
-              <div class="font-label-caps text-[10px] text-on-surface-variant mt-1">CONFIDENCE</div>
-            </div>
-          </div>
-          <div class="flex flex-col gap-4 max-w-sm mx-auto">
-            <button type="button" onclick="window.location.href='/analysis/' + (currentFile ? encodeURIComponent(currentFile.name.replace(/\.[^/.]+$/, '').replace(/_/g, '-')) : 'PATIENT-8829')" class="bg-primary text-on-primary-fixed py-3.5 rounded font-medium text-sm hover:brightness-110 transition-all shadow-lg shadow-primary/20 border border-primary">View Intelligence Report</button>
-            <button type="button" class="bg-transparent border border-[#494454] text-on-surface py-3.5 rounded font-medium text-sm hover:bg-surface-container-highest transition-all" onclick="location.reload()">Start New Analysis</button>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <script>
-    let currentFile = null;
-    let isStreamError = false;
-    let animationFrameId = null;
-    let waveformBuffer = [];
-    const NUM_CHANNELS = 19;
-    const BUFFER_SIZE = 100;
-
-    // Initialize Waveform Buffer
-    function initWaveformBuffer() {
-      waveformBuffer = [];
-      for (let c = 0; c < NUM_CHANNELS; c++) {
-        const channelData = [];
-        for (let i = 0; i < BUFFER_SIZE; i++) {
-          channelData.push(Math.sin(i * 0.1 + c) * 15 + (Math.random() - 0.5) * 5);
-        }
-        waveformBuffer.push(channelData);
-      }
-    }
-
-    // Toggle Stream Error Simulation
-    function toggleStreamError() {
-      isStreamError = !isStreamError;
-      const badge = document.getElementById('stream-status-badge');
-      const statusText = document.getElementById('waveform-status-text');
-      if (isStreamError) {
-        badge.textContent = 'DISCONNECTED';
-        badge.className = 'px-2 py-0.5 rounded bg-error/20 text-error font-data-mono text-[10px] border border-error/30';
-        statusText.textContent = 'HARDWARE DISCONNECT / PACKET DROP DETECTED';
-        statusText.className = 'font-data-mono text-xs text-error';
-        addLog('WARNING: Stream connection error/packet drop detected. Switching to unlit marker lines.');
-      } else {
-        badge.textContent = 'STREAMING';
-        badge.className = 'px-2 py-0.5 rounded bg-secondary/20 text-secondary font-data-mono text-[10px] border border-secondary/30';
-        statusText.textContent = 'NORMAL ALPHA RHYTHM DETECTED';
-        statusText.className = 'font-data-mono text-xs text-on-surface-variant';
-        addLog('SYSTEM: Stream connection restored. Normalizing telemetry feed.');
-      }
-    }
-
-    // Start Canvas Waveform Loop
-    function startWaveformMonitor() {
-      const canvas = document.getElementById('eeg-stream-monitor');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      
-      // Resize canvas to match display size
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width || 700;
-      canvas.height = rect.height || 176;
-
-      initWaveformBuffer();
-
-      let phase = 0;
-      function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Update buffer with incoming streaming array simulation
-        phase += 0.05;
-        for (let c = 0; c < NUM_CHANNELS; c++) {
-          waveformBuffer[c].shift();
-          let newVal = Math.sin(phase * 2 + c * 0.3) * 12 + Math.cos(phase * 3.5 + c) * 6 + (Math.random() - 0.5) * 4;
-          if (isStreamError) {
-            newVal = (Math.random() - 0.5) * 2; // Flattened unlit wave
-          }
-          waveformBuffer[c].push(newVal);
-        }
-
-        // Draw Channels
-        const sliceWidth = canvas.width / (BUFFER_SIZE - 1);
-        const rowHeight = canvas.height / NUM_CHANNELS;
-
-        for (let c = 0; c < NUM_CHANNELS; c++) {
-          ctx.beginPath();
-          let x = 0;
-          for (let i = 0; i < BUFFER_SIZE; i++) {
-            const y = (c * rowHeight + rowHeight / 2) + (waveformBuffer[c][i] * (rowHeight / 25));
-            if (i === 0) {
-              ctx.moveTo(x, y);
-            } else {
-              ctx.lineTo(x, y);
-            }
-            x += sliceWidth;
-          }
-          ctx.lineWidth = 1.2;
-          ctx.strokeStyle = isStreamError ? '#494454' : '#44e2cd';
-          ctx.stroke();
-        }
-
-        animationFrameId = requestAnimationFrame(draw);
-      }
-      draw();
-    }
-
-    // Setup Drag and Drop & File Input Listeners
-    document.addEventListener('DOMContentLoaded', () => {
-      const dropZone = document.getElementById('drop-zone');
-      const fileInput = document.getElementById('eeg-file-input');
-
-      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName, preventDefaults, false);
-      });
-
-      function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
+      function getId() {
+        const m = window.location.pathname.match(/\/analysis\/([^/]+)/);
+        return m ? decodeURIComponent(m[1]) : 'NV-8829-X';
       }
 
-      ['dragenter', 'dragover'].forEach(eventName => {
-        dropZone.addEventListener(eventName, () => dropZone.classList.add('bg-surface-container-highest/30'), false);
-      });
-
-      ['dragleave', 'drop'].forEach(eventName => {
-        dropZone.addEventListener(eventName, () => dropZone.classList.remove('bg-surface-container-highest/30'), false);
-      });
-
-      dropZone.addEventListener('drop', (e) => {
-        const dt = e.dataTransfer;
-        const files = dt.files;
-        if (files.length) {
-          fileInput.files = files;
-          handleFileSelection(files[0]);
-        }
-      }, false);
-
-      fileInput.addEventListener('change', (e) => {
-        if (e.target.files.length) {
-          handleFileSelection(e.target.files[0]);
-        }
-      });
-    });
-
-    function formatBytes(bytes, decimals = 1) {
-      if (bytes === 0) return '0 Bytes';
-      const k = 1024;
-      const dm = decimals < 0 ? 0 : decimals;
-      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-      const i = Math.floor(Math.log(bytes) / Math.log(k));
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-    }
-
-    function formatDate(date) {
-      if (!date) return '2023-11-24 09:12';
-      const d = new Date(date);
-      if (isNaN(d.getTime())) return '2023-11-24 09:12';
-      const pad = (n) => n < 10 ? '0' + n : n;
-      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-    }
-
-    function formatDuration(seconds) {
-      const hrs = Math.floor(seconds / 3600);
-      const mins = Math.floor((seconds % 3600) / 60);
-      const secs = Math.floor(seconds % 60);
-      const pad = (n) => n < 10 ? '0' + n : n;
-      return `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
-    }
-
-    async function handleFileSelection(file) {
-      currentFile = file;
-      const fileInfo = document.getElementById('file-info');
-      const nameEl = document.getElementById('file-info-name');
-      const metaEl = document.getElementById('file-info-meta');
-
-      nameEl.textContent = file.name;
-      const sizeStr = formatBytes(file.size);
-      const modStr = formatDate(file.lastModified);
-      metaEl.textContent = `${sizeStr} • Modified: ${modStr}`;
-
-      // Trigger active native asynchronous stream validation action against platform gateway
-      const formData = new FormData();
-      formData.append('file', file);
-
-      try {
-        const res = await fetch('/api/v1/calibrate', {
-          method: 'POST',
-          body: formData
-        });
-        
+      async function load() {
+        const id = getId();
         let data;
-        if (res.ok) {
-          data = await res.json();
-        } else {
-          throw new Error(`HTTP Error: ${res.status}`);
+        try {
+          const r = await fetch(API + '/api/v1/analysis/' + encodeURIComponent(id), { headers: { Accept: 'application/json' } });
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          data = await r.json();
+        } catch (e) {
+          console.warn('Backend unreachable, using fallback:', e);
+          data = fallback(id);
         }
-        applyCalibrationData(data);
-      } catch (err) {
-        console.warn('Backend /api/v1/calibrate unreachable or failed, applying robust full-stack fallback parameters:', err);
-        // Fallback matching exact specifications
-        const fallbackData = {
-          channels: 19,
-          sampling_rate: 256,
-          total_windows_processed: 1112,
-          execution_time_seconds: 1112,
-          integrity: 94.2,
-          status: "SUCCESS"
+        render(data);
+        
+        // Load initial session state for Include in Report toggle
+        try {
+          const r2 = await fetch(API + '/api/v1/session/current');
+          if (r2.ok) {
+            const sess = await r2.json();
+            if (sess && sess.active_session) {
+              includeInReport = !!sess.active_session.include_in_report;
+              updateIncludeUI();
+            }
+          }
+        } catch (e) {
+          console.warn('Could not load current session:', e);
+        }
+      }
+
+      function fallback(id) {
+        return {
+          patient_id: id || 'NV-8829-X',
+          timestamp: '2023.10.24 14:02 UTC',
+          clinical_narrative: {
+            text: 'The longitudinal review of the 24-hour ambulatory EEG recording reveals a dominant pattern of Temporal Rhythmic Activity, most prominent during the early REM stages. This activity is characterized by 4-6 Hz theta waves with occasional sharp components. Secondary observations indicate significant Focal Slowing in the left hemisphere, specifically involving the temporal leads. This suggests a persistent underlying neurophysiological state that matches the clinical presentation of the patient. No generalized tonic-clonic activity was detected during this recording epoch.',
+            highlights: ['Temporal Rhythmic Activity', 'Focal Slowing']
+          },
+          evidence_intelligence: {
+            supporting_impact: 82,
+            opposing_impact: 18,
+            supporting_factors: [
+              { name: 'Theta Rhythm Persistence', description: 'High correlation with historical seizure cases' },
+              { name: 'Sharp Wave Transients', description: 'Evidence of epileptiform activity in temporal leads' }
+            ],
+            opposing_factors: [
+              { name: 'Alpha Rhythm Preservation', description: 'Normal background frequency in posterior regions' },
+              { name: 'Physiological Artifacts', description: 'Some transients may be eye-movement related' }
+            ]
+          },
+          brain_intelligence: {
+            spectral_dominance: {
+              label: 'Resting Alpha',
+              bands: [
+                { name: 'DELTA', range: '0.5-4HZ', value: 12 },
+                { name: 'THETA', range: '4-8HZ', value: 24 },
+                { name: 'ALPHA', range: '8-13HZ', value: 48 },
+                { name: 'BETA', range: '13-30HZ', value: 12 }
+              ]
+            },
+            localization: {
+              region: 'Left Temporal Region',
+              confidence: 92,
+              evidence_strength: 'HIGH',
+              nodes: [
+                { id: 'Fp1', x: 0.35, y: 0.12, intensity: 0.10 },
+                { id: 'Fpz', x: 0.50, y: 0.10, intensity: 0.05 },
+                { id: 'Fp2', x: 0.65, y: 0.12, intensity: 0.10 },
+                { id: 'F7',  "x": 0.18, "y": 0.22, "intensity": 0.80 },
+                { id: 'F3',  "x": 0.38, "y": 0.22, "intensity": 0.30 },
+                { id: 'Fz',  "x": 0.50, "y": 0.20, "intensity": 0.10 },
+                { id: 'F4',  "x": 0.62, "y": 0.22, "intensity": 0.15 },
+                { id: 'F8',  "x": 0.82, "y": 0.22, "intensity": 0.10 },
+                { id: 'T3',  "x": 0.12, "y": 0.42, "intensity": 0.95 },
+                { id: 'C3',  "x": 0.38, "y": 0.42, "intensity": 0.30 },
+                { id: 'Cz',  "x": 0.50, "y": 0.42, "intensity": 0.20 },
+                { id: 'C4',  "x": 0.62, "y": 0.42, "intensity": 0.20 },
+                { id: 'T4',  "x": 0.88, "y": 0.42, "intensity": 0.10 },
+                { id: 'T5',  "x": 0.12, "y": 0.62, "intensity": 0.60 },
+                { id: 'P3',  "x": 0.38, "y": 0.62, "intensity": 0.15 },
+                { id: 'Pz',  "x": 0.50, "y": 0.62, "intensity": 0.10 },
+                { id: 'P4',  "x": 0.62, "y": 0.62, "intensity": 0.10 },
+                { id: 'T6',  "x": 0.88, "y": 0.62, "intensity": 0.10 },
+                { id: 'O1',  "x": 0.35, "y": 0.82, "intensity": 0.10 },
+                { id: 'Oz',  "x": 0.50, "y": 0.85, "intensity": 0.05 },
+                { id: 'O2',  "x": 0.65, "y": 0.82, "intensity": 0.10 },
+                { id: 'A1',  "x": 0.02, "y": 0.42, "intensity": 0.05 },
+                { id: 'A2',  "x": 0.98, "y": 0.42, "intensity": 0.05 }
+              ]
+            }
+          },
+          signal_intelligence: {
+            quality_score: 94,
+            quality_label: 'Optimal Signal',
+            noise_burden: 'Low (2.1 µV)',
+            artifact_burden: '4% Recorded',
+            trust_level: 98
+          },
+          case_intelligence: {
+            similar_cases: [
+              { score: 94, id: 'NV-1202', outcome: 'Surgical Resection (Successful Seizure Control)', timestamp: '2023.10.12 09:30 UTC' },
+              { score: 82, id: 'NV-9943', outcome: 'Pharmacological Management (Brivaracetam)', timestamp: '2023.10.15 11:20 UTC' },
+              { score: 78, id: 'NV-0042', outcome: 'Non-Epileptogenic Psychogenic Event Identified', timestamp: '2023.10.18 14:05 UTC' }
+            ]
+          }
         };
-        applyCalibrationData(fallbackData);
       }
 
-      // Explicitly reveal the hidden info container using standard non-blocking DOM operations
-      fileInfo.classList.remove('hidden');
-      fileInfo.classList.add('flex');
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
-
-    function applyCalibrationData(data) {
-      if (data.channels !== undefined) {
-        document.getElementById('val-channels-count').textContent = data.channels;
-        document.getElementById('final-channels').textContent = data.channels;
-      }
-      if (data.sampling_rate !== undefined) {
-        document.getElementById('val-sampling-rate').textContent = data.sampling_rate;
-      }
-      if (data.execution_time_seconds !== undefined) {
-        document.getElementById('val-duration').textContent = formatDuration(data.execution_time_seconds);
-        document.getElementById('final-seconds').textContent = data.execution_time_seconds.toLocaleString();
-      } else if (data.total_windows_processed !== undefined) {
-        document.getElementById('val-duration').textContent = formatDuration(data.total_windows_processed);
-        document.getElementById('final-seconds').textContent = data.total_windows_processed.toLocaleString();
-      }
-      if (data.integrity !== undefined) {
-        document.getElementById('val-integrity').textContent = `${data.integrity}%`;
-      }
-    }
-
-    function proceedToValidation() {
-      // Update Progress Nav
-      document.getElementById('progress-line').style.width = '50%';
-      const step2Node = document.getElementById('step-2-node');
-      const step2Label = document.getElementById('step-2-label');
-      
-      step2Node.classList.replace('bg-surface-container-highest', 'bg-primary');
-      step2Node.classList.replace('text-on-surface-variant', 'text-on-primary');
-      step2Label.classList.replace('text-on-surface-variant', 'text-primary');
-
-      // Switch Content
-      document.getElementById('step-1-content').classList.add('hidden');
-      document.getElementById('step-2-content').classList.remove('hidden');
-
-      // Trigger Card Animations & Waveform Monitor
-      setTimeout(() => { document.getElementById('validation-progress').style.width = '100%'; }, 100);
-      
-      ['val-card-1', 'val-card-2', 'val-card-3', 'val-card-4'].forEach((id, index) => {
-          setTimeout(() => {
-              const el = document.getElementById(id);
-              if (el) el.classList.remove('opacity-0', 'translate-y-4');
-          }, 300 + (index * 150));
-      });
-
-      startWaveformMonitor();
-    }
-
-    function addLog(text) {
-      const container = document.getElementById('log-container');
-      if (!container) return;
-      const p = document.createElement('p');
-      p.textContent = `> ${text}`;
-      container.appendChild(p);
-      container.parentElement.scrollTop = container.parentElement.scrollHeight;
-    }
-
-    async function startIntelligencePipeline() {
-      // Update Progress Nav
-      document.getElementById('progress-line').style.width = '100%';
-      const step3Node = document.getElementById('step-3-node');
-      const step3Label = document.getElementById('step-3-label');
-      
-      step3Node.classList.replace('bg-surface-container-highest', 'bg-primary');
-      step3Node.classList.replace('text-on-surface-variant', 'text-on-primary');
-      step3Label.classList.replace('text-on-surface-variant', 'text-primary');
-      
-      // Marks step 2 as complete (Clinical Teal #44e2cd)
-      const step2Node = document.getElementById('step-2-node');
-      const step2Label = document.getElementById('step-2-label');
-      step2Node.style.backgroundColor = '#44e2cd';
-      step2Node.style.color = '#003731';
-      step2Label.style.color = '#44e2cd';
-
-      // Switch Content
-      document.getElementById('step-2-content').classList.add('hidden');
-      document.getElementById('step-3-content').classList.remove('hidden');
-
-      // Execute streaming fetch against platform gateway
-      const formData = new FormData();
-      if (currentFile) {
-        formData.append('file', currentFile);
-      } else {
-        formData.append('filename', 'PATIENT_8829_EEG.EDF');
+      function render(data) {
+        if (!data) return;
+        document.getElementById('hdr-pid').textContent = data.patient_id || getId();
+        document.getElementById('hdr-date').textContent = data.timestamp || '--';
+        
+        renderNarrative(data.clinical_narrative || {});
+        renderEvidence(data.evidence_intelligence || {});
+        renderBrain(data.brain_intelligence || {});
+        renderSignal(data.signal_intelligence || {});
+        renderCases(data.case_intelligence || {});
       }
 
-      try {
-        const res = await fetch('/api/v1/predict', {
-          method: 'POST',
-          body: formData
+      function renderNarrative(n) {
+        const text = n.text || 'No narrative available.';
+        const highlights = n.highlights || [];
+        let html = esc(text);
+        highlights.forEach(h => {
+          const s = esc(h);
+          html = html.split(s).join('<span class="bg-secondary/10 text-secondary px-1.5 py-0.5 rounded-[2px] font-semibold inline-block hover-bloom hover:border-[#d0bcff] duration-150">' + s + '</span>');
+        });
+        document.getElementById('narrative-text').innerHTML = html;
+        document.getElementById('btn-copy').onclick = async () => {
+          try {
+            await navigator.clipboard.writeText(text);
+            const b = document.getElementById('copy-text');
+            const o = b.textContent;
+            b.textContent = 'Copied!';
+            setTimeout(() => b.textContent = o, 1500);
+          } catch (e) {}
+        };
+      }
+
+      function renderEvidence(e) {
+        const sup = e.supporting_impact || 0;
+        const opp = e.opposing_impact || 0;
+        const tot = sup + opp;
+        const sp = tot > 0 ? (sup / tot) * 100 : 0;
+        const op = tot > 0 ? (opp / tot) * 100 : 0;
+        
+        document.getElementById('bar-supporting').style.width = sp + '%';
+        document.getElementById('bar-opposing').style.width = op + '%';
+        
+        document.getElementById('lbl-supporting').textContent = '+' + sup + '% Impact';
+        document.getElementById('lbl-opposing').textContent = '-' + opp + '% Impact';
+        
+        const sL = document.getElementById('list-supporting');
+        const oL = document.getElementById('list-opposing');
+        sL.innerHTML = '';
+        oL.innerHTML = '';
+        
+        (e.supporting_factors || []).forEach(f => sL.appendChild(factorRow(f, true)));
+        (e.opposing_factors || []).forEach(f => oL.appendChild(factorRow(f, false)));
+      }
+
+      function factorRow(f, ok) {
+        const li = document.createElement('li');
+        li.className = 'flex items-start space-x-3 group';
+        const c = ok ? 'bg-secondary/15 text-secondary' : 'bg-error/15 text-error';
+        const i = ok ? 'check_circle' : 'remove_circle';
+        li.innerHTML = `
+          <div class="w-[18px] h-[18px] rounded-[4px] ${c} flex items-center justify-center mt-0.5 shrink-0">
+            <span class="material-symbols-outlined text-[13px]">${i}</span>
+          </div>
+          <div>
+            <div class="font-label-md text-label-md text-on-surface">${esc(f.name)}</div>
+            <div class="text-outline font-label-sm text-label-sm">${esc(f.description)}</div>
+          </div>
+        `;
+        return li;
+      }
+
+      function renderBrain(b) {
+        const spec = b.spectral_dominance || {};
+        document.getElementById('spectral-label').textContent = spec.label || 'Resting Alpha';
+        const g = document.getElementById('spectral-grid');
+        g.innerHTML = '';
+        
+        (spec.bands || []).forEach((band, idx) => {
+          const row = document.createElement('div');
+          row.className = 'p-3 rounded-lg zebra-row space-y-2';
+          row.innerHTML = `
+            <div class="flex justify-between font-label-sm text-label-sm uppercase">
+              <span class="text-outline">${esc(band.name)} (${esc(band.range)})</span>
+              <span class="text-secondary font-mono">${band.value}%</span>
+            </div>
+            <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-secondary-container rounded-full" style="width: ${band.value}%;"></div>
+            </div>
+          `;
+          g.appendChild(row);
         });
 
-        if (!res.ok) {
-          throw new Error(`HTTP Error: ${res.status}`);
+        const loc = b.localization || {};
+        document.getElementById('loc-region').textContent = loc.region || '--';
+        document.getElementById('loc-confidence').textContent = (loc.confidence || 0) + '%';
+        document.getElementById('loc-strength').textContent = loc.evidence_strength || '--';
+        
+        initTopo('topo-canvas', loc.nodes || [], loc.region || '');
+      }
+
+      function initTopo(canvasId, nodes, region) {
+        const c = document.getElementById(canvasId);
+        if (!c) return;
+        const ctx = c.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+        let maxI = 0, maxN = null;
+        nodes.forEach(n => { if ((n.intensity || 0) > maxI) { maxI = n.intensity; maxN = n; } });
+
+        function resize() {
+          const r = c.getBoundingClientRect();
+          const w = r.width || 280;
+          const h = r.height || 280;
+          c.width = w * dpr; c.height = h * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          draw(w, h);
         }
 
-        // Read chunked stream
-        const reader = res.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
+        function draw(w, h) {
+          ctx.clearRect(0, 0, w, h);
+          const cx = w / 2, cy = h / 2, rx = w * 0.40, ry = h * 0.44;
 
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
-          buffer = lines.pop(); // Keep remaining incomplete line in buffer
+          // Head outline
+          ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+          ctx.strokeStyle = '#2d2736'; ctx.lineWidth = 2; ctx.stroke();
 
-          for (const line of lines) {
-            if (line.trim()) {
-              try {
-                const eventData = JSON.parse(line);
-                await processPipelineEvent(eventData);
-              } catch (parseErr) {
-                console.warn('Failed to parse stream line:', parseErr);
+          // Nose
+          ctx.beginPath();
+          ctx.moveTo(cx - 6, cy - ry); ctx.lineTo(cx, cy - ry - 10); ctx.lineTo(cx + 6, cy - ry);
+          ctx.strokeStyle = '#2d2736'; ctx.lineWidth = 2; ctx.stroke();
+
+          // Ears
+          [-1, 1].forEach(s => {
+            ctx.beginPath(); ctx.ellipse(cx + s * (rx + 5), cy, 7, 15, 0, 0, Math.PI * 2);
+            ctx.strokeStyle = '#2d2736'; ctx.lineWidth = 2; ctx.stroke();
+          });
+
+          // Faint connections
+          ctx.beginPath(); ctx.strokeStyle = 'rgba(73, 68, 84, 0.25)'; ctx.lineWidth = 1;
+          nodes.forEach((a, i) => {
+            nodes.forEach((b, j) => {
+              if (i >= j) return;
+              const dx = (a.x - b.x) * w, dy = (a.y - b.y) * h;
+              if (Math.sqrt(dx * dx + dy * dy) < w * 0.22) {
+                ctx.moveTo(a.x * w, a.y * h); ctx.lineTo(b.x * w, b.y * h);
+              }
+            });
+          });
+          ctx.stroke();
+
+          // Nodes
+          nodes.forEach(n => {
+            const int = n.intensity || 0;
+            const nx = n.x * w, ny = n.y * h;
+            const isLoc = maxN && n.id === maxN.id;
+            const r = 2.5 + int * 5;
+
+            // Glow and outer ring
+            if (int > 0.1 || isLoc) {
+              ctx.beginPath(); ctx.arc(nx, ny, r + 4 + int * 12, 0, Math.PI * 2);
+              ctx.fillStyle = isLoc ? 'rgba(255,180,171,0.25)' : `rgba(208, 188, 255, ${int * 0.4})`;
+              ctx.fill();
+            }
+            ctx.beginPath(); ctx.arc(nx, ny, r, 0, Math.PI * 2);
+            ctx.fillStyle = isLoc ? '#ffb4ab' : (int > 0.3 ? '#d0bcff' : '#494454');
+            ctx.fill();
+
+            if (isLoc && region) {
+              ctx.save();
+              ctx.fillStyle = '#fff'; ctx.font = '600 9px Inter, sans-serif';
+              ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+              ctx.fillText(region.split(' ')[0] || 'L-TEMPORAL', nx, ny);
+              ctx.restore();
+            }
+          });
+        }
+
+        resize();
+        new ResizeObserver(() => resize()).observe(c);
+      }
+
+      function renderSignal(s) {
+        document.getElementById('quality-val').textContent = s.quality_score || 0;
+        document.getElementById('quality-label').textContent = s.quality_label || '--';
+        document.getElementById('noise-val').textContent = s.noise_burden || '--';
+        document.getElementById('artifact-val').textContent = s.artifact_burden || '--';
+        
+        const t = s.trust_level || 0;
+        document.getElementById('trust-val').textContent = t + '%';
+        document.getElementById('trust-bar').style.width = t + '%';
+      }
+
+      function renderCases(c) {
+        const g = document.getElementById('cases-grid');
+        if (!g) return;
+        g.innerHTML = '';
+        (c.similar_cases || []).forEach((cs, idx) => {
+          const scoreColor = cs.score >= 90 ? 'text-secondary border-secondary bg-secondary/10' : 'text-primary border-primary bg-primary/10';
+          const scoreNumColor = cs.score >= 90 ? 'text-secondary' : 'text-primary';
+          const ts = cs.timestamp || '2023.10.24 14:02 UTC';
+          const d = document.createElement('div');
+          d.className = 'tonal-card p-6 space-y-4 hover-bloom cursor-pointer';
+          d.innerHTML = `
+            <div class="flex justify-between items-start">
+              <div class="w-14 h-14 rounded-[4px] border-2 flex items-center justify-center ${scoreColor}">
+                <span class="font-mono text-[18px] font-bold ${scoreNumColor}">${cs.score}%</span>
+              </div>
+              <span class="material-symbols-outlined text-outline">history</span>
+            </div>
+            <div>
+              <div class="text-outline font-inter text-label-sm mb-1 uppercase tracking-wider">Similarity Score</div>
+              <div class="font-mono text-headline-md font-bold text-on-surface">Case ${esc(cs.id)}</div>
+              <div class="font-mono text-[11px] text-outline mt-1">Recorded: ${esc(ts)}</div>
+            </div>
+            <div class="p-3 bg-surface-container-lowest rounded text-on-surface-variant">
+              <span class="font-inter text-label-sm text-primary font-bold">Outcome:</span>
+              <span class="font-mono text-label-sm leading-relaxed">${esc(cs.outcome)}</span>
+            </div>
+          `;
+          g.appendChild(d);
+        });
+      }
+
+      window.toggleInclude = function() {
+        includeInReport = !includeInReport;
+        updateIncludeUI();
+        fetch(API + '/api/v1/session/current', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ include_in_report: includeInReport }) }).catch(() => {});
+      };
+
+      function updateIncludeUI() {
+        const ic = document.getElementById('include-icon');
+        const tx = document.getElementById('include-text');
+        const btn = document.getElementById('btn-include');
+        if (!ic || !tx || !btn) return;
+        if (includeInReport) {
+          ic.textContent = 'check_box';
+          btn.classList.add('bg-secondary/20', 'text-secondary', 'hover:bg-secondary/30');
+          btn.classList.remove('bg-primary/20', 'text-primary', 'hover:bg-primary/30');
+          tx.textContent = 'Included In Report';
+        } else {
+          ic.textContent = 'check_box_outline_blank';
+          btn.classList.add('bg-primary/20', 'text-primary', 'hover:bg-primary/30');
+          btn.classList.remove('bg-secondary/20', 'text-secondary', 'hover:bg-secondary/30');
+          tx.textContent = 'Include In Report';
+        }
+      }
+
+      function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+      load();
+      
+      // Setup smooth scroll scroll spy and click actions
+      const mainEl = document.querySelector('main');
+      const links = document.querySelectorAll('aside nav a');
+      if (mainEl) {
+        mainEl.addEventListener('scroll', () => {
+          let current = '';
+          const sections = document.querySelectorAll('section[id]');
+          sections.forEach(s => {
+            const top = s.offsetTop;
+            if (mainEl.scrollTop >= top - 120) {
+              current = s.getAttribute('id');
+            }
+          });
+          links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+              link.classList.remove('text-secondary-fixed-dim', 'font-bold', 'border-r-2', 'border-primary', 'bg-surface-container-highest');
+              link.classList.add('text-on-surface-variant', 'hover:bg-surface-container-highest');
+              if (href === '#' + current) {
+                link.classList.add('text-secondary-fixed-dim', 'font-bold', 'border-r-2', 'border-primary', 'bg-surface-container-highest');
+                link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-highest');
               }
             }
-          }
-        }
-        if (buffer.trim()) {
-          try {
-            const eventData = JSON.parse(buffer);
-            await processPipelineEvent(eventData);
-          } catch (parseErr) {
-            console.warn('Failed to parse final stream line:', parseErr);
-          }
-        }
-      } catch (err) {
-        console.warn('Streaming backend /api/v1/predict fallback triggered:', err);
-        await runStandalonePipelineSimulation();
-      }
-    }
-
-    async function processPipelineEvent(data) {
-      const stageId = data.stage_id || `pipe-${data.stage}`;
-      const card = document.getElementById(stageId);
-      if (!card) return;
-
-      const icon = card.querySelector('.status-indicator');
-
-      if (data.status === 'processing') {
-        card.classList.replace('border-[#494454]', 'border-tertiary');
-        icon.textContent = 'sync';
-        icon.classList.add('amber-pulse');
-        if (data.log) addLog(data.log);
-      } else if (data.status === 'complete') {
-        card.classList.replace('border-tertiary', 'border-secondary');
-        card.classList.replace('border-[#494454]', 'border-secondary');
-        icon.textContent = 'check_circle';
-        icon.classList.remove('amber-pulse');
-        icon.classList.replace('text-on-surface-variant', 'text-secondary');
-        const firstIcon = card.querySelector('.material-symbols-outlined:first-child');
-        if (firstIcon) firstIcon.classList.replace('text-on-surface-variant', 'text-secondary');
-
-        if (data.log) addLog(data.log);
-
-        // Map stage 'Signal Extraction' and 'Feature Extraction' execution cards to update their state, toggle an active violet glow, and transition status badges to 'check_circle' once 'computed_decision_gate' and baseline parameters (\mu, \sigma) return valid.
-        if ((stageId === 'pipe-1' || stageId === 'pipe-3') && data.computed_decision_gate) {
-          card.classList.add('violet-glow');
-          icon.textContent = 'check_circle';
-        }
-
-        // If clinical_alerts_detected list contains data entries, programmatically append real-time telemetry warning lines. If empty, push clean normalization lines.
-        if (data.clinical_alerts_detected && Array.isArray(data.clinical_alerts_detected)) {
-          if (data.clinical_alerts_detected.length > 0) {
-            data.clinical_alerts_detected.forEach(alert => {
-              addLog(`[ALERT] ${alert}`);
-            });
-          } else if (data.mu !== undefined && data.sigma !== undefined) {
-            addLog(`[NORM] Signal baseline normalized (\u03bc=${data.mu}, \u03c3=${data.sigma}). No clinical anomalies in current window.`);
-          }
-        }
-
-        if (data.metrics) {
-          if (data.metrics.features !== undefined) document.getElementById('final-features').textContent = data.metrics.features;
-          if (data.metrics.confidence !== undefined) document.getElementById('final-confidence').textContent = `${data.metrics.confidence}%`;
-        }
-
-        if (data.stage === 8 || stageId === 'pipe-8') {
-          setTimeout(() => {
-            document.getElementById('step-3-content').classList.add('hidden');
-            document.getElementById('success-panel').classList.remove('hidden');
-            
-            // Marks step 3 as complete
-            const step3Node = document.getElementById('step-3-node');
-            const step3Label = document.getElementById('step-3-label');
-            step3Node.style.backgroundColor = '#44e2cd';
-            step3Node.style.color = '#003731';
-            step3Label.style.color = '#44e2cd';
-          }, 800);
-        }
-      }
-    }
-
-    // Standalone execution loop fallback matching backend state sequence precisely
-    async function runStandalonePipelineSimulation() {
-      const stagesData = [
-        { stage: 1, id: 'pipe-1', log: '19 Channels Loaded. Normalizing signal amplitude...', computed_decision_gate: true, mu: 0.0043, sigma: 0.0128, clinical_alerts_detected: [] },
-        { stage: 2, id: 'pipe-2', log: 'Muscle artifact detected at 00:04:12. Filtering active window...', computed_decision_gate: true, mu: 0.0041, sigma: 0.0125, clinical_alerts_detected: ['Muscle artifact transient identified & isolated at 00:04:12'] },
-        { stage: 3, id: 'pipe-3', log: 'FFT Analysis complete. Alpha-Theta ratio established.', computed_decision_gate: true, mu: 0.0039, sigma: 0.0119, clinical_alerts_detected: [] },
-        { stage: 4, id: 'pipe-4', log: 'Cortical mapping generated. High connectivity in frontal lobe.', computed_decision_gate: true, mu: 0.0038, sigma: 0.0118, clinical_alerts_detected: [] },
-        { stage: 5, id: 'pipe-5', log: 'Running stochastic prediction model... 0.04% seizure probability.', computed_decision_gate: true, mu: 0.0040, sigma: 0.0120, clinical_alerts_detected: [] },
-        { stage: 6, id: 'pipe-6', log: 'Translating features to clinical nomenclature...', computed_decision_gate: true, mu: 0.0042, sigma: 0.0122, clinical_alerts_detected: [] },
-        { stage: 7, id: 'pipe-7', log: 'Cross-referencing with database of 40,000 cases...', computed_decision_gate: true, mu: 0.0041, sigma: 0.0121, clinical_alerts_detected: [] },
-        { stage: 8, id: 'pipe-8', log: 'Compiling final report PDF and summary...', computed_decision_gate: true, mu: 0.0043, sigma: 0.0123, clinical_alerts_detected: [], metrics: { features: 47, confidence: 91.3 } }
-      ];
-
-      for (let i = 0; i < stagesData.length; i++) {
-        const item = stagesData[i];
-        await processPipelineEvent({ stage: item.stage, stage_id: item.id, status: 'processing', log: item.log });
-        await new Promise(r => setTimeout(r, 1000));
-        await processPipelineEvent({
-          stage: item.stage,
-          stage_id: item.id,
-          status: 'complete',
-          computed_decision_gate: item.computed_decision_gate,
-          mu: item.mu,
-          sigma: item.sigma,
-          clinical_alerts_detected: item.clinical_alerts_detected,
-          metrics: item.metrics
+          });
         });
       }
-    }
-  </script>
-</body>
-</html>
+
+      // Add click listeners to side links for smooth scrolling
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const targetEl = document.getElementById(href.substring(1));
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        });
+      });
+      
+    })();
+</script>
+
+
+</body></html>

@@ -1,0 +1,2967 @@
+user/
+├── CERTIFICATION_GATE_REPORT.md
+├── CERTIFICATION_STATE_REPORT.md
+├── CORPUS_AUDIT_REPORT.json
+├── DEPLOYED_ROUTE_INVENTORY.md
+├── DEPLOYMENT_ENTRYPOINT_AUDIT.md
+├── DESIGN.md
+├── Dockerfile
+├── EDF_SEIZURE_INVENTORY.csv
+├── EDF_WINDOW_COUNTS.csv
+├── EXECUTIVE_CERTIFICATION_SUMMARY.md
+├── FEATURE_FORENSICS_REPORT.txt
+├── FINAL_CERTIFICATION_DECISION.md
+├── FINAL_CERTIFICATION_REPORT.md
+├── FINAL_PHASE_REPORT.txt
+├── FINAL_VERIFIER_EXECUTION_REPORT.md
+├── FRONTEND_INTEGRATION_GUIDE.md
+├── FRONTEND_ROUTE_MAP.md
+├── FRONTEND_RUNTIME_VERIFICATION.md
+├── FRONTEND_SURFACE_MAP.md
+├── LOCAL_DEPLOYMENT_VERIFICATION.md
+├── MODEL_STABILITY_REPORT.txt
+├── PATIENT_EXPANSION_REPORT.txt
+├── PATIENT_SEIZURE_DISTRIBUTION.csv
+├── PATIENT_WINDOW_COUNTS.csv
+├── PHASE10_SPATIO_TEMPORAL_ACCUMULATOR.py
+├── PHASE12_DEEP_SEQUENTIAL_ENGINE.py
+├── PHASE1_BEST_BA.csv
+├── PHASE1_BEST_F1.csv
+├── PHASE1_BEST_YOUDEN.csv
+├── PHASE1_LOPO_RESULTS.csv
+├── PHASE1_THRESHOLD_SWEEP.csv
+├── PHASE2_XGBOOST.joblib
+├── PHASE3A_FEATURE_IMPORTANCE.csv
+├── PHASE3A_XGBOOST_V3.joblib
+├── PHASE3B_PATIENT_DISJOINT.joblib
+├── PHASE3B_PATIENT_DISJOINT_IMPORTANCE.csv
+├── PHASE4A_CONFUSION_MATRIX.png
+├── PHASE4A_FEATURE_IMPORTANCE.csv
+├── PHASE4A_FEATURE_IMPORTANCE.png
+├── PHASE4A_METRICS.json
+├── PHASE4A_ROC_CURVE.png
+├── PHASE4A_XGBOOST.joblib
+├── PHASE4B_DATASET_AUDIT.json
+├── PHASE4B_FEATURE_IMPORTANCE.csv
+├── PHASE4B_LEAKAGE_AUDIT.json
+├── PHASE4B_METRICS.json
+├── PHASE4B_PATIENT_DISJOINT.joblib
+├── PHASE4B_PATIENT_RESULTS.csv
+├── PHASE4B_PATIENT_SPLIT.json
+├── PHASE4B_THRESHOLD_SWEEP.csv
+├── PHASE5A_DATASET_AUDIT.json
+├── PHASE5A_EDF_AUDIT.csv
+├── PHASE5A_EXECUTION.log
+├── PHASE5A_EXECUTION_REPORT.json
+├── PHASE5A_PATIENT_AUDIT.csv
+├── PHASE5A_SCHEMA_AUDIT.json
+├── PHASE5A_TEMPORAL_AUDIT.json
+├── PHASE5A_WINDOW_AUDIT.csv
+├── PHASE5B_BEST_THRESHOLDS.csv
+├── PHASE5B_CERTIFICATION_REPORT.txt
+├── PHASE5B_FEATURE_CATEGORY_SUMMARY.csv
+├── PHASE5B_FEATURE_IMPORTANCE.csv
+├── PHASE5B_FEATURE_SIGNATURE.json
+├── PHASE5B_LEAKAGE_AUDIT.json
+├── PHASE5B_MEMORY_AUDIT.json
+├── PHASE5B_METRICS.json
+├── PHASE5B_METRIC_SUMMARY.csv
+├── PHASE5B_PATIENT_SPLIT.json
+├── PHASE5B_TEMPORAL_XGBOOST.joblib
+├── PHASE5B_THRESHOLD_SWEEP.csv
+├── PHASE5B_THRESHOLD_TOP20.csv
+├── PHASE5B_TOP50_FEATURES.csv
+├── PHASE5C_BEST_CONFIGURATION.json
+├── PHASE5C_CALIBRATION_RESULTS.csv
+├── PHASE5C_CONFIGURATION_SEARCH.csv
+├── PHASE5C_EDF_RESULTS.csv
+├── PHASE5C_EVENT_METRICS.csv
+├── PHASE5C_EVENT_PREDICTIONS.csv
+├── PHASE5C_EXECUTION_REPORT.txt
+├── PHASE5C_FEATURE_PROOF.json
+├── PHASE5C_LEAKAGE_AUDIT.json
+├── PHASE5C_MEMORY_AUDIT.json
+├── PHASE5C_METRICS.json
+├── PHASE5C_PATIENT_EVENT_SUMMARY.csv
+├── PHASE5C_PATIENT_RESULTS.csv
+├── PHASE5C_RUNTIME_AUDIT.json
+├── PHASE5C_SCHEMA_AUDIT.json
+├── PHASE5C_TEMPORAL_METHOD_COMPARISON.csv
+├── PHASE5C_THRESHOLD_SWEEP.csv
+├── PHASE5C_V2_CALIBRATION_RESULTS.csv
+├── PHASE5C_V2_DEPLOYMENT_COMPARISON.csv
+├── PHASE5C_V2_EDF_RESULTS.csv
+├── PHASE5C_V2_METRICS.json
+├── PHASE5C_V2_PATIENT_RESULTS.csv
+├── PHASE5C_V2_THRESHOLD_SWEEP.csv
+├── PHASE5D_DURATION_FORENSICS.csv
+├── PHASE5D_EXECUTION_REPORT.txt
+├── PHASE5D_FAILURE_ANALYSIS.py
+├── PHASE5D_FALSE_NEGATIVE_EVENTS.csv
+├── PHASE5D_PATIENT_FAILURE_SUMMARY.csv
+├── PHASE5D_PATIENT_SHIFT_ANALYSIS.csv
+├── PHASE5D_PEAK_FORENSICS.csv
+├── PHASE5D_ROOT_CAUSE_ANALYSIS.csv
+├── PHASE5D_RUNTIME_AUDIT.json
+├── PHASE5D_SCHEMA_AUDIT.json
+├── PHASE5D_SMOOTHING_FORENSICS.csv
+├── PHASE5D_THRESHOLD_FORENSICS.csv
+├── PHASE5E_ARTIFACT_AUDIT.json
+├── PHASE5E_EVENT_DECISION_OPTIMIZATION.py
+├── PHASE5E_EXECUTION_REPORT.txt
+├── PHASE5E_FN_RECOVERY.csv
+├── PHASE5E_HISTORICAL_COMPARISON.csv
+├── PHASE5E_OPTIMAL_CONFIGURATIONS.json
+├── PHASE5E_PATIENT_FORENSICS.csv
+├── PHASE5E_PEAK_SWEEP_RESULTS.csv
+├── PHASE5E_PRODUCTION_RECOMMENDATION.json
+├── PHASE5E_REPRODUCTION_AUDIT.json
+├── PHASE5E_RUNTIME_AUDIT.json
+├── PHASE5E_SCHEMA_DISCOVERY.json
+├── PHASE5E_SELF_AUDIT.json
+├── PHASE6_PATIENT_GENERALIZATION_FORENSICS.py
+├── PHASE7B_DISCRIMINATOR_SCALER.pkl
+├── PHASE7B_FALSE_POSITIVE_DISCRIMINATION.py
+├── PHASE7B_FP_DISCRIMINATOR.pkl
+├── PHASE7_5_ABLATION_RESULTS.csv
+├── PHASE7_5_AUDIT_LOG.json
+├── PHASE7_5_CALIBRATION_RESULTS.csv
+├── PHASE7_5_CLASS_DISTRIBUTION_AUDIT.json
+├── PHASE7_5_CORRELATION_AUDIT.json
+├── PHASE7_5_DUPLICATE_AUDIT.json
+├── PHASE7_5_EXECUTION_REPORT.txt
+├── PHASE7_5_FEATURE_ORDER_AUDIT.json
+├── PHASE7_5_FEATURE_SELECTION_RESULTS.csv
+├── PHASE7_5_FEATURE_STABILITY.csv
+├── PHASE7_5_FINAL_COMPARISON.csv
+├── PHASE7_5_FN_MINING_AUDIT.json
+├── PHASE7_5_GENERALIZATION_SCORECARD.csv
+├── PHASE7_5_HYPERPARAMETER_SEARCH.csv
+├── PHASE7_5_IMPORTANCE_STABILITY.csv
+├── PHASE7_5_IMPORTANCE_STABILITY_AUDIT.json
+├── PHASE7_5_INPUT_VALIDATION.json
+├── PHASE7_5_MASTER_FEATURE_RANKING.csv
+├── PHASE7_5_MCNEMAR_RESULTS.json
+├── PHASE7_5_MEMORY_AUDIT.json
+├── PHASE7_5_MISSING_VALUE_AUDIT.json
+├── PHASE7_5_PIPELINE.log
+├── PHASE7_5_PROBABILITY_DISTRIBUTION.json
+├── PHASE7_5_RECOVERY_AUDIT.csv
+├── PHASE7_5_RELATIVE_FEATURE_AUDIT.json
+├── PHASE7_5_RELATIVE_FEATURE_DRIFT.csv
+├── PHASE7_5_ROOT_CAUSE_AUDIT.json
+├── PHASE7_5_SCHEMA_DISCOVERY.json
+├── PHASE7_5_SELF_AUDIT.json
+├── PHASE7_5_SHAP_SUMMARY.json
+├── PHASE7_5_SPLIT_AUDIT.json
+├── PHASE7_5_SUCCESS_AUDIT.json
+├── PHASE7_5_TEST_RESULTS.csv
+├── PHASE7_5_TRUE_GENERALIZATION_RECOVERY.py
+├── PHASE7_5_VARIANCE_AUDIT.json
+├── PHASE7_6_ABLATION_RESULTS.csv
+├── PHASE7_6_ARCHETYPES.csv
+├── PHASE7_6_ATTENUATED_SIGNAL_AUDIT.csv
+├── PHASE7_6_AUDIT_LOG.json
+├── PHASE7_6_CALIBRATION_AUDIT.csv
+├── PHASE7_6_EVENT_CONFIDENCE_AUDIT.csv
+├── PHASE7_6_EVENT_LEVEL_GENERALIZATION_RECOVERY.py
+├── PHASE7_6_EVENT_MERGE_AUDIT.csv
+├── PHASE7_6_EVENT_RECONSTRUCTION_AUDIT.csv
+├── PHASE7_6_EXECUTION_REPORT.txt
+├── PHASE7_6_FALSE_POSITIVE_FORENSICS.csv
+├── PHASE7_6_FINAL_COMPARISON.csv
+├── PHASE7_6_INPUT_VALIDATION.json
+├── PHASE7_6_MEMORY_AUDIT.json
+├── PHASE7_6_PARAMETER_SWEEP_AUDIT.csv
+├── PHASE7_6_PATIENT_SPLIT_AUDIT.json
+├── PHASE7_6_PIPELINE.log
+├── PHASE7_6_RECOVERY_AUDIT.csv
+├── PHASE7_6_RUNTIME_AUDIT.json
+├── PHASE7_6_SCHEMA_DISCOVERY.json
+├── PHASE7_6_SELF_AUDIT.json
+├── PHASE7_6_SUCCESS_AUDIT.json
+├── PHASE7_6_TEST_RESULTS.csv
+├── PHASE7_ABLATION_RESULTS.csv
+├── PHASE7_ADAPTIVE_THRESHOLD_RESULTS.csv
+├── PHASE7_CALIBRATED_RESULTS.csv
+├── PHASE7_CALIBRATION_COMPARISON.csv
+├── PHASE7_CALIBRATION_NESTED_RESULTS.csv
+├── PHASE7_CHB14_DOMAIN_SHIFT_RECOVERY.csv
+├── PHASE7_CHB14_DOMAIN_SHIFT_RESULTS.csv
+├── PHASE7_COMBINED_MODEL_RESULTS.csv
+├── PHASE7_EXECUTION_REPORT.txt
+├── PHASE7_FINAL_COMPARISON.csv
+├── PHASE7_INPUT_VALIDATION.json
+├── PHASE7_MEMORY_AUDIT.json
+├── PHASE7_MODEL_AUDIT.json
+├── PHASE7_PATIENT_OPTIMAL_THRESHOLDS.csv
+├── PHASE7_PATIENT_SPLIT_AUDIT.json
+├── PHASE7_PROD_CONFIG_AUDIT.json
+├── PHASE7_RECOVERY_SUMMARY.json
+├── PHASE7_RUNTIME_AUDIT.json
+├── PHASE7_SCHEMA_DISCOVERY.json
+├── PHASE7_SELF_AUDIT.json
+├── PHASE7_THRESHOLD_EXPERIMENTS.csv
+├── PHASE7_TRUE_GENERALIZATION_RECOVERY.py
+├── PHASE8_CLINICAL_VALIDATION_ENGINE.py
+├── PHASE9_PATIENT_CALIBRATED_ENGINE.py
+├── PRE_EXPANSION_AUDIT.txt
+├── README.md
+├── REAL_CORPUS_FAILURE_REPORT.md
+├── REAL_CORPUS_REMEDIATION_REPORT.md
+├── REAL_CORPUS_ROOT_CAUSE_REPORT.md
+├── RELEASE_BASELINE.md
+├── REMAINING_GAP_ANALYSIS.md
+├── RENDER_DEPLOYMENT_CHECKLIST.md
+├── REPOSITORY.md
+├── ROOT_CAUSE_ANALYSIS.md
+├── SEIZURE_AUDIT_REPORT.json
+├── SEIZURE_INTERVAL_DATABASE.json
+├── SEIZURE_RECONSTRUCTION.json
+├── STARTUP_FLOW_AUDIT.md
+├── TRAINING_RUN_1_REPORT.txt
+├── TRAINING_RUN_2_REPORT.txt
+├── TRAINING_RUN_3_REPORT.txt
+├── UI_REPLACEMENT_MAP.md
+├── VALIDATION_LOG_v4.txt
+├── VERIFIER_STATUS_REPORT.md
+├── WINDOW_INVENTORY_FINAL.json
+├── WINDOW_INVENTORY_REPORT.json
+├── _repo_bootstrap.py
+├── analysis.html
+├── auth.html
+├── capture_runtime.py
+├── chbmit_model.json
+├── code.html
+├── compare_phase5b_results.py
+├── dashboard.html
+├── dataset_audit_v4.json
+├── dataset_cleaning_log_v4.txt
+├── dataset_summary_v4.txt
+├── debug_phase6_tail.py
+├── debug_step16.py
+├── diagnose_model.py
+├── features.json
+├── generate_tree_output.py
+├── merge_audit_v4.json
+├── model_fscores.txt
+├── neurovision_api.py
+├── neurovision_fixed_files.zip
+├── neurovision_inference.py
+├── old_train_chbmit.py
+├── placeholder.html
+├── production_output.json
+├── production_output_phase12.json
+├── project_tree.txt
+├── pyproject.toml
+├── pytest_output.log
+├── rebuild_temporal_dataset.py
+├── requirements.txt
+├── runtime_frontend_5173.err.log
+├── runtime_frontend_5173.log
+├── runtime_server_8001.err.log
+├── runtime_server_8001.log
+├── seizure_counts.txt
+├── serve_local.py
+├── server.log
+├── status.html
+├── test_client_validation.py
+├── tree.txt
+├── upload.html
+├── v21.json
+├── v4_production.log
+├── v4_sample.csv
+├── valid_edf_base64.txt
+├── wire_analysis_html.py
+├── .gcc/
+│   ├── README.md
+│   ├── decisions/
+│   │   ├── ADR-0001-v1-p5-p6-baseline-models-and-uncertainty.md
+│   │   ├── ADR-0002-v1-p7-p8-offline-inference-and-research-app.md
+│   │   ├── ADR-0003-v2-p1-p2-clinical-case-and-review.md
+│   │   ├── ADR-0004-v2-p3-p4-findings-and-knowledge.md
+│   │   ├── ADR-0005-v2-p5-p6-intelligence-and-decision-support.md
+│   │   ├── ADR-0006-v2-p7-p8-workstation-and-certification.md
+│   │   ├── ADR-0007-v3-p1-p2-events-and-temporal.md
+│   │   ├── ADR-0008-v3-p3-p4-workflow-and-graph.md
+│   │   ├── ADR-0009-v3-p5-p6-analytics-and-recommendations.md
+│   │   ├── ADR-0010-v3-p7-p8-workstation-and-certification.md
+│   │   ├── ADR-0011-v4-p1-p2-goals-and-policies.md
+│   │   ├── ADR-0012-v4-p3-p4-planning-and-tasks.md
+│   │   ├── ADR-0013-v4-p5-p6-agents-and-execution.md
+│   │   ├── ADR-0014-productization-p1-real-eeg-foundation.md
+│   │   ├── ADR-0015-productization-p2-signal-processing.md
+│   │   ├── ADR-0016-productization-p3-feature-engineering.md
+│   │   ├── ADR-0017-productization-p4-model-foundation.md
+│   │   ├── ADR-0018-productization-p5-clinical-inference.md
+│   │   ├── ADR-0019-productization-p6-application-backend.md
+│   │   ├── ADR-0020-productization-p7-application-frontend.md
+│   │   ├── ADR-0021-productization-p8-operations-foundation.md
+│   │   ├── ADR-0022-productization-p9-validation-assurance.md
+│   │   ├── ADR-0023-productization-p10-deployment-certification.md
+│   │   ├── ADR-0024-drp1-real-dataset-integration.md
+│   │   ├── ADR-0025-drp2-production-models.md
+│   │   ├── ADR-0026-drp3-serving-platform.md
+│   │   ├── ADR-0027-drp4-persistence-platform.md
+│   │   ├── ADR-0028-drp5-security-platform.md
+│   │   ├── ADR-0029-drp6-clinical-validation.md
+│   │   ├── ADR-0030-track1-real-data-acquisition.md
+│   │   ├── ADR-0031-track2-real-model-training.md
+│   │   ├── ADR-0032-track3-real-product-application.md
+│   │   ├── ADR-0033-track4-operational-qualification.md
+│   │   ├── ADR-0034-dbe1-asgi-entrypoint.md
+│   │   ├── ADR-0035-dbe2-docker-deployment.md
+│   │   ├── ADR-0036-dbe3-duplicate-upload.md
+│   │   ├── ADR-0037-dbe4-persistence-wiring.md
+│   │   ├── ADR-0038-mp3-model-lifecycle-recovery.md
+│   │   ├── ADR-0039-mp4-source-of-truth-consolidation.md
+│   │   ├── README.md
+├── BACKUP_OLD_PHASE5B/
+├── PHASE10_OUTPUTS/
+│   ├── PHASE10_PIPELINE_LOG.txt
+├── PHASE13_OUTPUTS/
+├── PHASE7B_OUTPUTS/
+│   ├── PHASE7B_EXECUTION_REPORT.txt
+│   ├── PHASE7B_PIPELINE_LOG.txt
+├── PHASE8_OUTPUTS/
+│   ├── PHASE8_PIPELINE_LOG.txt
+├── PHASE9_OUTPUTS/
+│   ├── PHASE9_PIPELINE_LOG.txt
+├── backend/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── agent_coordination/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── capabilities/
+│   │   │   ├── __init__.py
+│   │   │   ├── capabilities.py
+│   │   ├── docs/
+│   │   │   ├── V4_P5_AGENT_COORDINATION.md
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── taxonomy/
+│   │   │   ├── __init__.py
+│   │   │   ├── taxonomy.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── application_backend/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── api/
+│   │   │   ├── __init__.py
+│   │   │   ├── application_api.py
+│   │   │   ├── contracts.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── auth/
+│   │   │   ├── __init__.py
+│   │   │   ├── passwords.py
+│   │   │   ├── service.py
+│   │   │   ├── tokens.py
+│   │   ├── docs/
+│   │   │   ├── DECISIONS.md
+│   │   │   ├── DESIGN.md
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── storage/
+│   │   │   ├── __init__.py
+│   │   │   ├── stores.py
+│   │   ├── tests/
+│   │   │   ├── README.md
+│   │   ├── users/
+│   │   │   ├── __init__.py
+│   │   │   ├── service.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   │   ├── workflows/
+│   │   │   ├── __init__.py
+│   │   │   ├── eeg_workflow.py
+│   ├── application_platform/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── chbmit_inference.py
+│   │   ├── persistence.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── api/
+│   │   │   ├── __init__.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   ├── docs/
+│   │   │   ├── AUTHENTICATION_RELIABILITY.md
+│   │   │   ├── DECISIONS.md
+│   │   │   ├── DESIGN.md
+│   │   │   ├── DUPLICATE_UPLOADS.md
+│   │   │   ├── MODEL_LIFECYCLE.md
+│   │   │   ├── MODEL_PROVISIONING.md
+│   │   │   ├── PERSISTENCE.md
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── predictions/
+│   │   │   ├── __init__.py
+│   │   ├── provisioning/
+│   │   │   ├── __init__.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   ├── security/
+│   │   │   ├── __init__.py
+│   │   │   ├── classifier.py
+│   │   │   ├── readiness.py
+│   │   │   ├── responses.py
+│   │   │   ├── token_validation.py
+│   │   ├── server/
+│   │   │   ├── README.md
+│   │   │   ├── __init__.py
+│   │   │   ├── app.py
+│   │   │   ├── config.py
+│   │   │   ├── factory.py
+│   │   │   ├── landing.py
+│   │   ├── uploads/
+│   │   │   ├── __init__.py
+│   │   │   ├── duplicates.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   ├── workflows/
+│   │   │   ├── __init__.py
+│   ├── clinical_cases/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── V2_P1_CLINICAL_CASES.md
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── clinical_findings/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── V2_P3_CLINICAL_FINDINGS.md
+│   │   ├── evidence/
+│   │   │   ├── __init__.py
+│   │   │   ├── evidence.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── interpretation/
+│   │   │   ├── __init__.py
+│   │   │   ├── interpretation.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── clinical_knowledge/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── identity.py
+│   │   ├── seed.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── concepts/
+│   │   │   ├── __init__.py
+│   │   │   ├── concepts.py
+│   │   ├── docs/
+│   │   │   ├── V2_P4_CLINICAL_KNOWLEDGE.md
+│   │   ├── evidence/
+│   │   │   ├── __init__.py
+│   │   │   ├── evidence.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── ontology/
+│   │   │   ├── __init__.py
+│   │   │   ├── ontology.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── relationships/
+│   │   │   ├── __init__.py
+│   │   │   ├── relationships.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── taxonomy/
+│   │   │   ├── __init__.py
+│   │   │   ├── taxonomy.py
+│   │   ├── terminology/
+│   │   │   ├── __init__.py
+│   │   │   ├── terminology.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── clinical_review/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── assignment/
+│   │   │   ├── __init__.py
+│   │   │   ├── assignment.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── V2_P2_CLINICAL_REVIEW.md
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── sessions/
+│   │   │   ├── __init__.py
+│   │   │   ├── sessions.py
+│   │   ├── tracking/
+│   │   │   ├── __init__.py
+│   │   │   ├── tracking.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   │   ├── workflow/
+│   │   │   ├── __init__.py
+│   │   │   ├── workflow.py
+│   ├── clinical_validation/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── benchmarks/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── calibration/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── comparison/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── docs/
+│   │   │   ├── DESIGN.md
+│   │   ├── evidence/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reliability/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── tests/
+│   │   │   ├── README.md
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── dataset_acquisition/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── acquisition/
+│   │   │   ├── __init__.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   ├── connectors/
+│   │   │   ├── __init__.py
+│   │   ├── docs/
+│   │   │   ├── DECISIONS.md
+│   │   │   ├── DESIGN.md
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   ├── inventory/
+│   │   │   ├── __init__.py
+│   │   ├── labels/
+│   │   │   ├── __init__.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   ├── sources/
+│   │   │   ├── __init__.py
+│   │   ├── storage/
+│   │   │   ├── __init__.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   ├── dataset_integration/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   ├── docs/
+│   │   │   ├── DECISIONS.md
+│   │   │   ├── DESIGN.md
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   ├── inventory/
+│   │   │   ├── __init__.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   ├── registration/
+│   │   │   ├── __init__.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   ├── tests/
+│   │   │   ├── README.md
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   ├── decision_support/
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── context/
+│   │   │   ├── __init__.py
+│   │   │   ├── context.py
+│   │   ├── docs/
+│   │   │   ├── V2_P6_DECISION_SUPPORT.md
+│   │   ├── evidence/
+│   │   │   ├── __init__.py
+│   │   │   ├── evidence.py
+│   │   ├── guidance/
+│   │   │   ├── __init__.py
+│   │   │   ├── guidance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── prioritization/
+│   │   │   ├── __init__.py
+│   │   │   ├── prioritization.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── risk/
+│   │   │   ├── __init__.py
+│   │   │   ├── risk.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── eeg_foundation/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── PRODUCTIZATION_P1_EEG_FOUNDATION.md
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── ingestion/
+│   │   │   ├── __init__.py
+│   │   │   ├── formats.py
+│   │   │   ├── reader.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── metadata/
+│   │   │   ├── __init__.py
+│   │   │   ├── extractor.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── storage/
+│   │   │   ├── __init__.py
+│   │   │   ├── store.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── execution_orchestration/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── coordination/
+│   │   │   ├── __init__.py
+│   │   │   ├── coordination.py
+│   │   ├── docs/
+│   │   │   ├── V4_P6_EXECUTION_ORCHESTRATION.md
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── monitoring/
+│   │   │   ├── __init__.py
+│   │   │   ├── monitoring.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── feature_engineering/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── _common.py
+│   │   ├── loader.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── connectivity/
+│   │   │   ├── __init__.py
+│   │   │   ├── connectivity.py
+│   │   ├── docs/
+│   │   │   ├── PRODUCTIZATION_P3_FEATURE_ENGINEERING.md
+│   │   ├── frequency/
+│   │   │   ├── __init__.py
+│   │   │   ├── frequency.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── spectral/
+│   │   │   ├── __init__.py
+│   │   │   ├── spectral.py
+│   │   ├── temporal/
+│   │   │   ├── __init__.py
+│   │   │   ├── temporal.py
+│   │   ├── topography/
+│   │   │   ├── __init__.py
+│   │   │   ├── topography.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── goal_intelligence/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── V4_P1_GOAL_INTELLIGENCE.md
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── taxonomy/
+│   │   │   ├── __init__.py
+│   │   │   ├── taxonomy.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── governance_intelligence/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── analytics/
+│   │   │   ├── __init__.py
+│   │   │   ├── analytics.py
+│   │   ├── approvals/
+│   │   │   ├── __init__.py
+│   │   │   ├── approvals.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── V4_P7_GOVERNANCE_INTELLIGENCE.md
+│   │   ├── escalations/
+│   │   │   ├── __init__.py
+│   │   │   ├── escalations.py
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   │   ├── observation.py
+│   │   ├── monitoring/
+│   │   │   ├── __init__.py
+│   │   │   ├── monitoring.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── risk/
+│   │   │   ├── __init__.py
+│   │   │   ├── risk.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   │   ├── violations/
+│   │   │   ├── __init__.py
+│   │   │   ├── violations.py
+│   ├── inference_foundation/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── calibration/
+│   │   │   ├── __init__.py
+│   │   │   ├── calibration.py
+│   │   ├── confidence/
+│   │   │   ├── __init__.py
+│   │   │   ├── confidence.py
+│   │   ├── docs/
+│   │   │   ├── PRODUCTIZATION_P5_CLINICAL_INFERENCE.md
+│   │   ├── explainability/
+│   │   │   ├── __init__.py
+│   │   │   ├── explainability.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── inference/
+│   │   │   ├── __init__.py
+│   │   │   ├── execution.py
+│   │   │   ├── prediction.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── model_foundation/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── datasets/
+│   │   │   ├── __init__.py
+│   │   │   ├── builder.py
+│   │   │   ├── connectors.py
+│   │   │   ├── splits.py
+│   │   ├── docs/
+│   │   │   ├── PRODUCTIZATION_P4_MODEL_FOUNDATION.md
+│   │   ├── evaluation/
+│   │   │   ├── __init__.py
+│   │   │   ├── evaluator.py
+│   │   │   ├── metrics.py
+│   │   ├── experiments/
+│   │   │   ├── __init__.py
+│   │   │   ├── tracker.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── training/
+│   │   │   ├── __init__.py
+│   │   │   ├── models.py
+│   │   │   ├── trainer.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── multi_case_intelligence/
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── analytics/
+│   │   │   ├── __init__.py
+│   │   │   ├── analytics.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── cohorts/
+│   │   │   ├── __init__.py
+│   │   │   ├── cohorts.py
+│   │   ├── docs/
+│   │   │   ├── V2_P5_MULTI_CASE_INTELLIGENCE.md
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── population/
+│   │   │   ├── __init__.py
+│   │   │   ├── population.py
+│   │   ├── quality/
+│   │   │   ├── __init__.py
+│   │   │   ├── quality.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── statistics/
+│   │   │   ├── __init__.py
+│   │   │   ├── statistics.py
+│   │   ├── trends/
+│   │   │   ├── __init__.py
+│   │   │   ├── trends.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── offline_inference/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── version.py
+│   │   ├── artifacts/
+│   │   │   ├── __init__.py
+│   │   │   ├── store.py
+│   │   ├── docs/
+│   │   │   ├── V1_P7_OFFLINE_INFERENCE.md
+│   │   ├── execution/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── jobs/
+│   │   │   ├── __init__.py
+│   │   │   ├── jobs.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── orchestrator/
+│   │   │   ├── __init__.py
+│   │   │   ├── orchestrator.py
+│   │   ├── pipelines/
+│   │   │   ├── __init__.py
+│   │   │   ├── pipeline.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── outputs.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── operational_analytics/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── V3_P5_OPERATIONAL_ANALYTICS.md
+│   │   ├── engine/
+│   │   │   ├── __init__.py
+│   │   │   ├── builder.py
+│   │   ├── health/
+│   │   │   ├── __init__.py
+│   │   │   ├── health.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── metrics/
+│   │   │   ├── __init__.py
+│   │   │   ├── _common.py
+│   │   │   ├── metrics.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── categories.py
+│   │   │   ├── domain.py
+│   │   │   ├── source.py
+│   │   ├── performance/
+│   │   │   ├── __init__.py
+│   │   │   ├── performance.py
+│   │   ├── quality/
+│   │   │   ├── __init__.py
+│   │   │   ├── quality.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── risk/
+│   │   │   ├── __init__.py
+│   │   │   ├── risk.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── trends/
+│   │   │   ├── __init__.py
+│   │   │   ├── trends.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── operational_events/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── contracts/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── docs/
+│   │   │   ├── V3_P1_OPERATIONAL_EVENTS.md
+│   │   ├── generation/
+│   │   │   ├── __init__.py
+│   │   │   ├── adapters.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   ├── taxonomy/
+│   │   │   ├── __init__.py
+│   │   │   ├── taxonomy.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── operational_graph/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── V3_P4_OPERATIONAL_GRAPH.md
+│   │   ├── edges/
+│   │   │   ├── __init__.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── nodes/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── ontology/
+│   │   │   ├── __init__.py
+│   │   │   ├── ontology.py
+│   │   ├── projections/
+│   │   │   ├── __init__.py
+│   │   │   ├── projections.py
+│   │   ├── queries/
+│   │   │   ├── __init__.py
+│   │   │   ├── queries.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── relationships/
+│   │   │   ├── __init__.py
+│   │   │   ├── builder.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── operational_recommendations/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── context/
+│   │   │   ├── __init__.py
+│   │   │   ├── _common.py
+│   │   │   ├── context.py
+│   │   ├── docs/
+│   │   │   ├── V3_P6_OPERATIONAL_RECOMMENDATIONS.md
+│   │   ├── escalation/
+│   │   │   ├── __init__.py
+│   │   │   ├── escalation.py
+│   │   ├── guidance/
+│   │   │   ├── __init__.py
+│   │   │   ├── guidance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   │   ├── kinds.py
+│   │   │   ├── source.py
+│   │   ├── optimization/
+│   │   │   ├── __init__.py
+│   │   │   ├── optimization.py
+│   │   ├── prioritization/
+│   │   │   ├── __init__.py
+│   │   │   ├── prioritization.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── operations_platform/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   ├── diagnostics/
+│   │   │   ├── __init__.py
+│   │   ├── docs/
+│   │   │   ├── DECISIONS.md
+│   │   │   ├── DESIGN.md
+│   │   ├── health/
+│   │   │   ├── __init__.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── monitoring/
+│   │   │   ├── __init__.py
+│   │   ├── qualification/
+│   │   │   ├── __init__.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   ├── persistence_platform/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── audit_storage/
+│   │   │   ├── __init__.py
+│   │   │   ├── store.py
+│   │   ├── docs/
+│   │   │   ├── DESIGN.md
+│   │   ├── execution_storage/
+│   │   │   ├── __init__.py
+│   │   │   ├── store.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── recovery.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── lineage_storage/
+│   │   │   ├── __init__.py
+│   │   │   ├── store.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── registry_storage/
+│   │   │   ├── __init__.py
+│   │   │   ├── store.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── repositories/
+│   │   │   ├── __init__.py
+│   │   │   ├── repository.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── storage/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── tests/
+│   │   │   ├── README.md
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── planning_foundation/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── dependencies/
+│   │   │   ├── __init__.py
+│   │   │   ├── dependencies.py
+│   │   ├── docs/
+│   │   │   ├── V4_P3_PLANNING_FOUNDATION.md
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── taxonomy/
+│   │   │   ├── __init__.py
+│   │   │   ├── taxonomy.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── policy_engine/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── integration.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── constraints/
+│   │   │   ├── __init__.py
+│   │   │   ├── constraints.py
+│   │   ├── docs/
+│   │   │   ├── V4_P2_POLICY_ENGINE.md
+│   │   ├── evaluation/
+│   │   │   ├── __init__.py
+│   │   │   ├── evaluation.py
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── policies/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   │   ├── taxonomy.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── production_models/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── architectures/
+│   │   │   ├── __init__.py
+│   │   │   ├── factory.py
+│   │   │   ├── models.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── benchmarking/
+│   │   │   ├── __init__.py
+│   │   │   ├── benchmarker.py
+│   │   │   ├── metrics.py
+│   │   ├── docs/
+│   │   │   ├── DESIGN.md
+│   │   ├── evaluation/
+│   │   │   ├── __init__.py
+│   │   │   ├── analysis.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── tests/
+│   │   │   ├── README.md
+│   │   ├── training/
+│   │   │   ├── __init__.py
+│   │   │   ├── config.py
+│   │   │   ├── trainer.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── real_model_training/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── data.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   ├── benchmarking/
+│   │   │   ├── __init__.py
+│   │   ├── comparison/
+│   │   │   ├── __init__.py
+│   │   ├── docs/
+│   │   │   ├── DECISIONS.md
+│   │   │   ├── DESIGN.md
+│   │   ├── evaluation/
+│   │   │   ├── __init__.py
+│   │   ├── experiments/
+│   │   │   ├── __init__.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   ├── training/
+│   │   │   ├── __init__.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   ├── security_platform/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── access_control/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── authentication/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── authorization/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── credentials/
+│   │   │   ├── __init__.py
+│   │   │   ├── manager.py
+│   │   ├── docs/
+│   │   │   ├── DESIGN.md
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── policies/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── tests/
+│   │   │   ├── README.md
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── serving_platform/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── contracts/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── docs/
+│   │   │   ├── DESIGN.md
+│   │   ├── execution/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── tracker.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── readiness/
+│   │   │   ├── __init__.py
+│   │   │   ├── engine.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── routing/
+│   │   │   ├── __init__.py
+│   │   │   ├── router.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── services/
+│   │   │   ├── __init__.py
+│   │   │   ├── prediction.py
+│   │   ├── tests/
+│   │   │   ├── README.md
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   │   │   ├── validators.py
+│   ├── signal_processing/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── artifacts/
+│   │   │   ├── __init__.py
+│   │   │   ├── detection.py
+│   │   │   ├── removal.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── PRODUCTIZATION_P2_SIGNAL_PROCESSING.md
+│   │   ├── filtering/
+│   │   │   ├── __init__.py
+│   │   │   ├── filters.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── preprocessing/
+│   │   │   ├── __init__.py
+│   │   │   ├── loader.py
+│   │   │   ├── pipeline.py
+│   │   ├── quality/
+│   │   │   ├── __init__.py
+│   │   │   ├── quality.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── storage/
+│   │   │   ├── __init__.py
+│   │   │   ├── store.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── integrity.py
+│   ├── simulation_scenario/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── comparison/
+│   │   │   ├── __init__.py
+│   │   │   ├── comparison.py
+│   │   ├── docs/
+│   │   │   ├── V4_P9_SIMULATION_SCENARIO.md
+│   │   ├── evaluation/
+│   │   │   ├── __init__.py
+│   │   │   ├── evaluation.py
+│   │   ├── forecast/
+│   │   │   ├── __init__.py
+│   │   │   ├── forecast.py
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── context.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── risk/
+│   │   │   ├── __init__.py
+│   │   │   ├── risk.py
+│   │   ├── scenarios/
+│   │   │   ├── __init__.py
+│   │   │   ├── scenarios.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── simulation/
+│   │   │   ├── __init__.py
+│   │   │   ├── simulation.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── task_intelligence/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── dependencies/
+│   │   │   ├── __init__.py
+│   │   │   ├── dependencies.py
+│   │   ├── docs/
+│   │   │   ├── V4_P4_TASK_INTELLIGENCE.md
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lifecycle/
+│   │   │   ├── __init__.py
+│   │   │   ├── lifecycle.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── taxonomy/
+│   │   │   ├── __init__.py
+│   │   │   ├── taxonomy.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── temporal_intelligence/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── analytics/
+│   │   │   ├── __init__.py
+│   │   │   ├── analytics.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── docs/
+│   │   │   ├── V3_P2_TEMPORAL_INTELLIGENCE.md
+│   │   ├── evolution/
+│   │   │   ├── __init__.py
+│   │   │   ├── evolution.py
+│   │   ├── history/
+│   │   │   ├── __init__.py
+│   │   │   ├── history.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── visualization.py
+│   │   ├── timelines/
+│   │   │   ├── __init__.py
+│   │   │   ├── event_source.py
+│   │   │   ├── timelines.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── workflow_intelligence/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── service.py
+│   │   ├── version.py
+│   │   ├── analytics/
+│   │   │   ├── __init__.py
+│   │   │   ├── builder.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── bottlenecks/
+│   │   │   ├── __init__.py
+│   │   │   ├── bottlenecks.py
+│   │   ├── dependencies/
+│   │   │   ├── __init__.py
+│   │   │   ├── dependencies.py
+│   │   ├── docs/
+│   │   │   ├── V3_P3_WORKFLOW_INTELLIGENCE.md
+│   │   ├── efficiency/
+│   │   │   ├── __init__.py
+│   │   │   ├── efficiency.py
+│   │   ├── identity/
+│   │   │   ├── __init__.py
+│   │   │   ├── identity.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   ├── domain.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── transitions/
+│   │   │   ├── __init__.py
+│   │   │   ├── transitions.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+├── certification/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── decision.py
+│   ├── program.py
+│   ├── util.py
+│   ├── version.py
+│   ├── audits/
+│   │   ├── __init__.py
+│   │   ├── end_to_end.py
+│   │   ├── gap.py
+│   │   ├── product_readiness.py
+│   │   ├── risk.py
+│   ├── compliance/
+│   │   ├── __init__.py
+│   ├── deployment/
+│   │   ├── __init__.py
+│   ├── docs/
+│   │   ├── CERTIFICATION_REPORT.md
+│   │   ├── DECISIONS.md
+│   │   ├── DESIGN.md
+│   ├── evidence/
+│   │   ├── __init__.py
+│   ├── readiness/
+│   │   ├── __init__.py
+│   ├── reports/
+│   │   ├── __init__.py
+│   ├── scorecards/
+│   │   ├── __init__.py
+│   ├── tests/
+│   │   ├── README.md
+├── certification_closure_evidence_20260601_220946/
+│   ├── verifier_verify_dbe1_asgi_entrypoint.txt
+│   ├── verifier_verify_dbe2_docker_deployment.txt
+│   ├── verifier_verify_dbe3_duplicate_upload.txt
+│   ├── verifier_verify_dbe4_persistence.txt
+│   ├── verifier_verify_dbe5_authentication_reliability.txt
+│   ├── verifier_verify_drp1_dataset_integration.txt
+│   ├── verifier_verify_drp2_production_models.txt
+│   ├── verifier_verify_drp3_serving_platform.txt
+│   ├── verifier_verify_drp4_persistence_platform.txt
+│   ├── verifier_verify_drp5_security_platform.txt
+│   ├── verifier_verify_drp6_clinical_validation.txt
+│   ├── verifier_verify_mp1_model_provisioning.txt
+│   ├── verifier_verify_mp3_model_lifecycle.txt
+│   ├── verifier_verify_mp4_source_of_truth.txt
+│   ├── verifier_verify_productization_p1.txt
+│   ├── verifier_verify_productization_p10.txt
+│   ├── verifier_verify_productization_p2.txt
+│   ├── verifier_verify_productization_p3.txt
+│   ├── verifier_verify_productization_p4.txt
+│   ├── verifier_verify_productization_p5.txt
+│   ├── verifier_verify_productization_p6.txt
+│   ├── verifier_verify_productization_p7.txt
+│   ├── verifier_verify_productization_p8.txt
+│   ├── verifier_verify_productization_p9.txt
+│   ├── verifier_verify_track1_real_data.txt
+│   ├── verifier_verify_track2_real_models.txt
+│   ├── verifier_verify_track3_application.txt
+├── certification_closure_evidence_20260601_221954/
+│   ├── verifier_verify_dbe1_asgi_entrypoint.txt
+│   ├── verifier_verify_dbe2_docker_deployment.txt
+│   ├── verifier_verify_dbe3_duplicate_upload.txt
+│   ├── verifier_verify_dbe4_persistence.txt
+│   ├── verifier_verify_dbe5_authentication_reliability.txt
+│   ├── verifier_verify_drp1_dataset_integration.txt
+│   ├── verifier_verify_drp2_production_models.txt
+│   ├── verifier_verify_drp3_serving_platform.txt
+│   ├── verifier_verify_drp4_persistence_platform.txt
+│   ├── verifier_verify_drp5_security_platform.txt
+│   ├── verifier_verify_drp6_clinical_validation.txt
+│   ├── verifier_verify_mp1_model_provisioning.txt
+│   ├── verifier_verify_mp3_model_lifecycle.txt
+│   ├── verifier_verify_mp4_source_of_truth.txt
+│   ├── verifier_verify_productization_p1.txt
+│   ├── verifier_verify_productization_p10.txt
+│   ├── verifier_verify_productization_p2.txt
+│   ├── verifier_verify_productization_p3.txt
+│   ├── verifier_verify_productization_p4.txt
+│   ├── verifier_verify_productization_p5.txt
+│   ├── verifier_verify_productization_p6.txt
+│   ├── verifier_verify_productization_p7.txt
+│   ├── verifier_verify_productization_p8.txt
+│   ├── verifier_verify_productization_p9.txt
+│   ├── verifier_verify_track1_real_data.txt
+│   ├── verifier_verify_track2_real_models.txt
+│   ├── verifier_verify_track3_application.txt
+│   ├── verifier_verify_track4_operations.txt
+│   ├── verifier_verify_v1.txt
+│   ├── verifier_verify_v1_p5_p6.txt
+│   ├── verifier_verify_v2.txt
+├── certification_closure_evidence_20260601_224927/
+│   ├── missing_verifier_summary.txt
+│   ├── verifier_verify_v2_p3_p4.txt
+│   ├── verifier_verify_v2_p5_p6.txt
+│   ├── verifier_verify_v2_p7_p8.txt
+│   ├── verifier_verify_v3_p1_p2.txt
+│   ├── verifier_verify_v3_p3_p4.txt
+│   ├── verifier_verify_v3_p5_p6.txt
+│   ├── verifier_verify_v3_p7_p8.txt
+│   ├── verifier_verify_v4_p1_p2.txt
+│   ├── verifier_verify_v4_p3_p4.txt
+│   ├── verifier_verify_v4_p5_p6.txt
+│   ├── verifier_verify_v4_p7_p8.txt
+│   ├── verifier_verify_v4_p9_p10.txt
+├── certification_evidence_20260601_211116/
+│   ├── operator_workspace.txt
+│   ├── phase01_repository_truth.txt
+│   ├── phase02_fresh_clone_install_startup.txt
+│   ├── phase02_startup_shutdown_restart.txt
+│   ├── phase03_pip_freeze.txt
+│   ├── phase03_python_version.txt
+│   ├── phase04_pytest_full.txt
+│   ├── phase05_verifier_summary.txt
+│   ├── phase05_verifier_verify_dbe1_asgi_entrypoint.txt
+│   ├── phase05_verifier_verify_dbe2_docker_deployment.txt
+│   ├── phase05_verifier_verify_dbe3_duplicate_upload.txt
+│   ├── phase05_verifier_verify_dbe4_persistence.txt
+│   ├── phase05_verifier_verify_dbe5_authentication_reliability.txt
+│   ├── phase05_verifier_verify_drp1_dataset_integration.txt
+│   ├── phase05_verifier_verify_drp2_production_models.txt
+│   ├── phase05_verifier_verify_drp3_serving_platform.txt
+│   ├── phase05_verifier_verify_drp4_persistence_platform.txt
+│   ├── phase05_verifier_verify_drp5_security_platform.txt
+│   ├── phase05_verifier_verify_drp6_clinical_validation.txt
+│   ├── phase05_verifier_verify_mp1_model_provisioning.txt
+│   ├── phase05_verifier_verify_mp3_model_lifecycle.txt
+│   ├── phase05_verifier_verify_mp4_source_of_truth.txt
+│   ├── phase05_verifier_verify_productization_p1.txt
+│   ├── phase05_verifier_verify_productization_p10.txt
+│   ├── phase05_verifier_verify_productization_p2.txt
+│   ├── phase05_verifier_verify_productization_p3.txt
+│   ├── phase05_verifier_verify_productization_p4.txt
+│   ├── phase05_verifier_verify_productization_p5.txt
+│   ├── phase05_verifier_verify_productization_p6.txt
+│   ├── phase05_verifier_verify_productization_p7.txt
+│   ├── phase05_verifier_verify_productization_p8.txt
+│   ├── phase05_verifier_verify_productization_p9.txt
+│   ├── phase05_verifier_verify_track1_real_data.txt
+│   ├── phase05_verifier_verify_track2_real_models.txt
+│   ├── phase05_verifier_verify_track3_application.txt
+│   ├── phase05_verifier_verify_track4_operations.txt
+│   ├── phase05_verifier_verify_v1.txt
+│   ├── phase05_verifier_verify_v1_p5_p6.txt
+│   ├── phase05_verifier_verify_v2.txt
+│   ├── phase05_verifier_verify_v2_p3_p4.txt
+│   ├── phase05_verifier_verify_v2_p5_p6.txt
+│   ├── phase05_verifier_verify_v2_p7_p8.txt
+│   ├── phase05_verifier_verify_v3_p1_p2.txt
+│   ├── phase05_verifier_verify_v3_p3_p4.txt
+│   ├── phase05_verifier_verify_v3_p5_p6.txt
+│   ├── phase05_verifier_verify_v3_p7_p8.txt
+│   ├── phase05_verifier_verify_v4_p1_p2.txt
+│   ├── phase05_verifier_verify_v4_p3_p4.txt
+│   ├── phase05_verifier_verify_v4_p5_p6.txt
+│   ├── phase05_verifier_verify_v4_p7_p8.txt
+│   ├── phase05_verifier_verify_v4_p9_p10.txt
+│   ├── phase06_docker_direct_build_run.txt
+│   ├── phase08_real_data_operator_copy.txt
+│   ├── phase13_release_baseline_inputs.txt
+├── chb_test/
+│   ├── chb01/
+│   │   ├── chb01-summary.txt
+│   │   ├── chb01_01.edf
+├── checkpoints_v4/
+├── data/
+├── datasets/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── _provenance.py
+│   ├── catalog.py
+│   ├── intelligence.py
+│   ├── splits.py
+│   ├── synthetic.py
+│   ├── version.py
+├── deployment/
+│   ├── README.md
+├── docs/
+│   ├── ARCHITECTURAL_PRINCIPLES.md
+│   ├── GLOSSARY.md
+│   ├── NON_NEGOTIABLE_RULES.md
+│   ├── PROJECT_OBJECTIVES.md
+│   ├── PROJECT_SCOPE.md
+│   ├── PROJECT_VISION.md
+│   ├── README.md
+│   ├── VERSION_EVOLUTION_MODEL.md
+│   ├── architecture/
+│   │   ├── DEPENDENCY_GRAPH.md
+│   │   ├── IMPORT_RULES.md
+│   │   ├── LAYERED_ARCHITECTURE.md
+│   │   ├── MODULE_BOUNDARIES.md
+│   │   ├── SYSTEM_CONTEXT.md
+│   ├── certification/
+│   │   ├── v1/
+│   │   │   ├── V1_AUDIT_FRAMEWORK.md
+│   │   │   ├── V1_CERTIFICATION_STANDARD.md
+│   │   │   ├── V1_COMPLETION_REPORT.md
+│   │   │   ├── V1_EXIT_CRITERIA.md
+│   │   │   ├── V1_GAP_ANALYSIS.md
+│   │   │   ├── V1_READINESS_ASSESSMENT.md
+│   │   │   ├── V1_RISK_REVIEW.md
+│   │   │   ├── V2_READINESS_GATE.md
+│   │   ├── v2/
+│   │   │   ├── V2_AUDIT_FRAMEWORK.md
+│   │   │   ├── V2_CERTIFICATION_STANDARD.md
+│   │   │   ├── V2_COMPLETION_REPORT.md
+│   │   │   ├── V2_EXIT_CRITERIA.md
+│   │   │   ├── V2_GAP_ANALYSIS.md
+│   │   │   ├── V2_READINESS_ASSESSMENT.md
+│   │   │   ├── V2_RISK_REVIEW.md
+│   │   │   ├── V3_READINESS_GATE.md
+│   │   ├── v3/
+│   │   │   ├── V3_AUDIT_FRAMEWORK.md
+│   │   │   ├── V3_CERTIFICATION_STANDARD.md
+│   │   │   ├── V3_COMPLETION_REPORT.md
+│   │   │   ├── V3_EXIT_CRITERIA.md
+│   │   │   ├── V3_GAP_ANALYSIS.md
+│   │   │   ├── V3_READINESS_ASSESSMENT.md
+│   │   │   ├── V3_RISK_REVIEW.md
+│   │   │   ├── V4_READINESS_GATE.md
+│   │   ├── v4/
+│   │   │   ├── V4_AUDIT_FRAMEWORK.md
+│   │   │   ├── V4_CERTIFICATION_STANDARD.md
+│   │   │   ├── V4_COMPLETION_REPORT.md
+│   │   │   ├── V4_EXIT_CRITERIA.md
+│   │   │   ├── V4_GAP_ANALYSIS.md
+│   │   │   ├── V4_READINESS_ASSESSMENT.md
+│   │   │   ├── V4_RISK_REVIEW.md
+│   │   │   ├── V5_READINESS_GATE.md
+├── evaluation/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── calibration_metrics.py
+│   ├── harness.py
+│   ├── metrics.py
+│   ├── version.py
+├── fcbr_evidence_20260601_231951/
+│   ├── after_verify_v4_p9_p10.txt
+│   ├── before_verify_v4_p9_p10.txt
+│   ├── fresh_env_pip_check.txt
+│   ├── gate_summary.txt
+│   ├── import_integrity.txt
+│   ├── pip_check.txt
+│   ├── pytest_collect.txt
+│   ├── pytest_full.txt
+│   ├── pytest_full_after_venv_cleanup.txt
+│   ├── rerun_verify_dbe1_asgi_entrypoint.txt
+│   ├── rerun_verify_dbe2_docker_deployment.txt
+│   ├── rerun_verify_dbe3_duplicate_upload.txt
+│   ├── rerun_verify_dbe4_persistence.txt
+│   ├── rerun_verify_dbe5_authentication_reliability.txt
+│   ├── rerun_verify_drp1_dataset_integration.txt
+│   ├── rerun_verify_drp2_production_models.txt
+│   ├── rerun_verify_drp3_serving_platform.txt
+│   ├── rerun_verify_drp4_persistence_platform.txt
+│   ├── rerun_verify_drp5_security_platform.txt
+│   ├── rerun_verify_drp6_clinical_validation.txt
+│   ├── rerun_verify_mp1_model_provisioning.txt
+│   ├── rerun_verify_mp3_model_lifecycle.txt
+│   ├── rerun_verify_mp4_source_of_truth.txt
+│   ├── rerun_verify_productization_p1.txt
+│   ├── rerun_verify_productization_p10.txt
+│   ├── rerun_verify_productization_p2.txt
+│   ├── rerun_verify_productization_p3.txt
+│   ├── rerun_verify_productization_p4.txt
+│   ├── rerun_verify_productization_p5.txt
+│   ├── rerun_verify_productization_p6.txt
+│   ├── rerun_verify_productization_p7.txt
+│   ├── rerun_verify_productization_p8.txt
+│   ├── rerun_verify_productization_p9.txt
+│   ├── rerun_verify_track1_real_data.txt
+│   ├── rerun_verify_track2_real_models.txt
+│   ├── rerun_verify_track3_application.txt
+│   ├── rerun_verify_track4_operations.txt
+├── frontend/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── design_system.py
+│   ├── application_frontend/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── actions.py
+│   │   ├── application.py
+│   │   ├── domain.py
+│   │   ├── gateway.py
+│   │   ├── reporting.py
+│   │   ├── util.py
+│   │   ├── version.py
+│   │   ├── auth/
+│   │   │   ├── __init__.py
+│   │   ├── components/
+│   │   │   ├── __init__.py
+│   │   ├── docs/
+│   │   │   ├── DECISIONS.md
+│   │   │   ├── DESIGN.md
+│   │   ├── forms/
+│   │   │   ├── __init__.py
+│   │   ├── intelligence/
+│   │   │   ├── __init__.py
+│   │   ├── layouts/
+│   │   │   ├── __init__.py
+│   │   ├── pages/
+│   │   │   ├── __init__.py
+│   │   │   ├── landing.py
+│   │   ├── predictions/
+│   │   │   ├── __init__.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   ├── state/
+│   │   │   ├── __init__.py
+│   │   ├── tests/
+│   │   │   ├── README.md
+│   │   ├── uploads/
+│   │   │   ├── __init__.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   ├── workflows/
+│   │   │   ├── __init__.py
+│   ├── autonomous_operations_workstation/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── version.py
+│   │   ├── agents/
+│   │   │   ├── __init__.py
+│   │   │   ├── agents.py
+│   │   ├── application/
+│   │   │   ├── __init__.py
+│   │   │   ├── application.py
+│   │   ├── audit/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   ├── components/
+│   │   │   ├── __init__.py
+│   │   │   ├── components.py
+│   │   │   ├── entity_workspace.py
+│   │   ├── controls/
+│   │   │   ├── __init__.py
+│   │   │   ├── intervention.py
+│   │   ├── docs/
+│   │   │   ├── V4_P8_AUTONOMOUS_OPERATIONS_WORKSTATION.md
+│   │   ├── executions/
+│   │   │   ├── __init__.py
+│   │   │   ├── executions.py
+│   │   ├── goals/
+│   │   │   ├── __init__.py
+│   │   │   ├── goals.py
+│   │   ├── governance/
+│   │   │   ├── __init__.py
+│   │   │   ├── governance.py
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── navigation/
+│   │   │   ├── __init__.py
+│   │   │   ├── navigation.py
+│   │   ├── plans/
+│   │   │   ├── __init__.py
+│   │   │   ├── plans.py
+│   │   ├── policies/
+│   │   │   ├── __init__.py
+│   │   │   ├── policies.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── html_report.py
+│   │   │   ├── reports.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── viewmodels.py
+│   │   ├── state/
+│   │   │   ├── __init__.py
+│   │   │   ├── workstation_state.py
+│   │   ├── system_health/
+│   │   │   ├── __init__.py
+│   │   │   ├── system_health.py
+│   │   ├── tasks/
+│   │   │   ├── __init__.py
+│   │   │   ├── tasks.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── clinical_workstation/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── version.py
+│   │   ├── application/
+│   │   │   ├── __init__.py
+│   │   │   ├── application.py
+│   │   ├── components/
+│   │   │   ├── __init__.py
+│   │   │   ├── components.py
+│   │   ├── docs/
+│   │   │   ├── V2_P7_CLINICAL_WORKSTATION.md
+│   │   ├── navigation/
+│   │   │   ├── __init__.py
+│   │   │   ├── navigation.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── html_report.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── viewmodels.py
+│   │   ├── state/
+│   │   │   ├── __init__.py
+│   │   │   ├── workstation_state.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   │   ├── visualizations/
+│   │   │   ├── __init__.py
+│   │   │   ├── charts.py
+│   │   ├── workspaces/
+│   │   │   ├── __init__.py
+│   │   │   ├── audit.py
+│   │   │   ├── cases.py
+│   │   │   ├── dashboards.py
+│   │   │   ├── decision_support.py
+│   │   │   ├── findings.py
+│   │   │   ├── intelligence.py
+│   │   │   ├── knowledge.py
+│   │   │   ├── lineage.py
+│   │   │   ├── reports.py
+│   │   │   ├── reviews.py
+│   ├── offline_research_app/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── version.py
+│   │   ├── components/
+│   │   │   ├── __init__.py
+│   │   │   ├── components.py
+│   │   ├── docs/
+│   │   │   ├── V1_P8_RESEARCH_APP.md
+│   │   ├── pages/
+│   │   │   ├── __init__.py
+│   │   │   ├── pages.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── html_report.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── viewmodels.py
+│   │   ├── state/
+│   │   │   ├── __init__.py
+│   │   │   ├── app_state.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   │   ├── visualizations/
+│   │   │   ├── __init__.py
+│   │   │   ├── charts.py
+│   │   ├── workflows/
+│   │   │   ├── __init__.py
+│   │   │   ├── workflows.py
+│   ├── operational_workstation/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── version.py
+│   │   ├── application/
+│   │   │   ├── __init__.py
+│   │   │   ├── application.py
+│   │   ├── components/
+│   │   │   ├── __init__.py
+│   │   │   ├── components.py
+│   │   ├── docs/
+│   │   │   ├── V3_P7_OPERATIONAL_WORKSTATION.md
+│   │   ├── navigation/
+│   │   │   ├── __init__.py
+│   │   │   ├── navigation.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── html_report.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── viewmodels.py
+│   │   ├── state/
+│   │   │   ├── __init__.py
+│   │   │   ├── workstation_state.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   │   ├── visualizations/
+│   │   │   ├── __init__.py
+│   │   │   ├── charts.py
+│   │   ├── workspaces/
+│   │   │   ├── __init__.py
+│   │   │   ├── analytics.py
+│   │   │   ├── audit.py
+│   │   │   ├── events.py
+│   │   │   ├── graph.py
+│   │   │   ├── lineage.py
+│   │   │   ├── recommendations.py
+│   │   │   ├── reports.py
+│   │   │   ├── system_health.py
+│   │   │   ├── timelines.py
+│   │   │   ├── workflows.py
+├── ml/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── _determinism.py
+│   ├── provenance.py
+│   ├── version.py
+│   ├── artifacts/
+│   │   ├── __init__.py
+│   │   ├── store.py
+│   ├── benchmarking/
+│   │   ├── __init__.py
+│   │   ├── benchmark.py
+│   ├── data/
+│   │   ├── __init__.py
+│   │   ├── adapter.py
+│   ├── docs/
+│   │   ├── V1_P5_BASELINE_MODELS.md
+│   ├── lineage/
+│   │   ├── __init__.py
+│   │   ├── lineage.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── _layers.py
+│   │   ├── base.py
+│   │   ├── eegnet.py
+│   │   ├── factory.py
+│   │   ├── simple_cnn.py
+│   │   ├── tcn.py
+│   ├── registry/
+│   │   ├── __init__.py
+│   │   ├── model_registry.py
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   ├── contracts.py
+│   ├── training/
+│   │   ├── __init__.py
+│   │   ├── config.py
+│   │   ├── manifest.py
+│   │   ├── pipeline.py
+│   │   ├── report.py
+│   ├── uncertainty/
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── _math.py
+│   │   ├── pipeline.py
+│   │   ├── version.py
+│   │   ├── calibration/
+│   │   │   ├── __init__.py
+│   │   │   ├── pipeline.py
+│   │   │   ├── temperature.py
+│   │   ├── conformal/
+│   │   │   ├── __init__.py
+│   │   │   ├── split_conformal.py
+│   │   ├── docs/
+│   │   │   ├── V1_P6_UNCERTAINTY.md
+│   │   ├── lineage/
+│   │   │   ├── __init__.py
+│   │   │   ├── lineage.py
+│   │   ├── registry/
+│   │   │   ├── __init__.py
+│   │   │   ├── registry.py
+│   │   ├── reliability/
+│   │   │   ├── __init__.py
+│   │   │   ├── reliability.py
+│   │   ├── reports/
+│   │   │   ├── __init__.py
+│   │   │   ├── reports.py
+│   │   ├── risk/
+│   │   │   ├── __init__.py
+│   │   │   ├── risk.py
+│   │   ├── schemas/
+│   │   │   ├── __init__.py
+│   │   │   ├── contracts.py
+│   │   ├── validation/
+│   │   │   ├── __init__.py
+│   │   │   ├── validators.py
+│   ├── validation/
+│   │   ├── __init__.py
+│   │   ├── validators.py
+├── monitoring/
+│   ├── README.md
+├── operations/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── cli.py
+│   ├── util.py
+│   ├── version.py
+│   ├── backups/
+│   │   ├── __init__.py
+│   ├── ci/
+│   │   ├── __init__.py
+│   ├── config/
+│   │   ├── __init__.py
+│   ├── deployment/
+│   │   ├── __init__.py
+│   │   ├── compose/
+│   │   │   ├── docker-compose.yml
+│   │   ├── docker/
+│   │   │   ├── Dockerfile.backend
+│   │   │   ├── Dockerfile.frontend
+│   │   │   ├── frontend_smoke.py
+│   │   │   ├── healthcheck.py
+│   ├── docs/
+│   │   ├── DECISIONS.md
+│   │   ├── DESIGN.md
+│   │   ├── RUNBOOK.md
+│   ├── environments/
+│   │   ├── __init__.py
+│   │   ├── development.env.template
+│   │   ├── production.env.template
+│   │   ├── staging.env.template
+│   │   ├── testing.env.template
+│   ├── health/
+│   │   ├── __init__.py
+│   ├── logging/
+│   │   ├── __init__.py
+│   ├── monitoring/
+│   │   ├── __init__.py
+│   ├── recovery/
+│   │   ├── __init__.py
+│   ├── reports/
+│   │   ├── __init__.py
+│   ├── tests/
+│   │   ├── README.md
+│   ├── validation/
+│   │   ├── __init__.py
+├── phase4c_outputs/
+├── preprocessing/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── _provenance.py
+│   ├── pipeline.py
+│   ├── version.py
+├── runtime_evidence_real_corpus/
+│   ├── failure1_application_platform.txt
+│   ├── failure2_dataset_acquisition.txt
+│   ├── failure3_operations_platform.txt
+│   ├── failure4_real_model_training.txt
+│   ├── remediation_phase2_acquire.txt
+│   ├── remediation_phase2_acquire_rerun.txt
+│   ├── remediation_phase2_acquire_utf8.txt
+│   ├── remediation_phase2_acquire_venv.txt
+│   ├── remediation_phase2_track1_probe.txt
+│   ├── remediation_phase4_dataset_acquisition_test.txt
+│   ├── remediation_phase5_real_model_training_test.txt
+│   ├── remediation_phase5_track2_probe.txt
+│   ├── remediation_phase6_application_platform_test.txt
+│   ├── remediation_phase6_track3_probe.txt
+│   ├── remediation_phase7_operations_platform_test.txt
+│   ├── remediation_phase7_track4_probe.txt
+│   ├── remediation_phase8_pytest_full.txt
+│   ├── remediation_phase9_verify_track1_real_data.txt
+│   ├── remediation_phase9_verify_track2_real_models.txt
+│   ├── remediation_phase9_verify_track3_application.txt
+│   ├── remediation_phase9_verify_track4_operations.txt
+│   ├── runtime_state_probe.py
+│   ├── runtime_state_probe.txt
+│   ├── runtime_state_probe2.py
+│   ├── runtime_state_probe2.txt
+├── runtime_frontend_preview/
+│   ├── analysis.html
+│   ├── autonomous.html
+│   ├── clinical.html
+│   ├── dashboard.html
+│   ├── index.html
+│   ├── login.html
+│   ├── operational.html
+│   ├── prediction.html
+│   ├── register.html
+│   ├── reports.html
+│   ├── research.html
+│   ├── upload.html
+│   ├── research_run/
+│   │   ├── research_app.html
+│   │   ├── models/
+│   │   ├── outputs/
+│   │   ├── registries/
+│   │   ├── reports/
+├── scripts/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── _repo_bootstrap.py
+│   ├── acquire_real_dataset.py
+│   ├── advanced_feature_foundation_v2.py
+│   ├── application_frontend_gateway.py
+│   ├── audit_feature_dataset_v3.py
+│   ├── audit_feature_foundation.py
+│   ├── build_application_frontend_snapshot.py
+│   ├── build_autonomous_operations_workstation_snapshot.py
+│   ├── build_chbmit_features.sh
+│   ├── build_feature_dataset_v3.py
+│   ├── build_operational_workstation_snapshot.py
+│   ├── build_phase5a_temporal_dataset.py
+│   ├── build_real_feature_dataset.py
+│   ├── build_real_feature_dataset_v2.py
+│   ├── build_real_feature_dataset_v3_production.py
+│   ├── build_real_feature_dataset_v4_production.py
+│   ├── build_real_window_dataset.py
+│   ├── build_seizure_interval_database.py
+│   ├── build_workstation_snapshot.py
+│   ├── compare_phase5b_results.py
+│   ├── corpus_audit.py
+│   ├── dataset_v4_size_estimator.py
+│   ├── feature_v3_sandbox.py
+│   ├── feature_v3_validation.py
+│   ├── fix_seizure_parser.py
+│   ├── generate_feature_signature.py
+│   ├── generate_real_window_inventory.py
+│   ├── prepare_v3_training_dataset.py
+│   ├── resume_chbmit_training.py
+│   ├── run_clinical_knowledge_workflow.py
+│   ├── run_clinical_workflow.py
+│   ├── run_offline_inference.py
+│   ├── run_pipeline.py
+│   ├── seizure_audit.py
+│   ├── seizure_parser_forensics.py
+│   ├── serve_neurovision.py
+│   ├── system_readiness_check.py
+│   ├── train_chbmit.py
+│   ├── train_phase1_baseline.py
+│   ├── train_phase1_threshold_audit.py
+│   ├── train_phase2_xgboost.py
+│   ├── train_phase3a_xgboost_v3.py
+│   ├── train_phase3b_patient_disjoint.py
+│   ├── train_phase4b_patient_disjoint.py
+│   ├── train_phase4c_generalization_optimization.py
+│   ├── train_phase5b_temporal_xgboost.py
+│   ├── train_phase5b_temporal_xgboost_BROKEN.py
+│   ├── train_phase5b_temporal_xgboost_v2.py
+│   ├── train_phase5b_temporal_xgboost_v3.py
+│   ├── train_phase5c_decision_optimization_v2.py
+│   ├── train_phase5c_decision_optimization_v3.py
+│   ├── train_phase5c_temporal_decision_optimization.py
+│   ├── train_phase5c_temporal_event_detection.py
+│   ├── v4_feature_foundation_validation.py
+│   ├── verify_dbe1_asgi_entrypoint.py
+│   ├── verify_dbe2_docker_deployment.py
+│   ├── verify_dbe3_duplicate_upload.py
+│   ├── verify_dbe4_persistence.py
+│   ├── verify_dbe5_authentication_reliability.py
+│   ├── verify_drp1_dataset_integration.py
+│   ├── verify_drp2_production_models.py
+│   ├── verify_drp3_serving_platform.py
+│   ├── verify_drp4_persistence_platform.py
+│   ├── verify_drp5_security_platform.py
+│   ├── verify_drp6_clinical_validation.py
+│   ├── verify_mp1_model_provisioning.py
+│   ├── verify_mp3_model_lifecycle.py
+│   ├── verify_mp4_source_of_truth.py
+│   ├── verify_productization_p1.py
+│   ├── verify_productization_p10.py
+│   ├── verify_productization_p2.py
+│   ├── verify_productization_p3.py
+│   ├── verify_productization_p4.py
+│   ├── verify_productization_p5.py
+│   ├── verify_productization_p6.py
+│   ├── verify_productization_p7.py
+│   ├── verify_productization_p8.py
+│   ├── verify_productization_p9.py
+│   ├── verify_track1_real_data.py
+│   ├── verify_track2_real_models.py
+│   ├── verify_track3_application.py
+│   ├── verify_track4_operations.py
+│   ├── verify_v1.py
+│   ├── verify_v1_p5_p6.py
+│   ├── verify_v2.py
+│   ├── verify_v2_p3_p4.py
+│   ├── verify_v2_p5_p6.py
+│   ├── verify_v2_p7_p8.py
+│   ├── verify_v3_p1_p2.py
+│   ├── verify_v3_p3_p4.py
+│   ├── verify_v3_p5_p6.py
+│   ├── verify_v3_p7_p8.py
+│   ├── verify_v4_p1_p2.py
+│   ├── verify_v4_p3_p4.py
+│   ├── verify_v4_p5_p6.py
+│   ├── verify_v4_p7_p8.py
+│   ├── verify_v4_p9_p10.py
+│   ├── window_inventory_audit.py
+├── scripts_v4_new/
+│   ├── audit_v4_dataset.py
+│   ├── build_shard_dataset_v4.py
+│   ├── merge_v4_shards.py
+│   ├── prepare_v4_training_dataset.py
+│   ├── train_phase4a_xgboost.py
+├── tests/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── _drp2_helpers.py
+│   ├── _drp3_helpers.py
+│   ├── _drp4_helpers.py
+│   ├── _drp5_helpers.py
+│   ├── _drp6_helpers.py
+│   ├── _eeg_edf_writer.py
+│   ├── _eeg_fixtures.py
+│   ├── _p5p6_helpers.py
+│   ├── _track1_helpers.py
+│   ├── _track2_helpers.py
+│   ├── _track3_helpers.py
+│   ├── _track4_helpers.py
+│   ├── _v3_helpers.py
+│   ├── _v3b_helpers.py
+│   ├── _v3c_helpers.py
+│   ├── _v4_helpers.py
+│   ├── _v4b_helpers.py
+│   ├── _v4c_helpers.py
+│   ├── _v4d_helpers.py
+│   ├── _v4e_helpers.py
+│   ├── conftest.py
+│   ├── test_agent_coordination.py
+│   ├── test_application_backend.py
+│   ├── test_application_backend_e2e.py
+│   ├── test_application_frontend.py
+│   ├── test_application_frontend_e2e.py
+│   ├── test_application_platform.py
+│   ├── test_application_platform_e2e.py
+│   ├── test_artifacts.py
+│   ├── test_autonomous_operations_workstation.py
+│   ├── test_boundaries.py
+│   ├── test_certification.py
+│   ├── test_chbmit_inference.py
+│   ├── test_clinical_cases.py
+│   ├── test_clinical_findings.py
+│   ├── test_clinical_knowledge.py
+│   ├── test_clinical_review.py
+│   ├── test_clinical_validation.py
+│   ├── test_clinical_validation_e2e.py
+│   ├── test_clinical_workflow_e2e.py
+│   ├── test_clinical_workstation.py
+│   ├── test_contracts.py
+│   ├── test_dataset_acquisition.py
+│   ├── test_dataset_acquisition_e2e.py
+│   ├── test_dataset_integration.py
+│   ├── test_dataset_intelligence.py
+│   ├── test_dbe5_authentication_reliability.py
+│   ├── test_decision_support.py
+│   ├── test_docker_deployment.py
+│   ├── test_duplicate_upload.py
+│   ├── test_eeg_foundation.py
+│   ├── test_eeg_foundation_e2e.py
+│   ├── test_evaluation_benchmark.py
+│   ├── test_execution_orchestration.py
+│   ├── test_feature_engineering.py
+│   ├── test_feature_engineering_e2e.py
+│   ├── test_foundations.py
+│   ├── test_goal_intelligence.py
+│   ├── test_governance_intelligence.py
+│   ├── test_inference_foundation.py
+│   ├── test_inference_foundation_e2e.py
+│   ├── test_jobs.py
+│   ├── test_model_foundation.py
+│   ├── test_model_foundation_e2e.py
+│   ├── test_models.py
+│   ├── test_mp1_model_provisioning.py
+│   ├── test_mp3_model_lifecycle.py
+│   ├── test_mp4_source_of_truth.py
+│   ├── test_multi_case_intelligence.py
+│   ├── test_offline_inference.py
+│   ├── test_operational_analytics.py
+│   ├── test_operational_events.py
+│   ├── test_operational_graph.py
+│   ├── test_operational_recommendations.py
+│   ├── test_operational_workstation.py
+│   ├── test_operations.py
+│   ├── test_operations_platform.py
+│   ├── test_persistence_durability.py
+│   ├── test_persistence_platform.py
+│   ├── test_persistence_platform_e2e.py
+│   ├── test_pipeline_e2e.py
+│   ├── test_planning_foundation.py
+│   ├── test_policy_engine.py
+│   ├── test_production_models.py
+│   ├── test_production_models_e2e.py
+│   ├── test_real_model_training.py
+│   ├── test_real_model_training_e2e.py
+│   ├── test_registry_lineage.py
+│   ├── test_research_app.py
+│   ├── test_security_platform.py
+│   ├── test_security_platform_e2e.py
+│   ├── test_server_entrypoint.py
+│   ├── test_serving_platform.py
+│   ├── test_serving_platform_e2e.py
+│   ├── test_signal_processing.py
+│   ├── test_signal_processing_e2e.py
+│   ├── test_simulation_scenario.py
+│   ├── test_task_intelligence.py
+│   ├── test_temporal_intelligence.py
+│   ├── test_training.py
+│   ├── test_uncertainty.py
+│   ├── test_v2_p3_p4_e2e.py
+│   ├── test_v2_p5_p6_e2e.py
+│   ├── test_v3_p1_p2_e2e.py
+│   ├── test_v3_p3_p4_e2e.py
+│   ├── test_v3_p5_p6_e2e.py
+│   ├── test_v4_p1_p2_e2e.py
+│   ├── test_v4_p3_p4_e2e.py
+│   ├── test_v4_p5_p6_e2e.py
+│   ├── test_v4_p7_p8_e2e.py
+│   ├── test_v4_p9_p10_e2e.py
+│   ├── test_validation.py
+│   ├── test_workflow_intelligence.py
+│   ├── fixtures/
+│   │   ├── eeg/
+│   │   │   ├── corrupted.bdf
+│   │   │   ├── corrupted.edf
+│   │   │   ├── unsupported.eeg
+│   │   │   ├── valid.bdf
+│   │   │   ├── valid.edf
+│   │   │   ├── valid.set
+│   │   │   ├── valid_bdf_plus.bdf
+│   │   │   ├── valid_edf_plus.edf
+│   │   │   ├── valid_raw.fif
+├── tools/
+│   ├── README.md
+├── validation/
+│   ├── README.md
+│   ├── __init__.py
+│   ├── harness.py
+│   ├── program.py
+│   ├── util.py
+│   ├── version.py
+│   ├── benchmarking/
+│   │   ├── __init__.py
+│   ├── calibration/
+│   │   ├── __init__.py
+│   ├── docs/
+│   │   ├── DECISIONS.md
+│   │   ├── DESIGN.md
+│   ├── drift/
+│   │   ├── __init__.py
+│   ├── performance/
+│   │   ├── __init__.py
+│   ├── reliability/
+│   │   ├── __init__.py
+│   ├── reporting/
+│   │   ├── __init__.py
+│   ├── reproducibility/
+│   │   ├── __init__.py
+│   ├── robustness/
+│   │   ├── __init__.py
+│   ├── scorecards/
+│   │   ├── __init__.py
+│   ├── tests/
+│   │   ├── README.md
+├── workspace/
+│   ├── proc/
+│   │   ├── 5c06db5f44bc8a5b/
+│   │   │   ├── processed.f64
+│   ├── raw/
+│   │   ├── d3e5ab4361cfe73d/
+│   │   │   ├── valid_1.edf
+│   │   ├── e1e43937d7875e1e/
+│   │   │   ├── valid_2.edf
