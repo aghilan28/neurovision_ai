@@ -91,71 +91,77 @@ def get_analysis_html_path() -> str:
             return path
     raise FileNotFoundError("analysis.html integration file could not be located on the filesystem.")
 
+
+# Helper to dynamically find a file in the project structure
+def find_html_file(names: list) -> str:
+    for name in names:
+        for folder in ["", "runtime_frontend_preview", "templates"]:
+            path = os.path.join(current_dir, folder, name) if folder else os.path.join(current_dir, name)
+            if os.path.exists(path):
+                return path
+    raise FileNotFoundError(f"Could not locate any of files: {names}")
+
 @app.get("/", response_class=HTMLResponse)
-@app.get("/upload", response_class=HTMLResponse)
-async def serve_wizard(request: Request):
-    """Serves the primary clinical analysis ingestion panel."""
+@app.get("/auth", response_class=HTMLResponse)
+@app.get("/login", response_class=HTMLResponse)
+async def serve_auth_page(request: Request):
     try:
-        html_path = get_code_html_path()
+        html_path = find_html_file(["auth.html", "login.html"])
         with open(html_path, "r", encoding="utf-8") as f:
             return HTMLResponse(content=f.read(), status_code=200)
     except Exception as e:
-        logger.error(f"Error serving code.html: {e}")
-        raise HTTPException(status_code=500, detail=f"Frontend integration template error: {e}")
+        logger.error(f"Error serving auth: {e}")
+        raise HTTPException(status_code=500, detail=f"Authentication template error: {e}")
 
-# Unified platform navigation routes serving actual project HTML files with fallback
+@app.get("/upload", response_class=HTMLResponse)
+async def serve_upload_wizard(request: Request):
+    try:
+        html_path = find_html_file(["upload.html", "code.html"])
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    except Exception as e:
+        logger.error(f"Error serving upload wizard: {e}")
+        raise HTTPException(status_code=500, detail=f"Upload template error: {e}")
+
 @app.get("/dashboard", response_class=HTMLResponse)
+async def serve_dashboard_page(request: Request):
+    try:
+        html_path = find_html_file(["dashboard.html"])
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    except Exception as e:
+        logger.error(f"Error serving dashboard: {e}")
+        raise HTTPException(status_code=500, detail=f"Dashboard template error: {e}")
+
 @app.get("/patients", response_class=HTMLResponse)
+async def serve_patients_page(request: Request):
+    try:
+        html_path = find_html_file(["patients.html", "clinical.html"])
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    except Exception as e:
+        logger.error(f"Error serving patients: {e}")
+        raise HTTPException(status_code=500, detail=f"Patients template error: {e}")
+
 @app.get("/export", response_class=HTMLResponse)
+async def serve_export_page(request: Request):
+    try:
+        html_path = find_html_file(["export.html", "reports.html", "placeholder.html"])
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    except Exception as e:
+        logger.error(f"Error serving export: {e}")
+        raise HTTPException(status_code=500, detail=f"Export template error: {e}")
+
 @app.get("/status", response_class=HTMLResponse)
-@app.get("/auth", response_class=HTMLResponse)
-async def serve_navigation_pages(request: Request):
-    """Serves the actual project HTML file for the requested route if available in the repo."""
-    route_path = request.url.path.strip("/")
-    
-    # Map routes to potential actual HTML file names in the repository (including runtime_frontend_preview)
-    route_file_map = {
-        "dashboard": ["dashboard.html", "runtime_frontend_preview/dashboard.html", "templates/dashboard.html"],
-        "patients": ["patients.html", "clinical.html", "runtime_frontend_preview/clinical.html", "placeholder.html"],
-        "export": ["export.html", "reports.html", "runtime_frontend_preview/reports.html", "placeholder.html"],
-        "status": ["status.html", "operational.html", "runtime_frontend_preview/operational.html", "placeholder.html"],
-        "auth": ["auth.html", "login.html", "runtime_frontend_preview/login.html"]
-    }
-
-    possible_files = route_file_map.get(route_path, [f"{route_path}.html", "placeholder.html"])
-    
-    for fname in possible_files:
-        fpath = os.path.join(current_dir, fname)
-        if os.path.exists(fpath):
-            logger.info(f"Serving existing repository file '{fname}' for route '/{route_path}'")
-            with open(fpath, "r", encoding="utf-8") as f:
-                return HTMLResponse(content=f.read(), status_code=200)
-
-    # Fallback if the file is truly missing
-    logger.warning(f"Project HTML file for route '/{route_path}' not found. Serving unified fallback viewpane.")
-    route_name = route_path.upper()
-    content = f"""
-    <!DOCTYPE html>
-    <html lang="en" class="dark">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>NeuroVision | {route_name}</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"/>
-    </head>
-    <body class="min-h-screen flex items-center justify-center bg-[#15121b] text-[#e7e0ed] font-['Inter']">
-        <div class="bg-[#211e27] border border-[#494454] p-12 rounded-xl text-center max-w-lg space-y-6">
-            <h1 class="text-3xl font-semibold tracking-tight">{route_name} MODULE</h1>
-            <p class="text-[#cbc3d7] text-base">You have navigated to the {route_name} workspace viewpane. The expected HTML file (<code>{route_path}.html</code>) was not found at the project root.</p>
-            <div class="pt-4">
-                <a href="/upload" class="inline-block bg-[#d0bcff] text-[#3c0091] px-8 py-3 rounded font-medium text-sm hover:brightness-110 transition-all">Return to Analysis Session</a>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
-    return HTMLResponse(content=content, status_code=200)
+async def serve_status_page(request: Request):
+    try:
+        html_path = find_html_file(["status.html", "operational.html", "placeholder.html"])
+        with open(html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    except Exception as e:
+        logger.error(f"Error serving status: {e}")
+        raise HTTPException(status_code=500, detail=f"Status template error: {e}")
 
 # ==============================================================================
 # PHASE 16 :: DYNAMIC CLINICAL INTELLIGENCE REPORT ROUTES
