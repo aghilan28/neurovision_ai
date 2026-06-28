@@ -683,6 +683,25 @@ def _generate_report(analysis_id: str) -> Dict[str, Any]:
 @app.get("/api/v1/analysis/{analysis_id}", response_class=JSONResponse)
 async def get_analysis_report(analysis_id: str):
     """Returns a per-patient clinical report payload, enriched with the latest live localization when available."""
+    # Check if there's an active calibrated session for this patient FIRST
+    sess = _ACTIVE_SESSION.get("active_session") or {}
+    has_live_session = bool(sess and sess.get("is_calibrated") and str(sess.get("analysis_id") or "") == str(analysis_id))
+    
+    if not has_live_session:
+        # Return empty uncalibrated response — no fake data!
+        return JSONResponse(content={
+            "patient_id": analysis_id,
+            "analysis_id": analysis_id,
+            "is_calibrated": False,
+            "risk": {},
+            "clinical_narrative": {},
+            "evidence_intelligence": {},
+            "brain_intelligence": {},
+            "signal_intelligence": {},
+            "case_intelligence": {},
+        }, status_code=200)
+    
+    # Only generate real report data for a legitimately calibrated session
     if HAS_NEUROVISION_API and hasattr(neurovision_api, "build_clinical_report"):
         try:
             report = neurovision_api.build_clinical_report(analysis_id)
@@ -692,9 +711,8 @@ async def get_analysis_report(analysis_id: str):
     else:
         report = _generate_report(analysis_id)
 
-    sess = _ACTIVE_SESSION.get("active_session") or {}
     latest = sess.get("last_prediction") or {}
-    if latest and str(sess.get("analysis_id") or latest.get("patient_id") or "") == str(analysis_id):
+    if latest:
         live_loc = ((latest.get("brain_intelligence") or {}).get("localization") or {})
         if live_loc:
             report.setdefault("brain_intelligence", {}).setdefault("localization", {}).update({

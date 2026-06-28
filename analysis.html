@@ -952,8 +952,17 @@
       var href = link.getAttribute('href');
       link.classList.remove('bg-surface-container-high', 'text-primary', 'border-l-2', 'border-primary');
       link.classList.add('text-on-surface-variant');
-      // Exact match or starts with check
-      if (path === href || (href !== '/' && path.startsWith(href))) {
+      // Map /analysis/* paths to highlight "Patient Records" (/patients)
+      var isActive = false;
+      if (path === href) {
+        isActive = true;
+      } else if (href === '/patients' && path.startsWith('/analysis/')) {
+        // /analysis/{id} should highlight Patient Records in sidebar
+        isActive = true;
+      } else if (href !== '/' && path.startsWith(href)) {
+        isActive = true;
+      }
+      if (isActive) {
         link.classList.add('bg-surface-container-high', 'text-primary', 'border-l-2', 'border-primary');
         link.classList.remove('text-on-surface-variant');
       }
