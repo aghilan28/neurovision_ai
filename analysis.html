@@ -204,7 +204,7 @@
 </head>
 <body class="font-body-md text-body-md flex min-h-screen">
 <!-- COMMON DASHBOARD SIDEBAR (preserved verbatim from dashboard.html) -->
-<aside class="fixed left-0 top-0 h-full w-sidebar-width flex flex-col bg-surface-container-low border-r border-outline-variant z-50">
+<aside class="fixed left-0 top-0 h-full w-[240px] flex flex-col bg-surface-container-low border-r border-outline-variant z-50">
 <div class="p-6">
 <div class="flex items-center gap-1 mb-1">
 <span class="font-headline-md text-headline-md font-bold text-on-surface">Neuro</span>
@@ -261,7 +261,7 @@
 <div class="h-4 w-[1px] bg-outline-variant"></div>
 <div class="flex items-center space-x-2">
 <span class="font-label-md text-label-md text-outline">Date:</span>
-<span id="hdr-date" class="font-label-md text-label-md text-on-surface">2023.10.24 14:02 UTC</span>
+<span id="hdr-date" class="font-label-md text-label-md text-on-surface">AWAITING INGESTION</span>
 </div>
 </div>
 <div class="flex items-center space-x-4">
@@ -294,17 +294,17 @@
         <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="8" fill="transparent" class="text-surface-container-highest"></circle>
             <!-- Active Risk Arc -->
-            <circle id="probability-ring" cx="50" cy="50" r="44" stroke="#EF4444" stroke-width="10" fill="transparent" stroke-dasharray="276.46" stroke-dashoffset="73.4" stroke-linecap="round" class="drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" style="stroke-dashoffset: calc(276.46 * (1 - 0.734));"></circle>
+            <circle id="probability-ring" cx="50" cy="50" r="44" stroke="#EF4444" stroke-width="10" fill="transparent" stroke-dasharray="276.46" stroke-dashoffset="73.4" stroke-linecap="round" class="drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" style="stroke-dashoffset: 276.46;"></circle>
         </svg>
         <!-- Percentage Text -->
         <div class="flex flex-col items-center justify-center z-10">
-            <span id="probability-text" class="font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]">73.4%</span>
+            <span id="probability-text" class="font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]">0.0%</span>
             <span class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Probability</span>
         </div>
     </div>
     <!-- Badge and Trend -->
     <div class="flex items-center space-x-4">
-        <span id="risk-badge" class="px-4 py-1.5 bg-error text-on-error font-label-sm text-label-sm rounded-full animate-pulse font-bold shadow-lg shadow-error/20">HIGH RISK</span>
+        <span id="risk-badge" class="px-4 py-1.5 bg-[#494454] text-on-surface-variant font-label-sm text-label-sm rounded-full font-bold">AWAITING EEG</span>
         <div class="flex flex-col items-start border-l border-white/10 pl-4">
             <span class="text-[10px] text-outline uppercase font-label-sm mb-1">Trend</span>
             <div class="flex items-end space-x-1 h-5">
@@ -320,20 +320,20 @@
 <div class="p-4 bg-surface-container-low rounded-lg border border-white/5">
 <div class="text-outline font-label-sm text-label-sm mb-1">Model Confidence</div>
 <div class="flex items-center justify-between">
-<span id="model-confidence" class="font-label-md text-headline-md font-bold text-secondary">94%</span>
+<span id="model-confidence" class="font-label-md text-headline-md font-bold text-secondary">—</span>
 
 </div>
 </div>
 <div class="p-4 bg-surface-container-low rounded-lg border border-white/5">
 <div class="text-outline font-label-sm text-label-sm mb-1">Prediction Stability</div>
 <div class="flex items-center justify-between">
-<span id="prediction-stability" class="font-label-md text-headline-md font-bold text-primary">91%</span>
+<span id="prediction-stability" class="font-label-md text-headline-md font-bold text-primary">—</span>
 
 </div>
-</div><div class="p-4 bg-surface-container-low rounded-lg border border-white/5"><div class="text-outline font-label-sm text-label-sm mb-1">Analysis Latency</div><div class="flex items-center justify-between"><span id="analysis-latency" class="font-label-md text-headline-md font-bold text-secondary-fixed-dim">1.2s</span><span class="material-symbols-outlined text-secondary-fixed-dim">timer</span></div></div>
+</div><div class="p-4 bg-surface-container-low rounded-lg border border-white/5"><div class="text-outline font-label-sm text-label-sm mb-1">Analysis Latency</div><div class="flex items-center justify-between"><span id="analysis-latency" class="font-label-md text-headline-md font-bold text-secondary-fixed-dim">—</span><span class="material-symbols-outlined text-secondary-fixed-dim">timer</span></div></div>
 <div id="key-finding-card" class="col-span-full p-6 bg-surface-container border-l-4 border-error rounded-r-lg">
 <div id="key-finding-label" class="text-error font-label-md text-label-md font-bold mb-2">Key Clinical Finding</div>
-<p id="key-finding-text" class="text-on-surface-variant font-body-md text-body-md leading-relaxed">Significant focal slowing and rhythmic discharges localized to the left temporal leads (T3, T5). Patterns are highly suggestive of focal-onset seizure activity with secondary generalization risk.</p>
+<p id="key-finding-text" class="text-on-surface-variant font-body-md text-body-md leading-relaxed">No clinical finding available until ingestion completes.</p>
 </div><div id="secondary-findings-wrap" class="col-span-full mt-4 space-y-3"><div class="text-primary font-label-md text-label-md font-bold uppercase tracking-wider">Secondary Findings</div><ul id="secondary-findings-list" class="space-y-2"></ul></div>
 </div>
 </div>
@@ -356,7 +356,7 @@
 </button>
 </div>
 <div class="max-w-3xl space-y-4">
-<div id="narrative-text" class="space-y-4"><p class="font-body-lg text-body-lg text-on-surface leading-loose">The longitudinal review of the 24-hour ambulatory EEG recording reveals a recurring pattern of <span class="bg-primary/20 text-primary px-1 rounded">Temporal Rhythmic Activity</span>, most prominent during the early REM stages. This activity is characterized by 4-6 Hz theta waves with occasional sharp components.</p><p class="font-body-lg text-body-lg text-on-surface leading-loose">Secondary observations indicate significant <span class="bg-secondary/20 text-secondary px-1 rounded">Focal Slowing</span> in the left hemisphere, specifically involving the temporal leads. This suggests a persistent underlying neurophysiological state that matches the clinical presentation of the patient. No generalized tonic-clonic activity was detected during this recording epoch.</p></div>
+<div id="narrative-text" class="space-y-4"><p class="font-body-lg text-body-lg text-on-surface leading-loose">Awaiting EEG file upload and stream calibration on the Ingestion Wizard.</p></div>
 <div class="pt-stack-lg flex items-center justify-between border-t border-white/5 mt-stack-lg">
 <span class="font-label-sm text-label-sm text-outline-variant italic uppercase">Research Use Only</span>
 <div class="flex items-center space-x-2 text-outline">
@@ -375,22 +375,22 @@
 </div>
 <div class="tonal-card p-stack-lg">
 <div class="h-12 w-full flex items-center mb-stack-lg rounded-full overflow-hidden bg-surface-container-highest">
-<div id="bar-supporting" class="h-full bg-primary transition-all duration-700" style="width: 65%;"></div>
-<div id="bar-opposing" class="h-full bg-error transition-all duration-700" style="width: 15%; margin-left: 2px;"></div>
+<div id="bar-supporting" class="h-full bg-primary transition-all duration-700" style="width: 0%;"></div>
+<div id="bar-opposing" class="h-full bg-error transition-all duration-700" style="width: 0%; margin-left: 2px;"></div>
 <div class="flex-1 h-full bg-surface-container-highest"></div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
 <div class="space-y-4">
 <div class="flex items-center justify-between border-b border-white/5 pb-2">
 <span class="font-label-md text-label-md text-secondary">Supporting Factors</span>
-<span id="lbl-supporting" class="font-label-md text-label-md text-secondary">+82% Impact</span>
+<span id="lbl-supporting" class="font-label-md text-label-md text-secondary">+0% Impact</span>
 </div>
 <ul id="list-supporting" class="space-y-3"></ul>
 </div>
 <div class="space-y-4">
 <div class="flex items-center justify-between border-b border-white/5 pb-2">
 <span class="font-label-md text-label-md text-error">Opposing Factors</span>
-<span id="lbl-opposing" class="font-label-md text-label-md text-error">-18% Impact</span>
+<span id="lbl-opposing" class="font-label-md text-label-md text-error">-0% Impact</span>
 </div>
 <ul id="list-opposing" class="space-y-3"></ul>
 </div>
@@ -408,7 +408,7 @@
 <div class="tonal-card p-stack-lg lg:col-span-1">
 <div class="flex items-center justify-between mb-stack-lg">
 <h3 class="font-label-md text-label-md text-primary uppercase">Spectral Dominance</h3>
-<span id="spectral-label" class="font-label-sm text-label-sm text-outline">Resting Alpha</span>
+<span id="spectral-label" class="font-label-sm text-label-sm text-outline">UNINGESTED</span>
 </div>
 <div id="spectral-grid" class="space-y-6"></div>
 </div>
@@ -431,23 +431,21 @@
 <div class="space-y-3">
 <div>
 <div class="text-outline font-label-sm text-label-sm">Most Likely Origin</div>
-<div id="loc-region" class="font-headline-md text-headline-md text-on-surface">Left Temporal Region</div>
+<div id="loc-region" class="font-headline-md text-headline-md text-on-surface">UNLOCALIZED</div>
 </div>
 <div class="flex justify-between border-t border-white/5 pt-3">
 <div>
 <div class="text-outline font-label-sm text-label-sm">Confidence</div>
-<div id="loc-confidence" class="font-label-md text-label-md text-secondary">92%</div>
+<div id="loc-confidence" class="font-label-md text-label-md text-secondary">0%</div>
 </div>
 <div>
 <div class="text-outline font-label-sm text-label-sm">Evidence Strength</div>
-<div id="loc-strength" class="font-label-md text-label-md text-on-surface uppercase">High</div>
+<div id="loc-strength" class="font-label-md text-label-md text-on-surface uppercase">N/A</div>
 </div>
 </div>
 </div>
 </div>
-<button class="w-full py-3 bg-surface-container-highest border border-white/10 rounded font-label-md text-label-md hover:bg-surface-bright transition-colors">
-                                View Full 3D Map
-                            </button>
+
 </div>
 </div>
 </div>
@@ -462,11 +460,11 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
 <div class="flex items-center space-x-4">
 <div id="quality-ring" class="w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center transition-colors">
-<span id="quality-val" class="font-label-md text-label-md text-secondary">94</span>
+<span id="quality-val" class="font-label-md text-label-md text-secondary">0</span>
 </div>
 <div>
 <div class="text-outline font-label-sm text-label-sm">Quality Score</div>
-<div id="quality-label" class="font-label-md text-label-md text-on-surface">Optimal Signal</div>
+<div id="quality-label" class="font-label-md text-label-md text-on-surface">No Signal</div>
 </div>
 </div>
 <div class="flex items-center space-x-4">
@@ -475,7 +473,7 @@
 </div>
 <div>
 <div class="text-outline font-label-sm text-label-sm">Noise Burden</div>
-<div id="noise-val" class="font-label-md text-label-md text-on-surface">Low (2.1 μV)</div>
+<div id="noise-val" class="font-label-md text-label-md text-on-surface">N/A</div>
 </div>
 </div>
 <div class="flex items-center space-x-4">
@@ -484,17 +482,17 @@
 </div>
 <div>
 <div class="text-outline font-label-sm text-label-sm">Artifact Burden</div>
-<div id="artifact-val" class="font-label-md text-label-md text-on-surface">4% Recorded</div>
+<div id="artifact-val" class="font-label-md text-label-md text-on-surface">N/A</div>
 </div>
 </div>
 <div class="flex items-center space-x-4">
 <div class="w-full flex flex-col">
 <div class="flex justify-between mb-1">
 <span class="text-outline font-label-sm text-label-sm">Trust Level</span>
-<span id="trust-val" class="text-secondary font-label-sm text-label-sm">98%</span>
+<span id="trust-val" class="text-secondary font-label-sm text-label-sm">0%</span>
 </div>
 <div class="h-1.5 bg-surface-container-highest rounded-full">
-<div id="trust-bar" class="h-full bg-secondary transition-all duration-1000" style="width: 98%;"></div>
+<div id="trust-bar" class="h-full bg-secondary transition-all duration-1000" style="width: 0%;"></div>
 </div>
 </div>
 </div>
@@ -944,6 +942,24 @@
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.style.opacity = '1'; });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  
+  // ---- Sidebar active state: highlight the current page ----
+  function updateSidebarActive() {
+    var path = window.location.pathname;
+    var links = document.querySelectorAll('aside nav a');
+    links.forEach(function(link) {
+      var href = link.getAttribute('href');
+      link.classList.remove('bg-surface-container-high', 'text-primary', 'border-l-2', 'border-primary');
+      link.classList.add('text-on-surface-variant');
+      // Exact match or starts with check
+      if (path === href || (href !== '/' && path.startsWith(href))) {
+        link.classList.add('bg-surface-container-high', 'text-primary', 'border-l-2', 'border-primary');
+        link.classList.remove('text-on-surface-variant');
+      }
+    });
+  }
+  updateSidebarActive();
 
   load();
 })();
