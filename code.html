@@ -462,21 +462,21 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-4 gap-4 mb-12 text-center bg-surface-container-lowest p-6 rounded-xl border border-[#494454]">
+           <div class="grid grid-cols-4 gap-4 mb-12 text-center bg-surface-container-lowest p-6 rounded-xl border border-[#494454]">
             <div>
-              <div id="final-channels" class="font-data-mono text-2xl font-bold text-on-surface">19</div>
+              <div id="final-channels" class="font-data-mono text-2xl font-bold text-on-surface">—</div>
               <div class="font-label-caps text-[10px] text-on-surface-variant mt-1">CHANNELS</div>
             </div>
             <div>
-              <div id="final-seconds" class="font-data-mono text-2xl font-bold text-on-surface">1,112</div>
+              <div id="final-seconds" class="font-data-mono text-2xl font-bold text-on-surface">—</div>
               <div class="font-label-caps text-[10px] text-on-surface-variant mt-1">SECONDS</div>
             </div>
             <div>
-              <div id="final-features" class="font-data-mono text-2xl font-bold text-on-surface">47</div>
+              <div id="final-features" class="font-data-mono text-2xl font-bold text-on-surface">—</div>
               <div class="font-label-caps text-[10px] text-on-surface-variant mt-1">FEATURES</div>
             </div>
             <div>
-              <div id="final-confidence" class="font-data-mono text-2xl font-bold text-secondary">91.3%</div>
+              <div id="final-confidence" class="font-data-mono text-2xl font-bold text-secondary">—</div>
               <div class="font-label-caps text-[10px] text-on-surface-variant mt-1">CONFIDENCE</div>
             </div>
           </div>
@@ -671,7 +671,7 @@
       formData.append('file', file);
 
       try {
-        const res = await fetch('/api/v1/calibrate', {
+        const res = await fetch(window.location.origin + '/api/v1/calibrate', {
           method: 'POST',
           body: formData
         });
@@ -892,7 +892,7 @@
       const predictionPayload = buildPredictionPayload();
 
       try {
-        const res = await fetch('/api/v1/predict', {
+        const res = await fetch(window.location.origin + '/api/v1/predict', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -909,9 +909,19 @@
         ingestPredictionResponse(response);
         await runProductionPipelineCompletion(response);
       } catch (err) {
-        console.warn('Backend /api/v1/predict failed; completing UI pipeline with diffuse safety localization only:', err);
+        console.error('Backend /api/v1/predict failed:', err);
+        addLog(`ERROR: Connection to platform inference gateway failed: ${err.message}`);
         applyDominantZoneLocalization('DIFFUSE');
-        await runStandalonePipelineSimulation();
+        const step3Node = document.getElementById('step-3-node');
+        const step3Label = document.getElementById('step-3-label');
+        if (step3Node) {
+          step3Node.style.backgroundColor = '#ffb4ab';
+          step3Node.style.color = '#690005';
+        }
+        if (step3Label) {
+          step3Label.style.color = '#ffb4ab';
+          step3Label.textContent = 'INTELLIGENCE PIPELINE FAILED';
+        }
       }
     }
 
@@ -938,7 +948,7 @@
 
         if (data.log) addLog(data.log);
 
-        // Map stage 'Signal Extraction' and 'Feature Extraction' execution cards to update their state, toggle an active violet glow, and transition status badges to 'check_circle' once 'computed_decision_gate' and baseline parameters (\mu, \sigma) return valid.
+        // Map stage 'Signal Extraction' and 'Feature Extraction' execution cards to update their state, toggle an active violet glow, and transition status badges to 'check_circle' once 'computed_decision_gate' and baseline parameters return valid.
         if ((stageId === 'pipe-1' || stageId === 'pipe-3') && data.computed_decision_gate) {
           card.classList.add('violet-glow');
           icon.textContent = 'check_circle';
@@ -951,7 +961,7 @@
               addLog(`[ALERT] ${alert}`);
             });
           } else if (data.mu !== undefined && data.sigma !== undefined) {
-            addLog(`[NORM] Signal baseline normalized (\u03bc=${data.mu}, \u03c3=${data.sigma}). No clinical anomalies in current window.`);
+            addLog(`[NORM] Signal baseline normalized (μ=${data.mu}, σ=${data.sigma}). No clinical anomalies in current window.`);
           }
         }
 
@@ -988,9 +998,13 @@
       const gate = profile.computed_decision_gate ?? '--';
       const mu = profile.baseline_mu ?? '--';
       const sigma = profile.baseline_sigma ?? '--';
-      const confidence = hasAlerts && alerts[0].peak_seizure_probability !== undefined
-        ? Math.round(Number(alerts[0].peak_seizure_probability) * 1000) / 10
-        : 91.3;
+
+      let confidence = 0.0;
+      if (response.peak_seizure_probability !== undefined) {
+        confidence = Math.round(Number(response.peak_seizure_probability) * 1000) / 10;
+      } else if (hasAlerts && alerts[0].peak_seizure_probability !== undefined) {
+        confidence = Math.round(Number(alerts[0].peak_seizure_probability) * 1000) / 10;
+      }
 
       const stagesData = [
         { stage: 1, id: 'pipe-1', log: `19-channel 10-20 feature matrix received (${windows || 'live'} windows).`, computed_decision_gate: true, mu, sigma, clinical_alerts_detected: [] },
@@ -1019,39 +1033,9 @@
       }
     }
 
-    // Standalone execution loop fallback matching backend state sequence precisely
-    async function runStandalonePipelineSimulation() {
-      const stagesData = [
-        { stage: 1, id: 'pipe-1', log: '19 Channels Loaded. Normalizing signal amplitude...', computed_decision_gate: true, mu: 0.0043, sigma: 0.0128, clinical_alerts_detected: [] },
-        { stage: 2, id: 'pipe-2', log: 'Muscle artifact detected at 00:04:12. Filtering active window...', computed_decision_gate: true, mu: 0.0041, sigma: 0.0125, clinical_alerts_detected: ['Muscle artifact transient identified & isolated at 00:04:12'] },
-        { stage: 3, id: 'pipe-3', log: 'FFT Analysis complete. Alpha-Theta ratio established.', computed_decision_gate: true, mu: 0.0039, sigma: 0.0119, clinical_alerts_detected: [] },
-        { stage: 4, id: 'pipe-4', log: 'Cortical mapping generated. High connectivity in frontal lobe.', computed_decision_gate: true, mu: 0.0038, sigma: 0.0118, clinical_alerts_detected: [] },
-        { stage: 5, id: 'pipe-5', log: 'Running stochastic prediction model... 0.04% seizure probability.', computed_decision_gate: true, mu: 0.0040, sigma: 0.0120, clinical_alerts_detected: [] },
-        { stage: 6, id: 'pipe-6', log: 'Translating features to clinical nomenclature...', computed_decision_gate: true, mu: 0.0042, sigma: 0.0122, clinical_alerts_detected: [] },
-        { stage: 7, id: 'pipe-7', log: 'Cross-referencing with database of 40,000 cases...', computed_decision_gate: true, mu: 0.0041, sigma: 0.0121, clinical_alerts_detected: [] },
-        { stage: 8, id: 'pipe-8', log: 'Compiling final report PDF and summary...', computed_decision_gate: true, mu: 0.0043, sigma: 0.0123, clinical_alerts_detected: [], metrics: { features: 47, confidence: 91.3 } }
-      ];
-
-      for (let i = 0; i < stagesData.length; i++) {
-        const item = stagesData[i];
-        await processPipelineEvent({ stage: item.stage, stage_id: item.id, status: 'processing', log: item.log });
-        await new Promise(r => setTimeout(r, 1000));
-        await processPipelineEvent({
-          stage: item.stage,
-          stage_id: item.id,
-          status: 'complete',
-          computed_decision_gate: item.computed_decision_gate,
-          mu: item.mu,
-          sigma: item.sigma,
-          clinical_alerts_detected: item.clinical_alerts_detected,
-          metrics: item.metrics
-        });
-      }
-    }
-
     async function openIntelligenceReport() {
       try {
-        const res = await fetch('/api/v1/session/current', { headers: { 'Accept': 'application/json' } });
+        const res = await fetch(window.location.origin + '/api/v1/session/current', { headers: { 'Accept': 'application/json' } });
         if (res.ok) {
           const data = await res.json();
           const id = data?.active_session?.analysis_id || latestPredictionPayload?.patient_id || (currentFile ? currentFile.name.replace(/\.[^.]+$/, '') : 'NV-LIVE-SESSION');

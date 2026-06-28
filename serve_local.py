@@ -711,8 +711,15 @@ async def get_analysis_report(analysis_id: str):
     else:
         report = _generate_report(analysis_id)
 
+    report.setdefault("clinical_alerts_detected", [])
+    report.setdefault("calibration_profile", {})
+
+    sess = _ACTIVE_SESSION.get("active_session") or {}
     latest = sess.get("last_prediction") or {}
-    if latest:
+    if latest and str(sess.get("analysis_id") or latest.get("patient_id") or "") == str(analysis_id):
+        report["clinical_alerts_detected"] = latest.get("clinical_alerts_detected") or []
+        report["calibration_profile"] = latest.get("calibration_profile") or {}
+        report["peak_seizure_probability"] = latest.get("peak_seizure_probability")
         live_loc = ((latest.get("brain_intelligence") or {}).get("localization") or {})
         if live_loc:
             report.setdefault("brain_intelligence", {}).setdefault("localization", {}).update({
@@ -792,6 +799,7 @@ async def predict_pipeline(
         response_payload = {
             "status": "SUCCESS",
             "patient_id": patient_id,
+            "peak_seizure_probability": peak_probability,
             "calibration_profile": {
                 "baseline_mu": 0.498064,
                 "baseline_sigma": 0.003138,
@@ -895,5 +903,5 @@ async def predict_pipeline(
 app.mount("/", StaticFiles(directory=current_dir), name="static")
 
 if __name__ == "__main__":
-    logger.info("Initializing NeuroVision platform local runner on http://0.0.0.0:8000")
-    uvicorn.run("serve_local:app", host="0.0.0.0", port=8000, reload=True)
+    logger.info("Initializing NeuroVision platform local runner on http://0.0.0.0:8080")
+    uvicorn.run("serve_local:app", host="0.0.0.0", port=8080, reload=True)

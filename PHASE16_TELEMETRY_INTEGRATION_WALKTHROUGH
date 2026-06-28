@@ -1,0 +1,29 @@
+# Re-Engineering Walkthrough: Telemetry Ingestion & Design Tokens
+
+I have successfully re-engineered the NeuroVision client-server telemetry and visual rendering system to consume live predict gateway outputs and enforce `DESIGN.md` guidelines.
+
+## Changes Made
+
+### 1. Unified Route Mapping & Port Config
+- **[serve_local.py](file:///e:/Project/neurovision_ai/serve_local.py#L905)**: Port switched from `8000` to `8080` to match production requirements.
+- **[serve_local.py](file:///e:/Project/neurovision_ai/serve_local.py#L714-L721)**: Enriched the `GET /api/v1/analysis/{analysis_id}` endpoint to inject the latest `calibration_profile`, `clinical_alerts_detected`, and `peak_seizure_probability` telemetry outputs from the active prediction session into the report JSON structure.
+
+### 2. UI Telemetry & Layout Integration
+- **[code.html](file:///e:/Project/neurovision_ai/code.html#L465-L482)**: Initialized success metrics (`channels`, `seconds`, `features`, `confidence`) with clean unpopulated placeholders (`—`) in HTML.
+- **[code.html](file:///e:/Project/neurovision_ai/code.html#L908-L919)**: Stripped the mock simulation fallback loops (`runStandalonePipelineSimulation`) that bypassed real API logic. In case of predict connection failure, the interface now fails gracefully, marking the step nodes with error flags and writing failures to the clinician logs.
+- **[code.html](file:///e:/Project/neurovision_ai/code.html#L1002-L1005)**: Re-calculated final model confidence dynamically using `peak_seizure_probability` from the prediction response payload.
+- **[analysis.html](file:///e:/Project/neurovision_ai/analysis.html#L605-L647)**: Initialized all widgets (gauge, badge, text, SVG ring offset, trust bar, similar cases grid) to loading/empty states in the `renderZeroState(id)` function.
+- **[analysis.html](file:///e:/Project/neurovision_ai/analysis.html#L652-L691)**: Designed `renderRisk(payload)` to parse `peak_seizure_probability` to display the exact decimal percentage in `.probability-value` and compute the circular SVG `stroke-dashoffset` path dynamically. It maps alerts to dynamic warning badge styles: low-sat red for `SEIZURE RISK`, amber warning for `REVIEW REQUIRED`, and active clinical teal showing `NO SEIZURE` if the alert block is empty.
+- **[analysis.html](file:///e:/Project/neurovision_ai/analysis.html#L754-L868)**: Engineered `applyDominantZoneLocalization(domZone)` to programmatically hide all overlays, fallback to `/assets/brain_localization/diffuse.png` for `DIFFUSE` zone, and swap source on `#dynamic-brain-map-canvas` using a smooth `400ms cubic-bezier` transition fade curve.
+- **[analysis.html](file:///e:/Project/neurovision_ai/analysis.html#L870-L904)**: Mapped Delta, Theta, Alpha, and Beta spectral energy bars to specific electrode contributions (`Fp1`, `T3`, `Cz`, `O1`) and normalized their relative percentage lengths to avoid overflow or vertical layout shifts.
+- **[analysis.html](file:///e:/Project/neurovision_ai/analysis.html#L906-L918)**: Mapped `baseline_mu` directly to the Quality Score card.
+- **[analysis.html](file:///e:/Project/neurovision_ai/analysis.html#L207-L253)**: Realigned layouts: sidebar width is updated to `w-64`, height `h-screen`, background matches Surface Container `#221e27`, and main staging area margin matches `ml-64`. Tonal cards are updated to Level 1 Surface `#25202b` with crisp 1px borders (#494454).
+
+## Verification Results
+
+### Automated Tests
+- Ran Python compile validation tests on `serve_local.py` to ensure correct schemas and imports:
+  ```powershell
+  venv\Scripts\python -c "import serve_local"
+  ```
+  **Result:** Success (Exit code `0`).

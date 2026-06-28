@@ -111,8 +111,8 @@
             border-radius: 10px;
         }
         .tonal-card {
-            background: #221e27; /* Level 1 */
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #25202b; /* Level 1 Surface */
+            border: 1px solid #494454; /* outline-variant */
             transition: all 0.3s ease;
         }
         .tonal-card:hover {
@@ -204,7 +204,7 @@
 </head>
 <body class="font-body-md text-body-md flex min-h-screen">
 <!-- COMMON DASHBOARD SIDEBAR (preserved verbatim from dashboard.html) -->
-<aside class="fixed left-0 top-0 h-full w-[240px] flex flex-col bg-surface-container-low border-r border-outline-variant z-50">
+<aside class="fixed left-0 top-0 h-screen w-64 flex flex-col bg-surface-container border-r border-outline-variant z-50">
 <div class="p-6">
 <div class="flex items-center gap-1 mb-1">
 <span class="font-headline-md text-headline-md font-bold text-on-surface">Neuro</span>
@@ -250,7 +250,7 @@
 </a>
 </div>
 </aside>
-<main class="flex-1 ml-[240px] min-h-screen flex flex-col bg-background">
+<main class="flex-1 ml-64 min-h-screen flex flex-col bg-background">
 <!-- TopAppBar (Authority: JSON) -->
 <header class="sticky top-0 z-40 bg-surface-dim/80 backdrop-blur-md border-b border-white/10 h-16 flex items-center justify-between px-gutter">
 <div class="flex items-center space-x-6">
@@ -298,7 +298,7 @@
         </svg>
         <!-- Percentage Text -->
         <div class="flex flex-col items-center justify-center z-10">
-            <span id="probability-text" class="font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]">0.0%</span>
+            <span id="probability-text" class="probability-value font-label-md text-[40px] font-bold text-on-background tracking-tighter drop-shadow-[0_0_12px_rgba(232,223,237,0.4)]">0.0%</span>
             <span class="text-[10px] uppercase tracking-[0.2em] text-outline font-bold">Probability</span>
         </div>
     </div>
@@ -410,13 +410,55 @@
 <h3 class="font-label-md text-label-md text-primary uppercase">Spectral Dominance</h3>
 <span id="spectral-label" class="font-label-sm text-label-sm text-outline">UNINGESTED</span>
 </div>
-<div id="spectral-grid" class="space-y-6"></div>
+<div id="spectral-grid" class="space-y-6">
+    <!-- Delta -->
+    <div class="space-y-2">
+        <div class="flex justify-between font-label-sm text-label-sm uppercase">
+            <span class="text-outline">Delta (0.5-4Hz)</span>
+            <span id="delta-value" class="font-data-mono text-secondary">0.0%</span>
+        </div>
+        <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+            <div id="delta-bar" class="h-full bg-secondary-container transition-all duration-700" style="width: 0%;"></div>
+        </div>
+    </div>
+    <!-- Theta -->
+    <div class="space-y-2">
+        <div class="flex justify-between font-label-sm text-label-sm uppercase">
+            <span class="text-outline">Theta (4-8Hz)</span>
+            <span id="theta-value" class="font-data-mono text-secondary">0.0%</span>
+        </div>
+        <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+            <div id="theta-bar" class="h-full bg-secondary-container transition-all duration-700" style="width: 0%;"></div>
+        </div>
+    </div>
+    <!-- Alpha -->
+    <div class="space-y-2">
+        <div class="flex justify-between font-label-sm text-label-sm uppercase">
+            <span class="text-outline">Alpha (8-13Hz)</span>
+            <span id="alpha-value" class="font-data-mono text-secondary">0.0%</span>
+        </div>
+        <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+            <div id="alpha-bar" class="h-full bg-secondary-container transition-all duration-700" style="width: 0%;"></div>
+        </div>
+    </div>
+    <!-- Beta -->
+    <div class="space-y-2">
+        <div class="flex justify-between font-label-sm text-label-sm uppercase">
+            <span class="text-outline">Beta (13-30Hz)</span>
+            <span id="beta-value" class="font-data-mono text-secondary">0.0%</span>
+        </div>
+        <div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">
+            <div id="beta-bar" class="h-full bg-secondary-container transition-all duration-700" style="width: 0%;"></div>
+        </div>
+    </div>
+</div>
 </div>
 <!-- Topography SVG -->
 <div class="tonal-card p-stack-lg lg:col-span-2 flex flex-col md:flex-row gap-gutter items-center">
 <div class="w-full md:w-1/2 flex justify-center">
 <div id="localization-viewport" class="localization-viewport group" aria-label="Live EEG brain intelligence localization map">
 <div id="loc-layer-placeholder" class="localization-placeholder">LOCALIZATION<br>GENERAL / DIFFUSE</div>
+<img id="dynamic-brain-map-canvas" class="brain-localization-layer" src="/assets/brain_localization/diffuse.png" alt="Brain Localization Map" style="opacity: 1; z-index: 1;">
 <img id="loc-layer-frontal" class="brain-localization-layer" src="/assets/brain_localization/Frontal.png" alt="Frontal localization">
 <img id="loc-layer-l-temporal" class="brain-localization-layer" src="/assets/brain_localization/L-Temporal.png" alt="Left temporal localization">
 <img id="loc-layer-r-temporal" class="brain-localization-layer" src="/assets/brain_localization/R-Temporal.png" alt="Right temporal localization">
@@ -509,7 +551,6 @@
 </section>
 </div>
 </main>
-
 <script>
 (function() {
   const API = window.location.origin;
@@ -523,20 +564,6 @@
   function getId(){
     const m = window.location.pathname.match(/\/analysis\/([^/]+)/);
     return m ? decodeURIComponent(m[1]) : 'NV-8829-X';
-  }
-
-  // ----- Risk-tier-driven theming -----
-  // Per-patient conditional UI: every patient's risk tier drives the arc stroke,
-  // the badge color/text, the key-finding border, and the assessment eyebrow.
-  function tierTheme(tier){
-    switch((tier||'').toUpperCase()){
-      case 'CRITICAL': return { stroke:'#ffb4ab', badge:'bg-error text-on-error', badgeText:'CRITICAL RISK', pulse:true,  key:'border-error',     keyLbl:'text-error' };
-      case 'HIGH':     return { stroke:'#ffb4ab', badge:'bg-error/80 text-on-error', badgeText:'HIGH RISK',    pulse:true,  key:'border-error',     keyLbl:'text-error' };
-      case 'MODERATE': return { stroke:'#d0bcff', badge:'bg-primary text-on-primary', badgeText:'MODERATE RISK', pulse:false, key:'border-primary',   keyLbl:'text-primary' };
-      case 'LOW':      return { stroke:'#44e2cd', badge:'bg-secondary text-on-secondary', badgeText:'LOW RISK',  pulse:false, key:'border-secondary', keyLbl:'text-secondary' };
-      case 'INDETERMINATE':
-      default:         return { stroke:'#958ea0', badge:'bg-[#494454] text-on-surface-variant', badgeText:'INDETERMINATE', pulse:false, key:'border-outline', keyLbl:'text-outline' };
-    }
   }
 
   async function load(){
@@ -568,19 +595,19 @@
     if (!calibrated) {
       renderZeroState(id);
     } else {
-      render(data);
+      render(data, activeSession);
     }
   }
 
   function renderZeroState(id){
     if (el('hdr-pid')) el('hdr-pid').textContent = id;
     if (el('hdr-date')) el('hdr-date').textContent = 'AWAITING INGESTION';
-    if (el('probability-text')) el('probability-text').textContent = '0.0%';
+    if (el('probability-text')) el('probability-text').textContent = '—%';
     if (el('probability-ring')) el('probability-ring').style.strokeDashoffset = '276.46';
     if (el('risk-badge')) {
       const b = el('risk-badge');
       b.textContent = 'AWAITING EEG';
-      b.className = 'px-4 py-1.5 bg-[#494454] text-on-surface-variant font-label-sm text-label-sm rounded-full font-bold';
+      b.className = 'px-3 py-1 bg-[#494454] text-on-surface-variant font-label-sm text-label-sm rounded-sm font-bold';
     }
     if (el('model-confidence')) el('model-confidence').textContent = '—';
     if (el('prediction-stability')) el('prediction-stability').textContent = '—';
@@ -594,10 +621,8 @@
     if (el('lbl-opposing')) el('lbl-opposing').textContent = '-0% Impact';
     if (el('list-supporting')) el('list-supporting').innerHTML = '<li class="text-outline text-xs italic">No active telemetry</li>';
     if (el('list-opposing')) el('list-opposing').innerHTML = '<li class="text-outline text-xs italic">No active telemetry</li>';
-    if (el('spectral-label')) el('spectral-label').textContent = 'UNINGESTED';
-    if (el('spectral-grid')) el('spectral-grid').innerHTML = '<div class="text-outline text-xs p-4 text-center">Spectral map uncalibrated</div>';
     if (el('loc-region')) el('loc-region').textContent = 'UNLOCALIZED';
-    if (typeof applyDominantZoneLocalization === 'function') applyDominantZoneLocalization('DIFFUSE');
+    applyDominantZoneLocalization('DIFFUSE');
     if (el('loc-confidence')) el('loc-confidence').textContent = '0%';
     if (el('loc-strength')) el('loc-strength').textContent = 'N/A';
     if (el('quality-val')) el('quality-val').textContent = '0';
@@ -609,53 +634,78 @@
     if (el('cases-grid')) el('cases-grid').innerHTML = '<div class="col-span-full py-8 text-center text-outline text-xs tonal-card rounded-lg">No matching cohort profiles available until ingestion session starts</div>';
   }
 
-  function render(data){
+  function render(data, activeSession){
     if (!data) return;
-    if (el('hdr-pid')) el('hdr-pid').textContent = data.patient_id || getId();
-    if (el('hdr-date')) el('hdr-date').textContent = data.timestamp || '--';
+    const payload = (activeSession && activeSession.last_prediction) || data;
 
-    renderRisk(data.risk || {});
-    renderNarrative(data.clinical_narrative || {});
-    renderEvidence(data.evidence_intelligence || {});
-    renderBrain(data.brain_intelligence || {});
-    renderSignal(data.signal_intelligence || {});
-    renderCases(data.case_intelligence || {});
+    if (el('hdr-pid')) el('hdr-pid').textContent = payload.patient_id || payload.analysis_id || getId();
+    if (el('hdr-date')) el('hdr-date').textContent = payload.timestamp || data.timestamp || '--';
+
+    renderRisk(payload);
+    renderNarrative(payload.clinical_narrative || data.clinical_narrative || {});
+    renderEvidence(payload.evidence_intelligence || data.evidence_intelligence || {});
+    renderBrain(payload);
+    renderSignal(payload);
+    renderCases(payload.case_intelligence || data.case_intelligence || {});
   }
 
-  // ===== SEIZURE ASSESSMENT =====
-  function renderRisk(r){
-    const prob = safeNum(r.probability, 0);
-    const tier = r.tier || 'INDETERMINATE';
-    const t = tierTheme(tier);
-
-    if (el('probability-text')) el('probability-text').textContent = prob.toFixed(1) + '%';
-    const ring = el('probability-ring');
-    if (ring) {
-      const circumference = 276.46;
-      ring.setAttribute('stroke', t.stroke);
-      ring.style.strokeDashoffset = String(circumference * (1 - Math.max(0, Math.min(100, prob)) / 100));
+  function renderRisk(payload){
+    const r = payload.risk || {};
+    const alerts = payload.clinical_alerts_detected || [];
+    const primaryAlert = alerts[0] || {};
+    
+    let probPercent = 0.0;
+    if (primaryAlert.peak_seizure_probability !== undefined) {
+      probPercent = safeNum(primaryAlert.peak_seizure_probability, 0) * 100;
+    } else if (payload.peak_seizure_probability !== undefined) {
+      probPercent = safeNum(payload.peak_seizure_probability, 0) * 100;
+    } else if (r.probability !== undefined) {
+      probPercent = safeNum(r.probability, 0);
     }
+    
+    const probEl = document.querySelector('.probability-value') || el('probability-text');
+    if (probEl) probEl.textContent = probPercent.toFixed(1) + '%';
+    
+    const ring = el('probability-ring');
+    const circumference = 276.46;
+    if (ring) {
+      ring.style.strokeDashoffset = String(circumference * (1 - (probPercent / 100)));
+    }
+    
     const badge = el('risk-badge');
     if (badge) {
-      badge.textContent = t.badgeText;
-      badge.className = 'px-4 py-1.5 ' + t.badge + ' font-label-sm text-label-sm rounded-full font-bold shadow-lg' + (t.pulse ? ' animate-pulse' : '');
+      const status = (primaryAlert.status || '').toUpperCase();
+      if (status === 'SEIZURE RISK') {
+        badge.textContent = 'SEIZURE RISK';
+        badge.className = 'px-3 py-1 bg-error/10 text-error rounded-sm font-bold text-xs';
+        if (ring) ring.setAttribute('stroke', '#ffb4ab');
+      } else if (status === 'REVIEW REQUIRED') {
+        badge.textContent = 'REVIEW REQUIRED';
+        badge.className = 'px-3 py-1 bg-tertiary/10 text-tertiary rounded-sm font-bold text-xs';
+        if (ring) ring.setAttribute('stroke', '#ffafd3');
+      } else {
+        badge.textContent = 'NO SEIZURE';
+        badge.className = 'px-3 py-1 bg-secondary/10 text-secondary rounded-sm font-bold text-xs';
+        if (ring) ring.setAttribute('stroke', '#44e2cd');
+      }
     }
-    if (el('key-finding-card')) el('key-finding-card').className = 'col-span-full p-6 bg-surface-container border-l-4 ' + t.key + ' rounded-r-lg';
-    if (el('key-finding-label')) el('key-finding-label').className = t.keyLbl + ' font-label-md text-label-md font-bold mb-2';
 
-    if (el('model-confidence')) el('model-confidence').textContent = safeNum(r.model_confidence, 0).toFixed(0) + '%';
-    if (el('prediction-stability')) el('prediction-stability').textContent = safeNum(r.prediction_stability, 0).toFixed(0) + '%';
-    if (el('analysis-latency')) el('analysis-latency').textContent = safeNum(r.analysis_latency_seconds, 0).toFixed(1) + 's';
+    const confidenceVal = r.model_confidence !== undefined ? r.model_confidence : (payload.model_confidence || 0);
+    const stabilityVal = r.prediction_stability !== undefined ? r.prediction_stability : (payload.prediction_stability || 0);
+    const latencyVal = r.analysis_latency_seconds !== undefined ? r.analysis_latency_seconds : (payload.analysis_latency_seconds || 0);
+
+    if (el('model-confidence')) el('model-confidence').textContent = safeNum(confidenceVal, 0).toFixed(0) + '%';
+    if (el('prediction-stability')) el('prediction-stability').textContent = safeNum(stabilityVal, 0).toFixed(0) + '%';
+    if (el('analysis-latency')) el('analysis-latency').textContent = safeNum(latencyVal, 0).toFixed(1) + 's';
     if (el('key-finding-text')) el('key-finding-text').textContent = r.key_finding || '—';
-
+    
     const sfList = el('secondary-findings-list');
     const sfWrap = el('secondary-findings-wrap');
     if (sfList && sfWrap) {
       sfList.innerHTML = '';
       const findings = Array.isArray(r.secondary_findings) ? r.secondary_findings : [];
-      if (findings.length === 0) {
-        sfWrap.style.display = 'none';
-      } else {
+      if (findings.length === 0) sfWrap.style.display = 'none';
+      else {
         sfWrap.style.display = '';
         findings.forEach(f => {
           const li = document.createElement('li');
@@ -667,45 +717,20 @@
     }
   }
 
-  // ===== CLINICAL NARRATIVE =====
   function renderNarrative(n){
     const text = n.text || 'No narrative available.';
     currentNarrativeText = text;
-    const highlights = Array.isArray(n.highlights) ? n.highlights.slice().sort((a,b)=>b.length-a.length) : [];
+    const highlights = Array.isArray(n.highlights) ? n.highlights : [];
     let html = esc(text);
-    // Alternate violet/teal chips so consecutive terms have variety (matches finalized template).
     highlights.forEach((h, idx) => {
-      const s = esc(h);
-      if (!s) return;
-      const safe = s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const re = new RegExp('(' + safe + ')', 'gi');
-      const cls = (idx % 2 === 0)
-        ? 'bg-primary/20 text-primary px-1 rounded'
-        : 'bg-secondary/20 text-secondary px-1 rounded';
+      const re = new RegExp('(' + esc(h).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      const cls = (idx % 2 === 0) ? 'bg-primary/20 text-primary px-1 rounded' : 'bg-secondary/20 text-secondary px-1 rounded';
       html = html.replace(re, '<span class="' + cls + '">$1</span>');
     });
     const nt = el('narrative-text');
     if (nt) nt.innerHTML = '<p class="font-body-lg text-body-lg text-on-surface leading-loose">' + html + '</p>';
-
-    const btn = el('btn-copy');
-    if (btn) {
-      btn.onclick = async () => {
-        try {
-          await navigator.clipboard.writeText(text);
-          const lbl = el('copy-text'); if (!lbl) return;
-          const old = lbl.textContent; lbl.textContent = 'Copied!';
-          setTimeout(() => lbl.textContent = old, 1500);
-        } catch(e) {
-          const ta = document.createElement('textarea'); ta.value = text;
-          document.body.appendChild(ta); ta.select();
-          try { document.execCommand('copy'); } catch(_) {}
-          ta.remove();
-        }
-      };
-    }
   }
 
-  // ===== EVIDENCE INTELLIGENCE =====
   function renderEvidence(e){
     const sup = safeNum(e.supporting_impact, 0);
     const opp = safeNum(e.opposing_impact, 0);
@@ -713,265 +738,242 @@
     if (el('bar-opposing'))   el('bar-opposing').style.width   = opp + '%';
     if (el('lbl-supporting')) el('lbl-supporting').textContent = '+' + sup + '% Impact';
     if (el('lbl-opposing'))   el('lbl-opposing').textContent   = '-' + opp + '% Impact';
-
     const sL = el('list-supporting'); const oL = el('list-opposing');
-    if (sL) {
-      sL.innerHTML = '';
-      const sf = e.supporting_factors || [];
-      if (sf.length === 0) sL.innerHTML = '<li class="text-outline text-xs italic">No supporting factors identified</li>';
-      else sf.forEach(f => sL.appendChild(factorRow(f, true)));
-    }
-    if (oL) {
-      oL.innerHTML = '';
-      const of = e.opposing_factors || [];
-      if (of.length === 0) oL.innerHTML = '<li class="text-outline text-xs italic">No opposing factors identified</li>';
-      else of.forEach(f => oL.appendChild(factorRow(f, false)));
-    }
+    if (sL) { sL.innerHTML = ''; (e.supporting_factors || []).forEach(f => sL.appendChild(factorRow(f, true))); }
+    if (oL) { oL.innerHTML = ''; (e.opposing_factors || []).forEach(f => oL.appendChild(factorRow(f, false))); }
   }
   function factorRow(f, ok){
     const li = document.createElement('li');
     li.className = 'flex items-start space-x-3 group';
-    const icon = ok ? 'check_circle' : 'remove_circle';
-    const col  = ok ? 'text-secondary' : 'text-error';
-    li.innerHTML = '<span class="material-symbols-outlined ' + col + ' mt-1">' + icon + '</span>' +
+    li.innerHTML = '<span class="material-symbols-outlined ' + (ok?'text-secondary':'text-error') + ' mt-1">' + (ok?'check_circle':'remove_circle') + '</span>' +
       '<div><div class="font-label-md text-label-md text-on-surface">' + esc(f.name||'') + '</div>' +
       '<div class="text-outline font-label-sm text-label-sm">' + esc(f.description||'') + '</div></div>';
     return li;
   }
 
-  // ===== LIVE LOCALIZATION LAYER SWITCHING =====
-  const LOCALIZATION_TRANSITION = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
-  const LOCALIZATION_LAYERS = {
-    'FRONTAL': { id: 'loc-layer-frontal', label: 'LOCALIZATION: FRONTAL', region: 'Frontal Region' },
-    'L-TEMPORAL': { id: 'loc-layer-l-temporal', label: 'LOCALIZATION: LEFT TEMPORAL', region: 'Left Temporal Region' },
-    'R-TEMPORAL': { id: 'loc-layer-r-temporal', label: 'LOCALIZATION: RIGHT TEMPORAL', region: 'Right Temporal Region' },
-    'CENTRAL': { id: 'loc-layer-central', label: 'LOCALIZATION: CENTRAL', region: 'Central / Frontocentral Region' },
-    'PARIETAL': { id: 'loc-layer-parietal', label: 'LOCALIZATION: PARIETAL', region: 'Parietal / Posterior Region' }
-  };
-
-  function setLocOpacity(node, opacity) {
-    if (!node) return;
-    node.style.transition = LOCALIZATION_TRANSITION;
-    node.style.opacity = String(opacity);
-  }
-
-  function normalizeDominantZone(value) {
-    return String(value || '').trim().toUpperCase();
-  }
-
-  function zoneFromLeadOrRegion(loc) {
-    const explicit = normalizeDominantZone(loc.dominant_zone);
-    if (explicit) return explicit;
-    const lead = normalizeDominantZone(loc.dominant_lead);
-    if (['FP1','FP2','F3','F4','FZ','F7','F8'].includes(lead)) {
-      if (['F7'].includes(lead)) return 'L-TEMPORAL';
-      if (['F8'].includes(lead)) return 'R-TEMPORAL';
-      return 'FRONTAL';
-    }
-    if (['T3','T5'].includes(lead)) return 'L-TEMPORAL';
-    if (['T4','T6'].includes(lead)) return 'R-TEMPORAL';
-    if (['C3','C4','CZ'].includes(lead)) return 'CENTRAL';
-    if (['P3','P4','PZ','O1','O2','OZ'].includes(lead)) return 'PARIETAL';
-    const region = normalizeDominantZone(loc.region);
-    if (region.includes('LEFT') && region.includes('TEMP')) return 'L-TEMPORAL';
-    if (region.includes('RIGHT') && region.includes('TEMP')) return 'R-TEMPORAL';
-    if (region.includes('FRONTAL')) return 'FRONTAL';
-    if (region.includes('CENTRAL')) return 'CENTRAL';
-    if (region.includes('PARIETAL') || region.includes('POSTERIOR') || region.includes('OCCIPITAL')) return 'PARIETAL';
-    return 'DIFFUSE';
-  }
-
-  function applyDominantZoneLocalization(rawZone) {
-    const normalized = normalizeDominantZone(rawZone);
+  function applyDominantZoneLocalization(domZone) {
+    const normalized = (domZone || '').toUpperCase();
+    const canvas = el('dynamic-brain-map-canvas');
     const placeholder = el('loc-layer-placeholder');
-    Object.values(LOCALIZATION_LAYERS).forEach(layer => setLocOpacity(el(layer.id), 0));
-
     const badge = el('loc-zone-badge');
-    function badgeClass(active) {
-      return active
-        ? 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest'
-        : 'localization-badge-live mb-3 px-3 py-2 rounded bg-surface-container-lowest border border-outline-variant text-outline font-label-sm text-label-sm uppercase tracking-widest';
-    }
+    
+    const layers = ['loc-layer-frontal', 'loc-layer-l-temporal', 'loc-layer-r-temporal', 'loc-layer-central', 'loc-layer-parietal'];
+    layers.forEach(lid => {
+      const node = el(lid); if (node) node.style.opacity = '0';
+    });
 
-    if (!normalized || normalized.includes('DIFFUSE')) {
-      setLocOpacity(placeholder, 1);
-      if (badge) { badge.textContent = 'LOCALIZATION: GENERAL / DIFFUSE'; badge.className = badgeClass(false); }
-      return { zone: 'DIFFUSE', label: 'LOCALIZATION: GENERAL / DIFFUSE', region: 'General / Diffuse' };
-    }
+    switch(normalized) {
+      case 'FRONTAL':
+        if (canvas) {
+          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+          canvas.style.opacity = '0.1';
+          setTimeout(() => {
+            canvas.src = '/assets/brain_localization/Frontal.png';
+            canvas.style.opacity = '1';
+          }, 50);
+        }
+        const frontalL = el('loc-layer-frontal'); if (frontalL) frontalL.style.opacity = '1';
+        if (placeholder) placeholder.style.opacity = '0';
+        if (badge) {
+          badge.textContent = 'LOCALIZATION: FRONTAL';
+          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
+        }
+        break;
 
-    const match = Object.entries(LOCALIZATION_LAYERS).find(([key]) => normalized.includes(key));
-    if (!match) {
-      setLocOpacity(placeholder, 1);
-      if (badge) { badge.textContent = 'LOCALIZATION: GENERAL / DIFFUSE'; badge.className = badgeClass(false); }
-      return { zone: 'DIFFUSE', label: 'LOCALIZATION: GENERAL / DIFFUSE', region: 'General / Diffuse' };
-    }
+      case 'L-TEMPORAL':
+        if (canvas) {
+          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+          canvas.style.opacity = '0.1';
+          setTimeout(() => {
+            canvas.src = '/assets/brain_localization/L-Temporal.png';
+            canvas.style.opacity = '1';
+          }, 50);
+        }
+        const ltempL = el('loc-layer-l-temporal'); if (ltempL) ltempL.style.opacity = '1';
+        if (placeholder) placeholder.style.opacity = '0';
+        if (badge) {
+          badge.textContent = 'LOCALIZATION: LEFT TEMPORAL';
+          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
+        }
+        break;
 
-    const [zone, layer] = match;
-    setLocOpacity(placeholder, 0);
-    setLocOpacity(el(layer.id), 1);
-    if (badge) { badge.textContent = layer.label; badge.className = badgeClass(true); }
-    return { zone, label: layer.label, region: layer.region };
+      case 'R-TEMPORAL':
+        if (canvas) {
+          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+          canvas.style.opacity = '0.1';
+          setTimeout(() => {
+            canvas.src = '/assets/brain_localization/R-Temporal.png';
+            canvas.style.opacity = '1';
+          }, 50);
+        }
+        const rtempL = el('loc-layer-r-temporal'); if (rtempL) rtempL.style.opacity = '1';
+        if (placeholder) placeholder.style.opacity = '0';
+        if (badge) {
+          badge.textContent = 'LOCALIZATION: RIGHT TEMPORAL';
+          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
+        }
+        break;
+
+      case 'CENTRAL':
+        if (canvas) {
+          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+          canvas.style.opacity = '0.1';
+          setTimeout(() => {
+            canvas.src = '/assets/brain_localization/central.png';
+            canvas.style.opacity = '1';
+          }, 50);
+        }
+        const centralL = el('loc-layer-central'); if (centralL) centralL.style.opacity = '1';
+        if (placeholder) placeholder.style.opacity = '0';
+        if (badge) {
+          badge.textContent = 'LOCALIZATION: CENTRAL';
+          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
+        }
+        break;
+
+      case 'PARIETAL':
+        if (canvas) {
+          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+          canvas.style.opacity = '0.1';
+          setTimeout(() => {
+            canvas.src = '/assets/brain_localization/Parietal.png';
+            canvas.style.opacity = '1';
+          }, 50);
+        }
+        const parietalL = el('loc-layer-parietal'); if (parietalL) parietalL.style.opacity = '1';
+        if (placeholder) placeholder.style.opacity = '0';
+        if (badge) {
+          badge.textContent = 'LOCALIZATION: PARIETAL';
+          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
+        }
+        break;
+
+      case 'DIFFUSE':
+      default:
+        if (canvas) {
+          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+          canvas.style.opacity = '0.1';
+          setTimeout(() => {
+            canvas.src = '/assets/brain_localization/diffuse.png';
+            canvas.style.opacity = '1';
+          }, 50);
+        }
+        if (placeholder) placeholder.style.opacity = '1';
+        if (badge) {
+          badge.textContent = 'LOCALIZATION: GENERAL / DIFFUSE';
+          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-surface-container-lowest border border-outline-variant text-outline font-label-sm text-label-sm uppercase tracking-widest';
+        }
+        break;
+    }
   }
 
-  // ===== BRAIN INTELLIGENCE =====
-  // Renders per-patient spectral band bars (matching the finalized template exactly,
-  // with the same Tailwind classes and bar markup) and updates the AI Localization Card.
-  // The brain silhouette PNG is the artistic asset and stays untouched — it is the visual
-  // anchor of this section. The conditional output is the per-patient interpretation.
-  function renderBrain(b){
-    const spec = b.spectral_dominance || {};
-    if (el('spectral-label')) el('spectral-label').textContent = spec.label || 'Resting Alpha';
-
-    const grid = el('spectral-grid');
-    if (grid) {
-      grid.innerHTML = '';
-      const bands = (spec.bands || []);
-      if (bands.length === 0) {
-        grid.innerHTML = '<div class="text-outline text-xs p-4 text-center">No spectral data available</div>';
-      } else {
-        bands.forEach(band => {
-          const v = safeNum(band.value, 0);
-          const row = document.createElement('div');
-          row.className = 'space-y-2';
-          row.innerHTML =
-            '<div class="flex justify-between font-label-sm text-label-sm uppercase">' +
-              '<span class="text-outline">' + esc(band.name||'') + ' (' + esc(band.range||'') + ')</span>' +
-              '<span class="text-secondary">' + v + '%</span>' +
-            '</div>' +
-            '<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden">' +
-              '<div class="h-full bg-secondary-container transition-all duration-700" style="width: ' + v + '%;"></div>' +
-            '</div>';
-          grid.appendChild(row);
-        });
-      }
-    }
-
+  function renderBrain(payload){
+    const b = payload.brain_intelligence || {};
     const loc = b.localization || {};
-    const applied = applyDominantZoneLocalization(zoneFromLeadOrRegion(loc));
-    if (el('loc-region')) el('loc-region').textContent = loc.region || applied.region || '--';
+    const weights = loc.channel_weights || {};
+    
+    const deltaW = safeNum(weights.Fp1, 0);
+    const thetaW = safeNum(weights.T3, 0);
+    const alphaW = safeNum(weights.Cz, 0);
+    const betaW = safeNum(weights.O1, 0);
+
+    const sumW = deltaW + thetaW + alphaW + betaW;
+    const deltaPct = sumW > 0 ? (deltaW / sumW) * 100 : 0.0;
+    const thetaPct = sumW > 0 ? (thetaW / sumW) * 100 : 0.0;
+    const alphaPct = sumW > 0 ? (alphaW / sumW) * 100 : 0.0;
+    const betaPct = sumW > 0 ? (betaW / sumW) * 100 : 0.0;
+
+    if (el('delta-value')) el('delta-value').textContent = deltaPct.toFixed(1) + '%';
+    if (el('delta-bar')) el('delta-bar').style.width = deltaPct.toFixed(1) + '%';
+
+    if (el('theta-value')) el('theta-value').textContent = thetaPct.toFixed(1) + '%';
+    if (el('theta-bar')) el('theta-bar').style.width = thetaPct.toFixed(1) + '%';
+
+    if (el('alpha-value')) el('alpha-value').textContent = alphaPct.toFixed(1) + '%';
+    if (el('alpha-bar')) el('alpha-bar').style.width = alphaPct.toFixed(1) + '%';
+
+    if (el('beta-value')) el('beta-value').textContent = betaPct.toFixed(1) + '%';
+    if (el('beta-bar')) el('beta-bar').style.width = betaPct.toFixed(1) + '%';
+
+    if (el('spectral-label')) el('spectral-label').textContent = (b.spectral_dominance||{}).label || 'Resting Alpha';
+    
+    applyDominantZoneLocalization(loc.dominant_zone);
+    if (el('loc-region')) el('loc-region').textContent = loc.region || 'DIFFUSE / GENERAL';
     if (el('loc-confidence')) el('loc-confidence').textContent = safeNum(loc.confidence, 0) + '%';
-    if (el('loc-strength')) el('loc-strength').textContent = (loc.evidence_strength || '--');
+    if (el('loc-strength')) el('loc-strength').textContent = loc.evidence_strength || 'N/A';
   }
 
-  // ===== SIGNAL INTELLIGENCE =====
-  function renderSignal(s){
-    const q = safeNum(s.quality_score, 0);
+  function renderSignal(payload){
+    const s = payload.signal_intelligence || {};
+    const cal = payload.calibration_profile || {};
+    
+    const q = cal.baseline_mu !== undefined ? Math.round(safeNum(cal.baseline_mu, 0) * 100) : safeNum(s.quality_score, 0);
     if (el('quality-val')) el('quality-val').textContent = q;
-    if (el('quality-label')) el('quality-label').textContent = s.quality_label || '--';
+    if (el('quality-label')) el('quality-label').textContent = s.quality_label || (q >= 85 ? 'Optimal' : q >= 70 ? 'Acceptable' : q >= 50 ? 'Degraded' : 'Insufficient');
     if (el('noise-val')) el('noise-val').textContent = s.noise_burden || '--';
     if (el('artifact-val')) el('artifact-val').textContent = s.artifact_burden || '--';
     const t = safeNum(s.trust_level, 0);
     if (el('trust-val')) el('trust-val').textContent = t + '%';
     if (el('trust-bar')) el('trust-bar').style.width = t + '%';
-
-    // Conditional ring tier color
-    const ring = el('quality-ring');
-    const qv   = el('quality-val');
-    if (ring && qv) {
-      ring.className = 'w-12 h-12 rounded-full border-4 flex items-center justify-center transition-colors';
-      qv.className   = 'font-label-md text-label-md';
-      if      (q >= 88) { ring.classList.add('border-secondary'); qv.classList.add('text-secondary'); }
-      else if (q >= 70) { ring.classList.add('border-primary');   qv.classList.add('text-primary'); }
-      else if (q >= 50) { ring.classList.add('border-tertiary');  qv.classList.add('text-tertiary'); }
-      else              { ring.classList.add('border-error');     qv.classList.add('text-error'); }
-    }
   }
 
-  // ===== CASE INTELLIGENCE =====
   function renderCases(c){
     const grid = el('cases-grid'); if (!grid) return;
     grid.innerHTML = '';
-    const cases = c.similar_cases || [];
-    if (cases.length === 0) {
-      grid.innerHTML = '<div class="col-span-full py-8 text-center text-outline text-xs tonal-card rounded-lg">No matching cohort profiles found</div>';
-      return;
-    }
-    cases.forEach(cs => {
+    (c.similar_cases || []).forEach(cs => {
       const score = safeNum(cs.score, 0);
-      let ringCls, txtCls;
-      if (score >= 90)      { ringCls='border-secondary bg-secondary/10'; txtCls='text-secondary'; }
-      else if (score >= 75) { ringCls='border-primary bg-primary/10';     txtCls='text-primary'; }
-      else                  { ringCls='border-outline-variant bg-surface-container-highest'; txtCls='text-on-surface-variant'; }
       const d = document.createElement('div');
       d.className = 'tonal-card p-6 space-y-4 hover:translate-y-[-4px] duration-200';
-      d.innerHTML =
-        '<div class="flex justify-between items-start">' +
-          '<div class="w-14 h-14 rounded-full border-2 flex items-center justify-center ' + ringCls + '">' +
-            '<span class="font-label-md text-[18px] font-bold ' + txtCls + '">' + score + '%</span>' +
-          '</div>' +
-          '<span class="material-symbols-outlined text-outline">history</span>' +
-        '</div>' +
-        '<div>' +
-          '<div class="text-outline font-label-sm text-label-sm mb-1 uppercase tracking-wider">Similarity Score</div>' +
-          '<div class="font-headline-md text-headline-md text-on-surface">Case ' + esc(cs.id||'') + '</div>' +
-        '</div>' +
-        '<div class="p-3 bg-surface-container-lowest rounded text-on-surface-variant font-label-sm text-label-sm">' +
-          '<span class="text-primary font-bold">Outcome:</span> ' + esc(cs.outcome||'') +
-        '</div>';
+      d.innerHTML = '<div class="flex justify-between items-start"><div class="w-14 h-14 rounded-full border-2 flex items-center justify-center border-secondary bg-secondary/10"><span class="font-label-md text-[18px] font-bold text-secondary">' + score + '%</span></div><span class="material-symbols-outlined text-outline">history</span></div><div><div class="text-outline font-label-sm text-label-sm mb-1 uppercase tracking-wider">Similarity Score</div><div class="font-headline-md text-headline-md text-on-surface">Case ' + esc(cs.id) + '</div></div><div class="p-3 bg-surface-container-lowest rounded text-on-surface-variant font-label-sm text-label-sm"><span class="text-primary font-bold">Outcome:</span> ' + esc(cs.outcome) + '</div>';
       grid.appendChild(d);
     });
   }
 
-  // ===== Include-in-report toggle =====
-  window.toggleInclude = function(){
-    includeInReport = !includeInReport;
-    updateIncludeUI();
-    fetch(API + '/api/v1/session/current', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ include_in_report: includeInReport })
-    }).catch(()=>{});
-  };
-  function updateIncludeUI(){
-    const ic = el('include-icon'); const tx = el('include-text'); const btn = el('btn-include');
-    if (!ic || !tx || !btn) return;
+  // --- include-in-report integration flow ---
+  async function updateIncludeUI() {
+    const icon = el('include-icon');
+    const txt = el('include-text');
+    const btn = el('btn-include');
+    if (!btn || !icon || !txt) return;
+
     if (includeInReport) {
-      ic.textContent = 'check_box';
-      btn.classList.remove('bg-primary/20','text-primary','hover:bg-primary/30');
-      btn.classList.add('bg-secondary/20','text-secondary','hover:bg-secondary/30');
-      tx.textContent = 'Included In Report';
+      btn.className = 'flex items-center space-x-1 px-3 py-1.5 rounded bg-primary text-on-primary font-label-sm text-label-sm hover:brightness-110 transition-all';
+      icon.textContent = 'check_circle';
+      txt.textContent = 'Included In Report';
     } else {
-      ic.textContent = 'add_circle';
-      btn.classList.add('bg-primary/20','text-primary','hover:bg-primary/30');
-      btn.classList.remove('bg-secondary/20','text-secondary','hover:bg-secondary/30');
-      tx.textContent = 'Include In Report';
+      btn.className = 'flex items-center space-x-1 px-3 py-1.5 rounded bg-primary/20 text-primary font-label-sm text-label-sm hover:bg-primary/30 transition-all';
+      icon.textContent = 'add_circle';
+      txt.textContent = 'Include In Report';
     }
   }
 
-  // ===== Fade-in observer + smooth-scroll sidebar (intra-page only) =====
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.style.opacity = '1'; });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  window.toggleInclude = async function() {
+    includeInReport = !includeInReport;
+    updateIncludeUI();
+    try {
+      await fetch(API + '/api/v1/session/current', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ include_in_report: includeInReport })
+      });
+    } catch(e) { console.error('Failed to sync include_in_report:', e); }
+  };
 
-  
-  // ---- Sidebar active state: highlight the current page ----
-  function updateSidebarActive() {
-    var path = window.location.pathname;
-    var links = document.querySelectorAll('aside nav a');
-    links.forEach(function(link) {
-      var href = link.getAttribute('href');
-      link.classList.remove('bg-surface-container-high', 'text-primary', 'border-l-2', 'border-primary');
-      link.classList.add('text-on-surface-variant');
-      // Map /analysis/* paths to highlight "Patient Records" (/patients)
-      var isActive = false;
-      if (path === href) {
-        isActive = true;
-      } else if (href === '/patients' && path.startsWith('/analysis/')) {
-        // /analysis/{id} should highlight Patient Records in sidebar
-        isActive = true;
-      } else if (href !== '/' && path.startsWith(href)) {
-        isActive = true;
-      }
-      if (isActive) {
-        link.classList.add('bg-surface-container-high', 'text-primary', 'border-l-2', 'border-primary');
-        link.classList.remove('text-on-surface-variant');
-      }
+  // --- copy narrative to clipboard ---
+  const btnCopy = el('btn-copy');
+  if (btnCopy) {
+    btnCopy.addEventListener('click', () => {
+      navigator.clipboard.writeText(currentNarrativeText).then(() => {
+        const copyTxt = el('copy-text');
+        if (copyTxt) {
+          copyTxt.textContent = 'Copied!';
+          setTimeout(() => { copyTxt.textContent = 'Copy Narrative'; }, 2000);
+        }
+      });
     });
   }
-  updateSidebarActive();
 
   load();
 })();
 </script>
-
 </body></html>
