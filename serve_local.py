@@ -125,7 +125,7 @@ async def serve_navigation_pages(request: Request):
 
     route_file_map = {
         "dashboard": ["dashboard.html", "runtime_frontend_preview/dashboard.html", "templates/dashboard.html"],
-        "patients": ["patients.html", "clinical.html", "runtime_frontend_preview/clinical.html", "placeholder.html"],
+        "patients": ["analysis.html", "runtime_frontend_preview/analysis.html", "placeholder.html"],
         "export": ["export.html", "reports.html", "runtime_frontend_preview/reports.html", "placeholder.html"],
         "status": ["status.html", "operational.html", "runtime_frontend_preview/operational.html", "placeholder.html"],
         "auth": ["auth.html", "login.html", "runtime_frontend_preview/login.html"]
