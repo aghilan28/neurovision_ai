@@ -889,16 +889,16 @@
       // Execute production JSON fetch against platform gateway.
       // The backend returns the explicit contract consumed below:
       // response.brain_intelligence.localization.dominant_zone
-      const predictionPayload = buildPredictionPayload();
+      const formData = new FormData();
+      formData.append("file", currentFile);
 
       try {
         const res = await fetch(window.location.origin + '/api/v1/predict', {
           method: 'POST',
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Accept': 'application/json'
           },
-          body: JSON.stringify(predictionPayload)
+          body: formData
         });
 
         if (!res.ok) {
