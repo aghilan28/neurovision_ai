@@ -907,7 +907,7 @@ EEG_CHANNELS = [
 async def predict(payload: dict):
     # 1. Parse streaming payload data matrix bounds cleanly
     patient_id = payload.get("patient_id", "anonymous_session")
-    raw_data = payload.get("data", [])
+    raw_data = payload.get("data") or payload.get("features") or []
     
     if not raw_data:
         raise HTTPException(status_code=400, detail="Empty data matrix payload submitted.")
