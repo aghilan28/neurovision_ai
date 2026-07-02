@@ -111,8 +111,8 @@
             border-radius: 10px;
         }
         .tonal-card {
-            background: #25202b; /* Level 1 Surface */
-            border: 1px solid #494454; /* outline-variant */
+            background: #25202b; /* Level 1 Surface (DESIGN.md elevation) */
+            border: 1px solid #494454; /* outline-variant micro-border */
             transition: all 0.3s ease;
         }
         .tonal-card:hover {
@@ -153,7 +153,7 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-    
+
         .localization-viewport {
             position: relative;
             width: min(100%, 340px);
@@ -204,6 +204,7 @@
 </head>
 <body class="font-body-md text-body-md flex min-h-screen">
 <!-- COMMON DASHBOARD SIDEBAR (preserved verbatim from dashboard.html) -->
+<!-- Structural spec: w-64 width, h-screen height, bg-surface-container (#221e27), content ml-64 -->
 <aside class="fixed left-0 top-0 h-screen w-64 flex flex-col bg-surface-container border-r border-outline-variant z-50">
 <div class="p-6">
 <div class="flex items-center gap-1 mb-1">
@@ -453,12 +454,14 @@
     </div>
 </div>
 </div>
-<!-- Topography SVG -->
+<!-- Topography / Brain Localization -->
 <div class="tonal-card p-stack-lg lg:col-span-2 flex flex-col md:flex-row gap-gutter items-center">
 <div class="w-full md:w-1/2 flex justify-center">
 <div id="localization-viewport" class="localization-viewport group" aria-label="Live EEG brain intelligence localization map">
 <div id="loc-layer-placeholder" class="localization-placeholder">LOCALIZATION<br>GENERAL / DIFFUSE</div>
+<!-- Source canvas (img#dynamic-brain-map-canvas). DIFFUSE/GENERAL -> diffuse.png exclusively -->
 <img id="dynamic-brain-map-canvas" class="brain-localization-layer" src="/assets/brain_localization/diffuse.png" alt="Brain Localization Map" style="opacity: 1; z-index: 1;">
+<!-- The 5 lobe overlay nodes: reset to inactive baseline before highlighting the active one -->
 <img id="loc-layer-frontal" class="brain-localization-layer" src="/assets/brain_localization/Frontal.png" alt="Frontal localization">
 <img id="loc-layer-l-temporal" class="brain-localization-layer" src="/assets/brain_localization/L-Temporal.png" alt="Left temporal localization">
 <img id="loc-layer-r-temporal" class="brain-localization-layer" src="/assets/brain_localization/R-Temporal.png" alt="Right temporal localization">
@@ -482,7 +485,7 @@
 </div>
 <div>
 <div class="text-outline font-label-sm text-label-sm">Evidence Strength</div>
-<div id="loc-strength" class="font-label-md text-label-md text-on-surface uppercase">N/A</div>
+<div id="loc-strength" class="font-label-md text-label-md text-surface uppercase">N/A</div>
 </div>
 </div>
 </div>
@@ -534,6 +537,7 @@
 <span id="trust-val" class="text-secondary font-label-sm text-label-sm">0%</span>
 </div>
 <div class="h-1.5 bg-surface-container-highest rounded-full">
+<!-- Trust Level bar fill width bound dynamically to backend signal_intelligence.trust_level -->
 <div id="trust-bar" class="h-full bg-secondary transition-all duration-1000" style="width: 0%;"></div>
 </div>
 </div>
@@ -560,6 +564,8 @@
   function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function safeNum(v, fb){ v = Number(v); return Number.isFinite(v) ? v : (fb||0); }
   function el(id){ return document.getElementById(id); }
+  // robust deep value getter: supports "a.b.c" paths without crashing on undefined
+  function getPath(obj, path, fb){ return path.split('.').reduce(function(o,k){ return (o==null?undefined:o[k]); }, obj) ?? fb; }
 
   function getId(){
     const m = window.location.pathname.match(/\/analysis\/([^/]+)/);
@@ -636,50 +642,61 @@
 
   function render(data, activeSession){
     if (!data) return;
-    const payload = (activeSession && activeSession.last_prediction) || data;
+    // The /api/v1/analysis/{id} report is the AUTHORITATIVE, server-merged payload:
+    // it already overlays the live model prediction (risk, signal_intelligence,
+    // brain_intelligence.localization, clinical_alerts_detected, ...) over the
+    // deterministic archetype. Prefer it. Fall back to the wizard's last_prediction
+    // only when no calibrated report is available. This removes the previous desync
+    // where a stale/error last_prediction shadowed the real merged data.
+    const lastPred = (activeSession && activeSession.last_prediction) || null;
+    const payload = (data && data.is_calibrated)
+      ? data
+      : (lastPred || data);
 
     if (el('hdr-pid')) el('hdr-pid').textContent = payload.patient_id || payload.analysis_id || getId();
-    if (el('hdr-date')) el('hdr-date').textContent = payload.timestamp || data.timestamp || '--';
+    if (el('hdr-date')) el('hdr-date').textContent = payload.timestamp || (data && data.timestamp) || '--';
 
     renderRisk(payload);
-    renderNarrative(payload.clinical_narrative || data.clinical_narrative || {});
-    renderEvidence(payload.evidence_intelligence || data.evidence_intelligence || {});
+    renderNarrative(payload.clinical_narrative || (data && data.clinical_narrative) || {});
+    renderEvidence(payload.evidence_intelligence || (data && data.evidence_intelligence) || {});
     renderBrain(payload);
     renderSignal(payload);
-    renderCases(payload.case_intelligence || data.case_intelligence || {});
+    renderCases(payload.case_intelligence || (data && data.case_intelligence) || {});
   }
 
   function renderRisk(payload){
     const r = payload.risk || {};
     const alerts = payload.clinical_alerts_detected || [];
     const primaryAlert = alerts[0] || {};
-    
+
+    // Probability ring binds to peak_seizure_probability (alert -> payload -> risk.probability)
     let probPercent = 0.0;
-    if (primaryAlert.peak_seizure_probability !== undefined) {
+    if (primaryAlert.peak_seizure_probability !== undefined && primaryAlert.peak_seizure_probability !== null) {
       probPercent = safeNum(primaryAlert.peak_seizure_probability, 0) * 100;
-    } else if (payload.peak_seizure_probability !== undefined) {
+    } else if (payload.peak_seizure_probability !== undefined && payload.peak_seizure_probability !== null) {
       probPercent = safeNum(payload.peak_seizure_probability, 0) * 100;
     } else if (r.probability !== undefined) {
       probPercent = safeNum(r.probability, 0);
     }
-    
+
     const probEl = document.querySelector('.probability-value') || el('probability-text');
     if (probEl) probEl.textContent = probPercent.toFixed(1) + '%';
-    
+
     const ring = el('probability-ring');
     const circumference = 276.46;
     if (ring) {
-      ring.style.strokeDashoffset = String(circumference * (1 - (probPercent / 100)));
+      ring.style.strokeDashoffset = String(circumference * (1 - (Math.max(0, Math.min(100, probPercent)) / 100)));
     }
-    
+
     const badge = el('risk-badge');
     if (badge) {
       const status = (primaryAlert.status || '').toUpperCase();
-      if (status === 'SEIZURE RISK') {
+      const tier = (r.tier || '').toUpperCase();
+      if (status === 'SEIZURE RISK' || tier === 'CRITICAL' || tier === 'HIGH') {
         badge.textContent = 'SEIZURE RISK';
         badge.className = 'px-3 py-1 bg-error/10 text-error rounded-sm font-bold text-xs';
         if (ring) ring.setAttribute('stroke', '#ffb4ab');
-      } else if (status === 'REVIEW REQUIRED') {
+      } else if (status === 'REVIEW REQUIRED' || tier === 'MODERATE') {
         badge.textContent = 'REVIEW REQUIRED';
         badge.className = 'px-3 py-1 bg-tertiary/10 text-tertiary rounded-sm font-bold text-xs';
         if (ring) ring.setAttribute('stroke', '#ffafd3');
@@ -690,15 +707,25 @@
       }
     }
 
-    const confidenceVal = r.model_confidence !== undefined ? r.model_confidence : (payload.model_confidence || 0);
+    // Spec: Confidence readout binds to
+    //   clinical_alerts_detected[0].peak_seizure_probability * 100
+    //   OR payload.risk.model_confidence
+    let confidenceVal = 0;
+    if (primaryAlert.peak_seizure_probability !== undefined && primaryAlert.peak_seizure_probability !== null) {
+      confidenceVal = safeNum(primaryAlert.peak_seizure_probability, 0) * 100;
+    } else if (r.model_confidence !== undefined) {
+      confidenceVal = safeNum(r.model_confidence, 0);
+    } else {
+      confidenceVal = safeNum(payload.model_confidence, 0);
+    }
     const stabilityVal = r.prediction_stability !== undefined ? r.prediction_stability : (payload.prediction_stability || 0);
     const latencyVal = r.analysis_latency_seconds !== undefined ? r.analysis_latency_seconds : (payload.analysis_latency_seconds || 0);
 
-    if (el('model-confidence')) el('model-confidence').textContent = safeNum(confidenceVal, 0).toFixed(0) + '%';
+    if (el('model-confidence')) el('model-confidence').textContent = confidenceVal.toFixed(0) + '%';
     if (el('prediction-stability')) el('prediction-stability').textContent = safeNum(stabilityVal, 0).toFixed(0) + '%';
     if (el('analysis-latency')) el('analysis-latency').textContent = safeNum(latencyVal, 0).toFixed(1) + 's';
     if (el('key-finding-text')) el('key-finding-text').textContent = r.key_finding || '—';
-    
+
     const sfList = el('secondary-findings-list');
     const sfWrap = el('secondary-findings-wrap');
     if (sfList && sfWrap) {
@@ -751,137 +778,107 @@
     return li;
   }
 
+  // ── Brain localization config ────────────────────────────────────────────
+  // Each dominant_zone token maps to its overlay layer id, the highlight image
+  // shown on the source canvas, and the badge copy. Order matches the 5 lobe
+  // nodes in the DOM: FRONTAL, L-TEMPORAL, R-TEMPORAL, CENTRAL, PARIETAL.
+  const _ZONE_LAYERS = {
+    'FRONTAL':    { layer: 'loc-layer-frontal',    image: '/assets/brain_localization/Frontal.png',    label: 'LOCALIZATION: FRONTAL' },
+    'L-TEMPORAL': { layer: 'loc-layer-l-temporal', image: '/assets/brain_localization/L-Temporal.png', label: 'LOCALIZATION: LEFT TEMPORAL' },
+    'R-TEMPORAL': { layer: 'loc-layer-r-temporal', image: '/assets/brain_localization/R-Temporal.png', label: 'LOCALIZATION: RIGHT TEMPORAL' },
+    'CENTRAL':    { layer: 'loc-layer-central',    image: '/assets/brain_localization/central.png',    label: 'LOCALIZATION: CENTRAL' },
+    'PARIETAL':   { layer: 'loc-layer-parietal',   image: '/assets/brain_localization/Parietal.png',   label: 'LOCALIZATION: PARIETAL' },
+  };
+  const _ALL_ZONE_LAYER_IDS = Object.keys(_ZONE_LAYERS).map(function(k){ return _ZONE_LAYERS[k].layer; });
+  const _LOC_TRANSITION = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+
+  function _setLayerOpacity(nodeId, opacity) {
+    const node = el(nodeId);
+    if (node) { node.style.transition = _LOC_TRANSITION; node.style.opacity = String(opacity); }
+  }
+
+  // applyDominantZoneLocalization(zone) — strict data-driven head-map renderer.
+  //  1) RESET all 5 lobe nodes to their desaturated inactive baseline.
+  //  2) DIFFUSE / GENERAL (or empty/unrecognized) -> deactivate alert styling on
+  //     ALL lobes and load diffuse.png exclusively on the source canvas.
+  //  3) Otherwise apply the high-contrast accent ONLY to the single matching lobe.
   function applyDominantZoneLocalization(domZone) {
-    const normalized = (domZone || '').toUpperCase();
+    const normalized = String(domZone || '').trim().toUpperCase();
     const canvas = el('dynamic-brain-map-canvas');
     const placeholder = el('loc-layer-placeholder');
     const badge = el('loc-zone-badge');
-    
-    const layers = ['loc-layer-frontal', 'loc-layer-l-temporal', 'loc-layer-r-temporal', 'loc-layer-central', 'loc-layer-parietal'];
-    layers.forEach(lid => {
-      const node = el(lid); if (node) node.style.opacity = '0';
-    });
 
-    switch(normalized) {
-      case 'FRONTAL':
-        if (canvas) {
-          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
-          canvas.style.opacity = '0.1';
-          setTimeout(() => {
-            canvas.src = '/assets/brain_localization/Frontal.png';
-            canvas.style.opacity = '1';
-          }, 50);
-        }
-        const frontalL = el('loc-layer-frontal'); if (frontalL) frontalL.style.opacity = '1';
-        if (placeholder) placeholder.style.opacity = '0';
-        if (badge) {
-          badge.textContent = 'LOCALIZATION: FRONTAL';
-          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
-        }
-        break;
+    // STEP 1 — reset every lobe node to inactive baseline (no stale red/active state)
+    _ALL_ZONE_LAYER_IDS.forEach(function(lid){ _setLayerOpacity(lid, 0); });
 
-      case 'L-TEMPORAL':
-        if (canvas) {
-          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
-          canvas.style.opacity = '0.1';
-          setTimeout(() => {
-            canvas.src = '/assets/brain_localization/L-Temporal.png';
-            canvas.style.opacity = '1';
-          }, 50);
-        }
-        const ltempL = el('loc-layer-l-temporal'); if (ltempL) ltempL.style.opacity = '1';
-        if (placeholder) placeholder.style.opacity = '0';
-        if (badge) {
-          badge.textContent = 'LOCALIZATION: LEFT TEMPORAL';
-          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
-        }
-        break;
-
-      case 'R-TEMPORAL':
-        if (canvas) {
-          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
-          canvas.style.opacity = '0.1';
-          setTimeout(() => {
-            canvas.src = '/assets/brain_localization/R-Temporal.png';
-            canvas.style.opacity = '1';
-          }, 50);
-        }
-        const rtempL = el('loc-layer-r-temporal'); if (rtempL) rtempL.style.opacity = '1';
-        if (placeholder) placeholder.style.opacity = '0';
-        if (badge) {
-          badge.textContent = 'LOCALIZATION: RIGHT TEMPORAL';
-          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
-        }
-        break;
-
-      case 'CENTRAL':
-        if (canvas) {
-          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
-          canvas.style.opacity = '0.1';
-          setTimeout(() => {
-            canvas.src = '/assets/brain_localization/central.png';
-            canvas.style.opacity = '1';
-          }, 50);
-        }
-        const centralL = el('loc-layer-central'); if (centralL) centralL.style.opacity = '1';
-        if (placeholder) placeholder.style.opacity = '0';
-        if (badge) {
-          badge.textContent = 'LOCALIZATION: CENTRAL';
-          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
-        }
-        break;
-
-      case 'PARIETAL':
-        if (canvas) {
-          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
-          canvas.style.opacity = '0.1';
-          setTimeout(() => {
-            canvas.src = '/assets/brain_localization/Parietal.png';
-            canvas.style.opacity = '1';
-          }, 50);
-        }
-        const parietalL = el('loc-layer-parietal'); if (parietalL) parietalL.style.opacity = '1';
-        if (placeholder) placeholder.style.opacity = '0';
-        if (badge) {
-          badge.textContent = 'LOCALIZATION: PARIETAL';
-          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
-        }
-        break;
-
-      case 'DIFFUSE':
-      default:
-        if (canvas) {
-          canvas.style.transition = 'opacity 400ms cubic-bezier(0.4, 0, 0.2, 1)';
-          canvas.style.opacity = '0.1';
-          setTimeout(() => {
-            canvas.src = '/assets/brain_localization/diffuse.png';
-            canvas.style.opacity = '1';
-          }, 50);
-        }
-        if (placeholder) placeholder.style.opacity = '1';
-        if (badge) {
-          badge.textContent = 'LOCALIZATION: GENERAL / DIFFUSE';
-          badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-surface-container-lowest border border-outline-variant text-outline font-label-sm text-label-sm uppercase tracking-widest';
-        }
-        break;
+    // STEP 2 — DIFFUSE / GENERAL: deactivate all lobes; diffuse.png only
+    if (!normalized || normalized.indexOf('DIFFUSE') !== -1 || normalized.indexOf('GENERAL') !== -1) {
+      if (canvas) { canvas.src = '/assets/brain_localization/diffuse.png'; canvas.style.transition = _LOC_TRANSITION; canvas.style.opacity = '1'; }
+      if (placeholder) placeholder.style.opacity = '1';
+      if (badge) {
+        badge.textContent = 'LOCALIZATION: GENERAL / DIFFUSE';
+        badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-surface-container-lowest border border-outline-variant text-outline font-label-sm text-label-sm uppercase tracking-widest';
+      }
+      return 'DIFFUSE';
     }
+
+    // STEP 3 — highlight ONLY the matching lobe
+    let cfg = _ZONE_LAYERS[normalized];
+    if (!cfg) {
+      for (const key in _ZONE_LAYERS) {
+        if (normalized.indexOf(key) !== -1) { cfg = _ZONE_LAYERS[key]; break; }
+      }
+    }
+    if (!cfg) {
+      if (canvas) { canvas.src = '/assets/brain_localization/diffuse.png'; canvas.style.transition = _LOC_TRANSITION; canvas.style.opacity = '1'; }
+      if (placeholder) placeholder.style.opacity = '1';
+      if (badge) {
+        badge.textContent = 'LOCALIZATION: GENERAL / DIFFUSE';
+        badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-surface-container-lowest border border-outline-variant text-outline font-label-sm text-label-sm uppercase tracking-widest';
+      }
+      return 'DIFFUSE';
+    }
+
+    if (canvas) { canvas.src = cfg.image; canvas.style.transition = _LOC_TRANSITION; canvas.style.opacity = '1'; }
+    _setLayerOpacity(cfg.layer, 1);
+    if (placeholder) placeholder.style.opacity = '0';
+    if (badge) {
+      badge.textContent = cfg.label;
+      badge.className = 'localization-badge-live mb-3 px-3 py-2 rounded bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm uppercase tracking-widest';
+    }
+    return normalized;
   }
 
   function renderBrain(payload){
     const b = payload.brain_intelligence || {};
     const loc = b.localization || {};
-    const weights = loc.channel_weights || {};
-    
-    const deltaW = safeNum(weights.Fp1, 0);
-    const thetaW = safeNum(weights.T3, 0);
-    const alphaW = safeNum(weights.Cz, 0);
-    const betaW = safeNum(weights.O1, 0);
+    const sd = b.spectral_dominance || {};
+    const bands = Array.isArray(sd.bands) ? sd.bands : [];
+    const byName = {};
+    bands.forEach(function(band){
+      byName[String(band.name || '').toUpperCase()] = safeNum(band.value, 0);
+    });
 
-    const sumW = deltaW + thetaW + alphaW + betaW;
-    const deltaPct = sumW > 0 ? (deltaW / sumW) * 100 : 0.0;
-    const thetaPct = sumW > 0 ? (thetaW / sumW) * 100 : 0.0;
-    const alphaPct = sumW > 0 ? (alphaW / sumW) * 100 : 0.0;
-    const betaPct = sumW > 0 ? (betaW / sumW) * 100 : 0.0;
+    let deltaPct, thetaPct, alphaPct, betaPct;
+    if (bands.length >= 4) {
+      // Prefer the backend spectral_dominance.bands profile (sums to 100)
+      deltaPct = safeNum(byName['DELTA'], 0);
+      thetaPct = safeNum(byName['THETA'], 0);
+      alphaPct = safeNum(byName['ALPHA'], 0);
+      betaPct  = safeNum(byName['BETA'], 0);
+    } else {
+      // Fallback: derive from channel variance weights (normalized to 100)
+      const weights = loc.channel_weights || {};
+      const deltaW = safeNum(weights.Fp1, 0);
+      const thetaW = safeNum(weights.T3, 0);
+      const alphaW = safeNum(weights.Cz, 0);
+      const betaW = safeNum(weights.O1, 0);
+      const sumW = deltaW + thetaW + alphaW + betaW;
+      deltaPct = sumW > 0 ? (deltaW / sumW) * 100 : 0.0;
+      thetaPct = sumW > 0 ? (thetaW / sumW) * 100 : 0.0;
+      alphaPct = sumW > 0 ? (alphaW / sumW) * 100 : 0.0;
+      betaPct  = sumW > 0 ? (betaW / sumW) * 100 : 0.0;
+    }
 
     if (el('delta-value')) el('delta-value').textContent = deltaPct.toFixed(1) + '%';
     if (el('delta-bar')) el('delta-bar').style.width = deltaPct.toFixed(1) + '%';
@@ -895,24 +892,29 @@
     if (el('beta-value')) el('beta-value').textContent = betaPct.toFixed(1) + '%';
     if (el('beta-bar')) el('beta-bar').style.width = betaPct.toFixed(1) + '%';
 
-    if (el('spectral-label')) el('spectral-label').textContent = (b.spectral_dominance||{}).label || 'Resting Alpha';
-    
+    if (el('spectral-label')) el('spectral-label').textContent = sd.label || 'Resting Alpha';
+
     applyDominantZoneLocalization(loc.dominant_zone);
     if (el('loc-region')) el('loc-region').textContent = loc.region || 'DIFFUSE / GENERAL';
-    if (el('loc-confidence')) el('loc-confidence').textContent = safeNum(loc.confidence, 0) + '%';
+    if (el('loc-confidence')) el('loc-confidence').textContent = safeNum(loc.confidence, 0).toFixed(0) + '%';
     if (el('loc-strength')) el('loc-strength').textContent = loc.evidence_strength || 'N/A';
   }
 
   function renderSignal(payload){
     const s = payload.signal_intelligence || {};
     const cal = payload.calibration_profile || {};
-    
-    const q = cal.baseline_mu !== undefined ? Math.round(safeNum(cal.baseline_mu, 0) * 100) : safeNum(s.quality_score, 0);
+
+    // Quality Score prefers the real backend signal_intelligence.quality_score;
+    // only the mu-proxy is used when quality_score is absent.
+    const q = s.quality_score !== undefined
+      ? Math.round(safeNum(s.quality_score, 0))
+      : (cal.baseline_mu !== undefined ? Math.round(safeNum(cal.baseline_mu, 0) * 100) : 0);
     if (el('quality-val')) el('quality-val').textContent = q;
     if (el('quality-label')) el('quality-label').textContent = s.quality_label || (q >= 85 ? 'Optimal' : q >= 70 ? 'Acceptable' : q >= 50 ? 'Degraded' : 'Insufficient');
     if (el('noise-val')) el('noise-val').textContent = s.noise_burden || '--';
     if (el('artifact-val')) el('artifact-val').textContent = s.artifact_burden || '--';
-    const t = safeNum(s.trust_level, 0);
+    // Trust Level bar + text bound dynamically to backend signal_intelligence.trust_level
+    const t = Math.max(0, Math.min(100, Math.round(safeNum(s.trust_level, 0))));
     if (el('trust-val')) el('trust-val').textContent = t + '%';
     if (el('trust-bar')) el('trust-bar').style.width = t + '%';
   }

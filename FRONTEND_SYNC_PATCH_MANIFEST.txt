@@ -1,0 +1,12 @@
+NeuroVision Frontend Synchronization Patch
+
+Project-relative file placement:
+- analysis.html
+- code.html
+
+Patch intent:
+- Brain localization graphics synchronized to normalized dominant_zone tokens.
+- Diffuse / General states now hard-reset all five lobe nodes and load diffuse.png exclusively.
+- Localization confidence now resolves from clinical_alerts_detected[0].peak_seizure_probability or risk.model_confidence.
+- Trust Level and quality visuals now consume dynamic backend quality fields instead of static 0% placeholders.
+- Sidebar/theme constraints preserved with w-64 sidebar, h-screen layout, surface-container sidebar background, ml-64 content offset, and level-1 surface cards with outline-variant borders.
