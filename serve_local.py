@@ -1015,7 +1015,7 @@ async def predict_real_edf_stream(file: UploadFile = File(...)):
                 raw.pick_channels(_present)
             data_matrix, times = raw.get_data(return_times=True)
         else:
-            data_matrix = np.array([])
+            data_matrix = np.empty((0, 0))
             times = np.array([])
         
         # Clean up temporary file path from disk memory
@@ -1126,6 +1126,7 @@ async def predict_real_edf_stream(file: UploadFile = File(...)):
         # Generate a seeded RNG based on patient_id for minor variation stability
         patient_hash = abs(hash(patient_id)) % 10000
         np.random.seed(patient_hash)
+        rng = _seeded_random(patient_id)
 
         # ── Localization enrichment (human region + model confidence + evidence tier) ──
         # NOTE: the variables below are snake_case (dominant_zone / dominant_lead).
@@ -1413,8 +1414,9 @@ async def predict_real_edf_stream(file: UploadFile = File(...)):
         return response_payload
         
     except Exception as e:
-        logger.error(f"Error in predict_real_edf_stream: {e}")
-        return {"status": "ERROR", "detail": str(e)}
+        import traceback
+        logger.error(f"Error in predict_real_edf_stream:\n{traceback.format_exc()}")
+        raise e
 
 
 # Mount the project root directory to serve any static assets, JSON snapshots, or additional HTML pages requested by the dashboard
