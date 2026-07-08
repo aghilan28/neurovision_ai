@@ -11,11 +11,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy all project execution files directly into the execution path
-COPY PHASE12_DEEP_SEQUENTIAL_ENGINE.py .
-COPY neurovision_api.py .
-COPY PHASE5B_TEMPORAL_XGBOOST.joblib .
+# Copy the ENTIRE project (frontend HTML + backend + model + all assets)
+COPY . .
 
 EXPOSE 8080
 
-ENTRYPOINT ["python", "neurovision_api.py"]
+# ONE entry point — the unified backend server
+ENTRYPOINT ["python", "serve_local.py"]
