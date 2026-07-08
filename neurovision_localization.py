@@ -460,29 +460,25 @@ def compute_model_driven_localization(
     dominant_zone = LEAD_TO_ZONE_MAP.get(dominant_lead, "DIFFUSE")
 
     # If no channel meaningfully drives the prediction (flat / normal recording),
-    # or the model never crossed the gate, classify as DIFFUSE / GENERAL.
+    # or the model never crossed the gate, classify as below_gate.
     GATE = 0.5012
-    if baseline_peak < GATE or dominant_drop < 1e-4:
-        dominant_lead_out = "NONE"
-        dominant_zone_out = "DIFFUSE"
-    else:
-        dominant_lead_out = dominant_lead
-        dominant_zone_out = dominant_zone
+    below_gate = bool(baseline_peak < GATE or dominant_drop < 1e-4)
 
     elapsed = time.perf_counter() - t0
     log.info(
         "neurovision_localization: ablation done in %.2fs | baseline_peak=%.4f "
-        "dominant=%s(%s) drop=%.4f windows=%d",
-        elapsed, baseline_peak, dominant_lead_out, dominant_zone_out,
-        dominant_drop, len(starts),
+        "dominant=%s(%s) drop=%.4f windows=%d below_gate=%s",
+        elapsed, baseline_peak, dominant_lead, dominant_zone,
+        dominant_drop, len(starts), below_gate,
     )
 
     return {
-        "dominant_lead": dominant_lead_out,
-        "dominant_zone": dominant_zone_out,
+        "dominant_lead": dominant_lead,
+        "dominant_zone": dominant_zone,
         "peak_seizure_probability": round(baseline_peak, 6),
         "channel_contributions": {k: round(v, 6) for k, v in contributions.items()},
         "localization_method": "xgboost_channel_ablation",
         "n_windows": len(starts),
         "baseline_peak": round(baseline_peak, 6),
+        "below_gate": below_gate,
     }

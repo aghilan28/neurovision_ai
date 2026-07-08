@@ -919,8 +919,9 @@ async def predict_real_edf_stream(file: UploadFile = File(...)):
                         # task; adopt it (clamped to a sane floor so the UI never
                         # renders a literal 0% on a real recording).
                         calculated_probability = float(min(max(_model_peak, 0.01), 0.99))
-                        # Adopt the model's spatial attribution. If the model did not
-                        # cross the gate, it returns DIFFUSE/NONE — honor that.
+                        # Adopt the model's spatial attribution. Even if the model did
+                        # not cross the gate, we preserve the true localized region for
+                        # internal consistency (below_gate flag indicates confidence).
                         dominant_zone = _loc.get("dominant_zone", dominant_zone)
                         dominant_lead = _loc.get("dominant_lead", dominant_lead)
                         # channel_contributions now carry TRUE model ablation drops
