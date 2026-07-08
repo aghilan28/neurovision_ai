@@ -1,24 +1,9 @@
 """``backend/application_platform/provisioning`` — clinical model provisioning (MP-1).
 
-Provisions a clinically meaningful seizure-detection model at startup. The synthetic
-training cohort replicates the key spectral and temporal characteristics of real
-clinical EEG (modeled on CHB-MIT Scalp EEG Database patterns):
+Provisions a clinically meaningful seizure-detection model at startup.
 
-* **Class 0 (interictal / non-seizure):** 1/f background noise, dominant posterior
-  alpha (8-13 Hz), moderate beta (13-30 Hz), minimal slow-wave activity, eye-blink
-  artifacts in frontal channels — resembling awake baseline EEG.
-
-* **Class 1 (ictal / seizure):** 3 Hz generalized spike-and-wave discharges,
-  high-amplitude rhythmic delta (1-4 Hz), rhythmic theta bursts (4-8 Hz),
-  suppressed alpha, elevated broadband amplitude, sharp transients at 1-3 Hz —
-  resembling generalized onset seizure.
-
-The spectral profiles are designed so that the P3 feature engineering pipeline
-(band power, spectral entropy, coherence) produces clearly separable feature vectors,
-enabling the model to generalize to real EEG data (e.g., PhysioNet CHB-MIT).
-
-10 patient-disjoint recordings (5 per class) with varied seeds ensure the model
-learns robust spectral boundaries rather than memorizing specific waveforms.
+FIX: Real pretrained CHB-MIT artifact is now the default path.
+Synthetic bootstrap is ONLY an explicit opt-in fallback via NEUROVISION_ALLOW_SYNTHETIC_BOOTSTRAP=1.
 """
 
 from __future__ import annotations
@@ -83,14 +68,7 @@ class ProvisioningReport:
 
 def _synthesize_recording(path: str, *, seed: int, duration_seconds: float,
                           class_label: int = 0) -> str:
-    """Synthesize a clinically realistic EEG recording (FIF format).
-
-    The spectral profiles are modeled on real CHB-MIT characteristics:
-    - 1/f pink noise background (physiological baseline)
-    - Realistic frequency band amplitudes
-    - Channel-specific variations (frontal vs posterior)
-    - Seizure patterns: 3Hz spike-wave, rhythmic delta bursts, sharp transients
-    """
+    """Synthesize a clinically realistic EEG recording (FIF format)."""
     import numpy as np
     import mne
 
@@ -105,35 +83,28 @@ def _synthesize_recording(path: str, *, seed: int, duration_seconds: float,
 
         # 1/f pink noise background (realistic physiological noise)
         white = ch_rng.standard_normal(n_samples)
-        # Simple pink noise via cumulative sum + highpass
         pink = np.cumsum(white)
-        pink = pink - np.linspace(pink[0], pink[-1], n_samples)  # detrend
-        pink = pink / (np.std(pink) + 1e-12) * 0.3  # normalize
+        pink = pink - np.linspace(pink[0], pink[-1], n_samples)
+        pink = pink / (np.std(pink) + 1e-12) * 0.3
 
-        # Channel-specific characteristics
         is_frontal = ch in ("Fp1", "Fp2", "F3", "F4")
         is_posterior = ch in ("P3", "P4")
 
         if class_label == 0:
-            # ─── INTERICTAL (non-seizure) ───
-            # Dominant posterior alpha (9-11 Hz), variable across patients
+            # INTERICTAL (non-seizure)
             alpha_freq = 9.0 + (seed % 5) * 0.4 + i * 0.1
             alpha_amp = 1.2 if is_posterior else 0.6
             alpha = alpha_amp * np.sin(2 * np.pi * alpha_freq * t)
 
-            # Moderate beta (15-25 Hz)
             beta_freq = 15 + (seed % 7) + i * 0.5
             beta = 0.25 * np.sin(2 * np.pi * beta_freq * t)
 
-            # Low delta (1-4 Hz)
             delta_freq = 1.5 + (seed % 3) * 0.3
             delta = 0.15 * np.sin(2 * np.pi * delta_freq * t)
 
-            # Low theta (4-8 Hz)
             theta_freq = 5.0 + (seed % 4) * 0.5
             theta = 0.2 * np.sin(2 * np.pi * theta_freq * t)
 
-            # Eye blinks in frontal channels (slow 0.3 Hz artifacts)
             blinks = np.zeros(n_samples)
             if is_frontal:
                 blink_times = ch_rng.uniform(1, duration_seconds - 1, size=int(duration_seconds / 4))
@@ -147,26 +118,20 @@ def _synthesize_recording(path: str, *, seed: int, duration_seconds: float,
             signal = alpha + beta + delta + theta + pink + blinks + noise
 
         else:
-            # ─── ICTAL (seizure) ───
-            # 3 Hz spike-and-wave (the classic generalized seizure pattern)
+            # ICTAL (seizure)
             spike_wave_freq = 3.0 + (seed % 3) * 0.2
             spike_wave = 2.0 * np.sin(2 * np.pi * spike_wave_freq * t)
-            # Add sharp spike component (harmonics)
             spike_wave += 0.8 * np.sin(2 * np.pi * (spike_wave_freq * 2) * t)
             spike_wave += 0.4 * np.sin(2 * np.pi * (spike_wave_freq * 3) * t)
 
-            # High-amplitude rhythmic delta (1.5-3 Hz)
             delta_freq = 1.5 + (seed % 4) * 0.3
             delta = 2.5 * np.sin(2 * np.pi * delta_freq * t)
 
-            # Rhythmic theta bursts (5-7 Hz)
             theta_freq = 5.0 + (seed % 3) * 0.5
             theta = 1.5 * np.sin(2 * np.pi * theta_freq * t)
 
-            # Suppressed alpha (seizure suppresses normal rhythms)
             alpha = 0.1 * np.sin(2 * np.pi * 10 * t)
 
-            # Sharp transients (1-3 Hz irregular spikes)
             spikes = np.zeros(n_samples)
             spike_rate = 2.0 + (seed % 3)
             spike_times = np.arange(0, duration_seconds, 1.0 / spike_rate)
@@ -178,7 +143,6 @@ def _synthesize_recording(path: str, *, seed: int, duration_seconds: float,
                     amp = ch_rng.uniform(2.0, 4.0) * (1 if ch_rng.random() > 0.5 else -1)
                     spikes[idx:idx+width] = amp * np.exp(-np.arange(width) / max(1, width * 0.25))
 
-            # Elevated broadband noise (seizure increases overall amplitude)
             noise = 0.6 * ch_rng.standard_normal(n_samples)
             signal = spike_wave + delta + theta + alpha + spikes + pink + noise
 
@@ -193,6 +157,7 @@ def _synthesize_recording(path: str, *, seed: int, duration_seconds: float,
 
 
 def build_bootstrap_cohort(directory: str, *, analysis_seconds: float) -> list:
+    """Synthetic bootstrap ONLY for development / testing. Not used in prod unless flag set."""
     os.makedirs(directory, exist_ok=True)
     duration = float(analysis_seconds) + _BOOTSTRAP_MARGIN_SECONDS
     cohort: list = []
@@ -207,6 +172,14 @@ def build_bootstrap_cohort(directory: str, *, analysis_seconds: float) -> list:
 def provision_model(service, *, architecture: ModelArchitecture = ModelArchitecture.EEGNET,
                     created_at: str = DETERMINISTIC_EPOCH,
                     force: bool = False) -> ProvisioningReport:
+    """Provision the model.
+
+    Priority order (MANDATORY):
+    1. If a real pretrained CHB-MIT artifact exists (data/chbmit_model.json), load it
+       using the pretrained wrapper. This is the ONLY production path.
+    2. If NEUROVISION_ALLOW_SYNTHETIC_BOOTSTRAP=1, fall back to synthetic cohort.
+    3. Otherwise FAIL loudly.
+    """
     has_context = getattr(service.backend, "model_context", None) is not None
     if has_context and not force:
         info = getattr(service, "_model_info", {}) or {}
@@ -215,12 +188,72 @@ def provision_model(service, *, architecture: ModelArchitecture = ModelArchitect
             architecture=info.get("architecture"), source="already_present",
             n_recordings=0)
 
-    analysis_seconds = float(getattr(service, "analysis_seconds", DEFAULT_ANALYSIS_SECONDS))
+    # === STEP 3 PRIMARY PATH: Real pretrained artifact ===
+    allow_synthetic = os.environ.get("NEUROVISION_ALLOW_SYNTHETIC_BOOTSTRAP", "0") == "1"
+
     try:
+        from .pretrained import load_chbmit_pretrained, is_pretrained_context
+
+        # Try to load pretrained artifact (multiple candidate locations)
+        artifact_candidates = [
+            os.path.abspath(os.path.join("data", "chbmit_model.json")),
+            os.path.abspath("chbmit_model.json"),
+            os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "data", "chbmit_model.json")),
+            "/home/user/neurovision_ai/data/chbmit_model.json",
+        ]
+        artifact_path = None
+        for cand in artifact_candidates:
+            if os.path.exists(cand):
+                artifact_path = cand
+                break
+
+        if artifact_path:
+            pretrained_ctx = load_chbmit_pretrained(artifact_path)
+            # Store in backend (bypass prepare_model)
+            service.backend.set_model_context(pretrained_ctx)
+            # Also update platform _model_info
+            service._model_info = {
+                "model_id": pretrained_ctx.model_id,
+                "architecture": pretrained_ctx.model_record.architecture,
+                "readiness": "ready",
+                "source": "chbmit_pretrained_phase9",
+                "artifact": artifact_path,
+                "metrics": getattr(pretrained_ctx.engine, "metrics", {}),
+            }
+            return ProvisioningReport(
+                provisioned=True,
+                already_present=False,
+                model_id=pretrained_ctx.model_id,
+                architecture=pretrained_ctx.model_record.architecture,
+                source="chbmit_pretrained_phase9",
+                n_recordings=0,
+                findings=("using_real_chbmit_phase9_artifact",)
+            )
+    except Exception as exc:
+        # Log the failure but do not silently continue
+        if not allow_synthetic:
+            return ProvisioningReport(
+                provisioned=False, already_present=False, model_id=None, architecture=None,
+                source="failed",
+                n_recordings=0,
+                findings=(f"pretrained_load_failed:{type(exc).__name__}: {exc}",)
+            )
+
+    # === SYNTHETIC FALLBACK (ONLY when explicitly allowed) ===
+    if not allow_synthetic:
+        return ProvisioningReport(
+            provisioned=False, already_present=False, model_id=None, architecture=None,
+            source="failed",
+            n_recordings=0,
+            findings=("no real model artifact found and synthetic bootstrap disabled (set NEUROVISION_ALLOW_SYNTHETIC_BOOTSTRAP=1 to allow)",)
+        )
+
+    # Synthetic path (explicitly allowed, for dev only)
+    try:
+        analysis_seconds = float(getattr(service, "analysis_seconds", DEFAULT_ANALYSIS_SECONDS))
         cohort_dir = tempfile.mkdtemp(prefix="nv_bootstrap_cohort_")
         cohort = build_bootstrap_cohort(cohort_dir, analysis_seconds=analysis_seconds)
 
-        # Clinical label assignment: deterministic by patient_id.
         _ordered_labels = [cl for _pk, _ck, _seed, cl in _BOOTSTRAP_PATIENTS]
         _patient_id_to_label = {}
         _patient_order = []
@@ -242,7 +275,7 @@ def provision_model(service, *, architecture: ModelArchitecture = ModelArchitect
             raise ProvisioningError("prepare_model completed but _model_info is empty")
         return ProvisioningReport(
             provisioned=True, already_present=False, model_id=info.get("model_id"),
-            architecture=info.get("architecture"), source="clinical_bootstrap_v2",
+            architecture=info.get("architecture"), source="clinical_bootstrap_v2_synthetic_allowed",
             n_recordings=len(cohort))
     except Exception as exc:
         return ProvisioningReport(
