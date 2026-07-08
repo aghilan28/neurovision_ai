@@ -7,8 +7,8 @@ Usage (recommended):
     python run_with_real_model.py
 
 This starts a minimal FastAPI server on port 8080 with:
-  POST /upload_and_analyze   → full metadata + real seizure prediction
   GET  /health
+  POST /upload_and_analyze   → full metadata + real seizure prediction
 
 It uses our fixed pretrained pipeline directly.
 """
@@ -16,13 +16,12 @@ It uses our fixed pretrained pipeline directly.
 import os
 import sys
 import tempfile
-import base64
 
 # Make sure we can import our fixed modules
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -52,6 +51,30 @@ except Exception as e:
 
 import mne
 import numpy as np
+
+@app.get("/", response_class=HTMLResponse)
+def home():
+    """Simple test page"""
+    return """
+    <html>
+    <head><title>NeuroVision - Real Model</title></head>
+    <body style="font-family: Arial; padding: 40px; background: #111; color: #eee;">
+        <h1>NeuroVision - Real Trained Model (FIXED)</h1>
+        <p style="color:#0f0;">✓ Real CHB-MIT model loaded successfully</p>
+        
+        <h2>Test Upload</h2>
+        <form action="/upload_and_analyze" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".edf,.fif" required style="margin:10px 0;">
+            <button type="submit" style="padding:10px 20px; background:#0af; color:white; border:none; cursor:pointer;">Upload EEG & Get Real Prediction</button>
+        </form>
+        
+        <p><a href="/health" style="color:#0af;">Check /health</a></p>
+        
+        <hr style="margin:30px 0; border-color:#333;">
+        <small>For frontend: POST to <code>/upload_and_analyze</code> with form field <code>file</code></small>
+    </body>
+    </html>
+    """
 
 @app.get("/health")
 def health():
@@ -131,4 +154,4 @@ if __name__ == "__main__":
     print("NEUROVISION - REAL MODEL SERVER (FIXED)")
     print("Using the actual trained chbmit_model.json")
     print("="*60)
-    uvicorn.run(app, host="0.0.0.0", port=8080, reload=False)  # reload=False avoids numba crashes
+    uvicorn.run(app, host="0.0.0.0", port=8080, reload=False)
