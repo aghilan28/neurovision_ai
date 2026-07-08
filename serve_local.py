@@ -253,6 +253,7 @@ async def calibrate_signal(file: UploadFile = File(...)):
         flatlines = [info['ch_names'][i] for i, v in enumerate(variances) if v < 1e-15]
         
         valid_data_indices = [info['ch_names'].index(channel_mapping[ch]) for ch in mapped_channels]
+        channel_variances = []
         if valid_data_indices and data.size > 0:
             valid_data = data[valid_data_indices, :]
             valid_data_uv = valid_data * 1e6
