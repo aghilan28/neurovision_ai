@@ -222,6 +222,42 @@ def build_application(config: Optional[ServerConfig] = None):
             f"NeuroVision deployment aborted: frontend route attachment failed — {_exc}"
         ) from _exc
 
+    # PHASE 1.2 HARDENING — Strip broken UI catch-all routes
+    # The UI layer (scripts.application_frontend_gateway) registers:
+    #   @app.get("/")  -> frontend.render_login()  -> AttributeError: pages.login_page missing
+    #   @app.get("/{page}") -> UI catch-all -> same crash
+    # These BROKEN routes cause redirect loops / 500s in production if they ever win.
+    # Static routes already cover ALL required paths (/, /auth, /dashboard, /upload,
+    # /analysis, /prediction, /clinical, /patients, /export, /settings, /status, /reports).
+    # Remove UI root + UI catch-all to guarantee 100% static delivery — 0 UI drift.
+    try:
+        _pruned = []
+        # Iterate over a copy since we mutate the list
+        for route in list(app.router.routes):
+            rpath = getattr(route, "path", None)
+            endpoint = getattr(route, "endpoint", None)
+            ename = getattr(endpoint, "__name__", "")
+            emod = getattr(endpoint, "__module__", "")
+            # UI root: path="/" + endpoint.__name__=="root" + module scripts.application_frontend_gateway
+            if rpath == "/" and ename == "root" and "application_frontend_gateway" in emod:
+                app.router.routes.remove(route)
+                _pruned.append(f"{rpath} -> {emod}.{ename}")
+                continue
+            # UI catch-all: path="/{page}"
+            if rpath == "/{page}":
+                app.router.routes.remove(route)
+                _pruned.append(f"{rpath} -> {emod}.{ename}")
+                continue
+            # UI action POST (kept for API compatibility, but not used by static HTML)
+            # Leave /action/{operation} intact — it does not conflict with static GET routes.
+        if _pruned:
+            _log.info("NeuroVision Phase 1.2: pruned %d broken UI catch-all route(s): %s",
+                      len(_pruned), ", ".join(_pruned))
+    except Exception as _pexc:  # noqa: BLE001
+        # Pruning failure is non-fatal — static routes still win first-match,
+        # but log it prominently.
+        _log.warning("UI route pruning encountered an issue (non-fatal): %s", _pexc)
+
     return service, app
 
 
