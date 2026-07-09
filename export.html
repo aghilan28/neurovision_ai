@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- Export Center for NeuroVision -->
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NeuroVision | Export Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&family=Geist:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        background: "#141218", surface: "#1d1b20", "surface-dim": "#141218",
+        "surface-container-lowest": "#0f0d13", "surface-container-low": "#1d1b20",
+        "surface-container": "#211f24", "surface-container-high": "#2b292f",
+        "surface-container-highest": "#36343a", "on-surface": "#e6e0e9",
+        "on-surface-variant": "#cbc4d2", outline: "#948e9c",
+        "outline-variant": "#494551", primary: "#cfbcff",
+        "on-primary": "#381e72", "primary-container": "#4f378a",
+        "on-primary-container": "#e9ddff", secondary: "#44e2cd",
+        "on-secondary": "#003731", secondary-container: "#03c6b2",
+        "on-secondary-container": "#004d44", tertiary: "#e7c365",
+        error: "#ffb4ab", "on-error": "#690005",
+      },
+      fontFamily: {
+        headline: ['"Playfair Display"', 'serif'],
+        body: ['"Geist"', '"Inter"', 'sans-serif'],
+        mono: ['"IBM Plex Mono"', '"JetBrains Mono"', 'monospace'],
+        data: ['"IBM Plex Mono"', '"JetBrains Mono"', 'monospace'],
+      },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem" },
+      spacing: { 'sidebar-width': '256px', 'main-padding': '2rem', 'container-gap': '1rem' }
+    }
+  }
+}
+</script>
+<style>
+  body { background: #141218; color: #e6e0e9; font-family: 'Geist','Inter',sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .glass-panel { background: #211f24; border: 1px solid #494551; border-radius: 0.75rem; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body class="flex min-h-screen">
+<!-- Sidebar (injected by nav.js fallback - static copy for correct active state) -->
+<aside class="w-sidebar-width h-screen bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col fixed left-0 top-0 z-50">
+<div class="px-6 py-6 border-b border-outline-variant/30">
+<div class="flex items-center gap-1">
+<span class="font-headline text-xl font-bold text-on-surface">Neuro</span>
+<span class="font-headline text-xl font-bold text-primary">Vision</span>
+</div>
+<p class="text-[10px] text-outline uppercase tracking-widest mt-1">AI-Powered Neurological Intelligence Platform</p>
+</div>
+<div class="px-6 py-4 flex items-center gap-3 border-b border-outline-variant/30">
+<div id="profile-avatar" class="w-10 h-10 rounded-full bg-primary-container/20 border border-primary/30 flex items-center justify-center text-primary font-headline text-sm font-bold">NV</div>
+<div class="flex flex-col">
+<span id="profile-name" class="text-on-surface text-sm font-medium leading-none">Clinician</span>
+<span id="profile-role" class="text-[11px] text-on-surface-variant mt-1">Senior Neurologist</span>
+<span id="profile-institution" class="text-[10px] text-primary/70 font-medium uppercase tracking-tight mt-0.5">Neuro-AI Lab</span>
+</div>
+</div>
+<nav data-nav class="flex-1 mt-4 px-3 space-y-1"></nav>
+<div class="p-3 border-t border-outline-variant">
+<a href="#" onclick="signOut();return false;" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="text-sm">Sign Out</span>
+</a>
+</div>
+</aside>
+
+<main class="ml-sidebar-width flex-1 min-h-screen overflow-y-auto bg-surface-dim scroll-smooth">
+<header class="flex justify-between items-center px-main-padding py-6 sticky top-0 bg-surface-dim/80 backdrop-blur-md z-40 border-b border-outline-variant/20">
+<div>
+<h1 class="font-headline text-2xl font-semibold text-on-surface">Export Center</h1>
+<p class="text-sm text-on-surface-variant mt-1">Generate and download clinical reports in standard formats.</p>
+</div>
+</header>
+<div class="px-main-padding pb-main-padding space-y-8">
+<section class="glass-panel p-8">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-[32px]">ios_share</span>
+<div>
+<h2 class="text-lg font-semibold text-on-surface">Clinical Report Export</h2>
+<p class="text-sm text-on-surface-variant">Export finalized analyses in your preferred clinical format.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-5 border border-outline-variant rounded hover:border-primary/50 transition-colors cursor-pointer" onclick="doExport('pdf')">
+<span class="material-symbols-outlined text-primary mb-2">picture_as_pdf</span>
+<h3 class="font-semibold text-on-surface">PDF Report</h3>
+<p class="text-xs text-on-surface-variant mt-1">Print-ready clinical PDF with full findings.</p>
+</div>
+<div class="p-5 border border-outline-variant rounded hover:border-primary/50 transition-colors cursor-pointer" onclick="doExport('edf')">
+<span class="material-symbols-outlined text-secondary mb-2">science</span>
+<h3 class="font-semibold text-on-surface">EDF+ Annotation</h3>
+<p class="text-xs text-on-surface-variant mt-1">Seizure markers written back to EDF+.</p>
+</div>
+<div class="p-5 border border-outline-variant rounded hover:border-primary/50 transition-colors cursor-pointer" onclick="doExport('json')">
+<span class="material-symbols-outlined text-tertiary mb-2">data_object</span>
+<h3 class="font-semibold text-on-surface">JSON Telemetry</h3>
+<p class="text-xs text-on-surface-variant mt-1">Machine-readable analysis payload.</p>
+</div>
+</div>
+</section>
+<section class="glass-panel p-8">
+<h2 class="text-lg font-semibold text-on-surface mb-4">Recent Exports</h2>
+<table class="w-full text-sm">
+<thead>
+<tr class="text-left text-[11px] text-outline uppercase tracking-wider border-b border-outline-variant/40">
+<th class="py-3 px-2">Analysis ID</th>
+<th class="py-3 px-2">Format</th>
+<th class="py-3 px-2">Exported</th>
+<th class="py-3 px-2">Status</th>
+</tr>
+</thead>
+<tbody id="export-rows">
+<tr><td colspan="4" class="py-8 text-center text-outline italic">No exports yet. Complete an analysis to begin.</td></tr>
+</tbody>
+</table>
+</section>
+</div>
+</main>
+<script src="/assets/js/nav.js"></script>
+<script>
+function signOut(){
+  localStorage.removeItem('nv_session');
+  localStorage.removeItem('nv_session_role');
+  localStorage.removeItem('nv_session_user');
+  localStorage.removeItem('nv_profile_name');
+  localStorage.removeItem('nv_profile_institution');
+  window.location.href = '/';
+}
+function doExport(fmt){
+  const rows = document.getElementById('export-rows');
+  const id = 'NV-' + Math.floor(1000+Math.random()*9000) + '-X';
+  const now = new Date().toLocaleString();
+  const badge = '<span class="inline-flex items-center gap-1 text-[11px] text-secondary font-mono"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>READY</span>';
+  const tr = '<tr class="border-b border-outline-variant/20"><td class="py-3 px-2 font-mono text-primary">'+id+'</td><td class="py-3 px-2 font-mono">'+fmt.toUpperCase()+'</td><td class="py-3 px-2 font-mono text-outline">'+now+'</td><td class="py-3 px-2">'+badge+'</td></tr>';
+  if (rows.querySelector('td[colspan]')) rows.innerHTML = '';
+  rows.insertAdjacentHTML('afterbegin', tr);
+  alert('Export queued: '+id+' ('+fmt.toUpperCase()+')');
+}
+NV.initPage({ active: '/export', requireAuth: true });
+</script>
+</body>
+</html>

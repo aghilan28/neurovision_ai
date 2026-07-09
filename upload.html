@@ -192,30 +192,9 @@
       <span id="profile-institution" class="text-[10px] text-primary/70 font-medium uppercase tracking-tight">Neuro-AI Lab</span>
     </div>
   </div>
-  <nav class="flex-1 mt-4 px-3 space-y-1">
-    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/dashboard">
-      <span class="material-symbols-outlined text-[20px]">dashboard</span>
-      <span class="font-body-md">Dashboard</span>
-    </a>
-    <a class="nav-item active flex items-center gap-3 px-4 py-3 transition-all duration-200" href="/upload">
-      <span class="material-symbols-outlined text-[20px]">upload_file</span>
-      <span class="font-body-md">Upload EEG</span>
-    </a>
-    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/patients">
-      <span class="material-symbols-outlined text-[20px]">folder_shared</span>
-      <span class="font-body-md">Patient Records</span>
-    </a>
-    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/export">
-      <span class="material-symbols-outlined text-[20px]">ios_share</span>
-      <span class="font-body-md">Export Center</span>
-    </a>
-    <a class="nav-item flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-all duration-200" href="/status">
-      <span class="material-symbols-outlined text-[20px]">analytics</span>
-      <span class="font-body-md">System Status</span>
-    </a>
-  </nav>
+  <nav data-nav class="flex-1 mt-4 px-3 space-y-1"></nav>
   <div class="p-3 border-t border-outline-variant">
-    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all duration-200" href="#" onclick="App.signOut(); return false;">
+    <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all duration-200" href="#" onclick="NV.signOut(); return false;">
       <span class="material-symbols-outlined text-[20px]">logout</span>
       <span class="font-body-md">Sign Out</span>
     </a>
@@ -456,6 +435,7 @@
   </div>
 </main>
 
+<script src="/assets/js/nav.js"></script>
 <script>
 (function() {
   'use strict';
@@ -490,29 +470,12 @@
     },
 
     checkAuth() {
-      const token = localStorage.getItem('nv_session');
-      if (!token) {
-        window.location.replace('/login');
-      }
+      if (!NV.requireAuth('/auth')) return false;
+      return true;
     },
 
     loadProfile() {
-      const user = localStorage.getItem('nv_session_user');
-      const role = localStorage.getItem('nv_session_role');
-      if (user) {
-        document.getElementById('profile-name').textContent = user;
-        document.getElementById('profile-avatar').textContent = user.split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase();
-      }
-      if (role) {
-        document.getElementById('profile-role').textContent = role;
-      }
-    },
-
-    signOut() {
-      localStorage.removeItem('nv_session');
-      localStorage.removeItem('nv_session_role');
-      localStorage.removeItem('nv_session_user');
-      window.location.href = '/login';
+      NV.applyProfile();
     },
 
     resetSession() {
@@ -1068,9 +1031,12 @@
       document.getElementById('success-confidence').textContent = confidence;
 
       const reportLink = document.getElementById('view-report-link');
-      if (this.state.uploadResult && this.state.uploadResult.analysis_id) {
-        reportLink.href = `${API_BASE}/v1/analyses/${this.state.uploadResult.analysis_id}/reports?format=html&type=analysis`;
-        reportLink.target = '_blank';
+      const analysisId = (this.state.uploadResult && this.state.uploadResult.analysis_id)
+        || (this.state.predictResult && (this.state.predictResult.analysis_id || this.state.predictResult.patient_id))
+        || null;
+      if (analysisId) {
+        reportLink.href = '/analysis/' + encodeURIComponent(analysisId);
+        reportLink.target = '_self';
       } else {
         reportLink.href = '/dashboard';
         reportLink.target = '_self';
@@ -1232,7 +1198,10 @@
   };
 
   window.App = App;
-  document.addEventListener('DOMContentLoaded', () => App.init());
+  document.addEventListener('DOMContentLoaded', () => {
+    NV.buildSidebar();
+    App.init();
+  });
 })();
 </script>
 </body>

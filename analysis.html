@@ -222,30 +222,9 @@
 <span id="profile-institution" class="text-[10px] text-primary/70 font-medium uppercase tracking-tight">Neuro-AI Lab</span>
 </div>
 </div>
-<nav class="flex-1 mt-4 px-3 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 bg-surface-container-high text-primary border-l-2 border-primary transition-all duration-150" href="/dashboard">
-<span class="material-symbols-outlined text-[20px]">dashboard</span>
-<span class="font-body-md">Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/upload">
-<span class="material-symbols-outlined text-[20px]">upload_file</span>
-<span class="font-body-md">Upload EEG</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/patients">
-<span class="material-symbols-outlined text-[20px]">folder_shared</span>
-<span class="font-body-md">Patient Records</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/export">
-<span class="material-symbols-outlined text-[20px]">ios_share</span>
-<span class="font-body-md">Export Center</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/status">
-<span class="material-symbols-outlined text-[20px]">analytics</span>
-<span class="font-body-md">System Status</span>
-</a>
-</nav>
+<nav data-nav class="flex-1 mt-4 px-3 space-y-1"></nav>
 <div class="p-3 border-t border-outline-variant">
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all duration-150" href="#" onclick="(window.NV&&NV.signOut)?NV.signOut():null;return false;">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all duration-150" href="#" onclick="NV.signOut();return false;">
 <span class="material-symbols-outlined text-[20px]">logout</span>
 <span class="font-body-md">Sign Out</span>
 </a>
@@ -555,8 +534,13 @@
 </section>
 </div>
 </main>
+<script src="/assets/js/nav.js"></script>
 <script>
 (function() {
+  // Auth gate: must be authenticated to view clinical report.
+  if (!NV.requireAuth('/auth')) return;
+  NV.buildSidebar();
+  NV.applyProfile();
   const API = window.location.origin;
   let includeInReport = false;
   let currentNarrativeText = '';

@@ -174,28 +174,7 @@
 <span id="profile-institution" class="text-[10px] text-primary/70 font-medium uppercase tracking-tight">Neuro-AI Lab</span>
 </div>
 </div>
-<nav class="flex-1 mt-4 px-3 space-y-1">
-<a class="flex items-center gap-3 px-4 py-3 bg-surface-container-high text-primary border-l-2 border-primary transition-all duration-150" href="/dashboard">
-<span class="material-symbols-outlined text-[20px]">dashboard</span>
-<span class="font-body-md">Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/upload">
-<span class="material-symbols-outlined text-[20px]">upload_file</span>
-<span class="font-body-md">Upload EEG</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/patients">
-<span class="material-symbols-outlined text-[20px]">folder_shared</span>
-<span class="font-body-md">Patient Records</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/export">
-<span class="material-symbols-outlined text-[20px]">ios_share</span>
-<span class="font-body-md">Export Center</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest hover:text-on-surface transition-all duration-150" href="/status">
-<span class="material-symbols-outlined text-[20px]">analytics</span>
-<span class="font-body-md">System Status</span>
-</a>
-</nav>
+<nav data-nav class="flex-1 mt-4 px-3 space-y-1"></nav>
 <div class="p-3 border-t border-outline-variant">
 <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all duration-150" href="#" onclick="NV.signOut(); return false;">
 <span class="material-symbols-outlined text-[20px]">logout</span>
@@ -383,36 +362,16 @@
 </section>
 </div>
 </main>
+<script src="/assets/js/nav.js"></script>
 <script>
-    const NV = (function () {
+    const Dash = (function () {
       const SESSION_KEY = 'nv_session';
-      const USER_KEY = 'nv_session_user';
-      const ROLE_KEY = 'nv_session_role';
 
       function apiBase() {
         const proto = window.location.protocol === 'file:' ? 'http:' : window.location.protocol;
         const host = window.location.hostname || 'localhost';
         const port = window.location.port ? ':' + window.location.port : '';
         return proto + '//' + host + port;
-      }
-
-      function readSession() {
-        try {
-          const raw = localStorage.getItem(SESSION_KEY);
-          if (!raw) return null;
-          const parsed = JSON.parse(raw);
-          if (parsed && (parsed.token || parsed.access_token)) return parsed;
-          return { token: raw, user: { name: localStorage.getItem(USER_KEY) || 'Clinician', role: localStorage.getItem(ROLE_KEY) || 'clinician', institution: '', email: '' } };
-        } catch (e) {
-          const raw = localStorage.getItem(SESSION_KEY);
-          if (raw) return { token: raw, user: { name: localStorage.getItem(USER_KEY) || 'Clinician', role: localStorage.getItem(ROLE_KEY) || 'clinician', institution: '', email: '' } };
-          return null;
-        }
-      }
-
-      function initials(name) {
-        if (!name) return 'NV';
-        return name.split(/\s+/).filter(Boolean).map(function (s) { return s[0]; }).slice(0, 2).join('').toUpperCase();
       }
 
       function greeting() {
@@ -475,27 +434,15 @@
         }
       }
 
-      function applyProfile(session) {
-        const u = session.user || {};
-        const name = u.name || session.email || 'Clinician';
-        const role = (u.role || 'clinician').toUpperCase();
-        const institution = u.institution || 'Neuro-AI Lab';
+      function applyProfileUI(session) {
+        NV.applyProfile();
+        const u = (session && session.user) || {};
+        const name = u.name || session.email || localStorage.getItem('nv_profile_name') || 'Clinician';
+        const institution = u.institution || localStorage.getItem('nv_profile_institution') || 'Neuro-AI Lab';
         const g = document.getElementById('greeting');
         if (g) g.textContent = greeting() + ', ' + name;
         const sub = document.getElementById('workspace-subline');
         if (sub) sub.textContent = formatDate() + ' · ' + institution;
-        const pName = document.getElementById('profile-name');
-        if (pName) pName.textContent = name;
-        const pRole = document.getElementById('profile-role');
-        if (pRole) pRole.textContent = role === 'CLINICIAN' ? 'Senior Neurologist' : role;
-        const pInst = document.getElementById('profile-institution');
-        if (pInst) pInst.textContent = institution;
-        const avatar = document.getElementById('profile-avatar');
-        if (avatar) {
-          avatar.textContent = initials(name);
-          avatar.style.background = 'rgba(160,120,255,0.2)';
-          avatar.style.color = '#d0bcff';
-        }
       }
 
       function renderNoRecords() {
@@ -648,29 +595,21 @@
         }, 5000);
       }
 
-      function signOut() {
-        localStorage.removeItem(SESSION_KEY);
-        localStorage.removeItem(USER_KEY);
-        localStorage.removeItem(ROLE_KEY);
-        window.location.href = '/login';
-      }
-
       function init() {
-        const session = readSession();
-        if (!session || !session.token) {
-          window.location.replace('/login');
-          return;
-        }
-        applyProfile(session);
+        // Delegate auth-gating + sidebar + profile to shared NV
+        if (!NV.requireAuth('/auth')) return;
+        NV.buildSidebar();
+        const session = NV.readSession();
+        applyProfileUI(session);
         loadTelemetry();
         pollHealth();
       }
 
-      return { init: init, signOut: signOut };
+      return { init: init };
     })();
 
     document.addEventListener('DOMContentLoaded', function () {
-      NV.init();
+      Dash.init();
       document.querySelectorAll('button, a').forEach(function (el) {
         el.addEventListener('mousedown', function () { el.style.transform = 'scale(0.98)'; });
         el.addEventListener('mouseup', function () { el.style.transform = 'scale(1)'; });

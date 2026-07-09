@@ -123,16 +123,56 @@ def _resolve_html(candidates: List[str]) -> Optional[str]:
 
 
 @app.get("/", response_class=HTMLResponse)
+async def serve_landing(request: Request):
+    """Landing page is the default application entry point."""
+    # If an authenticated session token is present in a cookie/header we still show landing;
+    # client-side JS may choose to forward, but the server always honors the landing as /.
+    resolved = _resolve_html(["index.html",
+                              "runtime_frontend_preview/index.html",
+                              "templates/index.html"])
+    if resolved:
+        logger.info("Serving landing page (index.html) for route '/'")
+        with open(resolved, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    raise HTTPException(status_code=404, detail="index.html (landing page) not found at project root.")
+
+
 @app.get("/upload", response_class=HTMLResponse)
 async def serve_wizard(request: Request):
-    """Serves the primary clinical analysis ingestion panel."""
+    """Serves the primary clinical analysis ingestion panel (upload wizard).
+
+    Prefer upload.html (production page shell) over code.html (legacy integration file).
+    Both contain the same wiring; upload.html has the correct Phase 4A nav/auth fixes.
+    """
+    candidates = [
+        "upload.html",
+        "runtime_frontend_preview/upload.html",
+    ]
+    resolved = _resolve_html(candidates)
+    if resolved:
+        logger.info(f"Serving upload wizard from '{os.path.basename(resolved)}'")
+        with open(resolved, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
+    # Fall back to legacy code.html if upload.html is missing
     try:
         html_path = get_code_html_path()
         with open(html_path, "r", encoding="utf-8") as f:
             return HTMLResponse(content=f.read(), status_code=200)
     except Exception as e:
-        logger.error(f"Error serving code.html: {e}")
+        logger.error(f"Error serving upload wizard: {e}")
         raise HTTPException(status_code=500, detail=f"Frontend integration template error: {e}")
+
+
+# PHASE 4a: /login is a canonical alias for /auth to match every page's redirects
+@app.get("/login", response_class=HTMLResponse)
+async def serve_login_alias(request: Request):
+    return await serve_navigation_pages(_FakeRequest("/auth"))
+
+
+class _FakeRequest:
+    """Minimal Request-like object so internal helpers can reuse serve_navigation_pages."""
+    def __init__(self, path):
+        self.url = type("URL", (), {"path": path})()
 
 
 # Unified platform navigation routes serving actual project HTML files with fallback
@@ -140,17 +180,21 @@ async def serve_wizard(request: Request):
 @app.get("/patients", response_class=HTMLResponse)
 @app.get("/export", response_class=HTMLResponse)
 @app.get("/status", response_class=HTMLResponse)
+@app.get("/settings", response_class=HTMLResponse)
 @app.get("/auth", response_class=HTMLResponse)
 async def serve_navigation_pages(request: Request):
     """Serves the actual project HTML file for the requested route if available in the repo."""
     route_path = request.url.path.strip("/")
+    if route_path == "login":
+        route_path = "auth"
 
     route_file_map = {
         "dashboard": ["dashboard.html", "runtime_frontend_preview/dashboard.html", "templates/dashboard.html"],
-        "patients": ["analysis.html", "runtime_frontend_preview/analysis.html", "placeholder.html"],
-        "export": ["export.html", "reports.html", "runtime_frontend_preview/reports.html", "placeholder.html"],
-        "status": ["status.html", "operational.html", "runtime_frontend_preview/operational.html", "placeholder.html"],
-        "auth": ["auth.html", "login.html", "runtime_frontend_preview/login.html"]
+        "patients":  ["patients.html", "clinical.html", "runtime_frontend_preview/clinical.html", "placeholder.html"],
+        "export":    ["export.html", "reports.html", "runtime_frontend_preview/reports.html", "placeholder.html"],
+        "status":    ["status.html", "operational.html", "runtime_frontend_preview/operational.html", "placeholder.html"],
+        "settings":  ["settings.html", "status.html", "placeholder.html"],
+        "auth":      ["auth.html", "login.html", "runtime_frontend_preview/login.html"]
     }
 
     possible_files = route_file_map.get(route_path, [f"{route_path}.html", "placeholder.html"])
