@@ -459,17 +459,20 @@ def compute_model_driven_localization(
     dominant_drop = contributions[dominant_lead]
     dominant_zone = LEAD_TO_ZONE_MAP.get(dominant_lead, "DIFFUSE")
 
-    # If no channel meaningfully drives the prediction (flat / normal recording),
-    # or the model never crossed the gate, classify as below_gate.
+    # The gate affects confidence/risk tier, NOT the localization itself.
+    # Always report the actual top contributing channel from ablation so the
+    # API can expose the model's strongest attribution even when overall
+    # seizure probability is low. The caller uses `below_gate` to set the
+    # risk tier / evidence strength.
     GATE = 0.5012
     below_gate = bool(baseline_peak < GATE or dominant_drop < 1e-4)
 
     elapsed = time.perf_counter() - t0
     log.info(
         "neurovision_localization: ablation done in %.2fs | baseline_peak=%.4f "
-        "dominant=%s(%s) drop=%.4f windows=%d below_gate=%s",
+        "dominant=%s(%s) drop=%.4f below_gate=%s windows=%d",
         elapsed, baseline_peak, dominant_lead, dominant_zone,
-        dominant_drop, len(starts), below_gate,
+        dominant_drop, below_gate, len(starts),
     )
 
     return {

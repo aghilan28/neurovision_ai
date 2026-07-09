@@ -707,14 +707,15 @@
       }
     }
 
-    // Spec: Confidence readout binds to
-    //   clinical_alerts_detected[0].peak_seizure_probability * 100
-    //   OR payload.risk.model_confidence
+    // Spec: Confidence readout binds to the MODEL CONFIDENCE first
+    //   (payload.risk.model_confidence), then falls back to
+    //   clinical_alerts_detected[0].peak_seizure_probability * 100.
+    // The seizure probability is displayed separately in the probability ring.
     let confidenceVal = 0;
-    if (primaryAlert.peak_seizure_probability !== undefined && primaryAlert.peak_seizure_probability !== null) {
-      confidenceVal = safeNum(primaryAlert.peak_seizure_probability, 0) * 100;
-    } else if (r.model_confidence !== undefined) {
+    if (r.model_confidence !== undefined && r.model_confidence !== null) {
       confidenceVal = safeNum(r.model_confidence, 0);
+    } else if (primaryAlert.peak_seizure_probability !== undefined && primaryAlert.peak_seizure_probability !== null) {
+      confidenceVal = safeNum(primaryAlert.peak_seizure_probability, 0) * 100;
     } else {
       confidenceVal = safeNum(payload.model_confidence, 0);
     }
