@@ -14,6 +14,7 @@ PHASE 16 PATCH:
 
 import sys
 import os
+import re
 import json
 import time
 import math
@@ -237,13 +238,15 @@ async def calibrate_signal(file: UploadFile = File(...)):
             
         channel_mapping = {}
         found_channels_in_raw = []
-        for ch in EEG_CHANNELS:
-            for raw_ch in info['ch_names']:
-                clean_raw = raw_ch.upper().replace("EEG", "").replace("-", "").replace("REF", "").replace(" ", "")
-                if clean_raw == ch.upper():
-                    channel_mapping[ch] = raw_ch
-                    found_channels_in_raw.append(raw_ch)
-                    break
+        for raw_ch in info['ch_names']:
+            label = _extract_eeg_label(raw_ch)
+            if label:
+                # Map canonical label back to the original EEG_CHANNELS entry
+                for ch in EEG_CHANNELS:
+                    if ch.upper() == label and ch not in channel_mapping:
+                        channel_mapping[ch] = raw_ch
+                        found_channels_in_raw.append(raw_ch)
+                        break
 
         mapped_channels = list(channel_mapping.keys())
         missing_channels = [ch for ch in EEG_CHANNELS if ch not in mapped_channels]
@@ -812,6 +815,60 @@ LEAD_TO_ZONE_MAP = {
     "O1": "PARIETAL", "O2": "PARIETAL", "Oz": "PARIETAL"
 }
 
+# ── Robust EEG channel name matcher ──────────────────────────────────────────
+# EDF files use many naming conventions for the same electrode:
+#   "EEG Fp1-Ref", "EEG FP1-REF", "EEG Fp1-LE", "EEG Fp1-RE",
+#   "EEG Fp1-A1", "EEG Fp1-AVG", "EEG_Fp1_Ref", "FP1REF", "Fp1", …
+# This function handles ALL of them by:
+#   1. Uppercasing and removing "EEG" prefix
+#   2. Splitting on '-' to separate electrode from reference suffix
+#   3. Stripping ALL non-alphanumeric characters
+#   4. Falling back to stripping known reference suffixes (REF, LE, RE, AVG, …)
+_EEG_UPPER_SET = {ch.upper() for ch in EEG_CHANNELS}
+_KNOWN_REF_SUFFIXES = sorted(
+    ["REF", "LE", "RE", "AVG", "A1", "A2", "G2", "AR", "IPS"],
+    key=len, reverse=True,  # longest first to avoid partial matches
+)
+
+def _strip_leading_zeros(name: str) -> str:
+    """FP01 -> FP1, C03 -> C3, T05 -> T5.  Leaves names without digits unchanged."""
+    m = re.match(r'^([A-Z]+)0+(\d+)$', name)
+    return m.group(1) + m.group(2) if m else name
+
+
+def _extract_eeg_label(raw_channel_name: str) -> str:
+    """Return the canonical 10-20 electrode label (e.g. 'FP1') extracted from
+    an arbitrary EDF channel name, or '' if no match is found.
+
+    Handles ALL common clinical EDF naming conventions:
+      - Standard:     "EEG Fp1-Ref", "EEG FP1-REF"
+      - Linked ears:  "EEG Fp1-LE", "EEG Fp1-RE"
+      - Mastoid:      "EEG Fp1-A1", "EEG Fp1-A2"
+      - Average ref:  "EEG Fp1-AVG", "EEG Fp1-AR"
+      - Zero-padded:  "EEG FP01-Ref", "EEG C03-LE", "EEG T05-A1"
+      - No separator: "FP1REF", "C03LE", "FP01REF"
+      - Underscores:  "EEG_Fp1_Ref"
+      - Bare names:   "Fp1", "FP1"
+    """
+    upper = raw_channel_name.upper().replace("EEG", "")
+    # Step 1: split on '-' to separate electrode from reference
+    electrode = upper.split("-")[0]
+    # Step 2: strip ALL non-alphanumeric characters (spaces, underscores, dots)
+    clean = re.sub(r"[^A-Z0-9]", "", electrode)
+    # Step 3: strip leading zeros from electrode number (FP01 -> FP1, C03 -> C3)
+    clean = _strip_leading_zeros(clean)
+    # Step 4: exact match against known EEG channels
+    if clean in _EEG_UPPER_SET:
+        return clean
+    # Step 5: strip known reference suffixes (for names without '-' separator)
+    for suffix in _KNOWN_REF_SUFFIXES:
+        if clean.endswith(suffix) and len(clean) > len(suffix):
+            candidate = clean[: -len(suffix)]
+            candidate = _strip_leading_zeros(candidate)
+            if candidate in _EEG_UPPER_SET:
+                return candidate
+    return ""
+
 @app.post("/api/v1/predict")
 async def predict_real_edf_stream(file: UploadFile = File(...)):
     try:
@@ -829,16 +886,14 @@ async def predict_real_edf_stream(file: UploadFile = File(...)):
         # Identify which channels are available in the raw file (fuzzy match)
         channel_mapping = {}
         found_channels_in_raw = []
-        for ch in EEG_CHANNELS:
-            matched = None
-            for raw_ch in raw.ch_names:
-                clean_raw = raw_ch.upper().replace("EEG", "").replace("-", "").replace("REF", "").replace(" ", "")
-                if clean_raw == ch.upper():
-                    matched = raw_ch
-                    break
-            if matched:
-                channel_mapping[ch] = matched
-                found_channels_in_raw.append(matched)
+        for raw_ch in raw.ch_names:
+            label = _extract_eeg_label(raw_ch)
+            if label:
+                for ch in EEG_CHANNELS:
+                    if ch.upper() == label and ch not in channel_mapping:
+                        channel_mapping[ch] = raw_ch
+                        found_channels_in_raw.append(raw_ch)
+                        break
 
         if found_channels_in_raw:
             # pick_channels() signature varies across MNE versions (the on_missing
