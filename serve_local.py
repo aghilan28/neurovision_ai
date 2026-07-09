@@ -239,7 +239,7 @@ async def calibrate_signal(file: UploadFile = File(...)):
         found_channels_in_raw = []
         for ch in EEG_CHANNELS:
             for raw_ch in info['ch_names']:
-                clean_raw = raw_ch.replace("EEG", "").replace("-", "").replace("Ref", "").replace(" ", "").upper()
+                clean_raw = raw_ch.upper().replace("EEG", "").replace("-", "").replace("REF", "").replace(" ", "")
                 if clean_raw == ch.upper():
                     channel_mapping[ch] = raw_ch
                     found_channels_in_raw.append(raw_ch)
@@ -351,7 +351,7 @@ async def calibrate_signal(file: UploadFile = File(...)):
             "status": "SUCCESS",
             "filename": file.filename,
             "file_size_bytes": file_size,
-            "channels": n_channels,
+            "channels": len(mapped_channels),
             "sampling_rate": float(sfreq),
             "total_windows_processed": int(duration / 2.0),
             "execution_time_seconds": float(duration),
@@ -832,7 +832,7 @@ async def predict_real_edf_stream(file: UploadFile = File(...)):
         for ch in EEG_CHANNELS:
             matched = None
             for raw_ch in raw.ch_names:
-                clean_raw = raw_ch.replace("EEG", "").replace("-", "").replace("Ref", "").replace(" ", "").upper()
+                clean_raw = raw_ch.upper().replace("EEG", "").replace("-", "").replace("REF", "").replace(" ", "")
                 if clean_raw == ch.upper():
                     matched = raw_ch
                     break

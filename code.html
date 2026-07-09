@@ -1029,7 +1029,7 @@
         { stage: 5, id: 'pipe-5', log: `Adaptive decision gate evaluated at ${gate}.`, computed_decision_gate: true, mu, sigma, clinical_alerts_detected: alerts.map(a => `${a.status || 'REVIEW REQUIRED'} at ${a.focal_origin || dominantZone}`) },
         { stage: 6, id: 'pipe-6', log: 'Clinical interpretation generated from live inference payload.', computed_decision_gate: true, mu, sigma, clinical_alerts_detected: [] },
         { stage: 7, id: 'pipe-7', log: 'Evidence layer aligned to channel variance localization weights.', computed_decision_gate: true, mu, sigma, clinical_alerts_detected: [] },
-        { stage: 8, id: 'pipe-8', log: 'Compiling final report PDF and summary from production model response...', computed_decision_gate: true, mu, sigma, clinical_alerts_detected: [], metrics: { features: windows || 47, confidence } }
+        { stage: 8, id: 'pipe-8', log: 'Compiling final report PDF and summary from production model response...', computed_decision_gate: true, mu, sigma, clinical_alerts_detected: [], metrics: { features: (windows && windows > 1) ? windows : 47, confidence } }
       ];
 
       for (const item of stagesData) {
