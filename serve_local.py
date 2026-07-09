@@ -1220,7 +1220,7 @@ async def predict_real_edf_stream(file: UploadFile = File(...)):
             },
             "clinical_alerts_detected": alerts,
             "metadata": {
-                "total_windows_in_buffer": int(len(times) / 256) if len(times) > 0 else 47
+                "total_windows_in_buffer": max(1, 1 + int((len(times) - int(4.0 * sfreq)) // int(2.0 * sfreq))) if len(times) >= int(4.0 * sfreq) and sfreq > 0 else 1
             }
         }
 

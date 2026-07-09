@@ -1007,13 +1007,18 @@
       const mu = profile.baseline_mu ?? '--';
       const sigma = profile.baseline_sigma ?? '--';
 
+      // FIX (PHASE 3.1): Bind Confidence to risk.model_confidence FIRST.
+      // peak_seizure_probability is the seizure RISK (2%), NOT the model's
+      // confidence in its prediction (85%+). The old order read the risk
+      // field first (always defined), making the model_confidence branch
+      // dead code and displaying "2%" as confidence for every normal EEG.
       let confidence = 0.0;
-      if (response.peak_seizure_probability !== undefined) {
-        confidence = Math.round(Number(response.peak_seizure_probability) * 1000) / 10;
+      if (response.risk && response.risk.model_confidence !== undefined && response.risk.model_confidence !== null) {
+        confidence = Math.round(Number(response.risk.model_confidence) * 10) / 10;
       } else if (hasAlerts && alerts[0].peak_seizure_probability !== undefined) {
         confidence = Math.round(Number(alerts[0].peak_seizure_probability) * 1000) / 10;
-      } else if (response.risk && response.risk.model_confidence !== undefined) {
-        confidence = Math.round(Number(response.risk.model_confidence) * 10) / 10;
+      } else if (response.peak_seizure_probability !== undefined) {
+        confidence = Math.round(Number(response.peak_seizure_probability) * 1000) / 10;
       }
 
       const stagesData = [
